@@ -10,7 +10,8 @@ import { statusText } from "./job-status.ts";
 import "./conversation.css";
 
 type JobRef = { id: string; status: string; capabilities: string[] | null };
-type Message = { seq: number; role: "user" | "chief"; text: string; created: string; job: JobRef | null };
+type Decision = { engine: string; provider?: string; fallback?: string };
+type Message = { seq: number; role: "user" | "chief"; text: string; created: string; job: JobRef | null; decision: Decision | null };
 type Summary = { id: string; title: string; updated: string; message_count: number };
 type Pending = { text: string; clientId: string };
 
@@ -26,6 +27,22 @@ async function call<T>(path: string, body?: unknown): Promise<T> {
   return value as T;
 }
 
+const FALLBACK: Record<string, string> = {
+  quota_exhausted: "a cota da conta do modelo acabou",
+  timeout: "o modelo demorou demais",
+  nonzero_exit: "a CLI do modelo falhou",
+  executable_unavailable: "a CLI do modelo não foi encontrada",
+  model_busy: "muitas consultas ao modelo ao mesmo tempo",
+  offer_not_in_catalog: "o modelo propôs algo fora do catálogo",
+};
+/** Quem decidiu a resposta; quando o modelo foi trocado pelas regras, diz por quê. */
+function decidedBy(d: Decision | null) {
+  if (!d) return "";
+  if (d.engine === "model") return ` · por modelo${d.provider ? ` (${d.provider})` : ""}`;
+  if (d.fallback && d.fallback !== "no_offers")
+    return ` · por regras: ${FALLBACK[d.fallback] ?? "resposta do modelo inválida"}`;
+  return " · por regras";
+}
 const time = (iso: string) => new Date(iso).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 const MAX_TEXT = 2000;
 const REFRESH_MS = 3000;
@@ -163,6 +180,7 @@ export function ConversationPanel({
               <li key={m.seq} className={`message ${m.role}`}>
                 <div className="message-meta">
                   {m.role === "chief" ? "Chief of Staff" : "Você"} · {time(m.created)}
+                  {m.role === "chief" && decidedBy(m.decision)}
                 </div>
                 <p>{m.text}</p>
                 {m.job && (

@@ -128,3 +128,30 @@ test("com a política do Aurora, o Chief of Staff escolhe entre os cenários do 
   assert.doesNotMatch(vague.body.reply.text, /Executar nova tarefa no que/, "sem repositório configurado, não é oferecida");
   assert.equal((await jobs(api)).length, 2);
 });
+
+test("com o Chief of Staff por modelo (CLI local), a decisão do modelo abre o trabalho e fica registrada", async () => {
+  const policyModule = pathToFileURL(fileURLToPath(new URL("../../../apps/aurora/domain/policy.ts", import.meta.url))).href;
+  const fakeCli = fileURLToPath(new URL("../conversation/fixtures/fake-cli.ts", import.meta.url));
+  const report = fileURLToPath(new URL("./.fake-cli-report.json", import.meta.url));
+  const chief = { engine: "model", provider: "claude", command: [process.execPath, fakeCli, "claude", "ok", report] };
+  const { api } = await start({ workerMode: "hang", extraConfig: { policyModule, chief } });
+  const id = await newConversation(api);
+  // O texto não usa termos do catálogo: só o modelo (aqui simulado) poderia escolher "campaign".
+  const sent = await say(api, id, "quero lançar aquela ação de marketing do fim do ano");
+  assert.equal(sent.body.reply.text, "Abri o trabalho.");
+  assert.deepEqual(sent.body.reply.decision, { engine: "model", provider: "claude" });
+  const { CATALOG } = await import(policyModule);
+  const campaign = CATALOG.scenarios.find((s: any) => s.id === "campaign").goal;
+  assert.equal((await jobs(api)).find((j) => j.id === sent.body.reply.job.id)?.goal, campaign);
+});
+
+test("se a CLI do modelo falhar, as regras respondem e a conversa mostra o motivo", async () => {
+  const fakeCli = fileURLToPath(new URL("../conversation/fixtures/fake-cli.ts", import.meta.url));
+  const report = fileURLToPath(new URL("./.fake-cli-report.json", import.meta.url));
+  const chief = { engine: "model", provider: "codex", command: [process.execPath, fakeCli, "codex", "exit1", report] };
+  const { api } = await start({ extraConfig: { chief } });
+  const id = await newConversation(api);
+  const sent = await say(api, id, "analise as vendas");
+  assert.deepEqual(sent.body.reply.decision, { engine: "rules", fallback: "nonzero_exit" });
+  assert.ok(sent.body.reply.job, "a regra ainda abriu o trabalho");
+});

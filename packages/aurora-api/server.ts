@@ -21,8 +21,11 @@ import { openJourneyLedger } from "./ledger/open-ledger.ts";
 import {
   normalize,
   RuleBasedChiefOfStaff,
+  type ChiefOfStaff,
   type ConversationOffer,
 } from "./conversation/chief-of-staff.ts";
+import { ClaudeCliClient, CodexCliClient } from "./conversation/model-cli.ts";
+import { ModelChiefOfStaff } from "./conversation/model-chief-of-staff.ts";
 import {
   ConversationError,
   ConversationService,
@@ -642,9 +645,32 @@ function conversationTargets(): ConversationTarget[] {
 }
 const targets = conversationTargets();
 
+/**
+ * `config.chief` escolhe como o Chief of Staff decide:
+ *   ausente ou { "engine": "rules" }  → regras determinísticas, sem modelo;
+ *   { "engine": "model", "provider": "claude" | "codex", "model"?, "timeoutMs"? } → CLI local
+ *   já autenticada pelo usuário, com as regras como plano B.
+ * `command` (opcional) troca o executável; é configuração local confiável, como `policyModule`.
+ */
+function buildChief(): ChiefOfStaff {
+  const rules = new RuleBasedChiefOfStaff();
+  const c = config.chief;
+  if (!c || c.engine === undefined || c.engine === "rules") return rules;
+  if (c.engine !== "model") throw Error('config.chief.engine deve ser "rules" ou "model"');
+  const options = { command: c.command, model: c.model };
+  const client =
+    c.provider === "claude"
+      ? new ClaudeCliClient(options)
+      : c.provider === "codex"
+        ? new CodexCliClient(options)
+        : null;
+  if (!client) throw Error('config.chief.provider deve ser "claude" ou "codex"');
+  return new ModelChiefOfStaff({ client, fallback: rules, timeoutMs: c.timeoutMs });
+}
+
 const conversations = new ConversationService({
   ledger,
-  chief: new RuleBasedChiefOfStaff(),
+  chief: buildChief(),
   offers: targets.map(({ id, title, keywords }) => ({ id, title, keywords })),
   async openJob(offerId, onAdmitted): Promise<Admission> {
     const target = targets.find((t) => t.id === offerId);

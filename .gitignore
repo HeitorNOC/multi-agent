@@ -27,3 +27,6 @@ apps/*/dist/
 Thumbs.db
 .idea/
 .vscode/
+
+# Saída de testes
+packages/aurora-api/test/.fake-cli-report.json

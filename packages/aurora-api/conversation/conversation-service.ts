@@ -18,7 +18,7 @@ import type {
   JourneyLedger,
   JourneyStore,
 } from "../ledger/journey-ledger.ts";
-import type { ChiefOfStaff, ConversationOffer } from "./chief-of-staff.ts";
+import type { ChiefOfStaff, ChiefTrace, ConversationOffer } from "./chief-of-staff.ts";
 
 export class ConversationError extends Error {
   readonly status: number;
@@ -52,12 +52,18 @@ export interface MessageView {
   created: string;
   reply_to: number | null;
   job: { id: string; status: JobStatus; capabilities: string[] | null } | null;
+  /** Só nas respostas do Chief of Staff: quem decidiu e, se for o caso, por que o modelo não foi usado. */
+  decision: { engine: string; provider?: string; fallback?: string } | null;
 }
+
+type Decisions = Map<number, MessageView["decision"]>;
 
 const MAX_TEXT = 2000;
 const MAX_TITLE = 120;
 const CLIENT_ID = /^[A-Za-z0-9_-]{8,100}$/;
 const DEFAULT_TITLE = "Nova conversa";
+
+type DecisionRecord = ChiefTrace & { offer_id?: string; admission?: "refused" };
 
 /** A resposta já existe; usado para abortar a transação sem criar nada. */
 class AlreadyAnswered extends Error {
@@ -127,6 +133,7 @@ export class ConversationService {
   async read(actor: string, id: string) {
     const conversation = await this.owned(actor, id);
     const messages = await this.ledger.listConversationMessages(id);
+    const decisions = await this.decisions(id);
     return {
       conversation: {
         id: conversation.id,
@@ -134,7 +141,7 @@ export class ConversationService {
         created: conversation.created,
         updated: conversation.updated,
       },
-      messages: await Promise.all(messages.map((m) => this.view(m))),
+      messages: await Promise.all(messages.map((m) => this.view(m, decisions))),
     };
   }
 
@@ -172,11 +179,14 @@ export class ConversationService {
     });
 
     const previous = await this.ledger.findConversationReply(conversation.id, question.seq);
-    if (previous)
-      return { status: 200, body: { replayed: true, user: await this.view(question), reply: await this.view(previous) } };
+    if (previous) {
+      const decisions = await this.decisions(conversation.id);
+      return { status: 200, body: { replayed: true, user: await this.view(question, decisions), reply: await this.view(previous, decisions) } };
+    }
 
     const reply = await this.answer(conversation.id, question);
-    return { status: 201, body: { replayed: false, user: await this.view(question), reply: await this.view(reply) } };
+    const decisions = await this.decisions(conversation.id);
+    return { status: 201, body: { replayed: false, user: await this.view(question, decisions), reply: await this.view(reply, decisions) } };
   }
 
   private async answer(conversation: string, question: ConversationMessage): Promise<ConversationMessage> {
@@ -187,7 +197,8 @@ export class ConversationService {
       lastJob: await this.lastJob(history),
       offers: this.offers,
     });
-    if (decision.kind === "reply") return this.reply(conversation, question.seq, decision.text);
+    const trace: ChiefTrace = decision.trace ?? { engine: "rules" };
+    if (decision.kind === "reply") return this.reply(conversation, question.seq, decision.text, trace);
     // Defesa contra uma implementação que invente um trabalho fora do catálogo.
     requireThat(this.offers.some((o) => o.id === decision.offerId), 500, "Chief of Staff escolheu um trabalho indisponível");
 
@@ -195,7 +206,7 @@ export class ConversationService {
     try {
       admission = await this.openJob(decision.offerId, async (tx, jobId) => {
         await this.requireUnanswered(tx, conversation, question.seq);
-        await this.appendReply(tx, conversation, question.seq, decision.text, jobId);
+        await this.appendReply(tx, conversation, question.seq, decision.text, jobId, { ...trace, offer_id: decision.offerId });
       });
     } catch (error) {
       if (error instanceof AlreadyAnswered) return error.reply;
@@ -214,15 +225,16 @@ export class ConversationService {
       conversation,
       question.seq,
       `Não consegui abrir o trabalho agora: ${admission.reason}. Tente de novo em instantes.`,
+      { ...trace, offer_id: decision.offerId, admission: "refused" },
     );
   }
 
   /** Grava uma resposta sem trabalho; se outra requisição já respondeu, devolve aquela. */
-  private async reply(conversation: string, replyTo: number, text: string): Promise<ConversationMessage> {
+  private async reply(conversation: string, replyTo: number, text: string, trace: DecisionRecord): Promise<ConversationMessage> {
     try {
       return await this.ledger.transaction(async (tx) => {
         await this.requireUnanswered(tx, conversation, replyTo);
-        return this.appendReply(tx, conversation, replyTo, text, null);
+        return this.appendReply(tx, conversation, replyTo, text, null, trace);
       });
     } catch (error) {
       if (error instanceof AlreadyAnswered) return error.reply;
@@ -235,8 +247,26 @@ export class ConversationService {
     if (existing) throw new AlreadyAnswered(existing);
   }
 
-  private appendReply(tx: JourneyStore, conversation: string, replyTo: number, text: string, job: string | null) {
-    return tx.appendConversationMessage({ conversation, role: "chief", text, job, replyTo, created: this.now() });
+  /**
+   * Grava a resposta e, na mesma transação, a decisão na trilha de eventos da conversa
+   * (motor, provedor, tempo, uso de tokens, motivo de fallback). O texto não vai para a trilha.
+   */
+  private async appendReply(
+    tx: JourneyStore,
+    conversation: string,
+    replyTo: number,
+    text: string,
+    job: string | null,
+    trace: DecisionRecord,
+  ) {
+    const reply = await tx.appendConversationMessage({ conversation, role: "chief", text, job, replyTo, created: this.now() });
+    await tx.appendEvent(`conversation:${conversation}`, "chief_decision", {
+      reply_to: replyTo,
+      reply_seq: reply.seq,
+      job,
+      ...trace,
+    });
+    return reply;
   }
 
   /** A conversa existe e pertence ao usuário; caso contrário, 404 (sem revelar que existe). */
@@ -253,7 +283,22 @@ export class ConversationService {
     return job ? { id: job.id, status: job.status } : null;
   }
 
-  private async view(m: ConversationMessage): Promise<MessageView> {
+  /** Decisões registradas na trilha da conversa, por `seq` da resposta. */
+  private async decisions(conversation: string): Promise<Decisions> {
+    const map: Decisions = new Map();
+    for (const event of await this.ledger.listEvents(`conversation:${conversation}`)) {
+      if (event.node !== "chief_decision") continue;
+      const d = JSON.parse(event.detail);
+      map.set(Number(d.reply_seq), {
+        engine: String(d.engine),
+        ...(d.provider ? { provider: String(d.provider) } : {}),
+        ...(d.fallback ? { fallback: String(d.fallback) } : {}),
+      });
+    }
+    return map;
+  }
+
+  private async view(m: ConversationMessage, decisions: Decisions): Promise<MessageView> {
     let job: MessageView["job"] = null;
     if (m.job) {
       const record = await this.ledger.getJob(m.job);
@@ -266,6 +311,14 @@ export class ConversationService {
         };
       }
     }
-    return { seq: m.seq, role: m.role, text: m.text, created: m.created, reply_to: m.replyTo, job };
+    return {
+      seq: m.seq,
+      role: m.role,
+      text: m.text,
+      created: m.created,
+      reply_to: m.replyTo,
+      job,
+      decision: m.role === "chief" ? (decisions.get(m.seq) ?? null) : null,
+    };
   }
 }

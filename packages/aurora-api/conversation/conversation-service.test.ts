@@ -194,6 +194,23 @@ describe("serviço de conversas", () => {
     assert.equal((await service.read("ana", id)).messages.length, 2, "a pergunta não foi duplicada");
   });
 
+  test("cada resposta registra na trilha quem decidiu, sem copiar o texto da conversa", async () => {
+    const { service, ledger } = setup();
+    const { id } = await service.create("ana", {});
+    const sent = await service.send("ana", id, { text: "analise as vendas, cliente sigiloso ACME" });
+    assert.deepEqual(sent.body.reply.decision, { engine: "rules" });
+    assert.equal(sent.body.user.decision, null);
+    const [event] = await ledger.listEvents(`conversation:${id}`);
+    assert.equal(event.node, "chief_decision");
+    const detail = JSON.parse(event.detail);
+    assert.deepEqual(
+      { engine: detail.engine, offer_id: detail.offer_id, reply_seq: detail.reply_seq, job: detail.job },
+      { engine: "rules", offer_id: "vendas", reply_seq: sent.body.reply.seq, job: sent.body.reply.job?.id },
+    );
+    assert.ok(!event.detail.includes("ACME"), "o texto do gestor não vai para a trilha");
+    assert.deepEqual((await service.read("ana", id)).messages[1].decision, { engine: "rules" });
+  });
+
   test("a conversa com mensagem nova sobe na lista", async () => {
     const { ledger } = setup();
     let t = 0;

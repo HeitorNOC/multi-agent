@@ -30,10 +30,24 @@ export interface ChiefTurn {
   offers: ConversationOffer[];
 }
 
-export type ChiefDecision =
+/**
+ * Como a decisão foi tomada, para auditoria e custo. Nunca contém o texto da conversa.
+ * `fallback` explica por que o modelo não foi usado (por exemplo, `timeout`).
+ */
+export interface ChiefTrace {
+  engine: "rules" | "model";
+  provider?: string;
+  model?: string;
+  seconds?: number;
+  usage?: Record<string, unknown>;
+  fallback?: string;
+}
+
+export type ChiefDecision = (
   | { kind: "reply"; text: string }
   /** Abrir o trabalho `offerId`; `text` é a resposta mostrada junto com o trabalho. */
-  | { kind: "open_job"; offerId: string; text: string };
+  | { kind: "open_job"; offerId: string; text: string }
+) & { trace?: ChiefTrace };
 
 export interface ChiefOfStaff {
   decide(turn: ChiefTurn): Promise<ChiefDecision>;
