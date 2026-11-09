@@ -1,0 +1,76 @@
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... Etc/UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+waiting for server to start....2026-11-04 03:41:40.321 UTC [47] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-11-04 03:41:40.323 UTC [47] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-04 03:41:40.330 UTC [50] LOG:  database system was shut down at 2026-11-04 03:41:40 UTC
+2026-11-04 03:41:40.336 UTC [47] LOG:  database system is ready to accept connections
+ done
+server started
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+2026-11-04 03:41:40.427 UTC [47] LOG:  received fast shutdown request
+waiting for server to shut down....2026-11-04 03:41:40.430 UTC [47] LOG:  aborting any active transactions
+2026-11-04 03:41:40.432 UTC [47] LOG:  background worker "logical replication launcher" (PID 53) exited with exit code 1
+2026-11-04 03:41:40.432 UTC [48] LOG:  shutting down
+2026-11-04 03:41:40.434 UTC [48] LOG:  checkpoint starting: shutdown immediate
+2026-11-04 03:41:40.444 UTC [48] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.002 s, total=0.013 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/14EA2D8, redo lsn=0/14EA2D8
+2026-11-04 03:41:40.448 UTC [47] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+initdb: warning: enabling "trust" authentication for local connections
+initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+2026-11-04 03:41:40.556 UTC [1] LOG:  starting PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-11-04 03:41:40.556 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-11-04 03:41:40.556 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-11-04 03:41:40.559 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-04 03:41:40.566 UTC [61] LOG:  database system was shut down at 2026-11-04 03:41:40 UTC
+2026-11-04 03:41:40.574 UTC [1] LOG:  database system is ready to accept connections
+2026-11-04 03:42:42.891 UTC [96] ERROR:  relation "migration_model" does not exist at character 25
+2026-11-04 03:42:42.891 UTC [96] STATEMENT:  SELECT ID, VERSION FROM MIGRATION_MODEL ORDER BY UPDATE_TIME DESC
+2026-11-04 03:42:44.579 UTC [97] ERROR:  relation "public.databasechangeloglock" does not exist at character 22
+2026-11-04 03:42:44.579 UTC [97] STATEMENT:  SELECT COUNT(*) FROM public.databasechangeloglock
+2026-11-04 03:43:19.797 UTC [119] ERROR:  relation "lightrag_doc_full" does not exist at character 15
+2026-11-04 03:43:19.797 UTC [119] STATEMENT:  SELECT 1 FROM LIGHTRAG_DOC_FULL LIMIT 1
+2026-11-04 03:43:19.807 UTC [119] ERROR:  relation "lightrag_doc_chunks" does not exist at character 15
+2026-11-04 03:43:19.807 UTC [119] STATEMENT:  SELECT 1 FROM LIGHTRAG_DOC_CHUNKS LIMIT 1
+2026-11-04 03:43:19.818 UTC [119] ERROR:  relation "lightrag_llm_cache" does not exist at character 15
+2026-11-04 03:43:19.818 UTC [119] STATEMENT:  SELECT 1 FROM LIGHTRAG_LLM_CACHE LIMIT 1
+2026-11-04 03:43:19.827 UTC [119] ERROR:  relation "lightrag_doc_status" does not exist at character 15
+2026-11-04 03:43:19.827 UTC [119] STATEMENT:  SELECT 1 FROM LIGHTRAG_DOC_STATUS LIMIT 1
+2026-11-04 03:43:19.836 UTC [119] ERROR:  relation "lightrag_full_entities" does not exist at character 15
+2026-11-04 03:43:19.836 UTC [119] STATEMENT:  SELECT 1 FROM LIGHTRAG_FULL_ENTITIES LIMIT 1
+2026-11-04 03:43:19.844 UTC [119] ERROR:  relation "lightrag_full_relations" does not exist at character 15
+2026-11-04 03:43:19.844 UTC [119] STATEMENT:  SELECT 1 FROM LIGHTRAG_FULL_RELATIONS LIMIT 1
+2026-11-04 03:43:19.853 UTC [119] ERROR:  relation "lightrag_entity_chunks" does not exist at character 15
+2026-11-04 03:43:19.853 UTC [119] STATEMENT:  SELECT 1 FROM LIGHTRAG_ENTITY_CHUNKS LIMIT 1
+2026-11-04 03:43:19.862 UTC [119] ERROR:  relation "lightrag_relation_chunks" does not exist at character 15
+2026-11-04 03:43:19.862 UTC [119] STATEMENT:  SELECT 1 FROM LIGHTRAG_RELATION_CHUNKS LIMIT 1
+2026-11-04 03:44:06.620 UTC [131] ERROR:  relation "LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d" does not exist at character 50
+2026-11-04 03:44:06.620 UTC [131] STATEMENT:  SELECT vector_dims(content_vector),count(*) FROM "LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d" GROUP BY 1;

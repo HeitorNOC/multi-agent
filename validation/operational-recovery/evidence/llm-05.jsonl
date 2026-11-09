@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a70d-48ed-7a13-8b29-71c86547a0eb"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"valor da proposta\\\",\\\"data de vigência\\\"],\\\"low_level_keywords\\\":[\\\"SIGILO_AQUISICAO_2026\\\",\\\"2026-02-01T00:00:00+00:00\\\",\\\"2026-11-04T14:53:14.972709+00:00\\\",\\\"aquisicao@v1\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12695,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":94,"reasoning_output_tokens":0}}

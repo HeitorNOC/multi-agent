@@ -1,0 +1,53 @@
+
+=================================== ERRORS ====================================
+____________ ERROR collecting tests/runtime/test_runtime_state.py _____________
+ImportError while importing test module 'C:\Users\PC\multi-agent\research\platform-fit-2026-11-04\sources\graphon\tests\runtime\test_runtime_state.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+research\platform-fit-2026-11-04\sources\graphon\tests\runtime\test_runtime_state.py:9: in <module>
+    from graphon.engine.ready_queue.entities import (
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\engine\__init__.py:1: in <module>
+    from .engine import Engine
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\engine\engine.py:10: in <module>
+    from graphon.engine_events.base import (
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\engine_events\__init__.py:2: in <module>
+    from .agent import NodeRunAgentLogEvent
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\engine_events\agent.py:5: in <module>
+    from .base import NodeEvent
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\engine_events\base.py:4: in <module>
+    from graphon.node_events.base import NodeRunResult
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\node_events\__init__.py:15: in <module>
+    from .node import (
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\node_events\node.py:11: in <module>
+    from graphon.variables.segments import Segment
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\variables\__init__.py:8: in <module>
+    from .input_entities import VariableEntity, VariableEntityType
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\variables\input_entities.py:6: in <module>
+    from jsonschema import Draft7Validator, SchemaError
+E   ModuleNotFoundError: No module named 'jsonschema'
+______ ERROR collecting tests/engine/test_runtime_state_serialization.py ______
+ImportError while importing test module 'C:\Users\PC\multi-agent\research\platform-fit-2026-11-04\sources\graphon\tests\engine\test_runtime_state_serialization.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+research\platform-fit-2026-11-04\sources\graphon\tests\engine\test_runtime_state_serialization.py:17: in <module>
+    from graphon.dsl import inspect
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\dsl\__init__.py:1: in <module>
+    from .code_runtime import SandboxCodeExecutionError, SandboxCodeExecutor
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\dsl\code_runtime.py:15: in <module>
+    from graphon.variables.utils import dumps_with_segments
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\variables\__init__.py:8: in <module>
+    from .input_entities import VariableEntity, VariableEntityType
+research\platform-fit-2026-11-04\sources\graphon\src\graphon\variables\input_entities.py:6: in <module>
+    from jsonschema import Draft7Validator, SchemaError
+E   ModuleNotFoundError: No module named 'jsonschema'
+=========================== short test summary info ===========================
+ERROR research\platform-fit-2026-11-04\sources\graphon\tests\runtime\test_runtime_state.py
+ERROR research\platform-fit-2026-11-04\sources\graphon\tests\engine\test_runtime_state_serialization.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+no tests collected, 2 errors in 1.35s

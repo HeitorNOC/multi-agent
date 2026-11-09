@@ -1,0 +1,18 @@
+{
+  "integration_tests": 1,
+  "checkpoints": 4,
+  "cross_process_calls": 7,
+  "counts": {
+    "expensive": 1,
+    "a": 1,
+    "b": 2,
+    "supplier_attempts": 2,
+    "transient": 3
+  },
+  "local_links_checked": 41,
+  "third_party_files_verified": 9,
+  "model_calls": 0,
+  "production_approved": false,
+  "business_read_commit_requalified": false,
+  "first_failure_preserved": true
+}

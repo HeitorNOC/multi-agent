@@ -1,0 +1,12 @@
+Changed password for user 'neo4j'. IMPORTANT: this change will only take effect if performed before the database is started for the first time.
+2026-11-04 19:30:29.294+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2026-11-04 19:30:29.373+0000 INFO  Starting...
+2026-11-04 19:30:31.781+0000 INFO  This instance is ServerId{7e3422e0} (7e3422e0-fc4a-4477-ba98-f31b76dc1172)
+2026-11-04 19:30:35.367+0000 INFO  ======== Neo4j 5.26.32 ========
+2026-11-04 19:30:41.069+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2026-11-04 19:30:44.471+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2026-11-04 19:30:44.472+0000 INFO  Remote interface available at http://localhost:7474/
+2026-11-04 19:30:44.474+0000 INFO  id: 5CE79D30B82A8194A9A1E7F6FA8B72AE56444C0FAB4248B07E2AA4939C67037D
+2026-11-04 19:30:44.474+0000 INFO  name: system
+2026-11-04 19:30:44.474+0000 INFO  creationDate: 2026-11-04T19:30:37.292Z
+2026-11-04 19:30:44.474+0000 INFO  Started.

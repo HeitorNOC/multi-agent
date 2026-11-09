@@ -1,0 +1,17 @@
+F
+================================== FAILURES ===================================
+__________ test_editorial_publication_and_native_temporal_acceptance __________
+validation\temporal-editorial\test_temporal.py:38: in test_editorial_publication_and_native_temporal_acceptance
+    stack.start();mark('real_graphiti_neo4j_oidc_and_pretrained_embeddings_ready')
+    ^^^^^^^^^^^^^
+validation\temporal-editorial\harness.py:161: in start
+    'neo4j':self.d('exec',self.neo_name,'cypher-shell','-u','neo4j','-p',self.secret,'--format','plain','CALL dbms.components() YIELD versions RETURN versions').stdout.decode().strip(),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validation\temporal-editorial\harness.py:52: in d
+    raise RuntimeError(error[-6000:])
+E   RuntimeError: [0.031s][warning][os,thread] Failed to start thread "Unknown thread" - pthread_create failed (EAGAIN) for attributes: stacksize: 1024k, guardsize: 0k, detached.
+E   Error occurred during initialization of VM
+E   java.lang.OutOfMemoryError: unable to create native thread: possibly out of memory or process/resource limits reached
+=========================== short test summary info ===========================
+FAILED validation/temporal-editorial/test_temporal.py::test_editorial_publication_and_native_temporal_acceptance
+1 failed in 123.35s (0:02:03)

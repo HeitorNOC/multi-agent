@@ -1,0 +1,3589 @@
+{
+  "url": "http://127.0.0.1:58678",
+  "environment": {
+    "installation": "business-flow-1963b94991",
+    "versions": {
+      "langgraph": "1.2.19",
+      "langgraph-checkpoint": "4.3.1",
+      "langgraph-checkpoint-postgres": "3.2.0",
+      "psycopg": "3.3.7",
+      "pytest": "9.2.0"
+    },
+    "langgraph_sha": "3c916d750575b22c464790e9774494d810ccd322",
+    "sources": [
+      {
+        "source": "aurora-strategy",
+        "version": 1,
+        "area": "executive",
+        "current": true,
+        "title": "Plano executivo e portfólio 2026",
+        "content": "GRUPO AURORA — plano executivo 2026, aprovado pelo conselho fictício. A companhia tem 18.400 colaboradores, atua em sete países e opera doze centros de distribuição. As quatro unidades são varejo/e-commerce, distribuição B2B, logística contratual e software empresarial. A prioridade Q4 é crescimento com margem e cumprimento dos compromissos assumidos. Projeto Horizonte refere-se à campanha de varejo do SKU-AURA; Conta Orion é uma oportunidade B2B separada para o mesmo SKU. Receita de software não deve ser confundida com vendas do SKU. Cada pedido deve mobilizar apenas as capacidades necessárias, com responsáveis claros e evidência versionada. Consulte aurora-marketing, aurora-sales, aurora-inventory, aurora-pricing e aurora-treasury para decisões do Horizonte. Incidentes de CRM seguem aurora-incident e aurora-response. Este plano não autoriza campanhas, pagamentos, acesso a dados ou alterações em produção.",
+        "sha256": "bc06b557c20b80fc818a8d33aa763634fa399baf068033f5a74b4105c93bb995",
+        "projection": "9f076dabda6d72dab7dd814ce31ca310daaa06ec0d5ee0a699dafa129dab3726"
+      },
+      {
+        "source": "aurora-governance",
+        "version": 1,
+        "area": "executive",
+        "current": true,
+        "title": "Governança de decisões e execução",
+        "content": "GRUPO AURORA — GOV-01. Todos os valores e operações desta instalação são fictícios. Fontes vigentes substituem regras antigas na decisão, mantendo o original histórico para consulta. Informação ausente deve ser marcada como desconhecida. Nenhum modelo pode se autoconceder autorização ou ampliar a equipe além do orçamento admitido. Diretores são funções configuradas neste cenário; especialistas atuam por capacidade, com escopo de evidência. A recomendação deve distinguir fatos, cálculos, hipóteses e pendências. Toda ação no quadro local exige revisão do texto exato e do destinatário. Não enviar emails, publicar campanha, bloquear sistemas ou transmitir dados a terceiros. Para incidente, a automação só pode propor diagnóstico e checklist, sem acessar registros de clientes. Referências cruzadas entre documentos não dispensam leitura do original vigente. Os documentos não provam causalidade comercial nem exfiltração do incidente.",
+        "sha256": "7b94a79e38af137ef87d277f97536d5b5be6cc13aa60ecb4761e84c6f74fe78c",
+        "projection": "b11c63c7066e2141f5d7d4b81f9e5b928a6e1714feb6e686e3478ccfe7cdb294"
+      },
+      {
+        "source": "aurora-sales",
+        "version": 1,
+        "area": "sales",
+        "current": true,
+        "title": "Carteira B2B e demanda incremental",
+        "content": "GRUPO AURORA — Comercial, posição fictícia em 05/11/2026. A Conta Orion avalia um pedido incremental de 6.000 unidades do SKU-AURA, por R$420 cada, total potencial R$2.520.000. O pedido não está assinado e NÃO integra as 9.000 unidades reservadas no documento aurora-inventory. Entrega pretendida: 15/12/2026, condicionada à confirmação de suprimento. A campanha Horizonte de aurora-marketing propõe outras 5.000 unidades incrementais para novembro. Os dois volumes são distintos: não somar apenas o maior nem tratá-los como já faturados. Outros contratos já firmes explicam as reservas atuais. A carteira não fornece probabilidade de conversão, elasticidade de preço ou evidência de que desconto aumentará vendas. Antes de prometer prazos, cruzar estoque liberado, lote de compras e capacidade logística. O contrato Orion é governado por aurora-contracts e não pode consumir estoque reservado a terceiros.",
+        "sha256": "fbc0483c97aeef5cd96b5fd1d9791886e4ea8dd263cafe8fe986a6c47bd4b1a3",
+        "projection": "31eae39d8aa95ad05af583507fc74de991cb0ad2cb84bbbb135516ce698c0ece"
+      },
+      {
+        "source": "aurora-marketing",
+        "version": 1,
+        "area": "marketing",
+        "current": true,
+        "title": "Briefing Horizonte — campanha multicanal",
+        "content": "GRUPO AURORA — briefing Horizonte Q4. Marketing solicita R$180.000 para campanha do SKU-AURA entre 15 e 30 de novembro. A projeção interna, ainda não validada, é de 5.000 pedidos adicionais. Propõe preço de lista R$420 com desconto de 8%, resultando em preço R$386,40 por unidade. A peça preliminar usa a frase carbono neutro e promete entrega em sete dias para Brasil e Chile. Essas duas alegações ainda precisam validação. O público prioritário está no Sudeste brasileiro; a extensão para Chile é opcional. Não há estimativa confiável de ROI ou prova de incremento causal. Campanha e Conta Orion disputam o mesmo saldo liberado, conforme aurora-sales e aurora-inventory. O custo está em aurora-costs, a regra de margem vigente em aurora-pricing v2 e a disponibilidade de caixa em aurora-treasury. O teto contábil do trimestre não equivale a dinheiro livre.",
+        "sha256": "da828ff7c75c9613e93dcc509194caf3602c30d02e4029db69143762f2dac6f4",
+        "projection": "f878697d6bb8dde7bc6beea1acc4fb84d1e91cdeef364a144d62685e9a763d50"
+      },
+      {
+        "source": "aurora-pricing",
+        "version": 2,
+        "area": "finance",
+        "current": true,
+        "title": "Política de preços vigente — margem mínima",
+        "content": "GRUPO AURORA — PR-01 versão 2, vigente desde 01/11/2026. A margem de contribuição mínima do SKU-AURA é 28% sobre o preço líquido: (preço líquido menos custo variável unitário) dividido pelo preço líquido. Desconto máximo de 8% é apenas um teto adicional; a margem mínima também deve ser satisfeita. O custo vigente vem de aurora-costs. O preço de R$386,40 proposto em aurora-marketing resulta de 8% sobre R$420, mas não está automaticamente autorizado. Preço alternativo de R$400 deve ser avaliado pela mesma fórmula, sem presumir aprovação comercial. Propostas abaixo da margem mínima ficam bloqueadas para revisão; nenhum diretor ou agente recebeu exceção neste cenário. A versão 1, com margem de 20%, foi revogada e permanece apenas no arquivo histórico. Não usar faturamento potencial de Orion como caixa disponível.",
+        "sha256": "653fada6f708046e7710b7b56bf8cd3bf157e6efd217124032d3c6fd86bb7fb0",
+        "projection": "11604de0ca3b4315a1d1118707ec352c531b729f309e7fc8022ea361c9cef358"
+      },
+      {
+        "source": "aurora-costs",
+        "version": 1,
+        "area": "finance",
+        "current": true,
+        "title": "Controladoria — custo variável do SKU-AURA",
+        "content": "GRUPO AURORA — ficha CV-AURA, competência novembro de 2026. Custo variável unitário consolidado do SKU-AURA: R$285, incluindo fabricação terceirizada, embalagem e frete de entrada. O valor não muda entre os dois cenários de preço deste exercício. Preço de lista R$420. O briefing Horizonte pede preço líquido R$386,40; a proposta alternativa em revisão é R$400. Calcular a margem pela fórmula de aurora-pricing v2, com arredondamento a duas casas percentuais apenas no resultado final. Não confundir markup sobre custo com margem sobre preço. Os R$180.000 da campanha são despesa fixa incremental, separada do custo variável por unidade. Faltam taxas de conversão e despesas completas para concluir ROI ou lucro total da campanha. Consulte aurora-treasury para restrição de caixa; margem positiva não prova disponibilidade financeira.",
+        "sha256": "d5cdea51e8f4e16bb53119f8f7930f7ec350eb37764fffedf736a52c6e0e2d57",
+        "projection": "466741c78a083cf584f073b9c4bcbfb2d188090f8f37c0c622b1b08480ed827b"
+      },
+      {
+        "source": "aurora-treasury",
+        "version": 1,
+        "area": "finance",
+        "current": true,
+        "title": "Tesouraria — caixa livre e compromissos",
+        "content": "GRUPO AURORA — tesouraria, posição fictícia de 05/11/2026 às 16h45. Caixa bancário R$660.000. Desse total, R$250.000 estão vinculados a garantias e R$280.000 cobrem compromissos operacionais já aprovados, que não podem ser cancelados pela simulação. O saldo remanescente pode ser considerado livre para novos compromissos. O teto contábil do Horizonte é R$200.000, mas Marketing solicita desembolso imediato de R$180.000. Não confundir teto com liquidez. Não há novo aporte, crédito aprovado ou antecipação de recebíveis disponível. A Conta Orion ainda não assinou nem pagou. O fornecedor de aurora-procurement exige adiantamento de R$1.200.000 para confirmar o lote; esse pagamento não está autorizado. Qualquer redução ou faseamento da campanha exige nova proposta e aprovação de conteúdo exato. Não simular transferência financeira.",
+        "sha256": "78fc8ca4e0c23dcefeac02841573d20afec7089f41ec09372340e72b34a67e68",
+        "projection": "b596b4f14183ea3a892ab1936653e500d84d08b191f12fa234167a2f87fac2a8"
+      },
+      {
+        "source": "aurora-inventory",
+        "version": 1,
+        "area": "operations",
+        "current": true,
+        "title": "Estoque — disponibilidade, reservas e qualidade",
+        "content": "GRUPO AURORA — inventário consolidado do SKU-AURA em 05/11/2026. Saldo físico 14.000 unidades. Destas, 9.000 estão reservadas para contratos firmes anteriores; outras 2.000 estão bloqueadas pela Qualidade e não podem ser vendidas. Não há sobreposição entre os dois grupos. Disponível para novas promessas é saldo físico menos reservas menos bloqueio. A oportunidade Orion de 6.000 e a campanha Horizonte de 5.000 são demandas incrementais e não constam nessas reservas. Calcular demanda conjunta e insuficiência frente ao saldo liberado atual. Há menção a lote futuro de 12.000 unidades em aurora-procurement, mas não é estoque físico nem entrada confirmada. Não liberar o bloqueio de Qualidade ou reduzir reservas para fabricar disponibilidade. A ocupação de armazenagem não foi informada; não inferir capacidade extra por haver estoque no sistema.",
+        "sha256": "c7f1ebdbe824427e27956b93e20d966a3eae9e4f73d5a38dd01d9e10f3ca0ec9",
+        "projection": "edc090d1c67e55612438458a3b3220982469548ad95253cd2c52269167f2f90d"
+      },
+      {
+        "source": "aurora-procurement",
+        "version": 1,
+        "area": "operations",
+        "current": true,
+        "title": "Suprimentos — lote futuro ainda não confirmado",
+        "content": "GRUPO AURORA — negociação SUP-88 para 12.000 unidades do SKU-AURA. O fornecedor indicou possível chegada em 10/12/2026, condicionada a adiantamento de R$1.200.000 e assinatura do pedido. Nem pagamento nem assinatura ocorreram. Status do lote: não confirmado. A data está após a abertura da campanha de 15/11; mesmo uma confirmação futura não cobriria imediatamente a promessa de novembro. A projeção não pode ser somada ao estoque disponível em aurora-inventory. Consulte aurora-treasury para recursos e aurora-contracts para compromissos. A empresa não dispõe de proposta alternativa aprovada de outro fornecedor. Especialistas podem propor faseamento, renegociação de escopo ou investigação de suprimento, sem efetuar compra ou assumir que a oportunidade Orion foi perdida. O lead time de entrega ao cliente está em aurora-logistics.",
+        "sha256": "0c2e2851917c3f564b936aaefbd2c63811f36ffa62238e69f95378660a763bbb",
+        "projection": "8d2bceb79190e1ddb86f7dfe8a9d739d99e66790818d70c1faf566073d7a313d"
+      },
+      {
+        "source": "aurora-logistics",
+        "version": 1,
+        "area": "operations",
+        "current": true,
+        "title": "Logística — capacidade e promessas regionais",
+        "content": "GRUPO AURORA — malha logística L-07. Capacidade incremental de separação liberada: 1.500 unidades/dia, desde que haja estoque vendável. Para o Sudeste brasileiro, trânsito padrão de dois dias úteis após expedição; para Chile, trânsito de dez dias úteis após expedição, sem promessa de desembaraço acelerado. O prazo publicitário de sete dias para todos os destinos, presente em aurora-marketing, não está comprovado para Chile. Capacidade diária não equivale a estoque liberado nem encurta automaticamente trânsito. O operador não tem autorização para reter pedidos firmes em favor do Horizonte. Janelas extraordinárias e equipe adicional não foram aprovadas. Consulte aurora-workforce para restrições de escala e aurora-inventory para saldo livre. Nesta simulação não criar ordem de transporte, etiqueta, contratação ou promessa a cliente.",
+        "sha256": "f21790c625f4959ea4774d4df742f5d7ed33e227abed5210b647e1af5c2d2988",
+        "projection": "4422cb5076bd87173829e632d508dbae3915df1c845160548b249c8338a80b46"
+      },
+      {
+        "source": "aurora-compliance",
+        "version": 1,
+        "area": "legal",
+        "current": true,
+        "title": "Revisão de comunicação e alegações ambientais",
+        "content": "GRUPO AURORA — checklist interno COM-12, versão vigente. A alegação carbono neutro para SKU-AURA requer certificação e escopo verificados pela empresa. A documentação disponível NÃO contém certificação válida do SKU-AURA. Assim, a peça do Horizonte deve retirar essa alegação ou permanecer bloqueada aguardando evidência e revisão; não afirmar que o produto tem ou não tem neutralidade com base apenas na ausência de documento. Promessas de entrega devem refletir aurora-logistics, com região e condições explícitas. Não publicar campanha automaticamente. Esse checklist é uma regra interna fictícia, não resumo de legislação de países reais. A decisão pode registrar pendências jurídicas e encaminhamentos, mas não inventar parecer, licença, certificação ou aprovação. Para o incidente de CRM, consultar aurora-response; não transportar dados pessoais para a campanha.",
+        "sha256": "3ae7cbc2b99f919877a27d773571aee8bf8156192c3564a99ad0d92d40627335",
+        "projection": "8a5eaa23ce454d8053e7ee60138c39cdf72b851da730edb54ac06096b9ae13e0"
+      },
+      {
+        "source": "aurora-contracts",
+        "version": 1,
+        "area": "legal",
+        "current": true,
+        "title": "Contratos B2B — reservas e cláusulas Orion",
+        "content": "GRUPO AURORA — posição contratual fictícia. Reservas de 9.000 unidades em aurora-inventory pertencem a contratos firmes e não podem ser transferidas ao Horizonte por decisão de agente. Orion é negociação de 6.000 unidades com prazo pretendido de 15/12/2026; não houve assinatura, reserva ou pagamento. A minuta contém multa proposta de 1,5% por atraso, ainda sujeita a negociação. Não reconhecer essa multa como obrigação já existente. Uma proposta comercial precisa separar compromisso firme, oportunidade e projeção. Qualquer novo compromisso requer aprovação humana do conteúdo, destinatário e condições. Reavaliar estoque e suprimento antes de prometer prazo. Não enviar minuta, assinar contrato ou alterar CRM nesta simulação. Consulte aurora-sales, aurora-procurement e aurora-governance para premissas e limites.",
+        "sha256": "16dff573cc46fe7ba778d08c7c2e8558a10f10e741131359696a7a41eace1b66",
+        "projection": "9948cfcedd4ac44dcf6dc144f7556dd0010d27e9da4fd6a3c46ab0c6cdfaa653"
+      },
+      {
+        "source": "aurora-workforce",
+        "version": 1,
+        "area": "people",
+        "current": true,
+        "title": "Pessoas — capacidade operacional e treinamento",
+        "content": "GRUPO AURORA — planejamento agregado de pessoas, sem nomes ou dados individuais. A empresa possui 18.400 colaboradores. A unidade logística já alocou a capacidade regular informada em aurora-logistics; não há horas extras ou admissões aprovadas para Horizonte. Treinamento de segurança de dados está planejado para todos os usuários de CRM no próximo trimestre, mas não é medida de contenção imediata do incidente. Investigações de uso indevido devem seguir governança, preservando privacidade e devido processo interno; não atribuir culpa a indivíduos sem evidência. Este documento não contém vagas, candidatos, salários ou avaliações de desempenho. Um pedido de campanha comercial não exige recrutamento automaticamente. Um pedido técnico de incidente não autoriza varrer informações de pessoas. Encaminhar questões de dimensionamento apenas quando demonstrada necessidade.",
+        "sha256": "430ad72be42bc2ca02f3142a5756fcfd33c926a48ee5c4f720d186b6a98f0453",
+        "projection": "d1862d745e131b0193de8305e6919355b9bf75ca2a939ec1ee3f0c6009fb6615"
+      },
+      {
+        "source": "aurora-data-platform",
+        "version": 1,
+        "area": "technology",
+        "current": true,
+        "title": "Plataforma de dados — CRM e integrações",
+        "content": "GRUPO AURORA — arquitetura funcional de dados. AuroraCRM contém relacionamentos B2B e se conecta a relatórios comerciais e ao hub de marketing. A sincronização de catálogo do SKU-AURA não transporta contatos pessoais. O monitoramento de exportações do CRM registra volume e destino lógico, sem conteúdo dos registros neste corpus. O incidente INC-47 de aurora-incident envolve possível exportação de 1.200 contatos do ambiente europeu, não os 6.000 itens da oportunidade Orion. São unidades diferentes e não devem ser somadas. Logs podem estar incompletos; um volume de exportação não prova recepção por terceiro. A equipe de agentes só pode ler os relatórios sintéticos disponíveis. Não conceder acesso à produção, executar SQL contra clientes, mudar configuração, revogar tokens ou copiar registros. Segurança e resposta usam aurora-response.",
+        "sha256": "c5d9ddeb1dc46d00c7f8289267d1545491cb604c392669b144ce85d690a2e024",
+        "projection": "44496589b58e075caac78b92618d6bd02294f88b4328453aa7299b6e3c2a5391"
+      },
+      {
+        "source": "aurora-incident",
+        "version": 1,
+        "area": "technology",
+        "current": true,
+        "title": "INC-47 — exportação suspeita no CRM",
+        "content": "GRUPO AURORA — INC-47, relatório fictício de 05/11/2026. Um alerta às 16h20 identificou evento de exportação envolvendo potencialmente 1.200 contatos do AuroraCRM europeu. Instante de avaliação: 16h45 do mesmo dia, mesmo fuso -03:00. A conclusão da transferência e o acesso de terceiro NÃO foram confirmados; a classificação atual é suspeita em investigação. Não declarar vazamento confirmado, origem humana ou causa técnica comprovada. O runbook aurora-response fixa prazo interno de 90 minutos após o alerta para primeira avaliação conjunta de Segurança e Jurídico. Calcular minutos transcorridos e restantes no instante de avaliação. O responsável de plantão já preservou os relatórios disponíveis; não há prova de contenção completa. Não tocar na produção ou enviar comunicação externa. O relatório contém apenas contagens sintéticas, nenhum registro pessoal.",
+        "sha256": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+        "projection": "14e4199763a33a7cc596a18f602a76809856a7fd654d2c070c36074fb0327904"
+      },
+      {
+        "source": "aurora-response",
+        "version": 1,
+        "area": "legal",
+        "current": true,
+        "title": "Runbook INC — avaliação técnica e jurídica",
+        "content": "GRUPO AURORA — runbook interno fictício RESP-09. A primeira avaliação conjunta de Segurança e Jurídico deve ocorrer em até 90 minutos após o alerta de possível exportação de dados. O prazo é um SLA interno da simulação, não obrigação legal genérica. A equipe deve separar evento observado, hipóteses de causa, extensão potencial e evidência que falta. Para INC-47, usar horários e contagem de aurora-incident e relações de aurora-data-platform. Preparar checklist priorizado de verificação de logs, estado da transferência, acessos e medidas autorizáveis. Revogação de acesso, bloqueio de sistemas, envio de comunicação e notificação externa exigem processo e aprovação separados; nenhum está liberado nesta execução. Não usar o prazo de campanha Horizonte para incidentes. Não envolver recrutamento ou precificação sem evidência de necessidade específica.",
+        "sha256": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+        "projection": "9b169a6516dd166ba5bb24dff24e809fe171aae1915985e74c3a37e79e4300a4"
+      }
+    ],
+    "catalog": {
+      "agents": [
+        {
+          "id": "executive_director",
+          "title": "Diretor executivo",
+          "kind": "director",
+          "domain": "executive",
+          "parent": "brain",
+          "focus": "Estratégia e portfólio",
+          "sources": [
+            "aurora-strategy",
+            "aurora-governance"
+          ],
+          "children": [
+            "business_analyst",
+            "portfolio_analyst"
+          ]
+        },
+        {
+          "id": "business_analyst",
+          "title": "Analista de negócios",
+          "kind": "specialist",
+          "domain": "executive",
+          "parent": "executive_director",
+          "focus": "Dependências e prioridades entre unidades",
+          "sources": [
+            "aurora-strategy",
+            "aurora-governance"
+          ]
+        },
+        {
+          "id": "portfolio_analyst",
+          "title": "Analista de portfólio",
+          "kind": "specialist",
+          "domain": "executive",
+          "parent": "executive_director",
+          "focus": "Priorização de investimentos e iniciativas",
+          "sources": [
+            "aurora-strategy",
+            "aurora-governance"
+          ]
+        },
+        {
+          "id": "marketing_director",
+          "title": "Diretora de marketing",
+          "kind": "director",
+          "domain": "marketing",
+          "parent": "brain",
+          "focus": "Campanhas e posicionamento",
+          "sources": [
+            "aurora-marketing",
+            "aurora-sales"
+          ],
+          "children": [
+            "campaign_planner",
+            "pricing_analyst"
+          ]
+        },
+        {
+          "id": "campaign_planner",
+          "title": "Planejador de campanhas",
+          "kind": "specialist",
+          "domain": "marketing",
+          "parent": "marketing_director",
+          "focus": "Escopo, público, demanda incremental e limites de campanha",
+          "sources": [
+            "aurora-marketing",
+            "aurora-sales",
+            "aurora-logistics"
+          ]
+        },
+        {
+          "id": "pricing_analyst",
+          "title": "Analista de preço comercial",
+          "kind": "specialist",
+          "domain": "marketing",
+          "parent": "marketing_director",
+          "focus": "Mecânica promocional e consistência comercial de preços",
+          "sources": [
+            "aurora-marketing",
+            "aurora-pricing",
+            "aurora-costs"
+          ]
+        },
+        {
+          "id": "operations_director",
+          "title": "Diretor de operações",
+          "kind": "director",
+          "domain": "operations",
+          "parent": "brain",
+          "focus": "Disponibilidade e execução logística",
+          "sources": [
+            "aurora-inventory",
+            "aurora-procurement",
+            "aurora-logistics"
+          ],
+          "children": [
+            "supply_planner",
+            "logistics_analyst"
+          ]
+        },
+        {
+          "id": "supply_planner",
+          "title": "Planejadora de suprimentos",
+          "kind": "specialist",
+          "domain": "operations",
+          "parent": "operations_director",
+          "focus": "Estoque livre, reservas, demanda conjunta e lote não confirmado",
+          "sources": [
+            "aurora-inventory",
+            "aurora-sales",
+            "aurora-procurement"
+          ]
+        },
+        {
+          "id": "logistics_analyst",
+          "title": "Analista de logística",
+          "kind": "specialist",
+          "domain": "operations",
+          "parent": "operations_director",
+          "focus": "Capacidade diária e prazos regionais",
+          "sources": [
+            "aurora-inventory",
+            "aurora-procurement",
+            "aurora-logistics"
+          ]
+        },
+        {
+          "id": "finance_director",
+          "title": "Diretora financeira",
+          "kind": "director",
+          "domain": "finance",
+          "parent": "brain",
+          "focus": "Margem e caixa",
+          "sources": [
+            "aurora-pricing",
+            "aurora-costs",
+            "aurora-treasury"
+          ],
+          "children": [
+            "controller",
+            "treasury_analyst"
+          ]
+        },
+        {
+          "id": "controller",
+          "title": "Controladoria",
+          "kind": "specialist",
+          "domain": "finance",
+          "parent": "finance_director",
+          "focus": "Margem sobre preço, desconto, caixa livre e insuficiência de orçamento",
+          "sources": [
+            "aurora-costs",
+            "aurora-pricing",
+            "aurora-treasury",
+            "aurora-marketing"
+          ]
+        },
+        {
+          "id": "treasury_analyst",
+          "title": "Analista de tesouraria",
+          "kind": "specialist",
+          "domain": "finance",
+          "parent": "finance_director",
+          "focus": "Liquidez, compromissos e necessidade de financiamento",
+          "sources": [
+            "aurora-treasury",
+            "aurora-marketing",
+            "aurora-procurement"
+          ]
+        },
+        {
+          "id": "people_director",
+          "title": "Diretora de pessoas",
+          "kind": "director",
+          "domain": "people",
+          "parent": "brain",
+          "focus": "Pessoas e capacidade organizacional",
+          "sources": [
+            "aurora-workforce"
+          ],
+          "children": [
+            "recruitment_analyst",
+            "workforce_analyst"
+          ]
+        },
+        {
+          "id": "recruitment_analyst",
+          "title": "Analista de recrutamento",
+          "kind": "specialist",
+          "domain": "people",
+          "parent": "people_director",
+          "focus": "Planejamento de admissões quando houver demanda demonstrada",
+          "sources": [
+            "aurora-workforce"
+          ]
+        },
+        {
+          "id": "workforce_analyst",
+          "title": "Analista de capacidade humana",
+          "kind": "specialist",
+          "domain": "people",
+          "parent": "people_director",
+          "focus": "Disponibilidade de equipes e treinamento",
+          "sources": [
+            "aurora-workforce"
+          ]
+        },
+        {
+          "id": "legal_director",
+          "title": "Diretor jurídico",
+          "kind": "director",
+          "domain": "legal",
+          "parent": "brain",
+          "focus": "Contratos, conformidade e resposta",
+          "sources": [
+            "aurora-compliance",
+            "aurora-contracts",
+            "aurora-response"
+          ],
+          "children": [
+            "compliance_advisor",
+            "contract_analyst"
+          ]
+        },
+        {
+          "id": "compliance_advisor",
+          "title": "Assessora de conformidade",
+          "kind": "specialist",
+          "domain": "legal",
+          "parent": "legal_director",
+          "focus": "Alegações da campanha e governança de resposta a incidente",
+          "sources": [
+            "aurora-compliance",
+            "aurora-response",
+            "aurora-incident"
+          ]
+        },
+        {
+          "id": "contract_analyst",
+          "title": "Analista de contratos",
+          "kind": "specialist",
+          "domain": "legal",
+          "parent": "legal_director",
+          "focus": "Diferença entre contratos firmes, negociação e obrigações",
+          "sources": [
+            "aurora-compliance",
+            "aurora-contracts",
+            "aurora-response"
+          ]
+        },
+        {
+          "id": "technology_director",
+          "title": "Diretora de tecnologia",
+          "kind": "director",
+          "domain": "technology",
+          "parent": "brain",
+          "focus": "Sistemas e segurança de dados",
+          "sources": [
+            "aurora-data-platform",
+            "aurora-incident"
+          ],
+          "children": [
+            "security_analyst",
+            "data_analyst"
+          ]
+        },
+        {
+          "id": "security_analyst",
+          "title": "Analista de segurança",
+          "kind": "specialist",
+          "domain": "technology",
+          "parent": "technology_director",
+          "focus": "Incidente, evidências ausentes e tempo do SLA interno",
+          "sources": [
+            "aurora-incident",
+            "aurora-response",
+            "aurora-data-platform"
+          ]
+        },
+        {
+          "id": "data_analyst",
+          "title": "Analista de dados",
+          "kind": "specialist",
+          "domain": "technology",
+          "parent": "technology_director",
+          "focus": "Consistência de contagens e integração dos sistemas",
+          "sources": [
+            "aurora-data-platform",
+            "aurora-incident",
+            "aurora-response"
+          ]
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "campaign",
+          "title": "Campanha Horizonte",
+          "label": "Marketing · Operações · Finanças · Jurídico",
+          "goal": "Avalie se o Grupo Aurora pode lançar a campanha Horizonte em novembro, considerando a oportunidade Orion, estoque e suprimento, desconto e margem vigente, caixa disponível, prazos regionais e a alegação carbono neutro. Proponha um plano condicionado, sem executar ações externas."
+        },
+        {
+          "id": "incident",
+          "title": "Incidente no CRM",
+          "label": "Tecnologia · Jurídico",
+          "goal": "Priorize a primeira avaliação do incidente INC-47 no CRM europeu. Distinga suspeita e fato confirmado, apure o prazo interno restante às 16h45 e proponha um checklist técnico e jurídico. Não execute contenção ou comunicação externa nem envolva áreas sem necessidade."
+        }
+      ]
+    },
+    "global_model_cap": 41,
+    "production_approved": false
+  },
+  "jobs": [
+    {
+      "id": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+      "goal": "Priorize a primeira avaliação do incidente INC-47 no CRM europeu. Distinga suspeita e fato confirmado, apure o prazo interno restante às 16h45 e proponha um checklist técnico e jurídico. Não execute contenção ou comunicação externa nem envolva áreas sem necessidade.",
+      "status": "awaiting_approval",
+      "plan": {
+        "strategy": "A3",
+        "reason": "A primeira avaliação exige segurança para apurar evidências e o prazo interno, e jurídico para avaliar governança e obrigações. Não foram fornecidos horário inicial, duração do SLA ou fatos do incidente; portanto, o prazo restante às 16h45 e a ocorrência de exposição não podem ser confirmados. O trabalho será apenas planejado, sem contenção ou comunicação externa.",
+        "teams": [
+          {
+            "lead": "technology_director",
+            "specialists": [
+              "security_analyst"
+            ],
+            "reason": "Coordenar a avaliação técnica inicial: registrar separadamente suspeitas e fatos confirmados; preservar e revisar evidências e logs disponíveis; apurar sistemas, dados, acessos e período potencialmente afetados; identificar lacunas; e obter horário inicial e duração do SLA interno para calcular o prazo restante às 16h45."
+          },
+          {
+            "lead": "legal_director",
+            "specialists": [
+              "compliance_advisor"
+            ],
+            "reason": "Coordenar o checklist jurídico: avaliar a governança da resposta, natureza e sensibilidade dos dados potencialmente envolvidos, papéis e obrigações aplicáveis, marcos e prazos relevantes, critérios de eventual notificação e documentação das decisões, sujeitos aos fatos apurados. Não realizar comunicação externa."
+          }
+        ],
+        "capabilities": [
+          "technology_director",
+          "security_analyst",
+          "legal_director",
+          "compliance_advisor"
+        ],
+        "not_selected": [
+          {
+            "id": "executive_director",
+            "reason": "A coordenação executiva não é necessária para a primeira avaliação delimitada."
+          },
+          {
+            "id": "business_analyst",
+            "reason": "Não há dependências entre unidades demonstradas que exijam análise específica."
+          },
+          {
+            "id": "portfolio_analyst",
+            "reason": "Não há decisão de investimentos ou portfólio no escopo."
+          },
+          {
+            "id": "marketing_director",
+            "reason": "O pedido trata de incidente no CRM, não de campanha ou posicionamento."
+          },
+          {
+            "id": "campaign_planner",
+            "reason": "Não há campanha a planejar."
+          },
+          {
+            "id": "pricing_analyst",
+            "reason": "Não há mecânica promocional ou questão de preços."
+          },
+          {
+            "id": "operations_director",
+            "reason": "Não há impacto logístico ou operacional demonstrado que exija sua coordenação."
+          },
+          {
+            "id": "supply_planner",
+            "reason": "Não há questão demonstrada de estoque ou suprimentos."
+          },
+          {
+            "id": "logistics_analyst",
+            "reason": "Não há questão demonstrada de capacidade logística ou prazos regionais."
+          },
+          {
+            "id": "finance_director",
+            "reason": "Não há decisão financeira necessária à primeira avaliação."
+          },
+          {
+            "id": "controller",
+            "reason": "Não há análise de margem, desconto ou orçamento solicitada."
+          },
+          {
+            "id": "treasury_analyst",
+            "reason": "Não há questão demonstrada de liquidez ou financiamento."
+          },
+          {
+            "id": "people_director",
+            "reason": "Não há demanda demonstrada de gestão de pessoas."
+          },
+          {
+            "id": "recruitment_analyst",
+            "reason": "Não há demanda demonstrada de admissões."
+          },
+          {
+            "id": "workforce_analyst",
+            "reason": "Não há necessidade demonstrada de análise de capacidade humana ou treinamento."
+          },
+          {
+            "id": "contract_analyst",
+            "reason": "Não há contrato ou obrigação contratual específica identificada; a avaliação jurídica inicial pode identificar eventual necessidade posterior."
+          },
+          {
+            "id": "data_analyst",
+            "reason": "Não há inconsistência de contagens ou integração demonstrada que exija análise especializada nesta etapa."
+          }
+        ],
+        "requires_approval": true,
+        "max_model_calls": 6
+      },
+      "review": {
+        "job": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+        "report": {
+          "summary": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico do INC-47 no AuroraCRM europeu. Às 16h45 de 05/11/2026, restavam 65 minutos do prazo interno fictício, com limite às 17h50 no fuso -03:00. A proposta original é parcialmente viável: o checklist pode ser realizado com base nos relatórios sintéticos preservados, mas a apuração de conteúdo, natureza dos registros e outros detalhes não disponíveis nesses relatórios está bloqueada pela falta de evidência. Esta é uma decisão de prioridade e um plano revisável, não uma aprovação de medidas.",
+          "facts": [
+            {
+              "key": "potential_records",
+              "value": 1200,
+              "unit": "contatos potencialmente envolvidos",
+              "label": "Estimativa potencial, não impacto confirmado",
+              "sources": [
+                "aurora-incident"
+              ]
+            },
+            {
+              "key": "confirmed_exfiltration",
+              "value": false,
+              "unit": "estado de confirmação",
+              "label": "Exfiltração não confirmada; isso não prova que não tenha ocorrido",
+              "sources": [
+                "aurora-incident"
+              ]
+            },
+            {
+              "key": "response_sla_minutes",
+              "value": 90,
+              "unit": "minutos após o alerta",
+              "label": "Prazo interno fictício para a primeira avaliação conjunta",
+              "sources": [
+                "aurora-response"
+              ]
+            },
+            {
+              "key": "minutes_elapsed",
+              "value": 25,
+              "unit": "minutos",
+              "label": "Tempo transcorrido entre o alerta às 16h20 e as 16h45",
+              "sources": [
+                "aurora-incident"
+              ]
+            },
+            {
+              "key": "minutes_remaining",
+              "value": 65,
+              "unit": "minutos",
+              "label": "Prazo restante às 16h45, até 17h50 no fuso -03:00",
+              "sources": [
+                "aurora-incident",
+                "aurora-response"
+              ]
+            }
+          ],
+          "risks": [
+            "Possível exposição de até 1.200 contatos; a extensão efetiva é desconhecida.",
+            "A conclusão da transferência e o acesso por terceiro não foram confirmados; a ausência de confirmação não prova que não ocorreram.",
+            "Os logs podem estar incompletos, e o volume registrado não comprova recepção por terceiro. Causa, origem, conteúdo e natureza dos registros envolvidos permanecem desconhecidos.",
+            "Não há prova de contenção completa.",
+            "A primeira avaliação conjunta pode ultrapassar o prazo interno das 17h50.",
+            "Os 6.000 itens da oportunidade Orion são distintos e não devem ser somados aos contatos potencialmente envolvidos."
+          ],
+          "conditions": [
+            "A avaliação requer a participação conjunta de Segurança e Jurídico; outras áreas só devem ser envolvidas diante de necessidade específica identificada.",
+            "A análise técnica está limitada aos relatórios sintéticos já preservados e às informações que eles permitam verificar. O conteúdo dos registros e detalhes ausentes não podem ser apurados com a evidência disponível.",
+            "Os horários e fontes foram informados nos relatórios das diretorias; os documentos subjacentes não foram fornecidos diretamente.",
+            "O prazo de 90 minutos é um SLA interno fictício, não uma obrigação legal genérica. Eventuais obrigações legais e contratuais dependem de apuração, sem conclusão legal real nesta decisão.",
+            "Não estão autorizados acesso à produção, SQL contra clientes, alteração de configurações, revogação de tokens, cópia de registros, contenção ou comunicação externa. Medidas dependem de processo e aprovação separados.",
+            "Não envolver recrutamento ou precificação sem necessidade específica nem transportar dados pessoais do incidente para campanha."
+          ],
+          "cited_sources": [
+            "aurora-incident",
+            "aurora-response",
+            "aurora-data-platform"
+          ],
+          "action": "No quadro local, priorizar o checklist conjunto para conclusão até 17h50. Segurança: revisar somente os relatórios sintéticos preservados; verificar, quando possível, horários, volume, destino lógico, estado da transferência e acessos associados; registrar lacunas, limites dos logs e ausência de prova de contenção completa. Jurídico: separar fatos confirmados de suspeitas e evidências ausentes; avaliar o impacto potencial e identificar contratos e eventuais obrigações conforme os fatos forem apurados; documentar incertezas, dependências e decisões pendentes. Revisar o plano se surgirem evidências adicionais e encaminhar possíveis medidas a processo separado, sem executá-las ou aprová-las agora.",
+          "requires_approval": true
+        },
+        "payload": {
+          "operation": "simulated-enterprise-decision",
+          "recipient": "comite-aurora-local",
+          "content": "No quadro local, priorizar o checklist conjunto para conclusão até 17h50. Segurança: revisar somente os relatórios sintéticos preservados; verificar, quando possível, horários, volume, destino lógico, estado da transferência e acessos associados; registrar lacunas, limites dos logs e ausência de prova de contenção completa. Jurídico: separar fatos confirmados de suspeitas e evidências ausentes; avaliar o impacto potencial e identificar contratos e eventuais obrigações conforme os fatos forem apurados; documentar incertezas, dependências e decisões pendentes. Revisar o plano se surgirem evidências adicionais e encaminhar possíveis medidas a processo separado, sem executá-las ou aprová-las agora."
+        },
+        "hash": "2271fa34ecb01aad81a9a25a66d7655f06a16595c6f8c56c2d3a19401fb4e767",
+        "requires_approval": true
+      },
+      "approval": false,
+      "receipt": null,
+      "error": null,
+      "created": "2026-11-05T13:44:44.560Z",
+      "worker_active": false,
+      "events": [
+        {
+          "seq": 32,
+          "at": "2026-11-05T13:44:44.561Z",
+          "node": "admission",
+          "detail": {
+            "goal": "Priorize a primeira avaliação do incidente INC-47 no CRM europeu. Distinga suspeita e fato confirmado, apure o prazo interno restante às 16h45 e proponha um checklist técnico e jurídico. Não execute contenção ou comunicação externa nem envolva áreas sem necessidade."
+          }
+        },
+        {
+          "seq": 33,
+          "at": "2026-11-05T13:44:44.567Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 19276
+          }
+        },
+        {
+          "seq": 34,
+          "at": "2026-11-05T13:44:45.416Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [],
+            "process": 28840,
+            "has_state": false
+          }
+        },
+        {
+          "seq": 35,
+          "at": "2026-11-05T13:44:45.446Z",
+          "node": "chief_of_staff",
+          "detail": {
+            "message": "Escolhendo uma equipe a partir do catálogo completo de 21 agentes."
+          }
+        },
+        {
+          "seq": 36,
+          "at": "2026-11-05T13:45:01.346Z",
+          "node": "plan",
+          "detail": {
+            "strategy": "A3",
+            "reason": "A primeira avaliação exige segurança para apurar evidências e o prazo interno, e jurídico para avaliar governança e obrigações. Não foram fornecidos horário inicial, duração do SLA ou fatos do incidente; portanto, o prazo restante às 16h45 e a ocorrência de exposição não podem ser confirmados. O trabalho será apenas planejado, sem contenção ou comunicação externa.",
+            "teams": [
+              {
+                "lead": "technology_director",
+                "specialists": [
+                  "security_analyst"
+                ],
+                "reason": "Coordenar a avaliação técnica inicial: registrar separadamente suspeitas e fatos confirmados; preservar e revisar evidências e logs disponíveis; apurar sistemas, dados, acessos e período potencialmente afetados; identificar lacunas; e obter horário inicial e duração do SLA interno para calcular o prazo restante às 16h45."
+              },
+              {
+                "lead": "legal_director",
+                "specialists": [
+                  "compliance_advisor"
+                ],
+                "reason": "Coordenar o checklist jurídico: avaliar a governança da resposta, natureza e sensibilidade dos dados potencialmente envolvidos, papéis e obrigações aplicáveis, marcos e prazos relevantes, critérios de eventual notificação e documentação das decisões, sujeitos aos fatos apurados. Não realizar comunicação externa."
+              }
+            ],
+            "capabilities": [
+              "technology_director",
+              "security_analyst",
+              "legal_director",
+              "compliance_advisor"
+            ],
+            "not_selected": [
+              {
+                "id": "executive_director",
+                "reason": "A coordenação executiva não é necessária para a primeira avaliação delimitada."
+              },
+              {
+                "id": "business_analyst",
+                "reason": "Não há dependências entre unidades demonstradas que exijam análise específica."
+              },
+              {
+                "id": "portfolio_analyst",
+                "reason": "Não há decisão de investimentos ou portfólio no escopo."
+              },
+              {
+                "id": "marketing_director",
+                "reason": "O pedido trata de incidente no CRM, não de campanha ou posicionamento."
+              },
+              {
+                "id": "campaign_planner",
+                "reason": "Não há campanha a planejar."
+              },
+              {
+                "id": "pricing_analyst",
+                "reason": "Não há mecânica promocional ou questão de preços."
+              },
+              {
+                "id": "operations_director",
+                "reason": "Não há impacto logístico ou operacional demonstrado que exija sua coordenação."
+              },
+              {
+                "id": "supply_planner",
+                "reason": "Não há questão demonstrada de estoque ou suprimentos."
+              },
+              {
+                "id": "logistics_analyst",
+                "reason": "Não há questão demonstrada de capacidade logística ou prazos regionais."
+              },
+              {
+                "id": "finance_director",
+                "reason": "Não há decisão financeira necessária à primeira avaliação."
+              },
+              {
+                "id": "controller",
+                "reason": "Não há análise de margem, desconto ou orçamento solicitada."
+              },
+              {
+                "id": "treasury_analyst",
+                "reason": "Não há questão demonstrada de liquidez ou financiamento."
+              },
+              {
+                "id": "people_director",
+                "reason": "Não há demanda demonstrada de gestão de pessoas."
+              },
+              {
+                "id": "recruitment_analyst",
+                "reason": "Não há demanda demonstrada de admissões."
+              },
+              {
+                "id": "workforce_analyst",
+                "reason": "Não há necessidade demonstrada de análise de capacidade humana ou treinamento."
+              },
+              {
+                "id": "contract_analyst",
+                "reason": "Não há contrato ou obrigação contratual específica identificada; a avaliação jurídica inicial pode identificar eventual necessidade posterior."
+              },
+              {
+                "id": "data_analyst",
+                "reason": "Não há inconsistência de contagens ou integração demonstrada que exija análise especializada nesta etapa."
+              }
+            ],
+            "requires_approval": true,
+            "max_model_calls": 6
+          }
+        },
+        {
+          "seq": 37,
+          "at": "2026-11-05T13:45:01.369Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "security_analyst",
+            "parent": "technology_director"
+          }
+        },
+        {
+          "seq": 38,
+          "at": "2026-11-05T13:45:01.371Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "compliance_advisor",
+            "parent": "legal_director"
+          }
+        },
+        {
+          "seq": 39,
+          "at": "2026-11-05T13:45:20.427Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "compliance_advisor",
+            "parent": "legal_director",
+            "sources": [
+              "aurora-compliance",
+              "aurora-response",
+              "aurora-incident"
+            ],
+            "output": {
+              "agent": "Assessora de conformidade — alegações da campanha e governança de resposta a incidente",
+              "facts": [
+                {
+                  "claim": "Alerta de evento de exportação no AuroraCRM europeu",
+                  "value": "05/11/2026 às 16h20, fuso -03:00",
+                  "unit": "data e hora",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Contatos potencialmente envolvidos",
+                  "value": 1200,
+                  "unit": "contatos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Classificação atual",
+                  "value": "suspeita em investigação",
+                  "unit": "classificação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Conclusão da transferência confirmada",
+                  "value": false,
+                  "unit": "confirmação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Acesso de terceiro confirmado",
+                  "value": false,
+                  "unit": "confirmação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Relatórios disponíveis preservados pelo responsável de plantão",
+                  "value": true,
+                  "unit": "estado",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Primeira avaliação conjunta de Segurança e Jurídico após o alerta",
+                  "value": 90,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-response"
+                  ]
+                },
+                {
+                  "claim": "Prazo para a primeira avaliação conjunta",
+                  "value": "05/11/2026 às 17h50, fuso -03:00",
+                  "unit": "data e hora",
+                  "sources": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "16h45 − 16h20 = 25 minutos transcorridos",
+                  "result": "25 minutos",
+                  "source_ids": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "expression": "90 minutos − 25 minutos = 65 minutos restantes às 16h45",
+                  "result": "65 minutos",
+                  "source_ids": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                },
+                {
+                  "expression": "16h20 + 90 minutos = 17h50, no mesmo dia e fuso",
+                  "result": "17h50 de 05/11/2026, fuso -03:00",
+                  "source_ids": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "risks": [
+                "Possível exposição de dados de até 1.200 contatos; a extensão efetiva ainda não foi confirmada.",
+                "O prazo interno para a primeira avaliação conjunta pode ser perdido se Segurança e Jurídico não a realizarem até 17h50.",
+                "Não há prova de contenção completa."
+              ],
+              "unknowns": [
+                "Se a transferência foi concluída e se terceiros acessaram os dados.",
+                "Causa, origem do evento, dados efetivamente envolvidos e extensão real.",
+                "Estado atual da transferência e dos acessos relacionados.",
+                "Quais medidas técnicas ou jurídicas serão justificadas após a avaliação e quais aprovações serão necessárias."
+              ],
+              "recommendation": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico até 17h50; o prazo de 90 minutos é um SLA interno fictício, não uma obrigação legal genérica. Checklist técnico: verificar os logs preservados e sua integridade, horários, identidade e permissões dos acessos, estado e destino da transferência e extensão efetiva; registrar separadamente observações, hipóteses e evidências faltantes. Checklist jurídico: avaliar com Segurança os fatos e o impacto potencial, registrar incertezas e pendências, e identificar medidas e eventuais obrigações para análise conforme as evidências, sem presumir prazo legal. Preparar opções de medidas para o processo de aprovação separado. Não executar revogação, bloqueio, outras ações de contenção ou comunicação externa; não tocar na produção. Não envolver recrutamento ou precificação sem evidência de necessidade específica nem transportar dados pessoais para a campanha."
+            }
+          }
+        },
+        {
+          "seq": 40,
+          "at": "2026-11-05T13:45:20.432Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "legal_director",
+            "children": [
+              "compliance_advisor"
+            ]
+          }
+        },
+        {
+          "seq": 41,
+          "at": "2026-11-05T13:45:39.846Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "security_analyst",
+            "parent": "technology_director",
+            "sources": [
+              "aurora-incident",
+              "aurora-response",
+              "aurora-data-platform"
+            ],
+            "output": {
+              "agent": "Analista de segurança — capacidade Incidente",
+              "facts": [
+                {
+                  "claim": "Alerta de evento de exportação no AuroraCRM europeu em 05/11/2026",
+                  "value": "16h20",
+                  "unit": "horário, fuso -03:00",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Instante da avaliação",
+                  "value": "16h45",
+                  "unit": "horário, fuso -03:00",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Contatos potencialmente envolvidos",
+                  "value": 1200,
+                  "unit": "contatos",
+                  "sources": [
+                    "aurora-incident",
+                    "aurora-data-platform"
+                  ]
+                },
+                {
+                  "claim": "Classificação atual",
+                  "value": "suspeita em investigação",
+                  "unit": "classificação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Conclusão da transferência confirmada",
+                  "value": false,
+                  "unit": "confirmação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Acesso de terceiro confirmado",
+                  "value": false,
+                  "unit": "confirmação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Relatórios disponíveis preservados pelo responsável de plantão",
+                  "value": true,
+                  "unit": "estado",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Prazo para primeira avaliação conjunta de Segurança e Jurídico",
+                  "value": 90,
+                  "unit": "minutos após o alerta; SLA interno",
+                  "sources": [
+                    "aurora-response"
+                  ]
+                },
+                {
+                  "claim": "O monitoramento registra volume e destino lógico, sem conteúdo dos registros neste corpus",
+                  "value": true,
+                  "unit": "característica do monitoramento",
+                  "sources": [
+                    "aurora-data-platform"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "16h45 − 16h20 = 25 minutos transcorridos",
+                  "result": "25 minutos",
+                  "source_ids": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "expression": "90 minutos de SLA interno − 25 minutos transcorridos = 65 minutos restantes",
+                  "result": "65 minutos restantes às 16h45",
+                  "source_ids": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                },
+                {
+                  "expression": "16h20 + 90 minutos = 17h50",
+                  "result": "Primeira avaliação conjunta até as 17h50 de 05/11/2026, no fuso -03:00",
+                  "source_ids": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "risks": [
+                "Possível exposição de até 1.200 contatos, ainda sem confirmação de transferência concluída ou acesso por terceiro.",
+                "Logs podem estar incompletos; volume registrado não prova recepção por terceiro.",
+                "Não há prova de contenção completa.",
+                "Os 6.000 itens da oportunidade Orion são uma unidade distinta e não devem ser somados aos contatos potencialmente envolvidos."
+              ],
+              "unknowns": [
+                "Se a transferência foi concluída e se algum terceiro recebeu ou acessou dados.",
+                "A causa, a origem do evento e a extensão efetiva do impacto.",
+                "O estado completo da transferência, os acessos associados e eventuais lacunas nos logs.",
+                "Se medidas de contenção foram executadas e se são suficientes.",
+                "A natureza e o conteúdo dos registros eventualmente envolvidos, ausentes do corpus."
+              ],
+              "recommendation": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico até 17h50. Checklist técnico: revisar somente os relatórios sintéticos disponíveis e já preservados; verificar horários, volume, destino lógico, estado da transferência e acessos associados; registrar lacunas e limites dos logs; identificar medidas possíveis para avaliação em processo separado. Checklist jurídico: registrar fatos confirmados, hipóteses e evidências ausentes; avaliar o impacto potencial e as eventuais obrigações aplicáveis à luz dos fatos que forem apurados; documentar decisões e aprovações necessárias. Não acessar produção, executar SQL contra clientes, alterar configurações, copiar registros, revogar acessos, bloquear sistemas ou enviar comunicações ou notificações externas nesta execução. Envolver outras áreas apenas se surgir evidência de necessidade específica."
+            }
+          }
+        },
+        {
+          "seq": 42,
+          "at": "2026-11-05T13:45:39.853Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "technology_director",
+            "children": [
+              "security_analyst"
+            ]
+          }
+        },
+        {
+          "seq": 43,
+          "at": "2026-11-05T13:45:58.300Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "legal_director",
+            "children": [
+              "compliance_advisor"
+            ],
+            "output": {
+              "agent": "Diretor jurídico — Contratos, conformidade e resposta",
+              "facts": [
+                {
+                  "claim": "Alerta de possível exportação no AuroraCRM europeu",
+                  "value": "05/11/2026 às 16h20, fuso -03:00",
+                  "unit": "data e hora",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Classificação atual",
+                  "value": "Suspeita em investigação",
+                  "unit": "classificação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Contatos potencialmente envolvidos",
+                  "value": 1200,
+                  "unit": "contatos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Conclusão da transferência",
+                  "value": "Não confirmada",
+                  "unit": "estado de confirmação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Acesso de terceiros aos dados",
+                  "value": "Não confirmado",
+                  "unit": "estado de confirmação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Relatórios disponíveis",
+                  "value": "Preservados pelo responsável de plantão",
+                  "unit": "estado",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Prazo interno para a primeira avaliação conjunta de Segurança e Jurídico",
+                  "value": 90,
+                  "unit": "minutos após o alerta",
+                  "sources": [
+                    "aurora-response"
+                  ]
+                },
+                {
+                  "claim": "Tempo transcorrido às 16h45",
+                  "value": 25,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Prazo interno restante às 16h45",
+                  "value": 65,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                },
+                {
+                  "claim": "Limite para a primeira avaliação conjunta",
+                  "value": "05/11/2026 às 17h50, fuso -03:00",
+                  "unit": "data e hora",
+                  "sources": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "risks": [
+                "Possível exposição de dados de até 1.200 contatos; a extensão efetiva não está confirmada.",
+                "Perda do SLA interno caso a primeira avaliação conjunta não ocorra até 17h50.",
+                "Não há prova de contenção completa; causa, destino e estado atual da transferência, dados efetivamente envolvidos e acessos permanecem desconhecidos."
+              ],
+              "conditions": [
+                "A avaliação depende da participação conjunta de Segurança e Jurídico, conforme aurora-response.",
+                "Os horários e a contagem foram informados pela especialista com referência a aurora-incident; o documento subjacente não foi fornecido diretamente nesta evidência.",
+                "As relações técnicas devem ser verificadas em aurora-data-platform, cujo conteúdo não foi fornecido diretamente.",
+                "O prazo de 90 minutos é um SLA interno fictício, não uma obrigação legal genérica; eventuais obrigações legais e contratuais dependem de apuração.",
+                "Revogação de acesso, bloqueio de sistemas e comunicações ou notificações externas exigem processo e aprovação separados e não estão autorizados nesta execução.",
+                "Não envolver recrutamento ou precificação sem evidência de necessidade específica, nem transportar dados pessoais do incidente para a campanha."
+              ],
+              "recommendation": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico até 17h50. Checklist técnico: verificar integridade e conteúdo dos relatórios e logs preservados; apurar horários, origem, identidade e permissões dos acessos; verificar estado, destino e eventual conclusão da transferência, acesso de terceiros e extensão efetiva; consultar as relações pertinentes em aurora-data-platform; registrar fatos observados, hipóteses e evidências faltantes separadamente. Checklist jurídico: avaliar com Segurança os dados e impactos potencialmente envolvidos, identificar contratos e eventuais obrigações aplicáveis conforme os fatos apurados, registrar incertezas e pendências e preparar opções de medidas para processo de aprovação separado. Não executar contenção nem comunicação externa e não aprovar ações nesta avaliação.",
+              "disagreements": []
+            }
+          }
+        },
+        {
+          "seq": 44,
+          "at": "2026-11-05T13:46:17.381Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "technology_director",
+            "children": [
+              "security_analyst"
+            ],
+            "output": {
+              "agent": "Diretora de tecnologia — Sistemas e segurança de dados",
+              "facts": [
+                {
+                  "claim": "Alerta de evento de exportação no AuroraCRM europeu",
+                  "value": "05/11/2026 às 16h20",
+                  "unit": "horário, fuso -03:00",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Classificação atual do evento",
+                  "value": "suspeita em investigação",
+                  "unit": "classificação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Contatos potencialmente envolvidos",
+                  "value": 1200,
+                  "unit": "contatos",
+                  "sources": [
+                    "aurora-incident",
+                    "aurora-data-platform"
+                  ]
+                },
+                {
+                  "claim": "Conclusão da transferência e acesso por terceiro",
+                  "value": "não confirmados",
+                  "unit": "estado da evidência",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Relatórios disponíveis",
+                  "value": "preservados pelo responsável de plantão",
+                  "unit": "estado",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Prazo interno para a primeira avaliação conjunta de Segurança e Jurídico",
+                  "value": 90,
+                  "unit": "minutos após o alerta",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Tempo transcorrido e restante às 16h45",
+                  "value": "25 minutos transcorridos; 65 minutos restantes",
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Limite para a primeira avaliação conjunta",
+                  "value": "05/11/2026 às 17h50",
+                  "unit": "horário, fuso -03:00",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Monitoramento de exportações",
+                  "value": "registra volume e destino lógico; o corpus não contém o conteúdo dos registros",
+                  "unit": "característica",
+                  "sources": [
+                    "aurora-data-platform"
+                  ]
+                },
+                {
+                  "claim": "Itens da oportunidade Orion",
+                  "value": 6000,
+                  "unit": "itens distintos dos contatos potencialmente envolvidos",
+                  "sources": [
+                    "aurora-data-platform"
+                  ]
+                }
+              ],
+              "risks": [
+                "Possível exposição de até 1.200 contatos, sem confirmação de transferência concluída ou de acesso por terceiro.",
+                "Logs podem estar incompletos e o volume registrado não comprova recepção por terceiro.",
+                "Não há prova de contenção completa; causa, origem e extensão efetiva do impacto permanecem desconhecidas.",
+                "Os 6.000 itens da oportunidade Orion não devem ser somados aos contatos potencialmente envolvidos."
+              ],
+              "conditions": [
+                "A primeira avaliação depende da participação conjunta de Segurança e Jurídico até as 17h50; envolver outras áreas somente diante de necessidade específica identificada.",
+                "A análise técnica fica limitada aos relatórios sintéticos disponíveis e já preservados; o conteúdo e a natureza dos registros eventualmente envolvidos não constam no corpus.",
+                "Não há confirmação de vazamento, causa técnica ou origem humana; ausência de confirmação não comprova que a transferência ou o acesso não ocorreram.",
+                "Não acessar produção, executar SQL contra clientes, alterar configurações, revogar tokens, copiar registros, executar contenção ou enviar comunicação externa nesta avaliação.",
+                "Eventuais medidas e obrigações dependem dos fatos apurados e de avaliação e decisão em processo próprio; nenhuma ação está aprovada por esta recomendação."
+              ],
+              "recommendation": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico até 17h50. Checklist técnico: revisar somente os relatórios sintéticos preservados; verificar, na medida em que os relatórios permitam, horários, volume, destino lógico, estado da transferência e acessos associados; registrar lacunas e limites dos logs e a ausência de prova de contenção completa. Checklist jurídico: separar fatos confirmados de suspeitas e evidências ausentes; avaliar o impacto potencial e eventuais obrigações aplicáveis conforme os fatos forem apurados; documentar conclusões, dependências e decisões necessárias. Submeter possíveis medidas a avaliação separada, sem executá-las ou aprová-las agora.",
+              "disagreements": []
+            }
+          }
+        },
+        {
+          "seq": 45,
+          "at": "2026-11-05T13:46:17.391Z",
+          "node": "synthesis",
+          "detail": {
+            "departments": 2
+          }
+        },
+        {
+          "seq": 46,
+          "at": "2026-11-05T13:46:38.919Z",
+          "node": "review_ready",
+          "detail": {
+            "hash": "2271fa34ecb01aad81a9a25a66d7655f06a16595c6f8c56c2d3a19401fb4e767",
+            "model_approval_mismatch": false
+          }
+        },
+        {
+          "seq": 47,
+          "at": "2026-11-05T13:46:38.930Z",
+          "node": "checkpoint_saved",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "completed": false
+          }
+        },
+        {
+          "seq": 48,
+          "at": "2026-11-05T13:46:39.018Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 19276,
+            "exit_code": 0
+          }
+        },
+        {
+          "seq": 49,
+          "at": "2026-11-05T13:46:39.121Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 27956
+          }
+        },
+        {
+          "seq": 50,
+          "at": "2026-11-05T13:46:40.012Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "process": 29976,
+            "has_state": true
+          }
+        },
+        {
+          "seq": 51,
+          "at": "2026-11-05T13:46:40.023Z",
+          "node": "checkpoint_saved",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "completed": false
+          }
+        },
+        {
+          "seq": 52,
+          "at": "2026-11-05T13:46:40.117Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 27956,
+            "exit_code": 0
+          }
+        },
+        {
+          "seq": 53,
+          "at": "2026-11-05T13:48:36.192Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 23904
+          }
+        },
+        {
+          "seq": 54,
+          "at": "2026-11-05T13:48:37.068Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "process": 18340,
+            "has_state": true
+          }
+        },
+        {
+          "seq": 55,
+          "at": "2026-11-05T13:48:37.096Z",
+          "node": "checkpoint_saved",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "completed": false
+          }
+        },
+        {
+          "seq": 56,
+          "at": "2026-11-05T13:48:37.185Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 23904,
+            "exit_code": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "goal": "Avalie se o Grupo Aurora pode lançar a campanha Horizonte em novembro, considerando a oportunidade Orion, estoque e suprimento, desconto e margem vigente, caixa disponível, prazos regionais e a alegação carbono neutro. Proponha um plano condicionado, sem executar ações externas.",
+      "status": "failed",
+      "plan": {
+        "strategy": "A3",
+        "reason": "A avaliação exige quatro times para cobrir campanha, suprimento e logística, margem e caixa, e riscos contratuais e da alegação ambiental. Como o limite de oito agentes permite apenas um especialista por diretor, a seleção prioriza a cobertura mínima; cada diretor coordenará seu especialista e responderá pelo restante de seu domínio. A evidência fornecida não contém valores ou prazos que permitam concluir pela viabilidade em novembro. O lançamento deve ficar condicionado à confirmação conjunta da oportunidade Orion, disponibilidade de estoque e suprimento, margem e caixa suficientes, cumprimento dos prazos regionais e comprovação da alegação carbono neutro. Sem essas confirmações, a recomendação é adiar ou reformular a campanha.",
+        "teams": [
+          {
+            "lead": "marketing_director",
+            "specialists": [
+              "campaign_planner"
+            ],
+            "reason": "Definir escopo, público, demanda incremental e limites da campanha; a diretora avaliará também a mecânica de desconto vigente em conjunto com Finanças."
+          },
+          {
+            "lead": "operations_director",
+            "specialists": [
+              "supply_planner"
+            ],
+            "reason": "Conciliar estoque livre, reservas, demanda conjunta de Horizonte e Orion e eventual lote não confirmado; o diretor verificará capacidade e prazos regionais antes de qualquer compromisso de lançamento."
+          },
+          {
+            "lead": "finance_director",
+            "specialists": [
+              "controller"
+            ],
+            "reason": "Avaliar o efeito do desconto sobre a margem e a suficiência do caixa livre para a campanha e compromissos existentes; a diretora tratará eventuais necessidades de liquidez."
+          },
+          {
+            "lead": "legal_director",
+            "specialists": [
+              "compliance_advisor"
+            ],
+            "reason": "Examinar o suporte para a alegação carbono neutro e as condições de uso na campanha; o diretor avaliará também o estágio e as obrigações da oportunidade Orion. Sem comprovação suficiente, a alegação não deve ser usada."
+          }
+        ],
+        "capabilities": [
+          "marketing_director",
+          "campaign_planner",
+          "operations_director",
+          "supply_planner",
+          "finance_director",
+          "controller",
+          "legal_director",
+          "compliance_advisor"
+        ],
+        "not_selected": [
+          {
+            "id": "executive_director",
+            "reason": "A coordenação da decisão cabe ao Chief of Staff no pedido, sem necessidade de uma diretoria executiva adicional."
+          },
+          {
+            "id": "business_analyst",
+            "reason": "As dependências essenciais podem ser consolidadas pelo Chief of Staff com os quatro times selecionados."
+          },
+          {
+            "id": "portfolio_analyst",
+            "reason": "Não há pedido de priorização ampla de investimentos ou portfólio."
+          },
+          {
+            "id": "pricing_analyst",
+            "reason": "A diretora de marketing e a controladoria cobrem a consistência do desconto e seu efeito financeiro dentro do limite de agentes."
+          },
+          {
+            "id": "logistics_analyst",
+            "reason": "O diretor de operações verificará capacidade e prazos regionais; a seleção prioriza a conciliação de estoque e demanda pelo especialista de suprimentos."
+          },
+          {
+            "id": "treasury_analyst",
+            "reason": "A controladoria avaliará caixa livre e insuficiência orçamentária, com a diretora financeira responsável por liquidez e eventual financiamento."
+          },
+          {
+            "id": "people_director",
+            "reason": "Não há evidência de demanda específica de pessoas ou capacidade organizacional que justifique o time."
+          },
+          {
+            "id": "recruitment_analyst",
+            "reason": "Não foi demonstrada necessidade de admissões."
+          },
+          {
+            "id": "workforce_analyst",
+            "reason": "Não foi demonstrada uma restrição de equipe ou treinamento que exija especialista próprio."
+          },
+          {
+            "id": "contract_analyst",
+            "reason": "O diretor jurídico avaliará o estágio contratual de Orion; a especialista selecionada prioriza a alegação ambiental."
+          },
+          {
+            "id": "technology_director",
+            "reason": "O pedido não apresenta questão de sistemas ou segurança necessária à decisão da campanha."
+          },
+          {
+            "id": "security_analyst",
+            "reason": "Não há incidente de segurança no escopo informado."
+          },
+          {
+            "id": "data_analyst",
+            "reason": "Não foi apresentada inconsistência de contagens ou necessidade de integração de sistemas."
+          }
+        ],
+        "requires_approval": true,
+        "max_model_calls": 10
+      },
+      "review": null,
+      "approval": false,
+      "receipt": null,
+      "error": "Worker falhou; veja o registro local. Não há sucesso presumido.",
+      "created": "2026-11-05T13:36:40.574Z",
+      "worker_active": false,
+      "events": [
+        {
+          "seq": 1,
+          "at": "2026-11-05T13:36:40.575Z",
+          "node": "admission",
+          "detail": {
+            "goal": "Avalie se o Grupo Aurora pode lançar a campanha Horizonte em novembro, considerando a oportunidade Orion, estoque e suprimento, desconto e margem vigente, caixa disponível, prazos regionais e a alegação carbono neutro. Proponha um plano condicionado, sem executar ações externas."
+          }
+        },
+        {
+          "seq": 2,
+          "at": "2026-11-05T13:36:40.586Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 16536
+          }
+        },
+        {
+          "seq": 3,
+          "at": "2026-11-05T13:36:41.522Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [],
+            "process": 6360,
+            "has_state": false
+          }
+        },
+        {
+          "seq": 4,
+          "at": "2026-11-05T13:36:41.550Z",
+          "node": "chief_of_staff",
+          "detail": {
+            "message": "Escolhendo uma equipe a partir do catálogo completo de 21 agentes."
+          }
+        },
+        {
+          "seq": 5,
+          "at": "2026-11-05T13:36:59.684Z",
+          "node": "plan",
+          "detail": {
+            "strategy": "A3",
+            "reason": "A avaliação exige quatro times para cobrir campanha, suprimento e logística, margem e caixa, e riscos contratuais e da alegação ambiental. Como o limite de oito agentes permite apenas um especialista por diretor, a seleção prioriza a cobertura mínima; cada diretor coordenará seu especialista e responderá pelo restante de seu domínio. A evidência fornecida não contém valores ou prazos que permitam concluir pela viabilidade em novembro. O lançamento deve ficar condicionado à confirmação conjunta da oportunidade Orion, disponibilidade de estoque e suprimento, margem e caixa suficientes, cumprimento dos prazos regionais e comprovação da alegação carbono neutro. Sem essas confirmações, a recomendação é adiar ou reformular a campanha.",
+            "teams": [
+              {
+                "lead": "marketing_director",
+                "specialists": [
+                  "campaign_planner"
+                ],
+                "reason": "Definir escopo, público, demanda incremental e limites da campanha; a diretora avaliará também a mecânica de desconto vigente em conjunto com Finanças."
+              },
+              {
+                "lead": "operations_director",
+                "specialists": [
+                  "supply_planner"
+                ],
+                "reason": "Conciliar estoque livre, reservas, demanda conjunta de Horizonte e Orion e eventual lote não confirmado; o diretor verificará capacidade e prazos regionais antes de qualquer compromisso de lançamento."
+              },
+              {
+                "lead": "finance_director",
+                "specialists": [
+                  "controller"
+                ],
+                "reason": "Avaliar o efeito do desconto sobre a margem e a suficiência do caixa livre para a campanha e compromissos existentes; a diretora tratará eventuais necessidades de liquidez."
+              },
+              {
+                "lead": "legal_director",
+                "specialists": [
+                  "compliance_advisor"
+                ],
+                "reason": "Examinar o suporte para a alegação carbono neutro e as condições de uso na campanha; o diretor avaliará também o estágio e as obrigações da oportunidade Orion. Sem comprovação suficiente, a alegação não deve ser usada."
+              }
+            ],
+            "capabilities": [
+              "marketing_director",
+              "campaign_planner",
+              "operations_director",
+              "supply_planner",
+              "finance_director",
+              "controller",
+              "legal_director",
+              "compliance_advisor"
+            ],
+            "not_selected": [
+              {
+                "id": "executive_director",
+                "reason": "A coordenação da decisão cabe ao Chief of Staff no pedido, sem necessidade de uma diretoria executiva adicional."
+              },
+              {
+                "id": "business_analyst",
+                "reason": "As dependências essenciais podem ser consolidadas pelo Chief of Staff com os quatro times selecionados."
+              },
+              {
+                "id": "portfolio_analyst",
+                "reason": "Não há pedido de priorização ampla de investimentos ou portfólio."
+              },
+              {
+                "id": "pricing_analyst",
+                "reason": "A diretora de marketing e a controladoria cobrem a consistência do desconto e seu efeito financeiro dentro do limite de agentes."
+              },
+              {
+                "id": "logistics_analyst",
+                "reason": "O diretor de operações verificará capacidade e prazos regionais; a seleção prioriza a conciliação de estoque e demanda pelo especialista de suprimentos."
+              },
+              {
+                "id": "treasury_analyst",
+                "reason": "A controladoria avaliará caixa livre e insuficiência orçamentária, com a diretora financeira responsável por liquidez e eventual financiamento."
+              },
+              {
+                "id": "people_director",
+                "reason": "Não há evidência de demanda específica de pessoas ou capacidade organizacional que justifique o time."
+              },
+              {
+                "id": "recruitment_analyst",
+                "reason": "Não foi demonstrada necessidade de admissões."
+              },
+              {
+                "id": "workforce_analyst",
+                "reason": "Não foi demonstrada uma restrição de equipe ou treinamento que exija especialista próprio."
+              },
+              {
+                "id": "contract_analyst",
+                "reason": "O diretor jurídico avaliará o estágio contratual de Orion; a especialista selecionada prioriza a alegação ambiental."
+              },
+              {
+                "id": "technology_director",
+                "reason": "O pedido não apresenta questão de sistemas ou segurança necessária à decisão da campanha."
+              },
+              {
+                "id": "security_analyst",
+                "reason": "Não há incidente de segurança no escopo informado."
+              },
+              {
+                "id": "data_analyst",
+                "reason": "Não foi apresentada inconsistência de contagens ou necessidade de integração de sistemas."
+              }
+            ],
+            "requires_approval": true,
+            "max_model_calls": 10
+          }
+        },
+        {
+          "seq": 6,
+          "at": "2026-11-05T13:36:59.717Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "campaign_planner",
+            "parent": "marketing_director"
+          }
+        },
+        {
+          "seq": 7,
+          "at": "2026-11-05T13:36:59.720Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "supply_planner",
+            "parent": "operations_director"
+          }
+        },
+        {
+          "seq": 8,
+          "at": "2026-11-05T13:36:59.723Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "controller",
+            "parent": "finance_director"
+          }
+        },
+        {
+          "seq": 9,
+          "at": "2026-11-05T13:36:59.725Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "compliance_advisor",
+            "parent": "legal_director"
+          }
+        },
+        {
+          "seq": 10,
+          "at": "2026-11-05T13:37:27.949Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "supply_planner",
+            "parent": "operations_director",
+            "sources": [
+              "aurora-inventory",
+              "aurora-sales",
+              "aurora-procurement"
+            ],
+            "output": {
+              "agent": "Planejadora de suprimentos",
+              "facts": [
+                {
+                  "claim": "Saldo físico do SKU-AURA em 05/11/2026",
+                  "value": 14000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Reservas para contratos firmes anteriores",
+                  "value": 9000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Estoque bloqueado pela Qualidade, sem sobreposição com as reservas",
+                  "value": 2000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Demanda incremental da oportunidade Orion, ainda não assinada",
+                  "value": 6000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Valor potencial de Orion, sem representar faturamento",
+                  "value": 2520000,
+                  "unit": "reais",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Entrega pretendida para Orion, condicionada à confirmação de suprimento",
+                  "value": "15/12/2026",
+                  "unit": "data",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Demanda incremental proposta para Horizonte em novembro",
+                  "value": 5000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Abertura prevista da campanha Horizonte",
+                  "value": "15/11/2026",
+                  "unit": "data",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Lote SUP-88 não confirmado, condicionado a adiantamento e assinatura ainda não realizados",
+                  "value": 12000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Adiantamento solicitado para SUP-88",
+                  "value": 1200000,
+                  "unit": "reais",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Possível chegada do lote SUP-88",
+                  "value": "10/12/2026",
+                  "unit": "data",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Há proposta alternativa aprovada de outro fornecedor",
+                  "value": false,
+                  "unit": "booleano",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "14.000 unidades físicas − 9.000 unidades reservadas − 2.000 unidades bloqueadas",
+                  "result": "3.000 unidades livres para novas promessas",
+                  "source_ids": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "expression": "6.000 unidades Orion + 5.000 unidades Horizonte",
+                  "result": "11.000 unidades de demanda incremental conjunta",
+                  "source_ids": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "expression": "11.000 unidades de demanda conjunta − 3.000 unidades livres",
+                  "result": "Insuficiência atual de 8.000 unidades",
+                  "source_ids": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "expression": "5.000 unidades Horizonte − 3.000 unidades livres, se todo o saldo livre for destinado à campanha",
+                  "result": "Insuficiência de 2.000 unidades para Horizonte isoladamente; nenhuma unidade livre restaria para Orion",
+                  "source_ids": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "expression": "6.000 unidades Orion × R$ 420 por unidade",
+                  "result": "R$ 2.520.000 de valor potencial, não faturado",
+                  "source_ids": [
+                    "aurora-sales"
+                  ]
+                }
+              ],
+              "risks": [
+                "O estoque livre atual não atende integralmente nem Horizonte isoladamente, nem a demanda conjunta; alocá-lo à campanha reduz a disponibilidade para Orion.",
+                "O lote SUP-88 não é estoque físico nem entrada confirmada e sua possível chegada em dezembro é posterior à abertura da campanha.",
+                "A entrega pretendida para Orion em 15/12 depende de suprimento confirmado e de capacidade logística ainda não demonstrada.",
+                "As 9.000 unidades reservadas a contratos firmes e as 2.000 bloqueadas pela Qualidade não podem ser tratadas como disponibilidade para novas promessas.",
+                "Sem informações sobre desconto, margem e caixa, não é possível avaliar a viabilidade econômica ou financeira; um eventual teto de orçamento não demonstra disponibilidade de caixa.",
+                "Sem evidência fornecida para a alegação de carbono neutro, seu uso na campanha não está fundamentado."
+              ],
+              "unknowns": [
+                "Caixa disponível, demais compromissos financeiros e eventual teto orçamentário aplicável.",
+                "Política vigente de descontos e margem, existência e conteúdo de eventual política revogada, e condições econômicas da campanha.",
+                "Prazos regionais, capacidade logística e ocupação de armazenagem.",
+                "Confirmação, condições definitivas e disponibilidade efetiva do lote SUP-88, inclusive após eventual recebimento.",
+                "Evidências e escopo que sustentem a alegação de carbono neutro.",
+                "Probabilidade de conversão de Orion, elasticidade de preço e efeito de desconto sobre vendas.",
+                "Qualquer evidência de suspeita ou confirmação de exfiltração: as fontes fornecidas não tratam do tema."
+              ],
+              "recommendation": "Não recomendar o lançamento integral de Horizonte em 15/11 nas condições atuais. Planejar, como opção condicionada, uma campanha faseada ou com escopo renegociado, limitada ao estoque efetivamente livre e à alocação decidida entre Horizonte e Orion, preservando reservas e bloqueio de Qualidade. Avaliar suprimento adicional sem contar o lote SUP-88 antes de sua confirmação e disponibilidade efetiva; mesmo confirmado, sua chegada possível em 10/12 não cobre imediatamente a abertura de novembro. Antes de assumir volumes, preços ou prazos, verificar caixa e compromissos, política vigente de desconto e margem, capacidade logística e prazos por região. Não prometer a entrega Orion até confirmar suprimento e logística, nem tratar a oportunidade como perdida. Condicionar qualquer alegação de carbono neutro à comprovação adequada. Trata-se apenas de assessoramento, sem executar compras, pagamentos ou outras ações externas."
+            }
+          }
+        },
+        {
+          "seq": 11,
+          "at": "2026-11-05T13:37:27.955Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "operations_director",
+            "children": [
+              "supply_planner"
+            ]
+          }
+        },
+        {
+          "seq": 12,
+          "at": "2026-11-05T13:37:52.171Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "compliance_advisor",
+            "parent": "legal_director",
+            "sources": [
+              "aurora-compliance",
+              "aurora-response",
+              "aurora-incident"
+            ],
+            "output": {
+              "agent": "Assessora de conformidade, capacidade Alegações da campanha e governança de resposta a incidente",
+              "facts": [
+                {
+                  "claim": "O checklist interno COM-12 exige certificação e escopo verificados pela empresa para alegar que o SKU-AURA é carbono neutro; a documentação disponível não contém certificação válida para o produto.",
+                  "value": false,
+                  "unit": "certificação válida disponível",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "A peça Horizonte deve retirar a alegação de carbono neutro ou permanecer bloqueada até a apresentação de evidência e revisão.",
+                  "value": "retirar a alegação ou manter a peça bloqueada",
+                  "unit": "condição interna",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "As promessas de entrega devem refletir aurora-logistics e explicitar região e condições; a campanha não deve ser publicada automaticamente.",
+                  "value": "revisão necessária",
+                  "unit": "condição interna",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "Em 05/11/2026, às 16h20, um alerta identificou uma exportação suspeita envolvendo potencialmente contatos do AuroraCRM europeu.",
+                  "value": 1200,
+                  "unit": "contatos potencialmente envolvidos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "A conclusão da transferência e o acesso de terceiros não foram confirmados; o caso permanece como suspeita em investigação.",
+                  "value": "suspeita em investigação",
+                  "unit": "classificação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O responsável de plantão preservou os relatórios disponíveis, mas não há prova de contenção completa.",
+                  "value": "preservação registrada; contenção completa não comprovada",
+                  "unit": "estado da resposta",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O RESP-09 determina a primeira avaliação conjunta de Segurança e Jurídico em até 90 minutos após o alerta; trata-se de SLA interno fictício.",
+                  "value": 90,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "16h45 − 16h20 = 25 minutos transcorridos; 90 − 25 = 65 minutos restantes; 16h20 + 90 minutos = 17h50, no mesmo fuso −03:00",
+                  "result": "No instante de avaliação de 05/11/2026, restavam 65 minutos para a primeira avaliação conjunta.",
+                  "source_ids": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "risks": [
+                "Publicar a alegação de carbono neutro sem certificação e escopo verificados contraria o COM-12.",
+                "Prometer entrega sem os prazos e condições regionais verificados pode criar compromissos que a operação não consiga cumprir.",
+                "Assumir que estoque físico está integralmente livre ou que a oportunidade Orion já é compromisso pode superestimar a capacidade disponível.",
+                "Confundir teto de orçamento com caixa disponível, ou aplicar política de desconto e margem revogada, pode comprometer a viabilidade financeira.",
+                "Tratar a suspeita de exportação como vazamento confirmado ou presumir contenção completa excede a evidência disponível."
+              ],
+              "unknowns": [
+                "Detalhes da oportunidade Orion, inclusive seu estágio e eventual compromisso assumido.",
+                "Saldo físico, reservas, saldo livre, demanda prevista e condições de suprimento.",
+                "Política vigente e eventual política revogada de desconto e margem, com seus respectivos valores.",
+                "Caixa disponível, teto de orçamento e custos previstos da campanha.",
+                "Prazos e condições por região em aurora-logistics; essa fonte é referenciada, mas seu conteúdo não foi fornecido.",
+                "Certificação válida e escopo verificado para a alegação do SKU-AURA; sua ausência na documentação disponível não determina se o produto é ou não neutro em carbono.",
+                "Estado efetivo da transferência, acesso de terceiros, causa, extensão e relações em aurora-data-platform, cujo conteúdo não foi fornecido.",
+                "Se a primeira avaliação conjunta de Segurança e Jurídico ocorreu e quais aprovações de campanha estão pendentes."
+              ],
+              "recommendation": "Não há base suficiente para autorizar o lançamento em novembro. Preparar uma decisão condicionada, sem publicação automática: retirar a alegação de carbono neutro da peça ou mantê-la bloqueada até obter evidência e revisão; verificar em aurora-logistics os prazos e condições de cada região; confirmar o estágio de Orion e calcular o saldo livre a partir do estoque físico e das reservas aplicáveis, confrontando-o com a demanda e o suprimento; validar desconto e margem pela política vigente e comparar os desembolsos previstos tanto com o teto de orçamento quanto com o caixa disponível. Registrar pendências jurídicas e aprovações necessárias sem presumir sua concessão. Em paralelo, tratar o INC-47 pelo RESP-09: verificar prioritariamente logs, estado da transferência e acessos, distinguindo fatos, hipóteses, extensão potencial e evidências faltantes; assegurar a avaliação conjunta de Segurança e Jurídico no prazo interno indicado. Não transportar dados pessoais do incidente para a campanha. Revogação de acesso, bloqueio de sistemas, comunicação e notificação externa dependem de processo e aprovação separados; nenhuma ação externa é executada ou autorizada por esta recomendação."
+            }
+          }
+        },
+        {
+          "seq": 13,
+          "at": "2026-11-05T13:37:52.178Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "legal_director",
+            "children": [
+              "compliance_advisor"
+            ]
+          }
+        },
+        {
+          "seq": 14,
+          "at": "2026-11-05T13:38:21.962Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "controller",
+            "parent": "finance_director",
+            "sources": [
+              "aurora-costs",
+              "aurora-pricing",
+              "aurora-treasury",
+              "aurora-marketing"
+            ],
+            "output": {
+              "agent": "Controladoria",
+              "facts": [
+                {
+                  "claim": "Período proposto para Horizonte e mercado prioritário",
+                  "value": "15 a 30 de novembro de 2026; Sudeste brasileiro; Chile opcional",
+                  "unit": "período e região",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Custo variável unitário consolidado do SKU-AURA",
+                  "value": 285,
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-costs"
+                  ]
+                },
+                {
+                  "claim": "Preço de lista e preço líquido proposto",
+                  "value": "420,00 e 386,40",
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-costs",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Política PR-01 v2 vigente desde 01/11/2026",
+                  "value": "Margem mínima de 28% sobre o preço líquido e desconto máximo adicional de 8%; a versão 1, com mínimo de 20%, foi revogada",
+                  "unit": "política",
+                  "sources": [
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "claim": "Preço alternativo em revisão, sem aprovação comercial presumida",
+                  "value": 400,
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-costs",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "claim": "Caixa bancário, garantias vinculadas e compromissos operacionais aprovados em 05/11/2026 às 16h45",
+                  "value": "660.000; 250.000; 280.000, respectivamente",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Teto contábil de Horizonte e desembolso imediato solicitado",
+                  "value": "200.000 e 180.000, respectivamente",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Orion ainda não assinou nem pagou e disputa o saldo liberado com a campanha",
+                  "value": true,
+                  "unit": "situação",
+                  "sources": [
+                    "aurora-treasury",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Adiantamento exigido para confirmar o lote de suprimento; pagamento não autorizado",
+                  "value": 1200000,
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Projeção interna de pedidos adicionais, ainda não validada",
+                  "value": 5000,
+                  "unit": "pedidos",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "A peça preliminar alega carbono neutro e entrega em sete dias para Brasil e Chile; ambas as alegações requerem validação",
+                  "value": true,
+                  "unit": "situação",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "Margem sobre preço = (preço líquido − custo variável unitário) / preço líquido. Para R$ 386,40: (386,40 − 285,00) / 386,40 × 100",
+                  "result": "26,24%; contribuição unitária de R$ 101,40; abaixo do mínimo de 28%, portanto bloqueado para revisão",
+                  "source_ids": [
+                    "aurora-costs",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "expression": "Para R$ 400,00: (400,00 − 285,00) / 400,00 × 100",
+                  "result": "28,75%; contribuição unitária de R$ 115,00; atende à margem mínima, sujeito à aprovação comercial",
+                  "source_ids": [
+                    "aurora-costs",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "expression": "Preço mínimo que atende à margem: 285,00 / (1 − 0,28)",
+                  "result": "R$ 395,84 por unidade, arredondado para cima ao centavo; desconto de aproximadamente 5,75% sobre R$ 420,00",
+                  "source_ids": [
+                    "aurora-costs",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "expression": "Caixa livre = 660.000 − 250.000 − 280.000",
+                  "result": "R$ 130.000 para novos compromissos",
+                  "source_ids": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "expression": "Insuficiência de caixa para a campanha = 180.000 − 130.000",
+                  "result": "R$ 50.000; o pedido está R$ 20.000 abaixo do teto contábil, mas não cabe no caixa livre",
+                  "source_ids": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "expression": "Necessidade conjunta imediata hipotética para campanha e adiantamento do lote = 180.000 + 1.200.000 − 130.000",
+                  "result": "Insuficiência de R$ 1.250.000, sem presumir autorização para qualquer pagamento",
+                  "source_ids": [
+                    "aurora-treasury"
+                  ]
+                }
+              ],
+              "risks": [
+                "A campanha como proposta combina preço bloqueado pela política vigente com desembolso superior ao caixa livre.",
+                "Horizonte e Orion disputam o mesmo saldo liberado; promessas simultâneas podem exceder a disponibilidade real.",
+                "O lote de suprimento depende de adiantamento não autorizado e não deve ser tratado como confirmado.",
+                "A promessa de sete dias para Brasil e Chile e a alegação carbono neutro ainda não estão validadas.",
+                "A projeção de 5.000 pedidos não comprova demanda incremental nem retorno financeiro."
+              ],
+              "unknowns": [
+                "Quantidade física em estoque, reservas, saldo efetivamente livre e eventual alocação para Orion ou Horizonte; as fontes de estoque e vendas mencionadas não foram fornecidas.",
+                "Condições, probabilidade e data de assinatura ou recebimento de Orion; oportunidade não é compromisso nem caixa disponível.",
+                "Prazos logísticos comprovados por região, disponibilidade de suprimento e data de confirmação do lote.",
+                "Evidências e escopo que sustentem a alegação carbono neutro.",
+                "Taxas de conversão, despesas completas, incremento causal e demais dados para estimar ROI ou lucro total.",
+                "Não há evidência fornecida de suspeita ou confirmação de exfiltração; nenhuma deve ser inferida."
+              ],
+              "recommendation": "Não lançar Horizonte na configuração proposta. Preparar nova proposta condicionada: usar preço que cumpra a PR-01 v2, como R$ 400,00 sujeito à aprovação comercial; revisar e obter aprovação do conteúdo exato de eventual redução ou faseamento do gasto, limitado ao caixa livre efetivamente disponível após os demais compromissos; conciliar estoque físico, reservas e saldo livre antes de alocar unidades entre Orion e campanha; confirmar suprimento e financiamento antes de contar com o lote. Priorizar o Sudeste conforme o briefing e incluir o Chile somente após validar disponibilidade e prazos regionais. Retirar ou reformular as alegações de carbono neutro e entrega em sete dias até haver comprovação. Atualizar caixa e compromissos antes de qualquer decisão; não contar faturamento potencial de Orion como dinheiro disponível. Estas medidas são apenas assessoramento e não autorizam execução ou pagamentos."
+            }
+          }
+        },
+        {
+          "seq": 15,
+          "at": "2026-11-05T13:38:21.969Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "finance_director",
+            "children": [
+              "controller"
+            ]
+          }
+        },
+        {
+          "seq": 16,
+          "at": "2026-11-05T13:38:50.549Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "campaign_planner",
+            "parent": "marketing_director",
+            "sources": [
+              "aurora-marketing",
+              "aurora-sales",
+              "aurora-logistics"
+            ],
+            "output": {
+              "agent": "Planejador de campanhas",
+              "facts": [
+                {
+                  "claim": "Campanha Horizonte proposta para o SKU-AURA de 15 a 30 de novembro, com prioridade para o Sudeste brasileiro e extensão opcional ao Chile",
+                  "value": "proposta",
+                  "unit": "status",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Verba solicitada pelo Marketing",
+                  "value": 180000,
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Projeção interna não validada de pedidos adicionais para a campanha",
+                  "value": 5000,
+                  "unit": "pedidos",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Preço de lista e desconto propostos",
+                  "value": "R$ 420 por unidade e 8%",
+                  "unit": "R$/unidade e percentual",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Orion avalia pedido incremental não assinado, condicionado à confirmação de suprimento, com entrega pretendida em 15/12/2026",
+                  "value": 6000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Preço proposto para Orion",
+                  "value": 420,
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Reservas existentes para outros contratos firmes, que não incluem o pedido incremental Orion",
+                  "value": 9000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Capacidade incremental de separação, condicionada à existência de estoque vendável",
+                  "value": 1500,
+                  "unit": "unidades/dia",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "Trânsito padrão após expedição",
+                  "value": "Sudeste: 2 dias úteis; Chile: 10 dias úteis, sem promessa de desembaraço acelerado",
+                  "unit": "dias úteis",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "Alegações preliminares de carbono neutro e entrega em sete dias ainda precisam de validação",
+                  "value": false,
+                  "unit": "validação concluída",
+                  "sources": [
+                    "aurora-marketing",
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "O teto contábil do trimestre não equivale a dinheiro livre",
+                  "value": false,
+                  "unit": "equivalência",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "R$ 420/unidade × (1 − 8%)",
+                  "result": "R$ 386,40/unidade, preço proposto para a campanha",
+                  "source_ids": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "expression": "6.000 unidades × R$ 420/unidade",
+                  "result": "R$ 2.520.000 de receita potencial Orion, ainda não contratada nem faturada",
+                  "source_ids": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "expression": "6.000 unidades Orion + até 5.000 unidades da campanha, se cada pedido adicional corresponder a uma unidade",
+                  "result": "Até 11.000 unidades de demanda incremental distinta; a quantidade por pedido da campanha não foi informada",
+                  "source_ids": [
+                    "aurora-sales",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "expression": "5.000 unidades ÷ 1.500 unidades/dia",
+                  "result": "Cerca de 3,33 dias de capacidade de separação, ou pelo menos 4 dias com capacidade diária integral, se cada pedido tiver uma unidade e houver estoque vendável; não inclui trânsito",
+                  "source_ids": [
+                    "aurora-marketing",
+                    "aurora-logistics"
+                  ]
+                }
+              ],
+              "risks": [
+                "Campanha e Orion disputam o mesmo saldo liberado; usar reservas de terceiros ou reter pedidos firmes para favorecer Horizonte não é autorizado.",
+                "A projeção de 5.000 pedidos não está validada e não há prova de incremento causal, ROI confiável ou evidência de que o desconto aumentará vendas.",
+                "O desconto pode afetar a margem, mas custo e regra vigente não foram fornecidos no conteúdo recuperado.",
+                "A promessa geral de entrega em sete dias não está comprovada para o Chile; mesmo no Sudeste, o trânsito informado começa somente após a expedição.",
+                "A alegação de carbono neutro não está validada e não deve ser publicada até haver comprovação."
+              ],
+              "unknowns": [
+                "Estoque físico, saldo livre vendável, condições e data do lote de suprimento; as 9.000 unidades reservadas não permitem calcular o saldo livre.",
+                "Caixa disponível e possibilidade de financiar os R$ 180.000; o teto contábil não comprova disponibilidade de caixa.",
+                "Custo unitário, margem resultante e regra de margem vigente de aurora-pricing v2; não há conteúdo suficiente para comparar uma política vigente com uma revogada.",
+                "Probabilidade de conversão e assinatura de Orion, quantidade média por pedido da campanha, elasticidade de preço e capacidade logística efetivamente disponível nas datas relevantes.",
+                "Tempo de processamento antes da expedição, desembaraço no Chile e eventual restrição de escala; janelas extraordinárias e equipe adicional não foram aprovadas.",
+                "Evidência que sustente a alegação de carbono neutro.",
+                "Não há evidência fornecida de suspeita ou confirmação de exfiltração."
+              ],
+              "recommendation": "Não aprovar o lançamento integral nas condições atuais. Preparar um lançamento condicionado de 15 a 30 de novembro, priorizando o Sudeste e limitando a demanda ao estoque livre comprovado e à capacidade disponível, sem consumir as 9.000 unidades reservadas. Antes de autorizar, confirmar saldo físico e livre, suprimento e alocação entre campanha e a oportunidade Orion; obter custo e regra de margem vigente para validar preço e desconto; confirmar caixa para a verba e validar os prazos completos por destino. Tratar Orion como oportunidade não assinada, preservando sua entrega pretendida apenas se houver suprimento confirmado. Retirar carbono neutro e a promessa geral de sete dias das peças até validação; manter o Chile fora do lançamento até comprovar prazo e capacidade. Validar a projeção de demanda e medir incremento antes de ampliar o investimento. Caso alguma condição não seja atendida, reduzir escopo ou adiar a campanha. Nenhuma ação externa é autorizada por esta recomendação."
+            }
+          }
+        },
+        {
+          "seq": 17,
+          "at": "2026-11-05T13:38:50.556Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "marketing_director",
+            "children": [
+              "campaign_planner"
+            ]
+          }
+        },
+        {
+          "seq": 18,
+          "at": "2026-11-05T13:39:17.835Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "operations_director",
+            "children": [
+              "supply_planner"
+            ],
+            "output": {
+              "agent": "Diretor de operações",
+              "facts": [
+                {
+                  "claim": "Estoque físico do SKU-AURA em 05/11/2026",
+                  "value": 14000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Reservas para contratos firmes anteriores",
+                  "value": 9000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Estoque bloqueado pela Qualidade, sem sobreposição com as reservas",
+                  "value": 2000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Saldo disponível para novas promessas: 14.000 menos 9.000 reservadas e 2.000 bloqueadas",
+                  "value": 3000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Demanda incremental conjunta: 6.000 de Orion e 5.000 de Horizonte",
+                  "value": 11000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Insuficiência diante da demanda conjunta",
+                  "value": 8000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Insuficiência de Horizonte isoladamente, caso receba todo o saldo livre",
+                  "value": 2000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Lote SUP-88 não confirmado, condicionado a adiantamento e assinatura ainda não realizados",
+                  "value": 12000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Adiantamento solicitado para SUP-88",
+                  "value": 1200000,
+                  "unit": "reais",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Possível chegada de SUP-88, posterior à abertura prevista de Horizonte em 15/11/2026",
+                  "value": "10/12/2026",
+                  "unit": "data",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Capacidade incremental de separação, condicionada a estoque vendável",
+                  "value": 1500,
+                  "unit": "unidades por dia",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "Trânsito padrão após expedição para o Sudeste brasileiro",
+                  "value": 2,
+                  "unit": "dias úteis",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "Trânsito após expedição para o Chile, sem promessa de desembaraço acelerado",
+                  "value": 10,
+                  "unit": "dias úteis",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                }
+              ],
+              "risks": [
+                "O saldo livre não atende Horizonte integralmente nem a demanda conjunta; destiná-lo à campanha reduz a disponibilidade para Orion.",
+                "SUP-88 não é estoque disponível nem entrada confirmada; sua possível chegada em dezembro não cobre imediatamente a abertura de novembro. Não há proposta alternativa aprovada de outro fornecedor.",
+                "A capacidade de separação não cria estoque nem reduz automaticamente os prazos de trânsito. Janelas extraordinárias e equipe adicional não foram aprovadas, e a ocupação de armazenagem não foi informada.",
+                "A promessa publicitária de sete dias para todos os destinos não está comprovada para o Chile.",
+                "Não há evidência fornecida sobre desconto e margem vigentes, caixa disponível ou demais compromissos financeiros; a viabilidade econômica e financeira permanece indeterminada.",
+                "Não há prova fornecida para sustentar a alegação de carbono neutro.",
+                "A entrega pretendida de Orion em 15/12, informada pela especialista, depende de suprimento e logística confirmados; não há base para tratá-la como garantida ou a oportunidade como perdida."
+              ],
+              "conditions": [
+                "Com Comercial, decidir a alocação do saldo efetivamente livre entre Orion e Horizonte e dimensionar eventual fase inicial da campanha dentro desse limite, preservando as reservas firmes e o bloqueio de Qualidade.",
+                "Com Suprimentos, verificar alternativas e condições de SUP-88; considerar unidades adicionais apenas após confirmação, recebimento e disponibilidade efetiva, sem pressupor cobertura para novembro.",
+                "Com Tesouraria e áreas responsáveis por contratos, verificar caixa e compromissos antes de avaliar o adiantamento; um teto orçamentário, se houver, não comprova caixa disponível.",
+                "Com Comercial e Finanças, verificar a política vigente de descontos e margem e validar a economia do escopo proposto antes de definir preços.",
+                "Com Logística e a área de pessoal, validar capacidade, escalas, armazenagem e prazos por destino, incluindo separação, expedição e trânsito; não usar a promessa de sete dias para o Chile sem comprovação.",
+                "Com a área responsável pela alegação ambiental, obter e validar evidência adequada e seu escopo antes de usar a expressão carbono neutro.",
+                "Confirmar suprimento e viabilidade logística antes de assumir qualquer prazo de entrega para Orion ou Horizonte."
+              ],
+              "recommendation": "Não recomendar o lançamento integral de Horizonte em novembro nas condições atuais. Preparar uma opção faseada ou com escopo renegociado, limitada ao estoque livre efetivamente alocado e condicionada às validações de suprimento, finanças, logística e alegação ambiental. Manter Orion em avaliação, sem presumir sua perda. Esta é uma recomendação condicionada; nenhuma compra, pagamento, contratação, promessa ou outra ação externa é aprovada ou executada.",
+              "disagreements": [
+                "A especialista indicou que não havia informações sobre prazos regionais e capacidade logística; a evidência própria de aurora-logistics informa capacidade de 1.500 unidades por dia e trânsitos de dois dias úteis para o Sudeste e dez para o Chile, embora permaneçam dependências de escala e estoque.",
+                "A especialista citou aurora-sales para o valor potencial de Orion, o caráter não assinado e a data pretendida de entrega. Esses pontos constam apenas de seu retorno, sem documento próprio de aurora-sales entre as evidências fornecidas; por isso não foram tratados como fatos verificados."
+              ]
+            }
+          }
+        },
+        {
+          "seq": 19,
+          "at": "2026-11-05T13:39:44.268Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "legal_director",
+            "children": [
+              "compliance_advisor"
+            ],
+            "output": {
+              "agent": "Diretor jurídico — Contratos, conformidade e resposta",
+              "facts": [
+                {
+                  "claim": "As 9.000 unidades reservadas pertencem a contratos firmes e não podem ser transferidas ao Horizonte por decisão de agente.",
+                  "value": 9000,
+                  "unit": "unidades reservadas",
+                  "sources": [
+                    "aurora-contracts"
+                  ]
+                },
+                {
+                  "claim": "Orion é uma negociação de 6.000 unidades com entrega pretendida em 15/12/2026; não há assinatura, reserva ou pagamento. A multa de 1,5% por atraso consta de minuta proposta e permanece sujeita a negociação, sem constituir obrigação existente.",
+                  "value": 6000,
+                  "unit": "unidades em negociação",
+                  "sources": [
+                    "aurora-contracts"
+                  ]
+                },
+                {
+                  "claim": "O COM-12 exige certificação e escopo verificados para a alegação de carbono neutro do SKU-AURA. A documentação disponível não contém certificação válida; isso não demonstra que o produto seja ou não neutro em carbono.",
+                  "value": "certificação válida não encontrada na documentação disponível",
+                  "unit": "estado da evidência",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "As promessas de entrega devem refletir os prazos e condições por região, mas o conteúdo de aurora-logistics não foi fornecido.",
+                  "value": "prazos e condições regionais não verificados",
+                  "unit": "estado da evidência",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "O retorno da especialista relata alerta às 16h20 de 05/11/2026 sobre possível exportação envolvendo até 1.200 contatos do AuroraCRM europeu; conclusão da transferência, acesso de terceiros e contenção completa não foram comprovados. O conteúdo primário de aurora-incident não foi fornecido para verificação independente.",
+                  "value": 1200,
+                  "unit": "contatos potencialmente envolvidos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O RESP-09 prevê primeira avaliação conjunta de Segurança e Jurídico em até 90 minutos do alerta, como SLA interno fictício. Segundo os horários informados pela especialista, o prazo terminaria às 17h50 de 05/11/2026, no fuso -03:00; não há prova de que a avaliação ocorreu.",
+                  "value": 90,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-response",
+                    "aurora-incident"
+                  ]
+                }
+              ],
+              "risks": [
+                "Lançar ou prometer volumes sem confirmar saldo livre, demanda e suprimento pode comprometer contratos firmes e a capacidade de atendimento.",
+                "Tratar Orion como contrato firmado ou a multa proposta como obrigação existente distorce a posição contratual.",
+                "Aplicar desconto ou margem sem validar a política vigente, ou confundir teto orçamentário com caixa disponível, impede avaliar a viabilidade financeira.",
+                "Divulgar a alegação de carbono neutro sem certificação e escopo verificados contraria o COM-12; promessas regionais não verificadas podem criar compromissos inexequíveis.",
+                "Tratar a suspeita de exportação como vazamento confirmado ou presumir contenção completa excede a evidência disponível."
+              ],
+              "conditions": [
+                "Estoque e Suprimentos devem confirmar estoque físico, reservas aplicáveis, saldo livre, demanda prevista e disponibilidade e prazos de reposição, preservando as 9.000 unidades dos contratos firmes; reavaliar a capacidade antes de qualquer promessa.",
+                "Comercial e Contratos devem separar compromissos firmes, oportunidade Orion e projeções, negociar eventuais condições e submeter conteúdo, destinatário e condições de qualquer novo compromisso à aprovação humana.",
+                "Comercial e Finanças devem confirmar desconto e margem pela política vigente, apurar custos e desembolsos previstos e compará-los com o teto orçamentário e com o caixa efetivamente disponível. Os valores necessários não foram fornecidos.",
+                "Logística deve fornecer prazos e condições por região para revisão das promessas de entrega.",
+                "Conformidade e Jurídico devem revisar a peça: retirar a alegação de carbono neutro ou mantê-la bloqueada até apresentação de evidência de certificação e escopo e conclusão da revisão. Registrar as demais pendências e aprovações sem presumir sua concessão; não publicar automaticamente.",
+                "Segurança e Jurídico devem verificar se a avaliação conjunta do INC-47 ocorreu no prazo interno e priorizar a análise de logs, estado da transferência e acessos, distinguindo observações, hipóteses, extensão potencial e evidências faltantes. Consultar os dados pertinentes de aurora-incident e aurora-data-platform; não transportar dados pessoais do incidente para a campanha.",
+                "Revogação de acesso, bloqueio de sistemas, comunicações e notificações externas dependem de processo e aprovação separados."
+              ],
+              "recommendation": "Não há base para autorizar o lançamento do Horizonte em novembro. Preparar uma decisão condicionada à confirmação das premissas comerciais, operacionais e financeiras, à revisão jurídica e de conformidade e às aprovações humanas pertinentes. Tratar o INC-47 em fluxo próprio, sem usar o prazo da campanha. Nenhuma ação externa ou novo compromisso é aprovado ou executado nesta avaliação.",
+              "disagreements": [
+                "A especialista registrou como desconhecidos os detalhes e o estágio de Orion; aurora-contracts esclarece que se trata de negociação de 6.000 unidades, sem assinatura, reserva ou pagamento, e informa o prazo pretendido e a multa proposta. Permanecem desconhecidas as demais condições e a viabilidade de atendimento.",
+                "O cálculo de 65 minutos restantes da especialista depende do instante de avaliação informado, 16h45 de 05/11/2026; não deve ser apresentado como tempo restante atual. Os horários e a contagem de contatos são relatos da especialista cuja fonte primária não foi fornecida."
+              ]
+            }
+          }
+        },
+        {
+          "seq": 20,
+          "at": "2026-11-05T13:40:14.777Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "finance_director",
+            "children": [
+              "controller"
+            ],
+            "output": {
+              "agent": "Diretora financeira",
+              "facts": [
+                {
+                  "claim": "Campanha proposta",
+                  "value": "15 a 30 de novembro de 2026, com prioridade para o Sudeste brasileiro e Chile opcional",
+                  "unit": "período e região",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Custo variável unitário e preço de lista do SKU-AURA",
+                  "value": "285,00 e 420,00, respectivamente",
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-costs"
+                  ]
+                },
+                {
+                  "claim": "Política vigente desde 01/11/2026",
+                  "value": "A PR-01 v2 exige margem de contribuição mínima de 28% sobre o preço líquido e limita o desconto adicional a 8%; a versão com mínimo de 20% foi revogada",
+                  "unit": "política",
+                  "sources": [
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "claim": "Preço proposto de R$ 386,40",
+                  "value": "Desconto de 8% sobre a lista; contribuição unitária de R$ 101,40 e margem de 26,24%. Está abaixo do mínimo e bloqueado para revisão",
+                  "unit": "R$/unidade e percentual",
+                  "sources": [
+                    "aurora-pricing",
+                    "aurora-costs",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Preço alternativo de R$ 400,00",
+                  "value": "Contribuição unitária de R$ 115,00, margem de 28,75% e desconto de aproximadamente 4,76% sobre a lista. Atende aos limites de margem e desconto, mas carece de aprovação comercial",
+                  "unit": "R$/unidade e percentual",
+                  "sources": [
+                    "aurora-pricing",
+                    "aurora-costs"
+                  ]
+                },
+                {
+                  "claim": "Preço mínimo calculado para atender à margem",
+                  "value": "R$ 395,84 por unidade, arredondado para cima ao centavo, correspondente a desconto aproximado de 5,75% sobre a lista",
+                  "unit": "R$/unidade e percentual",
+                  "sources": [
+                    "aurora-pricing",
+                    "aurora-costs"
+                  ]
+                },
+                {
+                  "claim": "Posição de caixa em 05/11/2026 às 16h45",
+                  "value": "Dos R$ 660.000 bancários, R$ 250.000 estão vinculados a garantias e R$ 280.000 cobrem compromissos operacionais aprovados; restam R$ 130.000 livres para novos compromissos",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Desembolso imediato de Horizonte",
+                  "value": "R$ 180.000 solicitados, dentro do teto contábil de R$ 200.000, mas R$ 50.000 acima do caixa livre informado",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Orion",
+                  "value": "A conta ainda não assinou nem pagou; seu faturamento potencial não constitui caixa disponível",
+                  "unit": "situação",
+                  "sources": [
+                    "aurora-treasury",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "claim": "Lote de suprimento",
+                  "value": "O fornecedor exige adiantamento de R$ 1.200.000 para confirmação; o pagamento não está autorizado. Campanha e adiantamento somariam R$ 1.380.000, excedendo o caixa livre em R$ 1.250.000",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Projeção de demanda",
+                  "value": "5.000 pedidos adicionais são uma projeção interna ainda não validada, não pedidos confirmados",
+                  "unit": "pedidos",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Peça preliminar",
+                  "value": "Alega carbono neutro e entrega em sete dias para Brasil e Chile; ambas as alegações requerem validação",
+                  "unit": "situação",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                }
+              ],
+              "risks": [
+                "A proposta atual combina preço abaixo da margem mínima com desembolso superior ao caixa livre; o teto contábil não garante liquidez.",
+                "Orion e Horizonte podem disputar estoque e caixa, sem que haja evidência suficiente para assumir disponibilidade para ambos.",
+                "O lote não está confirmado e depende de adiantamento não autorizado e de financiamento ainda indisponível.",
+                "Não foram fornecidas quantidades físicas em estoque, reservas ou saldo livre, nem comprovação de prazos por região ou da alegação de carbono neutro.",
+                "A projeção de 5.000 pedidos não comprova demanda incremental. Faltam taxas de conversão e despesas completas para concluir ROI ou lucro total."
+              ],
+              "conditions": [
+                "Controladoria e Comercial devem revisar o preço e obter aprovação comercial para uma proposta que cumpra a PR-01 v2; R$ 400,00 é uma alternativa calculada, ainda não aprovada.",
+                "Marketing e Tesouraria devem preparar e submeter à aprovação uma proposta com conteúdo exato para eventual redução ou faseamento do gasto, compatível com o caixa livre atualizado após os demais compromissos. Não há aporte, crédito aprovado ou antecipação de recebíveis disponível na posição informada.",
+                "Estoque e Comercial devem conciliar contagem física, reservas e saldo efetivamente livre e definir a alocação entre Orion e Horizonte antes de assumir capacidade de atendimento.",
+                "Suprimentos e Tesouraria devem confirmar condições, prazo e financiamento do lote antes de considerá-lo disponível; o adiantamento permanece sem autorização.",
+                "Logística e Comercial devem comprovar disponibilidade e prazos por região. Priorizar o Sudeste e condicionar eventual inclusão do Chile à validação; retirar ou reformular a promessa de sete dias até haver prova.",
+                "Marketing e a área responsável pela comprovação ambiental devem retirar ou reformular a alegação de carbono neutro até que seu escopo e evidências sejam validados.",
+                "Atualizar a posição de Orion, o caixa e os compromissos antes da decisão. Assinatura ou faturamento potencial não devem ser tratados como dinheiro disponível; confirmar eventual recebimento efetivo.",
+                "Obter dados de conversão, despesas completas e incremento causal para avaliar o retorno econômico antes de atribuir ROI ou lucro à campanha."
+              ],
+              "recommendation": "Não lançar Horizonte em novembro na configuração proposta. Preparar uma alternativa condicionada ao cumprimento da margem, aprovação comercial do preço e do conteúdo exato da campanha revisada, disponibilidade financeira efetiva, conciliação e alocação de estoque, suprimento confirmado e validação das promessas regionais e ambientais. A eventual decisão de lançamento depende dessas verificações e aprovações; esta avaliação não autoriza gastos, pagamentos ou execução.",
+              "disagreements": []
+            }
+          }
+        },
+        {
+          "seq": 21,
+          "at": "2026-11-05T13:40:38.064Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "marketing_director",
+            "children": [
+              "campaign_planner"
+            ],
+            "output": {
+              "agent": "Diretora de marketing",
+              "facts": [
+                {
+                  "claim": "Horizonte propõe campanha do SKU-AURA de 15 a 30 de novembro, com prioridade para o Sudeste e extensão opcional ao Chile.",
+                  "value": "proposta",
+                  "unit": "status",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Verba solicitada para a campanha.",
+                  "value": 180000,
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Projeção interna de pedidos adicionais, ainda não validada.",
+                  "value": 5000,
+                  "unit": "pedidos",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Preço de lista e desconto propostos, resultando em R$ 386,40 por unidade.",
+                  "value": "R$ 420 por unidade; desconto de 8%",
+                  "unit": "preço e percentual",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Orion avalia pedido incremental não assinado, condicionado à confirmação de suprimento, com entrega pretendida em 15/12/2026.",
+                  "value": 6000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Valor potencial do pedido Orion a R$ 420 por unidade; não contratado nem faturado.",
+                  "value": 2520000,
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Unidades reservadas para outros contratos firmes, sem incluir o pedido incremental Orion.",
+                  "value": 9000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "O especialista informa capacidade incremental de separação, condicionada à existência de estoque vendável.",
+                  "value": 1500,
+                  "unit": "unidades por dia",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "O especialista informa trânsito padrão após expedição de dois dias úteis para o Sudeste e dez dias úteis para o Chile, sem promessa de desembaraço acelerado.",
+                  "value": "Sudeste: 2; Chile: 10",
+                  "unit": "dias úteis",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                }
+              ],
+              "risks": [
+                "Campanha e Orion disputam o mesmo saldo liberado; as 9.000 unidades reservadas pertencem a outros compromissos e não podem ser usadas para Orion.",
+                "Os 5.000 pedidos projetados e as 6.000 unidades de Orion representam demandas distintas; a quantidade por pedido da campanha não foi informada, e nenhuma das demandas está confirmada como venda.",
+                "Não há estimativa confiável de ROI, prova de incremento causal, probabilidade de conversão de Orion nem evidência de que o desconto aumentará as vendas.",
+                "Custo unitário, regra de margem vigente e caixa disponível não foram apresentados em conteúdo suficiente para validar o desconto ou financiar a verba; o teto contábil não equivale a dinheiro livre.",
+                "A promessa geral de entrega em sete dias carece de validação ponta a ponta; o trânsito informado para o Chile é de dez dias úteis após a expedição.",
+                "A alegação carbono neutro carece de comprovação e não deve constar das peças até ser validada."
+              ],
+              "conditions": [
+                "Estoque, Compras e Comercial devem confirmar saldo físico e livre vendável, quantidade e data do suprimento, além da alocação entre Horizonte e Orion, preservando as reservas de terceiros.",
+                "Custos e Pricing devem fornecer o custo unitário e a regra vigente de aurora-pricing v2 e verificar a margem ao preço de R$ 386,40 antes de qualquer decisão sobre desconto.",
+                "Tesouraria deve confirmar caixa disponível para a verba proposta e seus desembolsos; o teto contábil isoladamente não é suficiente.",
+                "Logística deve validar capacidade disponível e prazo completo por destino, incluindo processamento, expedição, trânsito e desembaraço aplicável; manter o Chile fora do lançamento até comprovar prazo e capacidade.",
+                "A área responsável deve comprovar e validar a alegação carbono neutro antes de seu eventual uso; retirar também a promessa geral de sete dias enquanto não estiver comprovada.",
+                "Marketing e Comercial devem revisar a previsão de demanda, definir limite compatível com estoque e capacidade e estabelecer medição de incremento antes de ampliar investimento.",
+                "Se as condições não forem atendidas, reduzir o escopo ou adiar a campanha; eventual compromisso com Orion depende de confirmação de suprimento e das condições comerciais aplicáveis."
+              ],
+              "recommendation": "Não aprovar o lançamento integral nas condições atuais. Preparar uma proposta condicionada para 15 a 30 de novembro, priorizando o Sudeste e limitando a demanda ao estoque livre e à capacidade comprovados, após as validações das áreas responsáveis. Tratar Orion como oportunidade ainda não assinada. Nenhuma ação externa é autorizada por esta avaliação.",
+              "disagreements": [
+                "Não há discordância material com a recomendação do especialista. Os dados de aurora-logistics foram apresentados no retorno do especialista, mas o documento de origem não foi fornecido para verificação independente; devem ser confirmados antes da decisão."
+              ]
+            }
+          }
+        },
+        {
+          "seq": 22,
+          "at": "2026-11-05T13:40:38.093Z",
+          "node": "synthesis",
+          "detail": {
+            "departments": 4
+          }
+        },
+        {
+          "seq": 23,
+          "at": "2026-11-05T13:40:38.194Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 16536,
+            "exit_code": 1
+          }
+        },
+        {
+          "seq": 24,
+          "at": "2026-11-05T13:41:53.577Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 24864
+          }
+        },
+        {
+          "seq": 25,
+          "at": "2026-11-05T13:41:54.519Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [
+              "synthesis"
+            ],
+            "process": 30500,
+            "has_state": true
+          }
+        },
+        {
+          "seq": 26,
+          "at": "2026-11-05T13:41:54.550Z",
+          "node": "synthesis",
+          "detail": {
+            "departments": 4
+          }
+        },
+        {
+          "seq": 27,
+          "at": "2026-11-05T13:42:31.257Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 24864,
+            "exit_code": 1
+          }
+        },
+        {
+          "seq": 28,
+          "at": "2026-11-05T13:42:48.083Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 20600
+          }
+        },
+        {
+          "seq": 29,
+          "at": "2026-11-05T13:42:49.024Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [
+              "synthesis"
+            ],
+            "process": 30992,
+            "has_state": true
+          }
+        },
+        {
+          "seq": 30,
+          "at": "2026-11-05T13:42:49.030Z",
+          "node": "synthesis",
+          "detail": {
+            "departments": 4
+          }
+        },
+        {
+          "seq": 31,
+          "at": "2026-11-05T13:42:49.142Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 20600,
+            "exit_code": 1
+          }
+        }
+      ]
+    }
+  ],
+  "usage": {
+    "calls": 32,
+    "max_calls": 41,
+    "input_tokens": 471017,
+    "cached_input_tokens": 314112,
+    "output_tokens": 33723,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "slots": [
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "plan",
+      "status": "completed"
+    },
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "agent:supply_planner",
+      "status": "completed"
+    },
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "agent:compliance_advisor",
+      "status": "completed"
+    },
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "agent:controller",
+      "status": "completed"
+    },
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "agent:campaign_planner",
+      "status": "completed"
+    },
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "agent:operations_director",
+      "status": "completed"
+    },
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "agent:legal_director",
+      "status": "completed"
+    },
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "agent:finance_director",
+      "status": "completed"
+    },
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "agent:marketing_director",
+      "status": "completed"
+    },
+    {
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "slot": "synthesis",
+      "status": "completed"
+    },
+    {
+      "job": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+      "slot": "plan",
+      "status": "completed"
+    },
+    {
+      "job": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+      "slot": "agent:compliance_advisor",
+      "status": "completed"
+    },
+    {
+      "job": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+      "slot": "agent:security_analyst",
+      "status": "completed"
+    },
+    {
+      "job": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+      "slot": "agent:legal_director",
+      "status": "completed"
+    },
+    {
+      "job": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+      "slot": "agent:technology_director",
+      "status": "completed"
+    },
+    {
+      "job": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+      "slot": "synthesis",
+      "status": "completed"
+    }
+  ],
+  "effect_count": 0,
+  "model_calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "seconds": 28.976637900050264,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14049,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1414,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "seconds": 20.435294900031295,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14038,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 918,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "seconds": 21.320571499993093,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14067,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 966,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "seconds": 31.130438999971375,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14060,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1538,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "seconds": 23.09764130000258,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14045,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1059,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "seconds": 22.741497200040612,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14040,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1010,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "model": "gpt-6.1-terra",
+      "seconds": 14.913647099980153,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13271,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 625,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "model": "gpt-6.1-terra",
+      "seconds": 29.89845520001836,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14049,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1472,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 9,
+      "model": "gpt-6.1-terra",
+      "seconds": 24.32494969997788,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14040,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1136,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 10,
+      "model": "gpt-6.1-terra",
+      "seconds": 15.652825099998154,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13243,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 630,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 11,
+      "model": "gpt-6.1-terra",
+      "seconds": 19.335661599994637,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14025,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 835,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 12,
+      "model": "gpt-6.1-terra",
+      "seconds": 22.8919603000395,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14031,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 966,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 13,
+      "model": "gpt-6.1-terra",
+      "seconds": 15.744702900003176,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14020,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 620,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 14,
+      "model": "gpt-6.1-terra",
+      "seconds": 22.00856369995745,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13236,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 925,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 15,
+      "model": "gpt-6.1-terra",
+      "seconds": 22.793261699960567,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13248,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 959,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 16,
+      "model": "gpt-6.1-terra",
+      "seconds": 23.758055299986154,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14030,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1023,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 17,
+      "model": "gpt-6.1-terra",
+      "seconds": 18.09319729998242,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12595,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 814,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 18,
+      "model": "gpt-6.1-terra",
+      "seconds": 26.87015390000306,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 16602,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1249,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 19,
+      "model": "gpt-6.1-terra",
+      "seconds": 24.194057999993674,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 15801,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1124,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 20,
+      "model": "gpt-6.1-terra",
+      "seconds": 29.769963799975812,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 16584,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1463,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 21,
+      "model": "gpt-6.1-terra",
+      "seconds": 28.56799090001732,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 15022,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1304,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 22,
+      "model": "gpt-6.1-terra",
+      "seconds": 27.287661199981812,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 16664,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1256,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 23,
+      "model": "gpt-6.1-terra",
+      "seconds": 26.408089500037022,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 16969,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1229,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 24,
+      "model": "gpt-6.1-terra",
+      "seconds": 30.49731740000425,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 16740,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1397,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 25,
+      "model": "gpt-6.1-terra",
+      "seconds": 23.26885619998211,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 15502,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1083,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 26,
+      "model": "gpt-6.1-terra",
+      "seconds": 36.530111800006125,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 17545,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1832,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 27,
+      "model": "gpt-6.1-terra",
+      "seconds": 15.852097299997695,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12579,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 689,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 28,
+      "model": "gpt-6.1-terra",
+      "seconds": 18.993140599981416,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14995,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 793,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 29,
+      "model": "gpt-6.1-terra",
+      "seconds": 19.364628799958155,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 15727,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 841,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 30,
+      "model": "gpt-6.1-terra",
+      "seconds": 18.4605031000101,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 16647,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 814,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 31,
+      "model": "gpt-6.1-terra",
+      "seconds": 19.06520960002672,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 15503,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 831,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 32,
+      "model": "gpt-6.1-terra",
+      "seconds": 21.46754919999512,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14050,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 908,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ],
+  "attempts": {
+    "prior": {
+      "session": "session-919139542b",
+      "installation": "business-flow-ae14fb043a",
+      "reserved_calls": 23,
+      "completed_calls": 22,
+      "unknown_calls": 1,
+      "reason": "128-token embedding cap forced repeated extraction chunks. Graceful stop did not cancel in-flight staging; launcher tree was interrupted. Artifacts retained.",
+      "total_attempt_cap": 64
+    },
+    "current_reserved": 32,
+    "aggregate_reserved": 55,
+    "aggregate_cap": 64
+  },
+  "embedding": {
+    "batches": 76,
+    "segments": 412,
+    "max_embedded_tokens": 120,
+    "truncated_inputs": 0,
+    "pooled_batches": 76
+  },
+  "production_approved": false,
+  "business_v1_requalified": false
+}

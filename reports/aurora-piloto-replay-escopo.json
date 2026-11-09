@@ -1,0 +1,216 @@
+{
+  "manifest_sha256": "97d6e22428920294595a661b46f7d842ef9e006b2c5b9269636ab8a616378c81",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "reranker": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "173760f",
+    "files": {
+      "model_quint8_avx2.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "tokenizer.json": "3a56def25aa40facc030ea8b0b87f3688e4b3c39eb8b45d5702b3a1300fe2a20"
+    },
+    "onnxruntime": "1.31.1",
+    "startup_ms": 981.28
+  },
+  "cases": [
+    {
+      "id": "original",
+      "goal": "Quais estados e evidências são necessários para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?",
+      "queries": [
+        "Em que estado operacional o MBA deve estar para transferir uma conversa a um atendente?",
+        "Que tipo de sessão permite transferir uma conversa do MBA para um atendente?",
+        "Qual evento de controle registrado comprova que a conversa foi transferida do MBA para o atendente?"
+      ],
+      "slots": [
+        [],
+        [
+          [
+            "fluxo",
+            12,
+            30
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      ],
+      "found": [
+        3
+      ]
+    },
+    {
+      "id": "internal_event",
+      "goal": "Identificar o registro interno que representa a troca de controle da conversa.",
+      "queries": [
+        "Qual evento interno é registrado quando o fluxo recebe uma troca de controle?"
+      ],
+      "slots": [
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      ],
+      "found": [
+        3
+      ]
+    },
+    {
+      "id": "runtime_guarantee",
+      "goal": "Quais estados e evidências são necessários para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?",
+      "queries": [
+        "Que trecho comprova que MBA e atendente são impedidos de responder simultaneamente na execução?"
+      ],
+      "slots": [
+        []
+      ],
+      "found": []
+    },
+    {
+      "id": "csv_raw",
+      "facts": [
+        {
+          "fact": "Na retomada de fila do laboratório azul, deve-se revalidar a versão da fila.",
+          "status": "covered",
+          "citations": [
+            "1"
+          ],
+          "query": null
+        },
+        {
+          "fact": "Quem aprova a retomada de fila no laboratório azul.",
+          "status": "search",
+          "citations": [],
+          "query": "Quem tem autoridade para aprovar a retomada de fila no laboratório azul?"
+        }
+      ],
+      "queries": [
+        "Quem tem autoridade para aprovar a retomada de fila no laboratório azul?"
+      ]
+    },
+    {
+      "id": "csv_labeled",
+      "facts": [
+        {
+          "fact": "Na retomada de fila no laboratório azul, deve-se revalidar a versão da fila.",
+          "status": "covered",
+          "citations": [
+            "1"
+          ],
+          "query": null
+        },
+        {
+          "fact": "A Equipe Delta aprova a retomada de fila no laboratório azul.",
+          "status": "covered",
+          "citations": [
+            "1"
+          ],
+          "query": null
+        }
+      ],
+      "queries": []
+    }
+  ],
+  "model_calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "e8bb04d942680d36f4caec9fd3bbc92be6c4b9e7ff4926bc00fa99aff27f416f",
+      "reservation_id": "original",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.7211824000114575,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13352,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 28,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "8847d79881b55dd0106964f303fc74517e3fec753d474e0c2bace70018c67523",
+      "reservation_id": "internal_event",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.917996900010621,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12504,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "2ae2fe063eb23194be5f02f6c7da318d4d8493d2cb0ae184530b622b4a70e88f",
+      "reservation_id": "runtime_guarantee",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.483658899989678,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13313,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "3315e07191aaf52e5e64e5495fa0e68bbd944d9fde82363f0b88fd9cc6390dcc",
+      "reservation_id": "csv_raw",
+      "instance": "scope-verifier-eval",
+      "seconds": 5.537178900005529,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11485,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 105,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "80f4667865e2d38d56558b5abc30171ddce1db18d010498b5ada1540b2cf48d8",
+      "reservation_id": "csv_labeled",
+      "instance": "scope-verifier-eval",
+      "seconds": 5.330984900007024,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12285,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 97,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

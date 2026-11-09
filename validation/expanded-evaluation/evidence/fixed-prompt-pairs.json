@@ -1,0 +1,26 @@
+[
+  {
+    "case": "meal",
+    "terra_call": 7,
+    "sol_call": 18,
+    "exact_prompt_sha256": "3386e620c84bb434c58953bf6ad52a1093435e8c9f785b10d297b33db9fa8d5a"
+  },
+  {
+    "case": "deadline",
+    "terra_call": 9,
+    "sol_call": 19,
+    "exact_prompt_sha256": "978edd29a5f43eabbbe27d75623b01513a9788b01518fbf2cc2b5e8e1ee96134"
+  },
+  {
+    "case": "review",
+    "terra_call": 11,
+    "sol_call": 20,
+    "exact_prompt_sha256": "358d075883311b58a5234c93011d7c2e233e2e7f9300c5967317131af68fe824"
+  },
+  {
+    "case": "unknown",
+    "terra_call": 13,
+    "sol_call": 21,
+    "exact_prompt_sha256": "988c71c67e671f4fb621285a9bc95f10806cda2d5ba457c31a4b731f42e29838"
+  }
+]

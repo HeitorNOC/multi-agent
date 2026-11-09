@@ -1,0 +1,20 @@
+✔ catálogo amplo admite subconjunto com hierarquia, exclusões e orçamento (1.078ms)
+✔ chief não pode inventar agente, misturar subordinação, duplicar ou omitir exclusão (0.3326ms)
+✔ cenário livre fora do corpus é recusado (0.1815ms)
+✔ margem histórica e entradas não confirmadas não passam como fatos vigentes (0.4707ms)
+✔ aprovação permanece vinculada à proposta exata (0.7168ms)
+✔ modelo não amplia equipe nem dispensa aprovação (1.0865ms)
+✔ aprovação ausente, hash alterado e conteúdo adulterado bloqueiam efeito (0.5976ms)
+✔ fato errado, causalidade inventada ou fonte desconhecida bloqueiam a proposta (0.214ms)
+✔ ack perdido e restart conservam um evento; ID não aceita outro conteúdo/trabalho (24.4296ms)
+✔ rollback da operação desfaz também seu evento (0.5748ms)
+✔ projeção não copia prompt, token, conteúdo ou saída de modelo (0.6843ms)
+✔ migração conserva eventos legados e sua identidade após reabrir projeção (1.0915ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 177.1125

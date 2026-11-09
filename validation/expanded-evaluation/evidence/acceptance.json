@@ -1,0 +1,122 @@
+[
+  {
+    "case": "meal",
+    "mode": "mix",
+    "model": "gpt-6.1-terra",
+    "answer": "O teto diário de reembolso de **alimentação da equipe Aurora é de R$ 240 por pessoa**. Valores acima desse teto não são reembolsáveis. O manual está vigente desde 1º de janeiro de 2026 e, portanto, já estava vigente na data consultada, 1º de fevereiro de 2026. [1]\n\nO teto de **transporte** é distinto: R$ 85 por pessoa por dia. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 7,
+    "seconds": 81.61561479998636
+  },
+  {
+    "case": "deadline",
+    "mode": "mix",
+    "model": "gpt-6.1-terra",
+    "answer": "O comprovante de despesa da equipe Aurora deve ser enviado até **18h30 do dia útil seguinte**. Essa regra consta do manual vigente desde 1º de janeiro de 2026, portanto já estava em vigor na data consultada, 1º de fevereiro de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 2,
+    "seconds": 13.618999600003008
+  },
+  {
+    "case": "review",
+    "mode": "mix",
+    "model": "gpt-6.1-terra",
+    "answer": "As despesas extraordinárias da equipe Aurora exigem **dois revisores distintos**. O solicitante não pode revisar a própria despesa. [1]\n\nO manual está vigente desde 1º de janeiro de 2026, portanto estava vigente na data consultada, 1º de fevereiro de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 2,
+    "seconds": 14.159216500003822
+  },
+  {
+    "case": "unknown",
+    "mode": "mix",
+    "model": "gpt-6.1-terra",
+    "answer": "O manual vigente em 1º de fevereiro de 2026 **não define limite de diárias de hotel** para a equipe Aurora. Portanto, não há informação suficiente para informar um valor; o manual orienta consultar o departamento responsável. [1]\n\nO manual está vigente desde 1º de janeiro de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 2,
+    "seconds": 15.950880100019276
+  },
+  {
+    "case": "meal",
+    "mode": "naive",
+    "model": "gpt-6.1-terra",
+    "answer": "O teto diário de reembolso de **alimentação da equipe Aurora é de R$ 240 por pessoa**. Valores acima desse teto não são reembolsáveis. [1]\n\nO teto de **transporte é de R$ 85 por pessoa por dia**, distinto do teto de alimentação. O manual está vigente desde 1º de janeiro de 2026 e, portanto, se aplica à data consultada de 1º de fevereiro de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 1,
+    "seconds": 11.121820500004105
+  },
+  {
+    "case": "deadline",
+    "mode": "naive",
+    "model": "gpt-6.1-terra",
+    "answer": "O comprovante de despesa da equipe Aurora deve ser enviado **até as 18h30 do dia útil seguinte**. [1]\n\nO manual consultado está vigente desde 1º de janeiro de 2026 e, portanto, se aplica à data de 1º de fevereiro de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 1,
+    "seconds": 6.6664379999856465
+  },
+  {
+    "case": "review",
+    "mode": "naive",
+    "model": "gpt-6.1-terra",
+    "answer": "Despesas extraordinárias da equipe Aurora precisam da aprovação de **dois revisores distintos**. O solicitante não pode revisar a própria despesa. [1]\n\nO manual está vigente desde 1º de janeiro de 2026, portanto abrange a data consultada de 1º de fevereiro de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 1,
+    "seconds": 5.892117300012615
+  },
+  {
+    "case": "unknown",
+    "mode": "naive",
+    "model": "gpt-6.1-terra",
+    "answer": "O manual vigente em **1º de fevereiro de 2026** não define um limite de diárias de hotel para a equipe Aurora. Consulte o departamento responsável; não há informação suficiente para determinar esse valor. [1]\n\nO manual está vigente desde 1º de janeiro de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 1,
+    "seconds": 6.55338510000729
+  },
+  {
+    "case": "meal",
+    "mode": "mix_fixed_prompt",
+    "model": "gpt-6.1-sol",
+    "answer": "Em **1º de fevereiro de 2026**, o teto diário de reembolso de **alimentação da equipe Aurora é R$ 240 por pessoa**. Valores acima desse teto não são reembolsáveis, conforme o arquivo-fonte **politica-remoto@v1.md**, vigente desde 1º de janeiro de 2026. [1]\n\nO teto de **R$ 85 por pessoa por dia** corresponde a **transporte**. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 1,
+    "baseline_prompt_call": 7
+  },
+  {
+    "case": "deadline",
+    "mode": "mix_fixed_prompt",
+    "model": "gpt-6.1-sol",
+    "answer": "Para a vigência consultada de **1 de fevereiro de 2026**, o comprovante de despesa da equipe Aurora deve ser enviado **até as 18h30 do dia útil seguinte**, conforme o arquivo-fonte politica-remoto@v1.md [1].\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 1,
+    "baseline_prompt_call": 9
+  },
+  {
+    "case": "review",
+    "mode": "mix_fixed_prompt",
+    "model": "gpt-6.1-sol",
+    "answer": "Para a vigência consultada de **1 de fevereiro de 2026**, as despesas extraordinárias da equipe Aurora exigem aprovação de **dois revisores distintos**. O solicitante não pode revisar a própria despesa. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 1,
+    "baseline_prompt_call": 11
+  },
+  {
+    "case": "unknown",
+    "mode": "mix_fixed_prompt",
+    "model": "gpt-6.1-sol",
+    "answer": "Para a data de vigência consultada, **1 de fevereiro de 2026**, o manual vigente desde 1 de janeiro de 2026 **não define limite de diárias de hotel para a equipe Aurora**, nem para qualquer outra equipe. Portanto, não há informação suficiente para indicar um valor. [1]\n\nO documento orienta consultar o departamento responsável e não deduzir o limite de hospedagem dos valores de alimentação ou transporte. Fonte: `politica-remoto@v1.md`. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "value_or_abstention": true,
+    "citation": true,
+    "calls": 1,
+    "baseline_prompt_call": 13
+  }
+]

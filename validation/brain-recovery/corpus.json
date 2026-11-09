@@ -1,0 +1,9 @@
+{
+  "fixture_only": true,
+  "description": "Fictional ACME company. Invented policies and limits solely for local qualification. Contains no customer documents or credentials.",
+  "documents": [
+    {"source":"politica-remoto","version":1,"content":"A empresa ACME adota a Política Remoto. A Política Remoto autoriza os funcionários da ACME a trabalhar remotamente dois dias por semana."},
+    {"source":"aquisicao","version":1,"content":"A empresa ACME adota a Política de Aquisição. A Política de Aquisição limita compras da ACME a 1000 unidades monetárias por pedido. Código interno: SIGILO_FIXTURE_FINANCEIRO"},
+    {"source":"politica-remoto","version":2,"content":"A empresa ACME adota a Política Remoto versão 2. A Política Remoto versão 2 autoriza os funcionários da ACME a trabalhar remotamente três dias por semana."}
+  ]
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "operation": "UPDATE decisions SET record_json='tamper';",
+    "exit_code": 3,
+    "error": "ERROR:  permission denied for table decisions\n"
+  },
+  {
+    "operation": "DELETE FROM decisions;",
+    "exit_code": 3,
+    "error": "ERROR:  permission denied for table decisions\n"
+  }
+]

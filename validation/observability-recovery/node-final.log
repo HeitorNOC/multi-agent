@@ -1,0 +1,38 @@
+✔ catálogo amplo admite subconjunto com hierarquia, exclusões e orçamento (1.5098ms)
+✔ chief não pode inventar agente, misturar subordinação, duplicar ou omitir exclusão (0.5582ms)
+✔ cenário livre fora do corpus é recusado (0.3981ms)
+✔ margem histórica e entradas não confirmadas não passam como fatos vigentes (0.8425ms)
+✔ aprovação permanece vinculada à proposta exata (1.0654ms)
+✔ modelo não amplia equipe nem dispensa aprovação (1.6783ms)
+✔ aprovação ausente, hash alterado e conteúdo adulterado bloqueiam efeito (1.0964ms)
+✔ fato errado, causalidade inventada ou fonte desconhecida bloqueiam a proposta (0.2823ms)
+✔ HTTP: origem, token interno e falha de admissão não liberam efeitos nem bloqueiam próximo pedido (347.4078ms)
+✔ ack perdido e restart conservam um evento; ID não aceita outro conteúdo/trabalho (23.4926ms)
+✔ rollback da operação desfaz também seu evento (0.8922ms)
+✔ projeção não copia prompt, token, conteúdo ou saída de modelo (1.1323ms)
+✔ migração conserva eventos legados e sua identidade após reabrir projeção (2.9512ms)
+✔ canonical historical read succeeds while another connection holds an uncommitted editorial write (33.0349ms)
+✔ concurrent canonical readers return the committed snapshot without transient write-lock errors (438.2813ms)
+✔ TypeScript accepts a real Python signature with Unicode and integer-valued floats (4.2393ms)
+✔ tampered payload is rejected (0.6217ms)
+✔ tampered canonical bytes or operations cannot be substituted (1.1772ms)
+✔ nonce, installation and expiry are enforced (0.8621ms)
+✔ aprovação, evento e recibo persistem após queda 88 e restart da API; um efeito (1288.7758ms)
+✔ editing does not publish and editor cannot self-approve (22.1865ms)
+✔ review binds exact bytes and rejects changed content (15.5805ms)
+✔ publication requires approval and approved file must remain unchanged until preparation (23.5954ms)
+✔ approved publication receipt is signed and snapshot is immutable on replay (30.6196ms)
+✔ published source/version cannot be silently overwritten (36.9709ms)
+✔ frontmatter cannot change registered classification or authorize publication (2.7603ms)
+✔ restricted YAML profile rejects duplicates and vault traversal (2.0923ms)
+✔ public editor cannot import a financial note (10.9113ms)
+✔ invalid calendar dates are rejected before review or publication (10.5347ms)
+✔ immutable canonical snapshots select valid time and prior knowledge without rewriting graph facts (70.585ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1529.1164

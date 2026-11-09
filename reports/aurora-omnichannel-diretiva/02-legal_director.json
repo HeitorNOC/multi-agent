@@ -1,0 +1,104 @@
+{
+  "lead": "legal_director",
+  "assignment": {
+    "specialists": [
+      "privacy_specialist",
+      "risk_controls_analyst",
+      "contract_analyst"
+    ],
+    "queries": [
+      "Requisitos aplicáveis de privacidade, retenção e direitos dos titulares para histórico e identidade de clientes",
+      "Riscos e controles de isolamento entre empresas, credenciais e operações de negócio",
+      "Obrigações contratuais e requisitos de tratamento de dados dos provedores Meta e 360dialog",
+      "Evidências e testes de acesso, exclusão, auditoria e resposta a incidentes"
+    ],
+    "deliverable": "Parecer para a arquitetura e os testes, com requisitos de privacidade, retenção e direitos dos titulares; mapa de riscos e controles para histórico, identidade, credenciais e operações entre empresas; análise das obrigações aplicáveis dos provedores; lacunas, hipóteses e recomendações priorizadas."
+  },
+  "search": [
+    {
+      "query": "Requisitos aplicáveis de privacidade, retenção e direitos dos titulares para histórico e identidade de clientes",
+      "sources": [
+        "mba",
+        "contact",
+        "contact",
+        "mba",
+        "portal",
+        "contact"
+      ]
+    },
+    {
+      "query": "Riscos e controles de isolamento entre empresas, credenciais e operações de negócio",
+      "sources": [
+        "portal",
+        "mba",
+        "portal",
+        "portal",
+        "mba",
+        "mba"
+      ]
+    },
+    {
+      "query": "Obrigações contratuais e requisitos de tratamento de dados dos provedores Meta e 360dialog",
+      "sources": [
+        "fluxo",
+        "mba-frontend",
+        "mba",
+        "portal",
+        "contact",
+        "mba"
+      ]
+    },
+    {
+      "query": "Evidências e testes de acesso, exclusão, auditoria e resposta a incidentes",
+      "sources": [
+        "portal",
+        "portal",
+        "contact",
+        "mba",
+        "portal",
+        "portal"
+      ]
+    }
+  ],
+  "report": {
+    "analysis_md": "## Referência e escopo\n\nA diretiva exige isolamento entre empresas, histórico auditável, credenciais segregadas, autorização de operações e associação de identidades somente com identificação confiável. Os documentos citados são referências, não evidência de implementação ou de conformidade. Os trechos fornecidos indicam que a configuração do MBA pode incluir conhecimentos, arquivos, sites e conectores para ações [a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407], e mencionam aceitação dos Termos de IA da Meta Business [e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387]. A referência de Contact Center descreve verificações de permissão e estado para operações sobre atendimentos [832d018e1240c77f822086020c524c9543b076cb9dcef0f6cc02a8cdc8e3baf0] e notas internas [bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243]. Esses trechos, isoladamente, não estabelecem obrigações contratuais completas nem capacidades atuais dos provedores.\n\n## Proposta para arquitetura e controles\n\n1. **Governança e finalidade:** inventariar dados, finalidades, categorias de titulares, fluxos, fornecedores e jurisdições; definir papéis de cada empresa e fornecedor, bases legais e responsabilidades conforme a legislação aplicável, inclusive a LGPD quando pertinente. Avaliar necessidade de relatório de impacto e de revisão jurídica antes da produção. Minimizar conteúdo e metadados coletados, inclusive dados enviados a agentes e conectores.\n2. **Histórico e identidade:** vincular registros ao tenant em todas as consultas e eventos; manter identidades de canal separadas até haver prova de vínculo confiável. Registrar origem e justificativa do vínculo e oferecer correção ou desvinculação controlada. Separar permissões para conteúdo, anexos e notas internas; limitar acesso por função, finalidade e necessidade.\n3. **Retenção e direitos:** definir prazos por categoria, finalidade, obrigação legal e contrato, incluindo mensagens, payloads originais, anexos, eventos, logs e backups. Automatizar expiração e exclusão ou anonimização quando cabível, com tratamento de retenção legal e limitações de backups documentados. Criar fluxo autenticado e rastreável para acesso, correção, exclusão e demais direitos aplicáveis, incluindo avaliação de exceções e encaminhamento a fornecedores. Não fixar prazos legais sem validação da jurisdição e dos contratos.\n4. **Isolamento e credenciais:** aplicar autorização por tenant no servidor, inclusive em Socket.IO, consumidores Kafka, consultas, arquivos e ferramentas de negócio; não confiar em identificadores fornecidos pelo cliente sem validação. Segregar credenciais por empresa e integração, armazená-las em mecanismo seguro, limitar privilégios, registrar uso sem expor segredos e prever rotação e revogação. Criptografar dados em trânsito e em repouso e controlar acesso às chaves.\n5. **Operações e provedores:** expor operações de negócio por interfaces autenticadas e autorizadas por tenant, usuário ou agente, finalidade e operação; validar parâmetros e limitar dados retornados. Tratar arquivos e conhecimentos fornecidos ao MBA como possíveis fontes de dados sensíveis e revisá-los antes da disponibilização. Confirmar suporte oficial e limites dos conectores antes de planejar seu uso real.\n6. **Auditoria e incidentes:** registrar acesso, exportação, exclusão, alterações de identidade, uso de credenciais e operações de negócio com tenant, ator, ação, resultado e correlação, sem reproduzir conteúdo ou segredos desnecessariamente. Proteger logs contra alteração e acesso indevido. Manter procedimento de detecção, contenção, investigação, comunicação e recuperação, com responsabilidades e prazos definidos após análise jurídica.\n\n## Riscos, prioridade e testes\n\n- **Crítico — vazamento entre empresas:** testar tentativas cruzadas de leitura, escrita, assinatura de eventos, recuperação de arquivos e execução de ferramentas, inclusive com identificadores manipulados; verificar negação e auditoria.\n- **Crítico — credencial comprometida ou operação indevida:** testar privilégios mínimos, revogação, rotação, isolamento de credenciais e rejeição de chamadas sem autorização; verificar ausência de segredos em logs.\n- **Alto — histórico excessivo ou exclusão incompleta:** testar retenção, acesso e exclusão por tenant e titular em armazenamento principal, anexos, eventos, logs e processo de restauração de backup; registrar exceções e limitações.\n- **Alto — associação incorreta de identidades:** testar ausência de fusão automática, validação do vínculo, rastreabilidade, correção e desvinculação sem exposição entre titulares.\n- **Alto — acesso indevido por operadores ou agentes:** testar papéis, mudanças de permissão, notas internas e operações sensíveis; verificar que uma permissão de leitura não concede transferência, exportação ou execução de ações.\n- **Alto — incidente ou dependência externa:** simular comprometimento e indisponibilidade, testar contenção, revogação, preservação de evidências e comunicação; verificar separadamente o que foi exercitado com mocks e o que foi confirmado com provedores reais.\n\nPriorizar o inventário e as decisões de tratamento junto ao desenho do primeiro fluxo vertical; incluir nele testes de isolamento, autorização, minimização e auditoria. Ampliar testes de retenção, direitos e integração contratual antes da produção e da expansão dos canais.",
+    "evidence_ids": [
+      "a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407",
+      "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387",
+      "832d018e1240c77f822086020c524c9543b076cb9dcef0f6cc02a8cdc8e3baf0",
+      "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243"
+    ],
+    "pending": [
+      "Obter e analisar os documentos integrais de referência e os padrões aplicáveis; os trechos fornecidos não bastam para concluir a revisão.",
+      "Identificar jurisdições, papéis de tratamento, finalidades, bases legais, categorias de dados e titulares, inclusive eventual tratamento de dados sensíveis.",
+      "Definir e aprovar prazos de retenção, regras de eliminação, exceções legais e tratamento de backups para cada categoria de dado.",
+      "Obter e revisar termos vigentes, contratos e acordos de tratamento da Meta e da 360dialog: papéis, suboperadores, transferências internacionais, segurança, uso de dados para IA, retenção, exclusão, incidentes, auditoria e atendimento de direitos. Não há evidência suficiente para afirmar obrigações específicas.",
+      "Validar com os provedores capacidades atuais de conectores, acesso e exclusão de dados, histórico, eventos e mecanismos de transferência, distinguindo testes reais de mocks.",
+      "Definir responsáveis, canais e procedimentos para solicitações de titulares e incidentes, incluindo prazos aplicáveis e participação dos fornecedores.",
+      "Estabelecer critérios de vínculo de identidades, matriz de acesso por tenant e função, e política de credenciais e chaves.",
+      "Executar e documentar os testes propostos e revisar seus resultados antes da liberação para produção."
+    ]
+  },
+  "citations": {
+    "a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407": {
+      "source": "mba",
+      "page": 4,
+      "quote": "3 Configurar o agente Definir o conhecimento (informações do negócio, FAQs, arquivos, sites), o comportamento (skills), as políticas de transferência e de acompanhamento, e os conectores para ações."
+    },
+    "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387": {
+      "source": "mba",
+      "page": 4,
+      "quote": "2 Ativar e aceitar os termos Aceitar os Termos de IA da Meta Business no Business Manager, adicionar um método de pagamento válido e integrar o número."
+    },
+    "832d018e1240c77f822086020c524c9543b076cb9dcef0f6cc02a8cdc8e3baf0": {
+      "source": "contact",
+      "page": 15,
+      "quote": "A tela relê o atendimento, confere permissões (ver, interferir, finalizar de outro usuário) e o status (precisa estar ACTIVE)."
+    },
+    "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243": {
+      "source": "contact",
+      "page": 17,
+      "quote": "Observações do atendimento Notas internas (sticky notes) do atendimento."
+    }
+  }
+}

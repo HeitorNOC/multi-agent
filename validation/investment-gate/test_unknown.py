@@ -1,0 +1,28 @@
+"""Unknown inference needs an actual governed closure path, not safe retry alone."""
+from test_v1 import Lab,Rejected
+
+def test_v1_unknown_inference_requires_governed_closure():
+    lab=Lab()
+    try:
+        lab.start();job,p,row=lab.admission();lab.control('crash_before_receipt',row['id'])
+        try:lab.read(p)
+        except Rejected as error:assert error.status==503
+        else:raise AssertionError('expected lost provider response')
+        lab.inference_process.wait(timeout=5)
+        lab.stop_businesses();lab.inference_service();lab.start_business();fresh=lab.reclaim(job,p)
+        for _ in range(3):
+            try:lab.read(fresh)
+            except Rejected as error:assert error.status==409
+            else:raise AssertionError('unknown inference was regenerated')
+        assert lab.count_reads(job)==0
+        status=lab.call('board','retained_status');assert status['current']
+        try:lab.call('board','recovery_inspect')
+        except Rejected as error:recovery={'status':error.status,'reason':str(error)}
+        else:recovery={'status':200}
+        stats=lab.control('stats')['rows'];assert len(stats)==1 and stats[0][2]==1
+        lab.evidence.update(result='FAIL_UNKNOWN_GOVERNED_CLOSURE',recovery=recovery,inference_id=row['id'],
+            unknown_retries=3,reads=0,provider_executions=stats,authority_current=status['current'])
+        assert recovery['status']==200,'V1: unknown inference has safe rejection but no eligible governed closure path'
+    finally:
+        try:lab.cleanup()
+        finally:lab.save()

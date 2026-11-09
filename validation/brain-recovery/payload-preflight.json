@@ -1,0 +1,24 @@
+{
+  "corpus_sha256": "e7fbaac0b183461961936624c3eaca0d969e38c962d0ac43ba5eb1e78270ceeb",
+  "fixture_only": true,
+  "allowed_documents": [
+    {
+      "source": "politica-remoto",
+      "version": 1,
+      "content_sha": "2662b13247793d791a892495feb4289d1cbb133927b80336fb5f93da10be8253"
+    },
+    {
+      "source": "aquisicao",
+      "version": 1,
+      "content_sha": "a9c7ee0a9937085de1fe71f784880eb046a53862f8c40230f2da2039a29c86e7"
+    },
+    {
+      "source": "politica-remoto",
+      "version": 2,
+      "content_sha": "77906b0d042ccc9f7e954601f4e08d6fc1db3651b7abb4e8f95b27ff65a2b4a2"
+    }
+  ],
+  "unregistered_source": "BLOCKED",
+  "credential_in_payload": "BLOCKED",
+  "model_calls": 0
+}

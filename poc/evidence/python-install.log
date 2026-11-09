@@ -1,0 +1,324 @@
+Processing c:\users\pc\multi-agent\vendor\langgraph\libs\checkpoint
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Processing c:\users\pc\multi-agent\vendor\langgraph\libs\sdk-py
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Processing c:\users\pc\multi-agent\vendor\langgraph\libs\prebuilt
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Processing c:\users\pc\multi-agent\vendor\langgraph\libs\langgraph
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Processing c:\users\pc\multi-agent\vendor\langgraph\libs\checkpoint-sqlite
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Processing c:\users\pc\multi-agent\vendor\lightrag
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting pytest
+  Downloading pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+Collecting pytest-asyncio
+  Downloading pytest_asyncio-1.4.1.post1-py3-none-any.whl.metadata (4.4 kB)
+Collecting langchain-core>=0.2.38 (from langgraph-checkpoint==4.3.1)
+  Downloading langchain_core-1.7.4-py3-none-any.whl.metadata (4.8 kB)
+Collecting ormsgpack>=1.12.0 (from langgraph-checkpoint==4.3.1)
+  Downloading ormsgpack-1.13.0-cp312-cp312-win_amd64.whl.metadata (3.3 kB)
+Collecting httpx>=0.25.2 (from langgraph-sdk==0.4.11)
+  Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting langchain-protocol>=0.0.15 (from langgraph-sdk==0.4.11)
+  Downloading langchain_protocol-0.0.20-py3-none-any.whl.metadata (2.4 kB)
+Collecting orjson>=3.11.5 (from langgraph-sdk==0.4.11)
+  Downloading orjson-3.13.0-cp312-cp312-win_amd64.whl.metadata (43 kB)
+Collecting websockets>=14 (from langgraph-sdk==0.4.11)
+  Downloading websockets-17.4-cp312-cp312-win_amd64.whl.metadata (6.5 kB)
+Collecting pydantic>=2.7.4 (from langgraph==1.2.19)
+  Downloading pydantic-2.14.2-py3-none-any.whl.metadata (137 kB)
+Collecting xxhash>=3.5.0 (from langgraph==1.2.19)
+  Downloading xxhash-4.0.2-cp312-cp312-win_amd64.whl.metadata (18 kB)
+Collecting aiosqlite>=0.20 (from langgraph-checkpoint-sqlite==3.1.3)
+  Downloading aiosqlite-0.22.1-py3-none-any.whl.metadata (4.3 kB)
+Collecting sqlite-vec>=0.1.6 (from langgraph-checkpoint-sqlite==3.1.3)
+  Downloading sqlite_vec-0.1.9-py3-none-win_amd64.whl.metadata (198 bytes)
+Collecting aiohttp (from lightrag-hku==1.5.8)
+  Downloading aiohttp-3.14.5-cp312-cp312-win_amd64.whl.metadata (8.5 kB)
+Collecting configparser (from lightrag-hku==1.5.8)
+  Downloading configparser-7.3.0-py3-none-any.whl.metadata (5.5 kB)
+Collecting google-api-core<3.0.0,>=2.0.0 (from lightrag-hku==1.5.8)
+  Downloading google_api_core-2.43.2-py3-none-any.whl.metadata (3.2 kB)
+Collecting google-genai<3.0.0,>=1.0.0 (from lightrag-hku==1.5.8)
+  Downloading google_genai-2.34.0-py3-none-any.whl.metadata (59 kB)
+Collecting json_repair<1.0.0,>=0.59.9 (from lightrag-hku==1.5.8)
+  Downloading json_repair-0.64.3-py3-none-any.whl.metadata (20 kB)
+Collecting nano-vectordb (from lightrag-hku==1.5.8)
+  Downloading nano_vectordb-0.0.4.3-py3-none-any.whl.metadata (3.7 kB)
+Collecting networkx (from lightrag-hku==1.5.8)
+  Downloading networkx-3.7-py3-none-any.whl.metadata (6.7 kB)
+Collecting numpy<3.0.0,>=1.24.0 (from lightrag-hku==1.5.8)
+  Downloading numpy-2.5.4-cp312-cp312-win_amd64.whl.metadata (6.6 kB)
+Collecting packaging (from lightrag-hku==1.5.8)
+  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pandas<4.0.0,>=2.0.0 (from lightrag-hku==1.5.8)
+  Downloading pandas-3.1.0-cp312-cp312-win_amd64.whl.metadata (18 kB)
+Collecting pipmaster (from lightrag-hku==1.5.8)
+  Downloading pipmaster-1.2.2-py3-none-any.whl.metadata (13 kB)
+Collecting pypinyin (from lightrag-hku==1.5.8)
+  Downloading pypinyin-0.55.0-py2.py3-none-any.whl.metadata (12 kB)
+Collecting PyYAML<7.0,>=6.0 (from lightrag-hku==1.5.8)
+  Using cached pyyaml-6.0.3-cp312-cp312-win_amd64.whl.metadata (2.4 kB)
+Collecting python-dotenv (from lightrag-hku==1.5.8)
+  Downloading python_dotenv-1.2.4-py3-none-any.whl.metadata (29 kB)
+Collecting setuptools (from lightrag-hku==1.5.8)
+  Using cached setuptools-84.2.1-py3-none-any.whl.metadata (6.6 kB)
+Collecting tenacity (from lightrag-hku==1.5.8)
+  Downloading tenacity-9.2.1-py3-none-any.whl.metadata (1.4 kB)
+Collecting tiktoken>=0.7.0 (from lightrag-hku==1.5.8)
+  Using cached tiktoken-0.14.0-cp312-cp312-win_amd64.whl.metadata (6.8 kB)
+Collecting xlsxwriter>=3.2.0 (from lightrag-hku==1.5.8)
+  Downloading xlsxwriter-3.3.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting colorama>=0.4 (from pytest)
+  Using cached colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting iniconfig>=2 (from pytest)
+  Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting pluggy<2,>=1.6 (from pytest)
+  Using cached pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting pygments>=2.15 (from pytest)
+  Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting typing-extensions>=4.12 (from pytest-asyncio)
+  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting googleapis-common-protos<2.0.0,>=1.69.2 (from google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading googleapis_common_protos-1.76.0-py3-none-any.whl.metadata (8.5 kB)
+Collecting protobuf<8.0.0,>=6.33.5 (from google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Using cached protobuf-7.36.2-cp310-abi3-win_amd64.whl.metadata (595 bytes)
+Collecting proto-plus<2.0.0,>=1.26.1 (from google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading proto_plus-1.29.0-py3-none-any.whl.metadata (2.2 kB)
+Collecting google-auth<3.0.0,>=2.14.1 (from google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading google_auth-2.62.1-py3-none-any.whl.metadata (6.0 kB)
+Collecting requests<3.0.0,>=2.33.0 (from google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting opentelemetry-api<2.0.0,>=1.44.0 (from google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading opentelemetry_api-1.45.2-py3-none-any.whl.metadata (1.4 kB)
+Collecting anyio<5.0.0,>=4.8.0 (from google-genai<3.0.0,>=1.0.0->lightrag-hku==1.5.8)
+  Downloading anyio-4.16.0-py3-none-any.whl.metadata (4.7 kB)
+Collecting tenacity (from lightrag-hku==1.5.8)
+  Using cached tenacity-9.1.4-py3-none-any.whl.metadata (1.2 kB)
+Collecting distro<2,>=1.7.0 (from google-genai<3.0.0,>=1.0.0->lightrag-hku==1.5.8)
+  Using cached distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+Collecting sniffio (from google-genai<3.0.0,>=1.0.0->lightrag-hku==1.5.8)
+  Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Collecting certifi (from httpx>=0.25.2->langgraph-sdk==0.4.11)
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx>=0.25.2->langgraph-sdk==0.4.11)
+  Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx>=0.25.2->langgraph-sdk==0.4.11)
+  Using cached idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.25.2->langgraph-sdk==0.4.11)
+  Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting jsonpatch>=1.33.0 (from langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Downloading jsonpatch-1.41-py3-none-any.whl.metadata (4.3 kB)
+Collecting langsmith<1.0.0,>=0.14.9 (from langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Downloading langsmith-0.14.17-py3-none-any.whl.metadata (39 kB)
+Collecting uuid-utils>=0.12.0 (from langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Downloading uuid_utils-1.2.0-cp310-abi3-win_amd64.whl.metadata (6.5 kB)
+Collecting python-dateutil>=2.9.0 (from pandas<4.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading python_dateutil-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+Collecting tzdata (from pandas<4.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting annotated-types>=0.6.0 (from pydantic>=2.7.4->langgraph==1.2.19)
+  Using cached annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.50.2 (from pydantic>=2.7.4->langgraph==1.2.19)
+  Downloading pydantic_core-2.50.2-cp312-cp312-win_amd64.whl.metadata (6.7 kB)
+Collecting typing-inspection>=0.4.4 (from pydantic>=2.7.4->langgraph==1.2.19)
+  Using cached typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting regex (from tiktoken>=0.7.0->lightrag-hku==1.5.8)
+  Using cached regex-2026.9.29-cp312-cp312-win_amd64.whl.metadata (41 kB)
+Collecting aiohappyeyeballs>=2.5.0 (from aiohttp->lightrag-hku==1.5.8)
+  Using cached aiohappyeyeballs-2.7.1-py3-none-any.whl.metadata (5.9 kB)
+Collecting aiosignal>=1.4.0 (from aiohttp->lightrag-hku==1.5.8)
+  Using cached aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+Collecting attrs>=17.3.0 (from aiohttp->lightrag-hku==1.5.8)
+  Using cached attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting frozenlist>=1.1.1 (from aiohttp->lightrag-hku==1.5.8)
+  Using cached frozenlist-1.8.0-cp312-cp312-win_amd64.whl.metadata (21 kB)
+Collecting multidict<8.0,>=4.5 (from aiohttp->lightrag-hku==1.5.8)
+  Downloading multidict-7.2.1-cp312-cp312-win_amd64.whl.metadata (6.3 kB)
+Collecting propcache>=0.2.0 (from aiohttp->lightrag-hku==1.5.8)
+  Using cached propcache-0.5.4-cp312-cp312-win_amd64.whl.metadata (25 kB)
+Collecting yarl<2.0,>=1.25.1 (from aiohttp->lightrag-hku==1.5.8)
+  Using cached yarl-1.25.1-cp312-cp312-win_amd64.whl.metadata (115 kB)
+Collecting ascii_colors>=0.11.11 (from pipmaster->lightrag-hku==1.5.8)
+  Downloading ascii_colors-0.13.0-py3-none-any.whl.metadata (44 kB)
+Collecting wcwidth (from ascii_colors>=0.11.11->pipmaster->lightrag-hku==1.5.8)
+  Downloading wcwidth-0.9.4-cp310-abi3-win_amd64.whl.metadata (24 kB)
+Collecting pyasn1-modules>=0.2.1 (from google-auth<3.0.0,>=2.14.1->google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting cryptography>=38.0.3 (from google-auth<3.0.0,>=2.14.1->google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading cryptography-50.0.2-cp311-abi3-win_amd64.whl.metadata (4.4 kB)
+Collecting jsonpointer>=3.8 (from jsonpatch>=1.33.0->langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Downloading jsonpointer-3.8-py3-none-any.whl.metadata (2.7 kB)
+Collecting httpx2<3,>=2 (from langsmith<1.0.0,>=0.14.9->langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Downloading httpx2-2.16.0-py3-none-any.whl.metadata (10 kB)
+Collecting requests-toolbelt>=1.0.0 (from langsmith<1.0.0,>=0.14.9->langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Using cached requests_toolbelt-1.0.0-py2.py3-none-any.whl.metadata (14 kB)
+Collecting uuid-utils>=0.12.0 (from langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Downloading uuid_utils-0.19.0-cp310-abi3-win_amd64.whl.metadata (6.5 kB)
+Collecting zstandard>=0.23.0 (from langsmith<1.0.0,>=0.14.9->langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Using cached zstandard-0.25.0-cp312-cp312-win_amd64.whl.metadata (3.3 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3.0.0,>=2.33.0->google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading charset_normalizer-3.5.2-cp312-cp312-win_amd64.whl.metadata (47 kB)
+Collecting urllib3<3,>=1.26 (from requests<3.0.0,>=2.33.0->google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Using cached urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting cffi>=2.0.0 (from cryptography>=38.0.3->google-auth<3.0.0,>=2.14.1->google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading cffi-2.1.1-cp312-cp312-win_amd64.whl.metadata (2.6 kB)
+Collecting httpcore2==2.16.0 (from httpx2<3,>=2->langsmith<1.0.0,>=0.14.9->langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Downloading httpcore2-2.16.0-py3-none-any.whl.metadata (27 kB)
+Collecting truststore>=0.10 (from httpx2<3,>=2->langsmith<1.0.0,>=0.14.9->langchain-core>=0.2.38->langgraph-checkpoint==4.3.1)
+  Downloading truststore-0.10.5-py3-none-any.whl.metadata (4.5 kB)
+Collecting pyasn1<0.7.0,>=0.6.1 (from pyasn1-modules>=0.2.1->google-auth<3.0.0,>=2.14.1->google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading pyasn1-0.6.5-py3-none-any.whl.metadata (8.4 kB)
+Collecting pycparser (from cffi>=2.0.0->cryptography>=38.0.3->google-auth<3.0.0,>=2.14.1->google-api-core<3.0.0,>=2.0.0->lightrag-hku==1.5.8)
+  Downloading pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+Downloading pytest_asyncio-1.4.1.post1-py3-none-any.whl (17 kB)
+Downloading aiosqlite-0.22.1-py3-none-any.whl (17 kB)
+Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Downloading google_api_core-2.43.2-py3-none-any.whl (224 kB)
+Downloading google_genai-2.34.0-py3-none-any.whl (1.3 MB)
+   ---------------------------------------- 1.3/1.3 MB 2.7 MB/s eta 0:00:00
+Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Downloading json_repair-0.64.3-py3-none-any.whl (52 kB)
+Downloading langchain_core-1.7.4-py3-none-any.whl (577 kB)
+   ---------------------------------------- 577.2/577.2 kB 2.9 MB/s eta 0:00:00
+Downloading langchain_protocol-0.0.20-py3-none-any.whl (7.3 kB)
+Downloading numpy-2.5.4-cp312-cp312-win_amd64.whl (12.6 MB)
+   ---------------------------------------- 12.6/12.6 MB 3.9 MB/s eta 0:00:00
+Downloading orjson-3.13.0-cp312-cp312-win_amd64.whl (121 kB)
+Downloading ormsgpack-1.13.0-cp312-cp312-win_amd64.whl (157 kB)
+Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Downloading pandas-3.1.0-cp312-cp312-win_amd64.whl (10.7 MB)
+   ---------------------------------------- 10.7/10.7 MB 5.2 MB/s eta 0:00:00
+Using cached pluggy-1.7.0-py3-none-any.whl (27 kB)
+Downloading pydantic-2.14.2-py3-none-any.whl (490 kB)
+Downloading pydantic_core-2.50.2-cp312-cp312-win_amd64.whl (2.3 MB)
+   ---------------------------------------- 2.3/2.3 MB 10.6 MB/s eta 0:00:00
+Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
+Using cached pyyaml-6.0.3-cp312-cp312-win_amd64.whl (154 kB)
+Downloading sqlite_vec-0.1.9-py3-none-win_amd64.whl (292 kB)
+Using cached tenacity-9.1.4-py3-none-any.whl (28 kB)
+Using cached tiktoken-0.14.0-cp312-cp312-win_amd64.whl (941 kB)
+Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading websockets-17.4-cp312-cp312-win_amd64.whl (219 kB)
+Downloading xlsxwriter-3.3.1-py3-none-any.whl (180 kB)
+Downloading xxhash-4.0.2-cp312-cp312-win_amd64.whl (37 kB)
+Downloading aiohttp-3.14.5-cp312-cp312-win_amd64.whl (506 kB)
+Downloading configparser-7.3.0-py3-none-any.whl (17 kB)
+Downloading nano_vectordb-0.0.4.3-py3-none-any.whl (5.6 kB)
+Downloading networkx-3.7-py3-none-any.whl (2.1 MB)
+   ---------------------------------------- 2.1/2.1 MB 10.9 MB/s eta 0:00:00
+Downloading pipmaster-1.2.2-py3-none-any.whl (37 kB)
+Downloading pypinyin-0.55.0-py2.py3-none-any.whl (840 kB)
+   --------------------------------------- 840.2/840.2 kB 12.3 MB/s eta 0:00:00
+Downloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)
+Using cached setuptools-84.2.1-py3-none-any.whl (876 kB)
+Using cached aiohappyeyeballs-2.7.1-py3-none-any.whl (15 kB)
+Using cached aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+Using cached annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Downloading anyio-4.16.0-py3-none-any.whl (134 kB)
+Downloading ascii_colors-0.13.0-py3-none-any.whl (90 kB)
+Using cached attrs-26.1.0-py3-none-any.whl (67 kB)
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Using cached distro-1.9.0-py3-none-any.whl (20 kB)
+Using cached frozenlist-1.8.0-cp312-cp312-win_amd64.whl (44 kB)
+Downloading google_auth-2.62.1-py3-none-any.whl (267 kB)
+Downloading googleapis_common_protos-1.76.0-py3-none-any.whl (307 kB)
+Using cached idna-3.20-py3-none-any.whl (69 kB)
+Downloading jsonpatch-1.41-py3-none-any.whl (20 kB)
+Downloading langsmith-0.14.17-py3-none-any.whl (940 kB)
+   ---------------------------------------- 940.8/940.8 kB 8.7 MB/s eta 0:00:00
+Downloading multidict-7.2.1-cp312-cp312-win_amd64.whl (95 kB)
+Downloading opentelemetry_api-1.45.2-py3-none-any.whl (60 kB)
+Using cached propcache-0.5.4-cp312-cp312-win_amd64.whl (46 kB)
+Downloading proto_plus-1.29.0-py3-none-any.whl (50 kB)
+Using cached protobuf-7.36.2-cp310-abi3-win_amd64.whl (456 kB)
+Downloading python_dateutil-4.0.0-py3-none-any.whl (92 kB)
+Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+Using cached typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+Downloading uuid_utils-0.19.0-cp310-abi3-win_amd64.whl (182 kB)
+Using cached yarl-1.25.1-cp312-cp312-win_amd64.whl (102 kB)
+Using cached regex-2026.9.29-cp312-cp312-win_amd64.whl (280 kB)
+Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+Downloading tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Downloading charset_normalizer-3.5.2-cp312-cp312-win_amd64.whl (207 kB)
+Downloading cryptography-50.0.2-cp311-abi3-win_amd64.whl (3.8 MB)
+   ---------------------------------------- 3.8/3.8 MB 10.8 MB/s eta 0:00:00
+Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading httpx2-2.16.0-py3-none-any.whl (97 kB)
+Downloading httpcore2-2.16.0-py3-none-any.whl (85 kB)
+Downloading jsonpointer-3.8-py3-none-any.whl (10 kB)
+Downloading pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+Using cached requests_toolbelt-1.0.0-py2.py3-none-any.whl (54 kB)
+Using cached urllib3-2.8.0-py3-none-any.whl (135 kB)
+Using cached zstandard-0.25.0-cp312-cp312-win_amd64.whl (506 kB)
+Downloading wcwidth-0.9.4-cp310-abi3-win_amd64.whl (597 kB)
+   --------------------------------------- 597.8/597.8 kB 10.8 MB/s eta 0:00:00
+Downloading cffi-2.1.1-cp312-cp312-win_amd64.whl (185 kB)
+Downloading pyasn1-0.6.5-py3-none-any.whl (84 kB)
+Downloading truststore-0.10.5-py3-none-any.whl (19 kB)
+Downloading pycparser-3.12-py3-none-any.whl (62 kB)
+Building wheels for collected packages: langgraph-checkpoint, langgraph-sdk, langgraph-prebuilt, langgraph, langgraph-checkpoint-sqlite, lightrag-hku
+  Building wheel for langgraph-checkpoint (pyproject.toml): started
+  Building wheel for langgraph-checkpoint (pyproject.toml): finished with status 'done'
+  Created wheel for langgraph-checkpoint: filename=langgraph_checkpoint-4.3.1-py3-none-any.whl size=58484 sha256=b6769d7fa3e0ae61e047dcce660a761a003c55ce08df2196ce05e86047b61967
+  Stored in directory: C:\Users\PC\AppData\Local\Temp\pip-ephem-wheel-cache-3rxj0ctc\wheels\65\6a\ad\14af273936dc86dd5ac8f5f38c40216e5362304ce9c1840264
+  Building wheel for langgraph-sdk (pyproject.toml): started
+  Building wheel for langgraph-sdk (pyproject.toml): finished with status 'done'
+  Created wheel for langgraph-sdk: filename=langgraph_sdk-0.4.11-py3-none-any.whl size=171507 sha256=cc6a9a7b74781cdea6fbf1e1ffe9dd207c7588f1b30fb06d1d1609e95f1ed548
+  Stored in directory: c:\users\pc\appdata\local\packages\openai.codex_2p2nqsd0c76g0\localcache\local\pip\cache\wheels\20\0a\86\c72ff3e30116723db295a70fc85b6a6b136bcd192638f4f237
+  Building wheel for langgraph-prebuilt (pyproject.toml): started
+  Building wheel for langgraph-prebuilt (pyproject.toml): finished with status 'done'
+  Created wheel for langgraph-prebuilt: filename=langgraph_prebuilt-1.1.1-py3-none-any.whl size=42531 sha256=b2ae1ccbe6871f9272eb764060d5e2e1c1d74949f20e06a802c99826c74cc844
+  Stored in directory: C:\Users\PC\AppData\Local\Temp\pip-ephem-wheel-cache-3rxj0ctc\wheels\51\a1\2a\3bcb637d6b94ec7c8f6f2054315b6f8c440a06157a516318f1
+  Building wheel for langgraph (pyproject.toml): started
+  Building wheel for langgraph (pyproject.toml): finished with status 'done'
+  Created wheel for langgraph: filename=langgraph-1.2.19-py3-none-any.whl size=264338 sha256=883fda22e7965b416d3301fd27b9aba386c0b852bf901b902b8824a814e42848
+  Stored in directory: C:\Users\PC\AppData\Local\Temp\pip-ephem-wheel-cache-3rxj0ctc\wheels\ea\8b\c6\acea82b0f6fee9a12219bdb12d1abddd9516c98df62293cb36
+  Building wheel for langgraph-checkpoint-sqlite (pyproject.toml): started
+  Building wheel for langgraph-checkpoint-sqlite (pyproject.toml): finished with status 'done'
+  Created wheel for langgraph-checkpoint-sqlite: filename=langgraph_checkpoint_sqlite-3.1.3-py3-none-any.whl size=42091 sha256=13fb4a061d4d81c16b96704a56f530968380875a017c00b3d5c1e6d88d92afee
+  Stored in directory: c:\users\pc\appdata\local\packages\openai.codex_2p2nqsd0c76g0\localcache\local\pip\cache\wheels\98\5d\4d\dc460a39de28ec07d82cbb190decb75e7a4db29a1f187fe4e1
+  Building wheel for lightrag-hku (pyproject.toml): started
+  Building wheel for lightrag-hku (pyproject.toml): finished with status 'done'
+  Created wheel for lightrag-hku: filename=lightrag_hku-1.5.8-py3-none-any.whl size=2449809 sha256=78ce0c2a65fbf70bc1afe4e14239cbc56bf96263b380aea2f7d5f4cba1bca2a7
+  Stored in directory: C:\Users\PC\AppData\Local\Temp\pip-ephem-wheel-cache-3rxj0ctc\wheels\1b\28\10\ab9f5d7ddce1971bb72dc62e9a21407ae2ff76bb656fda6364
+Successfully built langgraph-checkpoint langgraph-sdk langgraph-prebuilt langgraph langgraph-checkpoint-sqlite lightrag-hku
+Installing collected packages: sqlite-vec, zstandard, xxhash, xlsxwriter, websockets, wcwidth, uuid-utils, urllib3, tzdata, typing-extensions, truststore, tenacity, sniffio, setuptools, regex, PyYAML, python-dotenv, pypinyin, pygments, pycparser, pyasn1, protobuf, propcache, pluggy, packaging, ormsgpack, orjson, numpy, networkx, multidict, jsonpointer, json_repair, iniconfig, idna, h11, frozenlist, distro, configparser, colorama, charset_normalizer, certifi, attrs, annotated-types, aiosqlite, aiohappyeyeballs, yarl, typing-inspection, requests, python-dateutil, pytest, pydantic-core, pyasn1-modules, proto-plus, opentelemetry-api, nano-vectordb, langchain-protocol, jsonpatch, httpcore2, httpcore, googleapis-common-protos, cffi, ascii_colors, anyio, aiosignal, tiktoken, requests-toolbelt, pytest-asyncio, pydantic, pipmaster, pandas, httpx2, httpx, cryptography, aiohttp, langsmith, google-auth, langchain-core, google-api-core, langgraph-sdk, langgraph-checkpoint, google-genai, lightrag-hku, langgraph-prebuilt, langgraph-checkpoint-sqlite, langgraph
+Successfully installed PyYAML-6.0.3 aiohappyeyeballs-2.7.1 aiohttp-3.14.5 aiosignal-1.4.0 aiosqlite-0.22.1 annotated-types-0.8.0 anyio-4.16.0 ascii_colors-0.13.0 attrs-26.1.0 certifi-2026.10.23 cffi-2.1.1 charset_normalizer-3.5.2 colorama-0.4.6 configparser-7.3.0 cryptography-50.0.2 distro-1.9.0 frozenlist-1.8.0 google-api-core-2.43.2 google-auth-2.62.1 google-genai-2.34.0 googleapis-common-protos-1.76.0 h11-0.16.0 httpcore-1.0.9 httpcore2-2.16.0 httpx-0.28.1 httpx2-2.16.0 idna-3.20 iniconfig-2.3.1 json_repair-0.64.3 jsonpatch-1.41 jsonpointer-3.8 langchain-core-1.7.4 langchain-protocol-0.0.20 langgraph-1.2.19 langgraph-checkpoint-4.3.1 langgraph-checkpoint-sqlite-3.1.3 langgraph-prebuilt-1.1.1 langgraph-sdk-0.4.11 langsmith-0.14.17 lightrag-hku-1.5.8 multidict-7.2.1 nano-vectordb-0.0.4.3 networkx-3.7 numpy-2.5.4 opentelemetry-api-1.45.2 orjson-3.13.0 ormsgpack-1.13.0 packaging-26.3 pandas-3.1.0 pipmaster-1.2.2 pluggy-1.7.0 propcache-0.5.4 proto-plus-1.29.0 protobuf-7.36.2 pyasn1-0.6.5 pyasn1-modules-0.4.2 pycparser-3.12 pydantic-2.14.2 pydantic-core-2.50.2 pygments-2.21.0 pypinyin-0.55.0 pytest-9.2.0 pytest-asyncio-1.4.1.post1 python-dateutil-4.0.0 python-dotenv-1.2.4 regex-2026.9.29 requests-2.34.2 requests-toolbelt-1.0.0 setuptools-84.2.1 sniffio-1.3.1 sqlite-vec-0.1.9 tenacity-9.1.4 tiktoken-0.14.0 truststore-0.10.5 typing-extensions-4.16.0 typing-inspection-0.4.4 tzdata-2026.6 urllib3-2.8.0 uuid-utils-0.19.0 wcwidth-0.9.4 websockets-17.4 xlsxwriter-3.3.1 xxhash-4.0.2 yarl-1.25.1 zstandard-0.25.0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: C:\Users\PC\multi-agent\poc\.venv\Scripts\python.exe -m pip install --upgrade pip

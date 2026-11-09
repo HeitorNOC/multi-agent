@@ -1,0 +1,5 @@
+2026-11-04 — independent Docker inventory after all temporal/editorial experiments.
+docker ps -a --filter name=temporal-pilot- --format '{{.Names}}': exit 0, empty.
+docker volume ls --filter name=temporal-pilot- --format '{{.Name}}': exit 0, empty.
+docker network ls --filter name=temporal-pilot- --format '{{.Name}}': exit 0, empty.
+All removals were restricted to experiment-owned names; no global prune or unrelated deletion.

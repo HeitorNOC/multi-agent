@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\demo-enterprise\test_scenarios.py", line 44, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\PC\multi-agent\demo-enterprise\test_scenarios.py", line 17, in main
+    state=wait(lambda s:s['runtime']['phase']=='ready',600);assert len(state['runtime']['sources'])==16 and len(state['runtime']['catalog'])==21
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\demo-enterprise\test_scenarios.py", line 12, in wait
+    if value['runtime']['phase']=='failed':raise AssertionError('Startup failed; private logs preserved')
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Startup failed; private logs preserved

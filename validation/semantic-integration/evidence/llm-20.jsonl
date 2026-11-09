@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a4ae-d144-7bf1-bfbe-70c5a6a25551"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"meta de vendas\\\",\\\"valor aprovado\\\"],\\\"low_level_keywords\\\":[\\\"março de 2026\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12620,"cached_input_tokens":12416,"cache_write_input_tokens":0,"output_tokens":44,"reasoning_output_tokens":0}}

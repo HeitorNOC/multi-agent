@@ -1,0 +1,30 @@
+﻿requirement,contract,test_or_evidence,result,limit
+"Aprovação, fontes, reserva, conciliação, conclusão honesta","service.py:127,155,169,178",test_human_gate_budget_and_trace[langgraph],PASS,Fonte/versão sintética; aprovação por ator de teste; unidades fictícias
+"Aprovação, fontes, reserva, conciliação, conclusão honesta","service.py:127,155,169,178",test_human_gate_budget_and_trace[agentscope],PASS,Fonte/versão sintética; aprovação por ator de teste; unidades fictícias
+Recuperação após encerramento abrupto,"worker.py:14,53; service.py:127",test_abrupt_worker_exit_and_recovery[langgraph],PASS,Crash em uma fronteira; native checkpoint LG versus cache próprio AS
+Recuperação após encerramento abrupto,"worker.py:14,53; service.py:127",test_abrupt_worker_exit_and_recovery[agentscope],PASS,Crash em uma fronteira; native checkpoint LG versus cache próprio AS
+Cancelamento e custo parcial,"service.py:127,208",test_cancel_while_retrieval_inflight[langgraph],PASS,Processo terminado pelo host; não cancelamento cooperativo nativo
+Cancelamento e custo parcial,"service.py:127,208",test_cancel_while_retrieval_inflight[agentscope],PASS,Processo terminado pelo host; não cancelamento cooperativo nativo
+Perda de ack após efeito e reinício do serviço,service.py:178,test_effect_ack_loss_then_control_server_restart[langgraph],PASS,Provedor simulado oferece idempotência e lookup; outros provedores não homologados
+Perda de ack após efeito e reinício do serviço,service.py:178,test_effect_ack_loss_then_control_server_restart[agentscope],PASS,Provedor simulado oferece idempotência e lookup; outros provedores não homologados
+"Autorização, revogação, custo acima da reserva","service.py:90,127; Ledger.charge",test_identity_scope_revocation_and_overrun[langgraph],PASS,Checks da camada comum; detecta overspend já incorrido
+"Autorização, revogação, custo acima da reserva","service.py:90,127; Ledger.charge",test_identity_scope_revocation_and_overrun[agentscope],PASS,Checks da camada comum; detecta overspend já incorrido
+Orçamento agregado concorrente,service.py:114,test_concurrent_aggregate_admission,PASS,Conta de período de teste com transação SQLite; não limites do provedor
+Reentrega e consumo idempotente,service.py:208; OpenAgents /v1/events,test_real_openagents_redelivery_inbox_dedup[langgraph],PASS,"ASGI/SQLite, token legado; efeito no consumidor aplicado uma vez"
+Reentrega e consumo idempotente,service.py:208; OpenAgents /v1/events,test_real_openagents_redelivery_inbox_dedup[agentscope],PASS,"ASGI/SQLite, token legado; efeito no consumidor aplicado uma vez"
+Falha de modelo não vira conclusão,"worker.py:27,53,95",test_provider_model_failure_is_not_completion[langgraph],PASS,Exceção sintética; um retry manual; sem provedor comercial
+Falha de modelo não vira conclusão,"worker.py:27,53,95",test_provider_model_failure_is_not_completion[agentscope],PASS,Exceção sintética; um retry manual; sem provedor comercial
+Idempotência estável entre runs,service.py:178,test_business_intent_across_new_runs[langgraph],PASS,Intenção/operação fictícia e provedor com dedup; payload não arbitrário
+Idempotência estável entre runs,service.py:178,test_business_intent_across_new_runs[agentscope],PASS,Intenção/operação fictícia e provedor com dedup; payload não arbitrário
+Qualidade de LLM e resposta causal,dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,Modelos determinísticos; LG estrutura evidências sem geração de resposta natural
+"Cérebro semântico híbrido, temporal e ACL por documento",dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,LightRAG naive com fonte sintética por empresa; Graphiti não integrado
+"Identidade, expiração/rotação de tokens e sandbox de produção",dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,"Tokens de teste opacos; sem TTL, federação ou MCP real"
+Orçamento monetário e tokens de provedor real,dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,Unidades sintéticas; tarifas e limites por chamada não qualificados
+Isolamento de deployment dedicado por cliente,dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,Fixture A/B não qualifica instalações separadas
+Contratação permanente e agentes temporários sob policy,dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,Pré-requisito preservado; não faz parte do comparativo de motores
+Controlador adaptativo A0–A4 e paralelismo dinâmico,dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,A3 fixo e etapas sequenciais para comparação
+"PostgreSQL, backup/restore e migração",dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,Testes de reinício usam SQLite; auditoria anterior de backup separada
+Recuperação integral AgentScope Agent Service,dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,"Código de sessão/SQL encontrado, mas não qualificado neste contrato"
+"Todas as fronteiras de cancelamento, retry e falha de rede",dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,Bateria limitada a pontos definidos; não prova contenção remota universal
+UI JARVIS própria e backend TypeScript,dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,Adiados; Python nesta pasta é harness de auditoria
+Paperclip integrado simultaneamente a cada novo motor,dossiê e REPORT.md,não executado nesta etapa,NOT TESTED,Reavaliação anterior separada; não concluído neste comparativo

@@ -1,0 +1,99 @@
+....................FFF.F.....................                           [100%]
+================================== FAILURES ===================================
+___________ TestUploadPath.test_document_manager_rejects_traversal ____________
+
+self = <tests.workspace.test_workspace_path_validation.TestUploadPath object at 0x00000210486EE7B0>
+tmp_path = WindowsPath('C:/Users/PC/AppData/Local/Temp/pytest-of-PC/pytest-2/test_document_manager_rejects_0')
+
+    def test_document_manager_rejects_traversal(self, tmp_path):
+>       DocumentManager = _import_document_manager()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:101: in _import_document_manager
+    from lightrag.api.routers.document_routes import DocumentManager
+vendor\lightrag\lightrag\api\routers\__init__.py:12: in <module>
+    from .ollama_api import OllamaAPI
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+>   from fastapi import APIRouter, HTTPException, Request
+E   ModuleNotFoundError: No module named 'fastapi'
+
+vendor\lightrag\lightrag\api\routers\ollama_api.py:1: ModuleNotFoundError
+________ TestUploadPath.test_document_manager_creates_workspace_subdir ________
+
+self = <tests.workspace.test_workspace_path_validation.TestUploadPath object at 0x00000210486EF470>
+tmp_path = WindowsPath('C:/Users/PC/AppData/Local/Temp/pytest-of-PC/pytest-2/test_document_manager_creates_0')
+
+    def test_document_manager_creates_workspace_subdir(self, tmp_path):
+>       DocumentManager = _import_document_manager()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:101: in _import_document_manager
+    from lightrag.api.routers.document_routes import DocumentManager
+vendor\lightrag\lightrag\api\routers\__init__.py:12: in <module>
+    from .ollama_api import OllamaAPI
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+>   from fastapi import APIRouter, HTTPException, Request
+E   ModuleNotFoundError: No module named 'fastapi'
+
+vendor\lightrag\lightrag\api\routers\ollama_api.py:1: ModuleNotFoundError
+_____ TestUploadPath.test_document_manager_empty_workspace_uses_base_dir ______
+
+self = <tests.workspace.test_workspace_path_validation.TestUploadPath object at 0x00000210486EE270>
+tmp_path = WindowsPath('C:/Users/PC/AppData/Local/Temp/pytest-of-PC/pytest-2/test_document_manager_empty_wo0')
+
+    def test_document_manager_empty_workspace_uses_base_dir(self, tmp_path):
+>       DocumentManager = _import_document_manager()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:101: in _import_document_manager
+    from lightrag.api.routers.document_routes import DocumentManager
+vendor\lightrag\lightrag\api\routers\__init__.py:12: in <module>
+    from .ollama_api import OllamaAPI
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+>   from fastapi import APIRouter, HTTPException, Request
+E   ModuleNotFoundError: No module named 'fastapi'
+
+vendor\lightrag\lightrag\api\routers\ollama_api.py:1: ModuleNotFoundError
+_____________ TestUploadPath.test_upload_dir_matches_storage_dir ______________
+
+self = <tests.workspace.test_workspace_path_validation.TestUploadPath object at 0x00000210486EDC10>
+tmp_path = WindowsPath('C:/Users/PC/AppData/Local/Temp/pytest-of-PC/pytest-2/test_upload_dir_matches_storag0')
+
+    def test_upload_dir_matches_storage_dir(self, tmp_path):
+        """Files uploaded to <input_dir>/<ws>/ must be resolvable against
+        storage data in <working_dir>/<ws>/ � same subdirectory name."""
+>       DocumentManager = _import_document_manager()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:101: in _import_document_manager
+    from lightrag.api.routers.document_routes import DocumentManager
+vendor\lightrag\lightrag\api\routers\__init__.py:12: in <module>
+    from .ollama_api import OllamaAPI
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+>   from fastapi import APIRouter, HTTPException, Request
+E   ModuleNotFoundError: No module named 'fastapi'
+
+vendor\lightrag\lightrag\api\routers\ollama_api.py:1: ModuleNotFoundError
+===================== spaCy language models not installed =====================
+Missing model(s): en_core_web_sm, zh_core_web_sm
+smart_heading (docx) tests that need them were skipped.
+To run them, install the pinned models:
+    lightrag-download-cache --spacy-install
+=========================== short test summary info ===========================
+FAILED vendor\lightrag\tests\workspace\test_workspace_path_validation.py::TestUploadPath::test_document_manager_rejects_traversal
+FAILED vendor\lightrag\tests\workspace\test_workspace_path_validation.py::TestUploadPath::test_document_manager_creates_workspace_subdir
+FAILED vendor\lightrag\tests\workspace\test_workspace_path_validation.py::TestUploadPath::test_document_manager_empty_workspace_uses_base_dir
+FAILED vendor\lightrag\tests\workspace\test_workspace_path_validation.py::TestUploadPath::test_upload_dir_matches_storage_dir
+4 failed, 42 passed in 0.58s

@@ -1,0 +1,7 @@
+{
+  "scenario": "OpenAgents accepts event; response lost; own outbox retries",
+  "observed_events": 2,
+  "distinct_business_event_ids": 1,
+  "conclusion": "at-least-once transport; metadata event_id is not server-side deduplication",
+  "required_adaptation": "durable inbox dedup at every business consumer; transport receipt/reconciliation before claiming stronger delivery"
+}

@@ -1,0 +1,16 @@
+gate,decision,evidence,remaining
+Architecture,CONTINUE_COMPONENT_APPROACH,DECISION.md,complete product contracts without reimplementing reused motors
+Workflow_owner,KEEP_LANGGRAPH,evidence/integration.json,distributed operations concurrency and cancellation in deployment
+Restore_freshness,PASS_LAB,evidence/integration.json,real source connectors authenticated complete inventory and distributed fencing
+Historical_effects,PASS_LOOKUP_ONLY_LAB,evidence/integration.json,real provider receipt semantics and retention
+Portuguese_generation,PASS_SMALL_7_CASES,evidence/model-evaluation.json,representative independent corpus and statistical acceptance
+Pretrained_embeddings,PASS_ISOLATED_6_QUERIES,evidence/pretrained-embedding.json,integration with LightRAG and real extraction
+LightRAG_semantic_path,NOT_QUALIFIED,DECISION.md,replace fixtures in integrated ingestion retrieval and test failure behavior
+Temporal_Graphiti,NOT_E2E_QUALIFIED,../production-readiness/GATES.csv,real temporal and contradictory episodes with actual database LLM and ACL
+Human_identity,LOCAL_PROTOCOL_ONLY,evidence/integration.json,corporate federation MFA TLS IdP revocation and JWKS rotation
+Sandbox_gateway,PASS_COMPONENT_LAB,evidence/sandbox-gateway.json,distributed durable capabilities actual MCP deployment secrets and output disk limits
+Money_cost,NOT_MEASURED,evidence/model-evaluation.json,provider attributable billing and total infrastructure operation expense
+Enterprise_capacity,NOT_QUALIFIED,evidence/integration.json,large dataset workload SLO backpressure quotas PITR failover and incident response
+Dependency_advisories,PARTIAL_NO_KNOWN_ALERTS,evidence/python-advisories.json,LightRAG unavailable version images frontend complete SBOM and source review
+Product_layer,NOT_IMPLEMENTED,DECISION.md,TypeScript product governance Chief of Staff adaptive A0-A4 teams hiring authority and functional JARVIS
+Production_release,NO_GO_THIS_BUILD,DECISION.md,all critical deployment and product gates must pass

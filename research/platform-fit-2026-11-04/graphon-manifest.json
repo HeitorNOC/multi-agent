@@ -1,0 +1,1778 @@
+{
+  "repo": "langgenius/graphon",
+  "sha": "4fa22141774dff80e90e4dfa98ea3e6fbf0421bb",
+  "url": "https://codeload.github.com/langgenius/graphon/zip/4fa22141774dff80e90e4dfa98ea3e6fbf0421bb",
+  "captured_utc": "2026-11-04T20:03:44.079146+00:00",
+  "archive_sha256": "5dc7c2713a3a780bd6d77daec723d403ed4690f813917de49d01e204e5e32dc8",
+  "archive_bytes": 813197,
+  "files": [
+    {
+      "path": ".github/dependabot.yml",
+      "sha256": "36fc06d2e685a630102acc57390d9dd05c4b01f37e49db3aba0e71016791a384"
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "sha256": "21dc81e405da412de0163ab82dd50934e164c0843e71944394f8e12a33177650"
+    },
+    {
+      "path": ".github/workflows/cla.yml",
+      "sha256": "17bdb4d292d3cba340b3957bbbfd05791070b780c186df7132d2678a58288f3c"
+    },
+    {
+      "path": ".github/workflows/pr.yml",
+      "sha256": "e0d838249a7e00c4e732b8cf5ab1902861319d12e85240442c9eb94921eac5a4"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "sha256": "7b2356853a6a3cd64e2d0ca12e24fda6a050fbf0be1eb65a6815f51599798b15"
+    },
+    {
+      "path": ".github/workflows/test.yml",
+      "sha256": "c8b3f7a2336a1df4ef0ee39c537fd4588f7f86a3286cf21f885aeafeab7d999c"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "89411dd39b1e69c6052bb4a40103684ca071cd11c5bc89373ffd6cd6cbfc1f15"
+    },
+    {
+      "path": ".python-version",
+      "sha256": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "00e4a4e55b55ae386572d7a353eef529a96f967b8065fd7159f97ad7bc850e0a"
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "sha256": "0912efc9fcf12065c4cb5be7912d00278d2715c9f2951322e82515798df1845a"
+    },
+    {
+      "path": "benchmarks/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/test_engine_performance.py",
+      "sha256": "1f7594e2bdb1cff077d93c507231da42eaa7606a0d54a5ebe021a63637110ae4"
+    },
+    {
+      "path": "CLA.md",
+      "sha256": "3cd03f9005cacdaef84e780e1ed1c41ef44cde88dd28b48c80eacadd00cb5900"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "14756258703ab444ec867304eac2db03ff10a34c1ccc243a4b99e7830f854c0d"
+    },
+    {
+      "path": "docs/development.md",
+      "sha256": "d845e99aa61ddd6378e15c6f22b625669562a741aaa6f2bef1823237a2cdd1c2"
+    },
+    {
+      "path": "docs/maintenance.md",
+      "sha256": "d47e805966e254b53b25cf270a580620bdbf4de819fb293f73d8c3e918d31b72"
+    },
+    {
+      "path": "docs/plans/execution-file-runtime.md",
+      "sha256": "e95d16b2ee93dd00b9a6ad0cfc94211be1b55fd299f3c83ad9641a12f097979c"
+    },
+    {
+      "path": "docs/plans/graph-validation.md",
+      "sha256": "cc1c57408cfb3fb8d20041a54aa8b0c9c1a1fd63132a14393fdfc40b0d4b2b6b"
+    },
+    {
+      "path": "docs/plans/runtime-import-boundaries.md",
+      "sha256": "c6704a7af51582cdca35768211ababe9c4052b239b595d98a29c7ac04bde2604"
+    },
+    {
+      "path": "docs/plans/snapshot-eligibility.md",
+      "sha256": "1f0d4318c8198be3f840764386ab12188d5eb9c986eab3eb7ddc55a5e142e4e8"
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "34779e864d210699a1926a518ae071b2f20ec9c60c056b4d22f8f2ac1e977f16"
+    },
+    {
+      "path": "docs/technical-debt.md",
+      "sha256": "3672b77fb6cb46befbc23bb500c92479e742bff3b82dfb94c3f37096db4131c8"
+    },
+    {
+      "path": "examples/__init__.py",
+      "sha256": "645da3773fafe83d0dc7e5c6b7b945a76a854a665fe6c8504b0ff3777da344bf"
+    },
+    {
+      "path": "examples/slim_llm/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "examples/slim_llm/code.py",
+      "sha256": "f00ed2bd4fa21d9e979d2d99f8a769584da627dbe82f3029f482136014e0da8f"
+    },
+    {
+      "path": "examples/slim_llm/credentials.example.json",
+      "sha256": "94ca6ff583b750f7f44ce292ad0dbf6f9da62d473a7f3f2d14f6631c9fe73c1e"
+    },
+    {
+      "path": "examples/slim_llm/dsl.py",
+      "sha256": "21bf0dcbe32722091d68ab4af8c8b9c01eb0ff84bf678ea1fe9b5040114eaec6"
+    },
+    {
+      "path": "examples/slim_llm/graph.yml",
+      "sha256": "1a90f3b05956c2aeb85179f6662a1d623a9e3459390b44bdfca84ea4035d71f4"
+    },
+    {
+      "path": "examples/slim_llm/README.md",
+      "sha256": "ce05b694dd9f3ff8de3b9917cf071031057e84d6062feca6a89437c098a28ec7"
+    },
+    {
+      "path": "examples/slim_llm/settings.py",
+      "sha256": "1e4c3acb59a123fb21904ef580731ee1ebf18a9cc7b1f185548ef5f740c8e356"
+    },
+    {
+      "path": "justfile",
+      "sha256": "4f694d12ac6d4d4e418dcf791f915eca1dd48db9f4663297b02919bb4f160637"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "f8afa52a6b3efa19703781efbcc3eb34880a61ac843c922ddcedb1e7a0d437d8"
+    },
+    {
+      "path": "prek.toml",
+      "sha256": "353c3f893f164cba247c9c2808aa0188bd670c10c8527a42d62ff5810cb0f72c"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "5eec1bffffc00079f1ea09fd67a3d8df947db9a44322cd1a42b41b8645f7329c"
+    },
+    {
+      "path": "README.md",
+      "sha256": "7096fe714970d48de3dfabff2483cd2e16382bf09427f5ed2f67221d28a4eb03"
+    },
+    {
+      "path": "src/graphon/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/dsl/__init__.py",
+      "sha256": "edd062d25ef5b2b61126396e5706a2e74c9a06256c28aba442d29b3e1d35f0a0"
+    },
+    {
+      "path": "src/graphon/dsl/code_runtime.py",
+      "sha256": "22f0c601cfb357d1928bc872ede9a052c91784ef16efbc28b9b08fcb42a47b07"
+    },
+    {
+      "path": "src/graphon/dsl/entities.py",
+      "sha256": "418ee6f0262f5ce791b0d4c854e496fb8dba3b678270827997229acf13535e4b"
+    },
+    {
+      "path": "src/graphon/dsl/errors.py",
+      "sha256": "206a4485f37fabc8cae2143e4f3440b9559c321488a7d789d75b08cf3aeda158"
+    },
+    {
+      "path": "src/graphon/dsl/importer.py",
+      "sha256": "422dc0d93fbf15567e366c94e06125cc795f191c97ac9a727a4d350f1df6d77f"
+    },
+    {
+      "path": "src/graphon/dsl/node_factory.py",
+      "sha256": "83738ea6ee4e7b44e1cc4b2bb9c6e68fc8cf8b163afbdf676176d3f26593815c"
+    },
+    {
+      "path": "src/graphon/dsl/slim/__init__.py",
+      "sha256": "2c8288710e57a8774a22c0d828217723318ae72af9d8f9818ccc9003eb7d91ef"
+    },
+    {
+      "path": "src/graphon/dsl/slim/client.py",
+      "sha256": "9f96603e2e5ee2c0242b56261f974a85f5253423b7e76aeaf5d3db6daf4c655b"
+    },
+    {
+      "path": "src/graphon/dsl/slim/config.py",
+      "sha256": "328389968470c4dc281c9850b0b7bbbc723160ef34bb95ec0548ad71fe89d15c"
+    },
+    {
+      "path": "src/graphon/dsl/slim/llm.py",
+      "sha256": "d054a56e426f5fdba4d13d4ca2e998886f7636f0b92a469f53b67b7ecd1ed1cc"
+    },
+    {
+      "path": "src/graphon/dsl/slim/package_loader.py",
+      "sha256": "591045b1924f491f9202f48597fb54c50306df5146a98d754bac4d16e3cc5df7"
+    },
+    {
+      "path": "src/graphon/dsl/tool_runtime.py",
+      "sha256": "4f3d823234195e627fa3526cee7cc97af26859ec4e61f6631b79840fa99e62aa"
+    },
+    {
+      "path": "src/graphon/engine/__init__.py",
+      "sha256": "d4f54c800031485e503bb205b091ab4cefe0c454aac2e16c454699f0ff3750fd"
+    },
+    {
+      "path": "src/graphon/engine/command/__init__.py",
+      "sha256": "985537d20a24f38e5fc93736c453420a9d668d6abd888c71d2a0e5abca1f599e"
+    },
+    {
+      "path": "src/graphon/engine/command/builtin/__init__.py",
+      "sha256": "bb39b8e6e8b5008cd974551563f10ffaf5d51999181e0afb5bbdfb0d13f8fa1e"
+    },
+    {
+      "path": "src/graphon/engine/command/builtin/in_memory.py",
+      "sha256": "a0c564a5f73c4bd7e299a861ae1d09ea259e15f8916cfee78df63ef0c4758396"
+    },
+    {
+      "path": "src/graphon/engine/command/builtin/redis.py",
+      "sha256": "50c29dd9d862c931bdc133ceb0b2abc6ca7cc7b06dab55bc6522da0d38a514a1"
+    },
+    {
+      "path": "src/graphon/engine/command/entities.py",
+      "sha256": "84cc21b33ab242636ecbb101cb56c1977bfc65240ab8ae297a905cb21841f5b3"
+    },
+    {
+      "path": "src/graphon/engine/command/processor.py",
+      "sha256": "da5f00c93fa98fab9d9bb4605fd7e31a576d6615bb6fda2edc238fbbdac42009"
+    },
+    {
+      "path": "src/graphon/engine/command/protocol.py",
+      "sha256": "d2f1dc53bcd79bb5b4535dcb9beab3a3c3c4cb3fcddf4cecf868c1835ffc8650"
+    },
+    {
+      "path": "src/graphon/engine/command/README.md",
+      "sha256": "68d0a2a705b6e184354cbc27a255d36f2c0acfcca20b89534118f53d1dce0d7e"
+    },
+    {
+      "path": "src/graphon/engine/container_handler/__init__.py",
+      "sha256": "2c54d06c54c71e1bc5a0aadfcfc50a57a49e189e707d02acc777a122b2ab3ea1"
+    },
+    {
+      "path": "src/graphon/engine/container_handler/builtin/__init__.py",
+      "sha256": "f60969333059a92198e04edd8cb67f3e6808684b079bb5111ae50f494bb793f5"
+    },
+    {
+      "path": "src/graphon/engine/container_handler/builtin/iteration.py",
+      "sha256": "f9c7f327c7245cedf66be72c5be34c986051d2e5a824abd9b8bac03653565f50"
+    },
+    {
+      "path": "src/graphon/engine/container_handler/builtin/loop.py",
+      "sha256": "93377ba70ddbd216165aca91161a5757e70b6b41cbad0fb976e934efdaa7080e"
+    },
+    {
+      "path": "src/graphon/engine/container_handler/container_handler_factory.py",
+      "sha256": "ebf2d17beb606a5852ea02aca78c4ac731eebefbc7b5892b8d651fc2bad81f4e"
+    },
+    {
+      "path": "src/graphon/engine/container_handler/protocol.py",
+      "sha256": "1d1baafd16b5c01b354a2b8f5798047328bb2fc33de075328e5d0444f5a942ee"
+    },
+    {
+      "path": "src/graphon/engine/dispatcher.py",
+      "sha256": "3760682c2d57bc98db43ef489f29cc5e79092976d96a6135815f8b6ce860e2ad"
+    },
+    {
+      "path": "src/graphon/engine/engine.py",
+      "sha256": "8fd4c2bfc71085c00de88eb809b4e568cb2124d2f484ed3973dcef812cafb215"
+    },
+    {
+      "path": "src/graphon/engine/event/__init__.py",
+      "sha256": "51cb67c53ad1911b06bc0cc93e12d3ef07e0c4a4334bbe39df8ed3781687e651"
+    },
+    {
+      "path": "src/graphon/engine/event/node_failure.py",
+      "sha256": "c0c69d73b439427c45aa3fd57f7850d95a080be6b870ea9855361b050065efc0"
+    },
+    {
+      "path": "src/graphon/engine/event/processor.py",
+      "sha256": "53794150e71e185b88690865fe3b0ac7f0d7e7a59e422d89f1961a42083876f2"
+    },
+    {
+      "path": "src/graphon/engine/event/stream.py",
+      "sha256": "a6ffb39fc87a1f3dcc3fb2c391da23699611ca2d5dca4e8c0ae52a52dffb327f"
+    },
+    {
+      "path": "src/graphon/engine/filter/__init__.py",
+      "sha256": "57e70ce140cfbc6e079252261a1e5bd0207957e8bbba6c3d40308728c43d6a04"
+    },
+    {
+      "path": "src/graphon/engine/filter/builtin/__init__.py",
+      "sha256": "f30662a9cb993434894d0d17c3e0e4dcfecc3a3648ea75d636478fe8bff5559a"
+    },
+    {
+      "path": "src/graphon/engine/filter/builtin/response_stream/__init__.py",
+      "sha256": "a06a68a0a6a5a5e09f413d0dbbfa6e95fd08ba5421e7d9a60c5a3ad2a35cd8ab"
+    },
+    {
+      "path": "src/graphon/engine/filter/builtin/response_stream/filter.py",
+      "sha256": "21312f32d4864699007f23c3026e981e111a1416671f31111846e96e09357b33"
+    },
+    {
+      "path": "src/graphon/engine/filter/builtin/response_stream/snapshot.py",
+      "sha256": "0db729150cf93da333cdb9a2a78f3a0d6e2acbea6956557f7f42b44813328472"
+    },
+    {
+      "path": "src/graphon/engine/filter/builtin/response_stream/v1.py",
+      "sha256": "ebe0e46c64d581f6321c98c18baaa7ec7e1846612d637850278b4656449c7c0a"
+    },
+    {
+      "path": "src/graphon/engine/filter/builtin/response_stream/v2.py",
+      "sha256": "c1053e3f7803d3c5df728ba1b4d1e72bdf403926fce424f871679a92d6ce829d"
+    },
+    {
+      "path": "src/graphon/engine/filter/chain.py",
+      "sha256": "3a056ee26f5eaf7f507d9e56ec285ab0ddac64988f0c9d93a09f8b6c9021c4fc"
+    },
+    {
+      "path": "src/graphon/engine/filter/protocol.py",
+      "sha256": "cfac83cf3d56ebd6001ba3a85d13f9734f97343c0bf5decab7a27394614f403f"
+    },
+    {
+      "path": "src/graphon/engine/frame.py",
+      "sha256": "dad90e577d7ec842a42c7c6d3777864e0493eb2ca5e055be9cb68b6a1d906800"
+    },
+    {
+      "path": "src/graphon/engine/layer/__init__.py",
+      "sha256": "8fa5c3f3aa01963969e45ea28e03d7596a92df989ef94dda9f5ccddae52a5c3d"
+    },
+    {
+      "path": "src/graphon/engine/layer/base.py",
+      "sha256": "872750e7511bc85afacc4b2e3c6d17c1c8bc8995970800f37f30f3ff35746a03"
+    },
+    {
+      "path": "src/graphon/engine/layer/builtin/__init__.py",
+      "sha256": "39b69063a80826c69d293d6e3de8a70eb8e57cfa1a33af083cc6c130bb217d7a"
+    },
+    {
+      "path": "src/graphon/engine/layer/builtin/execution_limits.py",
+      "sha256": "4e6d3b7b3e29b26403179121383e399243a3a9d2015e616b0964f3a3956097bb"
+    },
+    {
+      "path": "src/graphon/engine/layer/README.md",
+      "sha256": "6891dbbd15642065bb949dee9fa858dd628bc0ad69aecd30f50b7f55dddfcfa8"
+    },
+    {
+      "path": "src/graphon/engine/ready_queue/__init__.py",
+      "sha256": "5e6e76bf669bb0450e9e3e5fa4f20bb83bd2113ad5e9959a991c402eb54738eb"
+    },
+    {
+      "path": "src/graphon/engine/ready_queue/entities.py",
+      "sha256": "7ae55e7bc98a7cadfe323f97f4d53ffccbedd985cb86b042a03d432d033fc8cb"
+    },
+    {
+      "path": "src/graphon/engine/ready_queue/in_memory.py",
+      "sha256": "37ad5a2be899d2bc85ad344fe4a8ab030569874c9a7af40abed1efeb6264cb75"
+    },
+    {
+      "path": "src/graphon/engine/scheduler.py",
+      "sha256": "e54b6185bf525632117d414250b77c4f94d68e09fd4bf7cf75ac19644d95f6f3"
+    },
+    {
+      "path": "src/graphon/engine/worker/__init__.py",
+      "sha256": "ea8615fee09047968da1deb595ab6e6ef4d2d700a4f7d16e318a9fa510ac8b9d"
+    },
+    {
+      "path": "src/graphon/engine/worker/worker.py",
+      "sha256": "4a8c6a243137d9a996db4939022353be26ee050a8c4f4ff362a0cfa9cef89c54"
+    },
+    {
+      "path": "src/graphon/engine/worker/worker_pool.py",
+      "sha256": "dbc610eafafc0a7a26a8f27dd366e3563514552466978723d9b2440bb8a2a111"
+    },
+    {
+      "path": "src/graphon/engine_events/__init__.py",
+      "sha256": "40d329c036b643c188643ef1cb46db2cf8698392af8eb5c52644c041f4e6ddbc"
+    },
+    {
+      "path": "src/graphon/engine_events/agent.py",
+      "sha256": "0c65e3e426c0ab69fb804bc5246eb77c8f65132a434db68930ec5d035d34e1a5"
+    },
+    {
+      "path": "src/graphon/engine_events/base.py",
+      "sha256": "44ef1f012395cefcaa81ae8b4661f9887618825939baacee87724249ce0fa925"
+    },
+    {
+      "path": "src/graphon/engine_events/graph.py",
+      "sha256": "9b517b658d74c3b22b4865f77aa5ad56e14f36551e5137292151c63753c0e040"
+    },
+    {
+      "path": "src/graphon/engine_events/iteration.py",
+      "sha256": "d8a863ef91ac13c00670572bf216ad0e7e0a603c8a6fe589c9b23bb44362d17a"
+    },
+    {
+      "path": "src/graphon/engine_events/loop.py",
+      "sha256": "8b0d7f75aeab941b1a207cc2da24d939f129c6bcf3caa9c316fd87001240fed2"
+    },
+    {
+      "path": "src/graphon/engine_events/node.py",
+      "sha256": "0289849dc4cc50a1ebde24ccee4f37caf90ee2a18f7ec7a4544d38a429743d27"
+    },
+    {
+      "path": "src/graphon/engine_events/traversal.py",
+      "sha256": "58f8358f4358dc47c712f406c50d2366a2ccfea890a92c5733a93561f7d91178"
+    },
+    {
+      "path": "src/graphon/entities/__init__.py",
+      "sha256": "a2a3bf4b1a78697bc0b90ff7841633bd681368225df0454d68c107af174c8af1"
+    },
+    {
+      "path": "src/graphon/entities/base_node_data.py",
+      "sha256": "5879c1e05a108c57c8fd65847772643bb75e55f62e2551e929699b240fcb697e"
+    },
+    {
+      "path": "src/graphon/entities/exc.py",
+      "sha256": "df6e1d16cb3958fda697b51691a25bd2bb23b00d0529434cf10dbedeb12c29be"
+    },
+    {
+      "path": "src/graphon/entities/graph_config.py",
+      "sha256": "68b0aa4a997cb2ea3ce79ffb0f7a22bc63cf3170fdc500c69708507f1ab333bb"
+    },
+    {
+      "path": "src/graphon/entities/pause_reason.py",
+      "sha256": "6c671eb1423681e9857f2b9a29b2424a7fcde8c3b94eed3abe7f949d35793079"
+    },
+    {
+      "path": "src/graphon/entities/workflow_execution.py",
+      "sha256": "ee23ff4ca19b3073de36a46791c057cdfe3474c657225ee27285841964348716"
+    },
+    {
+      "path": "src/graphon/entities/workflow_node_execution.py",
+      "sha256": "d82521441dc8650270dd4eee54b2a9ce521babb9bee2fe212b90534ff719a1db"
+    },
+    {
+      "path": "src/graphon/entities/workflow_start_reason.py",
+      "sha256": "ab4e7b2ca8677c542e6425949ac48d07e51f3d2917b3cab4c7b6c23fd671bc6b"
+    },
+    {
+      "path": "src/graphon/enums.py",
+      "sha256": "abc339f62186008748a421dc79085f1b8baa0ef46915059a20539716e0df1504"
+    },
+    {
+      "path": "src/graphon/errors.py",
+      "sha256": "a15b0bb964128147cc3221f79376bc4ef66184b60cc14dab62a4b3e62dca8137"
+    },
+    {
+      "path": "src/graphon/file/__init__.py",
+      "sha256": "dd19c56dbdc6aae7cdbf668974594d244854078333c3c87d7b3f6270b7d5e011"
+    },
+    {
+      "path": "src/graphon/file/constants.py",
+      "sha256": "c279e651758b9fb8c79fcf75bec58a8c4f67e07ac4d34b2a4dd9feac9e19bee9"
+    },
+    {
+      "path": "src/graphon/file/enums.py",
+      "sha256": "95d6fb9bb857368d092320e1288a4bb4d62bfccfefb333167a2621a599918794"
+    },
+    {
+      "path": "src/graphon/file/file_factory.py",
+      "sha256": "acfda753f71ee18f29e75de01a299fda6c8f44af318594607134024dab9d863a"
+    },
+    {
+      "path": "src/graphon/file/file_manager.py",
+      "sha256": "ae43a4c30eaa04d9ae77381e61d93aa553cc4ead3c3406ad02394854a04627af"
+    },
+    {
+      "path": "src/graphon/file/helpers.py",
+      "sha256": "8c5b9308c19d044aab09f269f0dad8db3ff16fdc3191810c3a99485b4989444c"
+    },
+    {
+      "path": "src/graphon/file/models.py",
+      "sha256": "24a74a8ef0fe05cdb427acaaedb05a51c9230ab758124f0f7a00a9328ce5e612"
+    },
+    {
+      "path": "src/graphon/file/protocols.py",
+      "sha256": "fb7025700c6f14f0d74913bf11af9844e48df639e9aa17c6408e32e64725d628"
+    },
+    {
+      "path": "src/graphon/file/runtime.py",
+      "sha256": "716fe0fef5e4360d9332f4e1daaf9d9aeb30db6b7741c90da702b3106e70b70b"
+    },
+    {
+      "path": "src/graphon/file/tool_file_parser.py",
+      "sha256": "cc43e2eb6aee4a93fcadb6581e06a7b53135ffea7af234ec1ec37a3e7cd7d59c"
+    },
+    {
+      "path": "src/graphon/graph/__init__.py",
+      "sha256": "9245ed78debdcd3476f6d4a3c6e4376d9cf261ac825eb547336b3aa9b4798b52"
+    },
+    {
+      "path": "src/graphon/graph/edge.py",
+      "sha256": "f16997796e5acb1ecfeaa5ff071289a24b55ede3849f1ee409d92f719e0afec4"
+    },
+    {
+      "path": "src/graphon/graph/graph.py",
+      "sha256": "d27edf7d92cb1ee4d0854f825c5508d1d67239d189f1a193b2d5e87317842fb0"
+    },
+    {
+      "path": "src/graphon/graph/graph_template.py",
+      "sha256": "f92bdbe66d526a54c09ad2e74b5d029b32b0990edd06d5a85c2ae76d2084cfff"
+    },
+    {
+      "path": "src/graphon/graph/scoping.py",
+      "sha256": "49405b4b91b1167ac7e98fdbff5e982b21ab446d28fb712a30bdeb9322087b35"
+    },
+    {
+      "path": "src/graphon/graph/validation.py",
+      "sha256": "3fbb0b626cd2421987dab5fb605c70c562936f8258ec4ee7d4fcd92a26a11986"
+    },
+    {
+      "path": "src/graphon/http/__init__.py",
+      "sha256": "83af268d959f6bc532264f34056175dcbab2885622a417809365d1284808d838"
+    },
+    {
+      "path": "src/graphon/http/client.py",
+      "sha256": "5d2f5de9fe5cb50df546d256b5f3ab5e3a6af557d3516667814d346ea74c4dc8"
+    },
+    {
+      "path": "src/graphon/http/protocols.py",
+      "sha256": "168f60141e2e337780dec78b195c443d0ac388ad274a9dc842c2b21a19cef9ba"
+    },
+    {
+      "path": "src/graphon/http/response.py",
+      "sha256": "cec3c0659bf2c27bb1ad41aa7a12158c0e32480438eae6d44e635052edc06de5"
+    },
+    {
+      "path": "src/graphon/model_runtime/__init__.py",
+      "sha256": "3c25798e1ed1858a4f1d58a8cdc0321b82dd321dddd53c3d67413a5747e81ad8"
+    },
+    {
+      "path": "src/graphon/model_runtime/callbacks/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/model_runtime/callbacks/base_callback.py",
+      "sha256": "cc210383eda2fbe49c73387cb51241aea6bcd60d8fb71322aec7a97567b0aa46"
+    },
+    {
+      "path": "src/graphon/model_runtime/callbacks/logging_callback.py",
+      "sha256": "6df7b13b6e7754afd29630ef8a45516b3d98560c8edc33e7bd91a20e2ccf341e"
+    },
+    {
+      "path": "src/graphon/model_runtime/entities/__init__.py",
+      "sha256": "54596768810d089f17638e288aa2e6a0099349c2ac3cee1e0b03598a96014340"
+    },
+    {
+      "path": "src/graphon/model_runtime/entities/common_entities.py",
+      "sha256": "cac05f8c206cc43f2d7f44dc75dd1e45a1312a74818de858c9d71dddd1d48bd3"
+    },
+    {
+      "path": "src/graphon/model_runtime/entities/defaults.py",
+      "sha256": "3215e62a8e76b54fd336847ad261038d207df5d680c9a5c28fafad55d90373cf"
+    },
+    {
+      "path": "src/graphon/model_runtime/entities/llm_entities.py",
+      "sha256": "3d679e2686b41feb658f6f968b40e993c892ed28385605e93ca14f031158506c"
+    },
+    {
+      "path": "src/graphon/model_runtime/entities/message_entities.py",
+      "sha256": "f911cb3f91707bb48b374c62994c3b3937befae8179418bde27a877f65248f1a"
+    },
+    {
+      "path": "src/graphon/model_runtime/entities/model_entities.py",
+      "sha256": "c11f6dac3d90e7fd16b06383c89aede0bc9e4e48f1e89857b1c57e54df3e9ed3"
+    },
+    {
+      "path": "src/graphon/model_runtime/entities/provider_entities.py",
+      "sha256": "e93497494991aee0ad66bb3f7d555d0f0198d908cc2b32d0d4a2281476995d4a"
+    },
+    {
+      "path": "src/graphon/model_runtime/entities/rerank_entities.py",
+      "sha256": "cb8e9adbeccb0f13dc6dd9dd3c4f3f28a8782d1fe7d4ba955de1131f71eca73b"
+    },
+    {
+      "path": "src/graphon/model_runtime/entities/text_embedding_entities.py",
+      "sha256": "8ada9c4a7af7c3eb751724bb4d7599b307ee0caf774837744e780440153a3f9d"
+    },
+    {
+      "path": "src/graphon/model_runtime/errors/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/model_runtime/errors/invoke.py",
+      "sha256": "bbf05cd87567658e3b3c4f0b3190c74d06d021f998d05de9e40e4cc589f0063c"
+    },
+    {
+      "path": "src/graphon/model_runtime/errors/validate.py",
+      "sha256": "db84ccef40cca7b8dfd57c6f25202c9e5b4cec7ea87ed52f306236a4314026e7"
+    },
+    {
+      "path": "src/graphon/model_runtime/memory/__init__.py",
+      "sha256": "396be536baec097251c21757eeeafa880b3e2d8e1da541cfb76c9bd1740513b4"
+    },
+    {
+      "path": "src/graphon/model_runtime/memory/prompt_message_memory.py",
+      "sha256": "85d6e502903fcc924a75ee3ea209cf79d17f646dc8877a3196effe129d42ed81"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/_position.yaml",
+      "sha256": "bc59a7390b576966950674c7cfa61d656decf7dbdf978f6ff081dad8aeced574"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/ai_model.py",
+      "sha256": "fbb26f78931e8bf695365d6f8b294bf3631a42511e42dadf871a42cd7082e3c7"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/large_language_model.py",
+      "sha256": "7f8add5d612507fa78e1ab9eef4e38a449f27f5f41172b71a3fe79ab8b936840"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/moderation_model.py",
+      "sha256": "1632604909248dd86b692a613830ec7f1a4a2a4fceaf2f89c3eaf94029494f0a"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/rerank_model.py",
+      "sha256": "105121f464ac6e4d9c3c592c6b00061dce2b40abafa2001986feded92ad848d0"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/speech2text_model.py",
+      "sha256": "f6e38ebe9d138c3197e2e58f80825bf0b04b5e92235f80a3a300490f6611fc7c"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/text_embedding_model.py",
+      "sha256": "014c251e31eb6e2ff5bab13a83618979ec56263c43948430439d04e0c600002b"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/tokenizers/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/tokenizers/gpt2_tokenizer.py",
+      "sha256": "8f2797352c5419527f4d247237a219e2aa2e579f0881affad06eff572e3e8e8f"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/base/tts_model.py",
+      "sha256": "867dfbc0ceb7a000b6492eca715d858c6d95ba5fb9eb2c5715a0563c40b92dd6"
+    },
+    {
+      "path": "src/graphon/model_runtime/model_providers/model_provider_factory.py",
+      "sha256": "9e335821370a52ab30474ca3705a86bf5ed6b72088be949072f228d13fd7b419"
+    },
+    {
+      "path": "src/graphon/model_runtime/protocols/__init__.py",
+      "sha256": "1aa467023d22fd88f9b71bed070793dc6f5cd2f3a820c3b97da6c09824680bbd"
+    },
+    {
+      "path": "src/graphon/model_runtime/protocols/llm_runtime.py",
+      "sha256": "c8f5b6914d24194b869df5c496268f971a6238d9322e6371cf45594f4c8a02bd"
+    },
+    {
+      "path": "src/graphon/model_runtime/protocols/moderation_runtime.py",
+      "sha256": "bd4a54810f838951ebf66e0cb5cc40518d0755f5ed2fee2b779bd616b27244a6"
+    },
+    {
+      "path": "src/graphon/model_runtime/protocols/provider_runtime.py",
+      "sha256": "a80e3ad7007d79172c5491cc5d1b16439d7e2048db7b36f59612b6dfdbfc1ae7"
+    },
+    {
+      "path": "src/graphon/model_runtime/protocols/rerank_runtime.py",
+      "sha256": "91024004bf68d2c1464b019d9134369017747d9ba0a06264c6a89cdfc3c444f1"
+    },
+    {
+      "path": "src/graphon/model_runtime/protocols/runtime.py",
+      "sha256": "da50a7df1eef622c876e4e1fdfd6cfec75884ab3649bc25dcde58a25bcd7ca9a"
+    },
+    {
+      "path": "src/graphon/model_runtime/protocols/speech_to_text_runtime.py",
+      "sha256": "116255dcc7d905f64a08cbffcd7156ccb62f2003131141e50d415d160818ec41"
+    },
+    {
+      "path": "src/graphon/model_runtime/protocols/text_embedding_runtime.py",
+      "sha256": "843bc901eab63a25b32b2a8887cfc4ef0457e03073a98ac591190a40e33dfe76"
+    },
+    {
+      "path": "src/graphon/model_runtime/protocols/tts_runtime.py",
+      "sha256": "8ddfb54da2fb59e9c129f8990a37b542d2edbcfa70230120b14b1af7744cfa6a"
+    },
+    {
+      "path": "src/graphon/model_runtime/README.md",
+      "sha256": "ee44671b4c471357da9c4731f674490cf2c2bdf46792af01ad067ce5c7e8d705"
+    },
+    {
+      "path": "src/graphon/model_runtime/schema_validators/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/model_runtime/schema_validators/common_validator.py",
+      "sha256": "b288d1cce5ab3245e0419c4a72fca9a18fa426d63540c9e474f037ce46009be7"
+    },
+    {
+      "path": "src/graphon/model_runtime/schema_validators/model_credential_schema_validator.py",
+      "sha256": "028d1668886b63bd6d42f1892f41aecab249f0f45eeb7606d722fe9751d35aa8"
+    },
+    {
+      "path": "src/graphon/model_runtime/schema_validators/provider_credential_schema_validator.py",
+      "sha256": "d68ea59ba5dec31f22ff61a30ff1e5dffee1c2cfaa2948f099aac2b04142fc57"
+    },
+    {
+      "path": "src/graphon/model_runtime/utils/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/model_runtime/utils/encoders.py",
+      "sha256": "f1719bd9d0b06170c6a000cde5d70f8279c36ca28ef1377a7200e5e21d2582ed"
+    },
+    {
+      "path": "src/graphon/node_events/__init__.py",
+      "sha256": "843c01d97e52f0c0a505c84b32e7a40f054a398006b44f69ddfd494238e21865"
+    },
+    {
+      "path": "src/graphon/node_events/agent.py",
+      "sha256": "8aaaed9dc49e079e7851765552fcceb4895899d4ff70d5ea36ed29a01829641d"
+    },
+    {
+      "path": "src/graphon/node_events/base.py",
+      "sha256": "c239891de824561e24049f71d10bdf36097a04dbd15e0378e884beda645b4a42"
+    },
+    {
+      "path": "src/graphon/node_events/iteration.py",
+      "sha256": "e00634d07cef2db803c0f1e56b096d170a232bfb052c0456304782a7b7e09223"
+    },
+    {
+      "path": "src/graphon/node_events/loop.py",
+      "sha256": "9c4b323911885a0137b79c926fbc6aac4e0b27885813bd060e3146345b8565e0"
+    },
+    {
+      "path": "src/graphon/node_events/node.py",
+      "sha256": "04138d104cb258f2c422f29fdafc98f01faf97f98c0d2b3e15c839b3560d2456"
+    },
+    {
+      "path": "src/graphon/nodes/__init__.py",
+      "sha256": "1723542c38d6bd73e850ac8c59b57fad1bdaf05e556965eabb7762350715a365"
+    },
+    {
+      "path": "src/graphon/nodes/answer/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/nodes/answer/answer_node.py",
+      "sha256": "9b3cf1e203d8b9f497637e327bde5d05721b818a17a866d6b5535593f929c98f"
+    },
+    {
+      "path": "src/graphon/nodes/answer/entities.py",
+      "sha256": "883979ac8f169526f247549fbfebb7673addc1715d1ae99ab34ff4fa99fce592"
+    },
+    {
+      "path": "src/graphon/nodes/base/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/nodes/base/entities.py",
+      "sha256": "da36ddf25c92d5b436313c9d84afc02376b70a3a2d0661dfd273ddb13c03c028"
+    },
+    {
+      "path": "src/graphon/nodes/base/node.py",
+      "sha256": "9d2fb853b345e3fd005f329a7b45b5a7903c3dd8b05fc91ad4d6ed731b266ff5"
+    },
+    {
+      "path": "src/graphon/nodes/base/template.py",
+      "sha256": "cde69ac85beacd8793c664efb867bb08edae108c02c0f8e4b03ded318a713ac0"
+    },
+    {
+      "path": "src/graphon/nodes/base/variable_template_parser.py",
+      "sha256": "83c5e2416b8f237ac84c968d054ab51e739f132232cceabe1b59684b541aeebf"
+    },
+    {
+      "path": "src/graphon/nodes/code/__init__.py",
+      "sha256": "34c2addfe2ba4c308de243b1bb63054b238f8bcc43c87327ee95c474c57021e1"
+    },
+    {
+      "path": "src/graphon/nodes/code/code_node.py",
+      "sha256": "af42e22566b462abb097b1c823d67b8415fc55086e6a3ccb20fd6e0ad7dcd49c"
+    },
+    {
+      "path": "src/graphon/nodes/code/entities.py",
+      "sha256": "0e9096818363cf8e0dc61042afe1e49274f1d89b628252f2240f843b4d02ad83"
+    },
+    {
+      "path": "src/graphon/nodes/code/exc.py",
+      "sha256": "1fb1ee370e89480725444e91fd73a3993f168c48f150573568957dc49096323d"
+    },
+    {
+      "path": "src/graphon/nodes/code/limits.py",
+      "sha256": "d6759a24ab0e95170a4b390612febc1ec1dff3bc76f649655dfc4a7ef29e4e45"
+    },
+    {
+      "path": "src/graphon/nodes/code/protocols.py",
+      "sha256": "ea95932be295896a8d4d9c4e7e28b662f17e6e4d0f55c2d4cfa5ad56ee41b00a"
+    },
+    {
+      "path": "src/graphon/nodes/container_effects.py",
+      "sha256": "f41b2013b095a95b8fb632187499682402583ff344944429186661e212fdcf60"
+    },
+    {
+      "path": "src/graphon/nodes/document_extractor/__init__.py",
+      "sha256": "28c9daa3a7c121bd323c67b68087fafc30ed7f195a911ddc7a413dfdcff2e204"
+    },
+    {
+      "path": "src/graphon/nodes/document_extractor/entities.py",
+      "sha256": "12b4933a7b1390909eb3460a366e1a96638363cd82041d7ced476d7d0a9d03a9"
+    },
+    {
+      "path": "src/graphon/nodes/document_extractor/exc.py",
+      "sha256": "3f8acf0183c2b6b069573d699c5fa96444e5cd63531e10bfa012df6bf098527d"
+    },
+    {
+      "path": "src/graphon/nodes/document_extractor/node.py",
+      "sha256": "052f506d9baf3d61ae8da994a8deae56835a3982d7f249efdd79c5044468511f"
+    },
+    {
+      "path": "src/graphon/nodes/end/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/nodes/end/end_node.py",
+      "sha256": "82cb3327bb49c77927a8983695fb75ad89b13c1521988b86b1f7db124f8ae859"
+    },
+    {
+      "path": "src/graphon/nodes/end/entities.py",
+      "sha256": "1449ecc34ef0e385d9f01ada85d182c4294b96723bb781e56c178ff60cdc71cb"
+    },
+    {
+      "path": "src/graphon/nodes/http_request/__init__.py",
+      "sha256": "57964b3736cc18efecb04e231b73257fc1fbd7099180023d1e889f9dbf54df93"
+    },
+    {
+      "path": "src/graphon/nodes/http_request/config.py",
+      "sha256": "012d58683f2943dbf794c341af8ce499ebb9f5a655c7f02159f101fe9d7b3954"
+    },
+    {
+      "path": "src/graphon/nodes/http_request/entities.py",
+      "sha256": "e1e538c6ba3c4f63139ffd67d4b9a8de5e12c3392a5c589d5c2c13aeab266b3d"
+    },
+    {
+      "path": "src/graphon/nodes/http_request/exc.py",
+      "sha256": "b9e33ae1f20bb068902d35a3a9f6826dd8d280af44436584c49bbc6d52d35e8f"
+    },
+    {
+      "path": "src/graphon/nodes/http_request/executor.py",
+      "sha256": "3b5690181220e103a4687b7357a0c2acf35004c68300ab04acb444b27e1bac59"
+    },
+    {
+      "path": "src/graphon/nodes/http_request/node.py",
+      "sha256": "a300c048b29ab13081359c909f10bea4324a5f02ce08a4c02e3b37909b7f36be"
+    },
+    {
+      "path": "src/graphon/nodes/human_input/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/nodes/human_input/entities.py",
+      "sha256": "77d247d2df068f244655a1e8b503e8d58002cf37c21a75a59988145213a2865d"
+    },
+    {
+      "path": "src/graphon/nodes/human_input/human_input_node.py",
+      "sha256": "cb765462c7a86dae6dc39cfe729596048f8bd229edbcae5837eb4fc022d4cbd5"
+    },
+    {
+      "path": "src/graphon/nodes/if_else/__init__.py",
+      "sha256": "f10057bab0a575424559f2a0ee2aff2cdf3f0198e78705298a3f79aa2385c494"
+    },
+    {
+      "path": "src/graphon/nodes/if_else/entities.py",
+      "sha256": "54235da52ffdcbffb0592a91213eaf7204b8134f3872ced7ca8e1788ee10efde"
+    },
+    {
+      "path": "src/graphon/nodes/if_else/if_else_node.py",
+      "sha256": "f0463ea0a5dc2fa1a2cbabdeaedcfa8df6970fe2ff2750296f23694a76d4af4f"
+    },
+    {
+      "path": "src/graphon/nodes/iteration/__init__.py",
+      "sha256": "1a0ac9e13ea74f12cdac9ade2b0e4c00af26e396d950ee1aa7a6ed9b996963af"
+    },
+    {
+      "path": "src/graphon/nodes/iteration/entities.py",
+      "sha256": "e945e874e36c71034f847063f023036cace627857d6e1db7debd2d11be0224fd"
+    },
+    {
+      "path": "src/graphon/nodes/iteration/iteration_node.py",
+      "sha256": "4d04b2101fcd51b11a2fa9025bdc3f3b9a177fdcc4468a434ab47252e74eeccc"
+    },
+    {
+      "path": "src/graphon/nodes/iteration/iteration_start_node.py",
+      "sha256": "88acebc18788ee5995e091df6fd7d30eb49d0dc54896ff499657fca22a706979"
+    },
+    {
+      "path": "src/graphon/nodes/list_operator/__init__.py",
+      "sha256": "9b4748d64b7023ee93dbe22f7231c395af5eae77a501f40cefc0a0d7c89a6b58"
+    },
+    {
+      "path": "src/graphon/nodes/list_operator/entities.py",
+      "sha256": "8aaae25cc04ae9f246ddd7f24baa0fa61056c1715d31bcfbbe51d0c7d7d08cfd"
+    },
+    {
+      "path": "src/graphon/nodes/list_operator/exc.py",
+      "sha256": "372e499969404dba428e3b55b23a33ca47b03b02a4e2a0f9fa8c701ba105d007"
+    },
+    {
+      "path": "src/graphon/nodes/list_operator/node.py",
+      "sha256": "cca4b5bdd4203c26e3d09f9f655814112a5be4d08710057f219d8a54241943a3"
+    },
+    {
+      "path": "src/graphon/nodes/llm/__init__.py",
+      "sha256": "2baf41670e3ae1d357f92f73137395b060b4ca8c00f4e40bd6889c37f72d1737"
+    },
+    {
+      "path": "src/graphon/nodes/llm/entities.py",
+      "sha256": "fa9188209d439f250438822639ce398c9c4d41f40db5ec12cbbb49c78f75c07c"
+    },
+    {
+      "path": "src/graphon/nodes/llm/exc.py",
+      "sha256": "07a695d313d1bca10296fc0e759e17f2ddcb4e58926a6806e70c233b4e9bc082"
+    },
+    {
+      "path": "src/graphon/nodes/llm/file_saver.py",
+      "sha256": "2ebe886acfe7d1348154a3d0545275a6ba7187c1d768663c61fbdd427204c0c6"
+    },
+    {
+      "path": "src/graphon/nodes/llm/llm_utils.py",
+      "sha256": "c2872032bd27203252b229daf51314091755c65c4f8670e6acada217d7ffab33"
+    },
+    {
+      "path": "src/graphon/nodes/llm/node.py",
+      "sha256": "52c244bb7943acb2a06b6ceaa2e44f24192486c7f3b1cc290c40477378d858da"
+    },
+    {
+      "path": "src/graphon/nodes/llm/protocols.py",
+      "sha256": "0bbb85cb1185584882a3544f6db1f4ec3122047b4636092e0bf6c1110f40c0b6"
+    },
+    {
+      "path": "src/graphon/nodes/llm/reasoning.py",
+      "sha256": "7190062b745f32f9af0b265272e6cf24d22bb64fd8eaa62e6afef81c6cc13788"
+    },
+    {
+      "path": "src/graphon/nodes/llm/runtime_protocols.py",
+      "sha256": "8419999feca2a9cdc334404ed398b888bed0bef25d404959635bc115587f3f42"
+    },
+    {
+      "path": "src/graphon/nodes/loop/__init__.py",
+      "sha256": "a6e4d7af24fabff5c6e5d81c8bedaa8d8f4c09e967a43b16d5e96f861f2b92ae"
+    },
+    {
+      "path": "src/graphon/nodes/loop/entities.py",
+      "sha256": "2e53b3cb3deebe986ec92d20916bc171e42943fc440c51b84c2812c05e8da655"
+    },
+    {
+      "path": "src/graphon/nodes/loop/loop_end_node.py",
+      "sha256": "602ddf1cd8b61935ad66e6b8127166700255e862d70b35fd169b7bcadafebfe5"
+    },
+    {
+      "path": "src/graphon/nodes/loop/loop_node.py",
+      "sha256": "5956953a4d784d805a0c252f726d9bc14bc84b3ae3573c6799776771fefb00da"
+    },
+    {
+      "path": "src/graphon/nodes/loop/loop_start_node.py",
+      "sha256": "0980dfb7fb1519c11c426fea3579c162a33f4afa8e5767cd3f43a6d6e4b244d1"
+    },
+    {
+      "path": "src/graphon/nodes/parameter_extractor/__init__.py",
+      "sha256": "a8fc1badfedbcc1c98939ddfcf072f92ef344688689420d100d57c8b5ce95805"
+    },
+    {
+      "path": "src/graphon/nodes/parameter_extractor/entities.py",
+      "sha256": "b3f8a69a3fe8d2eea57f0d223e0b887f3e6ca606cafd74d1d88b7d16d97a3a3f"
+    },
+    {
+      "path": "src/graphon/nodes/parameter_extractor/exc.py",
+      "sha256": "9428f70e26ac88caec9021683d8fd3232d660e4655531cc4cffb5bae9bdccbce"
+    },
+    {
+      "path": "src/graphon/nodes/parameter_extractor/parameter_extractor_node.py",
+      "sha256": "e52479f5afd796de9b344f9a3ab355b7699a941946d10cebc09b06a469d3a26b"
+    },
+    {
+      "path": "src/graphon/nodes/parameter_extractor/prompts.py",
+      "sha256": "1490ae5083a7765d3792a2787f20cd179e8cc1bd6d442f7385f5f4e08bc1b1de"
+    },
+    {
+      "path": "src/graphon/nodes/protocols.py",
+      "sha256": "1ebdc4ef5be8f18dc2e22dc37c14641e4c0eeafc0819a3f43ce821b371a5a11d"
+    },
+    {
+      "path": "src/graphon/nodes/question_classifier/__init__.py",
+      "sha256": "4087919ae1783929f4163859ab197e6d5032ef4de556e5affc4b84484f3cbc85"
+    },
+    {
+      "path": "src/graphon/nodes/question_classifier/entities.py",
+      "sha256": "e7e1efc5d80273c476058d5c0a6da60bfe0af5a481ae275c3fd47c0a3db2411b"
+    },
+    {
+      "path": "src/graphon/nodes/question_classifier/exc.py",
+      "sha256": "3c90fcc571505e5f30151c4e4ee1f4f9870e5c01549d4408ee6c61d9b715a23d"
+    },
+    {
+      "path": "src/graphon/nodes/question_classifier/question_classifier_node.py",
+      "sha256": "101593f6ccc2e2b447d9df747387a50bfc6a555d417f533282872651c8d0d6cd"
+    },
+    {
+      "path": "src/graphon/nodes/question_classifier/template_prompts.py",
+      "sha256": "b8aba8bbe9f160e13f32a0e8ecd7d8a1d80404fa81ed96e0521edbddf444e25b"
+    },
+    {
+      "path": "src/graphon/nodes/runtime.py",
+      "sha256": "b636bcce7fb20ca35a56c52d8be5bfa9416b949c3542bb06468383e2fe1ca9f5"
+    },
+    {
+      "path": "src/graphon/nodes/start/__init__.py",
+      "sha256": "ab662ec8e7d513ff47a2eb8fe5ee8be45e7a3b3902fb6adc83eaa9f7204f440b"
+    },
+    {
+      "path": "src/graphon/nodes/start/entities.py",
+      "sha256": "f3c3aafdd8ae36893f31276cf9917646d1809426dc29a768f00d27db807e5fc2"
+    },
+    {
+      "path": "src/graphon/nodes/start/start_node.py",
+      "sha256": "ce8e5f361cbc6f8b579d8c67b355a777a00f45a93155551ef1cd9e7413779c83"
+    },
+    {
+      "path": "src/graphon/nodes/template_transform/__init__.py",
+      "sha256": "40cb5d3e5e8f815fe89145d3a7b9a5c45277e0cccf23a244b88acd72ea36d71e"
+    },
+    {
+      "path": "src/graphon/nodes/template_transform/entities.py",
+      "sha256": "97e3616b91291ee03fdd15f7e8a787fda8a912f1ef0300122b1f5b5a9c76dc2e"
+    },
+    {
+      "path": "src/graphon/nodes/template_transform/template_transform_node.py",
+      "sha256": "1487c9c634dea597c7b618fa14346d632837882b944f763ada05d956e8d76939"
+    },
+    {
+      "path": "src/graphon/nodes/tool/__init__.py",
+      "sha256": "ec0111f8d4f602a9f89c4aa618586c9f24dc53197785d47fc4200f9376007c83"
+    },
+    {
+      "path": "src/graphon/nodes/tool/entities.py",
+      "sha256": "f51e4d6a7e7d4a0f508bb44a88ceb374654391b0d2e0cb8d0b82c35bd31e73fc"
+    },
+    {
+      "path": "src/graphon/nodes/tool/exc.py",
+      "sha256": "8f7047cb5d2478a10f6f5cfcc26fc03e8fbb4f0e083dda4c23d11780e34aaa59"
+    },
+    {
+      "path": "src/graphon/nodes/tool/tool_node.py",
+      "sha256": "a75445398278ff4ee888a90f716b7dc0257a473702f614805a5484c7fe81244d"
+    },
+    {
+      "path": "src/graphon/nodes/tool_runtime_entities.py",
+      "sha256": "e63bae8f2bd727c49922b742b6131f90b1b1e9f13855e57fe5b2e239a2cec49d"
+    },
+    {
+      "path": "src/graphon/nodes/variable_aggregator/__init__.py",
+      "sha256": "3d1044f0306520af876c248b4acab0c8552c69752835c887e492634f7ec6caa1"
+    },
+    {
+      "path": "src/graphon/nodes/variable_aggregator/entities.py",
+      "sha256": "aff981ab7a6b8563803e0d68e48c4077cae2740437ce13bf52b1ece473bdaaca"
+    },
+    {
+      "path": "src/graphon/nodes/variable_aggregator/variable_aggregator_node.py",
+      "sha256": "16467842ed8322baf323ffc893299afae7d41c39cfdb8181b3dc6f1c246a886a"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/common/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/common/exc.py",
+      "sha256": "94cf90004949bd21525f683834c681dae9f5c5275b8c12d406015b3e06ce6721"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/common/helpers.py",
+      "sha256": "2aea4e559039966107751d072962cf76f0acb6c0ea7f11a9bb2725ef840bde7f"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/v1/__init__.py",
+      "sha256": "013731f3a2f8822db92c007cfba4450ec9f71f360f5d0d3e174bd29e3304bd19"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/v1/node.py",
+      "sha256": "46df4bb5a69ebdf56aaf52c770a38610ee1c3e1796f18c4a151a1d5ed3c74273"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/v1/node_data.py",
+      "sha256": "d3e5cf441f1892efeba9884624290a9b0b6e9660fc4d8f4ea4d82cded60070bc"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/v2/__init__.py",
+      "sha256": "013731f3a2f8822db92c007cfba4450ec9f71f360f5d0d3e174bd29e3304bd19"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/v2/entities.py",
+      "sha256": "4b6239db6ed300493dcad66d5122653e73f0bc96d0412cb996f83fbbac05280c"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/v2/enums.py",
+      "sha256": "d25144a0f761106aa06dbb9df0b7a6c975738327fd753c737054bad15aac4853"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/v2/exc.py",
+      "sha256": "69e47683e045d05e5ba53378b40d4e5ad1f9e9bae0e6a94c1a7b6de4c19ddb07"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/v2/helpers.py",
+      "sha256": "ceac2e2f21c1aa0295e6d82da5ac0481a23ed149d95d21ec36b28735c8c8ceab"
+    },
+    {
+      "path": "src/graphon/nodes/variable_assigner/v2/node.py",
+      "sha256": "383512ca8f419a928d55b2aebdc0b580e58afc0255b3d23b581af9cace06aca9"
+    },
+    {
+      "path": "src/graphon/prompt_entities.py",
+      "sha256": "7abe32bd4bea1f4748a30c3fe9eb82e11e21c9682424a2708a99e925a79c0614"
+    },
+    {
+      "path": "src/graphon/protocols/__init__.py",
+      "sha256": "83f026dc557759c3c113f3b18795162465e95d7a11c6b8b78a6b2a37e344edf1"
+    },
+    {
+      "path": "src/graphon/py.typed",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/runtime/__init__.py",
+      "sha256": "78241af84e32286e84085fc71cd655a33dbb31dab8cf63ca4b52040a3c0726ad"
+    },
+    {
+      "path": "src/graphon/runtime/container_state.py",
+      "sha256": "a31f2bad57bbbba3abef011c06c8dc80797fa9b682eae90cae6181ff533a0f8e"
+    },
+    {
+      "path": "src/graphon/runtime/execution.py",
+      "sha256": "8f584b79cb3f5ff8a8d3c9f6ec4733f0b6d7c76b5ecfc8f8358bd6671d320247"
+    },
+    {
+      "path": "src/graphon/runtime/init_params.py",
+      "sha256": "4f53cdc56273c276cc5fec95c1858e289ff68ac11fc0db2183134c74c4a98bf5"
+    },
+    {
+      "path": "src/graphon/runtime/read_only_wrappers.py",
+      "sha256": "0a5ff5f24e195736037b357d024704f4678cea3abd762e6611a0a80b2b119e8a"
+    },
+    {
+      "path": "src/graphon/runtime/ready_queue/__init__.py",
+      "sha256": "0056400f6e92060847eb558289277dd515add05d9ca05daf53093395e78255b5"
+    },
+    {
+      "path": "src/graphon/runtime/ready_queue/in_memory.py",
+      "sha256": "8c76c68c8fa1ae7a90154c100b46ced484cd4ebe0fc7a1d5438886af7697a614"
+    },
+    {
+      "path": "src/graphon/runtime/ready_queue/protocol.py",
+      "sha256": "29dcec381b7f9c7ee4e34847b110f6be126725086a80bef01dd54bccd342ebb8"
+    },
+    {
+      "path": "src/graphon/runtime/ready_queue/tasks.py",
+      "sha256": "89841db3d82bda462a4afa2ea12699026a01b0cf30ab8ce23378a2017d7a438b"
+    },
+    {
+      "path": "src/graphon/runtime/runtime_state/__init__.py",
+      "sha256": "5e7fe77c29e195fa123282e50359024c48b40dfb2686ce948db3c4625584cae9"
+    },
+    {
+      "path": "src/graphon/runtime/runtime_state/protocol.py",
+      "sha256": "b2987327657f8441ca5f58de6565b4143a877dafa1af8743c6d2d42e98aa63b8"
+    },
+    {
+      "path": "src/graphon/runtime/runtime_state/snapshot.py",
+      "sha256": "a5ee49d0f2e4fd688a012ab46c36ba043f65612aac277afbde7d3376b0131b4d"
+    },
+    {
+      "path": "src/graphon/runtime/runtime_state/state.py",
+      "sha256": "ab9876ccd32cd63ad1a564e839245a04b7d4622a4fae42ea720f569bb1a8eac7"
+    },
+    {
+      "path": "src/graphon/runtime/runtime_state/v1.py",
+      "sha256": "bff995bf1c5d8739794b4abc85171f3d56e5022596f99d6401ab5597c7cec71b"
+    },
+    {
+      "path": "src/graphon/runtime/runtime_state/v2.py",
+      "sha256": "3e7a1e463510e63b997db938a5cfebd14ff4848ef04dbef70af9b1690f4c39f3"
+    },
+    {
+      "path": "src/graphon/runtime/runtime_state/v3.py",
+      "sha256": "5b20cd9ec2b3550428b868b72c863dccdb65b9bffe9ecca60d11d40c1b66b680"
+    },
+    {
+      "path": "src/graphon/runtime/runtime_state_protocol.py",
+      "sha256": "8b2deb8ab036029b12372ca3f2aaa118458601a945415146fd9793aba94090df"
+    },
+    {
+      "path": "src/graphon/runtime/variable_pool.py",
+      "sha256": "4efb86be0a42ae5f6d7f7e8a46ccc8d559533ac4899c250381d0c5b73d11a6f0"
+    },
+    {
+      "path": "src/graphon/template_rendering.py",
+      "sha256": "e7d715bb9832d32c89a2e95835b1473ea3a20144201595bd34d983d2a4a7a16b"
+    },
+    {
+      "path": "src/graphon/utils/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/utils/condition/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/graphon/utils/condition/entities.py",
+      "sha256": "ca9e05018c32df3e0f55886fd806095d15630e785f6d9f0b27b6bfbc3e4ff69b"
+    },
+    {
+      "path": "src/graphon/utils/condition/processor.py",
+      "sha256": "7dc6253fd80c2c94f3aa8469321a24d1b87f5d0b4eb6cb71db8f2a6a7e1665f5"
+    },
+    {
+      "path": "src/graphon/utils/json_in_md_parser.py",
+      "sha256": "a5ec752b35c1d432c1de10ffca19b4c90d38596bb335512cb293399c9d802a58"
+    },
+    {
+      "path": "src/graphon/variable_loader.py",
+      "sha256": "6799e53c976f5b743053ef517cd7f9179bac1d6afb60c239f7eae6dc07f1baa6"
+    },
+    {
+      "path": "src/graphon/variables/__init__.py",
+      "sha256": "cef28b90a72a70fdea095e7ab4f30f27c28a0b1bd974e09b1f59b11feccb39da"
+    },
+    {
+      "path": "src/graphon/variables/consts.py",
+      "sha256": "c1948764f7c6d978a4327219400cb5c2dc45e8dd4fda0551f2679c4e126e390f"
+    },
+    {
+      "path": "src/graphon/variables/exc.py",
+      "sha256": "8659387196868b79376c286951632aa9968830b032b9cf8c5ade24d7c9dc92bd"
+    },
+    {
+      "path": "src/graphon/variables/factory.py",
+      "sha256": "d30df42d9fc3534914220fff97a20e2ef4abe8128f037e2120b9a403bbedc04b"
+    },
+    {
+      "path": "src/graphon/variables/input_entities.py",
+      "sha256": "97c0c49ed909567c2ea7fa5e7181114f02e3e278b23cde90f3551ccf1363caa7"
+    },
+    {
+      "path": "src/graphon/variables/segment_group.py",
+      "sha256": "cd429dd1dff559740bc1502606527f47e469f391b7a625a655f0a09aabc70378"
+    },
+    {
+      "path": "src/graphon/variables/segments.py",
+      "sha256": "5bd81b1b77edbfef7032e30df42f1bb4fc991dec3768500345de25aeaf15a039"
+    },
+    {
+      "path": "src/graphon/variables/sensitivity.py",
+      "sha256": "94824a40d636ce1b44bd03b54a14bc6700deae78b4361612bd02fea3fda499fe"
+    },
+    {
+      "path": "src/graphon/variables/template_resolution.py",
+      "sha256": "240844cc87add16e92bc0b93221c32e14a3ad538bf73bd59b8c13806ede6e11c"
+    },
+    {
+      "path": "src/graphon/variables/types.py",
+      "sha256": "69a6c6fdcd45eb3a7192e396eea79e47638f46c0cc376529fef7805bffe4bd87"
+    },
+    {
+      "path": "src/graphon/variables/utils.py",
+      "sha256": "888b5f0ad83744a19af7059bdf5884c628543ef3c83842d2500da0a9367c841c"
+    },
+    {
+      "path": "src/graphon/variables/variables.py",
+      "sha256": "249712e6c530b369ceda3398a294070c60804292f2d572fe4db5464fc6a9c883"
+    },
+    {
+      "path": "src/graphon/workflow_type_encoder.py",
+      "sha256": "7aaf0a00a451fa690ff1d8b61a5be510648014c0b0d2f0322a4bed5cb814d328"
+    },
+    {
+      "path": "tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/dsl/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/dsl/test_app_bootstrap.py",
+      "sha256": "d5fd4489d88efbf540dda7d58d82ab1625c9b619975d2bfd95e5a5a463ecbe8d"
+    },
+    {
+      "path": "tests/dsl/test_code_runtime.py",
+      "sha256": "2f1bad8c7c52b38516b637c5c05a645c35a4fdfb62db12eacacdac391d7deb5b"
+    },
+    {
+      "path": "tests/dsl/test_importer.py",
+      "sha256": "fb53d76ed02279369eb277443c1f4c14a82945e9155698b9e89c5eb032c416a1"
+    },
+    {
+      "path": "tests/dsl/test_node_factory.py",
+      "sha256": "0d230004727c68ed30990ccc156f5b89b53e3bec639e11e861631bf1ca1dd3a4"
+    },
+    {
+      "path": "tests/dsl/test_slim_client.py",
+      "sha256": "c9e5b44a2bc16036928d8376714a3cc084234ed9e3b7d4f02a3fe216de0d2cc7"
+    },
+    {
+      "path": "tests/dsl/test_slim_exports.py",
+      "sha256": "a88cd924a76a36ff106ba45910487b3ac3d3bddefd769727c45b4e5fb59337a6"
+    },
+    {
+      "path": "tests/dsl/test_slim_llm.py",
+      "sha256": "daa757195e594d15b268b702a5c8737df2bdab7563a849032b140bfd45d3aa42"
+    },
+    {
+      "path": "tests/dsl/test_slim_package_loader.py",
+      "sha256": "ddaa3f7dcff8f72dfd3d3f7adfdea9073af46ac7310f434ae85331903be054a5"
+    },
+    {
+      "path": "tests/dsl/test_tool_runtime.py",
+      "sha256": "5681b0edc37473ad27158193920aabcd064f49ca7a952c92ec72a1ca9e56418f"
+    },
+    {
+      "path": "tests/engine/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/engine/fixtures/response_stream_filter_v1_c3870df_nested.json",
+      "sha256": "f1721e2ad835924fde97537211fe33529e8fd91001eed2d2f136de5258c825b1"
+    },
+    {
+      "path": "tests/engine/fixtures/response_stream_filter_v1_c3870df_simple.json",
+      "sha256": "80e6c239dc41b86ec813990c82bac37d942cda6dacfe73259777563e39af54f9"
+    },
+    {
+      "path": "tests/engine/fixtures/runtime_state_v2_1d0f32c_paused_loop.json",
+      "sha256": "1b0c0335145d6fe93bac3eab6e74b9bafd8d578c35ed05a083cf13837fe4423d"
+    },
+    {
+      "path": "tests/engine/test_cooperative_container_execution.py",
+      "sha256": "9740714c3b7ace4b4ffaebe9ce96fcca57b7a39e515d3b09d068a39988a9a3e7"
+    },
+    {
+      "path": "tests/engine/test_dispatch_patterns.py",
+      "sha256": "62974dcdad41cf2df5e245046da43fb7d89a3618d78cc3341fc7213e62187737"
+    },
+    {
+      "path": "tests/engine/test_event_filters.py",
+      "sha256": "783a484bd07a3251a99bf6a7f094aa8fdb4759eecda89a71d4c731f61b1cd22f"
+    },
+    {
+      "path": "tests/engine/test_event_stream.py",
+      "sha256": "213269d4bccad44f4a6737b64f3a88e81af68672f438433ed7fe73a206f9e861"
+    },
+    {
+      "path": "tests/engine/test_file_runtime.py",
+      "sha256": "39a3d1160694ffbcdc8db65fdc420a317bf5ae9933b268c2176a5778e3e2b459"
+    },
+    {
+      "path": "tests/engine/test_layer_node_run_context.py",
+      "sha256": "38169ff60d07602e46b0807ef65ecdbb923353c89d399d00c6d9501b609e9a78"
+    },
+    {
+      "path": "tests/engine/test_raw_engine_events.py",
+      "sha256": "a058645b3724a6bda18d995ecd5933fab7bc17d3ae713a66491309d430e81cf7"
+    },
+    {
+      "path": "tests/engine/test_response_stream_filter.py",
+      "sha256": "a1f80133573b16d41daad218c29b4c6fa1267303c6c1502b436eff99869525e3"
+    },
+    {
+      "path": "tests/engine/test_runtime_state_serialization.py",
+      "sha256": "196fa6f548e35e860fb4fad9cc8cfe04b2abe6614af2e0d5bdebdcdbf7a204bb"
+    },
+    {
+      "path": "tests/engine/test_scheduler.py",
+      "sha256": "4eba0de433a3270cb21384355756a57806d21792de495c4b7d82015cf06d2be5"
+    },
+    {
+      "path": "tests/engine_events/__init__.py",
+      "sha256": "8cc85206738551c5e5242761aecab948c7d336e87459bf3f7460a22ed3e4267c"
+    },
+    {
+      "path": "tests/engine_events/test_traversal_events.py",
+      "sha256": "45032d70a83ac94729ff8b045b7d8bbbd3a021b629ec018e1ba430c5c55bde41"
+    },
+    {
+      "path": "tests/entities/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/entities/test_pause_reason.py",
+      "sha256": "b125647fbfb87f88aff5a4c226c42668e0317d4dcd763ce7a97f3298a16c8985"
+    },
+    {
+      "path": "tests/entities/test_workflow_execution_status.py",
+      "sha256": "5abac0d7befe5f2d5f15ca957605796b06d4e5a5aa055675ef37f80c8446fa78"
+    },
+    {
+      "path": "tests/entities/test_workflow_node_execution.py",
+      "sha256": "df6afab2c02ca30387cfc0bd22eb625d6b07136ea37144f6f522f4c750b4d979"
+    },
+    {
+      "path": "tests/examples/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/examples/test_slim_llm_example.py",
+      "sha256": "90eb3538ea8fbab4bf906b630b89a0a3dc62d771ba612083c61c87851bcdb64c"
+    },
+    {
+      "path": "tests/file/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/file/test_file_factory.py",
+      "sha256": "ebf5a38313218b3dd1513c56f5f38cdc497da80f1071092804763867842897a8"
+    },
+    {
+      "path": "tests/file/test_file_manager.py",
+      "sha256": "a726040a59c460bae8d5a68df4e7f2f0b7adbf283f54a4d8d2a90b1ab8707937"
+    },
+    {
+      "path": "tests/file/test_models.py",
+      "sha256": "a166897276759f9f2af91c4003db8889b11a614429f16774d10c8ed851e4842a"
+    },
+    {
+      "path": "tests/file/test_runtime.py",
+      "sha256": "819f1f4653d45c129f8c952f52986f012f818ecc744ac29b5089487ef7b4d53b"
+    },
+    {
+      "path": "tests/file/test_tool_file_parser.py",
+      "sha256": "c393eff2badccd4b039cb135b5aec4758286d552d35157418831433495e503d4"
+    },
+    {
+      "path": "tests/graph/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/graph/test_graph.py",
+      "sha256": "ef563a5d30d09a641f7920fb8ca80cde2418bc33abbbc3db80331ea098ee87dd"
+    },
+    {
+      "path": "tests/graph/test_graph_scoping.py",
+      "sha256": "75685ea86854001138b6c1b6f8d76c6135cc69e230810ac8b74960151ee59433"
+    },
+    {
+      "path": "tests/graph/test_graph_validation.py",
+      "sha256": "98902386cb12deb91db287c36927c7052f4b8f810b5ecc849fbe4aeb0d158369"
+    },
+    {
+      "path": "tests/helpers/__init__.py",
+      "sha256": "64480a9a5af4fa4dcac8dbef39c10c58f56f62f54ab35dd6332c91f28aed2c23"
+    },
+    {
+      "path": "tests/helpers/builders.py",
+      "sha256": "54192124fa742b914836a9ed08612d26c1a696d493402af3f0b7aaf0eb180ac7"
+    },
+    {
+      "path": "tests/helpers/workflow_events.py",
+      "sha256": "77d23f424aff8b95b185a2524165b1eff266ccc3f54dda519ae7496e76a05743"
+    },
+    {
+      "path": "tests/http/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/http/test_client.py",
+      "sha256": "f23c197f1104937cf7bb1fda015e74dc6f2de15ce5b0cb49948eaa5ee7c80bb9"
+    },
+    {
+      "path": "tests/http/test_executor_secret_masking.py",
+      "sha256": "a353d3077aee49481abaa3b1afd884498f3d189bfaa90d9a96d5581bbf86c825"
+    },
+    {
+      "path": "tests/model_runtime/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/model_runtime/test_common_entities.py",
+      "sha256": "e689fb2e7dd4cc3c4ea1452c0bbe194448952c0c2442c25b1acd1eddc184d241"
+    },
+    {
+      "path": "tests/model_runtime/test_encoders.py",
+      "sha256": "5f6efd22df245a946819f4c5141e3b22322562554d149961301e5f46d623fadc"
+    },
+    {
+      "path": "tests/model_runtime/test_large_language_model_non_stream_result.py",
+      "sha256": "cc88a5219c222fc9cacf29db952f79f1d9861996a09bb6dfacddd8eddb58410a"
+    },
+    {
+      "path": "tests/model_runtime/test_large_language_model_tool_calls.py",
+      "sha256": "0cf123242aeebc52123cd7d8af272ff76ece788bc7d55e9c4ebf8a5f97c7e2dd"
+    },
+    {
+      "path": "tests/model_runtime/test_llm_entities.py",
+      "sha256": "4ace6d0f81ae88f7c06c3ee96326b8e6d6172a505457c98db3d1932c76e14250"
+    },
+    {
+      "path": "tests/model_runtime/test_message_entities.py",
+      "sha256": "21accb70ee74ba7a46ac4aaed249506be7e5a46fd1d7cf2c132b2c012aa3453f"
+    },
+    {
+      "path": "tests/model_runtime/test_model_dispatch.py",
+      "sha256": "bbc078388a37133607607c2d809218c2dcd1b4aef55369690786aaf5f7a89636"
+    },
+    {
+      "path": "tests/model_runtime/test_model_entities.py",
+      "sha256": "909716c233ad790e37c1b9928401419cd18f026b7a57a7b6aadef4530a39ed93"
+    },
+    {
+      "path": "tests/model_runtime/test_text_embedding_model.py",
+      "sha256": "3aaa3751b69faf663419ad97be3179a88527037fecbefd205e12a8c446c08dc1"
+    },
+    {
+      "path": "tests/node_events/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/node_events/test_node_event_aliases.py",
+      "sha256": "45fc120f640cf35ac2dbafafa888478d0acf3881c82c3a7563f1b3ffd9cac14b"
+    },
+    {
+      "path": "tests/node_events/test_node_run_result.py",
+      "sha256": "a2db3c7b8942bcf812038a52de47ad93ba6d0df8ae3494209a5e875ae9271e4e"
+    },
+    {
+      "path": "tests/nodes/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/base/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/base/test_node_execution_binding.py",
+      "sha256": "d6fdcbb3ca324bed8bfdd35af5517f6c9566552bc242e938809619416bedaffc"
+    },
+    {
+      "path": "tests/nodes/base/test_template.py",
+      "sha256": "c9e66f8b7407b2371015b29d9019149a4802bc4e9bbc926b713fc926a3791138"
+    },
+    {
+      "path": "tests/nodes/base/test_variable_template_parser.py",
+      "sha256": "3f823a389f8a246c190091e5cfe4658da99e7a426b5ef417318b96d533d683f6"
+    },
+    {
+      "path": "tests/nodes/document_extractor/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/document_extractor/test_dispatch.py",
+      "sha256": "5471fca0a3075cc37538bfbc5218036e0da23d4c2f724dc90f2725c9219393a0"
+    },
+    {
+      "path": "tests/nodes/document_extractor/test_docx_extraction.py",
+      "sha256": "3b68a99c5ce51a4545a7522b93b1c00aa1fc6048e172809863948f9e301c60b6"
+    },
+    {
+      "path": "tests/nodes/http_request/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/http_request/test_dispatch.py",
+      "sha256": "e9d0021dd6ad407e4e558b63016ec614bfa018d5d046768274cd6ae3e955c73b"
+    },
+    {
+      "path": "tests/nodes/human_input/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/human_input/test_entities.py",
+      "sha256": "f6439e0ce2247c2fb27cb1b484a51232d4736e274a49030b479e2e79536954f7"
+    },
+    {
+      "path": "tests/nodes/human_input/test_human_input_node.py",
+      "sha256": "5c63f2032da2f37b14285d14a76c296bf2baec38fd1b7e77dd160c693dcf2ce8"
+    },
+    {
+      "path": "tests/nodes/if_else/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/if_else/test_entities.py",
+      "sha256": "49251a9f38fd0363e41a26784fca155909f63d0e523b2063753f3e39bb716b09"
+    },
+    {
+      "path": "tests/nodes/if_else/test_if_else_node.py",
+      "sha256": "73c875fefddbc6db6eb0f85cc7e5b503769f660e2468ed73e032daffe3c55cc5"
+    },
+    {
+      "path": "tests/nodes/llm/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/llm/test_file_saver.py",
+      "sha256": "b93d2c621fde43ff8e0e57958a71a481b25222b9c3d04c4953a274f20fa8ccc9"
+    },
+    {
+      "path": "tests/nodes/llm/test_llm_utils.py",
+      "sha256": "615e85615deaa4a10b40e8dc497be067a1fd6b7b8448d352b89a4eb8e33a1da8"
+    },
+    {
+      "path": "tests/nodes/llm/test_node.py",
+      "sha256": "4582e052b53a47675297cccdbb97d362eff160682dc99ae96a84bfa9c8071a0a"
+    },
+    {
+      "path": "tests/nodes/llm/test_reasoning.py",
+      "sha256": "6d97131ea64ef21c8cca031c61d5e96c4232c0b11fea0e0d8a09a0bd32afc793"
+    },
+    {
+      "path": "tests/nodes/parameter_extractor/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/parameter_extractor/test_entities.py",
+      "sha256": "a41c3fdaec83fdcad5f0fd30cde42cca7494e31a1ec5443f254684aa5bf867c3"
+    },
+    {
+      "path": "tests/nodes/parameter_extractor/test_prompts.py",
+      "sha256": "0922ef32e8773aff6a79741e4cf518531a9ea51f2aa9753baf88d457fcfdcb3a"
+    },
+    {
+      "path": "tests/nodes/question_classifier/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/question_classifier/test_question_classifier_node.py",
+      "sha256": "3dcbe5f31edd2bc7ab215ced569c890fa3cce70d84893f43f956b00164f15075"
+    },
+    {
+      "path": "tests/nodes/test_code_node.py",
+      "sha256": "84e46a22541e1f068abcea7d0fc4263c7d4c02478b7159b00972f81713402ed8"
+    },
+    {
+      "path": "tests/nodes/test_container_dispatch.py",
+      "sha256": "7bb900f4dcb59041271c97cb28f4ba7de26e623027b8e0cdc6b8cd7b6604c5ca"
+    },
+    {
+      "path": "tests/nodes/test_container_effects.py",
+      "sha256": "9b72cd5795a1d4af277ad3cd5bb991aa7275b87630ee77993ac759aae03544ea"
+    },
+    {
+      "path": "tests/nodes/test_human_input_runtime_binding.py",
+      "sha256": "fdd23756188d06effa6d45ab52ac288c4da1d7dceb0eabe92e5e4382afe254b7"
+    },
+    {
+      "path": "tests/nodes/tool/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/tool/test_entities.py",
+      "sha256": "832a50edfb2492d5b43c730444731ccfc065302579b0a4a985e753a39e8006a7"
+    },
+    {
+      "path": "tests/nodes/tool/test_tool_node.py",
+      "sha256": "94e2d8dea7cf3753be02b673e87cd2b39bed07e938989664bef48060af7d3047"
+    },
+    {
+      "path": "tests/nodes/variable_assigner/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/nodes/variable_assigner/test_v1_node.py",
+      "sha256": "a8c72e3ff333864941e180813c1d1a3aa5c7dd19f4d69439a7515dffbd548b9d"
+    },
+    {
+      "path": "tests/nodes/variable_assigner/test_v2_helpers.py",
+      "sha256": "c6fc6d7924100d62d47e71d13727b226f2d7d137422f18b7ec43507f1ef57e51"
+    },
+    {
+      "path": "tests/nodes/variable_assigner/test_v2_node.py",
+      "sha256": "fa5dc201442465e01a0de4ed41c47e88f17ba1d90468026864322b2a9ebffe02"
+    },
+    {
+      "path": "tests/runtime/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/runtime/fixtures/runtime_state_v2_full_graph.json",
+      "sha256": "2754773ff6f19e73d3417daa38dec9bbcbbbdcb9362fea35bd97848d76698f84"
+    },
+    {
+      "path": "tests/runtime/fixtures/runtime_state_v2_graph_builder.json",
+      "sha256": "50be59f6b8c9f84cb27b45aa4c09db22a855e57d270d25a9a0ee7921e1d74f7f"
+    },
+    {
+      "path": "tests/runtime/fixtures/runtime_state_v2_unattached.json",
+      "sha256": "109a708e82e426563cf15270f87e051b4008cd7543322eb2024fac426a12f98b"
+    },
+    {
+      "path": "tests/runtime/test_custom_container_state.py",
+      "sha256": "35e96f8d8ab2a294abff95cc959597a425488bc37757e0f6d498cb1a5abc0eff"
+    },
+    {
+      "path": "tests/runtime/test_runtime_imports.py",
+      "sha256": "c5867030670aa8ac104db46a1f6743401f394462579a6f26a64b2e4ad0f742fd"
+    },
+    {
+      "path": "tests/runtime/test_runtime_state.py",
+      "sha256": "02dfae611a08b6f826a296246c2a7ec9b6194af0f7d907a522f9af553411bdb4"
+    },
+    {
+      "path": "tests/runtime/test_variable_pool.py",
+      "sha256": "006ddf34383df3fff878e6ae10291b0301259dd9b2cfdae875bb4b12978a6e32"
+    },
+    {
+      "path": "tests/test_import_layers.py",
+      "sha256": "54e4db8785c05b1952a6ebf38c5f2a961fcf08b81ef22729d3908ae0ea99c833"
+    },
+    {
+      "path": "tests/test_protocols_exports.py",
+      "sha256": "4149ff5e1d4830bf179e40c13e39643c6c4f7bcc0a420b549abd78713a3d88dd"
+    },
+    {
+      "path": "tests/test_repository_docs.py",
+      "sha256": "b32ca3da7386c4dea00f5582c328b4c409df74283b297ba35cf7618ffbaf7077"
+    },
+    {
+      "path": "tests/test_snapshot_version_isolation.py",
+      "sha256": "bdd7a5add43fe7904ae40baf3360a873efc43017ac550ccdc7492527cdaf0120"
+    },
+    {
+      "path": "tests/utils/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/utils/test_condition_processor.py",
+      "sha256": "0683ec9b27b9234252bee03de62c0f8750e6a57c057fab9a935896fd2070722d"
+    },
+    {
+      "path": "tests/utils/test_json_in_md_parser.py",
+      "sha256": "9529c0624280a08619ed13364486fab67932e0ea643c3c02ddfa19c5d7923996"
+    },
+    {
+      "path": "tests/utils/test_variable_utils.py",
+      "sha256": "a64229170fd320c00383a428efd57b3609869c48df3ea5d823f51d95c96d0c4f"
+    },
+    {
+      "path": "tests/variables/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/variables/test_input_entities.py",
+      "sha256": "29f922f86c0f72041128cbf408b201ea038177d9c86308ff5d03d6a34b540722"
+    },
+    {
+      "path": "tests/variables/test_sensitivity.py",
+      "sha256": "22386c65916c784a2197c12d3d1f49e4935f4a2cc4018b7991ba55190a137873"
+    },
+    {
+      "path": "tests/variables/test_template_resolution.py",
+      "sha256": "9d4aa95dbd93308e842ba98a98dc441dfd432776f116133e1d0a376190d52038"
+    },
+    {
+      "path": "tests/variables/test_workflow_type_encoder_secret.py",
+      "sha256": "947734dbfecb56237b040056df69c9dcca0573e3c897e9ead2436706513d62ea"
+    },
+    {
+      "path": "tests/workflows/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/workflows/test_full_engine_events.py",
+      "sha256": "2a778c9ce9ca884d24ddb8d30958b0c8231e0e408bba087978ec0e5792f55d05"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "3edb6100a106bd45ad280c233fb8e607d7e6433afd0d80ff53ebb1b1c36c65d8"
+    }
+  ]
+}

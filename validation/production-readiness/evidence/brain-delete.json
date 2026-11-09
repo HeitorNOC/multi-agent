@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "journal_anchors_present": true,
+  "delete_result": "DeletionResult(status='success', doc_id='public-v1', message='Document public-v1 successfully deleted', status_code=200, file_path='public-v1.md')",
+  "document_absent": true,
+  "deleted_source_absent_in_hybrid": true,
+  "limit": "file/NetworkX backend; not power-loss or all external stores"
+}

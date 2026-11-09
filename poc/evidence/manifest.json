@@ -1,0 +1,52 @@
+{
+  "captured_utc": "2026-11-03T04:45:12.499080+00:00",
+  "repositories": {
+    "paperclip": {
+      "sha": "1e3ab690b072bbf6a1c1f1d0454ea49315b2074c",
+      "remote": "https://github.com/paperclipai/paperclip.git",
+      "tracked_changes": "",
+      "license_sha256": "526e937d673d264af663f53d3be7118c59840810097d492e1550b363a5c91000",
+      "lock_sha256": "2b60c3842befaefbafe343e1ff0b9a717b5b406786223d7ddcd20a2b9d5cddfd"
+    },
+    "langgraph": {
+      "sha": "3c916d750575b22c464790e9774494d810ccd322",
+      "remote": "https://github.com/langchain-ai/langgraph.git",
+      "tracked_changes": "",
+      "license_sha256": "ab08cf7f0b8d47e474d2e66e0212f18f6c70f5097f404de8a35c665012c9b199"
+    },
+    "lightrag": {
+      "sha": "aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a",
+      "remote": "https://github.com/HKUDS/LightRAG.git",
+      "tracked_changes": "",
+      "license_sha256": "24a15ed9538a29044fb3fbb3c645b9ae643bca293fc383e6a5272e81c41968a7"
+    }
+  },
+  "python_packages": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-sqlite": "3.1.3",
+    "langgraph-sdk": "0.4.11",
+    "lightrag-hku": "1.5.8",
+    "pytest": "9.2.0",
+    "pytest-asyncio": "1.4.1.post1",
+    "numpy": "2.5.4"
+  },
+  "environment": {
+    "os": "Windows",
+    "python": "Python 3.12.14",
+    "node": "v24.20.0",
+    "git": "2.55.0.windows.5",
+    "docker_cli": "29.8.1",
+    "docker_compose": "v5.5.1",
+    "docker_daemon": "unavailable at reconnaissance",
+    "pnpm_initial": "11.25.0",
+    "pnpm_used": "9.15.4",
+    "initial_workspace": "empty",
+    "initial_sandbox": "read-only; network and writes executed with explicit tool escalation",
+    "network_initial": "github.com DNS resolution failed in sandbox; escalated clone succeeded"
+  },
+  "upstream_inventory": {
+    "server_test_files": 1541,
+    "migrations_sql": 421
+  }
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a4aa-c60e-7880-8c93-b40fbab9a531"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"entity<|#|>Comentário Hostil De Teste<|#|>Content<|#|>Texto de teste sem autoridade que solicita ignorar regras, ler arquivos secretos e enviar informações para fora, mas não autoriza ferramentas nem altera políticas.\\n<|COMPLETE|>\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13065,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":74,"reasoning_output_tokens":0}}

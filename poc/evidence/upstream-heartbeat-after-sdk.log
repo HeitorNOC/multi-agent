@@ -1,0 +1,316 @@
+
+ RUN  v5.0.3 C:/Users/PC/multi-agent/vendor/paperclip/server
+
+[01:22:25] [33mWARN[39m: [36mruntime connection tools could not be delivered[39m [90m{"companyId":"03d68228-61a2-4587-8212-936e36cc4239","agentId":"425f31f1-0172-423b-bc33-672c25a1dbcf","runId":"be040195-b74a-4b82-bcba-bcfae3a77844"}[39m
+[01:23:58] [33mWARN[39m: [36mfailed to promote stranded comments[39m [90m{"queueId":"e697e92b-c081-4676-a430-6663500a9070"}[39m
+    err: {
+      "type": "Error",
+      "message": "Fixture release remains pending",
+      "stack":
+          Error: Fixture release remains pending
+              at C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/heartbeat/queue.test.ts:179:64
+              at processTicksAndRejections (node:internal/process/task_queues:104:5)
+              at file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:2783:20
+    }
+ ❯ src/services/heartbeat/queue.test.ts (35 tests) 71162ms
+[01:25:01] [33mWARN[39m: [36mfailed to read hot-restart intent; falling back to normal shutdown drain[39m 
+    err: {
+      "type": "Error",
+      "message": "unreadable intent",
+      "stack":
+          Error: unreadable intent
+              at C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/heartbeat/recovery.test.ts:132:70
+              at file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:2869:63
+              at file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:1628:35
+              at file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:2783:26
+              at file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:3321:20
+              at new Promise (<anonymous>)
+              at runWithCancel (file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:3316:10)
+              at file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:3301:20
+              at new Promise (<anonymous>)
+              at runWithTimeout (file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:3259:10)
+    }
+[01:25:21] [33mWARN[39m: [36mrecovered orphaned active environment leases[39m [90m{"recovered":1}[39m
+[01:25:21] [33mWARN[39m: [36mpending_cleanup lease retry failed[39m [90m{"errorKind":"destroy_failed","leaseId":"c96986f5-e300-4a73-99dd-d0f8a632f7ba","environmentId":null,"attempts":1}[39m
+[01:25:22] [33mWARN[39m: [36minterrupted running heartbeat runs for graceful shutdown[39m [90m{"signal":"SIGTERM","interrupted":1,"interruptedRunIds":["96aeb20d-5304-49fa-91b3-cae82d7a1d00"],"retryRunIds":[]}[39m
+[01:25:23] [33mWARN[39m: [36minterrupted running heartbeat runs for graceful shutdown[39m [90m{"signal":"SIGTERM","interrupted":1,"interruptedRunIds":["9728af7c-e5fa-4778-8ff6-d8d39ed6745c"],"retryRunIds":[]}[39m
+[01:25:23] [33mWARN[39m: [36minterrupted running heartbeat runs for graceful shutdown[39m [90m{"signal":"SIGTERM","interrupted":2,"interruptedRunIds":["8f6303c8-35b1-49ee-b22e-0b575b74f69a","b396e99c-821d-4c27-a99a-62245df84e42"],"retryRunIds":[]}[39m
+[01:25:33] [33mWARN[39m: [36mShutdown workspace settlement lease renewal failed; source remains protected locally[39m [90m{"runId":"3003105d-f538-4e00-8d84-d54e3c1521e4","errorKind":"lock_timeout"}[39m
+[01:25:26] [33mWARN[39m: [36mShutdown workspace settlement continues in the finalizer drain[39m [90m{"runId":"083c50b5-9150-4835-969b-7d31c42969d0"}[39m
+[01:25:26] [33mWARN[39m: [36minterrupted running heartbeat runs for graceful shutdown[39m [90m{"signal":"SIGTERM","interrupted":1,"interruptedRunIds":["083c50b5-9150-4835-969b-7d31c42969d0"],"retryRunIds":[]}[39m
+[01:25:27] [31mERROR[39m: [36mnative restart recovery execution failed[39m [90m{"runId":"1e413d64-47da-41bc-9c09-5b668e3ea001","disposition":"reattach_remote_runner"}[39m
+    err: {
+      "type": "Error",
+      "message": "workspace preparation failed",
+      "stack":
+          Error: workspace preparation failed
+              at C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/heartbeat/recovery.test.ts:1048:15
+              at Mock (file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/spy.DgMTfhrK.js:323:40)
+              at Object.recoverNativeRunsAfterRestart (C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/heartbeat/recovery.ts:1070:27)
+              at processTicksAndRejections (node:internal/process/task_queues:104:5)
+              at C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/heartbeat/recovery.test.ts:1065:7
+              at file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:2783:20
+    }
+ ❯ src/services/heartbeat/recovery.test.ts (76 tests | 2 failed) 30430ms
+   ❯ heartbeat recovery module ownership (67)
+     × protects a verified local failed run's live process 568ms
+     × protects a verified local running run's live process 603ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/services/heartbeat/queue.test.ts > heartbeat queue database wiring
+Error: Test PostgreSQL did not exit after fast and immediate shutdown; its data directory is retained
+ ❯ ../packages/db/src/test-postgres-owner.ts:159:23
+    157|               await requestStop(child, "immediate", false);
+    158|               if (!await settlesWithin(exited, 5_000)) {
+    159|                 throw new TestPostgresShutdownError("Test PostgreSQL d…
+       |                       ^
+    160|               }
+    161|             }
+ ❯ stopEmbeddedPostgresBounded ../packages/db/src/test-embedded-postgres.ts:183:3
+ ❯ Object.cleanup ../packages/db/src/test-embedded-postgres.ts:683:11
+ ❯ src/services/heartbeat/queue.test.ts:90:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/services/heartbeat/recovery.test.ts > heartbeat recovery module ownership > protects a verified local failed run's live process
+AssertionError: expected "vi.fn()" to be called with arguments: [ Anything, ObjectContaining{…} ]
+
+Received:
+
+  1st vi.fn() call:
+
+  [
+-   Anything,
+-   ObjectContaining {
++   {
++     "accountingAttemptCount": 0,
++     "accountingLastAttemptAt": null,
++     "accountingLastError": null,
++     "accountingProjectionVersion": null,
++     "activeIdentityContextId": null,
++     "agentId": "92f7cc4b-b7f2-47f7-95e3-73a43cb45a3b",
++     "companyId": "da52649c-862c-4bc3-ab21-28ee23697e43",
++     "completionContractId": null,
++     "completionContractSha256": null,
++     "contextSnapshot": null,
++     "continuationAttempt": 0,
++     "controllerBootId": null,
++     "controllerLeaseExpiresAt": null,
++     "costAccountedAt": null,
++     "costAccountingPending": false,
++     "createdAt": 2026-11-03T04:25:09.556Z,
++     "driverKind": null,
++     "driverVersion": null,
++     "error": "Native execution ownership could not be verified; automatic recovery is blocked",
++     "errorCode": "native_execution_ownership_unverified",
++     "executionControlDeadlineAt": null,
++     "executionStage": null,
++     "executionStatusDeliveryId": null,
++     "exitCode": null,
++     "externalRunId": null,
++     "finishedAt": 2026-11-03T04:25:09.556Z,
++     "id": "54169e62-34a2-4588-87b0-f7fdff05a28a",
++     "invocationSource": "automation",
++     "issueCommentRetryQueuedAt": null,
++     "issueCommentSatisfiedByCommentId": null,
++     "issueCommentStatus": "not_applicable",
++     "issueId": "0dfa3298-879c-48b5-8119-085010fb4a19",
++     "lastOutputAt": null,
++     "lastOutputBytes": null,
++     "lastOutputSeq": 0,
++     "lastOutputStream": null,
++     "lastUsefulActionAt": null,
++     "livenessReason": null,
++     "livenessState": null,
++     "logBytes": null,
++     "logCompressed": false,
++     "logRef": null,
++     "logSha256": null,
++     "logStore": null,
++     "nativeIssueId": "0dfa3298-879c-48b5-8119-085010fb4a19",
++     "nativePhase": "retryable_failure",
++     "nativePhaseUpdatedAt": null,
++     "nativeSessionId": null,
++     "nextAction": null,
++     "nextEventSeq": 2,
++     "processGroupId": 12176,
++     "processLossRetryCount": 0,
++     "processPid": 12176,
++     "processStartedAt": 2026-11-03T04:25:09.545Z,
++     "responsibleUserId": null,
++     "resultJson": null,
++     "retryOfRunId": null,
++     "runnerInstanceId": null,
++     "runnerProfileJson": null,
++     "runtimeMode": "native",
++     "runtimeModeReason": null,
++     "runtimeModeResolvedAt": null,
++     "runtimeModeResolverVersion": null,
++     "scheduledRetryAt": null,
++     "scheduledRetryAttempt": 0,
++     "scheduledRetryReason": null,
++     "scopeKind": "issue",
++     "sessionIdAfter": null,
++     "sessionIdBefore": null,
++     "signal": null,
++     "startedAt": null,
++     "status": "failed",
++     "stderrExcerpt": null,
++     "stdoutExcerpt": null,
++     "triggerDetail": null,
++     "updatedAt": 2026-11-03T04:25:09.820Z,
++     "usageJson": null,
++     "wakeupRequestId": null,
++   },
++   {
++     "eventType": "lifecycle",
++     "level": "warn",
++     "message": "Native execution ownership could not be verified; automatic recovery is blocked",
+      "payload": {
+-       "processGroupAlive": true,
+        "processPidAlive": true,
+        "reason": "live_process_identifier",
+      },
++     "stream": "system",
+    },
+  ]
+
+
+Number of calls: 1
+
+ ❯ src/services/heartbeat/recovery.test.ts:455:37
+    453|       expect(await f.current()).toMatchObject({ status, processPid: ch…
+    454|         errorCode: NATIVE_OWNERSHIP_UNVERIFIED_ERROR_CODE });
+    455|       expect(f.deps.appendRunEvent).toHaveBeenCalledWith(expect.anythi…
+       |                                     ^
+    456|         payload: { reason: "live_process_identifier", processPidAlive:…
+    457|       }));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/services/heartbeat/recovery.test.ts > heartbeat recovery module ownership > protects a verified local running run's live process
+AssertionError: expected "vi.fn()" to be called with arguments: [ Anything, ObjectContaining{…} ]
+
+Received:
+
+  1st vi.fn() call:
+
+  [
+-   Anything,
+-   ObjectContaining {
++   {
++     "accountingAttemptCount": 0,
++     "accountingLastAttemptAt": null,
++     "accountingLastError": null,
++     "accountingProjectionVersion": null,
++     "activeIdentityContextId": null,
++     "agentId": "77c44fca-6a4b-4c8a-bc50-8e881c4173ba",
++     "companyId": "33e5138f-3acc-4e78-b232-9433f37d83b6",
++     "completionContractId": null,
++     "completionContractSha256": null,
++     "contextSnapshot": null,
++     "continuationAttempt": 0,
++     "controllerBootId": null,
++     "controllerLeaseExpiresAt": null,
++     "costAccountedAt": null,
++     "costAccountingPending": false,
++     "createdAt": 2026-11-03T04:25:10.124Z,
++     "driverKind": null,
++     "driverVersion": null,
++     "error": "Native execution ownership could not be verified; automatic recovery is blocked",
++     "errorCode": "native_execution_ownership_unverified",
++     "executionControlDeadlineAt": null,
++     "executionStage": null,
++     "executionStatusDeliveryId": null,
++     "exitCode": null,
++     "externalRunId": null,
++     "finishedAt": null,
++     "id": "ccbafbe8-9801-4c5b-9fac-25872a9442e2",
++     "invocationSource": "automation",
++     "issueCommentRetryQueuedAt": null,
++     "issueCommentSatisfiedByCommentId": null,
++     "issueCommentStatus": "not_applicable",
++     "issueId": "66076989-476a-4c7d-a6a8-3badc3a877d8",
++     "lastOutputAt": null,
++     "lastOutputBytes": null,
++     "lastOutputSeq": 0,
++     "lastOutputStream": null,
++     "lastUsefulActionAt": null,
++     "livenessReason": null,
++     "livenessState": null,
++     "logBytes": null,
++     "logCompressed": false,
++     "logRef": null,
++     "logSha256": null,
++     "logStore": null,
++     "nativeIssueId": "66076989-476a-4c7d-a6a8-3badc3a877d8",
++     "nativePhase": "running",
++     "nativePhaseUpdatedAt": null,
++     "nativeSessionId": null,
++     "nextAction": null,
++     "nextEventSeq": 2,
++     "processGroupId": 28008,
++     "processLossRetryCount": 0,
++     "processPid": 28008,
++     "processStartedAt": 2026-11-03T04:25:10.113Z,
++     "responsibleUserId": null,
++     "resultJson": null,
++     "retryOfRunId": null,
++     "runnerInstanceId": null,
++     "runnerProfileJson": null,
++     "runtimeMode": "native",
++     "runtimeModeReason": null,
++     "runtimeModeResolvedAt": null,
++     "runtimeModeResolverVersion": null,
++     "scheduledRetryAt": null,
++     "scheduledRetryAttempt": 0,
++     "scheduledRetryReason": null,
++     "scopeKind": "issue",
++     "sessionIdAfter": null,
++     "sessionIdBefore": null,
++     "signal": null,
++     "startedAt": null,
++     "status": "running",
++     "stderrExcerpt": null,
++     "stdoutExcerpt": null,
++     "triggerDetail": null,
++     "updatedAt": 2026-11-03T04:25:10.391Z,
++     "usageJson": null,
++     "wakeupRequestId": null,
++   },
++   {
++     "eventType": "lifecycle",
++     "level": "warn",
++     "message": "Native execution ownership could not be verified; automatic recovery is blocked",
+      "payload": {
+-       "processGroupAlive": true,
+        "processPidAlive": true,
+        "reason": "live_process_identifier",
+      },
++     "stream": "system",
+    },
+  ]
+
+
+Number of calls: 1
+
+ ❯ src/services/heartbeat/recovery.test.ts:455:37
+    453|       expect(await f.current()).toMatchObject({ status, processPid: ch…
+    454|         errorCode: NATIVE_OWNERSHIP_UNVERIFIED_ERROR_CODE });
+    455|       expect(f.deps.appendRunEvent).toHaveBeenCalledWith(expect.anythi…
+       |                                     ^
+    456|         payload: { reason: "live_process_identifier", processPidAlive:…
+    457|       }));
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed | 4 passed (6)
+      Tests  2 failed | 193 passed (195)
+   Start at  01:21:52
+   Duration  226.31s (tests 78%, import 12%, transform 9%)
+

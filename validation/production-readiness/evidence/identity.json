@@ -1,0 +1,59 @@
+{
+  "result": "PASS",
+  "library": "jose 6.2.12, already installed in audited Paperclip dependency tree",
+  "checks": [
+    {
+      "name": "valid signed scoped token",
+      "result": "ALLOWED"
+    },
+    {
+      "name": "wrong audience",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong issuer",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong signing key",
+      "result": "DENIED"
+    },
+    {
+      "name": "expired",
+      "result": "DENIED"
+    },
+    {
+      "name": "unsigned alg none",
+      "result": "DENIED"
+    },
+    {
+      "name": "cross installation",
+      "result": "DENIED"
+    },
+    {
+      "name": "cross run",
+      "result": "DENIED"
+    },
+    {
+      "name": "wrong scope",
+      "result": "DENIED"
+    },
+    {
+      "name": "header-directed internal key fetch",
+      "result": "DENIED"
+    },
+    {
+      "name": "revoked jti",
+      "result": "DENIED"
+    },
+    {
+      "name": "stale policy epoch",
+      "result": "DENIED"
+    },
+    {
+      "name": "retired signing key",
+      "result": "DENIED"
+    }
+  ],
+  "scope": "local cryptographic verification and own policy guard; no production IdP/JWKS rotation service, OIDC login, mTLS or distributed revocation qualified"
+}

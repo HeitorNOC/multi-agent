@@ -1,0 +1,997 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.18, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\PC\multi-agent\validation\eigent\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\PC\multi-agent\vendor\eigent-audit\backend
+configfile: pyproject.toml
+plugins: anyio-4.13.0, asyncio-1.3.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 42 items / 34 deselected / 8 selected
+
+tests/app/workspace_runtime/test_workforce_adapter.py::test_actual_task_dependencies_and_private_handoff[False] FAILED
+Timeout (0:00:30)!
+Thread 0x00001818 (most recent call first):
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\concurrent\futures\thread.py", line 81 in _worker
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 982 in run
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 1045 in _bootstrap_inner
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 1002 in _bootstrap
+
+Thread 0x00006f94 (most recent call first):
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\windows_events.py", line 825 in _poll
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\windows_events.py", line 444 in select
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 1898 in _run_once
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 608 in run_forever
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\windows_events.py", line 321 in run_forever
+  File "C:\Users\PC\multi-agent\vendor\eigent-audit\backend\tests\conftest.py", line 313 in run_loop
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 982 in run
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 1045 in _bootstrap_inner
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 1002 in _bootstrap
+
+Thread 0x00007474 (most recent call first):
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 1936 in _run_once
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 608 in run_forever
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\windows_events.py", line 321 in run_forever
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 641 in run_until_complete
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\runners.py", line 118 in run
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pytest_asyncio\plugin.py", line 716 in inner
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\python.py", line 166 in pytest_pyfunc_call
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\python.py", line 1720 in runtest
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pytest_asyncio\plugin.py", line 469 in runtest
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 179 in pytest_runtest_call
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 245 in <lambda>
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 353 in from_call
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 244 in call_and_report
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 137 in runtestprotocol
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 118 in pytest_runtest_protocol
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\main.py", line 396 in pytest_runtestloop
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\main.py", line 372 in _main
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\main.py", line 318 in wrap_session
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\main.py", line 365 in pytest_cmdline_main
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\config\__init__.py", line 199 in main
+  File "<string>", line 1 in <module>
+tests/app/workspace_runtime/test_workforce_adapter.py::test_actual_task_dependencies_and_private_handoff[True] FAILED
+tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[unknown_worker] FAILED
+tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[unknown_task] FAILED
+Timeout (0:00:30)!
+Thread 0x00003f74 (most recent call first):
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\concurrent\futures\thread.py", line 81 in _worker
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 982 in run
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 1045 in _bootstrap_inner
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 1002 in _bootstrap
+
+Thread 0x00006f94 (most recent call first):
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\windows_events.py", line 825 in _poll
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\windows_events.py", line 444 in select
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 1898 in _run_once
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 608 in run_forever
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\windows_events.py", line 321 in run_forever
+  File "C:\Users\PC\multi-agent\vendor\eigent-audit\backend\tests\conftest.py", line 313 in run_loop
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 982 in run
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 1045 in _bootstrap_inner
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\threading.py", line 1002 in _bootstrap
+
+Thread 0x00007474 (most recent call first):
+  File "C:\Users\PC\multi-agent\vendor\eigent-audit\backend\app\workspace_runtime\admission.py", line 707 in list_dispatch_candidates
+  File "C:\Users\PC\multi-agent\vendor\eigent-audit\backend\app\workspace_runtime\service.py", line 829 in _dispatch
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\events.py", line 84 in _run
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 1936 in _run_once
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 608 in run_forever
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\windows_events.py", line 321 in run_forever
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\base_events.py", line 641 in run_until_complete
+  File "C:\Users\PC\multi-agent\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\runners.py", line 118 in run
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pytest_asyncio\plugin.py", line 716 in inner
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\python.py", line 166 in pytest_pyfunc_call
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\python.py", line 1720 in runtest
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pytest_asyncio\plugin.py", line 469 in runtest
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 179 in pytest_runtest_call
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 245 in <lambda>
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 353 in from_call
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 244 in call_and_report
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 137 in runtestprotocol
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\runner.py", line 118 in pytest_runtest_protocol
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\main.py", line 396 in pytest_runtestloop
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\main.py", line 372 in _main
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\main.py", line 318 in wrap_session
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\main.py", line 365 in pytest_cmdline_main
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_callers.py", line 121 in _multicall
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_manager.py", line 120 in _hookexec
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pluggy\_hooks.py", line 512 in __call__
+  File "C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\_pytest\config\__init__.py", line 199 in main
+  File "<string>", line 1 in <module>
+tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[cycle] FAILED
+tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[missing] FAILED
+tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[duplicate] FAILED
+tests/app/workspace_runtime/test_workforce_adapter.py::test_worker_failure_preserves_partial_without_publishing_or_retry FAILED
+
+================================== FAILURES ===================================
+__________ test_actual_task_dependencies_and_private_handoff[False] ___________
+
+predicate = <function test_actual_task_dependencies_and_private_handoff.<locals>.<lambda> at 0x000002146FAFFCE0>
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+>               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = <tests.app.workspace_runtime.test_service.World object at 0x000002146B8F3990>
+tokenizer = <app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146B960CD0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002146B8F1790>
+git = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("git", [False, True])
+    async def test_actual_task_dependencies_and_private_handoff(
+        world, tokenizer, monkeypatch, git
+    ):
+        script = None
+        seen_content = []
+    
+        async def workers(context, role, call, messages):
+            if role == "author":
+                if call == 1:
+                    return response(
+                        tool="write_to_file",
+                        arguments={
+                            "file_path": "draft.txt",
+                            "content": "private draft",
+                        },
+                    )
+            elif call == 1:
+                workforce = script.executions[context.run_id].workforce
+                assert workforce._completed_tasks[0].id.endswith(".1")
+                return response(
+                    tool="read_file", arguments={"file_path": "draft.txt"}
+                )
+            elif call == 2:
+                assert messages[-1]["content"] == "private draft"
+                seen_content.append(messages[-1]["content"])
+                return response(
+                    tool="write_to_file",
+                    arguments={
+                        "file_path": "checked.txt",
+                        "content": "checked private draft",
+                    },
+                    call_id="second",
+                )
+            return response(
+                content=json.dumps(
+                    {
+                        "content": "The requested work is completed with the private file content.",
+                        "failed": False,
+                    }
+                )
+            )
+    
+        script = ModelScript(monkeypatch, workers, dependent=True)
+        _, policy = register(world, tokenizer, "p", git=git)
+        await world.submit("p", "run")
+        await world.service.start()
+>       await eventually(
+            lambda: world.agent_errors or world.completed("run"), timeout=12
+        )
+
+tests\app\workspace_runtime\test_workforce_adapter.py:322: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x000002146FB1BFC0>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError
+------------------------------ Captured log call ------------------------------
+WARNING  app.workspace_runtime.service:service.py:1310 Execution preparation requires cleanup
+___________ test_actual_task_dependencies_and_private_handoff[True] ___________
+
+predicate = <function test_actual_task_dependencies_and_private_handoff.<locals>.<lambda> at 0x000002146E2B9800>
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+>               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = <tests.app.workspace_runtime.test_service.World object at 0x000002146FD997D0>
+tokenizer = <app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146FD98210>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002146B8F2FD0>
+git = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("git", [False, True])
+    async def test_actual_task_dependencies_and_private_handoff(
+        world, tokenizer, monkeypatch, git
+    ):
+        script = None
+        seen_content = []
+    
+        async def workers(context, role, call, messages):
+            if role == "author":
+                if call == 1:
+                    return response(
+                        tool="write_to_file",
+                        arguments={
+                            "file_path": "draft.txt",
+                            "content": "private draft",
+                        },
+                    )
+            elif call == 1:
+                workforce = script.executions[context.run_id].workforce
+                assert workforce._completed_tasks[0].id.endswith(".1")
+                return response(
+                    tool="read_file", arguments={"file_path": "draft.txt"}
+                )
+            elif call == 2:
+                assert messages[-1]["content"] == "private draft"
+                seen_content.append(messages[-1]["content"])
+                return response(
+                    tool="write_to_file",
+                    arguments={
+                        "file_path": "checked.txt",
+                        "content": "checked private draft",
+                    },
+                    call_id="second",
+                )
+            return response(
+                content=json.dumps(
+                    {
+                        "content": "The requested work is completed with the private file content.",
+                        "failed": False,
+                    }
+                )
+            )
+    
+        script = ModelScript(monkeypatch, workers, dependent=True)
+        _, policy = register(world, tokenizer, "p", git=git)
+        await world.submit("p", "run")
+        await world.service.start()
+>       await eventually(
+            lambda: world.agent_errors or world.completed("run"), timeout=12
+        )
+
+tests\app\workspace_runtime\test_workforce_adapter.py:322: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x000002146FB49600>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError
+------------------------------ Captured log call ------------------------------
+WARNING  app.workspace_runtime.service:service.py:1310 Execution preparation requires cleanup
+_ test_unapproved_assignments_fail_before_worker_model_or_tools[unknown_worker] _
+
+predicate = <function test_unapproved_assignments_fail_before_worker_model_or_tools.<locals>.<lambda> at 0x00000214700E47C0>
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+>               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = <tests.app.workspace_runtime.test_service.World object at 0x0000021470062750>
+tokenizer = <app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x0000021470060250>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021470063CD0>
+mode = 'unknown_worker'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+>       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x000002146FB4A680>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError
+------------------------------ Captured log call ------------------------------
+WARNING  app.workspace_runtime.service:service.py:1310 Execution preparation requires cleanup
+_ test_unapproved_assignments_fail_before_worker_model_or_tools[unknown_task] _
+
+predicate = <function test_unapproved_assignments_fail_before_worker_model_or_tools.<locals>.<lambda> at 0x00000214700E5300>
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+>               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = <tests.app.workspace_runtime.test_service.World object at 0x000002146FD98710>
+tokenizer = <app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146FD99810>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002146FCED510>
+mode = 'unknown_task'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+>       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x0000021470060F80>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError
+------------------------------ Captured log call ------------------------------
+WARNING  app.workspace_runtime.service:service.py:1310 Execution preparation requires cleanup
+____ test_unapproved_assignments_fail_before_worker_model_or_tools[cycle] _____
+
+predicate = <function test_unapproved_assignments_fail_before_worker_model_or_tools.<locals>.<lambda> at 0x000002146B8B63E0>
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+>               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = <tests.app.workspace_runtime.test_service.World object at 0x000002146B9036D0>
+tokenizer = <app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146B903910>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002146FAF01D0>
+mode = 'cycle'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+>       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x000002146FB2A180>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError
+------------------------------ Captured log call ------------------------------
+WARNING  app.workspace_runtime.service:service.py:1310 Execution preparation requires cleanup
+___ test_unapproved_assignments_fail_before_worker_model_or_tools[missing] ____
+
+predicate = <function test_unapproved_assignments_fail_before_worker_model_or_tools.<locals>.<lambda> at 0x00000214700E6200>
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+>               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = <tests.app.workspace_runtime.test_service.World object at 0x000002146FB2BD10>
+tokenizer = <app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146FB1B410>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002146B914A50>
+mode = 'missing'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+>       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x000002146FB2DEC0>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError
+------------------------------ Captured log call ------------------------------
+WARNING  app.workspace_runtime.service:service.py:1310 Execution preparation requires cleanup
+__ test_unapproved_assignments_fail_before_worker_model_or_tools[duplicate] ___
+
+predicate = <function test_unapproved_assignments_fail_before_worker_model_or_tools.<locals>.<lambda> at 0x00000214700E5D00>
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+>               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = <tests.app.workspace_runtime.test_service.World object at 0x000002147013C590>
+tokenizer = <app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002147013F790>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002147013DDD0>
+mode = 'duplicate'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+>       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x000002147027AF80>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError
+------------------------------ Captured log call ------------------------------
+WARNING  app.workspace_runtime.service:service.py:1310 Execution preparation requires cleanup
+______ test_worker_failure_preserves_partial_without_publishing_or_retry ______
+
+predicate = <function test_worker_failure_preserves_partial_without_publishing_or_retry.<locals>.<lambda> at 0x000002146B8B6F20>
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+>               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = <tests.app.workspace_runtime.test_service.World object at 0x000002146B9237D0>
+tokenizer = <app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146B8F3990>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002146B8F3ED0>
+
+    @pytest.mark.asyncio
+    async def test_worker_failure_preserves_partial_without_publishing_or_retry(
+        world, tokenizer, monkeypatch
+    ):
+        async def workers(context, role, call, messages):
+            if role == "author" and call == 1:
+                return response(
+                    tool="write_to_file",
+                    arguments={
+                        "file_path": "partial.txt",
+                        "content": "preserved partial",
+                    },
+                )
+            if role == "editor":
+                raise AssertionError(
+                    "dependent worker cannot execute after failure"
+                )
+            return response(
+                content=json.dumps(
+                    {
+                        "content": "The file is partial; the task could not be completed.",
+                        "failed": True,
+                    }
+                )
+            )
+    
+        script = ModelScript(monkeypatch, workers, dependent=True)
+        _, policy = register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+>       await eventually(
+            lambda: (
+                world.journal.get_run("run") is not None
+                and world.journal.get_run("run").status == "failed"
+            )
+        )
+
+tests\app\workspace_runtime\test_workforce_adapter.py:1021: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x000002146FB2A180>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError
+------------------------------ Captured log call ------------------------------
+WARNING  app.workspace_runtime.service:service.py:1310 Execution preparation requires cleanup
+- generated xml file: C:\Users\PC\multi-agent\validation\eigent\evidence\workforce-locked.xml -
+=========================== short test summary info ===========================
+FAILED tests/app/workspace_runtime/test_workforce_adapter.py::test_actual_task_dependencies_and_private_handoff[False] - TimeoutError
+FAILED tests/app/workspace_runtime/test_workforce_adapter.py::test_actual_task_dependencies_and_private_handoff[True] - TimeoutError
+FAILED tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[unknown_worker] - TimeoutError
+FAILED tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[unknown_task] - TimeoutError
+FAILED tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[cycle] - TimeoutError
+FAILED tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[missing] - TimeoutError
+FAILED tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_assignments_fail_before_worker_model_or_tools[duplicate] - TimeoutError
+FAILED tests/app/workspace_runtime/test_workforce_adapter.py::test_worker_failure_preserves_partial_without_publishing_or_retry - TimeoutError
+================= 8 failed, 34 deselected in 86.36s (0:01:26) =================

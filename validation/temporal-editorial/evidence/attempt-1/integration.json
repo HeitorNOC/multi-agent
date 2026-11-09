@@ -1,0 +1,20 @@
+{
+  "installation": "b0604c6dfe",
+  "images": {
+    "postgres": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+    "neo4j": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+    "keycloak": "quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7"
+  },
+  "scenarios": [],
+  "worker_calls": [],
+  "result": "FAIL",
+  "error": "[0.031s][warning][os,thread] Failed to start thread \"Unknown thread\" - pthread_create failed (EAGAIN) for attributes: stacksize: 1024k, guardsize: 0k, detached.\nError occurred during initialization of VM\njava.lang.OutOfMemoryError: unable to create native thread: possibly out of memory or process/resource limits reached\n",
+  "elapsed_seconds": 120.13996739999857,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

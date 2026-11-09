@@ -1,0 +1,235 @@
+{
+  "id": "a4eab6a2-45e0-474a-9f5c-f7678f89e2d4",
+  "elapsed_ms": 434632,
+  "review": {
+    "job": "a4eab6a2-45e0-474a-9f5c-f7678f89e2d4",
+    "report": {
+      "roster": [
+        "tech_lead",
+        "backend_engineer",
+        "qa_engineer",
+        "platform_engineer"
+      ],
+      "assignments": [
+        {
+          "agent": "tech_lead",
+          "task": "Definir a arquitetura e as garantias de atomicidade e idempotência, incluindo a chave por tenant e o tratamento de falhas de escrita."
+        },
+        {
+          "agent": "backend_engineer",
+          "task": "Implementar o módulo CommonJS síncrono com node:sqlite conforme a definição técnica."
+        },
+        {
+          "agent": "qa_engineer",
+          "task": "Verificar os critérios de aceitação, a persistência, o isolamento entre tenants, os conflitos e a possibilidade de nova tentativa após falha de escrita."
+        }
+      ],
+      "tests": {
+        "exit_code": 0,
+        "passed": true,
+        "log": "TAP version 13\n# CHECK duplicate: HTTP 202 then 200 across two deliveries; one stored effect\n# CHECK conflict: HTTP 409 for changed payload; original unchanged\n# CHECK tenant: same event ID in another tenant independently accepted\n# CHECK reopen: duplicate still recognized after reopening the SQLite file\n# CHECK rollback: injected write failure returned HTTP 500 with no effect; retry accepted exactly once\n# Subtest: webhook deduplicates repeated deliveries and preserves tenant scope\nok 1 - webhook deduplicates repeated deliveries and preserves tenant scope\n  ---\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 210.144615\n"
+      },
+      "qa": {
+        "verdict": "pass",
+        "evidence": "O teste passou com código de saída 0. O registro confirma um único efeito para entregas repetidas, conflito sem alteração do payload original, isolamento entre tenants, reconhecimento de duplicata após reabrir o banco SQLite e aceitação da nova tentativa após falha de escrita sem efeito persistido."
+      },
+      "technical_review": {
+        "verdict": "pass",
+        "evidence": "O módulo CommonJS exporta initialize e ingest síncronas. A chave primária composta isola os tenants, e o INSERT atômico preserva o payload original ao distinguir accepted, duplicate e conflict. A execução fora de transação externa e a propagação de erros de escrita permitem persistência e nova tentativa após falha. Os testes fornecidos passaram para duplicação, conflito, isolamento entre tenants, reabertura do banco e falha de escrita seguida de nova tentativa."
+      },
+      "decision": {
+        "action": "human_review",
+        "reason": "Os testes e o parecer técnico passaram, cobrindo idempotência, conflito de payload, isolamento entre tenants, persistência e nova tentativa após falha de escrita."
+      },
+      "review_history": [
+        {
+          "attempt": 1,
+          "passed": true,
+          "decision": {
+            "action": "human_review",
+            "reason": "Os testes e o parecer técnico passaram, cobrindo idempotência, conflito de payload, isolamento entre tenants, persistência e nova tentativa após falha de escrita."
+          }
+        }
+      ],
+      "kind": "engineering",
+      "diff": "--- a/webhook.cjs\n+++ b/webhook.cjs\n@@ -5,14 +5,36 @@\n     CREATE TABLE IF NOT EXISTS effects (\n       tenant_id TEXT NOT NULL,\n       event_id TEXT NOT NULL,\n-      payload TEXT NOT NULL\n+      payload TEXT NOT NULL,\n+      PRIMARY KEY (tenant_id, event_id)\n     );\n   `);\n }\n \n function ingest(db, { tenantId, eventId, payload }) {\n-  db.prepare(\"INSERT INTO effects VALUES (?, ?, ?)\").run(tenantId, eventId, payload);\n-  return \"accepted\";\n+  if (db.isTransaction) {\n+    throw new Error(\"ingest must run outside a transaction\");\n+  }\n+\n+  const result = db.prepare(`\n+    INSERT INTO effects (tenant_id, event_id, payload)\n+    VALUES (?, ?, ?)\n+    ON CONFLICT(tenant_id, event_id) DO NOTHING\n+  `).run(tenantId, eventId, payload);\n+\n+  if (result.changes === 1 || result.changes === 1n) {\n+    return \"accepted\";\n+  }\n+\n+  const existing = db.prepare(`\n+    SELECT payload FROM effects WHERE tenant_id = ? AND event_id = ?\n+  `).get(tenantId, eventId);\n+\n+  if (!existing) {\n+    throw new Error(\"Existing effect not found after insert conflict\");\n+  }\n+\n+  return existing.payload === payload ? \"duplicate\" : \"conflict\";\n }\n \n module.exports = { initialize, ingest };\n"
+    },
+    "payload": {
+      "operation": "engineering-review",
+      "recipient": "registro-local-engenharia",
+      "content": "Registrar a revisão humana da entrega de engenharia."
+    },
+    "hash": "8e5131d95965be4f1bc6ea4f75bfbf79eac1778dd2197ba5e2890397ba8a653b",
+    "requires_approval": true
+  },
+  "events": [
+    {
+      "seq": 1,
+      "at": "2026-11-07T03:01:58.797Z",
+      "node": "admission",
+      "detail": {
+        "goal": "Implemente e teste a ingestão idempotente de um webhook fictício e encaminhe o diff para revisão humana."
+      }
+    },
+    {
+      "seq": 2,
+      "at": "2026-11-07T03:01:58.797Z",
+      "node": "job_queued",
+      "detail": {
+        "position_id": 1,
+        "kind": "new",
+        "queued_at": "2026-11-07T03:01:58.797Z"
+      }
+    },
+    {
+      "seq": 3,
+      "at": "2026-11-07T03:01:58.802Z",
+      "node": "job_dequeued",
+      "detail": {
+        "position_id": 1,
+        "wait_ms": 5
+      }
+    },
+    {
+      "seq": 4,
+      "at": "2026-11-07T03:01:58.802Z",
+      "node": "worker_requested",
+      "detail": {}
+    },
+    {
+      "seq": 5,
+      "at": "2026-11-07T03:01:58.811Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 18532,
+        "running": 1
+      }
+    },
+    {
+      "seq": 6,
+      "at": "2026-11-07T03:01:59.756749+00:00",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [],
+        "process": 21736,
+        "has_state": false,
+        "telemetry": {
+          "span_id": "6a5fa449e2e92582",
+          "parent_span_id": "a506d84b2a712b6b",
+          "checkpoint_id": null,
+          "occurred_at": "2026-11-07T03:01:59.756749+00:00",
+          "worker_run_id": "8eec995c4efb4250ba25965b5ebb9b1c"
+        }
+      }
+    },
+    {
+      "seq": 7,
+      "at": "2026-11-07T03:02:05.438Z",
+      "node": "engineering_chief",
+      "detail": {
+        "attempt": 0,
+        "roster": [
+          "tech_lead",
+          "backend_engineer",
+          "qa_engineer",
+          "platform_engineer"
+        ]
+      }
+    },
+    {
+      "seq": 8,
+      "at": "2026-11-07T03:02:11.342Z",
+      "node": "engineering_assign",
+      "detail": {
+        "attempt": 0,
+        "assignments": [
+          {
+            "agent": "tech_lead",
+            "task": "Definir a arquitetura e as garantias de atomicidade e idempotência, incluindo a chave por tenant e o tratamento de falhas de escrita."
+          },
+          {
+            "agent": "backend_engineer",
+            "task": "Implementar o módulo CommonJS síncrono com node:sqlite conforme a definição técnica."
+          },
+          {
+            "agent": "qa_engineer",
+            "task": "Verificar os critérios de aceitação, a persistência, o isolamento entre tenants, os conflitos e a possibilidade de nova tentativa após falha de escrita."
+          }
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "at": "2026-11-07T03:02:36.705Z",
+      "node": "engineering_qa",
+      "detail": {
+        "attempt": 1,
+        "tests": {
+          "exit_code": 0,
+          "passed": true,
+          "log": "TAP version 13\n# CHECK duplicate: HTTP 202 then 200 across two deliveries; one stored effect\n# CHECK conflict: HTTP 409 for changed payload; original unchanged\n# CHECK tenant: same event ID in another tenant independently accepted\n# CHECK reopen: duplicate still recognized after reopening the SQLite file\n# CHECK rollback: injected write failure returned HTTP 500 with no effect; retry accepted exactly once\n# Subtest: webhook deduplicates repeated deliveries and preserves tenant scope\nok 1 - webhook deduplicates repeated deliveries and preserves tenant scope\n  ---\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 210.144615\n"
+        }
+      }
+    },
+    {
+      "seq": 10,
+      "at": "2026-11-07T03:02:42.297Z",
+      "node": "engineering_review",
+      "detail": {
+        "attempt": 1,
+        "technical_review": {
+          "verdict": "pass",
+          "evidence": "O módulo CommonJS exporta initialize e ingest síncronas. A chave primária composta isola os tenants, e o INSERT atômico preserva o payload original ao distinguir accepted, duplicate e conflict. A execução fora de transação externa e a propagação de erros de escrita permitem persistência e nova tentativa após falha. Os testes fornecidos passaram para duplicação, conflito, isolamento entre tenants, reabertura do banco e falha de escrita seguida de nova tentativa."
+        }
+      }
+    },
+    {
+      "seq": 11,
+      "at": "2026-11-07T03:02:46.278Z",
+      "node": "engineering_director",
+      "detail": {
+        "attempt": 1,
+        "decision": {
+          "action": "human_review",
+          "reason": "Os testes e o parecer técnico passaram, cobrindo idempotência, conflito de payload, isolamento entre tenants, persistência e nova tentativa após falha de escrita."
+        }
+      }
+    },
+    {
+      "seq": 12,
+      "at": "2026-11-07T03:02:46.285Z",
+      "node": "review_ready",
+      "detail": {
+        "hash": "8e5131d95965be4f1bc6ea4f75bfbf79eac1778dd2197ba5e2890397ba8a653b",
+        "model_approval_mismatch": true
+      }
+    },
+    {
+      "seq": 13,
+      "at": "2026-11-07T03:02:46.296798+00:00",
+      "node": "checkpoint_saved",
+      "detail": {
+        "next": [
+          "approval"
+        ],
+        "completed": false,
+        "telemetry": {
+          "span_id": "e7875a91e2e7ee4d",
+          "parent_span_id": "a506d84b2a712b6b",
+          "checkpoint_id": "1f1da57b-53cf-69aa-8008-d939f2a8c906",
+          "occurred_at": "2026-11-07T03:02:46.296798+00:00",
+          "worker_run_id": "8eec995c4efb4250ba25965b5ebb9b1c"
+        }
+      }
+    },
+    {
+      "seq": 14,
+      "at": "2026-11-07T03:02:46.397Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 18532,
+        "exit_code": 0
+      }
+    }
+  ]
+}

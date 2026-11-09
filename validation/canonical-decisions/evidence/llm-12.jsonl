@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a5f3-79cf-75a2-a882-4f94691f3a87"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"política de trabalho remoto\\\",\\\"dias por semana\\\",\\\"data de vigência\\\"],\\\"low_level_keywords\\\":[\\\"ACME\\\",\\\"2026-01-15T00:00:00+00:00\\\",\\\"2026-11-04T09:45:28.827653+00:00\\\",\\\"politica-remoto@v1\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12691,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":93,"reasoning_output_tokens":0}}

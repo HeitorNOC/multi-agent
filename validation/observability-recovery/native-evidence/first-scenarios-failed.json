@@ -1,0 +1,2484 @@
+{
+  "scenarios": [
+    {
+      "scenario": "campaign",
+      "job": "bf0f9ac8-2220-4b58-86de-c4829d488c73",
+      "status": "failed",
+      "plan": null,
+      "report": null,
+      "seconds": 16.208986999990884,
+      "events": [
+        {
+          "seq": 1,
+          "at": "2026-11-05T15:10:11.840Z",
+          "node": "admission",
+          "detail": {
+            "goal": "Avalie se o Grupo Aurora pode lançar a campanha Horizonte em novembro, considerando a oportunidade Orion, estoque e suprimento, desconto e margem vigente, caixa disponível, prazos regionais e a alegação carbono neutro. Proponha um plano condicionado, sem executar ações externas."
+          }
+        },
+        {
+          "seq": 2,
+          "at": "2026-11-05T15:10:11.843Z",
+          "node": "worker_requested",
+          "detail": {}
+        },
+        {
+          "seq": 3,
+          "at": "2026-11-05T15:10:11.853Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 24668
+          }
+        },
+        {
+          "seq": 4,
+          "at": "2026-11-05T15:10:12.864800+00:00",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [],
+            "process": 19192,
+            "has_state": false,
+            "telemetry": {
+              "span_id": "f57a4e4c37147319",
+              "parent_span_id": "364cf5decd0f7762",
+              "checkpoint_id": null,
+              "occurred_at": "2026-11-05T15:10:12.864800+00:00",
+              "worker_run_id": "f0790226c7bc4197809e1913c7b169e4"
+            }
+          }
+        },
+        {
+          "seq": 5,
+          "at": "2026-11-05T15:10:12.881746+00:00",
+          "node": "chief_of_staff",
+          "detail": {
+            "message": "Escolhendo uma equipe a partir do catálogo completo de 21 agentes.",
+            "telemetry": {
+              "span_id": "0c17bf964167be87",
+              "parent_span_id": "364cf5decd0f7762",
+              "occurred_at": "2026-11-05T15:10:12.881746+00:00",
+              "worker_run_id": "f0790226c7bc4197809e1913c7b169e4"
+            }
+          }
+        },
+        {
+          "seq": 6,
+          "at": "2026-11-05T15:10:12.912930+00:00",
+          "node": "inference_requested",
+          "detail": {
+            "capability": null,
+            "telemetry": {
+              "span_id": "73108db7cbb61866",
+              "parent_span_id": "364cf5decd0f7762",
+              "model_slot": "plan",
+              "input_artifact_id": "e1891123ea25bd8d99a6e89c03cf8b74ee1499a3fc825fae7f155cda72e25f38",
+              "occurred_at": "2026-11-05T15:10:12.912930+00:00",
+              "worker_run_id": "f0790226c7bc4197809e1913c7b169e4"
+            }
+          }
+        },
+        {
+          "seq": 7,
+          "at": "2026-11-05T15:10:27.570123+00:00",
+          "node": "inference_completed",
+          "detail": {
+            "capability": null,
+            "telemetry": {
+              "span_id": "2de7934a29861840",
+              "parent_span_id": "364cf5decd0f7762",
+              "model_slot": "plan",
+              "input_artifact_id": "e1891123ea25bd8d99a6e89c03cf8b74ee1499a3fc825fae7f155cda72e25f38",
+              "output_artifact_id": "38bfc8b084d2faa3dc66b988251de70574cceffb514bc44550c089cbf065255b",
+              "fact_ids": [],
+              "occurred_at": "2026-11-05T15:10:27.570123+00:00",
+              "worker_run_id": "f0790226c7bc4197809e1913c7b169e4"
+            }
+          }
+        },
+        {
+          "seq": 8,
+          "at": "2026-11-05T15:10:27.690Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 24668,
+            "exit_code": 1
+          }
+        }
+      ],
+      "failure": "Worker falhou; veja o registro local. Não há sucesso presumido."
+    },
+    {
+      "scenario": "incident",
+      "job": "97edcde8-beea-4ef7-a699-2d1cdcb66eb8",
+      "status": "awaiting_approval",
+      "plan": {
+        "strategy": "A3",
+        "reason": "A primeira avaliação do INC-47 requer segurança para apurar evidências e prazo interno, e jurídico para avaliar governança e possíveis obrigações. O enunciado não informa fatos sobre o incidente, horário de início ou prazo do SLA; portanto, não é possível confirmar comprometimento nem calcular o tempo restante às 16h45. O trabalho deve registrar separadamente suspeitas e fatos confirmados, obter o marco inicial e o prazo aplicável e calcular o saldo. A avaliação será planejada sem executar contenção ou comunicação externa.",
+        "teams": [
+          {
+            "lead": "technology_director",
+            "specialists": [
+              "security_analyst"
+            ],
+            "reason": "A diretora coordena a avaliação técnica. A analista deve identificar a origem e a confiabilidade dos alertas, preservar e revisar registros disponíveis, verificar acesso, escopo, dados e sistemas potencialmente afetados, distinguir evidências confirmadas de hipóteses e identificar lacunas. Deve também obter o marco inicial e a duração do SLA interno para calcular o tempo restante às 16h45; sem esses dados, o saldo permanece indeterminado."
+          },
+          {
+            "lead": "legal_director",
+            "specialists": [
+              "compliance_advisor"
+            ],
+            "reason": "O diretor coordena a avaliação jurídica. A assessora deve verificar a governança de resposta, a jurisdição e os papéis aplicáveis, os tipos de dados potencialmente envolvidos, eventuais prazos e critérios de notificação, além de registrar decisões e informações ainda necessárias. Qualquer obrigação dependerá dos fatos apurados e das regras aplicáveis; não será feita comunicação externa nesta etapa."
+          }
+        ],
+        "capabilities": [
+          "technology_director",
+          "security_analyst",
+          "legal_director",
+          "compliance_advisor"
+        ],
+        "not_selected": [
+          {
+            "id": "executive_director",
+            "reason": "A avaliação inicial pode ser coordenada pelas diretorias técnica e jurídica, sem escalonamento executivo por padrão."
+          },
+          {
+            "id": "business_analyst",
+            "reason": "Não há dependência entre unidades demonstrada que exija análise de negócios."
+          },
+          {
+            "id": "portfolio_analyst",
+            "reason": "Não há decisão de investimento ou priorização de portfólio nesta avaliação."
+          },
+          {
+            "id": "marketing_director",
+            "reason": "O pedido trata de incidente no CRM, sem escopo de campanha ou posicionamento."
+          },
+          {
+            "id": "campaign_planner",
+            "reason": "Não há campanha a planejar ou avaliar."
+          },
+          {
+            "id": "pricing_analyst",
+            "reason": "Não há questão de preço ou promoção."
+          },
+          {
+            "id": "operations_director",
+            "reason": "Não há impacto logístico ou operacional demonstrado que exija esta diretoria."
+          },
+          {
+            "id": "supply_planner",
+            "reason": "Não há questão de estoque ou suprimentos."
+          },
+          {
+            "id": "logistics_analyst",
+            "reason": "Não há questão de capacidade ou prazo logístico."
+          },
+          {
+            "id": "finance_director",
+            "reason": "Não há necessidade financeira demonstrada para a primeira avaliação."
+          },
+          {
+            "id": "controller",
+            "reason": "Não há análise de margem, desconto ou orçamento solicitada."
+          },
+          {
+            "id": "treasury_analyst",
+            "reason": "Não há questão de liquidez ou financiamento demonstrada."
+          },
+          {
+            "id": "people_director",
+            "reason": "Não há necessidade demonstrada de envolver pessoas ou RH."
+          },
+          {
+            "id": "recruitment_analyst",
+            "reason": "Não há demanda de admissões demonstrada."
+          },
+          {
+            "id": "workforce_analyst",
+            "reason": "Não há questão de capacidade humana ou treinamento demonstrada."
+          },
+          {
+            "id": "contract_analyst",
+            "reason": "Nenhuma questão contratual específica foi identificada; a avaliação jurídica inicial pode apontar eventual necessidade posterior."
+          },
+          {
+            "id": "data_analyst",
+            "reason": "Não há inconsistência de contagens ou integração demonstrada que exija especialista adicional na primeira avaliação."
+          }
+        ],
+        "requires_approval": true,
+        "max_model_calls": 6
+      },
+      "report": {
+        "summary": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico do INC-47 no AuroraCRM europeu. A proposta é viável como avaliação limitada aos relatórios sintéticos preservados, desde que as duas áreas participem até 17h50 de 05/11/2026, no fuso -03:00. Às 16h45, restavam 65 minutos do prazo interno fictício. Há suspeita de exportação envolvendo aproximadamente 1.200 contatos; transferência concluída e acesso por terceiros não foram confirmados. Esta decisão integrada não aprova ações de contenção ou comunicação externa e não constitui conclusão jurídica real.",
+        "facts": [
+          {
+            "key": "potential_records",
+            "value": 1200,
+            "unit": "contatos estimados",
+            "label": "Contatos potencialmente envolvidos, sob investigação",
+            "sources": [
+              "aurora-incident",
+              "aurora-data-platform"
+            ]
+          },
+          {
+            "key": "confirmed_exfiltration",
+            "value": false,
+            "unit": "estado da evidência",
+            "label": "Não há confirmação de exfiltração; isso não comprova que ela não ocorreu",
+            "sources": [
+              "aurora-incident"
+            ]
+          },
+          {
+            "key": "response_sla_minutes",
+            "value": 90,
+            "unit": "minutos",
+            "label": "Prazo interno fictício para a primeira avaliação conjunta após o alerta",
+            "sources": [
+              "aurora-incident",
+              "aurora-response"
+            ]
+          },
+          {
+            "key": "minutes_elapsed",
+            "value": 25,
+            "unit": "minutos",
+            "label": "Tempo transcorrido entre o alerta às 16h20 e 16h45",
+            "sources": [
+              "aurora-incident"
+            ]
+          },
+          {
+            "key": "minutes_remaining",
+            "value": 65,
+            "unit": "minutos",
+            "label": "Tempo restante às 16h45; vencimento às 17h50 no fuso -03:00",
+            "sources": [
+              "aurora-incident",
+              "aurora-response"
+            ]
+          },
+          {
+            "key": "reports_preserved",
+            "value": true,
+            "unit": "booleano",
+            "label": "Relatórios disponíveis preservados pelo responsável de plantão",
+            "sources": [
+              "aurora-incident"
+            ]
+          },
+          {
+            "key": "complete_containment_proven",
+            "value": false,
+            "unit": "booleano",
+            "label": "Não há prova de contenção completa",
+            "sources": [
+              "aurora-incident"
+            ]
+          }
+        ],
+        "risks": [
+          "A extensão efetiva, o destino final, a conclusão da transferência, o eventual acesso por terceiros e a causa permanecem desconhecidos; não há base para declarar vazamento confirmado.",
+          "Os relatórios sintéticos registram volume e destino lógico, mas não contêm o conteúdo dos registros; eventuais lacunas nos logs podem limitar a reconstrução.",
+          "A ausência de prova de contenção completa impede concluir que o incidente esteja contido.",
+          "Obrigações e prazos externos dependem da apuração factual e jurídica; os 90 minutos são apenas um prazo interno fictício.",
+          "As fontes canônicas citadas não foram fornecidas para verificação independente; as relações atribuídas a aurora-data-platform permanecem pendentes de verificação."
+        ],
+        "conditions": [
+          "Segurança e Jurídico devem participar conjuntamente da primeira avaliação até 17h50, no fuso -03:00.",
+          "Limitar a análise aos relatórios sintéticos já preservados e registrar suas limitações; não acessar produção, executar SQL contra clientes ou copiar registros pessoais.",
+          "Não executar contenção, alterar configurações, revogar tokens, executar campanha ou realizar comunicação ou notificação externa. Essas ações estão bloqueadas nesta avaliação e dependem de processo e aprovação separados.",
+          "Envolver outras áreas somente diante de necessidade específica demonstrada, registrando a dependência e os fatos necessários.",
+          "Os 6.000 itens da oportunidade Orion são uma unidade distinta e não devem ser somados aos contatos potencialmente envolvidos."
+        ],
+        "cited_sources": [
+          "aurora-incident",
+          "aurora-data-platform",
+          "aurora-response"
+        ],
+        "action": "Registrar no quadro local um checklist para avaliação, sem tratá-lo como autorização de execução: Segurança deve revisar os relatórios sintéticos preservados, registrar horários, volume, destino lógico, integridade e lacunas, e apurar somente dentro dessas evidências o estado da transferência, possíveis acessos e causa, separando fatos, hipóteses e evidências faltantes. Jurídico deve avaliar com Segurança a natureza e a possível extensão do evento, identificar fatos necessários para apurar requisitos jurídicos e contratuais e eventuais prazos externos, e registrar decisões, pendências e dependências sem presumir obrigação ou aprovar notificação. Revisar o plano quando surgirem novas evidências; encaminhar eventuais medidas ou comunicações ao processo próprio de autorização, sem executá-las nesta avaliação.",
+        "requires_approval": true
+      },
+      "seconds": 116.17737600003602,
+      "events": [
+        {
+          "seq": 9,
+          "at": "2026-11-05T15:10:28.080Z",
+          "node": "admission",
+          "detail": {
+            "goal": "Priorize a primeira avaliação do incidente INC-47 no CRM europeu. Distinga suspeita e fato confirmado, apure o prazo interno restante às 16h45 e proponha um checklist técnico e jurídico. Não execute contenção ou comunicação externa nem envolva áreas sem necessidade."
+          }
+        },
+        {
+          "seq": 10,
+          "at": "2026-11-05T15:10:28.081Z",
+          "node": "worker_requested",
+          "detail": {}
+        },
+        {
+          "seq": 11,
+          "at": "2026-11-05T15:10:28.085Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 24048
+          }
+        },
+        {
+          "seq": 12,
+          "at": "2026-11-05T15:10:28.979344+00:00",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [],
+            "process": 24132,
+            "has_state": false,
+            "telemetry": {
+              "span_id": "93838e1d2ff25678",
+              "parent_span_id": "b25b94bc82c46dee",
+              "checkpoint_id": null,
+              "occurred_at": "2026-11-05T15:10:28.979344+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 13,
+          "at": "2026-11-05T15:10:28.997715+00:00",
+          "node": "chief_of_staff",
+          "detail": {
+            "message": "Escolhendo uma equipe a partir do catálogo completo de 21 agentes.",
+            "telemetry": {
+              "span_id": "cf8ea1469e6c2b62",
+              "parent_span_id": "b25b94bc82c46dee",
+              "occurred_at": "2026-11-05T15:10:28.997715+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 14,
+          "at": "2026-11-05T15:10:29.005232+00:00",
+          "node": "inference_requested",
+          "detail": {
+            "capability": null,
+            "telemetry": {
+              "span_id": "91bebf55571886c8",
+              "parent_span_id": "b25b94bc82c46dee",
+              "model_slot": "plan",
+              "input_artifact_id": "8658f77e69fc6f6e26228aa12035efc90d5c4579a0565c08da543979497033e0",
+              "occurred_at": "2026-11-05T15:10:29.005232+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 15,
+          "at": "2026-11-05T15:10:46.837792+00:00",
+          "node": "inference_completed",
+          "detail": {
+            "capability": null,
+            "telemetry": {
+              "span_id": "c92e847bebef42dc",
+              "parent_span_id": "b25b94bc82c46dee",
+              "model_slot": "plan",
+              "input_artifact_id": "8658f77e69fc6f6e26228aa12035efc90d5c4579a0565c08da543979497033e0",
+              "output_artifact_id": "8a39b3f672d3430bd50f90653582aaebb0b1b3a7b8ff62408916a2818d942470",
+              "fact_ids": [],
+              "occurred_at": "2026-11-05T15:10:46.837792+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 16,
+          "at": "2026-11-05T15:10:46.843Z",
+          "node": "plan",
+          "detail": {
+            "strategy": "A3",
+            "reason": "A primeira avaliação do INC-47 requer segurança para apurar evidências e prazo interno, e jurídico para avaliar governança e possíveis obrigações. O enunciado não informa fatos sobre o incidente, horário de início ou prazo do SLA; portanto, não é possível confirmar comprometimento nem calcular o tempo restante às 16h45. O trabalho deve registrar separadamente suspeitas e fatos confirmados, obter o marco inicial e o prazo aplicável e calcular o saldo. A avaliação será planejada sem executar contenção ou comunicação externa.",
+            "teams": [
+              {
+                "lead": "technology_director",
+                "specialists": [
+                  "security_analyst"
+                ],
+                "reason": "A diretora coordena a avaliação técnica. A analista deve identificar a origem e a confiabilidade dos alertas, preservar e revisar registros disponíveis, verificar acesso, escopo, dados e sistemas potencialmente afetados, distinguir evidências confirmadas de hipóteses e identificar lacunas. Deve também obter o marco inicial e a duração do SLA interno para calcular o tempo restante às 16h45; sem esses dados, o saldo permanece indeterminado."
+              },
+              {
+                "lead": "legal_director",
+                "specialists": [
+                  "compliance_advisor"
+                ],
+                "reason": "O diretor coordena a avaliação jurídica. A assessora deve verificar a governança de resposta, a jurisdição e os papéis aplicáveis, os tipos de dados potencialmente envolvidos, eventuais prazos e critérios de notificação, além de registrar decisões e informações ainda necessárias. Qualquer obrigação dependerá dos fatos apurados e das regras aplicáveis; não será feita comunicação externa nesta etapa."
+              }
+            ],
+            "capabilities": [
+              "technology_director",
+              "security_analyst",
+              "legal_director",
+              "compliance_advisor"
+            ],
+            "not_selected": [
+              {
+                "id": "executive_director",
+                "reason": "A avaliação inicial pode ser coordenada pelas diretorias técnica e jurídica, sem escalonamento executivo por padrão."
+              },
+              {
+                "id": "business_analyst",
+                "reason": "Não há dependência entre unidades demonstrada que exija análise de negócios."
+              },
+              {
+                "id": "portfolio_analyst",
+                "reason": "Não há decisão de investimento ou priorização de portfólio nesta avaliação."
+              },
+              {
+                "id": "marketing_director",
+                "reason": "O pedido trata de incidente no CRM, sem escopo de campanha ou posicionamento."
+              },
+              {
+                "id": "campaign_planner",
+                "reason": "Não há campanha a planejar ou avaliar."
+              },
+              {
+                "id": "pricing_analyst",
+                "reason": "Não há questão de preço ou promoção."
+              },
+              {
+                "id": "operations_director",
+                "reason": "Não há impacto logístico ou operacional demonstrado que exija esta diretoria."
+              },
+              {
+                "id": "supply_planner",
+                "reason": "Não há questão de estoque ou suprimentos."
+              },
+              {
+                "id": "logistics_analyst",
+                "reason": "Não há questão de capacidade ou prazo logístico."
+              },
+              {
+                "id": "finance_director",
+                "reason": "Não há necessidade financeira demonstrada para a primeira avaliação."
+              },
+              {
+                "id": "controller",
+                "reason": "Não há análise de margem, desconto ou orçamento solicitada."
+              },
+              {
+                "id": "treasury_analyst",
+                "reason": "Não há questão de liquidez ou financiamento demonstrada."
+              },
+              {
+                "id": "people_director",
+                "reason": "Não há necessidade demonstrada de envolver pessoas ou RH."
+              },
+              {
+                "id": "recruitment_analyst",
+                "reason": "Não há demanda de admissões demonstrada."
+              },
+              {
+                "id": "workforce_analyst",
+                "reason": "Não há questão de capacidade humana ou treinamento demonstrada."
+              },
+              {
+                "id": "contract_analyst",
+                "reason": "Nenhuma questão contratual específica foi identificada; a avaliação jurídica inicial pode apontar eventual necessidade posterior."
+              },
+              {
+                "id": "data_analyst",
+                "reason": "Não há inconsistência de contagens ou integração demonstrada que exija especialista adicional na primeira avaliação."
+              }
+            ],
+            "requires_approval": true,
+            "max_model_calls": 6
+          }
+        },
+        {
+          "seq": 17,
+          "at": "2026-11-05T15:10:46.869862+00:00",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "compliance_advisor",
+            "parent": "legal_director",
+            "telemetry": {
+              "span_id": "c34fe4efcbc03363",
+              "parent_span_id": "18ddebde3bcaa56b",
+              "occurred_at": "2026-11-05T15:10:46.869862+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 18,
+          "at": "2026-11-05T15:10:46.867747+00:00",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "security_analyst",
+            "parent": "technology_director",
+            "telemetry": {
+              "span_id": "a3b860e383f38c1f",
+              "parent_span_id": "db612d1e51103fbb",
+              "occurred_at": "2026-11-05T15:10:46.867747+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 19,
+          "at": "2026-11-05T15:10:47.987873+00:00",
+          "node": "retrieval_completed",
+          "detail": {
+            "capability": "compliance_advisor",
+            "telemetry": {
+              "span_id": "c34fe4efcbc03363",
+              "parent_span_id": "18ddebde3bcaa56b",
+              "evidence": [
+                {
+                  "source_id": "aurora-compliance",
+                  "source_version": 1,
+                  "source_hash": "3ae7cbc2b99f919877a27d773571aee8bf8156192c3564a99ad0d92d40627335",
+                  "projection_id": "7b456b8ff723053c5eb66630fa5894c4dd12816a1e297383c0a64ad8ddc2d75f",
+                  "retrieved_fragment_id": "950b959671fbfd53aa21be9a1cf95155685229e21678e6363d396f7f35659056"
+                },
+                {
+                  "source_id": "aurora-response",
+                  "source_version": 1,
+                  "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                  "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                  "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853"
+                },
+                {
+                  "source_id": "aurora-incident",
+                  "source_version": 1,
+                  "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                  "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                  "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37"
+                }
+              ],
+              "output_artifact_id": "e293e8b4372cb43c872e7180704ae56c22831d9bc3cd208c0ad8398d12de03ec",
+              "occurred_at": "2026-11-05T15:10:47.987873+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 20,
+          "at": "2026-11-05T15:10:48.024485+00:00",
+          "node": "canonical_evidence_verified",
+          "detail": {
+            "capability": "compliance_advisor",
+            "telemetry": {
+              "span_id": "c34fe4efcbc03363",
+              "parent_span_id": "18ddebde3bcaa56b",
+              "evidence": [
+                {
+                  "source_id": "aurora-compliance",
+                  "source_version": 1,
+                  "source_hash": "3ae7cbc2b99f919877a27d773571aee8bf8156192c3564a99ad0d92d40627335",
+                  "projection_id": "7b456b8ff723053c5eb66630fa5894c4dd12816a1e297383c0a64ad8ddc2d75f",
+                  "retrieved_fragment_id": "950b959671fbfd53aa21be9a1cf95155685229e21678e6363d396f7f35659056",
+                  "canonical_fragment_id": "713fdbb4230d287ddde868b83bde5a8870f659068870ecbcd2c596f362ada10e"
+                },
+                {
+                  "source_id": "aurora-response",
+                  "source_version": 1,
+                  "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                  "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                  "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853",
+                  "canonical_fragment_id": "69364deab45b9d4e29c1e1dc76ab7c4d869e1549cc795bca4f240a7dbc2fe106"
+                },
+                {
+                  "source_id": "aurora-incident",
+                  "source_version": 1,
+                  "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                  "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                  "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37",
+                  "canonical_fragment_id": "2ebd77f6a9b0489970e2ed05ccca9f3cd4697774744db8e5ead8db13fbf3e2e4"
+                }
+              ],
+              "output_artifact_id": "8cae295bb35ccc093a8e769528300ac747bf232373470d70bc9e5fb2ee079cbf",
+              "occurred_at": "2026-11-05T15:10:48.024485+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 21,
+          "at": "2026-11-05T15:10:48.052307+00:00",
+          "node": "inference_requested",
+          "detail": {
+            "capability": "compliance_advisor",
+            "telemetry": {
+              "span_id": "c34fe4efcbc03363",
+              "parent_span_id": "18ddebde3bcaa56b",
+              "model_slot": "agent:compliance_advisor",
+              "input_artifact_id": "f0537d285511fd72650b187eee488fd105eb475d676e6a98e1ede981dfabe00e",
+              "occurred_at": "2026-11-05T15:10:48.052307+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 22,
+          "at": "2026-11-05T15:10:48.247980+00:00",
+          "node": "retrieval_completed",
+          "detail": {
+            "capability": "security_analyst",
+            "telemetry": {
+              "span_id": "a3b860e383f38c1f",
+              "parent_span_id": "db612d1e51103fbb",
+              "evidence": [
+                {
+                  "source_id": "aurora-incident",
+                  "source_version": 1,
+                  "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                  "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                  "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37"
+                },
+                {
+                  "source_id": "aurora-response",
+                  "source_version": 1,
+                  "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                  "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                  "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853"
+                },
+                {
+                  "source_id": "aurora-data-platform",
+                  "source_version": 1,
+                  "source_hash": "c5d9ddeb1dc46d00c7f8289267d1545491cb604c392669b144ce85d690a2e024",
+                  "projection_id": "6abfb52f0ff41dc772488dc7a91b82c29b95a7d5dea494fab07273aed6ea2853",
+                  "retrieved_fragment_id": "2c5c6ee79d6b8c43e0e0989150febeb927a67b1338aab6299e852684bba5c513"
+                }
+              ],
+              "output_artifact_id": "76031fe5c62aa6b4e403bbc3275143c082c387aaf9601ee226d3749062f45b76",
+              "occurred_at": "2026-11-05T15:10:48.247980+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 23,
+          "at": "2026-11-05T15:10:48.280129+00:00",
+          "node": "canonical_evidence_verified",
+          "detail": {
+            "capability": "security_analyst",
+            "telemetry": {
+              "span_id": "a3b860e383f38c1f",
+              "parent_span_id": "db612d1e51103fbb",
+              "evidence": [
+                {
+                  "source_id": "aurora-incident",
+                  "source_version": 1,
+                  "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                  "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                  "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37",
+                  "canonical_fragment_id": "2ebd77f6a9b0489970e2ed05ccca9f3cd4697774744db8e5ead8db13fbf3e2e4"
+                },
+                {
+                  "source_id": "aurora-response",
+                  "source_version": 1,
+                  "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                  "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                  "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853",
+                  "canonical_fragment_id": "69364deab45b9d4e29c1e1dc76ab7c4d869e1549cc795bca4f240a7dbc2fe106"
+                },
+                {
+                  "source_id": "aurora-data-platform",
+                  "source_version": 1,
+                  "source_hash": "c5d9ddeb1dc46d00c7f8289267d1545491cb604c392669b144ce85d690a2e024",
+                  "projection_id": "6abfb52f0ff41dc772488dc7a91b82c29b95a7d5dea494fab07273aed6ea2853",
+                  "retrieved_fragment_id": "2c5c6ee79d6b8c43e0e0989150febeb927a67b1338aab6299e852684bba5c513",
+                  "canonical_fragment_id": "a554086d9a1eef4315431991567482f0e2b25a46a0b97b1a6043c213ed709915"
+                }
+              ],
+              "output_artifact_id": "8fbf41ada511ea1756bd70a3bb935d3d530b58d50c11bf278bbe8f7f31c40364",
+              "occurred_at": "2026-11-05T15:10:48.280129+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 24,
+          "at": "2026-11-05T15:10:48.300193+00:00",
+          "node": "inference_requested",
+          "detail": {
+            "capability": "security_analyst",
+            "telemetry": {
+              "span_id": "a3b860e383f38c1f",
+              "parent_span_id": "db612d1e51103fbb",
+              "model_slot": "agent:security_analyst",
+              "input_artifact_id": "0db1790330753ad120b725cf53fe7b9ed9484318a171a24325d36e890eb2feb1",
+              "occurred_at": "2026-11-05T15:10:48.300193+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 25,
+          "at": "2026-11-05T15:11:05.692298+00:00",
+          "node": "inference_completed",
+          "detail": {
+            "capability": "compliance_advisor",
+            "telemetry": {
+              "span_id": "c34fe4efcbc03363",
+              "parent_span_id": "18ddebde3bcaa56b",
+              "model_slot": "agent:compliance_advisor",
+              "input_artifact_id": "f0537d285511fd72650b187eee488fd105eb475d676e6a98e1ede981dfabe00e",
+              "output_artifact_id": "d69d6c05d1461fcc11c75bc4f0675d222d6242b5307c6800edd7ecf2e92e2e9d",
+              "fact_ids": [
+                "61fa7d21fd7846365dcdee7963ef2e930362a3648e4b9d1eeece7a1a04b1e10b",
+                "b40313297d96a45e4822f82faa6d789fb88ee32228c48e8ae5a6d694972e8903",
+                "4c07656ce5c1fdd9bfa18d8fe3802bae2422843e52acb73440c49e900236489d",
+                "c88cac0f9015738ea615813ac66926f09c7f0ecf0e9bd2bc0ed038a2acd901ea",
+                "f525e92b53935452f79d2bdcdec8bab69a087822a765be8bebd365605e4ff6e1",
+                "835d3bd246380eed2d4559ae8fb4f3e6cb3cc937cd4b66b8039adedec141fa67",
+                "dd64339d974d346886dda352e6aaf9638673cee7d950fc6d40fc7975fadb8b5a"
+              ],
+              "occurred_at": "2026-11-05T15:11:05.692298+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 26,
+          "at": "2026-11-05T15:11:05.697291+00:00",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "compliance_advisor",
+            "parent": "legal_director",
+            "sources": [
+              "aurora-compliance",
+              "aurora-response",
+              "aurora-incident"
+            ],
+            "output": {
+              "agent": "Assessora de conformidade — alegações da campanha e governança de resposta a incidente",
+              "facts": [
+                {
+                  "claim": "Alerta de evento de exportação no AuroraCRM europeu",
+                  "value": "05/11/2026 às 16h20, fuso -03:00",
+                  "unit": "data e hora",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Contatos potencialmente envolvidos",
+                  "value": 1200,
+                  "unit": "contatos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Classificação atual",
+                  "value": "Suspeita em investigação; conclusão da transferência e acesso de terceiros não confirmados",
+                  "unit": "classificação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Relatórios disponíveis preservados pelo responsável de plantão",
+                  "value": true,
+                  "unit": "booleano",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Prazo interno para primeira avaliação conjunta de Segurança e Jurídico após o alerta",
+                  "value": 90,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-response",
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Prova de contenção completa disponível",
+                  "value": false,
+                  "unit": "booleano",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Relatório contém apenas contagens sintéticas e nenhum registro pessoal",
+                  "value": true,
+                  "unit": "booleano",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "16h45 − 16h20 = 25 minutos transcorridos",
+                  "result": "25 minutos",
+                  "source_ids": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "expression": "90 minutos − 25 minutos = 65 minutos restantes; 16h20 + 90 minutos = 17h50, no mesmo dia e fuso",
+                  "result": "65 minutos restantes às 16h45; prazo às 17h50",
+                  "source_ids": [
+                    "aurora-response",
+                    "aurora-incident"
+                  ]
+                }
+              ],
+              "risks": [
+                "Possível exposição de dados de até 1.200 contatos, ainda sem confirmação de conclusão da transferência ou acesso por terceiros.",
+                "A ausência de prova de contenção completa impede concluir que o evento esteja contido.",
+                "O prazo de 90 minutos é um SLA interno da simulação, não uma obrigação legal genérica.",
+                "Dados pessoais do incidente não devem ser transportados para a campanha."
+              ],
+              "unknowns": [
+                "Se a transferência foi concluída e qual foi sua extensão efetiva.",
+                "Se terceiros acessaram os dados, quais dados foram envolvidos e qual foi o destino da eventual transferência.",
+                "A causa do evento e se houve participação humana.",
+                "O estado efetivo da contenção e as medidas que poderão ser autorizadas.",
+                "Requisitos jurídicos e eventuais prazos externos aplicáveis, ainda não apurados nas fontes fornecidas."
+              ],
+              "recommendation": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico até as 17h50. Checklist técnico: verificar os logs e os relatórios já preservados; apurar estado, destino e extensão da transferência; revisar acessos relacionados; registrar evidências, lacunas e hipóteses separadamente; identificar medidas possíveis para submissão ao processo de autorização. Checklist jurídico: avaliar os fatos e as incertezas, a natureza e a possível extensão dos dados envolvidos, os requisitos e prazos eventualmente aplicáveis e a necessidade de medidas ou comunicações, registrando pendências sem presumir conclusão ou parecer. Revogação de acesso, bloqueio de sistemas, comunicação e notificação externa dependem de processo e aprovação separados e não estão autorizados nesta execução. Não tocar na produção nem envolver recrutamento ou precificação sem evidência de necessidade específica."
+            },
+            "telemetry": {
+              "span_id": "c34fe4efcbc03363",
+              "parent_span_id": "18ddebde3bcaa56b",
+              "occurred_at": "2026-11-05T15:11:05.697291+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 27,
+          "at": "2026-11-05T15:11:05.731766+00:00",
+          "node": "director_started",
+          "detail": {
+            "capability": "legal_director",
+            "children": [
+              "compliance_advisor"
+            ],
+            "telemetry": {
+              "span_id": "18ddebde3bcaa56b",
+              "parent_span_id": "a095cd70546bf58b",
+              "occurred_at": "2026-11-05T15:11:05.731766+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 28,
+          "at": "2026-11-05T15:11:06.194327+00:00",
+          "node": "retrieval_completed",
+          "detail": {
+            "capability": "legal_director",
+            "telemetry": {
+              "span_id": "18ddebde3bcaa56b",
+              "parent_span_id": "a095cd70546bf58b",
+              "evidence": [
+                {
+                  "source_id": "aurora-compliance",
+                  "source_version": 1,
+                  "source_hash": "3ae7cbc2b99f919877a27d773571aee8bf8156192c3564a99ad0d92d40627335",
+                  "projection_id": "7b456b8ff723053c5eb66630fa5894c4dd12816a1e297383c0a64ad8ddc2d75f",
+                  "retrieved_fragment_id": "950b959671fbfd53aa21be9a1cf95155685229e21678e6363d396f7f35659056"
+                },
+                {
+                  "source_id": "aurora-contracts",
+                  "source_version": 1,
+                  "source_hash": "16dff573cc46fe7ba778d08c7c2e8558a10f10e741131359696a7a41eace1b66",
+                  "projection_id": "fb0695c5686184115f37dc3e6f17bca911b805d9e382118ed626661cf2c50a0c",
+                  "retrieved_fragment_id": "797c09d2c13bea590880d20f04b3f14c157d7787c5916fcf0e2af07e6b227666"
+                },
+                {
+                  "source_id": "aurora-response",
+                  "source_version": 1,
+                  "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                  "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                  "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853"
+                }
+              ],
+              "output_artifact_id": "80ed40ae4d0dfb6908949ce3b116e8c9ce67a025c0df4d3e525f04651f950a22",
+              "occurred_at": "2026-11-05T15:11:06.194327+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 29,
+          "at": "2026-11-05T15:11:06.241128+00:00",
+          "node": "canonical_evidence_verified",
+          "detail": {
+            "capability": "legal_director",
+            "telemetry": {
+              "span_id": "18ddebde3bcaa56b",
+              "parent_span_id": "a095cd70546bf58b",
+              "evidence": [
+                {
+                  "source_id": "aurora-compliance",
+                  "source_version": 1,
+                  "source_hash": "3ae7cbc2b99f919877a27d773571aee8bf8156192c3564a99ad0d92d40627335",
+                  "projection_id": "7b456b8ff723053c5eb66630fa5894c4dd12816a1e297383c0a64ad8ddc2d75f",
+                  "retrieved_fragment_id": "950b959671fbfd53aa21be9a1cf95155685229e21678e6363d396f7f35659056",
+                  "canonical_fragment_id": "713fdbb4230d287ddde868b83bde5a8870f659068870ecbcd2c596f362ada10e"
+                },
+                {
+                  "source_id": "aurora-contracts",
+                  "source_version": 1,
+                  "source_hash": "16dff573cc46fe7ba778d08c7c2e8558a10f10e741131359696a7a41eace1b66",
+                  "projection_id": "fb0695c5686184115f37dc3e6f17bca911b805d9e382118ed626661cf2c50a0c",
+                  "retrieved_fragment_id": "797c09d2c13bea590880d20f04b3f14c157d7787c5916fcf0e2af07e6b227666",
+                  "canonical_fragment_id": "79d6f21f46607f07d6187fe8e04ac7681cfbea5a56bc418a61e8ac12b8379835"
+                },
+                {
+                  "source_id": "aurora-response",
+                  "source_version": 1,
+                  "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                  "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                  "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853",
+                  "canonical_fragment_id": "69364deab45b9d4e29c1e1dc76ab7c4d869e1549cc795bca4f240a7dbc2fe106"
+                }
+              ],
+              "output_artifact_id": "0e9fa1f6f061b9322e195cfbb947b7f952511b732161e8d3492bdc5e15445898",
+              "occurred_at": "2026-11-05T15:11:06.241128+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 30,
+          "at": "2026-11-05T15:11:06.271074+00:00",
+          "node": "inference_requested",
+          "detail": {
+            "capability": "legal_director",
+            "telemetry": {
+              "span_id": "18ddebde3bcaa56b",
+              "parent_span_id": "a095cd70546bf58b",
+              "model_slot": "agent:legal_director",
+              "input_artifact_id": "34a153db8424a442612d44238ae5ef680f8be4d57617ed465af53b4890b1744a",
+              "occurred_at": "2026-11-05T15:11:06.271074+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 31,
+          "at": "2026-11-05T15:11:24.147400+00:00",
+          "node": "inference_completed",
+          "detail": {
+            "capability": "security_analyst",
+            "telemetry": {
+              "span_id": "a3b860e383f38c1f",
+              "parent_span_id": "db612d1e51103fbb",
+              "model_slot": "agent:security_analyst",
+              "input_artifact_id": "0db1790330753ad120b725cf53fe7b9ed9484318a171a24325d36e890eb2feb1",
+              "output_artifact_id": "d747b94cfaf4ec7bfc36e2b51e5f19426a5a5e5137846af8d49a45e316d348c4",
+              "fact_ids": [
+                "edb87bd46deda79e5bd0b3847202498976ab21cf0410d59d2ab6fd8431611065",
+                "cf08c1504fc48a75b5513c3d01355e350578db5dc481265ab234b786b730c079",
+                "7e617387fe4b98396d1b4991930d1845f375cb1d2e5760348a5bdfc16b16477c",
+                "88712ebffef4bcd08bd58d2130bae3debcc2426e84f73dc0faddadbb9fe7b5d4",
+                "15573b1d8ff6e2cf99bb28a092df399640597ccebcfaeca1e224a7f37158edc3",
+                "c16a56f21d53e6c1ebe0945434ed8010fe3c0b1f285b12a1928caf1a403a35bc",
+                "03868b8cfabc6ffe8a0e2d3d09443e1621aaf5242d3286a17f20db99044b3a2b"
+              ],
+              "occurred_at": "2026-11-05T15:11:24.147400+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 32,
+          "at": "2026-11-05T15:11:24.152399+00:00",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "security_analyst",
+            "parent": "technology_director",
+            "sources": [
+              "aurora-incident",
+              "aurora-response",
+              "aurora-data-platform"
+            ],
+            "output": {
+              "agent": "Analista de segurança — capacidade Incidente",
+              "facts": [
+                {
+                  "claim": "O alerta identificou um evento de exportação suspeito no AuroraCRM europeu.",
+                  "value": "05/11/2026 às 16h20, fuso -03:00",
+                  "unit": "data e hora",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Contatos potencialmente envolvidos",
+                  "value": 1200,
+                  "unit": "contatos",
+                  "sources": [
+                    "aurora-incident",
+                    "aurora-data-platform"
+                  ]
+                },
+                {
+                  "claim": "Conclusão da transferência confirmada",
+                  "value": false,
+                  "unit": "confirmação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Acesso de terceiros confirmado",
+                  "value": false,
+                  "unit": "confirmação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O responsável de plantão preservou os relatórios disponíveis; não há prova de contenção completa.",
+                  "value": true,
+                  "unit": "situação registrada",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O monitoramento registra volume e destino lógico; o corpus não contém o conteúdo dos registros.",
+                  "value": true,
+                  "unit": "característica do monitoramento",
+                  "sources": [
+                    "aurora-data-platform"
+                  ]
+                },
+                {
+                  "claim": "Prazo interno para a primeira avaliação conjunta de Segurança e Jurídico após o alerta",
+                  "value": 90,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "16h45 − 16h20 = 25 minutos transcorridos",
+                  "result": "25 minutos",
+                  "source_ids": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "expression": "90 minutos − 25 minutos = 65 minutos restantes; 16h20 + 90 minutos = 17h50, no mesmo fuso",
+                  "result": "65 minutos restantes às 16h45; prazo às 17h50 de 05/11/2026, fuso -03:00",
+                  "source_ids": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "risks": [
+                "A possível exportação pode envolver até 1.200 contatos, mas a extensão efetiva e a recepção por terceiros não estão comprovadas.",
+                "Logs incompletos podem limitar a reconstrução do evento; volume registrado não prova recepção por terceiro.",
+                "O prazo de 90 minutos é um SLA interno da simulação, não uma obrigação legal genérica."
+              ],
+              "unknowns": [
+                "Se a transferência foi concluída e se terceiros acessaram ou receberam dados.",
+                "Causa, origem do evento, identidade e autorização de eventuais acessos, destino efetivo e extensão real.",
+                "Integridade e cobertura dos logs, conteúdo e categorias dos dados potencialmente envolvidos e existência de contenção completa.",
+                "Requisitos jurídicos e eventuais prazos externos aplicáveis, que dependem da apuração dos fatos e da avaliação jurídica."
+              ],
+              "recommendation": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico até 17h50. Checklist técnico, em ordem: 1) revisar os relatórios sintéticos já preservados e registrar suas limitações; 2) verificar nos relatórios disponíveis horários, volume e destino lógico, identificando lacunas de logs; 3) apurar, com as evidências disponíveis, o estado da transferência e os acessos, sem presumir conclusão ou recepção; 4) documentar hipóteses, evidências faltantes e medidas que possam exigir autorização. Checklist jurídico: 1) avaliar a natureza e a extensão potencial do evento com Segurança; 2) identificar fatos necessários para avaliar obrigações e prazos aplicáveis; 3) registrar decisões e preparar eventual análise de comunicação ou notificação pelo processo próprio. Não executar contenção, acessar produção, alterar configurações, revogar acessos ou enviar comunicação externa. Envolver outras áreas apenas se surgir evidência de necessidade específica. Os 6.000 itens da oportunidade Orion são unidade distinta e não devem ser somados aos contatos."
+            },
+            "telemetry": {
+              "span_id": "a3b860e383f38c1f",
+              "parent_span_id": "db612d1e51103fbb",
+              "occurred_at": "2026-11-05T15:11:24.152399+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 33,
+          "at": "2026-11-05T15:11:24.160611+00:00",
+          "node": "director_started",
+          "detail": {
+            "capability": "technology_director",
+            "children": [
+              "security_analyst"
+            ],
+            "telemetry": {
+              "span_id": "db612d1e51103fbb",
+              "parent_span_id": "a095cd70546bf58b",
+              "occurred_at": "2026-11-05T15:11:24.160611+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 34,
+          "at": "2026-11-05T15:11:24.207555+00:00",
+          "node": "retrieval_completed",
+          "detail": {
+            "capability": "technology_director",
+            "telemetry": {
+              "span_id": "db612d1e51103fbb",
+              "parent_span_id": "a095cd70546bf58b",
+              "evidence": [
+                {
+                  "source_id": "aurora-data-platform",
+                  "source_version": 1,
+                  "source_hash": "c5d9ddeb1dc46d00c7f8289267d1545491cb604c392669b144ce85d690a2e024",
+                  "projection_id": "6abfb52f0ff41dc772488dc7a91b82c29b95a7d5dea494fab07273aed6ea2853",
+                  "retrieved_fragment_id": "2c5c6ee79d6b8c43e0e0989150febeb927a67b1338aab6299e852684bba5c513"
+                },
+                {
+                  "source_id": "aurora-incident",
+                  "source_version": 1,
+                  "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                  "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                  "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37"
+                }
+              ],
+              "output_artifact_id": "f5c29478994740d5c88aac5f3b5335d072ced1b3369436e9923027632c770424",
+              "occurred_at": "2026-11-05T15:11:24.207555+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 35,
+          "at": "2026-11-05T15:11:24.255312+00:00",
+          "node": "canonical_evidence_verified",
+          "detail": {
+            "capability": "technology_director",
+            "telemetry": {
+              "span_id": "db612d1e51103fbb",
+              "parent_span_id": "a095cd70546bf58b",
+              "evidence": [
+                {
+                  "source_id": "aurora-data-platform",
+                  "source_version": 1,
+                  "source_hash": "c5d9ddeb1dc46d00c7f8289267d1545491cb604c392669b144ce85d690a2e024",
+                  "projection_id": "6abfb52f0ff41dc772488dc7a91b82c29b95a7d5dea494fab07273aed6ea2853",
+                  "retrieved_fragment_id": "2c5c6ee79d6b8c43e0e0989150febeb927a67b1338aab6299e852684bba5c513",
+                  "canonical_fragment_id": "a554086d9a1eef4315431991567482f0e2b25a46a0b97b1a6043c213ed709915"
+                },
+                {
+                  "source_id": "aurora-incident",
+                  "source_version": 1,
+                  "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                  "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                  "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37",
+                  "canonical_fragment_id": "2ebd77f6a9b0489970e2ed05ccca9f3cd4697774744db8e5ead8db13fbf3e2e4"
+                }
+              ],
+              "output_artifact_id": "4a4851ced6f78656d0add1f397fd20dbb957f8b53f021bd52c1f8c5e907bebe9",
+              "occurred_at": "2026-11-05T15:11:24.255312+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 36,
+          "at": "2026-11-05T15:11:24.285348+00:00",
+          "node": "inference_requested",
+          "detail": {
+            "capability": "technology_director",
+            "telemetry": {
+              "span_id": "db612d1e51103fbb",
+              "parent_span_id": "a095cd70546bf58b",
+              "model_slot": "agent:technology_director",
+              "input_artifact_id": "c2822b01cb70123e43a9a5b0010744e6f71f476229b8889fe15f83c7460ed361",
+              "occurred_at": "2026-11-05T15:11:24.285348+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 37,
+          "at": "2026-11-05T15:11:42.906430+00:00",
+          "node": "inference_completed",
+          "detail": {
+            "capability": "legal_director",
+            "telemetry": {
+              "span_id": "18ddebde3bcaa56b",
+              "parent_span_id": "a095cd70546bf58b",
+              "model_slot": "agent:legal_director",
+              "input_artifact_id": "34a153db8424a442612d44238ae5ef680f8be4d57617ed465af53b4890b1744a",
+              "output_artifact_id": "0424e6e4a5b6b023e74396757527850eb0cebf543368e2cd76d420d8ac0df737",
+              "fact_ids": [
+                "03627ce76cfdfc50279ac774a2a9dfbcaffd118186df24de6d2825d8a6be6cd5",
+                "b40313297d96a45e4822f82faa6d789fb88ee32228c48e8ae5a6d694972e8903",
+                "d1eb4df467bababc1379526815742adecd78fe8e404c56ca96f421dc4deb4c58",
+                "c88cac0f9015738ea615813ac66926f09c7f0ecf0e9bd2bc0ed038a2acd901ea",
+                "0fbfe3c300bee0dca126b938153a6ad9ed4ff4b65d939559bfc372cefa9e30f6",
+                "55f084f15d7921a1ad916bf9f5192461f4bed942f3eef54cf254690e3f77f26c",
+                "8f89d2fa9439f7840c41e2ef4bf26a6dc0ade3c1b7116b73336a3016b1fd3e81",
+                "aad16ddcef20b00d112d4eae5bc8b4bb41a0638ef302aa94452409cca598bffd"
+              ],
+              "occurred_at": "2026-11-05T15:11:42.906430+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 38,
+          "at": "2026-11-05T15:11:42.910952+00:00",
+          "node": "director_completed",
+          "detail": {
+            "capability": "legal_director",
+            "children": [
+              "compliance_advisor"
+            ],
+            "output": {
+              "agent": "Diretor jurídico — Contratos, conformidade e resposta",
+              "facts": [
+                {
+                  "claim": "Alerta de possível exportação no AuroraCRM europeu",
+                  "value": "05/11/2026 às 16h20, fuso -03:00",
+                  "unit": "data e hora",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Contatos potencialmente envolvidos",
+                  "value": 1200,
+                  "unit": "contatos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Estado da investigação",
+                  "value": "Suspeita em investigação; conclusão da transferência e acesso por terceiros não confirmados",
+                  "unit": "classificação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Relatórios disponíveis preservados pelo responsável de plantão",
+                  "value": true,
+                  "unit": "booleano",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Conteúdo do relatório",
+                  "value": "Contagens sintéticas, sem registros pessoais",
+                  "unit": "descrição",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Prova disponível de contenção completa",
+                  "value": false,
+                  "unit": "booleano",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Prazo para a primeira avaliação conjunta de Segurança e Jurídico",
+                  "value": 90,
+                  "unit": "minutos após o alerta; SLA interno da simulação",
+                  "sources": [
+                    "aurora-response"
+                  ]
+                },
+                {
+                  "claim": "Prazo restante às 16h45",
+                  "value": 65,
+                  "unit": "minutos; vencimento às 17h50 de 05/11/2026, no fuso -03:00",
+                  "sources": [
+                    "aurora-response",
+                    "aurora-incident"
+                  ]
+                }
+              ],
+              "risks": [
+                "Possível exposição de dados de até 1.200 contatos; a extensão efetiva permanece desconhecida.",
+                "A ausência de prova de contenção completa impede concluir que o incidente esteja contido.",
+                "Destino, conclusão da transferência, acesso por terceiros, dados efetivamente envolvidos e causa ainda não foram confirmados.",
+                "Requisitos jurídicos e eventuais prazos externos aplicáveis ainda não foram apurados nas evidências fornecidas."
+              ],
+              "conditions": [
+                "A primeira avaliação depende da participação conjunta de Segurança e Jurídico e deve ocorrer até as 17h50; o prazo de 90 minutos é interno, não uma obrigação legal genérica.",
+                "Os dados de horário, contagem e estado do incidente provêm do retorno da especialista, que cita aurora-incident; o documento canônico dessa fonte não foi fornecido para verificação independente.",
+                "O runbook indica aurora-data-platform para as relações do incidente, mas seu conteúdo não foi fornecido; essas relações permanecem pendentes de verificação.",
+                "Revogação de acesso, bloqueio de sistemas, envio de comunicação e notificação externa exigem processo e aprovação separados; nenhuma dessas ações está autorizada nesta execução.",
+                "Não transportar dados pessoais do incidente para a campanha; não envolver recrutamento ou precificação sem evidência de necessidade específica."
+              ],
+              "recommendation": "Priorizar imediatamente a avaliação conjunta de Segurança e Jurídico. Checklist técnico, em ordem: (1) examinar os logs e relatórios já preservados, registrando sua integridade e lacunas; (2) verificar estado, destino e extensão efetiva da eventual transferência; (3) revisar os acessos relacionados e apurar possível acesso de terceiros e causa; (4) registrar separadamente observações, hipóteses e evidências faltantes; (5) identificar possíveis medidas para processo de autorização separado. Checklist jurídico: (1) avaliar natureza dos dados, pessoas potencialmente afetadas e incertezas com Segurança; (2) apurar requisitos jurídicos, contratuais e eventuais prazos externos aplicáveis; (3) documentar pendências e avaliar eventual necessidade de medidas ou comunicações, sem presumir obrigação, emitir parecer conclusivo ou aprovar ações. Não executar contenção nem comunicação externa nesta avaliação.",
+              "disagreements": []
+            },
+            "telemetry": {
+              "span_id": "18ddebde3bcaa56b",
+              "parent_span_id": "a095cd70546bf58b",
+              "occurred_at": "2026-11-05T15:11:42.910952+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 39,
+          "at": "2026-11-05T15:12:01.982890+00:00",
+          "node": "inference_completed",
+          "detail": {
+            "capability": "technology_director",
+            "telemetry": {
+              "span_id": "db612d1e51103fbb",
+              "parent_span_id": "a095cd70546bf58b",
+              "model_slot": "agent:technology_director",
+              "input_artifact_id": "c2822b01cb70123e43a9a5b0010744e6f71f476229b8889fe15f83c7460ed361",
+              "output_artifact_id": "93736eaa918cbdd2d4d08be2b2d53838730266c40a1da63d0f5fdac9e4678eb8",
+              "fact_ids": [
+                "30655a3f96d76c17ac89b3bc7367fdaffd30469f00e17309092d1ca35cb1f1d3",
+                "de7bed908a54659936ba57534873d92a653b33c1cb4b0ad000e7ed8b6edd7b18",
+                "189dbd6dd3bc4dde435a67a8852f651d3cb5c5443f0c072ec2ef571200e949e5",
+                "108b5f2eba12589e93e2110e796799f0762e00cf7600d134498aa17a9927390f",
+                "1171def71424478f9dc4f5a8885e91830c3c8276b2a0f1bbd6c5321cd1a61bcc",
+                "00b4dd6ab009a54ac360f53fe89d6106e4fa6695b6e9b6f822f6a0f6b9b095e1",
+                "2b22275644560ea786a4c3e4d892ab14820d291e9842eb4528ebd14296adc7a2",
+                "ee4fdbd11e8db070cf4321c67fc68d98a07f520a2249fc76d9f74d89c9f46427"
+              ],
+              "occurred_at": "2026-11-05T15:12:01.982890+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 40,
+          "at": "2026-11-05T15:12:01.986401+00:00",
+          "node": "director_completed",
+          "detail": {
+            "capability": "technology_director",
+            "children": [
+              "security_analyst"
+            ],
+            "output": {
+              "agent": "Diretora de tecnologia — Sistemas e segurança de dados",
+              "facts": [
+                {
+                  "claim": "Um alerta identificou evento de exportação suspeito no AuroraCRM europeu",
+                  "value": "05/11/2026 às 16h20, fuso -03:00",
+                  "unit": "data e hora",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Contatos potencialmente envolvidos; o número é uma estimativa sob investigação",
+                  "value": 1200,
+                  "unit": "contatos",
+                  "sources": [
+                    "aurora-incident",
+                    "aurora-data-platform"
+                  ]
+                },
+                {
+                  "claim": "A conclusão da transferência e o acesso de terceiros não foram confirmados",
+                  "value": "não confirmados",
+                  "unit": "estado da evidência",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O responsável de plantão preservou os relatórios disponíveis; não há prova de contenção completa",
+                  "value": "relatórios preservados; contenção completa não comprovada",
+                  "unit": "situação registrada",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O monitoramento registra volume e destino lógico; o corpus não contém o conteúdo dos registros",
+                  "value": "volume e destino lógico",
+                  "unit": "dados disponíveis no monitoramento",
+                  "sources": [
+                    "aurora-data-platform"
+                  ]
+                },
+                {
+                  "claim": "O prazo interno para a primeira avaliação conjunta de Segurança e Jurídico é de 90 minutos após o alerta",
+                  "value": 90,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Às 16h45 haviam transcorrido 25 minutos e restavam 65 minutos; o prazo termina às 17h50 de 05/11/2026, no mesmo fuso -03:00",
+                  "value": "65 minutos restantes",
+                  "unit": "prazo interno",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "Os 6.000 itens da oportunidade Orion são unidade distinta dos contatos potencialmente envolvidos e não devem ser somados a eles",
+                  "value": 6000,
+                  "unit": "itens",
+                  "sources": [
+                    "aurora-data-platform"
+                  ]
+                }
+              ],
+              "risks": [
+                "A extensão efetiva do evento, a conclusão da transferência e a eventual recepção ou acesso por terceiros permanecem desconhecidos; não há base para declarar vazamento confirmado.",
+                "Logs possivelmente incompletos podem limitar a reconstrução; volume registrado não prova recepção por terceiro.",
+                "Não há prova de contenção completa, nem de origem humana ou causa técnica comprovada.",
+                "As obrigações e os prazos externos dependem da apuração dos fatos e da avaliação jurídica; o prazo de 90 minutos é interno."
+              ],
+              "conditions": [
+                "A primeira avaliação depende da participação conjunta de Segurança e Jurídico até 17h50.",
+                "A análise técnica fica limitada aos relatórios sintéticos disponíveis e já preservados; o corpus não contém registros pessoais.",
+                "Identidade e autorização de eventuais acessos, destino efetivo, categorias de dados e extensão real exigem apuração e não podem ser presumidos.",
+                "Envolver outras áreas somente se surgir uma necessidade específica demonstrada, registrando a dependência e os fatos necessários.",
+                "Não executar contenção ou comunicação externa, acessar produção, executar SQL contra clientes, alterar configurações, revogar tokens ou copiar registros."
+              ],
+              "recommendation": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico até 17h50. Checklist técnico: revisar os relatórios sintéticos preservados; registrar horários, volume e destino lógico disponíveis e lacunas dos logs; apurar, dentro dessas evidências, o estado da transferência e possíveis acessos; documentar hipóteses, limitações e evidências faltantes. Checklist jurídico: avaliar com Segurança a natureza e a extensão potencial do evento; identificar os fatos necessários para determinar obrigações e eventuais prazos externos; registrar decisões e dependências e preparar a análise de eventual notificação pelo processo próprio, sem executá-la ou aprová-la nesta avaliação.",
+              "disagreements": []
+            },
+            "telemetry": {
+              "span_id": "db612d1e51103fbb",
+              "parent_span_id": "a095cd70546bf58b",
+              "occurred_at": "2026-11-05T15:12:01.986401+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 41,
+          "at": "2026-11-05T15:12:02.013218+00:00",
+          "node": "synthesis",
+          "detail": {
+            "departments": 2,
+            "telemetry": {
+              "span_id": "f7ffe460bf684c20",
+              "parent_span_id": "b25b94bc82c46dee",
+              "occurred_at": "2026-11-05T15:12:02.013218+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 42,
+          "at": "2026-11-05T15:12:02.036604+00:00",
+          "node": "inference_requested",
+          "detail": {
+            "capability": null,
+            "telemetry": {
+              "span_id": "91bebf55571886c8",
+              "parent_span_id": "b25b94bc82c46dee",
+              "model_slot": "synthesis",
+              "input_artifact_id": "74af7e49657b9fd19fd2f815e32e16f5dbb3cccd1adc5a31fb0f36b06ae207ea",
+              "occurred_at": "2026-11-05T15:12:02.036604+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 43,
+          "at": "2026-11-05T15:12:24.065051+00:00",
+          "node": "inference_completed",
+          "detail": {
+            "capability": null,
+            "telemetry": {
+              "span_id": "c92e847bebef42dc",
+              "parent_span_id": "b25b94bc82c46dee",
+              "model_slot": "synthesis",
+              "input_artifact_id": "74af7e49657b9fd19fd2f815e32e16f5dbb3cccd1adc5a31fb0f36b06ae207ea",
+              "output_artifact_id": "14d901711366e0b697b5d4980f6e9c9a5c46255828c4ec11ee3ba68ee963b79f",
+              "fact_ids": [
+                "fa7d1c560fe7a4da9e9b125a3e42002c493795bafa7d8e1f659a7dc53adf27c9",
+                "2828246b5c8db78f9d486fc93a0f2dd28755998493e57103dcb3904a5db76372",
+                "8b4f5db9e6db999d9019fa4f892b579247a2b0aba6cdc84fed7674159ac5b790",
+                "b93ebbeb5eb00026c75b8f7349fb3af922a00b9791c638ab62e547bb70c6af3e",
+                "f4e4c36c3336778c93b3268bd6537138bf1dfd84a367b1b074040d38fc9274bc",
+                "c0115160f1264b835f74ba7e8b97a3cb8c9ab2d7b2050c2d1a08f780b925a211",
+                "fede5c247caceccf573c4fa50362a3ad4be62e1052eccaf3f716b3a9ab8b9cb8"
+              ],
+              "occurred_at": "2026-11-05T15:12:24.065051+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 44,
+          "at": "2026-11-05T15:12:24.081Z",
+          "node": "review_ready",
+          "detail": {
+            "hash": "080744fc904eedf1c16d7aa2398deb5ad1f8721cfbac30a7e6daf9cba3dcf3d4",
+            "model_approval_mismatch": false
+          }
+        },
+        {
+          "seq": 45,
+          "at": "2026-11-05T15:12:24.092372+00:00",
+          "node": "checkpoint_saved",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "completed": false,
+            "telemetry": {
+              "span_id": "4c3a606522523066",
+              "parent_span_id": "b25b94bc82c46dee",
+              "checkpoint_id": "1f1d92b4-e02e-648c-8003-7c681751b27f",
+              "occurred_at": "2026-11-05T15:12:24.092372+00:00",
+              "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4"
+            }
+          }
+        },
+        {
+          "seq": 46,
+          "at": "2026-11-05T15:12:24.208Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 24048,
+            "exit_code": 0
+          }
+        }
+      ],
+      "model_slots": [
+        [
+          "agent:compliance_advisor",
+          "completed"
+        ],
+        [
+          "agent:legal_director",
+          "completed"
+        ],
+        [
+          "agent:security_analyst",
+          "completed"
+        ],
+        [
+          "agent:technology_director",
+          "completed"
+        ],
+        [
+          "plan",
+          "completed"
+        ],
+        [
+          "synthesis",
+          "completed"
+        ]
+      ],
+      "inactive_agents": [
+        "business_analyst",
+        "campaign_planner",
+        "contract_analyst",
+        "controller",
+        "data_analyst",
+        "executive_director",
+        "finance_director",
+        "logistics_analyst",
+        "marketing_director",
+        "operations_director",
+        "people_director",
+        "portfolio_analyst",
+        "pricing_analyst",
+        "recruitment_analyst",
+        "supply_planner",
+        "treasury_analyst",
+        "workforce_analyst"
+      ],
+      "trace": {
+        "installation_id": "business-flow-b41e59623d",
+        "job_id": "97edcde8-beea-4ef7-a699-2d1cdcb66eb8",
+        "trace_id": "ea13f266bb6031ce28681d42d81e6afd",
+        "read_only": true,
+        "events": [
+          {
+            "event_id": "0e340995-0cdd-4209-8b6d-c84d64ff5198",
+            "sequence": 9,
+            "kind": "admission",
+            "occurred_at": "2026-11-05T15:10:28.080Z",
+            "recorded_at": "2026-11-05T15:10:28.080Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": null,
+            "span_id": null,
+            "parent_span_id": null,
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "6522728f-1f3d-4c36-ae78-30b2f24a09e3",
+            "sequence": 10,
+            "kind": "worker_requested",
+            "occurred_at": "2026-11-05T15:10:28.081Z",
+            "recorded_at": "2026-11-05T15:10:28.081Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": null,
+            "span_id": null,
+            "parent_span_id": null,
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "4dd0d41c-9ffc-4b12-a450-79f5722e6a7c",
+            "sequence": 11,
+            "kind": "worker_started",
+            "occurred_at": "2026-11-05T15:10:28.085Z",
+            "recorded_at": "2026-11-05T15:10:28.085Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": null,
+            "span_id": null,
+            "parent_span_id": null,
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "aab6545b-1318-433e-a531-fbe9b4218029",
+            "sequence": 12,
+            "kind": "checkpoint_loaded",
+            "occurred_at": "2026-11-05T15:10:28.979344+00:00",
+            "recorded_at": "2026-11-05T15:10:28.982Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "93838e1d2ff25678",
+            "parent_span_id": "b25b94bc82c46dee",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "7537cb88-ce2f-4223-8be7-b84c8addef88",
+            "sequence": 13,
+            "kind": "chief_of_staff",
+            "occurred_at": "2026-11-05T15:10:28.997715+00:00",
+            "recorded_at": "2026-11-05T15:10:29.000Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "cf8ea1469e6c2b62",
+            "parent_span_id": "b25b94bc82c46dee",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "fdbe37ec-4087-4ebf-86aa-fc8db0370705",
+            "sequence": 14,
+            "kind": "inference_requested",
+            "occurred_at": "2026-11-05T15:10:29.005232+00:00",
+            "recorded_at": "2026-11-05T15:10:29.006Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": "plan",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "91bebf55571886c8",
+            "parent_span_id": "b25b94bc82c46dee",
+            "input_artifact_id": "8658f77e69fc6f6e26228aa12035efc90d5c4579a0565c08da543979497033e0",
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "fcc1fa03-0e45-4ead-85f9-c339334584d6",
+            "sequence": 15,
+            "kind": "inference_completed",
+            "occurred_at": "2026-11-05T15:10:46.837792+00:00",
+            "recorded_at": "2026-11-05T15:10:46.839Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": "plan",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "c92e847bebef42dc",
+            "parent_span_id": "b25b94bc82c46dee",
+            "input_artifact_id": "8658f77e69fc6f6e26228aa12035efc90d5c4579a0565c08da543979497033e0",
+            "output_artifact_id": "8a39b3f672d3430bd50f90653582aaebb0b1b3a7b8ff62408916a2818d942470",
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "fd03fe6b-e20a-4706-a583-ede9b16675a8",
+            "sequence": 16,
+            "kind": "plan",
+            "occurred_at": "2026-11-05T15:10:46.843Z",
+            "recorded_at": "2026-11-05T15:10:46.843Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": null,
+            "span_id": null,
+            "parent_span_id": null,
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "b8ab4141-0a86-4ad5-a802-3b4c5e228766",
+            "sequence": 17,
+            "kind": "specialist_started",
+            "occurred_at": "2026-11-05T15:10:46.869862+00:00",
+            "recorded_at": "2026-11-05T15:10:46.871Z",
+            "capability_id": "compliance_advisor",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "c34fe4efcbc03363",
+            "parent_span_id": "18ddebde3bcaa56b",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "e105f396-853f-4408-92af-5502194ddb34",
+            "sequence": 18,
+            "kind": "specialist_started",
+            "occurred_at": "2026-11-05T15:10:46.867747+00:00",
+            "recorded_at": "2026-11-05T15:10:46.886Z",
+            "capability_id": "security_analyst",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "a3b860e383f38c1f",
+            "parent_span_id": "db612d1e51103fbb",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "00195765-3717-4eec-ab94-c92e4f82ae0d",
+            "sequence": 19,
+            "kind": "retrieval_completed",
+            "occurred_at": "2026-11-05T15:10:47.987873+00:00",
+            "recorded_at": "2026-11-05T15:10:47.988Z",
+            "capability_id": "compliance_advisor",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "c34fe4efcbc03363",
+            "parent_span_id": "18ddebde3bcaa56b",
+            "input_artifact_id": null,
+            "output_artifact_id": "e293e8b4372cb43c872e7180704ae56c22831d9bc3cd208c0ad8398d12de03ec",
+            "fact_ids": [],
+            "evidence": [
+              {
+                "source_id": "aurora-compliance",
+                "source_version": 1,
+                "source_hash": "3ae7cbc2b99f919877a27d773571aee8bf8156192c3564a99ad0d92d40627335",
+                "projection_id": "7b456b8ff723053c5eb66630fa5894c4dd12816a1e297383c0a64ad8ddc2d75f",
+                "retrieved_fragment_id": "950b959671fbfd53aa21be9a1cf95155685229e21678e6363d396f7f35659056",
+                "canonical_fragment_id": null
+              },
+              {
+                "source_id": "aurora-response",
+                "source_version": 1,
+                "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853",
+                "canonical_fragment_id": null
+              },
+              {
+                "source_id": "aurora-incident",
+                "source_version": 1,
+                "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37",
+                "canonical_fragment_id": null
+              }
+            ]
+          },
+          {
+            "event_id": "405c56c0-bf15-47aa-a9dc-f4d834920f0e",
+            "sequence": 20,
+            "kind": "canonical_evidence_verified",
+            "occurred_at": "2026-11-05T15:10:48.024485+00:00",
+            "recorded_at": "2026-11-05T15:10:48.046Z",
+            "capability_id": "compliance_advisor",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "c34fe4efcbc03363",
+            "parent_span_id": "18ddebde3bcaa56b",
+            "input_artifact_id": null,
+            "output_artifact_id": "8cae295bb35ccc093a8e769528300ac747bf232373470d70bc9e5fb2ee079cbf",
+            "fact_ids": [],
+            "evidence": [
+              {
+                "source_id": "aurora-compliance",
+                "source_version": 1,
+                "source_hash": "3ae7cbc2b99f919877a27d773571aee8bf8156192c3564a99ad0d92d40627335",
+                "projection_id": "7b456b8ff723053c5eb66630fa5894c4dd12816a1e297383c0a64ad8ddc2d75f",
+                "retrieved_fragment_id": "950b959671fbfd53aa21be9a1cf95155685229e21678e6363d396f7f35659056",
+                "canonical_fragment_id": "713fdbb4230d287ddde868b83bde5a8870f659068870ecbcd2c596f362ada10e"
+              },
+              {
+                "source_id": "aurora-response",
+                "source_version": 1,
+                "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853",
+                "canonical_fragment_id": "69364deab45b9d4e29c1e1dc76ab7c4d869e1549cc795bca4f240a7dbc2fe106"
+              },
+              {
+                "source_id": "aurora-incident",
+                "source_version": 1,
+                "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37",
+                "canonical_fragment_id": "2ebd77f6a9b0489970e2ed05ccca9f3cd4697774744db8e5ead8db13fbf3e2e4"
+              }
+            ]
+          },
+          {
+            "event_id": "a6e4d3d1-f601-4a91-a138-2fe01f1a977a",
+            "sequence": 21,
+            "kind": "inference_requested",
+            "occurred_at": "2026-11-05T15:10:48.052307+00:00",
+            "recorded_at": "2026-11-05T15:10:48.077Z",
+            "capability_id": "compliance_advisor",
+            "checkpoint_id": null,
+            "model_slot": "agent:compliance_advisor",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "c34fe4efcbc03363",
+            "parent_span_id": "18ddebde3bcaa56b",
+            "input_artifact_id": "f0537d285511fd72650b187eee488fd105eb475d676e6a98e1ede981dfabe00e",
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "dd681aed-8b83-4474-8eee-6c258219b15d",
+            "sequence": 22,
+            "kind": "retrieval_completed",
+            "occurred_at": "2026-11-05T15:10:48.247980+00:00",
+            "recorded_at": "2026-11-05T15:10:48.262Z",
+            "capability_id": "security_analyst",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "a3b860e383f38c1f",
+            "parent_span_id": "db612d1e51103fbb",
+            "input_artifact_id": null,
+            "output_artifact_id": "76031fe5c62aa6b4e403bbc3275143c082c387aaf9601ee226d3749062f45b76",
+            "fact_ids": [],
+            "evidence": [
+              {
+                "source_id": "aurora-incident",
+                "source_version": 1,
+                "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37",
+                "canonical_fragment_id": null
+              },
+              {
+                "source_id": "aurora-response",
+                "source_version": 1,
+                "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853",
+                "canonical_fragment_id": null
+              },
+              {
+                "source_id": "aurora-data-platform",
+                "source_version": 1,
+                "source_hash": "c5d9ddeb1dc46d00c7f8289267d1545491cb604c392669b144ce85d690a2e024",
+                "projection_id": "6abfb52f0ff41dc772488dc7a91b82c29b95a7d5dea494fab07273aed6ea2853",
+                "retrieved_fragment_id": "2c5c6ee79d6b8c43e0e0989150febeb927a67b1338aab6299e852684bba5c513",
+                "canonical_fragment_id": null
+              }
+            ]
+          },
+          {
+            "event_id": "b4e754d5-5e17-49af-999f-a2b539e9c0f6",
+            "sequence": 23,
+            "kind": "canonical_evidence_verified",
+            "occurred_at": "2026-11-05T15:10:48.280129+00:00",
+            "recorded_at": "2026-11-05T15:10:48.293Z",
+            "capability_id": "security_analyst",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "a3b860e383f38c1f",
+            "parent_span_id": "db612d1e51103fbb",
+            "input_artifact_id": null,
+            "output_artifact_id": "8fbf41ada511ea1756bd70a3bb935d3d530b58d50c11bf278bbe8f7f31c40364",
+            "fact_ids": [],
+            "evidence": [
+              {
+                "source_id": "aurora-incident",
+                "source_version": 1,
+                "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37",
+                "canonical_fragment_id": "2ebd77f6a9b0489970e2ed05ccca9f3cd4697774744db8e5ead8db13fbf3e2e4"
+              },
+              {
+                "source_id": "aurora-response",
+                "source_version": 1,
+                "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853",
+                "canonical_fragment_id": "69364deab45b9d4e29c1e1dc76ab7c4d869e1549cc795bca4f240a7dbc2fe106"
+              },
+              {
+                "source_id": "aurora-data-platform",
+                "source_version": 1,
+                "source_hash": "c5d9ddeb1dc46d00c7f8289267d1545491cb604c392669b144ce85d690a2e024",
+                "projection_id": "6abfb52f0ff41dc772488dc7a91b82c29b95a7d5dea494fab07273aed6ea2853",
+                "retrieved_fragment_id": "2c5c6ee79d6b8c43e0e0989150febeb927a67b1338aab6299e852684bba5c513",
+                "canonical_fragment_id": "a554086d9a1eef4315431991567482f0e2b25a46a0b97b1a6043c213ed709915"
+              }
+            ]
+          },
+          {
+            "event_id": "9770d839-69e5-4661-8790-b1af3161935b",
+            "sequence": 24,
+            "kind": "inference_requested",
+            "occurred_at": "2026-11-05T15:10:48.300193+00:00",
+            "recorded_at": "2026-11-05T15:10:48.301Z",
+            "capability_id": "security_analyst",
+            "checkpoint_id": null,
+            "model_slot": "agent:security_analyst",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "a3b860e383f38c1f",
+            "parent_span_id": "db612d1e51103fbb",
+            "input_artifact_id": "0db1790330753ad120b725cf53fe7b9ed9484318a171a24325d36e890eb2feb1",
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "f9d814dd-e96c-452d-8f4e-30b75d8a3c34",
+            "sequence": 25,
+            "kind": "inference_completed",
+            "occurred_at": "2026-11-05T15:11:05.692298+00:00",
+            "recorded_at": "2026-11-05T15:11:05.693Z",
+            "capability_id": "compliance_advisor",
+            "checkpoint_id": null,
+            "model_slot": "agent:compliance_advisor",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "c34fe4efcbc03363",
+            "parent_span_id": "18ddebde3bcaa56b",
+            "input_artifact_id": "f0537d285511fd72650b187eee488fd105eb475d676e6a98e1ede981dfabe00e",
+            "output_artifact_id": "d69d6c05d1461fcc11c75bc4f0675d222d6242b5307c6800edd7ecf2e92e2e9d",
+            "fact_ids": [
+              "61fa7d21fd7846365dcdee7963ef2e930362a3648e4b9d1eeece7a1a04b1e10b",
+              "b40313297d96a45e4822f82faa6d789fb88ee32228c48e8ae5a6d694972e8903",
+              "4c07656ce5c1fdd9bfa18d8fe3802bae2422843e52acb73440c49e900236489d",
+              "c88cac0f9015738ea615813ac66926f09c7f0ecf0e9bd2bc0ed038a2acd901ea",
+              "f525e92b53935452f79d2bdcdec8bab69a087822a765be8bebd365605e4ff6e1",
+              "835d3bd246380eed2d4559ae8fb4f3e6cb3cc937cd4b66b8039adedec141fa67",
+              "dd64339d974d346886dda352e6aaf9638673cee7d950fc6d40fc7975fadb8b5a"
+            ],
+            "evidence": []
+          },
+          {
+            "event_id": "86aff492-7385-4ec4-82c1-b3d04e49e72f",
+            "sequence": 26,
+            "kind": "specialist_completed",
+            "occurred_at": "2026-11-05T15:11:05.697291+00:00",
+            "recorded_at": "2026-11-05T15:11:05.722Z",
+            "capability_id": "compliance_advisor",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "c34fe4efcbc03363",
+            "parent_span_id": "18ddebde3bcaa56b",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "aa9846a6-5bf0-460f-9be0-79005c897bdc",
+            "sequence": 27,
+            "kind": "director_started",
+            "occurred_at": "2026-11-05T15:11:05.731766+00:00",
+            "recorded_at": "2026-11-05T15:11:05.732Z",
+            "capability_id": "legal_director",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "18ddebde3bcaa56b",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "2827a24e-e16c-40d7-8ba5-e5cd37202e9f",
+            "sequence": 28,
+            "kind": "retrieval_completed",
+            "occurred_at": "2026-11-05T15:11:06.194327+00:00",
+            "recorded_at": "2026-11-05T15:11:06.218Z",
+            "capability_id": "legal_director",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "18ddebde3bcaa56b",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": null,
+            "output_artifact_id": "80ed40ae4d0dfb6908949ce3b116e8c9ce67a025c0df4d3e525f04651f950a22",
+            "fact_ids": [],
+            "evidence": [
+              {
+                "source_id": "aurora-compliance",
+                "source_version": 1,
+                "source_hash": "3ae7cbc2b99f919877a27d773571aee8bf8156192c3564a99ad0d92d40627335",
+                "projection_id": "7b456b8ff723053c5eb66630fa5894c4dd12816a1e297383c0a64ad8ddc2d75f",
+                "retrieved_fragment_id": "950b959671fbfd53aa21be9a1cf95155685229e21678e6363d396f7f35659056",
+                "canonical_fragment_id": null
+              },
+              {
+                "source_id": "aurora-contracts",
+                "source_version": 1,
+                "source_hash": "16dff573cc46fe7ba778d08c7c2e8558a10f10e741131359696a7a41eace1b66",
+                "projection_id": "fb0695c5686184115f37dc3e6f17bca911b805d9e382118ed626661cf2c50a0c",
+                "retrieved_fragment_id": "797c09d2c13bea590880d20f04b3f14c157d7787c5916fcf0e2af07e6b227666",
+                "canonical_fragment_id": null
+              },
+              {
+                "source_id": "aurora-response",
+                "source_version": 1,
+                "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853",
+                "canonical_fragment_id": null
+              }
+            ]
+          },
+          {
+            "event_id": "28a79b1e-a568-41ab-b9cc-65a9e588a93b",
+            "sequence": 29,
+            "kind": "canonical_evidence_verified",
+            "occurred_at": "2026-11-05T15:11:06.241128+00:00",
+            "recorded_at": "2026-11-05T15:11:06.265Z",
+            "capability_id": "legal_director",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "18ddebde3bcaa56b",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": null,
+            "output_artifact_id": "0e9fa1f6f061b9322e195cfbb947b7f952511b732161e8d3492bdc5e15445898",
+            "fact_ids": [],
+            "evidence": [
+              {
+                "source_id": "aurora-compliance",
+                "source_version": 1,
+                "source_hash": "3ae7cbc2b99f919877a27d773571aee8bf8156192c3564a99ad0d92d40627335",
+                "projection_id": "7b456b8ff723053c5eb66630fa5894c4dd12816a1e297383c0a64ad8ddc2d75f",
+                "retrieved_fragment_id": "950b959671fbfd53aa21be9a1cf95155685229e21678e6363d396f7f35659056",
+                "canonical_fragment_id": "713fdbb4230d287ddde868b83bde5a8870f659068870ecbcd2c596f362ada10e"
+              },
+              {
+                "source_id": "aurora-contracts",
+                "source_version": 1,
+                "source_hash": "16dff573cc46fe7ba778d08c7c2e8558a10f10e741131359696a7a41eace1b66",
+                "projection_id": "fb0695c5686184115f37dc3e6f17bca911b805d9e382118ed626661cf2c50a0c",
+                "retrieved_fragment_id": "797c09d2c13bea590880d20f04b3f14c157d7787c5916fcf0e2af07e6b227666",
+                "canonical_fragment_id": "79d6f21f46607f07d6187fe8e04ac7681cfbea5a56bc418a61e8ac12b8379835"
+              },
+              {
+                "source_id": "aurora-response",
+                "source_version": 1,
+                "source_hash": "8f4a1801fde5b1b35afc5426495d6ae73c8c45d5b0a99cd54c804af8733c335d",
+                "projection_id": "a9431d866583500b35d0e8a099d19dd222c1ff58424f1338249a747842137542",
+                "retrieved_fragment_id": "adfd5a64514275fb46664ec2bfdf2a8b686488a4498747b7d2598301d33a9853",
+                "canonical_fragment_id": "69364deab45b9d4e29c1e1dc76ab7c4d869e1549cc795bca4f240a7dbc2fe106"
+              }
+            ]
+          },
+          {
+            "event_id": "393f169a-632c-466e-8959-0099010d777b",
+            "sequence": 30,
+            "kind": "inference_requested",
+            "occurred_at": "2026-11-05T15:11:06.271074+00:00",
+            "recorded_at": "2026-11-05T15:11:06.271Z",
+            "capability_id": "legal_director",
+            "checkpoint_id": null,
+            "model_slot": "agent:legal_director",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "18ddebde3bcaa56b",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": "34a153db8424a442612d44238ae5ef680f8be4d57617ed465af53b4890b1744a",
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "40b01dcd-aa94-4912-b9a0-22a7cbd7493e",
+            "sequence": 31,
+            "kind": "inference_completed",
+            "occurred_at": "2026-11-05T15:11:24.147400+00:00",
+            "recorded_at": "2026-11-05T15:11:24.149Z",
+            "capability_id": "security_analyst",
+            "checkpoint_id": null,
+            "model_slot": "agent:security_analyst",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "a3b860e383f38c1f",
+            "parent_span_id": "db612d1e51103fbb",
+            "input_artifact_id": "0db1790330753ad120b725cf53fe7b9ed9484318a171a24325d36e890eb2feb1",
+            "output_artifact_id": "d747b94cfaf4ec7bfc36e2b51e5f19426a5a5e5137846af8d49a45e316d348c4",
+            "fact_ids": [
+              "edb87bd46deda79e5bd0b3847202498976ab21cf0410d59d2ab6fd8431611065",
+              "cf08c1504fc48a75b5513c3d01355e350578db5dc481265ab234b786b730c079",
+              "7e617387fe4b98396d1b4991930d1845f375cb1d2e5760348a5bdfc16b16477c",
+              "88712ebffef4bcd08bd58d2130bae3debcc2426e84f73dc0faddadbb9fe7b5d4",
+              "15573b1d8ff6e2cf99bb28a092df399640597ccebcfaeca1e224a7f37158edc3",
+              "c16a56f21d53e6c1ebe0945434ed8010fe3c0b1f285b12a1928caf1a403a35bc",
+              "03868b8cfabc6ffe8a0e2d3d09443e1621aaf5242d3286a17f20db99044b3a2b"
+            ],
+            "evidence": []
+          },
+          {
+            "event_id": "bb519989-f07d-4a03-9497-ff604e1db1ff",
+            "sequence": 32,
+            "kind": "specialist_completed",
+            "occurred_at": "2026-11-05T15:11:24.152399+00:00",
+            "recorded_at": "2026-11-05T15:11:24.154Z",
+            "capability_id": "security_analyst",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "a3b860e383f38c1f",
+            "parent_span_id": "db612d1e51103fbb",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "6e439aa4-005f-4450-9bf5-d909517f7d24",
+            "sequence": 33,
+            "kind": "director_started",
+            "occurred_at": "2026-11-05T15:11:24.160611+00:00",
+            "recorded_at": "2026-11-05T15:11:24.185Z",
+            "capability_id": "technology_director",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "db612d1e51103fbb",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "5403e018-e9b3-4f03-ad83-1d93e2f0db52",
+            "sequence": 34,
+            "kind": "retrieval_completed",
+            "occurred_at": "2026-11-05T15:11:24.207555+00:00",
+            "recorded_at": "2026-11-05T15:11:24.233Z",
+            "capability_id": "technology_director",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "db612d1e51103fbb",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": null,
+            "output_artifact_id": "f5c29478994740d5c88aac5f3b5335d072ced1b3369436e9923027632c770424",
+            "fact_ids": [],
+            "evidence": [
+              {
+                "source_id": "aurora-data-platform",
+                "source_version": 1,
+                "source_hash": "c5d9ddeb1dc46d00c7f8289267d1545491cb604c392669b144ce85d690a2e024",
+                "projection_id": "6abfb52f0ff41dc772488dc7a91b82c29b95a7d5dea494fab07273aed6ea2853",
+                "retrieved_fragment_id": "2c5c6ee79d6b8c43e0e0989150febeb927a67b1338aab6299e852684bba5c513",
+                "canonical_fragment_id": null
+              },
+              {
+                "source_id": "aurora-incident",
+                "source_version": 1,
+                "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37",
+                "canonical_fragment_id": null
+              }
+            ]
+          },
+          {
+            "event_id": "b29ceee3-3bc5-494b-9ab6-ba4c7de92401",
+            "sequence": 35,
+            "kind": "canonical_evidence_verified",
+            "occurred_at": "2026-11-05T15:11:24.255312+00:00",
+            "recorded_at": "2026-11-05T15:11:24.280Z",
+            "capability_id": "technology_director",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "db612d1e51103fbb",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": null,
+            "output_artifact_id": "4a4851ced6f78656d0add1f397fd20dbb957f8b53f021bd52c1f8c5e907bebe9",
+            "fact_ids": [],
+            "evidence": [
+              {
+                "source_id": "aurora-data-platform",
+                "source_version": 1,
+                "source_hash": "c5d9ddeb1dc46d00c7f8289267d1545491cb604c392669b144ce85d690a2e024",
+                "projection_id": "6abfb52f0ff41dc772488dc7a91b82c29b95a7d5dea494fab07273aed6ea2853",
+                "retrieved_fragment_id": "2c5c6ee79d6b8c43e0e0989150febeb927a67b1338aab6299e852684bba5c513",
+                "canonical_fragment_id": "a554086d9a1eef4315431991567482f0e2b25a46a0b97b1a6043c213ed709915"
+              },
+              {
+                "source_id": "aurora-incident",
+                "source_version": 1,
+                "source_hash": "c9051947467a637993cb05121e86b055016e16cfc897357eb80514e177727aec",
+                "projection_id": "a3981bb789c906fcdb5382753fa662035be684c40ba42b69a0d5e207e387ba33",
+                "retrieved_fragment_id": "be94b103c6c0df2c05906ee42ad9b88a02c03b1b4a8f3613333633b24c8ceb37",
+                "canonical_fragment_id": "2ebd77f6a9b0489970e2ed05ccca9f3cd4697774744db8e5ead8db13fbf3e2e4"
+              }
+            ]
+          },
+          {
+            "event_id": "b2bab741-67f7-412e-b682-4c0c65595bdf",
+            "sequence": 36,
+            "kind": "inference_requested",
+            "occurred_at": "2026-11-05T15:11:24.285348+00:00",
+            "recorded_at": "2026-11-05T15:11:24.287Z",
+            "capability_id": "technology_director",
+            "checkpoint_id": null,
+            "model_slot": "agent:technology_director",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "db612d1e51103fbb",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": "c2822b01cb70123e43a9a5b0010744e6f71f476229b8889fe15f83c7460ed361",
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "4d28b17c-ef9a-463a-a32c-eabc28d6de82",
+            "sequence": 37,
+            "kind": "inference_completed",
+            "occurred_at": "2026-11-05T15:11:42.906430+00:00",
+            "recorded_at": "2026-11-05T15:11:42.908Z",
+            "capability_id": "legal_director",
+            "checkpoint_id": null,
+            "model_slot": "agent:legal_director",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "18ddebde3bcaa56b",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": "34a153db8424a442612d44238ae5ef680f8be4d57617ed465af53b4890b1744a",
+            "output_artifact_id": "0424e6e4a5b6b023e74396757527850eb0cebf543368e2cd76d420d8ac0df737",
+            "fact_ids": [
+              "03627ce76cfdfc50279ac774a2a9dfbcaffd118186df24de6d2825d8a6be6cd5",
+              "b40313297d96a45e4822f82faa6d789fb88ee32228c48e8ae5a6d694972e8903",
+              "d1eb4df467bababc1379526815742adecd78fe8e404c56ca96f421dc4deb4c58",
+              "c88cac0f9015738ea615813ac66926f09c7f0ecf0e9bd2bc0ed038a2acd901ea",
+              "0fbfe3c300bee0dca126b938153a6ad9ed4ff4b65d939559bfc372cefa9e30f6",
+              "55f084f15d7921a1ad916bf9f5192461f4bed942f3eef54cf254690e3f77f26c",
+              "8f89d2fa9439f7840c41e2ef4bf26a6dc0ade3c1b7116b73336a3016b1fd3e81",
+              "aad16ddcef20b00d112d4eae5bc8b4bb41a0638ef302aa94452409cca598bffd"
+            ],
+            "evidence": []
+          },
+          {
+            "event_id": "adae30b8-39a1-4af3-bc6e-8b68900b2255",
+            "sequence": 38,
+            "kind": "director_completed",
+            "occurred_at": "2026-11-05T15:11:42.910952+00:00",
+            "recorded_at": "2026-11-05T15:11:42.927Z",
+            "capability_id": "legal_director",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "18ddebde3bcaa56b",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "7deacd6a-b631-4c68-8041-99d84c410325",
+            "sequence": 39,
+            "kind": "inference_completed",
+            "occurred_at": "2026-11-05T15:12:01.982890+00:00",
+            "recorded_at": "2026-11-05T15:12:01.984Z",
+            "capability_id": "technology_director",
+            "checkpoint_id": null,
+            "model_slot": "agent:technology_director",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "db612d1e51103fbb",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": "c2822b01cb70123e43a9a5b0010744e6f71f476229b8889fe15f83c7460ed361",
+            "output_artifact_id": "93736eaa918cbdd2d4d08be2b2d53838730266c40a1da63d0f5fdac9e4678eb8",
+            "fact_ids": [
+              "30655a3f96d76c17ac89b3bc7367fdaffd30469f00e17309092d1ca35cb1f1d3",
+              "de7bed908a54659936ba57534873d92a653b33c1cb4b0ad000e7ed8b6edd7b18",
+              "189dbd6dd3bc4dde435a67a8852f651d3cb5c5443f0c072ec2ef571200e949e5",
+              "108b5f2eba12589e93e2110e796799f0762e00cf7600d134498aa17a9927390f",
+              "1171def71424478f9dc4f5a8885e91830c3c8276b2a0f1bbd6c5321cd1a61bcc",
+              "00b4dd6ab009a54ac360f53fe89d6106e4fa6695b6e9b6f822f6a0f6b9b095e1",
+              "2b22275644560ea786a4c3e4d892ab14820d291e9842eb4528ebd14296adc7a2",
+              "ee4fdbd11e8db070cf4321c67fc68d98a07f520a2249fc76d9f74d89c9f46427"
+            ],
+            "evidence": []
+          },
+          {
+            "event_id": "b97a5685-f752-46e8-bb28-3678e9774379",
+            "sequence": 40,
+            "kind": "director_completed",
+            "occurred_at": "2026-11-05T15:12:01.986401+00:00",
+            "recorded_at": "2026-11-05T15:12:02.000Z",
+            "capability_id": "technology_director",
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "db612d1e51103fbb",
+            "parent_span_id": "a095cd70546bf58b",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "b3be2d71-cf8a-4dcc-aee1-ac2e5ba1527e",
+            "sequence": 41,
+            "kind": "synthesis",
+            "occurred_at": "2026-11-05T15:12:02.013218+00:00",
+            "recorded_at": "2026-11-05T15:12:02.031Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "f7ffe460bf684c20",
+            "parent_span_id": "b25b94bc82c46dee",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "2c91a187-f934-48d7-a37f-83732d009366",
+            "sequence": 42,
+            "kind": "inference_requested",
+            "occurred_at": "2026-11-05T15:12:02.036604+00:00",
+            "recorded_at": "2026-11-05T15:12:02.037Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": "synthesis",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "91bebf55571886c8",
+            "parent_span_id": "b25b94bc82c46dee",
+            "input_artifact_id": "74af7e49657b9fd19fd2f815e32e16f5dbb3cccd1adc5a31fb0f36b06ae207ea",
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "4f7ada02-20b0-45f2-b62b-4fc93f0a77e2",
+            "sequence": 43,
+            "kind": "inference_completed",
+            "occurred_at": "2026-11-05T15:12:24.065051+00:00",
+            "recorded_at": "2026-11-05T15:12:24.078Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": "synthesis",
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "c92e847bebef42dc",
+            "parent_span_id": "b25b94bc82c46dee",
+            "input_artifact_id": "74af7e49657b9fd19fd2f815e32e16f5dbb3cccd1adc5a31fb0f36b06ae207ea",
+            "output_artifact_id": "14d901711366e0b697b5d4980f6e9c9a5c46255828c4ec11ee3ba68ee963b79f",
+            "fact_ids": [
+              "fa7d1c560fe7a4da9e9b125a3e42002c493795bafa7d8e1f659a7dc53adf27c9",
+              "2828246b5c8db78f9d486fc93a0f2dd28755998493e57103dcb3904a5db76372",
+              "8b4f5db9e6db999d9019fa4f892b579247a2b0aba6cdc84fed7674159ac5b790",
+              "b93ebbeb5eb00026c75b8f7349fb3af922a00b9791c638ab62e547bb70c6af3e",
+              "f4e4c36c3336778c93b3268bd6537138bf1dfd84a367b1b074040d38fc9274bc",
+              "c0115160f1264b835f74ba7e8b97a3cb8c9ab2d7b2050c2d1a08f780b925a211",
+              "fede5c247caceccf573c4fa50362a3ad4be62e1052eccaf3f716b3a9ab8b9cb8"
+            ],
+            "evidence": []
+          },
+          {
+            "event_id": "8fa076ba-8ac2-41a7-9ddf-3437a7576ace",
+            "sequence": 44,
+            "kind": "review_ready",
+            "occurred_at": "2026-11-05T15:12:24.081Z",
+            "recorded_at": "2026-11-05T15:12:24.081Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": null,
+            "span_id": null,
+            "parent_span_id": null,
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "b223d213-d069-4b60-bac3-4363a6f891bb",
+            "sequence": 45,
+            "kind": "checkpoint_saved",
+            "occurred_at": "2026-11-05T15:12:24.092372+00:00",
+            "recorded_at": "2026-11-05T15:12:24.095Z",
+            "capability_id": null,
+            "checkpoint_id": "1f1d92b4-e02e-648c-8003-7c681751b27f",
+            "model_slot": null,
+            "worker_run_id": "2c6fdf3d89d24febbfe1486c339b4aa4",
+            "span_id": "4c3a606522523066",
+            "parent_span_id": "b25b94bc82c46dee",
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          },
+          {
+            "event_id": "169af607-2633-4dbe-90ff-7853c2a154ff",
+            "sequence": 46,
+            "kind": "worker_stopped",
+            "occurred_at": "2026-11-05T15:12:24.208Z",
+            "recorded_at": "2026-11-05T15:12:24.208Z",
+            "capability_id": null,
+            "checkpoint_id": null,
+            "model_slot": null,
+            "worker_run_id": null,
+            "span_id": null,
+            "parent_span_id": null,
+            "input_artifact_id": null,
+            "output_artifact_id": null,
+            "fact_ids": [],
+            "evidence": []
+          }
+        ]
+      }
+    }
+  ],
+  "production_approved": false,
+  "business_v1_requalified": false,
+  "result": "FAIL",
+  "error": "TypeError(\"'NoneType' object is not subscriptable\")",
+  "seconds": 506.6685565999942
+}

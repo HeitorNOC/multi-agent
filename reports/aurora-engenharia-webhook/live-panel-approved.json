@@ -1,0 +1,307 @@
+{
+  "id": "a4eab6a2-45e0-474a-9f5c-f7678f89e2d4",
+  "status": "completed",
+  "receipt": {
+    "id": "b67da7fb-cfc4-4e2a-866c-bbc9316fcd1b",
+    "job": "a4eab6a2-45e0-474a-9f5c-f7678f89e2d4",
+    "hash": "8e5131d95965be4f1bc6ea4f75bfbf79eac1778dd2197ba5e2890397ba8a653b",
+    "simulated": true,
+    "recipient": "registro-local-engenharia",
+    "content": "Registrar a revisão humana da entrega de engenharia.",
+    "created": "2026-11-07T03:03:29.203Z"
+  },
+  "review_hash": "8e5131d95965be4f1bc6ea4f75bfbf79eac1778dd2197ba5e2890397ba8a653b",
+  "metrics": {
+    "indexing": {
+      "calls": 16,
+      "input_tokens": 222698,
+      "cached_input_tokens": 143488,
+      "output_tokens": 16152,
+      "model_seconds": 351.10139600004186,
+      "models": [
+        "gpt-6.1-terra"
+      ],
+      "unexpected_tool_events": 0
+    },
+    "engineering": {
+      "calls": 7,
+      "input_tokens": 86096,
+      "cached_input_tokens": 63744,
+      "output_tokens": 1065,
+      "model_seconds": 44.75524900000892,
+      "models": [
+        "gpt-6.1-terra"
+      ],
+      "unexpected_tool_events": 0
+    },
+    "seconds_admission_to_review": 47.488,
+    "seconds_approval_to_receipt": 0.994
+  },
+  "events": [
+    {
+      "seq": 1,
+      "at": "2026-11-07T03:01:58.797Z",
+      "node": "admission",
+      "detail": {
+        "goal": "Implemente e teste a ingestão idempotente de um webhook fictício e encaminhe o diff para revisão humana."
+      }
+    },
+    {
+      "seq": 2,
+      "at": "2026-11-07T03:01:58.797Z",
+      "node": "job_queued",
+      "detail": {
+        "position_id": 1,
+        "kind": "new",
+        "queued_at": "2026-11-07T03:01:58.797Z"
+      }
+    },
+    {
+      "seq": 3,
+      "at": "2026-11-07T03:01:58.802Z",
+      "node": "job_dequeued",
+      "detail": {
+        "position_id": 1,
+        "wait_ms": 5
+      }
+    },
+    {
+      "seq": 4,
+      "at": "2026-11-07T03:01:58.802Z",
+      "node": "worker_requested",
+      "detail": {}
+    },
+    {
+      "seq": 5,
+      "at": "2026-11-07T03:01:58.811Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 18532,
+        "running": 1
+      }
+    },
+    {
+      "seq": 6,
+      "at": "2026-11-07T03:01:59.756749+00:00",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [],
+        "process": 21736,
+        "has_state": false,
+        "telemetry": {
+          "span_id": "6a5fa449e2e92582",
+          "parent_span_id": "a506d84b2a712b6b",
+          "checkpoint_id": null,
+          "occurred_at": "2026-11-07T03:01:59.756749+00:00",
+          "worker_run_id": "8eec995c4efb4250ba25965b5ebb9b1c"
+        }
+      }
+    },
+    {
+      "seq": 7,
+      "at": "2026-11-07T03:02:05.438Z",
+      "node": "engineering_chief",
+      "detail": {
+        "attempt": 0,
+        "roster": [
+          "tech_lead",
+          "backend_engineer",
+          "qa_engineer",
+          "platform_engineer"
+        ]
+      }
+    },
+    {
+      "seq": 8,
+      "at": "2026-11-07T03:02:11.342Z",
+      "node": "engineering_assign",
+      "detail": {
+        "attempt": 0,
+        "assignments": [
+          {
+            "agent": "tech_lead",
+            "task": "Definir a arquitetura e as garantias de atomicidade e idempotência, incluindo a chave por tenant e o tratamento de falhas de escrita."
+          },
+          {
+            "agent": "backend_engineer",
+            "task": "Implementar o módulo CommonJS síncrono com node:sqlite conforme a definição técnica."
+          },
+          {
+            "agent": "qa_engineer",
+            "task": "Verificar os critérios de aceitação, a persistência, o isolamento entre tenants, os conflitos e a possibilidade de nova tentativa após falha de escrita."
+          }
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "at": "2026-11-07T03:02:36.705Z",
+      "node": "engineering_qa",
+      "detail": {
+        "attempt": 1,
+        "tests": {
+          "exit_code": 0,
+          "passed": true,
+          "log": "TAP version 13\n# CHECK duplicate: HTTP 202 then 200 across two deliveries; one stored effect\n# CHECK conflict: HTTP 409 for changed payload; original unchanged\n# CHECK tenant: same event ID in another tenant independently accepted\n# CHECK reopen: duplicate still recognized after reopening the SQLite file\n# CHECK rollback: injected write failure returned HTTP 500 with no effect; retry accepted exactly once\n# Subtest: webhook deduplicates repeated deliveries and preserves tenant scope\nok 1 - webhook deduplicates repeated deliveries and preserves tenant scope\n  ---\n  type: 'test'\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 210.144615\n"
+        }
+      }
+    },
+    {
+      "seq": 10,
+      "at": "2026-11-07T03:02:42.297Z",
+      "node": "engineering_review",
+      "detail": {
+        "attempt": 1,
+        "technical_review": {
+          "verdict": "pass",
+          "evidence": "O módulo CommonJS exporta initialize e ingest síncronas. A chave primária composta isola os tenants, e o INSERT atômico preserva o payload original ao distinguir accepted, duplicate e conflict. A execução fora de transação externa e a propagação de erros de escrita permitem persistência e nova tentativa após falha. Os testes fornecidos passaram para duplicação, conflito, isolamento entre tenants, reabertura do banco e falha de escrita seguida de nova tentativa."
+        }
+      }
+    },
+    {
+      "seq": 11,
+      "at": "2026-11-07T03:02:46.278Z",
+      "node": "engineering_director",
+      "detail": {
+        "attempt": 1,
+        "decision": {
+          "action": "human_review",
+          "reason": "Os testes e o parecer técnico passaram, cobrindo idempotência, conflito de payload, isolamento entre tenants, persistência e nova tentativa após falha de escrita."
+        }
+      }
+    },
+    {
+      "seq": 12,
+      "at": "2026-11-07T03:02:46.285Z",
+      "node": "review_ready",
+      "detail": {
+        "hash": "8e5131d95965be4f1bc6ea4f75bfbf79eac1778dd2197ba5e2890397ba8a653b",
+        "model_approval_mismatch": true
+      }
+    },
+    {
+      "seq": 13,
+      "at": "2026-11-07T03:02:46.296798+00:00",
+      "node": "checkpoint_saved",
+      "detail": {
+        "next": [
+          "approval"
+        ],
+        "completed": false,
+        "telemetry": {
+          "span_id": "e7875a91e2e7ee4d",
+          "parent_span_id": "a506d84b2a712b6b",
+          "checkpoint_id": "1f1da57b-53cf-69aa-8008-d939f2a8c906",
+          "occurred_at": "2026-11-07T03:02:46.296798+00:00",
+          "worker_run_id": "8eec995c4efb4250ba25965b5ebb9b1c"
+        }
+      }
+    },
+    {
+      "seq": 14,
+      "at": "2026-11-07T03:02:46.397Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 18532,
+        "exit_code": 0
+      }
+    },
+    {
+      "seq": 15,
+      "at": "2026-11-07T03:03:28.209Z",
+      "node": "human_approved",
+      "detail": {
+        "hash": "8e5131d95965be4f1bc6ea4f75bfbf79eac1778dd2197ba5e2890397ba8a653b",
+        "actor": "operador-local-demo"
+      }
+    },
+    {
+      "seq": 16,
+      "at": "2026-11-07T03:03:28.209Z",
+      "node": "job_queued",
+      "detail": {
+        "position_id": 2,
+        "kind": "resume",
+        "queued_at": "2026-11-07T03:03:28.209Z"
+      }
+    },
+    {
+      "seq": 17,
+      "at": "2026-11-07T03:03:28.251Z",
+      "node": "job_dequeued",
+      "detail": {
+        "position_id": 2,
+        "wait_ms": 42
+      }
+    },
+    {
+      "seq": 18,
+      "at": "2026-11-07T03:03:28.251Z",
+      "node": "worker_requested",
+      "detail": {}
+    },
+    {
+      "seq": 19,
+      "at": "2026-11-07T03:03:28.255Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 11700,
+        "running": 1
+      }
+    },
+    {
+      "seq": 20,
+      "at": "2026-11-07T03:03:29.145902+00:00",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [
+          "approval"
+        ],
+        "process": 21608,
+        "has_state": true,
+        "telemetry": {
+          "span_id": "da102e6aa17fee79",
+          "parent_span_id": "8acf56cfb3bf5843",
+          "checkpoint_id": "1f1da57b-53cf-69aa-8008-d939f2a8c906",
+          "occurred_at": "2026-11-07T03:03:29.145902+00:00",
+          "worker_run_id": "26ab3dcbc3ce439680929357f5da47eb"
+        }
+      }
+    },
+    {
+      "seq": 21,
+      "at": "2026-11-07T03:03:29.203Z",
+      "node": "effect_receipt",
+      "detail": {
+        "id": "b67da7fb-cfc4-4e2a-866c-bbc9316fcd1b",
+        "replayed": false,
+        "simulated": true
+      }
+    },
+    {
+      "seq": 22,
+      "at": "2026-11-07T03:03:29.211917+00:00",
+      "node": "checkpoint_saved",
+      "detail": {
+        "next": [],
+        "completed": true,
+        "telemetry": {
+          "span_id": "8f0bba33998eb4f1",
+          "parent_span_id": "8acf56cfb3bf5843",
+          "checkpoint_id": "1f1da57c-ed1b-6c09-800a-3a5341fa5c96",
+          "occurred_at": "2026-11-07T03:03:29.211917+00:00",
+          "worker_run_id": "26ab3dcbc3ce439680929357f5da47eb"
+        }
+      }
+    },
+    {
+      "seq": 23,
+      "at": "2026-11-07T03:03:29.307Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 11700,
+        "exit_code": 0
+      }
+    }
+  ]
+}

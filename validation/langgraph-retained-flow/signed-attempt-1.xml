@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.333" timestamp="2026-11-04T18:43:14.753619-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.langgraph-retained-flow.test_signed_flow" name="test_signed_budget_publication_and_restore" time="0.380"><failure message="RuntimeError: failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: O sistema não pode encontrar o arquivo especificado.">def test_signed_budget_publication_and_restore():
+        lab=SignedLab();started=time.perf_counter()
+        def denied(fn,status):
+            with pytest.raises(Rejected) as error:fn()
+            assert error.value.status==status,str(error.value)
+        try:
+&gt;           lab.start();lab.connect_authority()
+            ^^^^^^^^^^^
+
+validation\langgraph-retained-flow\test_signed_flow.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+validation\langgraph-business-flow\test_flow.py:100: in start
+    image = json.loads(self.docker('image','inspect','postgres:17.6-bookworm').stdout)[0]
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;test_signed_flow.SignedLab object at 0x00000279428B57F0&gt;, input = None
+check = True, args = ('image', 'inspect', 'postgres:17.6-bookworm')
+
+    def docker(self,*args,input=None,check=True):
+        result = subprocess.run(['docker',*args],input=input,capture_output=True,timeout=50)
+        if check and result.returncode:
+&gt;           raise RuntimeError(self.redact(result.stderr.decode(errors='replace'))[-2500:])
+E           RuntimeError: failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: O sistema não pode encontrar o arquivo especificado.
+
+validation\langgraph-business-flow\test_flow.py:64: RuntimeError</failure></testcase></testsuite></testsuites>

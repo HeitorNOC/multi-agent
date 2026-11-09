@@ -1,0 +1,3307 @@
+{
+  "manifest_sha256": "78b2a7fb555cfe2038d6a271e966a4f29aababf78d671a7834a5c23e7108768c",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "reranker": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "173760f",
+    "files": {
+      "model_quint8_avx2.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "tokenizer.json": "3a56def25aa40facc030ea8b0b87f3688e4b3c39eb8b45d5702b3a1300fe2a20"
+    },
+    "onnxruntime": "1.31.1",
+    "startup_ms": 1069.16
+  },
+  "documents": 10,
+  "passages": 377,
+  "cases": [
+    {
+      "id": "Q01",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 463,
+          "candidates": [
+            [
+              "contact",
+              13,
+              34
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ],
+            [
+              "contact",
+              13,
+              29
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              54
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 489,
+          "candidates": [
+            [
+              "contact",
+              13,
+              34
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "contact",
+              13,
+              29
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 1953,
+          "candidates": [
+            [
+              "contact",
+              13,
+              34
+            ],
+            [
+              "contact",
+              13,
+              29
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "contact",
+              16,
+              66
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 2038,
+          "candidates": [
+            [
+              "contact",
+              13,
+              34
+            ],
+            [
+              "contact",
+              13,
+              29
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "contact",
+              16,
+              66
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q02",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 318,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 532,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              12,
+              28
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 1405,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              12,
+              28
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 1380,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              12,
+              28
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q03",
+      "critical": false,
+      "expected": 2,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 347,
+          "candidates": [
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba",
+              4,
+              11
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              3,
+              1
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 688,
+          "candidates": [
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba",
+              4,
+              11
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 1348,
+          "candidates": [
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              8,
+              12
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              4,
+              11
+            ],
+            [
+              "mba",
+              8,
+              14
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 1320,
+          "candidates": [
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              8,
+              12
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              4,
+              11
+            ],
+            [
+              "mba",
+              8,
+              14
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q04",
+      "critical": true,
+      "expected": 2,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 742,
+          "candidates": [
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "contact",
+              16,
+              65
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 1361,
+          "candidates": [
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "contact",
+              16,
+              65
+            ],
+            [
+              "fluxo",
+              12,
+              28
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 3421,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              16,
+              65
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            1,
+            2
+          ],
+          "rerank_ms": 9602,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "contact",
+              16,
+              65
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q05",
+      "critical": true,
+      "expected": 2,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 447,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              13
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              12,
+              29
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 658,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              13
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              12,
+              29
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 1167,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              13
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 3189,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              13
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q06",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 419,
+          "candidates": [
+            [
+              "contact",
+              15,
+              53
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              44
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "contact",
+              16,
+              65
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 744,
+          "candidates": [
+            [
+              "contact",
+              15,
+              53
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              44
+            ],
+            [
+              "contact",
+              16,
+              69
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              16,
+              68
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 2336,
+          "candidates": [
+            [
+              "contact",
+              15,
+              53
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              44
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "contact",
+              16,
+              69
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 2351,
+          "candidates": [
+            [
+              "contact",
+              15,
+              53
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              44
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "contact",
+              16,
+              69
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q07",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 492,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              12
+            ],
+            [
+              "fluxo",
+              10,
+              16
+            ],
+            [
+              "fluxo",
+              9,
+              4
+            ],
+            [
+              "fluxo",
+              9,
+              7
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 791,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              12
+            ],
+            [
+              "fluxo",
+              9,
+              4
+            ],
+            [
+              "fluxo",
+              10,
+              16
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              7
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 1956,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              12
+            ],
+            [
+              "fluxo",
+              9,
+              4
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              10,
+              16
+            ],
+            [
+              "fluxo",
+              9,
+              7
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 2001,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              12
+            ],
+            [
+              "fluxo",
+              9,
+              4
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              10,
+              16
+            ],
+            [
+              "fluxo",
+              9,
+              7
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q08",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 333,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 566,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 1286,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 1407,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q09",
+      "critical": true,
+      "expected": 3,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            2,
+            3
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 774,
+          "candidates": [
+            [
+              "contact",
+              9,
+              3
+            ],
+            [
+              "contact",
+              11,
+              26
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              11,
+              15
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            2,
+            3
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 1255,
+          "candidates": [
+            [
+              "contact",
+              11,
+              26
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "contact",
+              9,
+              3
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              11,
+              15
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1,
+            2,
+            3
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 3381,
+          "candidates": [
+            [
+              "contact",
+              9,
+              3
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "contact",
+              11,
+              26
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              24
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1,
+            2,
+            3
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 9611,
+          "candidates": [
+            [
+              "contact",
+              9,
+              3
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ],
+            [
+              "contact",
+              11,
+              26
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "critical": true,
+      "expected": 2,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            1,
+            2
+          ],
+          "rerank_ms": 402,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba",
+              4,
+              5
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            1,
+            2
+          ],
+          "rerank_ms": 984,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "fluxo",
+              9,
+              3
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            1,
+            2
+          ],
+          "rerank_ms": 2135,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              8,
+              14
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              4,
+              11
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            1,
+            2
+          ],
+          "rerank_ms": 5626,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              8,
+              14
+            ],
+            [
+              "reclame-aqui",
+              12,
+              9
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              8
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "N01",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "vector": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 100,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "mba",
+              4,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              1
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 359,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "fluxo",
+              9,
+              5
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              10,
+              11
+            ],
+            [
+              "mba-academic",
+              null,
+              1
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 1554,
+          "candidates": [
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              11
+            ],
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              10,
+              23
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 1581,
+          "candidates": [
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              11
+            ],
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              10,
+              23
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "N02",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "vector": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 323,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              19
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              16,
+              60
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "contact",
+              13,
+              38
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 451,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              19
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              13,
+              38
+            ],
+            [
+              "contact",
+              16,
+              60
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 2262,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              19
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              13,
+              35
+            ],
+            [
+              "contact",
+              13,
+              38
+            ],
+            [
+              "contact",
+              16,
+              60
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 2281,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              19
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              13,
+              35
+            ],
+            [
+              "contact",
+              13,
+              38
+            ],
+            [
+              "contact",
+              16,
+              60
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "N03",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "vector": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 529,
+          "candidates": [
+            [
+              "reclame-aqui",
+              3,
+              1
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ],
+            [
+              "reclame-aqui",
+              7,
+              6
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 619,
+          "candidates": [
+            [
+              "reclame-aqui",
+              3,
+              1
+            ],
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 1595,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 1550,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "N04",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "vector": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 0,
+          "candidates": []
+        },
+        "union": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 64,
+          "candidates": [
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "portal",
+              13,
+              4
+            ],
+            [
+              "contact",
+              11,
+              18
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 770,
+          "candidates": [
+            [
+              "portal",
+              13,
+              2
+            ],
+            [
+              "portal",
+              13,
+              4
+            ],
+            [
+              "portal",
+              13,
+              2
+            ],
+            [
+              "contact",
+              11,
+              27
+            ],
+            [
+              "contact",
+              11,
+              15
+            ],
+            [
+              "contact",
+              11,
+              17
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 771,
+          "candidates": [
+            [
+              "portal",
+              13,
+              2
+            ],
+            [
+              "portal",
+              13,
+              4
+            ],
+            [
+              "portal",
+              13,
+              2
+            ],
+            [
+              "contact",
+              11,
+              27
+            ],
+            [
+              "contact",
+              11,
+              15
+            ],
+            [
+              "contact",
+              11,
+              17
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "handoff",
+      "critical": false,
+      "expected": 3,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            3
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 410,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            3
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 671,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            3
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 2223,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            3
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 2324,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "persistence",
+      "critical": false,
+      "expected": 2,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 927,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              9,
+              9
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 1361,
+          "candidates": [
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              10,
+              19
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 2333,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ],
+            [
+              "fluxo",
+              10,
+              19
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [
+            2
+          ],
+          "rerank_ms": 6074,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "release",
+      "critical": false,
+      "expected": 2,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            2
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 337,
+          "candidates": [
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              3,
+              1
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            2
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 679,
+          "candidates": [
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 1275,
+          "candidates": [
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba",
+              3,
+              4
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "contact",
+              16,
+              64
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1,
+            2
+          ],
+          "selected_evidence": [],
+          "rerank_ms": 1281,
+          "candidates": [
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba",
+              3,
+              4
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "contact",
+              16,
+              64
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "frontend",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "vector": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 434,
+          "candidates": [
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ],
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "mba-frontend",
+              4,
+              1
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 638,
+          "candidates": [
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              1
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 2137,
+          "candidates": [
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              1
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [
+            1
+          ],
+          "selected_evidence": [
+            1
+          ],
+          "rerank_ms": 2164,
+          "candidates": [
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              1
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "limit",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "vector": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 438,
+          "candidates": [
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "contact",
+              9,
+              11
+            ],
+            [
+              "contact",
+              16,
+              65
+            ],
+            [
+              "contact",
+              13,
+              38
+            ],
+            [
+              "contact",
+              17,
+              71
+            ],
+            [
+              "contact",
+              9,
+              9
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 576,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "contact",
+              9,
+              11
+            ],
+            [
+              "contact",
+              16,
+              65
+            ],
+            [
+              "contact",
+              11,
+              15
+            ],
+            [
+              "contact",
+              16,
+              62
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 1591,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              9,
+              11
+            ],
+            [
+              "contact",
+              9,
+              9
+            ],
+            [
+              "contact",
+              15,
+              58
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 1590,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              9,
+              11
+            ],
+            [
+              "contact",
+              9,
+              9
+            ],
+            [
+              "contact",
+              15,
+              58
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "price",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "vector": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 196,
+          "candidates": [
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              3,
+              1
+            ]
+          ]
+        },
+        "union": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 478,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              6
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              11
+            ]
+          ]
+        },
+        "pages": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 1725,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              10
+            ],
+            [
+              "mba",
+              4,
+              10
+            ],
+            [
+              "mba",
+              4,
+              6
+            ]
+          ]
+        },
+        "pages_by_clause": {
+          "pool_evidence": [],
+          "selected_evidence": [],
+          "rerank_ms": 1721,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              10
+            ],
+            [
+              "mba",
+              4,
+              10
+            ],
+            [
+              "mba",
+              4,
+              6
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "budgets": {
+    "model": {
+      "cap": 40,
+      "reserved": 13
+    },
+    "stress": {
+      "cap": 7,
+      "reserved": 7
+    }
+  },
+  "head": "0b4d2f212bce5ccf0a2de65c3a0f04dc64ce48e848744ba08f991d76b8170cea",
+  "installation": "02a41254c8",
+  "issued": 1793816172.211872,
+  "nonce": "8a64be821faddb9ffc055c0f498b93d49c2bddb28efe5b6b",
+  "operations": [
+    {
+      "context": {
+        "key": "81c62131-956d-4169-9a90-fc8db5f8fc5a"
+      },
+      "id": "14fc496d-17e2-54a7-8320-4bc988a873c4",
+      "input_sha": "e73008ba70967884b2ddb5f4964fd49d97f8438c8aa313edbc6818d17b037e12",
+      "kind": "approval",
+      "outcome": "committed",
+      "receipt_sha": "4aa39884cde1ee1fe59d37a60934e33bd32747658495aa7ffd592a14c5b0f4b2",
+      "seq": 1
+    },
+    {
+      "context": {
+        "key": "81c62131-956d-4169-9a90-fc8db5f8fc5a",
+        "source": "politica-remoto"
+      },
+      "id": "1e0b3adb-305b-55c9-bf51-5f9a453e89d3",
+      "input_sha": "abcbc18ec59176618426d6c37b983cca3843ff36a092c2530b9b975e08ebef71",
+      "kind": "publication",
+      "outcome": "committed",
+      "receipt_sha": "dcf55ac8ccd5977ec8e80d738d8e8c1ebdbad18ffce51dbc6332887554e4a90e",
+      "seq": 2
+    },
+    {
+      "context": {
+        "fingerprint": "20b5aad464102e338d0c272d9157c4e51436bb0eceb51d682caaeb34c5e338e4",
+        "key": "1dfc35ae-c6e0-41a6-9b7e-ada7a7e0b3e4",
+        "owner": "e4192117-2984-4c7c-b0e7-8de430ec9a81",
+        "request_id": "1dfc35ae-c6e0-41a6-9b7e-ada7a7e0b3e4",
+        "source": "politica-remoto"
+      },
+      "id": "2a9d50e7-e10c-596e-972c-7e78c50d47f4",
+      "input_sha": "f47311e86dadee5da2e8251fa788f7d461b9bfce531456aeb90e7906bc48f172",
+      "kind": "decision",
+      "outcome": "committed",
+      "receipt_sha": "b0726cd69be0851389aa06444ad520b1eee43667efedb24475b5e4900d3b79b5",
+      "seq": 3
+    },
+    {
+      "context": {
+        "fingerprint": "ea83b0793e14dd2d5257e9d15581086f911900976378295d512358c34401ada1",
+        "key": "048da19a-299e-46df-bcca-45f99af63a6a",
+        "owner": "e4192117-2984-4c7c-b0e7-8de430ec9a81",
+        "request_id": "048da19a-299e-46df-bcca-45f99af63a6a",
+        "source": "politica-remoto"
+      },
+      "id": "30565c97-d4c5-5fc3-bb7a-ff6cb56ecf23",
+      "input_sha": "9b7c9ea02c314e4c99dfd5c3bc113857fbf609036d7823f5362f1e87b08b6de0",
+      "kind": "decision",
+      "outcome": "committed",
+      "receipt_sha": "85b9eaaf265b1360ba3d9119c3e5074cb15770c1a30ff99fa7b99975538f0bca",
+      "seq": 4
+    },
+    {
+      "context": {
+        "fingerprint": "c88c96d92910f315c2b261d14af8bfb61cabc652c0ea425fc944598a8abbdc5a",
+        "key": "4f49edd8-18f3-4ee5-b567-29494878c670",
+        "owner": "e4192117-2984-4c7c-b0e7-8de430ec9a81",
+        "request_id": "4f49edd8-18f3-4ee5-b567-29494878c670",
+        "source": "politica-remoto"
+      },
+      "id": "34d1930d-5386-56c2-a676-457b3cb8712c",
+      "input_sha": "45651abfe8e7c0636cb9ea22ca3cbaf7a009880137fe799aaa0350f6273a9882",
+      "kind": "decision",
+      "outcome": "committed",
+      "receipt_sha": "ee7398d2711642f0759c4b450e2c1b129bdaf7b41933d7f504a6af54d84943c4",
+      "seq": 5
+    },
+    {
+      "context": {
+        "fingerprint": "fac08955a069586da2113644b57c6dfd9d95efbd82082205475abe2cce5b2f65",
+        "key": "f7a9f149-f387-4996-948c-75e918b9bfa6",
+        "owner": "e4192117-2984-4c7c-b0e7-8de430ec9a81",
+        "request_id": "f7a9f149-f387-4996-948c-75e918b9bfa6",
+        "source": "politica-remoto"
+      },
+      "id": "c82c060a-4d83-5e87-8e36-74c12f7148c6",
+      "input_sha": "ab1e43a188182aa55b59b7aabfc9808f2fead4aceee34c52415c25b3e5f1faab",
+      "kind": "decision",
+      "outcome": "committed",
+      "receipt_sha": "0f281816fbcad8fa1327c8ed25236e097390e111d6621fef5f38b539bbacfbc6",
+      "seq": 6
+    },
+    {
+      "context": {
+        "fingerprint": "40f6fa16b5cf933027ba243e081aaa27f9ec61886c11153301b93d060a222118",
+        "key": "9343e39d-7de7-4a4e-8882-44a7ab534f2f",
+        "owner": "e4192117-2984-4c7c-b0e7-8de430ec9a81",
+        "request_id": "9343e39d-7de7-4a4e-8882-44a7ab534f2f",
+        "source": "politica-remoto"
+      },
+      "id": "6e47670a-5b5f-5277-aa1e-8c7b9cd26434",
+      "input_sha": "23a72bdc42bb186c60dd0893a98b48f2ab714390e727dd102ca6cbd145e11017",
+      "kind": "decision",
+      "outcome": "committed",
+      "receipt_sha": "edf6bd26feea95cd82a278032294d0720722dc11ea8c50e59bd1f99484ecc723",
+      "seq": 7
+    },
+    {
+      "context": {
+        "fingerprint": "a9d910764159a444d79b2f56554094b53e08e9b8f42f7bfd6ad00389f6af5574",
+        "key": "310cf1d8-4122-4df3-99bb-d856e3b81b3e",
+        "owner": "e4192117-2984-4c7c-b0e7-8de430ec9a81",
+        "request_id": "310cf1d8-4122-4df3-99bb-d856e3b81b3e",
+        "source": "politica-remoto"
+      },
+      "id": "bbc7970f-14f8-5f7b-b8b3-f75fec7e33f9",
+      "input_sha": "fcc6b886515267e9700f8187731cf312fd5df04cc14c24eb5ad1eb3378947caa",
+      "kind": "decision",
+      "outcome": "committed",
+      "receipt_sha": "7362edb7f8b71b123b730ea53abf869c199c21bc6806edea3ecc7073d789a988",
+      "seq": 8
+    },
+    {
+      "context": {
+        "fingerprint": "36b9e71dd70c27fc84ec39a5a4a05d05390b1a81b12038523db7263da210e72c",
+        "key": "78c23566-9f87-4a95-a55b-816f9c667c59",
+        "owner": "e4192117-2984-4c7c-b0e7-8de430ec9a81",
+        "request_id": "78c23566-9f87-4a95-a55b-816f9c667c59",
+        "source": "politica-remoto"
+      },
+      "id": "9e1a938c-7927-56ff-9005-74a0eeef1ac5",
+      "input_sha": "12fd6215f24c074d1bd6d0cd42c3b7ba889e07fa507ca5930c9ddf56fad2d351",
+      "kind": "decision",
+      "outcome": "closed_unknown",
+      "receipt_sha": "53a3514e3039384b79d7f9ac2a9c1cf215fb7424da6e036cf581162ee1f68db7",
+      "seq": 9
+    }
+  ],
+  "reservation": null,
+  "seq": 9
+}

@@ -1,0 +1,19 @@
+{
+  "receipts": 1,
+  "requests": [
+    [
+      "lookup",
+      3
+    ],
+    [
+      "send",
+      1
+    ]
+  ],
+  "action_sequence": [
+    "lookup",
+    "send",
+    "lookup",
+    "lookup"
+  ]
+}

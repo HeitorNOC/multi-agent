@@ -1,0 +1,214 @@
+{
+  "sources": {
+    "D1": "Referência funcional para integrar a base de conhecimento e conectores existentes. Descreve apenas o front-end observado; contratos, autorização, segredos e disponibilidade de upload no servidor exigem validação.",
+    "D2": "Referência prioritária do Contact Center existente: contratos, filas, estados, histórico e Socket.IO orientam a integração. Versões implantadas e autorização efetiva no backend precisam ser verificadas.",
+    "D3": "Fora do escopo inicial: descreve Reclame Aqui e tickets, sem requisito de integrar esse canal nesta diretiva. Pode ser consultado em expansão futura.",
+    "D4": "Referência obrigatória para compreender o fluxo de mensageria e a integração ao Contact Center. Serviços, tópicos e comportamentos descritos não são presumidos existentes no novo núcleo; detalhes de canais não examinados permanecem hipóteses.",
+    "D5": "Entrada obrigatória de padrões Tatodesk para backend REST: camadas, contratos, validação, segurança e revisão. É uma versão de trabalho; exemplos não validados e lacunas devem ser confirmados. O conflito Prisma/TypeORM e a sanitização de erros exigem decisão explícita.",
+    "D6": "Referência de descoberta para localizar documentação de filas, permissões, canais e APIs; é apenas um índice e não estabelece requisitos nem comprova comportamentos.",
+    "D7": "Referência obrigatória inicial para MBA e 360dialog, sujeita à confirmação na documentação oficial atual e em ambiente real. Não contém contratos completos nem comprova capacidades atuais."
+  },
+  "tasks": [
+    {
+      "id": "A1",
+      "owner": "tech_lead",
+      "task": "Consolidar requisitos da diretiva, referências D1–D7, lacunas e hipóteses; mapear o Contact Center existente e seus pontos de extensão, preservando o núcleo omnichannel novo. Preparar diagramas de entrada e saída, limites de domínio e backlog incremental.",
+      "depends_on": [],
+      "acceptance": "Documento rastreia cada requisito às fontes e aos critérios de aceite, distingue fatos relatados de hipóteses e identifica contratos existentes a confirmar.",
+      "blocked_by": []
+    },
+    {
+      "id": "A2",
+      "owner": "technology_director",
+      "task": "Resolver e registrar a decisão Prisma versus TypeORM: a diretiva indica Prisma como referência inicial e D5 prescreve TypeORM. Avaliar compatibilidade com padrões, operação, persistência e mudanças de schema; decidir também sanitização de erros e exceções ao padrão, com responsáveis.",
+      "depends_on": [
+        "A1"
+      ],
+      "acceptance": "ADR aprovado registra escolha, justificativa, impacto nos padrões Tatodesk, estratégia de schema e resposta de erro sem exposição de detalhes internos.",
+      "blocked_by": []
+    },
+    {
+      "id": "A3",
+      "owner": "backend_engineer",
+      "task": "Inspecionar localmente, quando disponíveis, os repositórios e configurações do Contact Center e identificar APIs, eventos, autenticação, autorização, histórico, filas e versões aplicáveis; produzir adaptador e plano de compatibilidade sem presumir equivalência com D2 ou D4.",
+      "depends_on": [
+        "A1"
+      ],
+      "acceptance": "Mapa de contratos com evidências de versão, lacunas, permissões verificadas e estratégia de integração; ausências de acesso são registradas.",
+      "blocked_by": [
+        "Acesso aos repositórios e configurações reais para confirmar a implementação existente"
+      ]
+    },
+    {
+      "id": "A4",
+      "owner": "backend_engineer_2",
+      "task": "Validar com documentação oficial atual da Meta e 360dialog elegibilidade, ativação, cobrança, webhooks, standby, identificação de mensagens, conectores, histórico e mecanismos de tomada e devolução de controle. Definir matriz de capacidades e alternativas seguras para eventos incertos.",
+      "depends_on": [
+        "A1"
+      ],
+      "acceptance": "Matriz cita versão e fonte de cada capacidade, distingue confirmação documental de teste real e identifica campos, respostas, limitações e dúvidas em aberto.",
+      "blocked_by": [
+        "Acesso às fontes oficiais atuais; credenciais e ambiente elegível para validação real"
+      ]
+    },
+    {
+      "id": "A5",
+      "owner": "tech_lead",
+      "task": "Projetar núcleo modular compartilhado, modelo de dados e máquina de estados auditável, separando controle externo, responsável interno, fila, atendimento ativo, transferência pendente e encerramento. Definir contratos versionados de mensagens, eventos Kafka e Socket.IO, correlação, payload original, ordenação e identidade confiável entre canais.",
+      "depends_on": [
+        "A1",
+        "A2"
+      ],
+      "acceptance": "Diagramas, contratos e ADRs descrevem transições permitidas, concorrência, idempotência, recuperação, isolamento por empresa e limites entre módulos; não pressupõem vinculação de identidades sem prova.",
+      "blocked_by": []
+    },
+    {
+      "id": "A6",
+      "owner": "backend_engineer",
+      "task": "Implementar localmente o primeiro fluxo vertical com adaptadores de teste: receber, validar, normalizar, identificar empresa e sessão, persistir, rotear, responder, registrar resultado, consultar histórico e rastrear a execução. Aplicar D5 e a decisão A2; usar Node.js, TypeScript e PostgreSQL, sem NestJS ou FastAPI.",
+      "depends_on": [
+        "A2",
+        "A5"
+      ],
+      "acceptance": "Comandos documentados executam o fluxo completo e testes automatizados reproduzíveis demonstram histórico, correlação, isolamento e ausência de efeito duplicado; mocks são identificados.",
+      "blocked_by": []
+    },
+    {
+      "id": "A7",
+      "owner": "qa_engineer",
+      "task": "Validar o fluxo vertical antes da expansão e estabelecer suíte incremental de contratos, integração e regressão, com dados de pelo menos duas empresas.",
+      "depends_on": [
+        "A6"
+      ],
+      "acceptance": "Relatório reproduzível cobre os dez passos do fluxo, duplicidade e isolamento; falhas impedem a passagem à expansão e resultados simulados são identificados.",
+      "blocked_by": []
+    },
+    {
+      "id": "A8",
+      "owner": "backend_engineer_2",
+      "task": "Implementar processamento assíncrono confiável com Kafka conforme contratos aprovados, persistência transacional dos eventos e mecanismo de publicação recuperável, particionamento por conversa, retentativas limitadas, tratamento de falhas e eventos fora de ordem.",
+      "depends_on": [
+        "A5",
+        "A7"
+      ],
+      "acceptance": "Testes demonstram recuperação após queda de consumidor, ausência de perda silenciosa, idempotência e preservação da ordem lógica; falhas esgotadas ficam visíveis para operação.",
+      "blocked_by": []
+    },
+    {
+      "id": "A9",
+      "owner": "backend_engineer",
+      "task": "Implementar adaptador WhatsApp/360dialog e saída oficial do canal: validar origem de webhook conforme mecanismo confirmado, preservar payload, normalizar mensagens e status, persistir intenção e resultado de envio e observar eventos MBA sem produzir resposta concorrente.",
+      "depends_on": [
+        "A4",
+        "A7",
+        "A8"
+      ],
+      "acceptance": "Testes de contrato e integração simulada cobrem mensagens, status, duplicidades e falhas; teste real registra uma mensagem e eventos MBA sem resposta concorrente quando disponível.",
+      "blocked_by": [
+        "Confirmação das capacidades e contratos oficiais em A4; credenciais e ambiente 360dialog para teste real"
+      ]
+    },
+    {
+      "id": "A10",
+      "owner": "backend_engineer_2",
+      "task": "Implementar handoff persistente e auditável entre MBA e humano, com estados intermediários, confirmação quando suportada, timeout, reconciliação e bloqueio seguro de respostas concorrentes; implementar retorno controlado ao MBA.",
+      "depends_on": [
+        "A4",
+        "A5",
+        "A8",
+        "A9"
+      ],
+      "acceptance": "Testes reproduzíveis cobrem transferência, falha, concorrência e devolução; iniciar uma chamada HTTP nunca conclui a transferência por si só. Resultados reais e limitações do provedor são documentados.",
+      "blocked_by": [
+        "Mecanismos de controle confirmados em A4; acesso ao ambiente real para validação ponta a ponta"
+      ]
+    },
+    {
+      "id": "A11",
+      "owner": "backend_engineer",
+      "task": "Integrar o núcleo ao Contact Center existente por contratos verificados: criar ou encaminhar atendimento, disponibilizar histórico observado e autoria, refletir estado, receber resposta do operador pelo pipeline oficial e concluir ou devolver controle. Projetar contratos para o workspace, priorizando backend.",
+      "depends_on": [
+        "A3",
+        "A7",
+        "A8",
+        "A10"
+      ],
+      "acceptance": "Teste integrado demonstra fila, histórico, resposta pelo canal original, status de entrega e conclusão; permissões são aplicadas no backend e contratos de workspace ficam documentados.",
+      "blocked_by": [
+        "Contratos e autorização reais do Contact Center; acesso a ambiente integrado para validação real"
+      ]
+    },
+    {
+      "id": "A12",
+      "owner": "backend_engineer_2",
+      "task": "Implementar Webchat próprio com Socket.IO autenticado, sessão recuperável, texto, indicadores de conexão e entrega, histórico, reconexão e roteamento ao núcleo; disponibilizar interface substituível para provedores de IA independente do MBA.",
+      "depends_on": [
+        "A5",
+        "A7",
+        "A8"
+      ],
+      "acceptance": "Teste reproduzível inicia conversa, troca mensagens com IA simulada ou configurada, recupera mensagens após reconexão e demonstra isolamento e roteamento humano.",
+      "blocked_by": []
+    },
+    {
+      "id": "A13",
+      "owner": "backend_engineer",
+      "task": "Criar interface autorizada de operações de negócio compartilhadas por motores de IA e adaptadores para conectores oficialmente suportados pelo MBA e ferramentas do Webchat. Examinar D1 para compatibilidade com recursos existentes, sem presumir validações de servidor.",
+      "depends_on": [
+        "A3",
+        "A4",
+        "A5",
+        "A7"
+      ],
+      "acceptance": "Uma operação de demonstração é reutilizada pelos dois adaptadores em testes, com autenticação, autorização por empresa, auditoria e falhas controladas; integração real é identificada separadamente.",
+      "blocked_by": [
+        "Contratos oficiais de conectores e acesso aos sistemas empresariais para validação real"
+      ]
+    },
+    {
+      "id": "A14",
+      "owner": "qa_engineer",
+      "task": "Executar testes ponta a ponta, concorrência, duplicidade, eventos fora de ordem, falhas e recuperação, segurança de webhooks, segregação de credenciais e dados, handoff e reconexão; separar ambientes simulados e reais.",
+      "depends_on": [
+        "A9",
+        "A10",
+        "A11",
+        "A12",
+        "A13"
+      ],
+      "acceptance": "Matriz de aceite cobre todos os critérios da diretiva com evidências reproduzíveis, resultados e limitações; nenhum cenário simulado é apresentado como integração real.",
+      "blocked_by": [
+        "Ambientes e credenciais reais da 360dialog/Meta, Contact Center e sistemas empresariais para cenários reais"
+      ]
+    },
+    {
+      "id": "A15",
+      "owner": "tech_lead",
+      "task": "Preparar operação e documentação: logs estruturados, correlação, métricas de consumidores e handoffs, alertas, procedimentos de recuperação, gestão de segredos, capacidade e decisões sobre novos componentes.",
+      "depends_on": [
+        "A8",
+        "A9",
+        "A11",
+        "A12"
+      ],
+      "acceptance": "Documentação contém indicadores, alertas, procedimentos testáveis e ADRs com justificativa e custo operacional; verificações de lint e build seguem o padrão aplicável.",
+      "blocked_by": [
+        "Acesso ao ambiente de implantação e observabilidade para validar configuração real"
+      ]
+    },
+    {
+      "id": "A16",
+      "owner": "technology_director",
+      "task": "Revisar evidências de aceite, riscos e limitações externas e decidir a prontidão de cada entrega incremental e da operação.",
+      "depends_on": [
+        "A14",
+        "A15"
+      ],
+      "acceptance": "Decisão registra critérios atendidos, pendências com responsáveis e evidências reais separadas das simulações; não declara concluída capacidade externa não validada.",
+      "blocked_by": [
+        "Resultados dos testes reais e acesso ao ambiente operacional"
+      ]
+    }
+  ],
+  "summary": "Plano proposto, não trabalho executado: parte dos contratos e capacidades do Contact Center existente e constrói um núcleo omnichannel novo e modular, sem reproduzir automaticamente os serviços de referência. A primeira entrega é o fluxo vertical local; a expansão depende de sua validação. D5 é entrada obrigatória e a escolha Prisma/TypeORM permanece pendente de decisão da liderança. Implementação e testes locais podem usar mocks; confirmação de APIs, integração ponta a ponta e prontidão operacional dependem de documentação atual, repositórios, credenciais e ambientes reais. As leituras fornecidas relatam trabalhos anteriores, mas não comprovam execução nesta tarefa."
+}

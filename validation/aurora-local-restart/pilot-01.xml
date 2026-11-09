@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="1.721" timestamp="2026-11-06T12:27:58.356024-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.aurora-local-restart.test_pilot" name="test_manifest_rejects_paths_outside_scope_and_changed_bytes" time="0.013" /><testcase classname="validation.aurora-local-restart.test_pilot" name="test_pilot_open_task_access_minimization_and_citations" time="1.373"><failure message="AssertionError: Launcher saiu antes da prontidão">tmp_path = WindowsPath('C:/Users/PC/multi-agent/validation/aurora-local-restart/.state/pilot-01/test_pilot_open_task_access_mi0')
+
+    def test_pilot_open_task_access_minimization_and_citations(tmp_path):
+        manifest = make_manifest(tmp_path)
+        with (tmp_path / "launcher.log").open("w", encoding="utf-8") as log:
+            launcher = subprocess.Popen(
+                [PYTHON, str(HERE / "pilot_fixture.py"), "--pilot-manifest", str(manifest),
+                 "--pilot-user", "operador-teste", "--pilot-viewer", "consulta-teste"],
+                cwd=ROOT, stdout=log, stderr=log, env={**os.environ, "AURORA_TEST_MANIFEST": str(manifest)},
+            )
+    
+            def api_address():
+                if launcher.poll() is not None:
+                    raise AssertionError("Launcher saiu antes da prontidão")
+                for line in (tmp_path / "launcher.log").read_text(encoding="utf-8").splitlines():
+                    if line.startswith('{"url":'):
+                        return json.loads(line)["url"]
+                return None
+    
+            try:
+&gt;               url = wait_for(api_address)
+                      ^^^^^^^^^^^^^^^^^^^^^
+
+validation\aurora-local-restart\test_pilot.py:71: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+validation\aurora-local-restart\test_launcher.py:24: in wait_for
+    value=check()
+          ^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def api_address():
+        if launcher.poll() is not None:
+&gt;           raise AssertionError("Launcher saiu antes da prontidão")
+E           AssertionError: Launcher saiu antes da prontidão
+
+validation\aurora-local-restart\test_pilot.py:64: AssertionError</failure></testcase></testsuite></testsuites>

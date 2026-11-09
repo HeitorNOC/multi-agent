@@ -1,0 +1,21 @@
+{
+  "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+  "minimum_complete_positives": 9,
+  "minimum_evidence_recall": 0.9,
+  "cases": [
+    {"id": "Q01", "goal": "Quando o navegador volta a se conectar após uma queda, o que é refeito para o operador continuar vendo as conversas?", "evidence": [["contact", 34, "entra de novo em todas as salas"]]},
+    {"id": "Q02", "goal": "Quais identificadores compõem a chave usada para recuperar a sessão de um contato no WhatsApp?", "evidence": [["fluxo", 6, "wp-<integrationID>-<waID>"]]},
+    {"id": "Q03", "goal": "Na implantação do agente da Meta, como limitar a estreia a poucos destinatários antes de expandir a disponibilidade?", "evidence": [["mba", 10, "Liberar primeiro para um conjunto pequeno de números"], ["mba", 11, "Abrir o agente a todos os clientes"]]},
+    {"id": "Q04", "critical": true, "goal": "Ao encerrar um atendimento de mensageria pelo botão Finalizar, qual estado é gravado e o que acontece com o tipo da sessão se a operação falhar no meio?", "evidence": [["contact", 59, "muda o status para DONE"], ["contact", 59, "Se algo falhar no meio, devolve a sessão ao tipo humano"]]},
+    {"id": "Q05", "critical": true, "goal": "Onde fica o evento original recebido do WhatsApp e onde fica a versão normalizada que compõe o histórico?", "evidence": [["fluxo", 19, "grava o payload cru"], ["fluxo", 20, "mensagem já normalizada e faz um INSERT na tabela de histórico"]]},
+    {"id": "Q06", "goal": "Enquanto um atendimento está suspenso pelo operador, a sessão de mensagens pode vencer?", "evidence": [["contact", 53, "remove a expiração da sessão de mensagens"]]},
+    {"id": "Q07", "goal": "Quando a notificação de entrada do WhatsApp chega sem o identificador da integração, qual campo permite encontrar o aplicativo?", "evidence": [["fluxo", 12, "metadata.phone_number_id"]]},
+    {"id": "Q08", "goal": "O que o consumidor de saída faz quando uma resposta do WhatsApp contém mais de trinta mensagens?", "evidence": [["fluxo", 24, "troca por um aviso de tamanho excedido"]]},
+    {"id": "Q09", "critical": true, "goal": "Ao abrir um atendimento que veio da mensageria, qual estado inicial fica na fila e o que muda no destino das mensagens recebidas?", "evidence": [["contact", 17, "Define o status WAITING"], ["contact", 26, "passa a ser do tipo HUMAN"], ["contact", 26, "passar a publicar em message-human"]]},
+    {"id": "Q10", "critical": true, "goal": "Que falhas intermitentes podem ocorrer nos endpoints do agente da Meta e após quanto tempo o material orienta repetir a tentativa?", "evidence": [["mba", 13, "4XX ou 500 de forma intermitente"], ["mba", 13, "tentar novamente depois de algumas horas"]]},
+    {"id": "N01", "goal": "Qual a taxa mensal em reais por número de WhatsApp com o MBA ativado?", "evidence": []},
+    {"id": "N02", "goal": "Por quantos dias o Tatodesk retém o payload cru armazenado no WhatsappMessage?", "evidence": []},
+    {"id": "N03", "goal": "Qual é o limite de requisições por segundo do endpoint startAttendance por conta?", "evidence": []},
+    {"id": "N04", "goal": "Qual é o ponto de ebulição do mercúrio à pressão atmosférica padrão?", "evidence": []}
+  ]
+}

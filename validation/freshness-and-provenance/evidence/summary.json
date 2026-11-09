@@ -1,0 +1,35 @@
+{
+  "integrated_original_result": "FAIL_SEMANTIC",
+  "operational_checkpoints": "PASS",
+  "original_temporal_grader_passed": 1,
+  "revised_offline_passed": 4,
+  "temporal_total": 4,
+  "full_e2e_after_grader_revision": "NOT_RUN",
+  "unit_python_security": 2,
+  "unit_python_grader": 8,
+  "recorded_output_checks": 4,
+  "unit_typescript": 2,
+  "typecheck": "PASS",
+  "proofs_verified_offline": 39,
+  "model_calls": 12,
+  "usage": {
+    "input_tokens": 153536,
+    "cached_input_tokens": 81920,
+    "output_tokens": 1274,
+    "reasoning_output_tokens": 0
+  },
+  "model_tool_events": 0,
+  "production": "NO_GO",
+  "elapsed_seconds": 473.422318500001,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "installation": "business-flow-a0fdaf27d1",
+  "checkpoints": [],
+  "worker_calls": [
+    {
+      "job": "8c0afe0d-5086-448a-b113-2523f9e4fcc1",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "error ignored in rollback on <psycopg.AsyncConnection [IDLE] (host=127.0.0.1 port=50583 user=workflow_runtime database=postgres) at 0x1ed07c2a000>: connection not in pipeline mode\nTraceback (most recent call last):\n  File \"C:\\Users\\PC\\multi-agent\\validation\\langgraph-business-flow\\worker.py\", line 82, in <module>\n    asyncio.run(main(json.loads(sys.stdin.readline())))\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\asyncio\\runners.py\", line 195, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\asyncio\\runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\asyncio\\base_events.py\", line 691, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\validation\\langgraph-business-flow\\worker.py\", line 72, in main\n    await graph.ainvoke(value,graph_config)\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\main.py\", line 4177, in ainvoke\n    async for chunk in self.astream(\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\main.py\", line 3528, in astream\n    async for _ in runner.atick(\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_runner.py\", line 558, in atick\n    _panic_or_proceed(\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_runner.py\", line 694, in _panic_or_proceed\n    raise exc\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_retry.py\", line 738, in arun_with_retry\n    return await task.proc.ainvoke(task.input, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py\", line 836, in ainvoke\n    input = await asyncio.create_task(\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py\", line 554, in ainvoke\n    ret = await self.afunc(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\validation\\langgraph-business-flow\\worker.py\", line 41, in specialist\n    snapshot = await call('read', capability=state['capability'])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\validation\\langgraph-business-flow\\worker.py\", line 35, in call\n    return await asyncio.to_thread(request, action, worker=worker_id, epoch=claim['epoch'], **payload)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\asyncio\\threads.py\", line 25, in to_thread\n    return await loop.run_in_executor(None, func_call)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\concurrent\\futures\\thread.py\", line 59, in run\n    result = self.fn(*self.args, **self.kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\validation\\langgraph-business-flow\\worker.py\", line 31, in request\n    with urlopen(req, timeout=config.get('request_timeout',12)) as response:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 215, in urlopen\n    return opener.open(url, data, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 521, in open\n    response = meth(req, response)\n               ^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 630, in http_response\n    response = self.parent.error(\n               ^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 559, in error\n    return self._call_chain(*args)\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 492, in _call_chain\n    result = func(*args)\n             ^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 639, in http_error_default\n    raise HTTPError(req.full_url, code, msg, hdrs, fp)\nurllib.error.HTTPError: HTTP Error 503: Service Unavailable\nDuring task with name 'specialist' and id 'beaf14a7-f6ec-e518-226b-21d07f7ea690'\n"
+    }
+  ],
+  "model_calls": 4,
+  "production_approved": false,
+  "scope": "native LightRAG/ONNX projection and canonical recovery, deterministic coordination",
+  "postgres_image": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "publication_calls": [
+    {
+      "draft": "461c8821-f370-4e3c-9eaa-7b0d6c4ec37f",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"ebc5cee69fb5561615eaf8253ab3c5804e61a2d0241c43ff90988b193f482cff\"}\n",
+      "stderr": ""
+    },
+    {
+      "draft": "7169a728-afc5-4eb4-a610-9b899f9c2631",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"10867a15ae7ac91db0478eb37df3af6700091614c150dadd649083d6b9892222\"}\n",
+      "stderr": ""
+    }
+  ],
+  "result": "FAIL",
+  "error": "AssertionError('run_until_complete\\n      return future.result()\\n             ^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\validation\\\\langgraph-business-flow\\\\worker.py\", line 72, in main\\n      await graph.ainvoke(value,graph_config)\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\pregel\\\\main.py\", line 4177, in ainvoke\\n      async for chunk in self.astream(\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\pregel\\\\main.py\", line 3528, in astream\\n      async for _ in runner.atick(\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\pregel\\\\_runner.py\", line 558, in atick\\n      _panic_or_proceed(\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\pregel\\\\_runner.py\", line 694, in _panic_or_proceed\\n      raise exc\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\pregel\\\\_retry.py\", line 738, in arun_with_retry\\n      return await task.proc.ainvoke(task.input, config)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\_internal\\\\_runnable.py\", line 836, in ainvoke\\n      input = await asyncio.create_task(\\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\_internal\\\\_runnable.py\", line 554, in ainvoke\\n      ret = await self.afunc(*args, **kwargs)\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\validation\\\\langgraph-business-flow\\\\worker.py\", line 41, in specialist\\n      snapshot = await call(\\'read\\', capability=state[\\'capability\\'])\\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\validation\\\\langgraph-business-flow\\\\worker.py\", line 35, in call\\n      return await asyncio.to_thread(request, action, worker=worker_id, epoch=claim[\\'epoch\\'], **payload)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\asyncio\\\\threads.py\", line 25, in to_thread\\n      return await loop.run_in_executor(None, func_call)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\concurrent\\\\futures\\\\thread.py\", line 59, in run\\n      result = self.fn(*self.args, **self.kwargs)\\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\validation\\\\langgraph-business-flow\\\\worker.py\", line 31, in request\\n      with urlopen(req, timeout=config.get(\\'request_timeout\\',12)) as response:\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\urllib\\\\request.py\", line 215, in urlopen\\n      return opener.open(url, data, timeout)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\urllib\\\\request.py\", line 521, in open\\n      response = meth(req, response)\\n                 ^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\urllib\\\\request.py\", line 630, in http_response\\n      response = self.parent.error(\\n                 ^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\urllib\\\\request.py\", line 559, in error\\n      return self._call_chain(*args)\\n             ^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\urllib\\\\request.py\", line 492, in _call_chain\\n      result = func(*args)\\n               ^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\urllib\\\\request.py\", line 639, in http_error_default\\n      raise HTTPError(req.full_url, code, msg, hdrs, fp)\\n  urllib.error.HTTPError: HTTP Error 503: Service Unavailable\\n  During task with name \\'specialist\\' and id \\'beaf14a7-f6ec-e518-226b-21d07f7ea690\\'\\n  \\nassert 1 == 0\\n +  where 1 = CompletedProcess(args=[\\'C:\\\\\\\\Users\\\\\\\\PC\\\\\\\\multi-agent\\\\\\\\validation\\\\\\\\integrated-pilot\\\\\\\\.venv\\\\\\\\Scripts\\\\\\\\python.exe\\', \\'C:\\\\\\\\Us...rror 503: Service Unavailable\\\\nDuring task with name \\\\\\'specialist\\\\\\' and id \\\\\\'beaf14a7-f6ec-e518-226b-21d07f7ea690\\\\\\'\\\\n\\').returncode')",
+  "seconds": 96.52102780001587,
+  "disposable_resources_removed": true,
+  "model_usage_records": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "5dbc7ec7134d54e69b4051d341f824348b92b7bb1610726eb53fd61ffca9ac51",
+      "reservation_id": "4b0d4b7e-c456-4dcf-97ce-cc6833c4d1ab",
+      "instance": "39a35ad30218403d9d214e7b612751e8",
+      "seconds": 6.780489099997794,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13878,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 161,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "37844c7dd7c41f04ac1fed4c56046967168d9194bf81665531c60d92dbe81d82",
+      "reservation_id": "1a9f6945-d193-4e81-b9ef-e6a09fc84967",
+      "instance": "39a35ad30218403d9d214e7b612751e8",
+      "seconds": 8.621464800002286,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13099,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 285,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "8bd5a08ed9b2d27869ebef5aff4d2b0f538aa579265cbecdf85cabc25cb084cf",
+      "reservation_id": "a1b6aa56-3ce8-436b-abd7-4e330b5dafb3",
+      "instance": "39a35ad30218403d9d214e7b612751e8",
+      "seconds": 7.092977599997539,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12650,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 45,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0f87cad892a3087dcf7fe03415a842a46d848e8a9a555e7ef486f048ee6d8495",
+      "reservation_id": "3e086dcd-9e36-4581-8f3b-43de996a0349",
+      "instance": "39a35ad30218403d9d214e7b612751e8",
+      "seconds": 5.661196000000928,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12930,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 74,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ],
+  "embedding_calls": [
+    {
+      "batch": 2,
+      "dimension": 384,
+      "max_wordpiece_tokens": 25,
+      "truncated_inputs": 0,
+      "seconds": 0.02961869997670874,
+      "input_hashes": [
+        "3386d655b160b08e8ef3057622dc9499ac9ba81abac8db98d29619066004359b",
+        "f846abca1a2f4ba78b678ff7dc49ee47fb343c5a8ac11f406d510027d18dca61"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 41,
+      "truncated_inputs": 0,
+      "seconds": 0.01305440001306124,
+      "input_hashes": [
+        "0402561f7c3bc888c94b4d825b8cadb4ab07330a4e9b8a728ac794ddb7f4a9d6"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 32,
+      "truncated_inputs": 0,
+      "seconds": 0.01112829998601228,
+      "input_hashes": [
+        "2662b13247793d791a892495feb4289d1cbb133927b80336fb5f93da10be8253"
+      ]
+    },
+    {
+      "batch": 4,
+      "dimension": 384,
+      "max_wordpiece_tokens": 26,
+      "truncated_inputs": 0,
+      "seconds": 0.02765089998138137,
+      "input_hashes": [
+        "cf0fedc560a667c1cf92d23c4e18f704b87b0b956a4814ed865cd23ec5da1a93",
+        "b13e834a8f01993dd63fb1a3f66c708962b34e580eb9e62ec350b28f7736bcf9",
+        "2ce8148460b813644d73a5da6c35cf8243e2b508823a398c5067ea0e79ebd78b",
+        "2ba00069ef31b5352b647c95484e024a91fc65976bccd4a041633c2a3f6c5b4b"
+      ]
+    },
+    {
+      "batch": 2,
+      "dimension": 384,
+      "max_wordpiece_tokens": 44,
+      "truncated_inputs": 0,
+      "seconds": 0.02671169998939149,
+      "input_hashes": [
+        "ccd6918d15c3f312a5d8a3d4220147c2403eeb5f4de94b9ad38a744cdc3906a0",
+        "440eb4ab35d5cf0d21c670186cd178618a96a129148130cbc42c5b8e6b5f6c79"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 48,
+      "truncated_inputs": 0,
+      "seconds": 0.014663099980680272,
+      "input_hashes": [
+        "a9c7ee0a9937085de1fe71f784880eb046a53862f8c40230f2da2039a29c86e7"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 25,
+      "truncated_inputs": 0,
+      "seconds": 0.02200609998544678,
+      "input_hashes": [
+        "6dd767ebcfce38b291f2a0e365cb834d82f7f6553b4b1e43ceb0767ae3b9c821",
+        "a8308e8e2e4b73307d860de2effdc675fa122f64c2095e7974d8ef804b9d3b70",
+        "9ef5615935fdced3b2fffe737672ef5604eb8069f13c1b99a46eb39597fc9ab4"
+      ]
+    }
+  ]
+}

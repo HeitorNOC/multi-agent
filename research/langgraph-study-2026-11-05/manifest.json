@@ -1,0 +1,354 @@
+[
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "LICENSE",
+    "commit": "fa15bec4a51c541c40c261586b037c9d134977b1",
+    "sha256": "893e6e30275896912c21c77f9f7c112aba85fd985d05b26a29424cf7e511d177",
+    "bytes": 1072,
+    "url": "https://raw.githubusercontent.com/langchain-ai/langchain-academy/fa15bec4a51c541c40c261586b037c9d134977b1/LICENSE"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "README.md",
+    "commit": "fa15bec4a51c541c40c261586b037c9d134977b1",
+    "sha256": "6af0a076f010123fd1e7ce7eff3712a48d34f6b233ed6561c0fe4b3159799642",
+    "bytes": 4252,
+    "url": "https://raw.githubusercontent.com/langchain-ai/langchain-academy/fa15bec4a51c541c40c261586b037c9d134977b1/README.md"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "requirements.txt",
+    "commit": "fa15bec4a51c541c40c261586b037c9d134977b1",
+    "sha256": "5f1de88d187152128dfea9a4f70e280d1f418cfc5ce8e505669b27bc52ab80ed",
+    "bytes": 311,
+    "url": "https://raw.githubusercontent.com/langchain-ai/langchain-academy/fa15bec4a51c541c40c261586b037c9d134977b1/requirements.txt"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-2/chatbot-external-memory.ipynb",
+    "commit": "fa15bec4a51c541c40c261586b037c9d134977b1",
+    "sha256": "b39e69583d4676b77919c36fa651e05f4e886fc5fcf6a160b01ea19faac0b4be",
+    "bytes": 13254,
+    "url": "https://raw.githubusercontent.com/langchain-ai/langchain-academy/fa15bec4a51c541c40c261586b037c9d134977b1/module-2/chatbot-external-memory.ipynb"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-3/dynamic-breakpoints.ipynb",
+    "commit": "fa15bec4a51c541c40c261586b037c9d134977b1",
+    "sha256": "f85af0926a1720718ecf52db92c62f36184cce713f84a898e42f52d3ffb401b5",
+    "bytes": 27476,
+    "url": "https://raw.githubusercontent.com/langchain-ai/langchain-academy/fa15bec4a51c541c40c261586b037c9d134977b1/module-3/dynamic-breakpoints.ipynb"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-4/sub-graph.ipynb",
+    "commit": "fa15bec4a51c541c40c261586b037c9d134977b1",
+    "sha256": "cc658b811b30837ee864a74176d550d139a511caf3386d61ce1c89c2b0c5da53",
+    "bytes": 79868,
+    "url": "https://raw.githubusercontent.com/langchain-ai/langchain-academy/fa15bec4a51c541c40c261586b037c9d134977b1/module-4/sub-graph.ipynb"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-4/research-assistant.ipynb",
+    "commit": "fa15bec4a51c541c40c261586b037c9d134977b1",
+    "sha256": "354e7ec78225c982a32b877e528c1b3e67086f6eb4c4d458fcfea0ebaa7789e3",
+    "bytes": 203309,
+    "url": "https://raw.githubusercontent.com/langchain-ai/langchain-academy/fa15bec4a51c541c40c261586b037c9d134977b1/module-4/research-assistant.ipynb"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-5/memory_store.ipynb",
+    "commit": "fa15bec4a51c541c40c261586b037c9d134977b1",
+    "sha256": "31de4f6ce831648f2091f73789830a4fa7692cf90b37cb4408226f4afc03c6be",
+    "bytes": 1273655,
+    "url": "https://raw.githubusercontent.com/langchain-ai/langchain-academy/fa15bec4a51c541c40c261586b037c9d134977b1/module-5/memory_store.ipynb"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "LICENSE",
+    "commit": "93f35e5d2a51590f9542207a9ff66a01901da5bc",
+    "sha256": "893e6e30275896912c21c77f9f7c112aba85fd985d05b26a29424cf7e511d177",
+    "bytes": 1072,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deep_research_from_scratch/93f35e5d2a51590f9542207a9ff66a01901da5bc/LICENSE"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "README.md",
+    "commit": "93f35e5d2a51590f9542207a9ff66a01901da5bc",
+    "sha256": "ef7753d668ae4b6d85bfd07a2051a3fd810db39c6f1e8309216d656423ad100d",
+    "bytes": 8743,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deep_research_from_scratch/93f35e5d2a51590f9542207a9ff66a01901da5bc/README.md"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "pyproject.toml",
+    "commit": "93f35e5d2a51590f9542207a9ff66a01901da5bc",
+    "sha256": "927bc00cdbf5dedd7a22d3985f02987caa25673085684769c2f21db0f0065b1b",
+    "bytes": 1227,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deep_research_from_scratch/93f35e5d2a51590f9542207a9ff66a01901da5bc/pyproject.toml"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "src/deep_research_from_scratch/multi_agent_supervisor.py",
+    "commit": "93f35e5d2a51590f9542207a9ff66a01901da5bc",
+    "sha256": "60ec85ad86ce47c37d2a19fbbd1c461cc6ca0afa01606e5aeb7c440d1a09a897",
+    "bytes": 9297,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deep_research_from_scratch/93f35e5d2a51590f9542207a9ff66a01901da5bc/src/deep_research_from_scratch/multi_agent_supervisor.py"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "src/deep_research_from_scratch/research_agent.py",
+    "commit": "93f35e5d2a51590f9542207a9ff66a01901da5bc",
+    "sha256": "7fe3ec2a34719f83dcdc599c50b80ef48175c78aa924cccf3066ada8c641da57",
+    "bytes": 5024,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deep_research_from_scratch/93f35e5d2a51590f9542207a9ff66a01901da5bc/src/deep_research_from_scratch/research_agent.py"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "notebooks/4_research_supervisor.ipynb",
+    "commit": "93f35e5d2a51590f9542207a9ff66a01901da5bc",
+    "sha256": "6aa2b141ae99e9fcc865b8eb251ce301f6213af9ffa56d8d85cce6a4c8b9f77e",
+    "bytes": 569817,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deep_research_from_scratch/93f35e5d2a51590f9542207a9ff66a01901da5bc/notebooks/4_research_supervisor.ipynb"
+  },
+  {
+    "repo": "campusx-official/langgraph-tutorials",
+    "path": "requirements.txt",
+    "commit": "d700de29b00e5f561e7e51ebb114ff195e0dece0",
+    "sha256": "4038bf6c77453a65738f128f2b30f2fe72394d1671aac8af62486cd17c384471",
+    "bytes": 1373,
+    "url": "https://raw.githubusercontent.com/campusx-official/langgraph-tutorials/d700de29b00e5f561e7e51ebb114ff195e0dece0/requirements.txt"
+  },
+  {
+    "repo": "campusx-official/langgraph-tutorials",
+    "path": "10_persistence.ipynb",
+    "commit": "d700de29b00e5f561e7e51ebb114ff195e0dece0",
+    "sha256": "61968dcb72d1f3f24c807396e090e9ea781b00393ba0e48db6748ab52cc95054",
+    "bytes": 44349,
+    "url": "https://raw.githubusercontent.com/campusx-official/langgraph-tutorials/d700de29b00e5f561e7e51ebb114ff195e0dece0/10_persistence.ipynb"
+  },
+  {
+    "repo": "campusx-official/langgraph-tutorials",
+    "path": "14_hitl.ipynb",
+    "commit": "d700de29b00e5f561e7e51ebb114ff195e0dece0",
+    "sha256": "1cf1d660c5448fbb3cf0d4cd70f4434e549b82b496a179f4c7bb7433c682249f",
+    "bytes": 16480,
+    "url": "https://raw.githubusercontent.com/campusx-official/langgraph-tutorials/d700de29b00e5f561e7e51ebb114ff195e0dece0/14_hitl.ipynb"
+  },
+  {
+    "repo": "campusx-official/langgraph-tutorials",
+    "path": "15_subgraphs.ipynb",
+    "commit": "d700de29b00e5f561e7e51ebb114ff195e0dece0",
+    "sha256": "4880862e70e26c78385ebf630344b7839894e96a074a60f0b369325106fe2e47",
+    "bytes": 21091,
+    "url": "https://raw.githubusercontent.com/campusx-official/langgraph-tutorials/d700de29b00e5f561e7e51ebb114ff195e0dece0/15_subgraphs.ipynb"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "LICENSE",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "b23dff4d4bac8d17b6efaaa7e88c2b730149c4dda45699ce676b719cfdffe7e1",
+    "bytes": 1134,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/LICENSE"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "README.md",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "85178435935ee1f642fae0f2f4e66ab7a45cf71875a9a3019475ae163d0a7f8d",
+    "bytes": 379315,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/README.md"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/docs/ARCHITECTURE.md",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "fdac8b9e13c30b7fd1c1e766f3174fceca8ad3a241d38e893116e5e7ed266c2b",
+    "bytes": 38088,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/backend/docs/ARCHITECTURE.md"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/docs/checkpoint-retention-contract.md",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "c4fb1a6049749392d2aa61f4135f2449714eaa4ba298408e4ae633296daad68b",
+    "bytes": 8799,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/backend/docs/checkpoint-retention-contract.md"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/packages/harness/deerflow/config/checkpointer_config.py",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "e3aec30ac7514b8b749354a87577b3565c8ecd2a57aed9ed83995b53b474295a",
+    "bytes": 2849,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/backend/packages/harness/deerflow/config/checkpointer_config.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/packages/harness/deerflow/community/aio_sandbox/local_backend.py",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "838936d0303792209b4cc7e4e712de04f16587e4c5ce282b8c864cf9968661f8",
+    "bytes": 105499,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/backend/packages/harness/deerflow/community/aio_sandbox/local_backend.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/app/channels/dedupe_store.py",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "7a40698c2eb1dcc28f031677421258f15085ec6df7a598c5ba07dfda6e3b76cb",
+    "bytes": 15149,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/backend/app/channels/dedupe_store.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "LICENSE",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "61e5e8faf0b76db76793ecd8aa0edca36a82bd8dba279d2a31972f026c132423",
+    "bytes": 1070,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/LICENSE"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "README.md",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "cca393edec65af64d7cd48473efc8c36c29e08aae0169bdfe7b12295d22646d2",
+    "bytes": 6487,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/README.md"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "pyproject.toml",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "bb0ee8dad4a36aab75739dd9f38a80a3c1fb5fbe312683d22e25af1439f0502a",
+    "bytes": 4911,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/pyproject.toml"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openswe/utils/turn_checkpoint.py",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "e602fa1ee2f1e0cebd02c73e06157a744d80b040067bd971dfc80e5f331b847a",
+    "bytes": 10780,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/openswe/utils/turn_checkpoint.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openswe/webhooks/event_log.py",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "bb91e4be24477a8a2246d30584b5b31528424006c152e202ff5c3276525cbd9c",
+    "bytes": 19484,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/openswe/webhooks/event_log.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "tests/slack/test_slack_event_dedupe.py",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "43ea78ecd4a27ee5d290b641ce110213885422ceb81528845c2d678c3c8eff41",
+    "bytes": 15160,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/tests/slack/test_slack_event_dedupe.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "tests/auth/test_private_webhook_ingress.py",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "2368ab1a27d5f5d98af8e54e8cc17a6d5eaab424ae21a301c211aba0498491d8",
+    "bytes": 6629,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/tests/auth/test_private_webhook_ingress.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openwiki/architecture/agent-graph.md",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "195b27b5fb3b199a52ec44080084fdbeade5b270652d0c8cc1575a0f1a44d167",
+    "bytes": 13315,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/openwiki/architecture/agent-graph.md"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openwiki/architecture/sandbox-lifecycle.md",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "9a2f68a604c41df7f34926178eb68d0f796098563f93fbb6bf97ab441e987d34",
+    "bytes": 14724,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/openwiki/architecture/sandbox-lifecycle.md"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "LICENSE",
+    "commit": "6cd647ba201d4612aeaa2d49d9588bd6e46ce250",
+    "sha256": "4ec67e4ca6e6721dba849b2ca82261597c86a61ee214bbf21416006b7b2d0478",
+    "bytes": 1067,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deepagents/6cd647ba201d4612aeaa2d49d9588bd6e46ce250/LICENSE"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "libs/ARCHITECTURE.md",
+    "commit": "6cd647ba201d4612aeaa2d49d9588bd6e46ce250",
+    "sha256": "a2657562c0c28a61c0b8c1ff335b29c714b31f601558d92abcfc8977a987bb2c",
+    "bytes": 11326,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deepagents/6cd647ba201d4612aeaa2d49d9588bd6e46ce250/libs/ARCHITECTURE.md"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "libs/deepagents/deepagents/middleware/subagents.py",
+    "commit": "6cd647ba201d4612aeaa2d49d9588bd6e46ce250",
+    "sha256": "4a4e0a86fde5c29ba829eae6a0996e42f4fdf6f1a4beef42e3995b39ae168858",
+    "bytes": 44599,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deepagents/6cd647ba201d4612aeaa2d49d9588bd6e46ce250/libs/deepagents/deepagents/middleware/subagents.py"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "libs/deepagents/tests/unit_tests/middleware/test_subagent_middleware_init.py",
+    "commit": "6cd647ba201d4612aeaa2d49d9588bd6e46ce250",
+    "sha256": "5d55061e3ce28622b36411c2f7e5ec138e7e393a2d0f6c0aeccc7c25f64bd0ec",
+    "bytes": 46777,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deepagents/6cd647ba201d4612aeaa2d49d9588bd6e46ce250/libs/deepagents/tests/unit_tests/middleware/test_subagent_middleware_init.py"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "libs/deepagents/pyproject.toml",
+    "commit": "6cd647ba201d4612aeaa2d49d9588bd6e46ce250",
+    "sha256": "a53c3760eda43e182c3b3647c23fd45438abf3c14807a8cd092b5dff0fa80a72",
+    "bytes": 6493,
+    "url": "https://raw.githubusercontent.com/langchain-ai/deepagents/6cd647ba201d4612aeaa2d49d9588bd6e46ce250/libs/deepagents/pyproject.toml"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/tests/test_checkpoint_retention_contract.py",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "8aa7dd00f458b3917e0a76c5631f2fde91e9d2502e5f95217b8b472fe7355c56",
+    "bytes": 26598,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/backend/tests/test_checkpoint_retention_contract.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/tests/test_multi_pod_inbound_dedupe.py",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "9e403e3b1ed47522b5d7de291bb80ac367e084d1418341eacd65a407c8cf1021",
+    "bytes": 10967,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/backend/tests/test_multi_pod_inbound_dedupe.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/packages/harness/deerflow/agents/lead_agent/agent.py",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "0c49a2a6c3e3350a20dd492809b4c9ce0e1d6fed084972d472ceede96982ba62",
+    "bytes": 72674,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/backend/packages/harness/deerflow/agents/lead_agent/agent.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/packages/harness/deerflow/sandbox/local/local_sandbox.py",
+    "commit": "713a861e75e037e3ff7b4bb61f03d3d0739785cb",
+    "sha256": "ec78948dc81be8ad3c36f8900242e0a0cf0e2ddc623cb8110473c60d62c92a2c",
+    "bytes": 71866,
+    "url": "https://raw.githubusercontent.com/bytedance/deer-flow/713a861e75e037e3ff7b4bb61f03d3d0739785cb/backend/packages/harness/deerflow/sandbox/local/local_sandbox.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openswe/event_claims.py",
+    "commit": "94012656e06e8ee8d16c4aa249b8dae2009a33d4",
+    "sha256": "d1b44072886c47d417aacb0b117fa3877dd098e10e797c9b3dd7be52891be295",
+    "bytes": 5013,
+    "url": "https://raw.githubusercontent.com/langchain-ai/open-swe/94012656e06e8ee8d16c4aa249b8dae2009a33d4/openswe/event_claims.py"
+  }
+]

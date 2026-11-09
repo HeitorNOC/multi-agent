@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-04",
+  "result": "PASS_SMALL_E2E",
+  "answer_cases": 5,
+  "contract_checkpoints": 7,
+  "pytest_console_seconds": 214.39,
+  "provider_calls": 16,
+  "models": [
+    "gpt-6.1-terra"
+  ],
+  "observed_token_usage": {
+    "input_tokens": 204215,
+    "cached_input_tokens": 147072,
+    "output_tokens": 1845,
+    "reasoning_output_tokens": 0
+  },
+  "monetary_cost": null,
+  "advice_records": 7,
+  "embedding_vectors_computed": 36,
+  "truncated_embedding_inputs": 0,
+  "production_approved": false,
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "history_operation": "read persisted record; no regeneration"
+}

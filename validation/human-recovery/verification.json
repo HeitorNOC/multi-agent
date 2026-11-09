@@ -1,0 +1,190 @@
+{
+  "suites": {
+    "final.xml": {
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 183.648
+    },
+    "console-final.xml": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 16.76
+    },
+    "inspection-release.xml": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 16.959
+    },
+    "isolated-regressions.xml": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 44.488
+    }
+  },
+  "reexecutions_not_independent_test_totals": true,
+  "node_tests": 33,
+  "strict": true,
+  "new_model_calls": 0,
+  "proof_records": [
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-012e825ab6/results.json",
+      "installation": "business-flow-012e825ab6",
+      "result": "PASS_HUMAN_RECOVERY_INTEGRATION",
+      "signatures_verified": 84
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-020492a90a/results.json",
+      "installation": "business-flow-020492a90a",
+      "result": "PASS_HUMAN_RECOVERY_INTEGRATION",
+      "signatures_verified": 79
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-22402e2bd5/results.json",
+      "installation": "business-flow-22402e2bd5",
+      "result": "FAIL_HUMAN_RECOVERY_INTEGRATION",
+      "signatures_verified": 40
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-2daa9325c4/results.json",
+      "installation": "business-flow-2daa9325c4",
+      "result": "PASS_SELECTED_UNKNOWN_AND_REVOCATION",
+      "signatures_verified": 83
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-2e7527cb43/results.json",
+      "installation": "business-flow-2e7527cb43",
+      "result": "PASS_HUMAN_RECOVERY_INTEGRATION",
+      "signatures_verified": 84
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-3281702220/results.json",
+      "installation": "business-flow-3281702220",
+      "result": null,
+      "signatures_verified": 35
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-5a28789baa/results.json",
+      "installation": "business-flow-5a28789baa",
+      "result": "PASS_SELECTED_UNKNOWN_AND_REVOCATION",
+      "signatures_verified": 89
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-6bccd65561/results.json",
+      "installation": "business-flow-6bccd65561",
+      "result": "PASS_SELECTED_UNKNOWN_AND_REVOCATION",
+      "signatures_verified": 89
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-9fc1f003e2/results.json",
+      "installation": "business-flow-9fc1f003e2",
+      "result": "PASS_HUMAN_RECOVERY_INTEGRATION",
+      "signatures_verified": 84
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-a1efbd8b1f/results.json",
+      "installation": "business-flow-a1efbd8b1f",
+      "result": "PASS_HUMAN_RECOVERY_INTEGRATION",
+      "signatures_verified": 79
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-c4f6a17631/results.json",
+      "installation": "business-flow-c4f6a17631",
+      "result": "PASS_HUMAN_RECOVERY_INTEGRATION",
+      "signatures_verified": 84
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-d3e500b9ee/results.json",
+      "installation": "business-flow-d3e500b9ee",
+      "result": "PASS_HUMAN_RECOVERY_INTEGRATION",
+      "signatures_verified": 79
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-d619c474f3/results.json",
+      "installation": "business-flow-d619c474f3",
+      "result": "PASS_SELECTED_UNKNOWN_AND_REVOCATION",
+      "signatures_verified": 89
+    },
+    {
+      "artifact": "validation/human-recovery/evidence/business-flow-d651275b60/results.json",
+      "installation": "business-flow-d651275b60",
+      "result": "PASS_SELECTED_UNKNOWN_AND_REVOCATION",
+      "signatures_verified": 81
+    },
+    {
+      "artifact": "validation/human-recovery/detached-regression-evidence/results.json",
+      "installation": "business-flow-a703b136f8",
+      "result": "PASS_BOUNDED_DETACHED_INFERENCE",
+      "signatures_verified": 188
+    },
+    {
+      "artifact": "validation/human-recovery/governed-regression-evidence/results.json",
+      "installation": "business-flow-2af8cf211e",
+      "result": "PASS_BOUNDED_GOVERNED_RECOVERY",
+      "signatures_verified": 198
+    },
+    {
+      "artifact": "validation/human-recovery/regression-imported-current/detached-regression-evidence/results.json",
+      "installation": "business-flow-19661a1899",
+      "result": "PASS_BOUNDED_DETACHED_INFERENCE",
+      "signatures_verified": 188
+    },
+    {
+      "artifact": "validation/human-recovery/regression-imported-current/governed-regression-evidence/results.json",
+      "installation": "business-flow-5c6f19dac2",
+      "result": "PASS_BOUNDED_GOVERNED_RECOVERY",
+      "signatures_verified": 198
+    }
+  ],
+  "live": {
+    "url": "http://127.0.0.1:61621",
+    "installation": "business-flow-03278e9765",
+    "mode": "controlled recovery-only profile",
+    "cases": [
+      {
+        "id": "business-flow-03278e9765:inference:44cee4bfaef97ba5dfc43e02db3e3878c8cdaa5c41067bd40a714ee76dd23577",
+        "job": "39fc099c-88bf-4a77-a828-297e75b5781f",
+        "state": "committed"
+      },
+      {
+        "id": "business-flow-03278e9765:inference:e4f90e35eb1addad681845ff73696fb4b684bf2119c593c385450a0e38df3c3f",
+        "job": "a80fff59-c6ee-48d3-97f6-453b3117684b",
+        "state": "admitted"
+      }
+    ],
+    "provider": [
+      {
+        "id": "business-flow-03278e9765:inference:e4f90e35eb1addad681845ff73696fb4b684bf2119c593c385450a0e38df3c3f",
+        "state": "admitted",
+        "runs": 1
+      },
+      {
+        "id": "business-flow-03278e9765:inference:44cee4bfaef97ba5dfc43e02db3e3878c8cdaa5c41067bd40a714ee76dd23577",
+        "state": "complete",
+        "runs": 1
+      }
+    ],
+    "votes": 0,
+    "pending_retained_operations": 1
+  },
+  "historical_export_limitation": {
+    "superseded": [
+      "validation/observability-recovery/detached-regression-evidence/results.json",
+      "validation/observability-recovery/detached-regression-evidence/authority-public.json",
+      "validation/observability-recovery/governed-regression-evidence/results.json",
+      "validation/observability-recovery/governed-regression-evidence/authority-public.json"
+    ],
+    "original_public_keys_not_recovered": true,
+    "historical_junit_and_logs_preserved": true
+  },
+  "ui_visual_review_completed": false,
+  "direct_mvp_model_slots_migrated": false,
+  "production_approved": false
+}

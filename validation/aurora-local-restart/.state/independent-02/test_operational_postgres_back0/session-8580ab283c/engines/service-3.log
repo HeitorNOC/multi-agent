@@ -1,0 +1,128 @@
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: PostgreSQL, Retry config: attempts=10, backoff=3.0s, backoff_max=30.0s, pool_close_timeout=5.0s
+INFO: PostgreSQL, VECTOR extension enabled
+INFO: PostgreSQL, Connected to database at 127.0.0.1:55822/knowledge without SSL
+INFO: chunk_id column already exists in LIGHTRAG_LLM_CACHE table
+INFO: cache_type column already exists in LIGHTRAG_LLM_CACHE table
+INFO: queryparam column already exists in LIGHTRAG_LLM_CACHE table
+INFO: mode column does not exist in LIGHTRAG_LLM_CACHE table
+INFO: chunks_list column already exists in LIGHTRAG_DOC_STATUS table
+INFO: llm_cache_list column already exists in LIGHTRAG_DOC_CHUNKS table
+INFO: track_id column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Index on track_id column already exists for LIGHTRAG_DOC_STATUS table
+INFO: metadata column already exists in LIGHTRAG_DOC_STATUS table
+INFO: error_msg column already exists in LIGHTRAG_DOC_STATUS table
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: [brain_0892c6417b875905d2e4906374cc] Connected to neo4j at bolt://127.0.0.1:52650
+INFO: [brain_0892c6417b875905d2e4906374cc] Ensured B-Tree index on entity_id for brain_0892c6417b875905d2e4906374cc in neo4j
+INFO: [brain_0892c6417b875905d2e4906374cc] Found existing index 'entity_id_fulltext_idx_brain_0892c6417b875905d2e4906374cc' with state: ONLINE
+INFO: [brain_0892c6417b875905d2e4906374cc] Full-text index 'entity_id_fulltext_idx_brain_0892c6417b875905d2e4906374cc' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Query nodes: aurora-compliance, SKU-AURA (top_k:6, cosine:0.25)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: legal, Grupo Aurora (top_k:6, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:6 cosine:0.25)
+INFO: Raw search results: 2 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 2 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E2/1
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_e90b9c2969ac5d3fcf9223d1152a' while default workspace is set to 'brain_0892c6417b875905d2e4906374cc'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: [brain_e90b9c2969ac5d3fcf9223d1152a] Connected to neo4j at bolt://127.0.0.1:52650
+INFO: [brain_e90b9c2969ac5d3fcf9223d1152a] Ensured B-Tree index on entity_id for brain_e90b9c2969ac5d3fcf9223d1152a in neo4j
+INFO: [brain_e90b9c2969ac5d3fcf9223d1152a] Found existing index 'entity_id_fulltext_idx_brain_e90b9c2969ac5d3fcf9223d1152a' with state: ONLINE
+INFO: [brain_e90b9c2969ac5d3fcf9223d1152a] Full-text index 'entity_id_fulltext_idx_brain_e90b9c2969ac5d3fcf9223d1152a' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Query nodes: aurora-response, INC-47 (top_k:6, cosine:0.25)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: legal, Grupo Aurora (top_k:6, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:6 cosine:0.25)
+INFO: Raw search results: 2 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 2 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E2/1
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_be541105edda39ecb4980a09ec76' while default workspace is set to 'brain_0892c6417b875905d2e4906374cc'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: [brain_be541105edda39ecb4980a09ec76] Connected to neo4j at bolt://127.0.0.1:52650
+INFO: [brain_be541105edda39ecb4980a09ec76] Ensured B-Tree index on entity_id for brain_be541105edda39ecb4980a09ec76 in neo4j
+INFO: [brain_be541105edda39ecb4980a09ec76] Found existing index 'entity_id_fulltext_idx_brain_be541105edda39ecb4980a09ec76' with state: ONLINE
+INFO: [brain_be541105edda39ecb4980a09ec76] Full-text index 'entity_id_fulltext_idx_brain_be541105edda39ecb4980a09ec76' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Query nodes: aurora-incident, INC-47 (top_k:6, cosine:0.25)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: technology, Grupo Aurora (top_k:6, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:6 cosine:0.25)
+INFO: Raw search results: 2 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 2 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E2/1
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_c662743f4a48defc300530bfd15a' while default workspace is set to 'brain_0892c6417b875905d2e4906374cc'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: [brain_c662743f4a48defc300530bfd15a] Connected to neo4j at bolt://127.0.0.1:52650
+INFO: [brain_c662743f4a48defc300530bfd15a] Ensured B-Tree index on entity_id for brain_c662743f4a48defc300530bfd15a in neo4j
+INFO: [brain_c662743f4a48defc300530bfd15a] Found existing index 'entity_id_fulltext_idx_brain_c662743f4a48defc300530bfd15a' with state: ONLINE
+INFO: [brain_c662743f4a48defc300530bfd15a] Full-text index 'entity_id_fulltext_idx_brain_c662743f4a48defc300530bfd15a' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Query nodes: aurora-contracts, SKU-AURA (top_k:6, cosine:0.25)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: legal, Grupo Aurora (top_k:6, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:6 cosine:0.25)
+INFO: Raw search results: 2 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 2 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E2/1

@@ -1,0 +1,1046 @@
+[
+  {
+    "case": "historical-policy",
+    "response": {
+      "generation": "g1",
+      "policy_epoch": 1,
+      "context": [
+        {
+          "status": "success",
+          "message": "Query processed successfully",
+          "data": {
+            "entities": [
+              {
+                "entity_name": "Trabalho Remoto",
+                "entity_type": "concept",
+                "description": "Modalidade de trabalho permitida pela Política ACME versão 1 em dois dias por semana até 28/02/2026.",
+                "source_id": "politica-remoto:v1-chunk-000",
+                "file_path": "politica-remoto@v1.md",
+                "created_at": 1793763999
+              },
+              {
+                "entity_name": "Política ACME Versão 1",
+                "entity_type": "content",
+                "description": "Política que permitia trabalho remoto em dois dias por semana até 28/02/2026.",
+                "source_id": "politica-remoto:v1-chunk-000",
+                "file_path": "politica-remoto@v1.md",
+                "created_at": 1793763998
+              },
+              {
+                "entity_name": "Vendas de Janeiro de 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 100.000 em janeiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              },
+              {
+                "entity_name": "ACME",
+                "entity_type": "organization",
+                "description": "Organização cujas vendas foram de R$ 100.000 em janeiro de 2026 e R$ 80.000 em fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              },
+              {
+                "entity_name": "Vendas de Fevereiro de 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 80.000 em fevereiro de 2026, representando queda de 20% em relação a janeiro.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              }
+            ],
+            "relationships": [
+              {
+                "src_id": "Vendas de Fevereiro de 2026",
+                "tgt_id": "Vendas de Janeiro de 2026",
+                "description": "As vendas caíram de R$ 100.000 em janeiro para R$ 80.000 em fevereiro de 2026, uma queda de 20%.",
+                "keywords": "comparação,queda de vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764016
+              },
+              {
+                "src_id": "Política ACME Versão 1",
+                "tgt_id": "Trabalho Remoto",
+                "description": "A Política ACME versão 1 permitia trabalho remoto em dois dias por semana até 28/02/2026.",
+                "keywords": "frequência,permissão",
+                "weight": 1.0,
+                "source_id": "politica-remoto:v1-chunk-000",
+                "file_path": "politica-remoto@v1.md",
+                "created_at": 1793763999
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas de Fevereiro de 2026",
+                "description": "A ACME registrou vendas de R$ 80.000 em fevereiro de 2026.",
+                "keywords": "vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas de Janeiro de 2026",
+                "description": "A ACME registrou vendas de R$ 100.000 em janeiro de 2026.",
+                "keywords": "vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              },
+              {
+                "src_id": "Campanha",
+                "tgt_id": "Vendas de Fevereiro de 2026",
+                "description": "A relação entre a pausa da campanha e a queda das vendas é uma hipótese, sem causalidade comprovada.",
+                "keywords": "causalidade não comprovada,hipótese",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              }
+            ],
+            "chunks": [
+              {
+                "reference_id": "1",
+                "content": "Política ACME versão 1: até 28/02/2026, trabalho remoto permitido em dois dias por semana.",
+                "file_path": "politica-remoto@v1.md",
+                "chunk_id": "politica-remoto:v1-chunk-000"
+              },
+              {
+                "reference_id": "2",
+                "content": "ACME: vendas de janeiro de 2026 foram R$100.000 e de fevereiro R$80.000, queda de 20%. A campanha foi pausada em 10/02/2026. Relação com a queda é hipótese, sem causalidade comprovada.",
+                "file_path": "vendas-campanha@v1.md",
+                "chunk_id": "vendas-campanha:v1-chunk-000"
+              }
+            ],
+            "references": [
+              {
+                "reference_id": "1",
+                "file_path": "politica-remoto@v1.md"
+              },
+              {
+                "reference_id": "2",
+                "file_path": "vendas-campanha@v1.md"
+              }
+            ]
+          },
+          "metadata": {
+            "query_mode": "mix",
+            "keywords": {
+              "high_level": [
+                "política de trabalho remoto"
+              ],
+              "low_level": [
+                "ACME",
+                "versão 1",
+                "dias por semana"
+              ]
+            },
+            "processing_info": {
+              "total_entities_found": 5,
+              "total_relations_found": 5,
+              "entities_after_truncation": 5,
+              "relations_after_truncation": 5,
+              "merged_chunks_count": 2,
+              "final_chunks_count": 2
+            }
+          },
+          "llm_response": {
+            "content": "A política ACME versão 1 permitia trabalhar remotamente **dois dias por semana**, até 28/02/2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+            "response_iterator": null,
+            "is_streaming": false,
+            "llm_generated": true
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "comentario-externo",
+          "domain": "publico",
+          "version": 1,
+          "sha": "b20ee8a12a7993cb824e9f8448b886ac9787be55a2e2d3f9967be5b900c1a9a6",
+          "authority": "untrusted"
+        },
+        {
+          "id": "politica-remoto",
+          "domain": "publico",
+          "version": 1,
+          "sha": "c78ccf3510b0d4563ca7ed20a833b38fd20c16e613fada2da5dc8ddd3d8822f8",
+          "authority": "corporate-approved"
+        },
+        {
+          "id": "vendas-campanha",
+          "domain": "publico",
+          "version": 1,
+          "sha": "0a0667f7038ffb50a75bea3998c34d1b9df8df239500d27c79412a14218115f0",
+          "authority": "corporate-approved"
+        }
+      ],
+      "cache_hit": false
+    }
+  },
+  {
+    "case": "current-policy",
+    "response": {
+      "generation": "g2",
+      "policy_epoch": 3,
+      "context": [
+        {
+          "status": "success",
+          "message": "Query processed successfully",
+          "data": {
+            "entities": [
+              {
+                "entity_name": "Política ACME Versão 2",
+                "entity_type": "content",
+                "description": "Versão da política que permite trabalho remoto em três dias por semana desde 01/03/2026 e substitui a versão 1.",
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764216
+              },
+              {
+                "entity_name": "Trabalho Remoto",
+                "entity_type": "concept",
+                "description": "Modalidade de trabalho permitida em três dias por semana pela Política ACME Versão 2 desde 01/03/2026.",
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764216
+              },
+              {
+                "entity_name": "Política ACME Versão 1",
+                "entity_type": "content",
+                "description": "Versão da política substituída pela Política ACME Versão 2.",
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764216
+              },
+              {
+                "entity_name": "Vendas De Fevereiro De 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 80.000 em fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "ACME",
+                "entity_type": "organization",
+                "description": "Organização com vendas de R$ 100.000 em janeiro de 2026 e R$ 80.000 em fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Vendas De Janeiro De 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 100.000 em janeiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Queda Nas Vendas",
+                "entity_type": "data",
+                "description": "Redução de 20% nas vendas da ACME entre janeiro e fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              }
+            ],
+            "relationships": [
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas De Fevereiro De 2026",
+                "description": "A ACME registrou vendas de R$ 80.000 em fevereiro de 2026.",
+                "keywords": "desempenho,vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "Política ACME Versão 2",
+                "tgt_id": "Trabalho Remoto",
+                "description": "A Política ACME Versão 2 permite trabalho remoto em três dias por semana desde 01/03/2026.",
+                "keywords": "frequência,permissão",
+                "weight": 1.0,
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764216
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Queda Nas Vendas",
+                "description": "As vendas da ACME apresentaram queda de 20% entre janeiro e fevereiro de 2026.",
+                "keywords": "desempenho,redução",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas De Janeiro De 2026",
+                "description": "A ACME registrou vendas de R$ 100.000 em janeiro de 2026.",
+                "keywords": "desempenho,vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "Vendas De Fevereiro De 2026",
+                "tgt_id": "Vendas De Janeiro De 2026",
+                "description": "As vendas caíram de R$ 100.000 em janeiro para R$ 80.000 em fevereiro de 2026.",
+                "keywords": "comparação,queda",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "Política ACME Versão 1",
+                "tgt_id": "Política ACME Versão 2",
+                "description": "A Política ACME Versão 2 substitui a Política ACME Versão 1.",
+                "keywords": "substituição",
+                "weight": 1.0,
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764217
+              },
+              {
+                "src_id": "Campanha",
+                "tgt_id": "Queda Nas Vendas",
+                "description": "A relação entre a pausa da campanha e a queda nas vendas é uma hipótese, sem causalidade comprovada.",
+                "keywords": "causalidade não comprovada,hipótese",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              }
+            ],
+            "chunks": [
+              {
+                "reference_id": "1",
+                "content": "Política ACME versão 2: desde 01/03/2026, trabalho remoto permitido em três dias por semana. Substitui a versão 1.",
+                "file_path": "politica-remoto@v2.md",
+                "chunk_id": "politica-remoto:v2-chunk-000"
+              },
+              {
+                "reference_id": "2",
+                "content": "ACME: vendas de janeiro de 2026 foram R$100.000 e de fevereiro R$80.000, queda de 20%. A campanha foi pausada em 10/02/2026. Relação com a queda é hipótese, sem causalidade comprovada.",
+                "file_path": "vendas-campanha@v1.md",
+                "chunk_id": "vendas-campanha:v1-chunk-000"
+              }
+            ],
+            "references": [
+              {
+                "reference_id": "1",
+                "file_path": "politica-remoto@v2.md"
+              },
+              {
+                "reference_id": "2",
+                "file_path": "vendas-campanha@v1.md"
+              }
+            ]
+          },
+          "metadata": {
+            "query_mode": "mix",
+            "keywords": {
+              "high_level": [
+                "política de trabalho remoto"
+              ],
+              "low_level": [
+                "ACME",
+                "versão 2",
+                "dias por semana"
+              ]
+            },
+            "processing_info": {
+              "total_entities_found": 7,
+              "total_relations_found": 7,
+              "entities_after_truncation": 7,
+              "relations_after_truncation": 7,
+              "merged_chunks_count": 2,
+              "final_chunks_count": 2
+            }
+          },
+          "llm_response": {
+            "content": "A política ACME versão 2 permite trabalhar remotamente **três dias por semana** desde 1º de março de 2026. [1]\n\nEla substitui a versão 1 da política. [1]\n\n### References\n\n* [1] politica-remoto@v2.md",
+            "response_iterator": null,
+            "is_streaming": false,
+            "llm_generated": true
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "comentario-externo",
+          "domain": "publico",
+          "version": 1,
+          "sha": "b20ee8a12a7993cb824e9f8448b886ac9787be55a2e2d3f9967be5b900c1a9a6",
+          "authority": "untrusted"
+        },
+        {
+          "id": "politica-remoto",
+          "domain": "publico",
+          "version": 2,
+          "sha": "52bc32eafb6832da08d330a2e37cd99570a22001be3c4b1b66512b6ea9b57505",
+          "authority": "corporate-approved"
+        },
+        {
+          "id": "vendas-campanha",
+          "domain": "publico",
+          "version": 1,
+          "sha": "0a0667f7038ffb50a75bea3998c34d1b9df8df239500d27c79412a14218115f0",
+          "authority": "corporate-approved"
+        }
+      ],
+      "cache_hit": false
+    }
+  },
+  {
+    "case": "historical-policy-after-restore",
+    "response": {
+      "generation": "g1",
+      "policy_epoch": 3,
+      "context": [
+        {
+          "status": "success",
+          "message": "Query processed successfully",
+          "data": {
+            "entities": [
+              {
+                "entity_name": "Trabalho Remoto",
+                "entity_type": "concept",
+                "description": "Modalidade de trabalho permitida pela Política ACME versão 1 em dois dias por semana até 28/02/2026.",
+                "source_id": "politica-remoto:v1-chunk-000",
+                "file_path": "politica-remoto@v1.md",
+                "created_at": 1793763999
+              },
+              {
+                "entity_name": "Política ACME Versão 1",
+                "entity_type": "content",
+                "description": "Política que permitia trabalho remoto em dois dias por semana até 28/02/2026.",
+                "source_id": "politica-remoto:v1-chunk-000",
+                "file_path": "politica-remoto@v1.md",
+                "created_at": 1793763998
+              },
+              {
+                "entity_name": "Vendas de Janeiro de 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 100.000 em janeiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              },
+              {
+                "entity_name": "ACME",
+                "entity_type": "organization",
+                "description": "Organização cujas vendas foram de R$ 100.000 em janeiro de 2026 e R$ 80.000 em fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              },
+              {
+                "entity_name": "Vendas de Fevereiro de 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 80.000 em fevereiro de 2026, representando queda de 20% em relação a janeiro.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              }
+            ],
+            "relationships": [
+              {
+                "src_id": "Vendas de Fevereiro de 2026",
+                "tgt_id": "Vendas de Janeiro de 2026",
+                "description": "As vendas caíram de R$ 100.000 em janeiro para R$ 80.000 em fevereiro de 2026, uma queda de 20%.",
+                "keywords": "comparação,queda de vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764016
+              },
+              {
+                "src_id": "Política ACME Versão 1",
+                "tgt_id": "Trabalho Remoto",
+                "description": "A Política ACME versão 1 permitia trabalho remoto em dois dias por semana até 28/02/2026.",
+                "keywords": "frequência,permissão",
+                "weight": 1.0,
+                "source_id": "politica-remoto:v1-chunk-000",
+                "file_path": "politica-remoto@v1.md",
+                "created_at": 1793763999
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas de Fevereiro de 2026",
+                "description": "A ACME registrou vendas de R$ 80.000 em fevereiro de 2026.",
+                "keywords": "vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas de Janeiro de 2026",
+                "description": "A ACME registrou vendas de R$ 100.000 em janeiro de 2026.",
+                "keywords": "vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              },
+              {
+                "src_id": "Campanha",
+                "tgt_id": "Vendas de Fevereiro de 2026",
+                "description": "A relação entre a pausa da campanha e a queda das vendas é uma hipótese, sem causalidade comprovada.",
+                "keywords": "causalidade não comprovada,hipótese",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764017
+              }
+            ],
+            "chunks": [
+              {
+                "reference_id": "1",
+                "content": "Política ACME versão 1: até 28/02/2026, trabalho remoto permitido em dois dias por semana.",
+                "file_path": "politica-remoto@v1.md",
+                "chunk_id": "politica-remoto:v1-chunk-000"
+              },
+              {
+                "reference_id": "2",
+                "content": "ACME: vendas de janeiro de 2026 foram R$100.000 e de fevereiro R$80.000, queda de 20%. A campanha foi pausada em 10/02/2026. Relação com a queda é hipótese, sem causalidade comprovada.",
+                "file_path": "vendas-campanha@v1.md",
+                "chunk_id": "vendas-campanha:v1-chunk-000"
+              }
+            ],
+            "references": [
+              {
+                "reference_id": "1",
+                "file_path": "politica-remoto@v1.md"
+              },
+              {
+                "reference_id": "2",
+                "file_path": "vendas-campanha@v1.md"
+              }
+            ]
+          },
+          "metadata": {
+            "query_mode": "mix",
+            "keywords": {
+              "high_level": [
+                "política de trabalho remoto"
+              ],
+              "low_level": [
+                "ACME",
+                "versão 1",
+                "dias por semana"
+              ]
+            },
+            "processing_info": {
+              "total_entities_found": 5,
+              "total_relations_found": 5,
+              "entities_after_truncation": 5,
+              "relations_after_truncation": 5,
+              "merged_chunks_count": 2,
+              "final_chunks_count": 2
+            }
+          },
+          "llm_response": {
+            "content": "A política ACME versão 1 permitia trabalhar remotamente **dois dias por semana**, até 28/02/2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+            "response_iterator": null,
+            "is_streaming": false,
+            "llm_generated": true
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "comentario-externo",
+          "domain": "publico",
+          "version": 1,
+          "sha": "b20ee8a12a7993cb824e9f8448b886ac9787be55a2e2d3f9967be5b900c1a9a6",
+          "authority": "untrusted"
+        },
+        {
+          "id": "politica-remoto",
+          "domain": "publico",
+          "version": 1,
+          "sha": "c78ccf3510b0d4563ca7ed20a833b38fd20c16e613fada2da5dc8ddd3d8822f8",
+          "authority": "corporate-approved"
+        },
+        {
+          "id": "vendas-campanha",
+          "domain": "publico",
+          "version": 1,
+          "sha": "0a0667f7038ffb50a75bea3998c34d1b9df8df239500d27c79412a14218115f0",
+          "authority": "corporate-approved"
+        }
+      ],
+      "cache_hit": false
+    }
+  },
+  {
+    "case": "causal-uncertainty",
+    "response": {
+      "generation": "g2",
+      "policy_epoch": 3,
+      "context": [
+        {
+          "status": "success",
+          "message": "Query processed successfully",
+          "data": {
+            "entities": [
+              {
+                "entity_name": "Queda Nas Vendas",
+                "entity_type": "data",
+                "description": "Redução de 20% nas vendas da ACME entre janeiro e fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Campanha",
+                "entity_type": "other",
+                "description": "Campanha pausada em 10 de fevereiro de 2026, cuja relação com a queda nas vendas é uma hipótese sem causalidade comprovada.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Vendas De Fevereiro De 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 80.000 em fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Vendas De Janeiro De 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 100.000 em janeiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "ACME",
+                "entity_type": "organization",
+                "description": "Organização com vendas de R$ 100.000 em janeiro de 2026 e R$ 80.000 em fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Política ACME Versão 2",
+                "entity_type": "content",
+                "description": "Versão da política que permite trabalho remoto em três dias por semana desde 01/03/2026 e substitui a versão 1.",
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764215
+              },
+              {
+                "entity_name": "Trabalho Remoto",
+                "entity_type": "concept",
+                "description": "Modalidade de trabalho permitida em três dias por semana pela Política ACME Versão 2 desde 01/03/2026.",
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764215
+              },
+              {
+                "entity_name": "Política ACME Versão 1",
+                "entity_type": "content",
+                "description": "Versão da política substituída pela Política ACME Versão 2.",
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764215
+              }
+            ],
+            "relationships": [
+              {
+                "src_id": "ACME",
+                "tgt_id": "Queda Nas Vendas",
+                "description": "As vendas da ACME apresentaram queda de 20% entre janeiro e fevereiro de 2026.",
+                "keywords": "desempenho,redução",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "Campanha",
+                "tgt_id": "Queda Nas Vendas",
+                "description": "A relação entre a pausa da campanha e a queda nas vendas é uma hipótese, sem causalidade comprovada.",
+                "keywords": "causalidade não comprovada,hipótese",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas De Fevereiro De 2026",
+                "description": "A ACME registrou vendas de R$ 80.000 em fevereiro de 2026.",
+                "keywords": "desempenho,vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "Vendas De Fevereiro De 2026",
+                "tgt_id": "Vendas De Janeiro De 2026",
+                "description": "As vendas caíram de R$ 100.000 em janeiro para R$ 80.000 em fevereiro de 2026.",
+                "keywords": "comparação,queda",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas De Janeiro De 2026",
+                "description": "A ACME registrou vendas de R$ 100.000 em janeiro de 2026.",
+                "keywords": "desempenho,vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "Política ACME Versão 2",
+                "tgt_id": "Trabalho Remoto",
+                "description": "A Política ACME Versão 2 permite trabalho remoto em três dias por semana desde 01/03/2026.",
+                "keywords": "frequência,permissão",
+                "weight": 1.0,
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764216
+              },
+              {
+                "src_id": "Política ACME Versão 1",
+                "tgt_id": "Política ACME Versão 2",
+                "description": "A Política ACME Versão 2 substitui a Política ACME Versão 1.",
+                "keywords": "substituição",
+                "weight": 1.0,
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764217
+              }
+            ],
+            "chunks": [
+              {
+                "reference_id": "1",
+                "content": "ACME: vendas de janeiro de 2026 foram R$100.000 e de fevereiro R$80.000, queda de 20%. A campanha foi pausada em 10/02/2026. Relação com a queda é hipótese, sem causalidade comprovada.",
+                "file_path": "vendas-campanha@v1.md",
+                "chunk_id": "vendas-campanha:v1-chunk-000"
+              },
+              {
+                "reference_id": "2",
+                "content": "Política ACME versão 2: desde 01/03/2026, trabalho remoto permitido em três dias por semana. Substitui a versão 1.",
+                "file_path": "politica-remoto@v2.md",
+                "chunk_id": "politica-remoto:v2-chunk-000"
+              }
+            ],
+            "references": [
+              {
+                "reference_id": "1",
+                "file_path": "vendas-campanha@v1.md"
+              },
+              {
+                "reference_id": "2",
+                "file_path": "politica-remoto@v2.md"
+              }
+            ]
+          },
+          "metadata": {
+            "query_mode": "mix",
+            "keywords": {
+              "high_level": [
+                "relação causal",
+                "pausa da campanha",
+                "queda das vendas"
+              ],
+              "low_level": [
+                "queda de 20%",
+                "vendas de fevereiro"
+              ]
+            },
+            "processing_info": {
+              "total_entities_found": 8,
+              "total_relations_found": 7,
+              "entities_after_truncation": 8,
+              "relations_after_truncation": 7,
+              "merged_chunks_count": 2,
+              "final_chunks_count": 2
+            }
+          },
+          "llm_response": {
+            "content": "Não. A relação entre a pausa da campanha e a queda nas vendas é uma **hipótese**, sem causalidade comprovada. A campanha foi pausada em 10 de fevereiro de 2026. [1]\n\nAs vendas da ACME caíram de R$ 100.000 em janeiro para R$ 80.000 em fevereiro de 2026, uma redução de 20%. [1]\n\n### References\n\n* [1] vendas-campanha@v1.md",
+            "response_iterator": null,
+            "is_streaming": false,
+            "llm_generated": true
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "comentario-externo",
+          "domain": "publico",
+          "version": 1,
+          "sha": "b20ee8a12a7993cb824e9f8448b886ac9787be55a2e2d3f9967be5b900c1a9a6",
+          "authority": "untrusted"
+        },
+        {
+          "id": "politica-remoto",
+          "domain": "publico",
+          "version": 2,
+          "sha": "52bc32eafb6832da08d330a2e37cd99570a22001be3c4b1b66512b6ea9b57505",
+          "authority": "corporate-approved"
+        },
+        {
+          "id": "vendas-campanha",
+          "domain": "publico",
+          "version": 1,
+          "sha": "0a0667f7038ffb50a75bea3998c34d1b9df8df239500d27c79412a14218115f0",
+          "authority": "corporate-approved"
+        }
+      ],
+      "cache_hit": false
+    }
+  },
+  {
+    "case": "abstention-missing-target",
+    "response": {
+      "generation": "g2",
+      "policy_epoch": 3,
+      "context": [
+        {
+          "status": "success",
+          "message": "Query processed successfully",
+          "data": {
+            "entities": [
+              {
+                "entity_name": "Vendas De Janeiro De 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 100.000 em janeiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Vendas De Fevereiro De 2026",
+                "entity_type": "data",
+                "description": "Vendas da ACME no valor de R$ 80.000 em fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Campanha",
+                "entity_type": "other",
+                "description": "Campanha pausada em 10 de fevereiro de 2026, cuja relação com a queda nas vendas é uma hipótese sem causalidade comprovada.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "ACME",
+                "entity_type": "organization",
+                "description": "Organização com vendas de R$ 100.000 em janeiro de 2026 e R$ 80.000 em fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Queda Nas Vendas",
+                "entity_type": "data",
+                "description": "Redução de 20% nas vendas da ACME entre janeiro e fevereiro de 2026.",
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "entity_name": "Política ACME Versão 2",
+                "entity_type": "content",
+                "description": "Versão da política que permite trabalho remoto em três dias por semana desde 01/03/2026 e substitui a versão 1.",
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764216
+              },
+              {
+                "entity_name": "Trabalho Remoto",
+                "entity_type": "concept",
+                "description": "Modalidade de trabalho permitida em três dias por semana pela Política ACME Versão 2 desde 01/03/2026.",
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764216
+              },
+              {
+                "entity_name": "Política ACME Versão 1",
+                "entity_type": "content",
+                "description": "Versão da política substituída pela Política ACME Versão 2.",
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764216
+              }
+            ],
+            "relationships": [
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas De Janeiro De 2026",
+                "description": "A ACME registrou vendas de R$ 100.000 em janeiro de 2026.",
+                "keywords": "desempenho,vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "Vendas De Fevereiro De 2026",
+                "tgt_id": "Vendas De Janeiro De 2026",
+                "description": "As vendas caíram de R$ 100.000 em janeiro para R$ 80.000 em fevereiro de 2026.",
+                "keywords": "comparação,queda",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Vendas De Fevereiro De 2026",
+                "description": "A ACME registrou vendas de R$ 80.000 em fevereiro de 2026.",
+                "keywords": "desempenho,vendas",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "Campanha",
+                "tgt_id": "Queda Nas Vendas",
+                "description": "A relação entre a pausa da campanha e a queda nas vendas é uma hipótese, sem causalidade comprovada.",
+                "keywords": "causalidade não comprovada,hipótese",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "ACME",
+                "tgt_id": "Queda Nas Vendas",
+                "description": "As vendas da ACME apresentaram queda de 20% entre janeiro e fevereiro de 2026.",
+                "keywords": "desempenho,redução",
+                "weight": 1.0,
+                "source_id": "vendas-campanha:v1-chunk-000",
+                "file_path": "vendas-campanha@v1.md",
+                "created_at": 1793764235
+              },
+              {
+                "src_id": "Política ACME Versão 1",
+                "tgt_id": "Política ACME Versão 2",
+                "description": "A Política ACME Versão 2 substitui a Política ACME Versão 1.",
+                "keywords": "substituição",
+                "weight": 1.0,
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764217
+              },
+              {
+                "src_id": "Política ACME Versão 2",
+                "tgt_id": "Trabalho Remoto",
+                "description": "A Política ACME Versão 2 permite trabalho remoto em três dias por semana desde 01/03/2026.",
+                "keywords": "frequência,permissão",
+                "weight": 1.0,
+                "source_id": "politica-remoto:v2-chunk-000",
+                "file_path": "politica-remoto@v2.md",
+                "created_at": 1793764216
+              }
+            ],
+            "chunks": [
+              {
+                "reference_id": "1",
+                "content": "ACME: vendas de janeiro de 2026 foram R$100.000 e de fevereiro R$80.000, queda de 20%. A campanha foi pausada em 10/02/2026. Relação com a queda é hipótese, sem causalidade comprovada.",
+                "file_path": "vendas-campanha@v1.md",
+                "chunk_id": "vendas-campanha:v1-chunk-000"
+              },
+              {
+                "reference_id": "2",
+                "content": "Política ACME versão 2: desde 01/03/2026, trabalho remoto permitido em três dias por semana. Substitui a versão 1.",
+                "file_path": "politica-remoto@v2.md",
+                "chunk_id": "politica-remoto:v2-chunk-000"
+              }
+            ],
+            "references": [
+              {
+                "reference_id": "1",
+                "file_path": "vendas-campanha@v1.md"
+              },
+              {
+                "reference_id": "2",
+                "file_path": "politica-remoto@v2.md"
+              }
+            ]
+          },
+          "metadata": {
+            "query_mode": "mix",
+            "keywords": {
+              "high_level": [
+                "meta de vendas",
+                "valor aprovado"
+              ],
+              "low_level": [
+                "março de 2026"
+              ]
+            },
+            "processing_info": {
+              "total_entities_found": 8,
+              "total_relations_found": 7,
+              "entities_after_truncation": 8,
+              "relations_after_truncation": 7,
+              "merged_chunks_count": 2,
+              "final_chunks_count": 2
+            }
+          },
+          "llm_response": {
+            "content": "Não há informação suficiente no contexto para determinar o valor aprovado da meta de vendas de março de 2026.\n\nOs dados disponíveis informam apenas as vendas realizadas em janeiro e fevereiro de 2026. [1]\n\n### References\n\n* [1] vendas-campanha@v1.md",
+            "response_iterator": null,
+            "is_streaming": false,
+            "llm_generated": true
+          }
+        }
+      ],
+      "sources": [
+        {
+          "id": "comentario-externo",
+          "domain": "publico",
+          "version": 1,
+          "sha": "b20ee8a12a7993cb824e9f8448b886ac9787be55a2e2d3f9967be5b900c1a9a6",
+          "authority": "untrusted"
+        },
+        {
+          "id": "politica-remoto",
+          "domain": "publico",
+          "version": 2,
+          "sha": "52bc32eafb6832da08d330a2e37cd99570a22001be3c4b1b66512b6ea9b57505",
+          "authority": "corporate-approved"
+        },
+        {
+          "id": "vendas-campanha",
+          "domain": "publico",
+          "version": 1,
+          "sha": "0a0667f7038ffb50a75bea3998c34d1b9df8df239500d27c79412a14218115f0",
+          "authority": "corporate-approved"
+        }
+      ],
+      "cache_hit": false
+    }
+  }
+]

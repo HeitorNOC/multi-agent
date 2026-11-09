@@ -1,0 +1,1233 @@
+{
+  "manifest_sha256": "97d6e22428920294595a661b46f7d842ef9e006b2c5b9269636ab8a616378c81",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "reranker": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "173760f",
+    "files": {
+      "model_quint8_avx2.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "tokenizer.json": "3a56def25aa40facc030ea8b0b87f3688e4b3c39eb8b45d5702b3a1300fe2a20"
+    },
+    "onnxruntime": "1.31.1",
+    "startup_ms": 955.72
+  },
+  "documents": 13,
+  "passages": 383,
+  "cases": [
+    {
+      "id": "handoff",
+      "expected": 3,
+      "planner_error": null,
+      "planner_seconds": 3.948,
+      "direct": {
+        "queries": [
+          "Antes de o humano responder pelo WhatsApp, como sabemos se ele já assumiu o atendimento e que sinal separa a troca de controle do mero recebimento de uma mensagem?"
+        ],
+        "found_in_pool": [
+          3
+        ],
+        "found": [],
+        "elapsed_ms": 741,
+        "candidates": [
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            10,
+            27
+          ],
+          [
+            "fluxo",
+            10,
+            24
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            9,
+            6
+          ],
+          [
+            "fluxo",
+            10,
+            21
+          ]
+        ]
+      },
+      "semantic": {
+        "queries": [
+          "Antes de o humano responder pelo WhatsApp, como sabemos se ele já assumiu o atendimento e que sinal separa a troca de controle do mero recebimento de uma mensagem?"
+        ],
+        "found_in_pool": [
+          3
+        ],
+        "found": [],
+        "elapsed_ms": 697,
+        "candidates": [
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            10,
+            27
+          ],
+          [
+            "fluxo",
+            10,
+            24
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            9,
+            6
+          ],
+          [
+            "fluxo",
+            10,
+            21
+          ]
+        ]
+      },
+      "semantic_sources": {
+        "queries": [
+          "Antes de o humano responder pelo WhatsApp, como sabemos se ele já assumiu o atendimento e que sinal separa a troca de controle do mero recebimento de uma mensagem?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 82,
+        "candidates": [
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            10,
+            13
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "contact",
+            15,
+            54
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "persistence",
+      "expected": 2,
+      "planner_error": null,
+      "planner_seconds": 7.23,
+      "direct": {
+        "queries": [
+          "Para uma auditoria da entrada de WhatsApp, onde rastrear o conteúdo recebido intacto e em qual ponto consultar o registro transformado usado para reconstruir a conversa?"
+        ],
+        "found_in_pool": [
+          1,
+          2
+        ],
+        "found": [
+          2
+        ],
+        "elapsed_ms": 793,
+        "candidates": [
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "fluxo",
+            10,
+            20
+          ],
+          [
+            "fluxo",
+            10,
+            27
+          ],
+          [
+            "fluxo",
+            9,
+            6
+          ],
+          [
+            "fluxo",
+            10,
+            22
+          ],
+          [
+            "fluxo",
+            10,
+            19
+          ]
+        ]
+      },
+      "semantic": {
+        "queries": [
+          "Onde rastrear o conteúdo recebido pela entrada de WhatsApp e quais evidências comprovam que ele foi preservado intacto?",
+          "Em que ponto consultar o registro transformado usado para reconstruir a conversa recebida pelo WhatsApp?"
+        ],
+        "found_in_pool": [
+          1,
+          2
+        ],
+        "found": [
+          1,
+          2
+        ],
+        "elapsed_ms": 1396,
+        "candidates": [
+          [
+            "fluxo",
+            10,
+            27
+          ],
+          [
+            "fluxo",
+            10,
+            19
+          ],
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "fluxo",
+            10,
+            20
+          ],
+          [
+            "fluxo",
+            9,
+            9
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ]
+        ]
+      },
+      "semantic_sources": {
+        "queries": [
+          "Onde rastrear o conteúdo recebido pela entrada de WhatsApp e quais evidências comprovam que ele foi preservado intacto?",
+          "Em que ponto consultar o registro transformado usado para reconstruir a conversa recebida pelo WhatsApp?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 314,
+        "candidates": [
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            10,
+            21
+          ],
+          [
+            "fluxo",
+            9,
+            1
+          ],
+          [
+            "reclame-aqui",
+            7,
+            4
+          ],
+          [
+            "fluxo",
+            10,
+            11
+          ]
+        ]
+      }
+    },
+    {
+      "id": "release",
+      "expected": 2,
+      "planner_error": null,
+      "planner_seconds": 4.948,
+      "direct": {
+        "queries": [
+          "Como testar o agente da Meta com um grupo restrito de contatos e depois disponibilizar para a base inteira?"
+        ],
+        "found_in_pool": [
+          2
+        ],
+        "found": [],
+        "elapsed_ms": 718,
+        "candidates": [
+          [
+            "mba",
+            4,
+            9
+          ],
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba",
+            4,
+            7
+          ],
+          [
+            "mba",
+            3,
+            1
+          ],
+          [
+            "mba-frontend",
+            15,
+            9
+          ],
+          [
+            "mba",
+            8,
+            13
+          ]
+        ]
+      },
+      "semantic": {
+        "queries": [
+          "Como configurar e testar um agente da Meta com um grupo restrito de contatos?",
+          "Como disponibilizar o agente da Meta para toda a base de contatos após o teste?",
+          "Quais garantias e limitações de acesso aos contatos precisam ser comprovadas durante o teste restrito e a disponibilização para toda a base?"
+        ],
+        "found_in_pool": [
+          2
+        ],
+        "found": [],
+        "elapsed_ms": 1963,
+        "candidates": [
+          [
+            "mba",
+            4,
+            8
+          ],
+          [
+            "mba",
+            3,
+            4
+          ],
+          [
+            "reclame-aqui",
+            3,
+            1
+          ],
+          [
+            "mba",
+            4,
+            9
+          ],
+          [
+            "mba",
+            4,
+            7
+          ],
+          [
+            "contact",
+            15,
+            48
+          ]
+        ]
+      },
+      "semantic_sources": {
+        "queries": [
+          "Como configurar e testar um agente da Meta com um grupo restrito de contatos?",
+          "Como disponibilizar o agente da Meta para toda a base de contatos após o teste?",
+          "Quais garantias e limitações de acesso aos contatos precisam ser comprovadas durante o teste restrito e a disponibilização para toda a base?"
+        ],
+        "found_in_pool": [
+          2
+        ],
+        "found": [],
+        "elapsed_ms": 556,
+        "candidates": [
+          [
+            "mba",
+            4,
+            8
+          ],
+          [
+            "mba",
+            3,
+            4
+          ],
+          [
+            "contact",
+            16,
+            62
+          ],
+          [
+            "mba",
+            4,
+            9
+          ],
+          [
+            "contact",
+            15,
+            48
+          ],
+          [
+            "mba",
+            4,
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "id": "frontend",
+      "expected": 1,
+      "planner_error": null,
+      "planner_seconds": 6.437,
+      "direct": {
+        "queries": [
+          "Quais botões aparecem para administrar o conhecimento do agente da Meta quando o onboarding foi concluído?"
+        ],
+        "found_in_pool": [
+          1
+        ],
+        "found": [
+          1
+        ],
+        "elapsed_ms": 686,
+        "candidates": [
+          [
+            "mba-frontend",
+            4,
+            2
+          ],
+          [
+            "mba-frontend",
+            4,
+            2
+          ],
+          [
+            "mba-frontend",
+            4,
+            1
+          ],
+          [
+            "mba-frontend",
+            15,
+            9
+          ],
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba",
+            4,
+            8
+          ]
+        ]
+      },
+      "semantic": {
+        "queries": [
+          "Quais botões aparecem para administrar o conhecimento do agente da Meta quando o onboarding foi concluído?"
+        ],
+        "found_in_pool": [
+          1
+        ],
+        "found": [
+          1
+        ],
+        "elapsed_ms": 665,
+        "candidates": [
+          [
+            "mba-frontend",
+            4,
+            2
+          ],
+          [
+            "mba-frontend",
+            4,
+            2
+          ],
+          [
+            "mba-frontend",
+            4,
+            1
+          ],
+          [
+            "mba-frontend",
+            15,
+            9
+          ],
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba",
+            4,
+            8
+          ]
+        ]
+      },
+      "semantic_sources": {
+        "queries": [
+          "Quais botões aparecem para administrar o conhecimento do agente da Meta quando o onboarding foi concluído?"
+        ],
+        "found_in_pool": [
+          1
+        ],
+        "found": [
+          1
+        ],
+        "elapsed_ms": 162,
+        "candidates": [
+          [
+            "mba-frontend",
+            4,
+            2
+          ],
+          [
+            "mba",
+            4,
+            8
+          ],
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba-frontend",
+            4,
+            1
+          ],
+          [
+            "mba",
+            3,
+            2
+          ],
+          [
+            "mba",
+            4,
+            9
+          ]
+        ]
+      }
+    },
+    {
+      "id": "limit",
+      "expected": 0,
+      "planner_error": null,
+      "planner_seconds": 3.673,
+      "direct": {
+        "queries": [
+          "Quantas chamadas por segundo o Contact Center aceita na operação startAttendance para a mesma conta?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 586,
+        "candidates": [
+          [
+            "contact",
+            16,
+            63
+          ],
+          [
+            "contact",
+            15,
+            43
+          ],
+          [
+            "contact",
+            9,
+            11
+          ],
+          [
+            "contact",
+            16,
+            65
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "contact",
+            16,
+            62
+          ]
+        ]
+      },
+      "semantic": {
+        "queries": [
+          "Quantas chamadas por segundo o Contact Center aceita na operação startAttendance para a mesma conta?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 624,
+        "candidates": [
+          [
+            "contact",
+            16,
+            63
+          ],
+          [
+            "contact",
+            15,
+            43
+          ],
+          [
+            "contact",
+            9,
+            11
+          ],
+          [
+            "contact",
+            16,
+            65
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "contact",
+            16,
+            62
+          ]
+        ]
+      },
+      "semantic_sources": {
+        "queries": [
+          "Quantas chamadas por segundo o Contact Center aceita na operação startAttendance para a mesma conta?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 411,
+        "candidates": [
+          [
+            "contact",
+            16,
+            63
+          ],
+          [
+            "contact",
+            15,
+            43
+          ],
+          [
+            "contact",
+            9,
+            11
+          ],
+          [
+            "contact",
+            16,
+            65
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "contact",
+            9,
+            9
+          ]
+        ]
+      }
+    },
+    {
+      "id": "price",
+      "expected": 0,
+      "planner_error": null,
+      "planner_seconds": 3.572,
+      "direct": {
+        "queries": [
+          "Qual valor em reais a 360dialog cobra por número habilitado para o agente da Meta a cada mês?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 537,
+        "candidates": [
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba",
+            4,
+            7
+          ],
+          [
+            "mba",
+            3,
+            1
+          ],
+          [
+            "mba",
+            4,
+            6
+          ],
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba",
+            4,
+            11
+          ]
+        ]
+      },
+      "semantic": {
+        "queries": [
+          "Qual valor em reais a 360dialog cobra por número habilitado para o agente da Meta a cada mês?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 540,
+        "candidates": [
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba",
+            4,
+            7
+          ],
+          [
+            "mba",
+            3,
+            1
+          ],
+          [
+            "mba",
+            4,
+            6
+          ],
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba",
+            4,
+            11
+          ]
+        ]
+      },
+      "semantic_sources": {
+        "queries": [
+          "Qual valor em reais a 360dialog cobra por número habilitado para o agente da Meta a cada mês?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 154,
+        "candidates": [
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba",
+            4,
+            7
+          ],
+          [
+            "mba",
+            3,
+            1
+          ],
+          [
+            "mba",
+            4,
+            11
+          ],
+          [
+            "mba",
+            3,
+            1
+          ],
+          [
+            "mba",
+            4,
+            6
+          ]
+        ]
+      }
+    },
+    {
+      "id": "handoff-original",
+      "expected": 3,
+      "planner_error": null,
+      "planner_seconds": 5.003,
+      "direct": {
+        "queries": [
+          "Quais estados e evidências são necessários para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 470,
+        "candidates": [
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "mba-academic",
+            null,
+            1
+          ],
+          [
+            "contact",
+            16,
+            66
+          ],
+          [
+            "mba",
+            3,
+            4
+          ],
+          [
+            "fluxo",
+            9,
+            5
+          ],
+          [
+            "mba-academic",
+            null,
+            1
+          ]
+        ]
+      },
+      "semantic": {
+        "queries": [
+          "Quais estados e transições são descritos para a transferência de uma conversa do MBA para um atendente?",
+          "Quais evidências documentais comprovam que o MBA deixa de responder antes de o atendente assumir a conversa?",
+          "Quais garantias e mecanismos documentados impedem que o MBA e o atendente respondam simultaneamente durante e após a transferência?"
+        ],
+        "found_in_pool": [
+          1
+        ],
+        "found": [],
+        "elapsed_ms": 1542,
+        "candidates": [
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "mba-academic",
+            null,
+            1
+          ],
+          [
+            "contact",
+            15,
+            42
+          ],
+          [
+            "contact",
+            16,
+            66
+          ],
+          [
+            "mba",
+            4,
+            6
+          ],
+          [
+            "contact",
+            15,
+            52
+          ]
+        ]
+      },
+      "semantic_sources": {
+        "queries": [
+          "Quais estados e transições são descritos para a transferência de uma conversa do MBA para um atendente?",
+          "Quais evidências documentais comprovam que o MBA deixa de responder antes de o atendente assumir a conversa?",
+          "Quais garantias e mecanismos documentados impedem que o MBA e o atendente respondam simultaneamente durante e após a transferência?"
+        ],
+        "found_in_pool": [],
+        "found": [],
+        "elapsed_ms": 338,
+        "candidates": [
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "mba-academic",
+            null,
+            1
+          ],
+          [
+            "mba-academic",
+            null,
+            1
+          ],
+          [
+            "mba",
+            3,
+            4
+          ],
+          [
+            "mba",
+            4,
+            6
+          ],
+          [
+            "mba",
+            8,
+            14
+          ]
+        ]
+      }
+    },
+    {
+      "id": "csv-control",
+      "expected": 2,
+      "planner_error": null,
+      "planner_seconds": 4.067,
+      "direct": {
+        "queries": [
+          "No laboratório azul, o que deve ser conferido na retomada de fila e quem aprova?"
+        ],
+        "found_in_pool": [
+          1,
+          2
+        ],
+        "found": [
+          1,
+          2
+        ],
+        "elapsed_ms": 761,
+        "candidates": [
+          [
+            "rehearsal-note",
+            null,
+            1
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ],
+          [
+            "reclame-aqui",
+            10,
+            8
+          ],
+          [
+            "contact",
+            16,
+            68
+          ],
+          [
+            "contact",
+            15,
+            57
+          ],
+          [
+            "reclame-aqui",
+            3,
+            1
+          ]
+        ]
+      },
+      "semantic": {
+        "queries": [
+          "No laboratório azul, o que deve ser conferido na retomada de fila e quem aprova?"
+        ],
+        "found_in_pool": [
+          1,
+          2
+        ],
+        "found": [
+          1,
+          2
+        ],
+        "elapsed_ms": 741,
+        "candidates": [
+          [
+            "rehearsal-note",
+            null,
+            1
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ],
+          [
+            "reclame-aqui",
+            10,
+            8
+          ],
+          [
+            "contact",
+            16,
+            68
+          ],
+          [
+            "contact",
+            15,
+            57
+          ],
+          [
+            "reclame-aqui",
+            3,
+            1
+          ]
+        ]
+      },
+      "semantic_sources": {
+        "queries": [
+          "No laboratório azul, o que deve ser conferido na retomada de fila e quem aprova?"
+        ],
+        "found_in_pool": [
+          1,
+          2
+        ],
+        "found": [
+          1,
+          2
+        ],
+        "elapsed_ms": 156,
+        "candidates": [
+          [
+            "rehearsal-note",
+            null,
+            1
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ],
+          [
+            "reclame-aqui",
+            10,
+            8
+          ],
+          [
+            "reclame-aqui",
+            3,
+            1
+          ],
+          [
+            "training-calendar",
+            null,
+            1
+          ]
+        ]
+      }
+    }
+  ],
+  "model_calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "63a902cc148dddba460f3c822df4d108f9409b9314b67adc6fa81030ab0a472d",
+      "reservation_id": "handoff",
+      "instance": "semantic-plan-eval",
+      "seconds": 3.939767400006531,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12125,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 18,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "13b7b99119cd6e3170f82dc63ba540b90dd2d9d9980ffdcf2a53a33ac7b3aafe",
+      "reservation_id": "persistence",
+      "instance": "semantic-plan-eval",
+      "seconds": 7.22033250000095,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11334,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 86,
+          "reasoning_output_tokens": 17
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "b9cb05c1f4e9149742a75ce1e706639d9b313d0ad9b073ae6c0436d0c8163e28",
+      "reservation_id": "release",
+      "instance": "semantic-plan-eval",
+      "seconds": 4.938372600008734,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12112,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 85,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "d04f06d34fa93e58e311b488d3d0926b75e9b248b4f936943a29422b9cdf1ec6",
+      "reservation_id": "frontend",
+      "instance": "semantic-plan-eval",
+      "seconds": 6.428461800009245,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11320,
+          "cached_input_tokens": 11136,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 34,
+          "reasoning_output_tokens": 14
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "20846b3eb74645781d454137cee2e1682945a5887e3c0c3c44deec5181e75354",
+      "reservation_id": "limit",
+      "instance": "semantic-plan-eval",
+      "seconds": 3.6655004000058398,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12108,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 18,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "cf35d5e8c662e3d08b17d7083d927d87f661db6ec8f7e53d4abaea0d37548bd1",
+      "reservation_id": "price",
+      "instance": "semantic-plan-eval",
+      "seconds": 3.5631330999895,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12112,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 18,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "af9285fd50919ce1df348dcaa930e2e571e1d03e23e318a4b98800a9cea7b918",
+      "reservation_id": "handoff-original",
+      "instance": "semantic-plan-eval",
+      "seconds": 4.994694099994376,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11328,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 95,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "16400b58df23f9fe11c42ae3c2dd87a0b52a925887a141092b1eef6103033290",
+      "reservation_id": "csv-control",
+      "instance": "semantic-plan-eval",
+      "seconds": 4.058665399992606,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12110,
+          "cached_input_tokens": 11904,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 18,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

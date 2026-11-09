@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="69.472" timestamp="2026-11-06T12:31:37.170637-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.aurora-local-restart.test_pilot" name="test_manifest_rejects_paths_outside_scope_and_changed_bytes" time="0.014" /><testcase classname="validation.aurora-local-restart.test_pilot" name="test_provider_privacy_mode_keeps_usage_without_content" time="0.502" /><testcase classname="validation.aurora-local-restart.test_pilot" name="test_pilot_open_task_access_minimization_and_citations" time="68.531"><failure message="AssertionError: assert 1 == 0&#10; +  where 1 = wait(timeout=90)&#10; +    where wait = &lt;Popen: returncode: 1 args: ['C:\\Users\\PC\\multi-agent\\apps\\aurora\\.ven...&gt;.wait">tmp_path = WindowsPath('C:/Users/PC/multi-agent/validation/aurora-local-restart/.state/pilot-03/test_pilot_open_task_access_mi0')
+
+    def test_pilot_open_task_access_minimization_and_citations(tmp_path):
+        manifest = make_manifest(tmp_path)
+        with (tmp_path / "launcher.log").open("w", encoding="utf-8") as log:
+            launcher = subprocess.Popen(
+                [PYTHON, str(HERE / "pilot_fixture.py"), "--pilot-manifest", str(manifest),
+                 "--pilot-user", "operador-teste", "--pilot-viewer", "consulta-teste"],
+                cwd=ROOT, stdout=log, stderr=log, env={**os.environ, "AURORA_TEST_MANIFEST": str(manifest)},
+            )
+    
+            def api_address():
+                if launcher.poll() is not None:
+                    raise AssertionError("Launcher saiu antes da prontidão")
+                for line in (tmp_path / "launcher.log").read_text(encoding="utf-8").splitlines():
+                    if line.startswith('{"url":'):
+                        return json.loads(line)["url"]
+                return None
+    
+            try:
+                url = wait_for(api_address)
+    
+                def call(path, body=None, cookie=None, key=None):
+                    request = Request(
+                        url + path, None if body is None else json.dumps(body).encode(),
+                        {"Content-Type": "application/json", **({"Cookie": cookie} if cookie else {}),
+                         **({"Idempotency-Key": key} if key else {})},
+                    )
+                    try:
+                        response = urlopen(request, timeout=5)
+                    except HTTPError as error:
+                        response = error
+                    with response:
+                        return response.status, json.load(response), response.headers
+    
+                def login(id, password):
+                    status, _, headers = call("/api/pilot/login", {"id": id, "password": password})
+                    assert status == 200
+                    cookie = headers["Set-Cookie"]
+                    assert "HttpOnly" in cookie and "SameSite=Strict" in cookie
+                    return cookie.split(";", 1)[0]
+    
+                assert call("/api/state")[0] == 401
+                assert call("/api/jobs", {"goal": "Qual é o prazo de reembolso?"})[0] == 401
+                operator = login("operador-teste", OPERATOR_PASSWORD)
+                viewer = login("consulta-teste", VIEWER_PASSWORD)
+                wait_for(lambda: call("/api/state", cookie=operator)[1]["runtime"]["phase"] == "ready")
+                status = call("/api/state", cookie=viewer)[1]
+                assert status["actor"]["role"] == "viewer"
+                assert not any("content" in row for row in status["runtime"]["sources"] + status["runtime"]["history"])
+                assert call("/api/jobs", {"goal": "Qual é o prazo de reembolso?"}, viewer)[0] == 403
+    
+                def submit(goal):
+                    status, result, _ = call("/api/jobs", {"goal": goal}, operator, uuid4().hex)
+                    assert status == 202
+                    return result["id"]
+    
+                def find(id, status):
+                    jobs = call("/api/state", cookie=operator)[1]["jobs"]
+                    return next((job for job in jobs if job["id"] == id and job["status"] == status), None)
+    
+                supported = submit("Qual é o prazo de reembolso?")
+                job = wait_for(lambda: find(supported, "awaiting_approval"))
+                review = job["review"]
+                evidence = review["report"]["citations"]
+                assert [(p["source"], p["version"], p["line"], p["quote"]) for p in evidence] == [
+                    ("reembolso", 2, 1, "O prazo do reembolso é de 15 dias úteis.")
+                ]
+                route = f"/api/jobs/{supported}/approve"
+                assert call(route, {"hash": review["hash"]})[0] == 401
+                assert call(route, {"hash": review["hash"]}, viewer)[0] == 403
+                assert call(route, {"hash": "invalid"}, operator)[0] == 409
+                assert call(route, {"hash": review["hash"]}, operator)[0] == 202
+                completed = wait_for(lambda: find(supported, "completed"))
+                assert completed["receipt"]["simulated"] is True
+                assert next(e["detail"]["actor"] for e in completed["events"] if e["node"] == "human_approved") == "operador-teste"
+    
+                unknown = submit("Qual a temperatura de congelamento do oceano?")
+                report = wait_for(lambda: find(unknown, "awaiting_approval"))["review"]["report"]
+                assert report["status"] == "insufficient_evidence" and report["citations"] == []
+                adversarial = submit("Qual o prazo do reembolso em revisão adversarial?")
+                assert wait_for(lambda: find(adversarial, "recovery_required"))["review"] is None
+    
+                capture = (tmp_path / "fake-provider.jsonl").read_text(encoding="utf-8")
+                for marker in ("MARCADOR-REVOGADO", "MARCADOR-LOCAL", "Notas de treinamento", "banners de cor azul"):
+                    assert marker not in capture
+                assert '"recommendations": {"controller":' in capture
+                assert '"recommendations": {"finance_director":' in capture
+                state_root, = tmp_path.glob("aurora-pilot-*")
+                assert not (state_root / "active.json").exists()
+                assert not list(state_root.rglob("*.prompt.json"))
+                outbox, = state_root.rglob("telemetry-outbox.sqlite")
+                with sqlite3.connect(outbox) as db:
+                    assert db.execute("SELECT count(*) FROM artifacts").fetchone() == (0,)
+                assert call("/api/pilot/logout", {}, viewer)[0] == 200
+                assert call("/api/state", cookie=viewer)[0] == 401
+                assert call("/api/pilot/stop", {}, operator)[0] == 200
+&gt;               assert launcher.wait(timeout=90) == 0
+E               AssertionError: assert 1 == 0
+E                +  where 1 = wait(timeout=90)
+E                +    where wait = &lt;Popen: returncode: 1 args: ['C:\\Users\\PC\\multi-agent\\apps\\aurora\\.ven...&gt;.wait
+
+validation\aurora-local-restart\test_pilot.py:178: AssertionError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,42 @@
+--- a/webhook.cjs
++++ b/webhook.cjs
+@@ -5,14 +5,36 @@
+     CREATE TABLE IF NOT EXISTS effects (
+       tenant_id TEXT NOT NULL,
+       event_id TEXT NOT NULL,
+-      payload TEXT NOT NULL
++      payload TEXT NOT NULL,
++      PRIMARY KEY (tenant_id, event_id)
+     );
+   `);
+ }
+ 
+ function ingest(db, { tenantId, eventId, payload }) {
+-  db.prepare("INSERT INTO effects VALUES (?, ?, ?)").run(tenantId, eventId, payload);
+-  return "accepted";
++  if (db.isTransaction) {
++    throw new Error("ingest must run outside a transaction");
++  }
++
++  const result = db.prepare(`
++    INSERT INTO effects (tenant_id, event_id, payload)
++    VALUES (?, ?, ?)
++    ON CONFLICT(tenant_id, event_id) DO NOTHING
++  `).run(tenantId, eventId, payload);
++
++  if (result.changes === 1 || result.changes === 1n) {
++    return "accepted";
++  }
++
++  const existing = db.prepare(`
++    SELECT payload FROM effects WHERE tenant_id = ? AND event_id = ?
++  `).get(tenantId, eventId);
++
++  if (!existing) {
++    throw new Error("Existing effect not found after insert conflict");
++  }
++
++  return existing.payload === payload ? "duplicate" : "conflict";
+ }
+ 
+ module.exports = { initialize, ingest };

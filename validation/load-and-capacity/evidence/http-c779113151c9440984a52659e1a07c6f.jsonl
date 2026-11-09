@@ -1,0 +1,15 @@
+{"phase": "setup", "path": "/drafts", "method": "POST", "status": 200, "seconds": 0.13854769998579286, "queue_seconds": 0.001632300001801923, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "setup", "path": "/review", "method": "POST", "status": 200, "seconds": 0.25764060000074096, "queue_seconds": 0.0016542999946977943, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "setup", "path": "/publish", "method": "POST", "status": 200, "seconds": 0.24471450000419281, "queue_seconds": 0.0017912999901454896, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "setup", "path": "/drafts", "method": "POST", "status": 200, "seconds": 0.13003569998545572, "queue_seconds": 0.00180460000410676, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "setup", "path": "/review", "method": "POST", "status": 200, "seconds": 0.2383988999936264, "queue_seconds": 0.0016760000144131482, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "setup", "path": "/publish", "method": "POST", "status": 200, "seconds": 0.23547789998701774, "queue_seconds": 0.0017450999876018614, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "setup", "path": "/drafts", "method": "POST", "status": 200, "seconds": 0.12766299999202602, "queue_seconds": 0.0019019000174012035, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "setup", "path": "/review", "method": "POST", "status": 200, "seconds": 0.2443175000080373, "queue_seconds": 0.0017567000177223235, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "setup", "path": "/publish", "method": "POST", "status": 200, "seconds": 0.2387633000034839, "queue_seconds": 0.0015970999957062304, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "native-mix", "path": "/advise", "method": "POST", "status": 200, "seconds": 45.875487200013595, "queue_seconds": 0.001708900002995506, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "native-mix", "path": "/advise", "method": "POST", "status": 200, "seconds": 10.6921474999981, "queue_seconds": 0.0019567999988794327, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "native-mix", "path": "/advise", "method": "POST", "status": 200, "seconds": 49.40027439998812, "queue_seconds": 0.0018151999975088984, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "native-mix", "path": "/advise", "method": "POST", "status": 200, "seconds": 10.953823599993484, "queue_seconds": 0.0016780000005383044, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "native-mix", "path": "/advise", "method": "POST", "status": 200, "seconds": 37.74175999997533, "queue_seconds": 0.001973200007341802, "instance": "c779113151c9440984a52659e1a07c6f"}
+{"phase": "native-mix", "path": "/advise", "method": "POST", "status": 200, "seconds": 10.027939299994614, "queue_seconds": 0.0016304999880958349, "instance": "c779113151c9440984a52659e1a07c6f"}

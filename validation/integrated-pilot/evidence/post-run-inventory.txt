@@ -1,0 +1,5 @@
+Independent read-only Docker inventory attempted after final PASS.
+docker ps -a / volume ls / network ls with integrated-pilot- filters:
+Error response from daemon: Docker Desktop is manually paused. Unpause it through the Whale menu or Dashboard.
+Exit code: 1. No independent inventory obtained; manual pause respected.
+Cleanup evidence from test: four volumes removed=true; network_removed=true.

@@ -1,0 +1,129 @@
+
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 7 files:  14%|█▍        | 1/7 [00:00<00:01,  3.99it/s]
+Fetching 7 files:  29%|██▊       | 2/7 [00:00<00:01,  4.01it/s]
+Fetching 7 files:  43%|████▎     | 3/7 [00:00<00:00,  4.01it/s]
+Fetching 7 files:  57%|█████▋    | 4/7 [00:04<00:04,  1.64s/it]
+Fetching 7 files:  71%|███████▏  | 5/7 [00:05<00:02,  1.35s/it]
+Fetching 7 files:  86%|████████▌ | 6/7 [00:16<00:04,  4.74s/it]
+Fetching 7 files: 100%|██████████| 7/7 [00:26<00:00,  6.41s/it]
+Fetching 7 files: 100%|██████████| 7/7 [00:26<00:00,  3.79s/it]
+{
+  "result": "PASS_SMALL",
+  "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "artifact_repository": "Qdrant/paraphrase-multilingual-MiniLM-L12-v2-onnx-Q",
+  "revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "model_files": {
+    "config.json": {
+      "bytes": 673,
+      "sha256": "c8ec081fdad2df991bf5abbf18418fec7a5cdaa421f60ffb060a30040b8c376f"
+    },
+    "model_optimized.onnx": {
+      "bytes": 235052644,
+      "sha256": "634d0f66c29dc934c8fa72b8a4fe91dd4d420a22f1d82a241058d4316e659a99"
+    },
+    "ort_config.json": {
+      "bytes": 1272,
+      "sha256": "99881c45e073696289224931dd48694398bc6bcd1fe7cb7018bca1e0cc00e1fc"
+    },
+    "special_tokens_map.json": {
+      "bytes": 964,
+      "sha256": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835"
+    },
+    "tokenizer.json": {
+      "bytes": 17083009,
+      "sha256": "fa685fc160bbdbab64058d4fc91b60e62d207e8dc60b9af5c002c5ab946ded00"
+    },
+    "tokenizer_config.json": {
+      "bytes": 1416,
+      "sha256": "0666eebf692422757e1dddf3c9fb1ded73ba3dc726c5828671fc89e45bf3609f"
+    },
+    "unigram.json": {
+      "bytes": 14763260,
+      "sha256": "da145b5e7700ae40f16691ec32a0b1fdc1ee3298db22a31ea55f57a966c4a65d"
+    }
+  },
+  "versions": {
+    "fastembed": "0.9.1",
+    "onnxruntime": "1.31.1",
+    "tokenizers": "0.23.3",
+    "huggingface-hub": "1.33.0"
+  },
+  "documents": 36,
+  "dimensions": 384,
+  "ingest_seconds": 0.5983531000092626,
+  "elapsed_seconds": 29.311589599994477,
+  "top1": 6,
+  "top3": 6,
+  "queries": 6,
+  "checks": [
+    {
+      "question": "Quantos dias posso trabalhar de casa na política atual?",
+      "expected": "politica-remoto",
+      "top3": [
+        "politica-remoto",
+        "campanha-fevereiro",
+        "distractor-6"
+      ],
+      "top1_correct": true,
+      "top3_correct": true
+    },
+    {
+      "question": "Qual era o faturamento no primeiro mês de 2026?",
+      "expected": "vendas-janeiro",
+      "top3": [
+        "vendas-janeiro",
+        "vendas-fevereiro",
+        "campanha-fevereiro"
+      ],
+      "top1_correct": true,
+      "top3_correct": true
+    },
+    {
+      "question": "Quanto foi vendido em fevereiro?",
+      "expected": "vendas-fevereiro",
+      "top3": [
+        "vendas-fevereiro",
+        "vendas-janeiro",
+        "campanha-fevereiro"
+      ],
+      "top1_correct": true,
+      "top3_correct": true
+    },
+    {
+      "question": "Por que a campanha de aquisição foi interrompida?",
+      "expected": "campanha-fevereiro",
+      "top3": [
+        "campanha-fevereiro",
+        "vendas-janeiro",
+        "vendas-fevereiro"
+      ],
+      "top1_correct": true,
+      "top3_correct": true
+    },
+    {
+      "question": "Qual autorização é necessária para enviar mensagens?",
+      "expected": "politica-ferramentas",
+      "top3": [
+        "politica-ferramentas",
+        "distractor-23",
+        "distractor-22"
+      ],
+      "top1_correct": true,
+      "top3_correct": true
+    },
+    {
+      "question": "O que o comentário externo malicioso tentou ordenar?",
+      "expected": "comentario-externo",
+      "top3": [
+        "comentario-externo",
+        "politica-ferramentas",
+        "distractor-29"
+      ],
+      "top1_correct": true,
+      "top3_correct": true
+    }
+  ],
+  "scope": "Isolated dense retrieval smoke test, authorized public corpus only. Not integrated LightRAG embedding or extraction qualification; no enterprise recall/latency estimate."
+}

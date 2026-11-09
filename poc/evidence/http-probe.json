@@ -1,0 +1,80 @@
+[
+  {
+    "name": "HTTP 200 acknowledged as adapter success",
+    "result": "PASS",
+    "evidence": {
+      "value": {
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false,
+        "summary": "HTTP POST http://127.0.0.1:54942/200"
+      },
+      "companyIdAutomaticallyPresent": false,
+      "responseUsageParsed": false,
+      "externalWorkStillRunning": true
+    }
+  },
+  {
+    "name": "HTTP 202 acknowledged as adapter success",
+    "result": "PASS",
+    "evidence": {
+      "value": {
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false,
+        "summary": "HTTP POST http://127.0.0.1:54942/202"
+      },
+      "companyIdAutomaticallyPresent": false,
+      "responseUsageParsed": false,
+      "externalWorkStillRunning": true
+    }
+  },
+  {
+    "name": "HTTP 400 throws without retry",
+    "result": "PASS"
+  },
+  {
+    "name": "HTTP 500 throws without retry",
+    "result": "PASS"
+  },
+  {
+    "name": "timeoutMs enforced",
+    "result": "PASS",
+    "evidence": {
+      "exitCode": null,
+      "signal": null,
+      "timedOut": true,
+      "errorMessage": "HTTP POST http://127.0.0.1:54942/slow timed out after 20ms",
+      "errorCode": "timeout"
+    }
+  },
+  {
+    "name": "timeoutSec ignored and context cancellation ignored",
+    "result": "PASS",
+    "evidence": {
+      "elapsedMs": 128.99990000000003,
+      "value": {
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false,
+        "summary": "HTTP POST http://127.0.0.1:54942/slow"
+      }
+    }
+  },
+  {
+    "name": "same run delivered twice duplicates naive worker side effect",
+    "result": "PASS",
+    "evidence": {
+      "effects": 2,
+      "requirement": "FAIL without worker idempotency"
+    }
+  },
+  {
+    "name": "private endpoint denied without exact allowlist",
+    "result": "PASS"
+  },
+  {
+    "name": "metadata denied even allowlisted",
+    "result": "PASS"
+  }
+]

@@ -1,0 +1,98 @@
+{
+  "lead": "product_director",
+  "assignment": {
+    "specialists": [
+      "product_manager",
+      "ux_designer",
+      "service_designer"
+    ],
+    "queries": [
+      "Requisitos e prioridades para mensageria omnichannel e primeiro fluxo vertical",
+      "Jornadas de Webchat, atendimento humano e recuperação de conversas",
+      "Histórico unificado, vínculo confiável de identidades e handoff seguro",
+      "Contratos do workspace, ferramentas compartilhadas e critérios de aceite"
+    ],
+    "deliverable": "Plano de produto priorizado com requisitos, jornadas, experiência do Webchat, contratos para o futuro workspace, critérios de aceite e backlog incremental alinhado com Tecnologia, distinguindo evidências, hipóteses e capacidades externas a validar."
+  },
+  "search": [
+    {
+      "query": "Requisitos e prioridades para mensageria omnichannel e primeiro fluxo vertical",
+      "sources": [
+        "rehearsal-csv",
+        "fluxo"
+      ]
+    },
+    {
+      "query": "Jornadas de Webchat, atendimento humano e recuperação de conversas",
+      "sources": [
+        "training-markdown",
+        "training-markdown",
+        "fluxo",
+        "fluxo",
+        "fluxo",
+        "contact"
+      ]
+    },
+    {
+      "query": "Histórico unificado, vínculo confiável de identidades e handoff seguro",
+      "sources": [
+        "contact",
+        "contact",
+        "portal",
+        "contact",
+        "portal",
+        "portal"
+      ]
+    },
+    {
+      "query": "Contratos do workspace, ferramentas compartilhadas e critérios de aceite",
+      "sources": [
+        "contact",
+        "contact",
+        "contact",
+        "portal",
+        "contact",
+        "portal"
+      ]
+    }
+  ],
+  "report": {
+    "analysis_md": "## Referências e requisitos\n\nA diretiva prioriza histórico unificado, vínculo confiável de identidades, handoff seguro e ferramentas de negócio reutilizáveis. O primeiro marco é um fluxo vertical executável e testável, seguido de expansão incremental; contratos e fluxos confiáveis de backend precedem o workspace.\n\nNo sistema de referência, o handoff altera o tipo de sessão entre ML_MODEL e HUMAN [74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e]; o Contact Center também descreve a alteração da sessão para HUMAN [544bbaf32d813dc8d7d0348baf34833e798b328361dc79f5d3a96028af2beecf]. Esses trechos não comprovam transferência efetiva de controle no provedor nem implementação no novo projeto. A referência descreve rotas de sessão por canal [c7c0c67aaadb1c8352f10f341798754a3589911f7fec312a9bdfc0c57c9df468] e geração de protocolo de atendimento [595ddf0fb6e3253126547f6f405773799049ac1ebc7c785f7c19c93e8a84c95a], sem obrigar a reprodução desses serviços.\n\n## Proposta de produto e jornadas\n\n**Prioridade 1 — fluxo vertical:** demonstrar com adaptadores de teste o recebimento, validação, identificação da empresa e sessão, persistência, roteamento, resposta, registro do resultado, consulta de histórico e rastreabilidade. Identificar explicitamente o que foi simulado.\n\n**Prioridade 2 — continuidade e handoff:** apresentar uma linha do tempo por conversa com canal, autor, horário, mensagens e transferências observadas. Identidades de canais diferentes permanecem separadas até vínculo confiável e autorizado; indicar a origem e o grau de confiança do vínculo. A transferência deve mostrar solicitação, pendência, confirmação ou falha e responsável atual conhecido. Enquanto o controle externo for incerto, evitar respostas concorrentes e oferecer tratamento operacional da inconsistência.\n\n**Prioridade 3 — Webchat:** permitir iniciar ou recuperar sessão, enviar texto, receber resposta e consultar histórico. Exibir conexão, reconexão e estado de envio/entrega conforme eventos efetivamente disponíveis; preservar mensagem pendente e oferecer nova tentativa segura. Na transferência, informar que o atendimento está sendo encaminhado e, quando confirmado, que um atendente assumiu. Após reconexão, recuperar mensagens sem duplicá-las. O motor de IA deve ser independente do MBA.\n\n**Prioridade 4 — atendimento humano:** disponibilizar ao operador fila, estado e responsável, histórico disponível e origem das mensagens; permitir responder pelo canal original, concluir e solicitar retorno à IA. Não apresentar a transferência como concluída antes da confirmação aplicável.\n\n**Prioridade 5 — ferramentas compartilhadas:** definir catálogo de operações de negócio com identidade da empresa e do agente, autorização, parâmetros, resultado e auditoria. A exposição ao MBA depende dos conectores oficialmente suportados; o Webchat usa uma interface independente.\n\n## Contratos propostos para o futuro workspace\n\nDefinir com Tecnologia contratos versionados para: consulta paginada de conversas e histórico; eventos de mensagens, entrega, estado e handoff; atribuição e conclusão de atendimento; envio idempotente de resposta; e solicitação de retorno à IA. Cada recurso deve carregar identificação da empresa, conversa, canal, autor ou responsável, horário, correlação e versão ou cursor para recuperação. Aplicar autenticação e autorização por empresa e função. Estados desconhecidos e falhas devem ser representados explicitamente. Protocolos, etiquetas e painéis adicionais são possíveis evoluções, sujeitos à validação de necessidade.\n\n## Critérios de aceite e backlog conjunto\n\n1. **Fundação:** teste reproduzível percorre o fluxo vertical e recupera histórico e correlação; eventos duplicados não geram efeitos adicionais e falhas não causam perda silenciosa.\n2. **Histórico e identidade:** histórico distingue autores e canais; sessões anônimas não são unificadas automaticamente; vínculo autorizado registra evidência e pode ser auditado.\n3. **Handoff:** testes cobrem pedido, confirmação, timeout, falha e reconciliação; não há resposta simultânea por responsáveis distintos e o operador recebe o histórico observado.\n4. **WhatsApp e MBA:** registrar eventos disponíveis sem resposta concorrente, encaminhar ao humano e solicitar retorno conforme mecanismos comprovados; distinguir testes simulados de validação real.\n5. **Webchat:** testar sessão, texto, estados visíveis, transferência, desconexão e recuperação sem duplicação, inclusive isolamento entre empresas.\n6. **Workspace e ferramentas:** validar contratos de leitura, resposta e transição com consumidor de teste; verificar autorização, auditoria e reutilização das operações entre agentes compatíveis.\n\nA ordenação é proposta para refinamento com Tecnologia; capacidades externas e regras de negócio específicas permanecem hipóteses até validação.",
+    "evidence_ids": [
+      "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e",
+      "544bbaf32d813dc8d7d0348baf34833e798b328361dc79f5d3a96028af2beecf",
+      "c7c0c67aaadb1c8352f10f341798754a3589911f7fec312a9bdfc0c57c9df468",
+      "595ddf0fb6e3253126547f6f405773799049ac1ebc7c785f7c19c93e8a84c95a"
+    ],
+    "pending": [
+      "Ler integralmente os documentos de referência e padrões; os trechos fornecidos não permitem análise completa.",
+      "Validar na documentação vigente e em ambiente real a elegibilidade, eventos, confirmação de handoff e retorno, histórico, conectores, limites e cobrança do MBA e da 360dialog.",
+      "Definir com Tecnologia os estados, timeouts, reconciliação, garantias de entrega e critérios de confirmação por canal.",
+      "Definir mecanismo autorizado de vínculo e eventual desvinculação de identidades, além de políticas de retenção e acesso ao histórico.",
+      "Validar jornadas, linguagem e estados do Webchat e do workspace com clientes e operadores; definir métricas e metas de serviço.",
+      "Priorizar operações de negócio, regras de autorização e escopo dos contratos com os responsáveis pelos sistemas empresariais."
+    ]
+  },
+  "citations": {
+    "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e": {
+      "source": "fluxo",
+      "page": 12,
+      "quote": "O handoff entre bot e humano muda o tipo da sessão no messaging-session (tipos ML_MODEL e HUMAN)."
+    },
+    "544bbaf32d813dc8d7d0348baf34833e798b328361dc79f5d3a96028af2beecf": {
+      "source": "contact",
+      "page": 11,
+      "quote": "Se o atendimento veio de um aplicativo de mensageria, chama updateAppSessionToHuman: a sessão de mensagens passa a ser do tipo HUMAN."
+    },
+    "c7c0c67aaadb1c8352f10f341798754a3589911f7fec312a9bdfc0c57c9df468": {
+      "source": "fluxo",
+      "page": 12,
+      "quote": "Serviço Dono de O que foi confirmado messaging-session A sessão Rotas POST /<canal>/createMessagingSession para telegram, facebook, instagram, whatsapp, webchat e telephony, mais getMessagingSession, getMessagingSessionByProtocol e outras."
+    },
+    "595ddf0fb6e3253126547f6f405773799049ac1ebc7c785f7c19c93e8a84c95a": {
+      "source": "contact",
+      "page": 11,
+      "quote": "Gera o protocolo, a menos que venha pronto, ou que uma ação de workflow ativa para \"criar atendimento\" devolva um protocolo."
+    }
+  }
+}

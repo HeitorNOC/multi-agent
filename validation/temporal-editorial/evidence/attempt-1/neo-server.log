@@ -1,0 +1,13 @@
+Changed password for user 'neo4j'. IMPORTANT: this change will only take effect if performed before the database is started for the first time.
+2026-11-04 09:00:53.620+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+2026-11-04 09:00:53.703+0000 INFO  Starting...
+2026-11-04 09:00:57.096+0000 INFO  This instance is ServerId{5dde034c} (5dde034c-c605-4770-b9e6-e077a3fbaf4a)
+2026-11-04 09:01:00.433+0000 INFO  ======== Neo4j 5.26.32 ========
+2026-11-04 09:01:07.012+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+2026-11-04 09:01:12.101+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+2026-11-04 09:01:12.105+0000 INFO  Remote interface available at http://localhost:7474/
+2026-11-04 09:01:12.107+0000 INFO  id: 7A4A355124EF314781C00FB7F82EA5648877C664FD6AE47253BFC3C06A88C541
+2026-11-04 09:01:12.107+0000 INFO  name: system
+2026-11-04 09:01:12.108+0000 INFO  creationDate: 2026-11-04T09:01:03.794Z
+2026-11-04 09:01:12.108+0000 INFO  Started.
+2026-11-04 09:02:33.730+0000 WARN  Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.

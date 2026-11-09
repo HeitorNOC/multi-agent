@@ -1,0 +1,28 @@
+{
+  "result": "FAIL",
+  "installation": "business-flow-a0fdaf27d1",
+  "proofs_verified": 28,
+  "checkpoints": 0,
+  "model_calls_recorded": 4,
+  "model_reservations": 4,
+  "reservations_without_usage_record": [],
+  "tokens_observed": {
+    "input_tokens": 52557,
+    "cached_input_tokens": 11392,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 565,
+    "reasoning_output_tokens": 0
+  },
+  "pending_operations": 0,
+  "budgets": {
+    "business": {
+      "cap": 64,
+      "reserved": 2
+    },
+    "model": {
+      "cap": 16,
+      "reserved": 4
+    }
+  },
+  "unexpected_tool_events": 0
+}

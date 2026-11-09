@@ -1,0 +1,12 @@
+✔ modelo não amplia equipe nem dispensa aprovação (0.8887ms)
+✔ aprovação ausente, hash alterado e conteúdo adulterado bloqueiam efeito (0.595ms)
+✔ fato errado, causalidade inventada ou fonte desconhecida bloqueiam a proposta (0.1947ms)
+✔ HTTP: origem, token interno e falha de admissão não liberam efeitos nem bloqueiam próximo pedido (281.706ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 421.759

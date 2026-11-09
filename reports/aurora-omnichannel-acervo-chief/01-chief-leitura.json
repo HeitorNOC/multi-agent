@@ -1,0 +1,33 @@
+{
+  "reviews": {
+    "D1": {
+      "agent": "backend_engineer",
+      "focus": "Ler integralmente as 16 páginas e registrar conteúdos, possíveis relações com o projeto, requisitos, referências e dúvidas, sem decidir a relevância antes da leitura."
+    },
+    "D2": {
+      "agent": "backend_engineer_2",
+      "focus": "Ler integralmente as 25 páginas, identificando fluxos, contratos e responsabilidades de Contact Center e workspace, além de lacunas e hipóteses a validar."
+    },
+    "D3": {
+      "agent": "qa_engineer",
+      "focus": "Ler integralmente as 12 páginas e registrar conteúdos, possíveis regras, integrações e implicações para testes; avaliar a relevância somente após a leitura."
+    },
+    "D4": {
+      "agent": "tech_lead",
+      "focus": "Ler integralmente as 16 páginas e identificar responsabilidades, sessões, eventos, tópicos, processamento e integração com Contact Center como referências, sem presumir que existam no novo projeto."
+    },
+    "D5": {
+      "agent": "backend_engineer",
+      "focus": "Ler integralmente as 44 páginas e identificar padrões obrigatórios de código e arquitetura, convenções, validação, tratamento de erros e eventuais conflitos ou lacunas."
+    },
+    "D6": {
+      "agent": "qa_engineer",
+      "focus": "Ler integralmente as 21 páginas e registrar o conteúdo, possíveis padrões e relações com o projeto; avaliar a relevância somente após a leitura."
+    },
+    "D7": {
+      "agent": "backend_engineer_2",
+      "focus": "Ler integralmente as 9 páginas e identificar configurações, capacidades, limitações, eventos e mecanismos de controle do MBA, distinguindo o conteúdo de referência das capacidades a confirmar nas fontes oficiais atuais."
+    }
+  },
+  "acceptance": "Cada especialista deve registrar a leitura integral de cada PDF atribuído, com evidências por página, achados e avaliação de relevância apenas após concluir a leitura. Consolidar requisitos da diretiva separadamente de referências documentais, hipóteses, decisões propostas e trabalho efetivamente executado. Validar capacidades atuais do MBA nas fontes oficiais antes de tratá-las como confirmadas. Nenhum PDF foi lido nem integração validada nesta atribuição; os nomes e números de páginas são dados do catálogo. A aceitação da plataforma exige os testes reproduzíveis e demais critérios da seção 12 da diretiva, incluindo o fluxo vertical anterior à expansão arquitetural."
+}

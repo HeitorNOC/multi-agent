@@ -1,0 +1,21 @@
+C:\Users\PC\multi-agent\validation\eigent\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+============================= test session starts =============================
+platform win32 -- Python 3.11.18, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\PC\multi-agent\validation\eigent\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\PC\multi-agent\vendor\eigent-audit\backend
+configfile: pyproject.toml
+plugins: anyio-4.16.0, platformdirs-4.14.3, asyncio-1.4.1.post1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 42 items / 37 deselected / 5 selected
+
+tests/app/workspace_runtime/test_workforce_adapter.py::test_adapters_require_their_exact_profile PASSED
+tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_workforce_profiles_fail_before_admission[browser] PASSED
+tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_workforce_profiles_fail_before_admission[terminal] PASSED
+tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_workforce_profiles_fail_before_admission[mcp] PASSED
+tests/app/workspace_runtime/test_workforce_adapter.py::test_unapproved_workforce_profiles_fail_before_admission[delegation] PASSED
+
+- generated xml file: C:\Users\PC\multi-agent\validation\eigent\evidence\profile-subset.xml -
+====================== 5 passed, 37 deselected in 1.49s =======================

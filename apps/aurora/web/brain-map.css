@@ -1,0 +1,208 @@
+.spatial-panel {
+  background:
+    radial-gradient(
+      ellipse at 50% 51%,
+      #234358 0,
+      #122c40 35%,
+      transparent 72%
+    ),
+    #0a1520;
+  border-color: #2b424d;
+}
+.spatial-panel .spatial-controls {
+  gap: 6px;
+  margin-top: 10px;
+}
+.spatial-modes {
+  display: flex;
+  gap: 6px;
+  margin-top: 16px;
+}
+.spatial-modes [aria-pressed="true"] {
+  background: #174267;
+  border-color: #5796bd;
+  color: #e0f5ff;
+}
+.spatial-controls button {
+  min-width: 32px;
+}
+.spatial-map {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+.spatial-map:active {
+  cursor: grabbing;
+}
+.spatial-orbit {
+  fill: none;
+  stroke: #4da5e9;
+  stroke-opacity: 0.29;
+  stroke-dasharray: 2 6;
+}
+.spatial-edge {
+  stroke: #3979a8;
+  stroke-width: 1.2;
+  opacity: 0.42;
+}
+.spatial-edge.selected {
+  stroke: #52c1fb;
+  stroke-width: 1.8;
+  opacity: 0.8;
+}
+.spatial-edge.running {
+  stroke: #ffc36d;
+  stroke-width: 2.4;
+  opacity: 0.95;
+  stroke-dasharray: 6 4;
+  animation: signal-travel 1s linear infinite;
+}
+@keyframes signal-travel {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spatial-edge.running {
+    animation: none;
+  }
+}
+.spatial-node {
+  cursor: pointer;
+  text-anchor: middle;
+}
+.spatial-node text {
+  pointer-events: none;
+}
+.spatial-dot {
+  fill: #12273e;
+  stroke: #50779b;
+  stroke-width: 1.4;
+}
+.spatial-node.director .spatial-dot {
+  fill: #18415e;
+  stroke: #5a9eca;
+}
+.spatial-node.selected .spatial-dot {
+  fill: #123d54;
+  stroke: #68dcff;
+  stroke-width: 2;
+}
+.spatial-node.running .spatial-dot {
+  fill: #55391b;
+  stroke: #ffc36d;
+  stroke-width: 2.4;
+  filter: drop-shadow(0 0 7px #efaa56a0);
+}
+.spatial-node.done .spatial-dot {
+  fill: #164440;
+  stroke: #7be4bf;
+  stroke-width: 2;
+}
+.spatial-node.historical .spatial-dot {
+  fill: #312b50;
+  stroke: #bda9ee;
+  stroke-dasharray: 2 2;
+}
+.spatial-node.hub .spatial-dot {
+  fill: url(#spatial-core);
+  stroke: #ffd88a;
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 7px #ffe0a687) drop-shadow(0 0 23px #70deff70);
+}
+.spatial-node.focused .spatial-dot,
+.spatial-node:hover .spatial-dot {
+  stroke: #fff2ca;
+  stroke-width: 3;
+}
+.spatial-symbol,
+.spatial-label {
+  fill: #b6cfeb;
+  font-size: 12px;
+}
+.spatial-label {
+  paint-order: stroke;
+  stroke: #0a1424;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+.spatial-node.director .spatial-label {
+  font-size: 13px;
+  font-weight: 700;
+  fill: #d8edff;
+}
+.core-grid,
+.core-ring {
+  fill: none;
+  stroke: #a9dfff;
+  opacity: 0.4;
+}
+.core-grid {
+  opacity: 0.32;
+}
+.core-ring.outer {
+  stroke-dasharray: 1 5;
+}
+.core-title,
+.core-subtitle {
+  fill: #f7fbff;
+  paint-order: stroke;
+  stroke: #143551;
+  stroke-width: 2;
+}
+.core-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+.core-subtitle {
+  font-size: 7px;
+  letter-spacing: 0.6px;
+}
+.spatial-legend i.running {
+  background: #ffc36d;
+}
+.spatial-legend i.historical {
+  background: #bda9ee;
+}
+.performance-panel h2 {
+  margin: 7px 0 16px;
+}
+.performance-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
+  gap: 9px;
+}
+.performance-metrics > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid #304a59;
+  border-radius: 8px;
+  padding: 12px;
+  background: #132633;
+}
+.performance-metrics span,
+.performance-metrics small {
+  font-size: 10px;
+  color: #a4bad2;
+}
+.performance-metrics strong {
+  font-size: 20px;
+  color: #a8e9ff;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 650px) {
+  .spatial-controls {
+    flex-wrap: wrap;
+  }
+  .spatial-controls select {
+    flex: 1 0 100%;
+  }
+  .spatial-node.specialist:not(.focused) .spatial-label {
+    display: none;
+  }
+}

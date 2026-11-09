@@ -1,0 +1,66 @@
+{
+  "cases": [
+    [
+      "aurora_meal",
+      "manual-aurora",
+      "analista",
+      "Qual o teto diário de alimentação da unidade Aurora?",
+      "240|duzentos e quarenta"
+    ],
+    [
+      "aurora_deadline",
+      "manual-aurora",
+      "analista",
+      "Até que horário a Aurora entrega comprovantes?",
+      "18[:h]30|dezoito.*trinta"
+    ],
+    [
+      "boreal_meal",
+      "manual-boreal",
+      "analista",
+      "Qual o teto diário de alimentação da unidade Boreal?",
+      "190|cento e noventa"
+    ],
+    [
+      "boreal_reviewers",
+      "manual-boreal",
+      "analista",
+      "Quantos revisores distintos a Boreal exige para despesas extraordinárias?",
+      "tr[eê]s|\\b3\\b"
+    ],
+    [
+      "celeste_cap",
+      "manual-celeste",
+      "financeiro",
+      "Qual o teto financeiro de estudo da iniciativa Celeste?",
+      "9[.,]700[.,]000|9[,.]7\\s*(?:milh|mil)|nove milh"
+    ],
+    [
+      "missing_hotel",
+      "manual-aurora",
+      "analista",
+      "Qual o teto de reembolso de hotel na Aurora?",
+      "não (?:há|define|informa|consta)|não.*informad|sem informa"
+    ]
+  ],
+  "corpus_sources": 3,
+  "modes": [
+    "mix",
+    "naive"
+  ],
+  "calls_cap": 40,
+  "warm_read_blocks": {
+    "concurrency": [
+      1,
+      4,
+      8
+    ],
+    "requests_each": 40
+  },
+  "optimized_read_requests": 80,
+  "pressure_reads": 8,
+  "pilot_history_p95_limit_seconds": 1.0,
+  "limit_is": "exploratory lab criterion, not an enterprise SLO",
+  "timing": "HTTP incl JWT verification, DB and retained proof; excludes token issuance; urllib opens connections",
+  "native_budget_exhaustion": "warm source, no new CLI after cap; preserve baseline failure and compare pre-admission check"
+}

@@ -1,0 +1,66 @@
+{
+  "installation": "business-flow-199615a416",
+  "checkpoints": [
+    {
+      "name": "completed_task_result_reused_across_process_and_human_interrupt"
+    },
+    {
+      "name": "pending_writes_preserve_successful_parallel_node_across_process"
+    }
+  ],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "deterministic capability policy, synthetic auth, canonical snapshots, synthetic provider",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "calls": [
+    {
+      "mode": "task_interrupt",
+      "resume": false,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "mode": "task_interrupt",
+      "resume": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "mode": "siblings",
+      "resume": false,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "mode": "siblings",
+      "resume": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "mode": "effect",
+      "resume": false,
+      "exit_code": 88,
+      "stderr": ""
+    },
+    {
+      "mode": "effect",
+      "resume": true,
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\PC\\multi-agent\\research\\langgraph-reuse-2026-11-05\\native_worker.py\", line 71, in <module>\n    asyncio.run(main(json.loads(sys.stdin.readline())))\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\asyncio\\runners.py\", line 195, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\asyncio\\runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\asyncio\\base_events.py\", line 691, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\research\\langgraph-reuse-2026-11-05\\native_worker.py\", line 42, in main\n    value=await workflow.ainvoke(None if c.get('resume') else {'business_key':'stable-fixture-intent'},cfg,durability='sync')\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\main.py\", line 4177, in ainvoke\n    async for chunk in self.astream(\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\main.py\", line 3437, in astream\n    async with AsyncPregelLoop(\n               ^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_loop.py\", line 2147, in __aenter__\n    self.updated_channels = self._first(\n                            ^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_loop.py\", line 1187, in _first\n    raise EmptyInputError(f\"Received no input for {input_keys}\")\nlanggraph.errors.EmptyInputError: Received no input for __start__\n"
+    }
+  ],
+  "result": "FAIL",
+  "error": "AssertionError('Traceback (most recent call last):\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\research\\\\langgraph-reuse-2026-11-05\\\\native_worker.py\", line 71, in <module>\\n      asyncio.run(main(json.loads(sys.stdin.readline())))\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\asyncio\\\\runners.py\", line 195, in run\\n      return runner.run(main)\\n             ^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\asyncio\\\\runners.py\", line 118, in run\\n      return self._loop.run_until_complete(task)\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\Lib\\\\asyncio\\\\base_events.py\", line 691, in run_until_complete\\n      return future.result()\\n             ^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\research\\\\langgraph-reuse-2026-11-05\\\\native_worker.py\", line 42, in main\\n      value=await workflow.ainvoke(None if c.get(\\'resume\\') else {\\'business_key\\':\\'stable-fixture-intent\\'},cfg,durability=\\'sync\\')\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\pregel\\\\main.py\", line 4177, in ainvoke\\n      async for chunk in self.astream(\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\pregel\\\\main.py\", line 3437, in astream\\n      async with AsyncPregelLoop(\\n                 ^^^^^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\pregel\\\\_loop.py\", line 2147, in __aenter__\\n      self.updated_channels = self._first(\\n                              ^^^^^^^^^^^^\\n    File \"C:\\\\Users\\\\PC\\\\multi-agent\\\\vendor\\\\langgraph\\\\libs\\\\langgraph\\\\langgraph\\\\pregel\\\\_loop.py\", line 1187, in _first\\n      raise EmptyInputError(f\"Received no input for {input_keys}\")\\n  langgraph.errors.EmptyInputError: Received no input for __start__\\n  \\nassert 1 == 0\\n +  where 1 = CompletedProcess(args=[\\'C:\\\\\\\\Users\\\\\\\\PC\\\\\\\\multi-agent\\\\\\\\validation\\\\\\\\integrated-pilot\\\\\\\\.venv\\\\\\\\Scripts\\\\\\\\python.exe\\', \\'C:\\\\\\\\Us...nputError(f\"Received no input for {input_keys}\")\\\\nlanggraph.errors.EmptyInputError: Received no input for __start__\\\\n\\').returncode')",
+  "seconds": 9.49103199999081,
+  "disposable_resources_removed": true
+}

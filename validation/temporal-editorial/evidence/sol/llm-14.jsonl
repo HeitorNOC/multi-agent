@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a5d5-b0d6-7ee2-8bc3-38828337b3a6"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"extracted_entities\\\":[{\\\"name\\\":\\\"ACME\\\",\\\"entity_type_id\\\":0,\\\"episode_indices\\\":[0]},{\\\"name\\\":\\\"SIGILO_AQUISICAO_2026\\\",\\\"entity_type_id\\\":0,\\\"episode_indices\\\":[0]}]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13019,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":66,"reasoning_output_tokens":0}}

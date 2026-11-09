@@ -1,0 +1,12 @@
+{"result": "FAIL", "checks": 7}
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\validation\production-readiness\postgres_probe.py", line 145, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\PC\multi-agent\validation\production-readiness\postgres_probe.py", line 99, in main
+    assert sql('SET ROLE corpus_owner; SELECT count(*) FROM source_versions;',label='FORCE RLS owner no grant')=='0'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\validation\production-readiness\postgres_probe.py", line 27, in sql
+    if expect and result.returncode:raise AssertionError(label or query[:100]+': '+err)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: FORCE RLS owner no grant

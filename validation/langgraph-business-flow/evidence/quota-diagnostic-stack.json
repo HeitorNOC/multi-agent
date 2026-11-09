@@ -1,0 +1,202 @@
+{
+  "source_installation": "business-flow-5b914ad4b4",
+  "copy_installation": "business-flow-2e170c2356",
+  "requests": [
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 503,
+      "error": "503: {\"error\":\"operation failed; retry with reconciliation\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 503,
+      "error": "503: {\"error\":\"operation failed; retry with reconciliation\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 503,
+      "error": "503: {\"error\":\"operation failed; retry with reconciliation\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 503,
+      "error": "503: {\"error\":\"operation failed; retry with reconciliation\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 503,
+      "error": "503: {\"error\":\"operation failed; retry with reconciliation\"}"
+    },
+    {
+      "status": 503,
+      "error": "503: {\"error\":\"operation failed; retry with reconciliation\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    },
+    {
+      "status": 429,
+      "error": "429: {\"error\":\"installation reservation ceiling\"}"
+    }
+  ],
+  "service_errors": [
+    "{\"event\":\"qualification_internal_error\",\"name\":\"Error\",\"message\":\"database is locked\",\"stack\":\"Error: database is locked\\n    at execute (file:///C:/Users/PC/multi-agent/validation/temporal-editorial/editorial.ts:39:6)\\n    at snapshot (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:71:18)\\n    at file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:100:17\\n    at Array.map (<anonymous>)\\n    at rpc (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:99:37)\\n    at Server.<anonymous> (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:216:26)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\"}\n{\"event\":\"qualification_internal_error\",\"name\":\"Error\",\"message\":\"database is locked\",\"stack\":\"Error: database is locked\\n    at execute (file:///C:/Users/PC/multi-agent/validation/temporal-editorial/editorial.ts:39:6)\\n    at snapshot (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:71:18)\\n    at file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:100:17\\n    at Array.map (<anonymous>)\\n    at rpc (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:99:37)\\n    at Server.<anonymous> (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:216:26)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\"}\n{\"event\":\"qualification_internal_error\",\"name\":\"Error\",\"message\":\"database is locked\",\"stack\":\"Error: database is locked\\n    at execute (file:///C:/Users/PC/multi-agent/validation/temporal-editorial/editorial.ts:39:6)\\n    at snapshot (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:71:18)\\n    at file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:100:17\\n    at Array.map (<anonymous>)\\n    at rpc (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:99:37)\\n    at Server.<anonymous> (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:216:26)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\"}\n",
+    "{\"event\":\"qualification_internal_error\",\"name\":\"Error\",\"message\":\"database is locked\",\"stack\":\"Error: database is locked\\n    at execute (file:///C:/Users/PC/multi-agent/validation/temporal-editorial/editorial.ts:39:6)\\n    at snapshot (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:71:18)\\n    at file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:100:17\\n    at Array.map (<anonymous>)\\n    at rpc (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:99:37)\\n    at Server.<anonymous> (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:216:26)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\"}\n{\"event\":\"qualification_internal_error\",\"name\":\"Error\",\"message\":\"database is locked\",\"stack\":\"Error: database is locked\\n    at execute (file:///C:/Users/PC/multi-agent/validation/temporal-editorial/editorial.ts:39:6)\\n    at snapshot (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:71:18)\\n    at file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:100:17\\n    at Array.map (<anonymous>)\\n    at rpc (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:99:37)\\n    at Server.<anonymous> (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:216:26)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\"}\n{\"event\":\"qualification_internal_error\",\"name\":\"Error\",\"message\":\"database is locked\",\"stack\":\"Error: database is locked\\n    at execute (file:///C:/Users/PC/multi-agent/validation/temporal-editorial/editorial.ts:39:6)\\n    at snapshot (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:71:18)\\n    at file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:100:17\\n    at Array.map (<anonymous>)\\n    at rpc (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:99:37)\\n    at Server.<anonymous> (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/business.ts:216:26)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\"}\n"
+  ]
+}

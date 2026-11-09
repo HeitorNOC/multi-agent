@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a5f2-ba2c-7d12-9f3f-9b36be709c95"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"entity<|#|>ACME<|#|>Organization<|#|>Organização cuja política de trabalho remoto permite três dias de trabalho remoto por semana desde 1 de março de 2026.\\nentity<|#|>Política de Trabalho Remoto da ACME<|#|>Concept<|#|>Política que permite três dias de trabalho remoto por semana desde 1 de março de 2026, substituindo a permissão anterior de dois dias por semana.\\nrelation<|#|>ACME<|#|>Política de Trabalho Remoto da ACME<|#|>política organizacional,trabalho remoto<|#|>A política de trabalho remoto da ACME permite três dias de trabalho remoto por semana desde 1 de março de 2026.\\n<|COMPLETE|>\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13854,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":191,"reasoning_output_tokens":0}}

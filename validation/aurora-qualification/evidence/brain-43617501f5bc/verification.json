@@ -1,0 +1,34 @@
+{
+  "result": "PASS_BOUNDED_NATIVE_BRAIN_RECOVERY",
+  "seconds": 231.2040340000001,
+  "restore_seconds": 53.851,
+  "model_calls": 0,
+  "disposable_resources_removed": true,
+  "verified_signatures": 99,
+  "checkpoints": [
+    "native_extraction_vectors_graph_and_advice_through_typescript_langgraph",
+    "stage_before_canonical_commit_crash_resumes_without_model_reingestion",
+    "signed_bundle_witness_refuses_stale_and_modified_dumps_before_live_changes",
+    "cold_joint_restore_vectors_graph_canonical_checkpoints_keys_and_revocation"
+  ],
+  "junit": {
+    "local-01.xml": {
+      "tests": "2",
+      "errors": "0",
+      "failures": "0",
+      "time": "21.660"
+    },
+    "admission-01.xml": {
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "time": "3.380"
+    },
+    "brain-01.xml": {
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "time": "236.238"
+    }
+  }
+}

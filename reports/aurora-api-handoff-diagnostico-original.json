@@ -1,0 +1,580 @@
+{
+  "goal": "Quais estados e evidências são necessários para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?",
+  "status": "awaiting_approval",
+  "error": null,
+  "plan": {
+    "strategy": "A3",
+    "reason": "A passagem exige definir estados e controle de resposta, validar evidências de funcionamento e alinhar o fluxo de atendimento.",
+    "teams": [
+      {
+        "lead": "technology_director",
+        "specialists": [
+          "tech_lead",
+          "qa_engineer"
+        ],
+        "reason": "Definir a arquitetura e os estados de controle da conversa e verificar os critérios de aceitação e cenários de concorrência."
+      },
+      {
+        "lead": "customer_director",
+        "specialists": [
+          "support_specialist"
+        ],
+        "reason": "Definir os eventos e as necessidades operacionais da transferência ao atendente."
+      },
+      {
+        "lead": "product_director",
+        "specialists": [
+          "service_designer"
+        ],
+        "reason": "Mapear a jornada e os pontos de contato entre o MBA e o atendimento humano."
+      }
+    ],
+    "capabilities": [
+      "technology_director",
+      "tech_lead",
+      "qa_engineer",
+      "customer_director",
+      "support_specialist",
+      "product_director",
+      "service_designer"
+    ],
+    "not_selected": [
+      {
+        "id": "executive_director",
+        "reason": "A estratégia de portfólio não é necessária para definir a passagem."
+      },
+      {
+        "id": "project_manager",
+        "reason": "O planejamento de entregas não é o foco da pergunta."
+      },
+      {
+        "id": "business_analyst",
+        "reason": "Dependências entre unidades não são necessárias para responder à pergunta."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "Priorização de investimentos está fora do escopo."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "Campanhas e posicionamento não são necessários."
+      },
+      {
+        "id": "content_specialist",
+        "reason": "Conteúdo de marca não define o controle da conversa."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "O escopo de campanhas não é pertinente."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "Preços e promoções não são pertinentes."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Suprimentos e logística não são o foco da passagem."
+      },
+      {
+        "id": "procurement_analyst",
+        "reason": "Fornecedores e compras não são pertinentes."
+      },
+      {
+        "id": "process_quality_analyst",
+        "reason": "O desenho do atendimento e sua verificação já estão cobertos pela equipe selecionada."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Estoque e reservas não são pertinentes."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Capacidade logística e prazos regionais não são pertinentes."
+      },
+      {
+        "id": "finance_director",
+        "reason": "Finanças não são necessárias para definir a passagem."
+      },
+      {
+        "id": "financial_planning_analyst",
+        "reason": "Projeções financeiras não são pertinentes."
+      },
+      {
+        "id": "accounting_analyst",
+        "reason": "Fechamento contábil não é pertinente."
+      },
+      {
+        "id": "controller",
+        "reason": "Margem e orçamento não são pertinentes."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Liquidez e financiamento não são pertinentes."
+      },
+      {
+        "id": "people_director",
+        "reason": "Capacidade organizacional não é necessária para definir os estados."
+      },
+      {
+        "id": "people_development_specialist",
+        "reason": "Treinamento não responde aos critérios técnicos da passagem."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "Admissões não são pertinentes."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "Disponibilidade de equipes não é o foco da pergunta."
+      },
+      {
+        "id": "legal_director",
+        "reason": "A pergunta não solicita análise jurídica."
+      },
+      {
+        "id": "privacy_specialist",
+        "reason": "Tratamento de dados pessoais não é o foco da pergunta."
+      },
+      {
+        "id": "risk_controls_analyst",
+        "reason": "A auditoria de controles não é necessária para definir o fluxo solicitado."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "Campanhas e resposta a incidentes não são pertinentes."
+      },
+      {
+        "id": "contract_analyst",
+        "reason": "Obrigações contratuais não são pertinentes."
+      },
+      {
+        "id": "backend_engineer",
+        "reason": "A arquitetura e a verificação cobrem a definição solicitada, sem exigir implementação."
+      },
+      {
+        "id": "frontend_engineer",
+        "reason": "A pergunta não exige implementar estados de interface."
+      },
+      {
+        "id": "platform_engineer",
+        "reason": "Ambientes e pipelines não são necessários para definir a passagem."
+      },
+      {
+        "id": "data_engineer",
+        "reason": "Pipelines de dados não são pertinentes."
+      },
+      {
+        "id": "security_analyst",
+        "reason": "Incidentes e SLA interno não são o foco da pergunta."
+      },
+      {
+        "id": "data_analyst",
+        "reason": "Contagens entre sistemas não são necessárias para definir os estados."
+      },
+      {
+        "id": "product_manager",
+        "reason": "A jornada e os critérios de verificação já estão cobertos pelos especialistas selecionados."
+      },
+      {
+        "id": "ux_designer",
+        "reason": "Pesquisa e prototipação de interface não são necessárias para esta definição."
+      },
+      {
+        "id": "sales_director",
+        "reason": "Vendas e negociação não são pertinentes."
+      },
+      {
+        "id": "sales_operations_analyst",
+        "reason": "Pipeline comercial não é pertinente."
+      },
+      {
+        "id": "account_specialist",
+        "reason": "Qualificação de oportunidades não é pertinente."
+      },
+      {
+        "id": "customer_success_specialist",
+        "reason": "Adoção e retenção não são o foco da transferência."
+      },
+      {
+        "id": "customer_experience_analyst",
+        "reason": "Análise de satisfação não é necessária para definir os estados e evidências."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 10
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 10,
+    "max_calls": 24,
+    "input_tokens": 134937,
+    "cached_input_tokens": 81920,
+    "output_tokens": 2640,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    },
+    {
+      "source": "training-calendar",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "training-calendar",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "training-calendar.txt",
+      "sha256": "366c2f6da77c54ada89a52a3521f112aa11633749da560ad645bf03049d17210"
+    },
+    {
+      "source": "webchat-sandbox",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "webchat-sandbox",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "webchat-sandbox.txt",
+      "sha256": "b7ed48e69e4716596432686301b96f96879bfe5bf807a2b2f7eeeae8d69a1a6c"
+    },
+    {
+      "source": "mba-academic",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "mba-academic",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "mba-academic.txt",
+      "sha256": "91200ff7d105a64a4e65c08271ee9050290238cc61d5bc6ace12652052961111"
+    }
+  ],
+  "retrieval": "hybrid-handoff-runtime-lab",
+  "facets": [],
+  "job_seconds": 87.5,
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "specialist_started",
+    "specialist_started",
+    "specialist_started",
+    "retrieval_completed",
+    "retrieval_completed",
+    "inference_requested",
+    "retrieval_completed",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_requested",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "director_completed",
+    "inference_completed",
+    "director_completed",
+    "inference_completed",
+    "director_completed",
+    "synthesis",
+    "inference_requested",
+    "inference_completed",
+    "inference_requested",
+    "inference_completed",
+    "review_ready",
+    "checkpoint_saved",
+    "worker_stopped"
+  ],
+  "retrieval_observed": true,
+  "candidates": [
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 5
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 30
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 15
+    },
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 3
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 59
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 13
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 43
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 22
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 41
+    },
+    {
+      "source": "contact",
+      "page": 11,
+      "line": 26
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 27
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 7
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 52
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "contact",
+      "page": 11,
+      "line": 23
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 7
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 21
+    }
+  ],
+  "report": {
+    "status": "partial_evidence",
+    "summary": "Parte da pergunta tem evidência para revisão humana.",
+    "citations": [
+      {
+        "id": "567ca8d007bc76e32c40a8a1b98f4c8c59c3ac08d0b2bb8570bb1336190f615c",
+        "source": "contact",
+        "version": 1,
+        "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510",
+        "line": 5,
+        "quote": "3 ACTIVE Um atendente iniciou o atendimento.",
+        "pdf_page": 9
+      },
+      {
+        "id": "544bbaf32d813dc8d7d0348baf34833e798b328361dc79f5d3a96028af2beecf",
+        "source": "contact",
+        "version": 1,
+        "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510",
+        "line": 26,
+        "quote": "Se o atendimento veio de um aplicativo de mensageria, chama updateAppSessionToHuman: a sessão de mensagens passa a ser do tipo HUMAN.",
+        "pdf_page": 11
+      },
+      {
+        "id": "4abaf00e00cb21934401f683b9d2e2417878a1afbfd2460738dad9af16bdce48",
+        "source": "fluxo",
+        "version": 1,
+        "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1",
+        "line": 15,
+        "quote": "control_passed: vira um evento com origem MESSAGING_HANDOVER.",
+        "pdf_page": 10
+      },
+      {
+        "id": "0b4da400ec0c767ef7160ef0c8ea1985064253744f203829d56b55d960614377",
+        "source": "fluxo",
+        "version": 1,
+        "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1",
+        "line": 10,
+        "quote": "Mensagem normal, sessão do tipo HUMAN Troca as URLs de mídia pelas de longa duração e publica em message-human.",
+        "pdf_page": 9
+      }
+    ],
+    "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+    "requires_approval": true,
+    "unanswered": [
+      "sem que ambos respondam ao mesmo tempo"
+    ]
+  },
+  "admission_replay": {
+    "job_ids": [
+      "d28c9beb-dc4b-4633-9f90-530fa1f41022",
+      "d28c9beb-dc4b-4633-9f90-530fa1f41022",
+      "d28c9beb-dc4b-4633-9f90-530fa1f41022"
+    ],
+    "same_job": true,
+    "jobs_visible": 1,
+    "worker_starts": 1
+  },
+  "diagnostics": [],
+  "model_call_metadata": [
+    {
+      "call": 1,
+      "seconds": 24.129420999990543,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "seconds": 6.7346738999767695,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "seconds": 7.296616899984656,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "seconds": 6.552500099991448,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "seconds": 6.663756900001317,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "seconds": 5.729668299987679,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "seconds": 6.008280500012916,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "seconds": 6.115266099979635,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 9,
+      "seconds": 6.527100499981316,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 10,
+      "seconds": 6.486985199997434,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    }
+  ]
+}

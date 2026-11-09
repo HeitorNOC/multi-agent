@@ -1,0 +1,8 @@
+criterion,expected,terra_observed,terra_pass,sol_observed,sol_pass
+january_after_march_update,2,"[2, 3]",False,[2],True
+february_before_retroactive_correction,2,"[2, 3]",False,[2],True
+march_after_update,3,[3],True,[3],True
+january_after_backdated_correction,2,"[2, 3]",False,[2],True
+february_after_backdated_correction,1,[1],True,[1],True
+march_unchanged_by_backdated_correction,3,[3],True,[3],True
+what_was_known_before_correction_about_february,2,[],False,[],False

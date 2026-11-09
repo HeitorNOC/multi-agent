@@ -1,0 +1,174 @@
+{
+  "installation": "business-flow-a70a254f50",
+  "checkpoints": [
+    {
+      "name": "typescript_verifies_real_signed_authority",
+      "seq": 1
+    },
+    {
+      "name": "stable_request_id_replays_and_binds_input_without_new_reservation"
+    },
+    {
+      "name": "langgraph_approval_and_effect_with_retained_job_reservation"
+    },
+    {
+      "name": "source_publication_and_current_revocation_anchored",
+      "seq": 19
+    },
+    {
+      "name": "old_customer_backup_refused_against_retained_history",
+      "reason": "retained history ahead of local backup or operation pending"
+    },
+    {
+      "name": "quota_reset_and_canonical_tampering_refused"
+    },
+    {
+      "name": "cold_restore_new_postgres_keeps_output_acl_and_published_version",
+      "approval_checkpoint_resumed_in_new_process": true
+    },
+    {
+      "name": "authority_outage_fails_closed_restart_preserves_budget"
+    },
+    {
+      "name": "two_apis_atomic_retained_budget",
+      "attempts": 8,
+      "admitted": 1,
+      "reserved": 11,
+      "cap": 12
+    },
+    {
+      "name": "crash_after_retained_intent_fences_reopening",
+      "reason": "retained history ahead of local backup or operation pending"
+    }
+  ],
+  "worker_calls": [
+    {
+      "job": "22a986a0-ade1-47d4-a68e-35dcededa3f0",
+      "resume": false,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": false, \"next\": [\"approval\"], \"evidence_count\": 2, \"epoch\": 1}\n",
+      "stderr": ""
+    },
+    {
+      "job": "22a986a0-ade1-47d4-a68e-35dcededa3f0",
+      "resume": true,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 2, \"epoch\": 2}\n",
+      "stderr": ""
+    },
+    {
+      "job": "f50b81ff-3d0e-41a1-9730-3b079de27161",
+      "resume": false,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": false, \"next\": [\"approval\"], \"evidence_count\": 1, \"epoch\": 1}\n",
+      "stderr": ""
+    },
+    {
+      "job": "f50b81ff-3d0e-41a1-9730-3b079de27161",
+      "resume": true,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 1, \"epoch\": 2}\n",
+      "stderr": ""
+    },
+    {
+      "job": "241c543c-7d2b-4d10-8ddf-8567d6bfe568",
+      "resume": false,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 1, \"epoch\": 1}\n",
+      "stderr": ""
+    }
+  ],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "signed authority integration; canonical-only knowledge; synthetic auth and tools",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "cold_restore_new_postgres": {
+    "container": "business-flow-a70a254f50-pg-restored",
+    "volume": "business-flow-a70a254f50-pg-restored-data"
+  },
+  "retained_admissions": [
+    {
+      "accepted": false,
+      "status": 429,
+      "error": "429: {\"error\":\"retained authority rejected: reservation cap exhausted\"}"
+    },
+    {
+      "accepted": false,
+      "status": 429,
+      "error": "429: {\"error\":\"retained authority rejected: reservation cap exhausted\"}"
+    },
+    {
+      "accepted": true,
+      "id": "3f5af93d-2b4f-4045-8eaf-da8c320d609b"
+    },
+    {
+      "accepted": false,
+      "status": 429,
+      "error": "429: {\"error\":\"retained authority rejected: reservation cap exhausted\"}"
+    },
+    {
+      "accepted": false,
+      "status": 429,
+      "error": "429: {\"error\":\"retained authority rejected: reservation cap exhausted\"}"
+    },
+    {
+      "accepted": false,
+      "status": 429,
+      "error": "429: {\"error\":\"retained authority rejected: reservation cap exhausted\"}"
+    },
+    {
+      "accepted": false,
+      "status": 429,
+      "error": "429: {\"error\":\"retained authority rejected: reservation cap exhausted\"}"
+    },
+    {
+      "accepted": false,
+      "status": 429,
+      "error": "429: {\"error\":\"retained authority rejected: reservation cap exhausted\"}"
+    }
+  ],
+  "signed_head": {
+    "seq": 30,
+    "head": "60a659a41c15565c67a954337acb2948f3ae6605f6ad398f70ea3e73cfe0cabb",
+    "budgets": {
+      "business": {
+        "cap": 12,
+        "reserved": 11
+      }
+    }
+  },
+  "provider": {
+    "unique_receipts": 2,
+    "send_counts": {
+      "business-flow-a70a254f50:22a986a0-ade1-47d4-a68e-35dcededa3f0": 1,
+      "business-flow-a70a254f50:f50b81ff-3d0e-41a1-9730-3b079de27161": 1
+    }
+  },
+  "final_retained_state": {
+    "seq": 31,
+    "head": "d1665afbab59afae8cea160fa6e49a5efcaf95ab914d6caa111447b182fdd0d6",
+    "budgets": {
+      "business": {
+        "cap": 12,
+        "reserved": 12
+      }
+    },
+    "pending_count": 1
+  },
+  "result": "PASS_BOUNDED_SIGNED_INTEGRATION",
+  "seconds": 18.847894800012,
+  "disposable_resources_removed": true
+}

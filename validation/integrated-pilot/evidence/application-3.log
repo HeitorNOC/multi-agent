@@ -1,0 +1,81 @@
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=4, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=4, timeout=240
+INFO:  - query: None/None, host=None, max_async=4, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=4, timeout=240
+INFO: PostgreSQL, Retry config: attempts=10, backoff=3.0s, backoff_max=30.0s, pool_close_timeout=5.0s
+INFO: PostgreSQL, VECTOR extension enabled
+INFO: PostgreSQL, Connected to database at 127.0.0.1:51182/knowledge without SSL
+INFO: chunk_id column already exists in LIGHTRAG_LLM_CACHE table
+INFO: cache_type column already exists in LIGHTRAG_LLM_CACHE table
+INFO: queryparam column already exists in LIGHTRAG_LLM_CACHE table
+INFO: mode column does not exist in LIGHTRAG_LLM_CACHE table
+INFO: chunks_list column already exists in LIGHTRAG_DOC_STATUS table
+INFO: llm_cache_list column already exists in LIGHTRAG_DOC_CHUNKS table
+INFO: track_id column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Index on track_id column already exists for LIGHTRAG_DOC_STATUS table
+INFO: metadata column already exists in LIGHTRAG_DOC_STATUS table
+INFO: error_msg column already exists in LIGHTRAG_DOC_STATUS table
+INFO: HNSW vector index idx_lightrag_vdb_entity_synthetic_hash_v1_64d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: HNSW vector index idx_lightrag_vdb_relation_synthetic_hash_v1_64d_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: HNSW vector index idx_lightrag_vdb_chunks_synthetic_hash_v1_64d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: [pilot_3131b4220e_g1_financeiro] Connected to neo4j at bolt://127.0.0.1:51183
+INFO: [pilot_3131b4220e_g1_financeiro] Ensured B-Tree index on entity_id for pilot_3131b4220e_g1_financeiro in neo4j
+INFO: [pilot_3131b4220e_g1_financeiro] Found existing index 'entity_id_fulltext_idx_pilot_3131b4220e_g1_financeiro' with state: ONLINE
+INFO: [pilot_3131b4220e_g1_financeiro] Full-text index 'entity_id_fulltext_idx_pilot_3131b4220e_g1_financeiro' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Query nodes: ACME (top_k:12, cosine:-1.0)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: empresa, campanha (top_k:12, cosine:-1.0)
+INFO: Global query: 2 entities, 1 relations
+INFO: Raw search results: 2 entities, 1 relations, 0 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 2 from 2 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 2 (deduplicated 0)
+INFO: Final context: 2 entities, 1 relations, 2 chunks
+INFO: Final chunks S+F/O: E2/1 E2/2
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=4, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=4, timeout=240
+INFO:  - query: None/None, host=None, max_async=4, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=4, timeout=240
+INFO: Creating LightRAG instance with workspace='pilot_3131b4220e_g1_publico' while default workspace is set to 'pilot_3131b4220e_g1_financeiro'
+INFO: HNSW vector index idx_lightrag_vdb_entity_synthetic_hash_v1_64d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: HNSW vector index idx_lightrag_vdb_relation_synthetic_hash_v1_64d_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: HNSW vector index idx_lightrag_vdb_chunks_synthetic_hash_v1_64d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: [pilot_3131b4220e_g1_publico] Connected to neo4j at bolt://127.0.0.1:51183
+INFO: [pilot_3131b4220e_g1_publico] Ensured B-Tree index on entity_id for pilot_3131b4220e_g1_publico in neo4j
+INFO: [pilot_3131b4220e_g1_publico] Found existing index 'entity_id_fulltext_idx_pilot_3131b4220e_g1_publico' with state: ONLINE
+INFO: [pilot_3131b4220e_g1_publico] Full-text index 'entity_id_fulltext_idx_pilot_3131b4220e_g1_publico' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Query nodes: ACME (top_k:12, cosine:-1.0)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: empresa, campanha (top_k:12, cosine:-1.0)
+INFO: Global query: 2 entities, 1 relations
+INFO: Raw search results: 2 entities, 1 relations, 0 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 2 from 6 entity-related chunks by vector similarity
+INFO: Find 4 additional chunks in 1 relations (deduplicated 2)
+INFO: Selecting 2 from 4 relation-related chunks by vector similarity
+INFO: Round-robin merged chunks: 4 -> 4 (deduplicated 0)
+INFO: Final context: 2 entities, 1 relations, 4 chunks
+INFO: Final chunks S+F/O: E2/1 R1/1 E2/2 R1/2
+INFO: Query nodes: ACME (top_k:12, cosine:-1.0)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: empresa, campanha (top_k:12, cosine:-1.0)
+INFO: Global query: 2 entities, 1 relations
+INFO: Raw search results: 2 entities, 1 relations, 0 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 2 from 6 entity-related chunks by vector similarity
+INFO: Find 4 additional chunks in 1 relations (deduplicated 2)
+INFO: Selecting 2 from 4 relation-related chunks by vector similarity
+INFO: Round-robin merged chunks: 4 -> 4 (deduplicated 0)
+INFO: Final context: 2 entities, 1 relations, 4 chunks
+INFO: Final chunks S+F/O: E2/1 R1/1 E2/2 R1/2

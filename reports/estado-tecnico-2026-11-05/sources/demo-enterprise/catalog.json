@@ -1,0 +1,309 @@
+{
+  "agents": [
+    {
+      "id": "executive_director",
+      "title": "Diretor executivo",
+      "kind": "director",
+      "domain": "executive",
+      "parent": "brain",
+      "focus": "Estratégia e portfólio",
+      "sources": [
+        "aurora-strategy",
+        "aurora-governance"
+      ],
+      "children": [
+        "business_analyst",
+        "portfolio_analyst"
+      ]
+    },
+    {
+      "id": "business_analyst",
+      "title": "Analista de negócios",
+      "kind": "specialist",
+      "domain": "executive",
+      "parent": "executive_director",
+      "focus": "Dependências e prioridades entre unidades",
+      "sources": [
+        "aurora-strategy",
+        "aurora-governance"
+      ]
+    },
+    {
+      "id": "portfolio_analyst",
+      "title": "Analista de portfólio",
+      "kind": "specialist",
+      "domain": "executive",
+      "parent": "executive_director",
+      "focus": "Priorização de investimentos e iniciativas",
+      "sources": [
+        "aurora-strategy",
+        "aurora-governance"
+      ]
+    },
+    {
+      "id": "marketing_director",
+      "title": "Diretora de marketing",
+      "kind": "director",
+      "domain": "marketing",
+      "parent": "brain",
+      "focus": "Campanhas e posicionamento",
+      "sources": [
+        "aurora-marketing",
+        "aurora-sales"
+      ],
+      "children": [
+        "campaign_planner",
+        "pricing_analyst"
+      ]
+    },
+    {
+      "id": "campaign_planner",
+      "title": "Planejador de campanhas",
+      "kind": "specialist",
+      "domain": "marketing",
+      "parent": "marketing_director",
+      "focus": "Escopo, público, demanda incremental e limites de campanha",
+      "sources": [
+        "aurora-marketing",
+        "aurora-sales",
+        "aurora-logistics"
+      ]
+    },
+    {
+      "id": "pricing_analyst",
+      "title": "Analista de preço comercial",
+      "kind": "specialist",
+      "domain": "marketing",
+      "parent": "marketing_director",
+      "focus": "Mecânica promocional e consistência comercial de preços",
+      "sources": [
+        "aurora-marketing",
+        "aurora-pricing",
+        "aurora-costs"
+      ]
+    },
+    {
+      "id": "operations_director",
+      "title": "Diretor de operações",
+      "kind": "director",
+      "domain": "operations",
+      "parent": "brain",
+      "focus": "Disponibilidade e execução logística",
+      "sources": [
+        "aurora-inventory",
+        "aurora-procurement",
+        "aurora-logistics"
+      ],
+      "children": [
+        "supply_planner",
+        "logistics_analyst"
+      ]
+    },
+    {
+      "id": "supply_planner",
+      "title": "Planejadora de suprimentos",
+      "kind": "specialist",
+      "domain": "operations",
+      "parent": "operations_director",
+      "focus": "Estoque livre, reservas, demanda conjunta e lote não confirmado",
+      "sources": [
+        "aurora-inventory",
+        "aurora-sales",
+        "aurora-procurement"
+      ]
+    },
+    {
+      "id": "logistics_analyst",
+      "title": "Analista de logística",
+      "kind": "specialist",
+      "domain": "operations",
+      "parent": "operations_director",
+      "focus": "Capacidade diária e prazos regionais",
+      "sources": [
+        "aurora-inventory",
+        "aurora-procurement",
+        "aurora-logistics"
+      ]
+    },
+    {
+      "id": "finance_director",
+      "title": "Diretora financeira",
+      "kind": "director",
+      "domain": "finance",
+      "parent": "brain",
+      "focus": "Margem e caixa",
+      "sources": [
+        "aurora-pricing",
+        "aurora-costs",
+        "aurora-treasury"
+      ],
+      "children": [
+        "controller",
+        "treasury_analyst"
+      ]
+    },
+    {
+      "id": "controller",
+      "title": "Controladoria",
+      "kind": "specialist",
+      "domain": "finance",
+      "parent": "finance_director",
+      "focus": "Margem sobre preço, desconto, caixa livre e insuficiência de orçamento",
+      "sources": [
+        "aurora-costs",
+        "aurora-pricing",
+        "aurora-treasury",
+        "aurora-marketing"
+      ]
+    },
+    {
+      "id": "treasury_analyst",
+      "title": "Analista de tesouraria",
+      "kind": "specialist",
+      "domain": "finance",
+      "parent": "finance_director",
+      "focus": "Liquidez, compromissos e necessidade de financiamento",
+      "sources": [
+        "aurora-treasury",
+        "aurora-marketing",
+        "aurora-procurement"
+      ]
+    },
+    {
+      "id": "people_director",
+      "title": "Diretora de pessoas",
+      "kind": "director",
+      "domain": "people",
+      "parent": "brain",
+      "focus": "Pessoas e capacidade organizacional",
+      "sources": [
+        "aurora-workforce"
+      ],
+      "children": [
+        "recruitment_analyst",
+        "workforce_analyst"
+      ]
+    },
+    {
+      "id": "recruitment_analyst",
+      "title": "Analista de recrutamento",
+      "kind": "specialist",
+      "domain": "people",
+      "parent": "people_director",
+      "focus": "Planejamento de admissões quando houver demanda demonstrada",
+      "sources": [
+        "aurora-workforce"
+      ]
+    },
+    {
+      "id": "workforce_analyst",
+      "title": "Analista de capacidade humana",
+      "kind": "specialist",
+      "domain": "people",
+      "parent": "people_director",
+      "focus": "Disponibilidade de equipes e treinamento",
+      "sources": [
+        "aurora-workforce"
+      ]
+    },
+    {
+      "id": "legal_director",
+      "title": "Diretor jurídico",
+      "kind": "director",
+      "domain": "legal",
+      "parent": "brain",
+      "focus": "Contratos, conformidade e resposta",
+      "sources": [
+        "aurora-compliance",
+        "aurora-contracts",
+        "aurora-response"
+      ],
+      "children": [
+        "compliance_advisor",
+        "contract_analyst"
+      ]
+    },
+    {
+      "id": "compliance_advisor",
+      "title": "Assessora de conformidade",
+      "kind": "specialist",
+      "domain": "legal",
+      "parent": "legal_director",
+      "focus": "Alegações da campanha e governança de resposta a incidente",
+      "sources": [
+        "aurora-compliance",
+        "aurora-response",
+        "aurora-incident"
+      ]
+    },
+    {
+      "id": "contract_analyst",
+      "title": "Analista de contratos",
+      "kind": "specialist",
+      "domain": "legal",
+      "parent": "legal_director",
+      "focus": "Diferença entre contratos firmes, negociação e obrigações",
+      "sources": [
+        "aurora-compliance",
+        "aurora-contracts",
+        "aurora-response"
+      ]
+    },
+    {
+      "id": "technology_director",
+      "title": "Diretora de tecnologia",
+      "kind": "director",
+      "domain": "technology",
+      "parent": "brain",
+      "focus": "Sistemas e segurança de dados",
+      "sources": [
+        "aurora-data-platform",
+        "aurora-incident"
+      ],
+      "children": [
+        "security_analyst",
+        "data_analyst"
+      ]
+    },
+    {
+      "id": "security_analyst",
+      "title": "Analista de segurança",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Incidente, evidências ausentes e tempo do SLA interno",
+      "sources": [
+        "aurora-incident",
+        "aurora-response",
+        "aurora-data-platform"
+      ]
+    },
+    {
+      "id": "data_analyst",
+      "title": "Analista de dados",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Consistência de contagens e integração dos sistemas",
+      "sources": [
+        "aurora-data-platform",
+        "aurora-incident",
+        "aurora-response"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "campaign",
+      "title": "Campanha Horizonte",
+      "label": "Marketing · Operações · Finanças · Jurídico",
+      "goal": "Avalie se o Grupo Aurora pode lançar a campanha Horizonte em novembro, considerando a oportunidade Orion, estoque e suprimento, desconto e margem vigente, caixa disponível, prazos regionais e a alegação carbono neutro. Proponha um plano condicionado, sem executar ações externas."
+    },
+    {
+      "id": "incident",
+      "title": "Incidente no CRM",
+      "label": "Tecnologia · Jurídico",
+      "goal": "Priorize a primeira avaliação do incidente INC-47 no CRM europeu. Distinga suspeita e fato confirmado, apure o prazo interno restante às 16h45 e proponha um checklist técnico e jurídico. Não execute contenção ou comunicação externa nem envolva áreas sem necessidade."
+    }
+  ]
+}

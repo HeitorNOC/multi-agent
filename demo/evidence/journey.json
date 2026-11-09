@@ -1,0 +1,397 @@
+{
+  "checks": [
+    {
+      "name": "three_native_sources_ready",
+      "sources": [
+        {
+          "source": "sales-january",
+          "sha256": "f3d860e11853fc46538b4e8b0c3877d5eebf9b22ee269610b3b387bad18eeab7"
+        },
+        {
+          "source": "sales-february",
+          "sha256": "52eb018b3cd618488ccccf23badb7def03ababfe0ca4191e2fde2211bcaa3703"
+        },
+        {
+          "source": "inventory",
+          "sha256": "6126f553e23949d81c71b1c2e685ae89ac1f0bd186f589259e51090a7763d6d3"
+        }
+      ]
+    },
+    {
+      "name": "real_cos_two_specialists_synthesis_and_approval_pause",
+      "report": {
+        "january_revenue": 10000,
+        "february_revenue": 8000,
+        "revenue_drop_pct": 20,
+        "january_stockouts": 0,
+        "february_stockouts": 0,
+        "causal_proof": false,
+        "summary": "De janeiro para fevereiro, a receita caiu de 10.000 para 8.000 unidades e os pedidos diminuíram de 100 para 80, ambos com queda de 20%; o preço médio permaneceu em 100 unidades. Não houve rupturas de estoque registradas nos dois meses, mas os níveis de estoque não foram informados. A causa da queda não foi estabelecida.",
+        "hypotheses": [
+          "Hipótese não comprovada: uma redução na demanda pode ter contribuído para a queda no número de pedidos.",
+          "Hipótese não comprovada: mudanças na disponibilidade de produtos podem ter influenciado os pedidos, embora não tenham sido registradas rupturas e os níveis de estoque não sejam conhecidos."
+        ],
+        "cited_sources": [
+          "sales-january",
+          "sales-february",
+          "inventory"
+        ],
+        "action": "Investigar a queda dos pedidos, verificando os níveis de estoque disponíveis e outros dados relevantes de vendas. Em seguida, definir metas e critérios de acompanhamento e submeter uma possível campanha de estímulo a pedidos para revisão e aprovação de seu conteúdo exato.",
+        "requires_approval": true
+      },
+      "hash": "d7ea5ab0307718677008ab56ed33390864e4d9f8af1fc85dcfd56be43d4a483c"
+    },
+    {
+      "name": "new_process_without_approval_stays_paused_no_new_inference"
+    },
+    {
+      "name": "worker_exit_88_after_simulated_effect_before_checkpoint",
+      "receipt": "5e6f5f1d-9a41-4863-a27c-0358e5b85455"
+    },
+    {
+      "name": "restart_and_completed_replay_one_effect_no_new_inference",
+      "effects": 1,
+      "worker_processes": 5,
+      "receipt": "5e6f5f1d-9a41-4863-a27c-0358e5b85455"
+    }
+  ],
+  "production_approved": false,
+  "job": "207b88d0-ed55-4da3-b74f-02e5420c7c7c",
+  "result": "PASS",
+  "usage": {
+    "calls": 7,
+    "max_calls": 16,
+    "input_tokens": 88564,
+    "cached_input_tokens": 18176,
+    "output_tokens": 1520,
+    "money": "Custo monetário não medido; chamadas Codex de bancada, sem fatura API atribuível."
+  },
+  "events": [
+    {
+      "seq": 1,
+      "at": "2026-11-05T06:25:23.289Z",
+      "node": "admission",
+      "detail": {
+        "goal": "Analise as vendas e o estoque da ACME de janeiro e fevereiro e proponha uma ação comercial revisável."
+      }
+    },
+    {
+      "seq": 2,
+      "at": "2026-11-05T06:25:23.300Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 16784
+      }
+    },
+    {
+      "seq": 3,
+      "at": "2026-11-05T06:25:24.243Z",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [],
+        "has_state": false,
+        "process": 1752
+      }
+    },
+    {
+      "seq": 4,
+      "at": "2026-11-05T06:25:24.272Z",
+      "node": "chief_of_staff",
+      "detail": {
+        "message": "Planejando a análise de vendas e estoque."
+      }
+    },
+    {
+      "seq": 5,
+      "at": "2026-11-05T06:25:29.213Z",
+      "node": "plan",
+      "detail": {
+        "strategy": "A3",
+        "capabilities": [
+          "sales_analysis",
+          "inventory_analysis"
+        ],
+        "reason": "A análise de vendas é necessária para comparar o desempenho de janeiro e fevereiro, enquanto a análise de estoque permite avaliar a disponibilidade dos produtos e embasar uma proposta comercial revisável.",
+        "requires_approval": true,
+        "max_model_calls": 4
+      }
+    },
+    {
+      "seq": 6,
+      "at": "2026-11-05T06:25:29.220Z",
+      "node": "specialist_started",
+      "detail": {
+        "capability": "inventory_analysis"
+      }
+    },
+    {
+      "seq": 7,
+      "at": "2026-11-05T06:25:29.221Z",
+      "node": "specialist_started",
+      "detail": {
+        "capability": "sales_analysis"
+      }
+    },
+    {
+      "seq": 8,
+      "at": "2026-11-05T06:25:35.383Z",
+      "node": "specialist_completed",
+      "detail": {
+        "capability": "inventory_analysis",
+        "sources": [
+          "inventory"
+        ]
+      }
+    },
+    {
+      "seq": 9,
+      "at": "2026-11-05T06:25:42.293Z",
+      "node": "specialist_completed",
+      "detail": {
+        "capability": "sales_analysis",
+        "sources": [
+          "sales-january",
+          "sales-february"
+        ]
+      }
+    },
+    {
+      "seq": 10,
+      "at": "2026-11-05T06:25:42.298Z",
+      "node": "synthesis",
+      "detail": {
+        "message": "Consolidando fatos, fontes e hipóteses."
+      }
+    },
+    {
+      "seq": 11,
+      "at": "2026-11-05T06:25:52.215Z",
+      "node": "review_ready",
+      "detail": {
+        "hash": "d7ea5ab0307718677008ab56ed33390864e4d9f8af1fc85dcfd56be43d4a483c",
+        "model_approval_mismatch": false
+      }
+    },
+    {
+      "seq": 12,
+      "at": "2026-11-05T06:25:52.226Z",
+      "node": "checkpoint_saved",
+      "detail": {
+        "next": [
+          "approval"
+        ],
+        "completed": false
+      }
+    },
+    {
+      "seq": 13,
+      "at": "2026-11-05T06:25:52.319Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 16784,
+        "exit_code": 0
+      }
+    },
+    {
+      "seq": 14,
+      "at": "2026-11-05T06:25:52.390Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 19308
+      }
+    },
+    {
+      "seq": 15,
+      "at": "2026-11-05T06:25:53.280Z",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [
+          "approval"
+        ],
+        "has_state": true,
+        "process": 11988
+      }
+    },
+    {
+      "seq": 16,
+      "at": "2026-11-05T06:25:53.291Z",
+      "node": "checkpoint_saved",
+      "detail": {
+        "next": [
+          "approval"
+        ],
+        "completed": false
+      }
+    },
+    {
+      "seq": 17,
+      "at": "2026-11-05T06:25:53.378Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 19308,
+        "exit_code": 0
+      }
+    },
+    {
+      "seq": 18,
+      "at": "2026-11-05T06:25:54.016Z",
+      "node": "human_approved",
+      "detail": {
+        "hash": "d7ea5ab0307718677008ab56ed33390864e4d9f8af1fc85dcfd56be43d4a483c",
+        "actor": "operador-local-demo"
+      }
+    },
+    {
+      "seq": 19,
+      "at": "2026-11-05T06:25:54.021Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 32004
+      }
+    },
+    {
+      "seq": 20,
+      "at": "2026-11-05T06:25:54.865Z",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [
+          "approval"
+        ],
+        "has_state": true,
+        "process": 6060
+      }
+    },
+    {
+      "seq": 21,
+      "at": "2026-11-05T06:25:54.871Z",
+      "node": "approval_resumed",
+      "detail": {
+        "hash": "d7ea5ab0307718677008ab56ed33390864e4d9f8af1fc85dcfd56be43d4a483c"
+      }
+    },
+    {
+      "seq": 22,
+      "at": "2026-11-05T06:25:54.877Z",
+      "node": "effect_receipt",
+      "detail": {
+        "id": "5e6f5f1d-9a41-4863-a27c-0358e5b85455",
+        "replayed": false,
+        "simulated": true
+      }
+    },
+    {
+      "seq": 23,
+      "at": "2026-11-05T06:25:54.889Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 32004,
+        "exit_code": 88
+      }
+    },
+    {
+      "seq": 24,
+      "at": "2026-11-05T06:25:55.708Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 6308
+      }
+    },
+    {
+      "seq": 25,
+      "at": "2026-11-05T06:25:56.569Z",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [
+          "effect"
+        ],
+        "has_state": true,
+        "process": 29864
+      }
+    },
+    {
+      "seq": 26,
+      "at": "2026-11-05T06:25:56.598Z",
+      "node": "effect_receipt",
+      "detail": {
+        "id": "5e6f5f1d-9a41-4863-a27c-0358e5b85455",
+        "replayed": true,
+        "simulated": true
+      }
+    },
+    {
+      "seq": 27,
+      "at": "2026-11-05T06:25:56.607Z",
+      "node": "checkpoint_saved",
+      "detail": {
+        "next": [],
+        "completed": true
+      }
+    },
+    {
+      "seq": 28,
+      "at": "2026-11-05T06:25:56.695Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 6308,
+        "exit_code": 0
+      }
+    },
+    {
+      "seq": 29,
+      "at": "2026-11-05T06:25:57.360Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 16312
+      }
+    },
+    {
+      "seq": 30,
+      "at": "2026-11-05T06:25:58.305Z",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [],
+        "has_state": true,
+        "process": 20824
+      }
+    },
+    {
+      "seq": 31,
+      "at": "2026-11-05T06:25:58.313Z",
+      "node": "checkpoint_saved",
+      "detail": {
+        "next": [],
+        "completed": true
+      }
+    },
+    {
+      "seq": 32,
+      "at": "2026-11-05T06:25:58.402Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 16312,
+        "exit_code": 0
+      }
+    }
+  ],
+  "report": {
+    "january_revenue": 10000,
+    "february_revenue": 8000,
+    "revenue_drop_pct": 20,
+    "january_stockouts": 0,
+    "february_stockouts": 0,
+    "causal_proof": false,
+    "summary": "De janeiro para fevereiro, a receita caiu de 10.000 para 8.000 unidades e os pedidos diminuíram de 100 para 80, ambos com queda de 20%; o preço médio permaneceu em 100 unidades. Não houve rupturas de estoque registradas nos dois meses, mas os níveis de estoque não foram informados. A causa da queda não foi estabelecida.",
+    "hypotheses": [
+      "Hipótese não comprovada: uma redução na demanda pode ter contribuído para a queda no número de pedidos.",
+      "Hipótese não comprovada: mudanças na disponibilidade de produtos podem ter influenciado os pedidos, embora não tenham sido registradas rupturas e os níveis de estoque não sejam conhecidos."
+    ],
+    "cited_sources": [
+      "sales-january",
+      "sales-february",
+      "inventory"
+    ],
+    "action": "Investigar a queda dos pedidos, verificando os níveis de estoque disponíveis e outros dados relevantes de vendas. Em seguida, definir metas e critérios de acompanhamento e submeter uma possível campanha de estímulo a pedidos para revisão e aprovação de seu conteúdo exato.",
+    "requires_approval": true
+  },
+  "seconds": 35.76675599999726
+}

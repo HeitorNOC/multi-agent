@@ -1,0 +1,16 @@
+✔ catálogo amplo admite subconjunto com hierarquia, exclusões e orçamento (0.9051ms)
+✔ chief não pode inventar agente, misturar subordinação, duplicar ou omitir exclusão (0.5013ms)
+✔ cenário livre fora do corpus é recusado (0.158ms)
+✔ margem histórica e entradas não confirmadas não passam como fatos vigentes (0.4956ms)
+✔ aprovação permanece vinculada à proposta exata (0.6022ms)
+✔ modelo não amplia equipe nem dispensa aprovação (1.2777ms)
+✔ aprovação ausente, hash alterado e conteúdo adulterado bloqueiam efeito (0.8508ms)
+✔ fato errado, causalidade inventada ou fonte desconhecida bloqueiam a proposta (0.4259ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 133.8376

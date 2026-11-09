@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a723-7000-7242-b33a-ea10dfa143f0"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"tamanho da equipe\\\"],\\\"low_level_keywords\\\":[\\\"equipe Aurora\\\",\\\"data de vigência: 2026-03-15T00:00:00+00:00\\\",\\\"corte de conhecimento: 2026-11-04T15:17:22.545119+00:00\\\",\\\"politica-remoto@v2\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":11914,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":96,"reasoning_output_tokens":0}}

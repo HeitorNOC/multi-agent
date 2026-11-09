@@ -1,0 +1,80 @@
+{
+  "passed": true,
+  "field": "refund_deadline_business_days",
+  "cases": [
+    {
+      "case": "correspondencia",
+      "expected": "confirmed",
+      "passed": true,
+      "status": "confirmed",
+      "eligible_for_review": true,
+      "reference_value": 15,
+      "cited_values": [
+        15
+      ],
+      "reference_issuer": "financeiro-ficticio",
+      "reference_version": 1
+    },
+    {
+      "case": "parecer-real-com-fato-falso",
+      "expected": "divergent",
+      "passed": true,
+      "status": "divergent",
+      "eligible_for_review": false,
+      "reference_value": 15,
+      "cited_values": [
+        45
+      ],
+      "reference_issuer": "financeiro-ficticio",
+      "reference_version": 1
+    },
+    {
+      "case": "sem-referencia",
+      "expected": "unavailable",
+      "passed": true,
+      "status": "unavailable",
+      "reason": "missing_reference",
+      "eligible_for_review": false
+    },
+    {
+      "case": "referencia-adulterada",
+      "expected": "unavailable",
+      "passed": true,
+      "status": "unavailable",
+      "reason": "invalid_signature",
+      "eligible_for_review": false
+    },
+    {
+      "case": "referencia-expirada",
+      "expected": "unavailable",
+      "passed": true,
+      "status": "unavailable",
+      "reason": "stale_reference",
+      "eligible_for_review": false
+    },
+    {
+      "case": "versao-incompativel",
+      "expected": "unavailable",
+      "passed": true,
+      "status": "unavailable",
+      "reason": "source_or_version_mismatch",
+      "eligible_for_review": false
+    },
+    {
+      "case": "citacao-alterada",
+      "expected": "unavailable",
+      "passed": true,
+      "status": "unavailable",
+      "reason": "invalid_citation_binding",
+      "eligible_for_review": false
+    },
+    {
+      "case": "unidade-incompativel",
+      "expected": "unavailable",
+      "passed": true,
+      "status": "unavailable",
+      "reason": "unsupported_claim_format",
+      "eligible_for_review": false
+    }
+  ]
+}

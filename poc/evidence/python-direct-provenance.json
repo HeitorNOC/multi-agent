@@ -1,0 +1,26 @@
+{
+  "langgraph": {
+    "dir_info": {},
+    "url": "file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/langgraph"
+  },
+  "langgraph-checkpoint": {
+    "dir_info": {},
+    "url": "file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/checkpoint"
+  },
+  "langgraph-checkpoint-sqlite": {
+    "dir_info": {},
+    "url": "file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/checkpoint-sqlite"
+  },
+  "langgraph-prebuilt": {
+    "dir_info": {},
+    "url": "file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/prebuilt"
+  },
+  "langgraph-sdk": {
+    "dir_info": {},
+    "url": "file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/sdk-py"
+  },
+  "lightrag-hku": {
+    "dir_info": {},
+    "url": "file:///C:/Users/PC/multi-agent/vendor/lightrag"
+  }
+}

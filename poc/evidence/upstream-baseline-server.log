@@ -1,0 +1,72 @@
+
+ RUN  v5.0.3 C:/Users/PC/multi-agent/vendor/paperclip/server
+
+[01:00:31] [33mWARN[39m: [36mresponsible-user authorization intersection denied[39m [90m{"authzMode":"enforce","code":"RESPONSIBLE_USER_UNAUTHORIZED","reason":"deny_no_grant","action":"skill_config:update","resourceType":"company","companyId":"bfaa9c14-84fa-4a27-84d6-fcf2be30f9ec","actorAgentId":"f6a003c7-b6c9-4262-a2a5-594df0265187","responsibleUserId":"user-e2c14758-3685-457a-a024-6512891eca5a"}[39m
+[01:00:31] [33mWARN[39m: [36mresponsible-user authorization intersection denied[39m [90m{"authzMode":"enforce","code":"RESPONSIBLE_USER_UNAVAILABLE","reason":"deny_missing_membership","action":"issue:comment","resourceType":"issue","companyId":"496fe90d-a710-4832-9250-dd1ca3d18f46","actorAgentId":"28622da2-352e-487d-a981-109b5d61044d","responsibleUserId":"user-d57d708b-8a0c-4b70-9603-b13fb2a6c79f"}[39m
+[01:00:31] [33mWARN[39m: [36mresponsible-user authorization intersection denied[39m [90m{"authzMode":"enforce","code":"RESPONSIBLE_USER_UNAVAILABLE","reason":"deny_missing_membership","action":"issue:mutate","resourceType":"issue","companyId":"496fe90d-a710-4832-9250-dd1ca3d18f46","actorAgentId":"28622da2-352e-487d-a981-109b5d61044d","responsibleUserId":"user-d57d708b-8a0c-4b70-9603-b13fb2a6c79f"}[39m
+[01:00:31] [33mWARN[39m: [36mresponsible-user authorization intersection denied[39m [90m{"authzMode":"enforce","code":"RESPONSIBLE_USER_UNAUTHORIZED","reason":"deny_policy_restricted","action":"tasks:assign","resourceType":"issue","companyId":"45f0f601-a2d6-4a45-a404-8b60c8cf1269","actorAgentId":"e47c6dac-f477-46e9-a12a-0753050ea50b","responsibleUserId":"user-e3e7092a-1120-4d60-aea3-5be2bfb40c6c"}[39m
+[01:00:31] [33mWARN[39m: [36mresponsible-user authorization intersection denied[39m [90m{"authzMode":"enforce","code":"RESPONSIBLE_USER_UNAVAILABLE","reason":"deny_missing_membership","action":"issue:mutate","resourceType":"issue","companyId":"5d5f3591-fa32-4d80-b043-ea2446105895","actorAgentId":"c12d8e0b-d1b7-4db9-be13-9554b268f14d","responsibleUserId":"user-58b1d3a7-590e-4dcb-81fe-833aefacf3ae"}[39m
+[01:00:31] [33mWARN[39m: [36mresponsible-user authorization intersection denied[39m [90m{"authzMode":"enforce","code":"RESPONSIBLE_USER_UNAUTHORIZED","reason":"deny_unsupported_action","action":"issue:mutate","resourceType":"issue","companyId":"b2c05b02-3300-48b3-bdb9-08e60d117069","actorAgentId":"73805ea4-0895-4e0b-a329-ca1d55fd2468","responsibleUserId":"user-754e9d0c-8c1a-49aa-977d-c8adcb9b53be"}[39m
+[01:00:32] [33mWARN[39m: [36mresponsible-user authorization intersection denied[39m [90m{"authzMode":"enforce","code":"RESPONSIBLE_USER_UNAVAILABLE","reason":"deny_missing_membership","action":"tasks:assign","resourceType":"issue","companyId":"415ae769-70cf-4e06-a0f5-44dd19d3ad91","actorAgentId":"96c033e8-852c-480d-ae08-ed3e57ed4144","responsibleUserId":"missing-e40ed14f-d63d-4a6e-9872-b158aa8172f5"}[39m
+[01:00:32] [32mINFO[39m: [36mauthorized issue mention-scoped comment grant[39m [90m{"actorAgentId":"d2400ac5-bc20-40fc-8f58-5f2497b43624","issueId":"fce9c9ab-99a7-4883-9f1c-c3cec0d44e0f","companyId":"3d8a2dad-a2e3-4b99-8f89-0e7a5222d0b1","commentId":"b7a3ee59-f653-42c3-90e0-83fa619c2093","grantedAction":"issue:read","grant":"issue_mention_comment"}[39m
+[01:00:32] [32mINFO[39m: [36mauthorized issue mention-scoped comment grant[39m [90m{"actorAgentId":"d2400ac5-bc20-40fc-8f58-5f2497b43624","issueId":"fce9c9ab-99a7-4883-9f1c-c3cec0d44e0f","companyId":"3d8a2dad-a2e3-4b99-8f89-0e7a5222d0b1","commentId":"b7a3ee59-f653-42c3-90e0-83fa619c2093","grantedAction":"issue:comment","grant":"issue_mention_comment"}[39m
+[01:00:32] [32mINFO[39m: [36mauthorized issue mention-scoped comment grant[39m [90m{"actorAgentId":"92a2d729-7bf9-4267-be0f-6c71dc0c66d9","issueId":"b89ef226-3596-4050-86db-078a69c643d7","companyId":"4062b868-df5c-4572-9638-db3c9a0bd031","commentId":"b3645761-00e3-4976-a951-7da9b6c533ee","grantedAction":"issue:comment","grant":"issue_mention_comment"}[39m
+[01:00:32] [32mINFO[39m: [36mauthorized issue mention-scoped comment grant[39m [90m{"actorAgentId":"83bb75b6-4279-4fc7-8b18-7972c194c489","issueId":"530015f9-8db3-47f4-b98d-75519e7ba5f6","companyId":"96d46b2f-9d9b-4b1f-b02a-97e90b3ab462","commentId":"fff9480d-e094-4792-b1e7-c2e682d0494c","grantedAction":"issue:comment","grant":"issue_mention_comment"}[39m
+[01:00:33] [33mWARN[39m: [36missue privacy would deny read[39m [90m{"authzMode":"enforce","action":"issue:read","companyId":"c5aaed0c-adc2-4392-8247-1d7463d475a7","issueId":"fc500d00-edd2-4c64-8548-43bff22fd42a","privacyRootIssueId":"fc500d00-edd2-4c64-8548-43bff22fd42a","actorType":"board","actorUserId":"user-c6479751-b137-4760-a200-de1883e77506","actorAgentId":null,"reason":"deny_issue_private"}[39m
+[01:00:33] [33mWARN[39m: [36missue privacy would deny read[39m [90m{"authzMode":"enforce","action":"issue:read","companyId":"c5aaed0c-adc2-4392-8247-1d7463d475a7","issueId":"fc500d00-edd2-4c64-8548-43bff22fd42a","privacyRootIssueId":"fc500d00-edd2-4c64-8548-43bff22fd42a","actorType":"agent","actorUserId":null,"actorAgentId":"7d8faa41-44d1-4e8e-aae6-fa2af005613f","reason":"deny_issue_private"}[39m
+[01:00:33] [33mWARN[39m: [36missue privacy would deny read[39m [90m{"authzMode":"enforce","action":"issue:read","companyId":"c5aaed0c-adc2-4392-8247-1d7463d475a7","issueId":"fc500d00-edd2-4c64-8548-43bff22fd42a","privacyRootIssueId":"fc500d00-edd2-4c64-8548-43bff22fd42a","actorType":"board","actorUserId":"user-0ee342af-594f-46dd-bc41-806fd212909e","actorAgentId":null,"reason":"deny_issue_private"}[39m
+[01:00:33] [33mWARN[39m: [36mproject privacy would deny read[39m [90m{"authzMode":"enforce","action":"project:read","companyId":"71e727a9-0c52-4633-9962-23e296663621","projectId":"07276860-4529-41d5-9f47-2a352cc5572e","actorType":"board","actorUserId":"user-7f2bfe4c-7430-4d95-b7a0-2c3d7dc75af4","actorAgentId":null,"reason":"deny_project_private"}[39m
+[01:00:33] [33mWARN[39m: [36missue privacy would deny read[39m [90m{"authzMode":"enforce","action":"issue:read","companyId":"71e727a9-0c52-4633-9962-23e296663621","issueId":"8d8d7697-19cb-4c43-80f4-f10bbba6c909","privacyRootIssueId":null,"actorType":"board","actorUserId":"user-7f2bfe4c-7430-4d95-b7a0-2c3d7dc75af4","actorAgentId":null,"reason":"deny_issue_private"}[39m
+[01:00:33] [33mWARN[39m: [36mproject privacy would deny read[39m [90m{"authzMode":"enforce","action":"project:read","companyId":"71e727a9-0c52-4633-9962-23e296663621","projectId":"07276860-4529-41d5-9f47-2a352cc5572e","actorType":"agent","actorUserId":null,"actorAgentId":"91daac00-c3c5-4f46-b697-ffb9825566aa","reason":"deny_project_private"}[39m
+[01:00:33] [33mWARN[39m: [36missue privacy would deny read[39m [90m{"authzMode":"enforce","action":"issue:read","companyId":"71e727a9-0c52-4633-9962-23e296663621","issueId":"8d8d7697-19cb-4c43-80f4-f10bbba6c909","privacyRootIssueId":null,"actorType":"agent","actorUserId":null,"actorAgentId":"91daac00-c3c5-4f46-b697-ffb9825566aa","reason":"deny_issue_private"}[39m
+ ❯ src/services/heartbeat/recovery.test.ts (0 test)
+ ❯ src/services/heartbeat/budget-cancellation.test.ts (0 test)
+ ❯ src/services/heartbeat/queue.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/services/heartbeat/budget-cancellation.test.ts [ src/services/heartbeat/budget-cancellation.test.ts ]
+Error: Failed to resolve entry for package "@paperclipai/plugin-sdk". The package may have incorrect main/module/exports specified in its package.json.
+ ❯ src/services/native-runtime/plugin-runner-probe.ts:8:1
+      6| import type { AdapterEnvironmentTestContext, AdapterEnvironmentTestRes…
+      7| import { resolvePaperclipRunnerPiThinkingLevel } from "@paperclipai/ad…
+      8| import { environmentTaskResultSchema } from "@paperclipai/plugin-sdk";
+       | ^
+      9| import { NativeEnvironmentProbeCleanupError, probeNativeRunnerEnvironm…
+     10| import { preparePluginRunnerCredentials } from "./plugin-runner-creden…
+ ❯ src/adapters/registry.ts:1:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/services/heartbeat/queue.test.ts [ src/services/heartbeat/queue.test.ts ]
+Error: Failed to resolve entry for package "@paperclipai/plugin-sdk". The package may have incorrect main/module/exports specified in its package.json.
+ ❯ src/services/provider-fresh-workspace.ts:12:1
+     10| import { and, asc, eq } from "drizzle-orm";
+     11| import { executionWorkspaces, heartbeatRuns, issues, projectWorkspaces…
+     12| import { freshWorkspaceSchema, type PluginFreshWorkspace } from "@pape…
+       | ^
+     13| import type { ExecutionWorkspace } from "@paperclipai/shared";
+     14| import { resolvePaperclipInstanceRoot } from "../home-paths.js";
+ ❯ src/services/plugin-workspaces.ts:3:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/services/heartbeat/recovery.test.ts [ src/services/heartbeat/recovery.test.ts ]
+Error: Failed to resolve entry for package "@paperclipai/plugin-sdk". The package may have incorrect main/module/exports specified in its package.json.
+ ❯ src/services/sandbox-creation-operations.ts:5:1
+      3| import { and, eq, lte, or, sql } from "drizzle-orm";
+      4| import { companies, environments, sandboxCreationOperations, type Db }…
+      5| import { readEnvironmentCreationCleanupError, type PluginEnvironmentLe…
+       | ^
+      6| import { assertEnvironmentCompanyBinding, environmentService } from ".…
+      7| import { ENVIRONMENT_CLEANUP_RETRY_MS, recoverableSandboxCreationCondi…
+ ❯ src/services/environment-runtime.ts:3:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  3 failed | 5 passed (8)
+      Tests  116 passed (116)
+   Start at  01:00:10
+   Duration  37.92s (import 50%, tests 31%, transform 16%, setup 4%)
+

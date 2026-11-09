@@ -1,0 +1,57 @@
+{
+  "installation": "02a41254c8",
+  "images": {
+    "postgres": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+    "neo4j": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+    "keycloak": "quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7"
+  },
+  "scenarios": [
+    {
+      "name": "two_api_processes_and_editorial_grant_revocation_enforced"
+    },
+    {
+      "name": "eight_identical_requests_across_two_processes_one_admission_and_result",
+      "model_attempts": 2
+    },
+    {
+      "name": "distinct_requests_from_both_api_processes_complete_without_call_id_collision"
+    },
+    {
+      "name": "governance_reconciles_after_fresh_receipt_without_model_or_changed_response"
+    },
+    {
+      "name": "governance_reconciles_after_receipt_without_model_or_changed_response"
+    },
+    {
+      "name": "two_governance_identities_close_unknown_intent_without_success_or_reexecution"
+    },
+    {
+      "name": "two_process_reservation_race_twenty_requests_exactly_seven_admitted"
+    },
+    {
+      "name": "authority_and_both_clients_restart_preserve_limits_tombstone_and_original_results"
+    }
+  ],
+  "worker_calls": [],
+  "freshness_authority": {
+    "public_key": "48fe356d03bea8ff72d8ca6349d3ee2aba9b0025e2536f1b02023ea5a2af458d",
+    "location": "separate process/store retained outside bundle on same lab host"
+  },
+  "versions": {
+    "postgres": "PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "pgvector": "0.8.7",
+    "neo4j": "versions\n[\"5.26.32\"]",
+    "keycloak": "26.8.1"
+  },
+  "result": "PASS",
+  "execution_completed": true,
+  "model_calls": 13,
+  "elapsed_seconds": 202.21978710000985,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

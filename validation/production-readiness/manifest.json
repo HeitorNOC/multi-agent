@@ -1,0 +1,410 @@
+{
+  "captured_utc": "2026-11-03T21:04:47.069243+00:00",
+  "scope": "production-readiness investigation and bounded local qualification, not production approval",
+  "projects": {
+    "langgraph": {
+      "sha": "3c916d750575b22c464790e9774494d810ccd322",
+      "tracked_diff": "",
+      "origin": "https://github.com/langchain-ai/langgraph.git"
+    },
+    "lightrag": {
+      "sha": "aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a",
+      "tracked_diff": "",
+      "origin": "https://github.com/HKUDS/LightRAG.git"
+    },
+    "graphiti": {
+      "sha": "7e0342a49ce5a04f6415ac2f64ce150bb81b0689",
+      "tracked_diff": "",
+      "origin": "https://github.com/getzep/graphiti.git"
+    },
+    "paperclip": {
+      "sha": "1e3ab690b072bbf6a1c1f1d0454ea49315b2074c",
+      "tracked_diff": "",
+      "origin": "https://github.com/paperclipai/paperclip.git"
+    },
+    "agentscope": {
+      "sha": "9668b4c90c70cc214e1b7bb65dec2a6e70b90010",
+      "tracked_diff": "",
+      "origin": "https://github.com/agentscope-ai/agentscope.git"
+    },
+    "openagents": {
+      "sha": "6a330c789c321bdce5856578b7c47c2539ea7fc6",
+      "tracked_diff": "",
+      "origin": "https://github.com/openagents-org/openagents.git"
+    }
+  },
+  "environments": {
+    "poc": {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "packages": {
+        "langgraph": "1.2.19",
+        "langgraph-checkpoint": "4.3.1",
+        "langgraph-checkpoint-sqlite": "3.1.3",
+        "lightrag-hku": "1.5.8"
+      }
+    },
+    "graphiti": {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "packages": {
+        "graphiti-core": "0.31.2",
+        "pytest": "9.2.0",
+        "pytest-asyncio": "1.4.1.post1"
+      }
+    },
+    "postgres-runtime": {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "packages": {
+        "langgraph": "1.2.19",
+        "langgraph-checkpoint": "4.3.1",
+        "langgraph-checkpoint-postgres": "3.2.0",
+        "psycopg": "3.3.7",
+        "psycopg-pool": "3.3.3",
+        "psycopg-binary": "3.3.7"
+      }
+    }
+  },
+  "pytest": {
+    "lightrag-upstream": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "62",
+      "time": "5.764",
+      "timestamp": "2026-11-03T13:44:58.061267-03:00",
+      "hostname": "DESKTOP-BRCHPFP"
+    },
+    "brain": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "3",
+      "time": "1.700",
+      "timestamp": "2026-11-03T13:49:07.447261-03:00",
+      "hostname": "DESKTOP-BRCHPFP"
+    },
+    "graphiti-unit": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "16",
+      "time": "0.087",
+      "timestamp": "2026-11-03T13:54:29.434406-03:00",
+      "hostname": "DESKTOP-BRCHPFP"
+    },
+    "costs": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "8",
+      "time": "0.049",
+      "timestamp": "2026-11-03T14:00:26.831972-03:00",
+      "hostname": "DESKTOP-BRCHPFP"
+    }
+  },
+  "probes": {
+    "sandbox": {
+      "result": "PASS",
+      "checks": 0,
+      "scope": "containment on this local Docker Linux VM; not kernel exploit resistance or production isolation certification"
+    },
+    "postgres": {
+      "result": "PASS",
+      "checks": 19,
+      "scope": "isolated local PostgreSQL canonical catalog fixture, not a full LightRAG PostgreSQL/graph deployment"
+    },
+    "identity": {
+      "result": "PASS",
+      "checks": 13,
+      "scope": "local cryptographic verification and own policy guard; no production IdP/JWKS rotation service, OIDC login, mTLS or distributed revocation qualified"
+    },
+    "pg-saver": {
+      "result": "PASS",
+      "checks": 0,
+      "scope": "native checkpoint and interrupt recovery only; no HA/failover/TLS/cross-client checkpoint ACL certified"
+    }
+  },
+  "files": {
+    "validation/production-readiness/BRAIN.md": {
+      "bytes": 9521,
+      "sha256": "412edce68c564b190cb286745664da95c6956553cf7fd2922a982205c33cd80b"
+    },
+    "validation/production-readiness/catalog_probe.sql": {
+      "bytes": 3375,
+      "sha256": "b01ed15ac236377b3aed9494deab76418b888cc3a9f4ecd93aa9cf4ca58c5a86"
+    },
+    "validation/production-readiness/COMMANDS.md": {
+      "bytes": 7092,
+      "sha256": "67e7e80447cd8af1ffd9bdbd614179061d041b93f6f8b584426f9a92f510d5da"
+    },
+    "validation/production-readiness/COSTS.md": {
+      "bytes": 7789,
+      "sha256": "e4ebcbef2005505665a87654fbf30142c82897a0b66c42fd50d810f90901d0bd"
+    },
+    "validation/production-readiness/costs.py": {
+      "bytes": 4552,
+      "sha256": "a7dafb79a79650f88f8e2290546e94eed6b54b990c3521fdffedc95cefa0039d"
+    },
+    "validation/production-readiness/GATES.csv": {
+      "bytes": 8630,
+      "sha256": "53e10bbc27fce48a5a443e076ee79c1c7f9c28c5513158316857ec040621e903"
+    },
+    "validation/production-readiness/identity_probe.mjs": {
+      "bytes": 4005,
+      "sha256": "66ef2f31ccfccc5deb7a082dbbb155330ea857ac653010527a3482718118ee7d"
+    },
+    "validation/production-readiness/OPERATIONS.md": {
+      "bytes": 9309,
+      "sha256": "21a341bcc51d8f862fe377f6c680bbc4ff7eb38d3fb2c69e7132a76d38740885"
+    },
+    "validation/production-readiness/pg_saver_probe.py": {
+      "bytes": 5088,
+      "sha256": "4ecc95be338e49b67f2f0c1f56b2fbe508d02a0943b454b34d22219881dae2af"
+    },
+    "validation/production-readiness/pg_saver_worker.py": {
+      "bytes": 1919,
+      "sha256": "27c93a6a4aba223ce915a2045d977541cd5c718b26bf996e4c27befd096251b8"
+    },
+    "validation/production-readiness/postgres_probe.py": {
+      "bytes": 11424,
+      "sha256": "8878026f35c58c96810409dfb0b22256bf91141e94f70d6697b0b4dd3098c629"
+    },
+    "validation/production-readiness/README.md": {
+      "bytes": 955,
+      "sha256": "a02bf55e0e60b0e6643cc314ce3dd9c5ce8c094bd9b00100b7197b4f47f62832"
+    },
+    "validation/production-readiness/record_manifest.py": {
+      "bytes": 4627,
+      "sha256": "aef1ac95898c3a53952ba5bf8f6d9c4bf0652c11e0a06665b4c94610fb0bcd7d"
+    },
+    "validation/production-readiness/REPORT.md": {
+      "bytes": 10219,
+      "sha256": "7e18dfd317e59cf9b9b9257443eab7e6d91155f377cfaca1a24d69de58c7f9fd"
+    },
+    "validation/production-readiness/sandbox_probe.py": {
+      "bytes": 5799,
+      "sha256": "83663186ed7be5f77a4e2a1308e00535bbb465863cb785d6e1566a4b7e6df91b"
+    },
+    "validation/production-readiness/SECURITY.md": {
+      "bytes": 6259,
+      "sha256": "992c9d19351b5595a0c136f8d81125e9d983eaef7a755144f56da97592cf88c9"
+    },
+    "validation/production-readiness/SOURCES.md": {
+      "bytes": 3555,
+      "sha256": "98b49e532237c3ef3e6bd376f4b25f8e3d1bc9147032171a5cac04d5c6c25dc7"
+    },
+    "validation/production-readiness/SOURCE_TRACE.md": {
+      "bytes": 2497,
+      "sha256": "f8489c3ad6c282fcc9b6395f5207a801d8f1bfdd4c4a0f827a611199d5d26bf8"
+    },
+    "validation/production-readiness/test_brain.py": {
+      "bytes": 6439,
+      "sha256": "4beaf7709a83373bcb45434d8196ae2adf130ef97558d49a11036310e90e41bb"
+    },
+    "validation/production-readiness/test_costs.py": {
+      "bytes": 2212,
+      "sha256": "c2d05febcf51d585cc25a0ef0761d427bd00a9aa076d5e3825eb121ef474525b"
+    },
+    "validation/production-readiness/evidence/brain-acl.json": {
+      "bytes": 323,
+      "sha256": "139c5c5fa6bf0bb46d9b8f6aace4635e7124c2d8a587b621cc3f21f664a23846"
+    },
+    "validation/production-readiness/evidence/brain-delete.json": {
+      "bytes": 378,
+      "sha256": "2405ce39fd9dd782be576b1bb25b70db089e065475bc8ec93d6bcda8c72ed3f8"
+    },
+    "validation/production-readiness/evidence/brain-shared-graph.json": {
+      "bytes": 391,
+      "sha256": "0ed8897f6861fd353e2a90e757c29cf4fb5f59b0ad444c78ca752f81f6c5c36f"
+    },
+    "validation/production-readiness/evidence/brain.log": {
+      "bytes": 745,
+      "sha256": "6066c50e6a96424cc26c4d0fb3742f1823a57509b17016c81fec556ad64e279c"
+    },
+    "validation/production-readiness/evidence/brain.xml": {
+      "bytes": 662,
+      "sha256": "134025439ed3fe33a579df208a27c401d5ceac8b87e288e5af061f198d6174bf"
+    },
+    "validation/production-readiness/evidence/cost-estimates.json": {
+      "bytes": 5035,
+      "sha256": "02e7e4e44a68c5e29ac88b97db8017e454d8cc5089b2df35e04fd1fd9755fb12"
+    },
+    "validation/production-readiness/evidence/costs-first.log": {
+      "bytes": 745,
+      "sha256": "194ceb99da1be0d2396bd23dea4bd13316d590c0b68f6ae50bf005aae3241d77"
+    },
+    "validation/production-readiness/evidence/costs-first.xml": {
+      "bytes": 1248,
+      "sha256": "c4158ae987d5a583ef8ce8038491cb352966c006c5c03eed73173f61d560c744"
+    },
+    "validation/production-readiness/evidence/costs.log": {
+      "bytes": 745,
+      "sha256": "23f0b9082cbe0eb7c203539b72cf005312915ef52031542b7b09835fda1c3da0"
+    },
+    "validation/production-readiness/evidence/costs.xml": {
+      "bytes": 1391,
+      "sha256": "c350df4db600960daf061bb45d4cfa581c7396a7b102f7dbf41c9ac010576ac2"
+    },
+    "validation/production-readiness/evidence/docker.log": {
+      "bytes": 783,
+      "sha256": "bf8995e08876de8458ab3e89e7c753733e4a3faf54da4cc8d0cfcff31b491fec"
+    },
+    "validation/production-readiness/evidence/execution-interruptions.json": {
+      "bytes": 665,
+      "sha256": "1e51393b480a9eb5b9a42402ab785cba479ba5f437350d142a6d7297f7dcef8b"
+    },
+    "validation/production-readiness/evidence/graphiti-freeze.txt": {
+      "bytes": 691,
+      "sha256": "6845620900b24873c924ffd7a3a01643fa42afac314be96ca5ff03010693e7c9"
+    },
+    "validation/production-readiness/evidence/graphiti-install.log": {
+      "bytes": 1169,
+      "sha256": "1553540124ac08888dedca18b35df26e9956a1b58c13a783c567983e802339a7"
+    },
+    "validation/production-readiness/evidence/graphiti-test-deps.log": {
+      "bytes": 275,
+      "sha256": "f7a8bef37f7f7fba0f0178f324a13a2edace9f0fcd708bb411b2d736a0b6350f"
+    },
+    "validation/production-readiness/evidence/graphiti-unit.log": {
+      "bytes": 731,
+      "sha256": "f6bbcaf496dbeb677184e68f07f1e96bb792f974335a80c1bdb01fb93ad29737"
+    },
+    "validation/production-readiness/evidence/graphiti-unit.xml": {
+      "bytes": 2650,
+      "sha256": "386ec2bec2fb2dd28ff2142ce28f2390d76a28c2878390c42b5b94b4b1ae13e0"
+    },
+    "validation/production-readiness/evidence/identity.json": {
+      "bytes": 1228,
+      "sha256": "d85d6cafb14540e44ac786d362f085a55d3c5e685604cd44edb2a2d7f810c3ed"
+    },
+    "validation/production-readiness/evidence/identity.log": {
+      "bytes": 31,
+      "sha256": "d7316d01988cf5bc2c3ed590e72cda6910452306261e97877128b600e8ca5b88"
+    },
+    "validation/production-readiness/evidence/lightrag-upstream.log": {
+      "bytes": 375,
+      "sha256": "9d91a15d6bfed22f4c3c40d0600a4f2cf9d669665d886da4da601f289957487d"
+    },
+    "validation/production-readiness/evidence/lightrag-upstream.xml": {
+      "bytes": 9007,
+      "sha256": "4f7865f262314a2a2f500f007defe935dccd3cbadefd4f9fc425c0c6d68f046e"
+    },
+    "validation/production-readiness/evidence/pg-runtime-install.log": {
+      "bytes": 2883,
+      "sha256": "2cbba394deac1faaa0062d569cfd1da018b61d5009d76ed8b73497266ea774aa"
+    },
+    "validation/production-readiness/evidence/pg-saver-first.json": {
+      "bytes": 2403,
+      "sha256": "87b4a2e59d245f4639222fecd741ce658e350df9ca8ff632a37bfc81e31b1ed5"
+    },
+    "validation/production-readiness/evidence/pg-saver-first.log": {
+      "bytes": 2743,
+      "sha256": "5d0e57045fcab3e90275b980999cc8cd50842d922a6d008108c0ad96b3e0b097"
+    },
+    "validation/production-readiness/evidence/pg-saver-fourth.json": {
+      "bytes": 815,
+      "sha256": "07288205bd790340143cea7b8951bfefd707163d56942331f4c4a23b9a6541a5"
+    },
+    "validation/production-readiness/evidence/pg-saver-fourth.log": {
+      "bytes": 950,
+      "sha256": "c685efbb2b2de5b354b572047e7859d0acc051ea6775fd4fc35fd6faddba6dbe"
+    },
+    "validation/production-readiness/evidence/pg-saver-second.json": {
+      "bytes": 578,
+      "sha256": "1fd18e5d487efe2c5f194fefe52260c09bbe2fb387fa4140f1111185077420bf"
+    },
+    "validation/production-readiness/evidence/pg-saver-second.log": {
+      "bytes": 2153,
+      "sha256": "23a0141fb095eef6494f2c9a089627e55cc57a815603fb1e625135392609f280"
+    },
+    "validation/production-readiness/evidence/pg-saver-third.json": {
+      "bytes": 6808,
+      "sha256": "ba2c63b4571d02e9f9b094bb549e7918d39abc8bcc053cb367d43c7aa5031600"
+    },
+    "validation/production-readiness/evidence/pg-saver-third.log": {
+      "bytes": 2503,
+      "sha256": "3a7c4778d828ad9e91adcc58376ef404472b1bc752e0e8d0a23657052c316ef6"
+    },
+    "validation/production-readiness/evidence/pg-saver.json": {
+      "bytes": 3752,
+      "sha256": "c9f8f8b75e7f1bdf7ac48b69cbffbaff2987c3efac9f572cb4b7dc9084b00266"
+    },
+    "validation/production-readiness/evidence/pg-saver.log": {
+      "bytes": 20,
+      "sha256": "2df1c5b6352a189869df53be815c4e6b6ca155773628cde5ea668ed07275f6df"
+    },
+    "validation/production-readiness/evidence/poc-freeze.txt": {
+      "bytes": 2027,
+      "sha256": "1c6e842ac5a33c1285fe01413de59a269db465068a990e3729de2560f34391cf"
+    },
+    "validation/production-readiness/evidence/postgres-first.json": {
+      "bytes": 2291,
+      "sha256": "9c542ca61c83dfcd9e7298ac4d8cd13e80f23ffb5b5858e87b2665ac5a2378fc"
+    },
+    "validation/production-readiness/evidence/postgres-first.log": {
+      "bytes": 902,
+      "sha256": "8f186c12740fc7a76e1da164066d64badcab747e74d8827a1502f453b7dd07f3"
+    },
+    "validation/production-readiness/evidence/postgres-runtime-freeze.txt": {
+      "bytes": 1069,
+      "sha256": "59de7fbfae093ee0904173ca8a63ba695268afac2902928bcb4b30d8c990fbb3"
+    },
+    "validation/production-readiness/evidence/postgres-server.log": {
+      "bytes": 7035,
+      "sha256": "f16399503ef6eea77331c61c15406f63d56b501ce2c26b2975f951d0ea9abe58"
+    },
+    "validation/production-readiness/evidence/postgres.json": {
+      "bytes": 6332,
+      "sha256": "b86efc1fd42e2747ac6e5b1cfa2007046b911b5e9cbcfd12d654a1d39ea3ca56"
+    },
+    "validation/production-readiness/evidence/postgres.log": {
+      "bytes": 34,
+      "sha256": "edf2f2e8fd53123dce76729220f36dcf1206f32c0e8e6e0aefa69ee3c30ed5fd"
+    },
+    "validation/production-readiness/evidence/sandbox.json": {
+      "bytes": 4642,
+      "sha256": "5e1dcd20204c314567f79895ec705ec765f1b3c09ba155020b9878367058893b"
+    },
+    "validation/production-readiness/evidence/sandbox.log": {
+      "bytes": 37,
+      "sha256": "d6d45b9b587130457e2a4aac5ee98ca264ca97769ccab043ef400bae704a8a70"
+    },
+    "validation/production-readiness/evidence/wsl.log": {
+      "bytes": 36,
+      "sha256": "f849c0e259a54b9cf9463e25acd61b8bcf18540198de3d4c501c61e2b120a6c5"
+    },
+    "poc/runtime.py": {
+      "bytes": 9455,
+      "sha256": "e81756742106bef3fecc33762a101b6050fbe5135100a4d2562510d4387255bc"
+    },
+    "poc/DOSSIER.md": {
+      "bytes": 27520,
+      "sha256": "0999f8b3a71cdea40bb2e9c9603edc0652db8fe246b0c59c398f8500d67662c2"
+    },
+    "poc/COMMANDS.md": {
+      "bytes": 6771,
+      "sha256": "54cba27fc7c34dda0eee1b56eb5e9bd3e302a84b0df123b9942c49dfc742e6d8"
+    },
+    "validation/manifest.json": {
+      "bytes": 2534,
+      "sha256": "df0f02a1eba8a7fe50bbdae37fe51c7ea6c8dc44346f0043f233d02d352d4a55"
+    },
+    "validation/motor-comparison/REPORT.md": {
+      "bytes": 18219,
+      "sha256": "4180c43f08ee2ebed65e90ac878a3ad6db7950b3246b563441a0629486488725"
+    },
+    "validation/motor-comparison/BOUNDARIES.md": {
+      "bytes": 5258,
+      "sha256": "3f09649628235d7905906da822116b4aa9b643843a852a32bd29008e29f22c75"
+    }
+  },
+  "graphiti_lock_sha256": "c8c0f4f6da121f2e582570ef73f1b709096f0c8faff00cad9f618d6f60a8fc4c",
+  "node": "v24.20.0",
+  "images": {
+    "sandbox": "mcr.microsoft.com/playwright@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27",
+    "postgres": "postgres@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab"
+  }
+}

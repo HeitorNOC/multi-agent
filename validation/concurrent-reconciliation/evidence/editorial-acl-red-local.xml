@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.266" timestamp="2026-11-04T15:20:28.589255-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.concurrent-reconciliation.test_editorial_acl" name="test_current_grant_required_even_for_published_replay[False]" time="0.002"><failure message="NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'">published = False
+
+    @pytest.mark.parametrize('published',[False,True])
+    def test_current_grant_required_even_for_published_replay(published):
+        s=Subject(False,published)
+&gt;       with pytest.raises(PermissionError):asyncio.run(s._business_dispatch(Request(actor={'id':'board','role':'board'})))
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+validation\concurrent-reconciliation\test_editorial_acl.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;test_editorial_acl.Subject object at 0x0000027BC22909E0&gt;
+req = {'actor': {'id': 'board', 'role': 'board'}}
+
+&gt;   ???
+E   NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'
+
+application.py:_business_dispatch:151: NameError</failure></testcase><testcase classname="validation.concurrent-reconciliation.test_editorial_acl" name="test_current_grant_required_even_for_published_replay[True]" time="0.001"><failure message="NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'">published = True
+
+    @pytest.mark.parametrize('published',[False,True])
+    def test_current_grant_required_even_for_published_replay(published):
+        s=Subject(False,published)
+&gt;       with pytest.raises(PermissionError):asyncio.run(s._business_dispatch(Request(actor={'id':'board','role':'board'})))
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+validation\concurrent-reconciliation\test_editorial_acl.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;test_editorial_acl.Subject object at 0x0000027BC2292300&gt;
+req = {'actor': {'id': 'board', 'role': 'board'}}
+
+&gt;   ???
+E   NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'
+
+application.py:_business_dispatch:151: NameError</failure></testcase><testcase classname="validation.concurrent-reconciliation.test_editorial_acl" name="test_authorized_published_replay_checks_grant_without_new_publication" time="0.001"><failure message="NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'">def test_authorized_published_replay_checks_grant_without_new_publication():
+        s=Subject(True)
+&gt;       assert asyncio.run(s._business_dispatch(Request(actor={'id':'board','role':'board'})))=={'id':'draft','state':'published'}
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+validation\concurrent-reconciliation\test_editorial_acl.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;test_editorial_acl.Subject object at 0x0000027BC2247260&gt;
+req = {'actor': {'id': 'board', 'role': 'board'}}
+
+&gt;   ???
+E   NameError: name 'hashlib' is not defined. Did you forget to import 'hashlib'
+
+application.py:_business_dispatch:151: NameError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,84 @@
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: PostgreSQL, Retry config: attempts=10, backoff=3.0s, backoff_max=30.0s, pool_close_timeout=5.0s
+INFO: PostgreSQL, VECTOR extension enabled
+INFO: PostgreSQL, Connected to database at 127.0.0.1:60593/knowledge without SSL
+INFO: chunk_id column already exists in LIGHTRAG_LLM_CACHE table
+INFO: cache_type column already exists in LIGHTRAG_LLM_CACHE table
+INFO: queryparam column already exists in LIGHTRAG_LLM_CACHE table
+INFO: mode column does not exist in LIGHTRAG_LLM_CACHE table
+INFO: chunks_list column already exists in LIGHTRAG_DOC_STATUS table
+INFO: llm_cache_list column already exists in LIGHTRAG_DOC_CHUNKS table
+INFO: track_id column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Index on track_id column already exists for LIGHTRAG_DOC_STATUS table
+INFO: metadata column already exists in LIGHTRAG_DOC_STATUS table
+INFO: error_msg column already exists in LIGHTRAG_DOC_STATUS table
+INFO: HNSW vector index idx_60a018b75b81_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_e7b623ae5c8a_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_c8dc6c405ffd_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: [audit_8accae10a9_1bd889e9886d35b59bb851addf547da6b40808c34999aa6efd5447ab01eacc30] Connected to neo4j at bolt://127.0.0.1:60594
+INFO: [audit_8accae10a9_1bd889e9886d35b59bb851addf547da6b40808c34999aa6efd5447ab01eacc30] Ensured B-Tree index on entity_id for audit_8accae10a9_1bd889e9886d35b59bb851addf547da6b40808c34999aa6efd5447ab01eacc30 in neo4j
+INFO: [audit_8accae10a9_1bd889e9886d35b59bb851addf547da6b40808c34999aa6efd5447ab01eacc30] Found existing index 'entity_id_fulltext_idx_audit_8accae10a9_1bd889e9886d35b59bb851addf547da6b40808c34999aa6efd5447ab01eacc30' with state: ONLINE
+INFO: [audit_8accae10a9_1bd889e9886d35b59bb851addf547da6b40808c34999aa6efd5447ab01eacc30] Full-text index 'entity_id_fulltext_idx_audit_8accae10a9_1bd889e9886d35b59bb851addf547da6b40808c34999aa6efd5447ab01eacc30' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Naive query: 2 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Final context: 2 chunks
+INFO: query LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: naive:query:a8ba2e028890dd8238658d5d357d1b9a
+INFO: Naive query: 2 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Final context: 2 chunks
+INFO:  == LLM cache == saving: naive:query:54e562a151f9489d47ffd85340c5f52c
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='audit_8accae10a9_dedd106ba22b771751417308fcfccc1ba217946328f1073cea76788a69e2eb6a' while default workspace is set to 'audit_8accae10a9_1bd889e9886d35b59bb851addf547da6b40808c34999aa6efd5447ab01eacc30'
+INFO: HNSW vector index idx_60a018b75b81_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_e7b623ae5c8a_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_c8dc6c405ffd_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: [audit_8accae10a9_dedd106ba22b771751417308fcfccc1ba217946328f1073cea76788a69e2eb6a] Connected to neo4j at bolt://127.0.0.1:60594
+INFO: [audit_8accae10a9_dedd106ba22b771751417308fcfccc1ba217946328f1073cea76788a69e2eb6a] Ensured B-Tree index on entity_id for audit_8accae10a9_dedd106ba22b771751417308fcfccc1ba217946328f1073cea76788a69e2eb6a in neo4j
+INFO: [audit_8accae10a9_dedd106ba22b771751417308fcfccc1ba217946328f1073cea76788a69e2eb6a] Found existing index 'entity_id_fulltext_idx_audit_8accae10a9_dedd106ba22b771751417308fcfccc1ba217946328f1073cea76788a69e2eb6a' with state: ONLINE
+INFO: [audit_8accae10a9_dedd106ba22b771751417308fcfccc1ba217946328f1073cea76788a69e2eb6a] Full-text index 'entity_id_fulltext_idx_audit_8accae10a9_dedd106ba22b771751417308fcfccc1ba217946328f1073cea76788a69e2eb6a' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Naive query: 1 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Final context: 1 chunks
+INFO: query LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: naive:query:29ad80a1d54c8a4ec28a5144abd2c191
+INFO: Naive query: 2 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Final context: 2 chunks
+INFO:  == LLM cache == saving: naive:query:6a6d0dc290ff037dec8210d0a8d5029a
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='audit_8accae10a9_50ee823114861498d9f2ee41be4c008e0081a0e42b1774e5df8bc1913568866f' while default workspace is set to 'audit_8accae10a9_1bd889e9886d35b59bb851addf547da6b40808c34999aa6efd5447ab01eacc30'
+INFO: HNSW vector index idx_60a018b75b81_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_e7b623ae5c8a_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_c8dc6c405ffd_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: [audit_8accae10a9_50ee823114861498d9f2ee41be4c008e0081a0e42b1774e5df8bc1913568866f] Connected to neo4j at bolt://127.0.0.1:60594
+INFO: [audit_8accae10a9_50ee823114861498d9f2ee41be4c008e0081a0e42b1774e5df8bc1913568866f] Ensured B-Tree index on entity_id for audit_8accae10a9_50ee823114861498d9f2ee41be4c008e0081a0e42b1774e5df8bc1913568866f in neo4j
+INFO: [audit_8accae10a9_50ee823114861498d9f2ee41be4c008e0081a0e42b1774e5df8bc1913568866f] Found existing index 'entity_id_fulltext_idx_audit_8accae10a9_50ee823114861498d9f2ee41be4c008e0081a0e42b1774e5df8bc1913568866f' with state: ONLINE
+INFO: [audit_8accae10a9_50ee823114861498d9f2ee41be4c008e0081a0e42b1774e5df8bc1913568866f] Full-text index 'entity_id_fulltext_idx_audit_8accae10a9_50ee823114861498d9f2ee41be4c008e0081a0e42b1774e5df8bc1913568866f' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Naive query: 2 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Final context: 2 chunks
+INFO: query LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: naive:query:3ac507e915539882cfbb47526ccebdeb
+INFO: Naive query: 3 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Final context: 3 chunks
+INFO:  == LLM cache == saving: naive:query:f5a602796ffd06be18618822d49ebc57

@@ -1,0 +1,40 @@
+{
+  "image": "postgres@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab",
+  "scope": "native checkpoint and interrupt recovery only; no HA/failover/TLS/cross-client checkpoint ACL certified",
+  "host_tcp_preflight": "connected",
+  "worker_stages": [
+    {
+      "resume": false,
+      "stderr": "worker_start\nsaver_connect\nsaver_connected_setup\nsaver_setup_done\ngraph_invoke\n"
+    },
+    {
+      "resume": true,
+      "stderr": "worker_start\nsaver_connect\nsaver_connected_setup\nsaver_setup_done\ngraph_invoke\n"
+    }
+  ],
+  "first_process": {
+    "next": [
+      "approval"
+    ],
+    "values": {
+      "evidence": "synthetic source version 1"
+    },
+    "interrupted": true
+  },
+  "ephemeral_port_before_restart": "54084",
+  "ephemeral_port_after_restart": "54094",
+  "result": "PASS",
+  "new_process_after_sigkill": {
+    "next": [],
+    "values": {
+      "evidence": "synthetic source version 1",
+      "completed": true
+    },
+    "interrupted": false
+  },
+  "evidence_node_calls": 1,
+  "checkpoint_tables": "checkpoint_blobs\ncheckpoint_migrations\ncheckpoint_writes\ncheckpoints\nnode_calls",
+  "server_log": "chmod: /var/run/postgresql: Operation not permitted\nsh: locale: not found\n2026-11-03 20:54:45.011 UTC [28] WARNING:  no usable system locales were found\ninitdb: warning: enabling \"trust\" authentication for local connections\ninitdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.\n2026-11-03 20:54:46.247 UTC [1] LOG:  starting PostgreSQL 16.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit\n2026-11-03 20:54:46.247 UTC [1] LOG:  listening on IPv4 address \"0.0.0.0\", port 5432\n2026-11-03 20:54:46.247 UTC [1] LOG:  listening on IPv6 address \"::\", port 5432\n2026-11-03 20:54:46.249 UTC [1] LOG:  listening on Unix socket \"/var/run/postgresql/.s.PGSQL.5432\"\n2026-11-03 20:54:46.256 UTC [79] LOG:  database system was shut down at 2026-11-03 20:54:46 UTC\n2026-11-03 20:54:46.262 UTC [1] LOG:  database system is ready to accept connections\nchmod: /var/run/postgresql: Operation not permitted\n2026-11-03 20:54:50.627 UTC [1] LOG:  starting PostgreSQL 16.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit\n2026-11-03 20:54:50.627 UTC [1] LOG:  listening on IPv4 address \"0.0.0.0\", port 5432\n2026-11-03 20:54:50.628 UTC [1] LOG:  listening on IPv6 address \"::\", port 5432\n2026-11-03 20:54:50.630 UTC [1] LOG:  listening on Unix socket \"/var/run/postgresql/.s.PGSQL.5432\"\n2026-11-03 20:54:50.635 UTC [16] LOG:  database system was interrupted; last known up at 2026-11-03 20:54:46 UTC\n2026-11-03 20:54:50.830 UTC [23] FATAL:  the database system is starting up\n2026-11-03 20:54:50.902 UTC [16] LOG:  database system was not properly shut down; automatic recovery in progress\n2026-11-03 20:54:50.905 UTC [16] LOG:  redo starts at 0/14F71F8\n2026-11-03 20:54:50.928 UTC [16] LOG:  invalid record length at 0/193F588: expected at least 24, got 0\n2026-11-03 20:54:50.928 UTC [16] LOG:  redo done at 0/193F560 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.02 s\n2026-11-03 20:54:50.934 UTC [14] LOG:  checkpoint starting: end-of-recovery immediate wait\n2026-11-03 20:54:51.030 UTC [14] LOG:  checkpoint complete: wrote 966 buffers (5.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.026 s, sync=0.064 s, total=0.098 s; sync files=328, longest=0.003 s, average=0.001 s; distance=4385 kB, estimate=4385 kB; lsn=0/193F588, redo lsn=0/193F588\n2026-11-03 20:54:51.037 UTC [1] LOG:  database system is ready to accept connections\n",
+  "container_removed": true,
+  "volume_removed": true
+}

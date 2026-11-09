@@ -1,0 +1,183 @@
+{
+  "installation": "business-flow-2af8cf211e",
+  "checkpoints": [
+    {
+      "name": "baseline_receipt_and_revocation_ready"
+    },
+    {
+      "name": "unchanged_pending_admission_has_bound_recovery_evidence"
+    },
+    {
+      "name": "owner_stale_evidence_and_same_reviewer_cannot_reopen"
+    },
+    {
+      "name": "closure_crash_reconciled_by_original_second_reviewer"
+    },
+    {
+      "name": "closed_request_cannot_replay_or_reset_budget_or_revocation",
+      "reserved": 5
+    },
+    {
+      "name": "latest_restore_preserves_closure_old_restore_stays_fenced"
+    },
+    {
+      "name": "unavailable_external_receipt_keeps_installation_fenced"
+    },
+    {
+      "name": "verified_effect_receipt_reconciles_and_langgraph_resumes_without_resend"
+    },
+    {
+      "name": "second_cold_restore_keeps_reconciled_effect_and_actual_checkpoints",
+      "restored_checkpoints": 7
+    }
+  ],
+  "worker_calls": [
+    {
+      "job": "0182d7c7-d379-4738-9a2c-fabd3ffc3028",
+      "resume": false,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": false, \"next\": [\"approval\"], \"evidence_count\": 2, \"epoch\": 1, \"heartbeat_count\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "job": "0182d7c7-d379-4738-9a2c-fabd3ffc3028",
+      "resume": true,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 2, \"epoch\": 2, \"heartbeat_count\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "job": "cc48e421-e53a-440d-8681-1625da4651be",
+      "resume": false,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 1, \"epoch\": 1, \"heartbeat_count\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "job": "326c1974-1720-4f6b-b0e0-33f89e77fdd1",
+      "resume": false,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": false, \"next\": [\"approval\"], \"evidence_count\": 1, \"epoch\": 1, \"heartbeat_count\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "job": "326c1974-1720-4f6b-b0e0-33f89e77fdd1",
+      "resume": true,
+      "crash": false,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\asyncio\\base_events.py\", line 691, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\validation\\langgraph-business-flow\\worker.py\", line 90, in main\n    else:await graph.ainvoke(value,graph_config)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\main.py\", line 4177, in ainvoke\n    async for chunk in self.astream(\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\main.py\", line 3528, in astream\n    async for _ in runner.atick(\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_runner.py\", line 395, in atick\n    await arun_with_retry(\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_retry.py\", line 738, in arun_with_retry\n    return await task.proc.ainvoke(task.input, config)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py\", line 836, in ainvoke\n    input = await asyncio.create_task(\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\vendor\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py\", line 554, in ainvoke\n    ret = await self.afunc(*args, **kwargs)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\validation\\langgraph-business-flow\\worker.py\", line 56, in effect\n    value = await call('effect')\n            ^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\validation\\langgraph-business-flow\\worker.py\", line 36, in call\n    return await asyncio.to_thread(request, action, worker=worker_id, epoch=claim['epoch'], **payload)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\asyncio\\threads.py\", line 25, in to_thread\n    return await loop.run_in_executor(None, func_call)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\concurrent\\futures\\thread.py\", line 59, in run\n    result = self.fn(*self.args, **self.kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\multi-agent\\validation\\langgraph-business-flow\\worker.py\", line 31, in request\n    with urlopen(req, timeout=config.get('request_timeout',12)) as response:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 215, in urlopen\n    return opener.open(url, data, timeout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 515, in open\n    response = self._open(req, data)\n               ^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 532, in _open\n    result = self._call_chain(self.handle_open, protocol, protocol +\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 492, in _call_chain\n    result = func(*args)\n             ^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 1373, in http_open\n    return self.do_open(http.client.HTTPConnection, req)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\urllib\\request.py\", line 1348, in do_open\n    r = h.getresponse()\n        ^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\http\\client.py\", line 1478, in getresponse\n    response.begin()\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\http\\client.py\", line 343, in begin\n    version, status, reason = self._read_status()\n                              ^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\http\\client.py\", line 304, in _read_status\n    line = str(self.fp.readline(_MAXLINE + 1), \"iso-8859-1\")\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\PC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\socket.py\", line 720, in readinto\n    return self._sock.recv_into(b)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nConnectionResetError: [WinError 10054] Foi forçado o cancelamento de uma conexão existente pelo host remoto\nDuring task with name 'effect' and id '1eee9aa8-8ba7-c80a-d62c-f217493b6a48'\n"
+    },
+    {
+      "job": "326c1974-1720-4f6b-b0e0-33f89e77fdd1",
+      "resume": true,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 1, \"epoch\": 4, \"heartbeat_count\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "job": "326c1974-1720-4f6b-b0e0-33f89e77fdd1",
+      "resume": true,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 1, \"epoch\": 5, \"heartbeat_count\": 0}\n",
+      "stderr": ""
+    }
+  ],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "governed closure of unchanged uncommitted admissions; unknown effects remain fenced",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "closure": {
+    "approvers": [
+      "board",
+      "reviewer2"
+    ],
+    "evidence_sha": "e44c34a25dc19f5e3411408aa1275a2555e33d7e0bb8eba593bd0117b14da45d",
+    "job": "c9cac2d3-5003-42d1-bc15-e631fabee6d4",
+    "kind": "closed_unknown",
+    "operation_id": "business-flow-2af8cf211e:7d1ab3441e01846fc2ba7053983f7b8784fc4c5a57bb10ce1cac7eba002fbcf1",
+    "original_outcome": "unknown_not_reexecuted",
+    "owner": "owner",
+    "reason": "Close only as unknown after verifying unchanged local state; retain all reservation units.",
+    "reservation": "retained_not_refunded"
+  },
+  "cold_restore_new_postgres": {
+    "container": "business-flow-2af8cf211e-pg-restored-995e1b",
+    "volume": "business-flow-2af8cf211e-pg-restored-995e1b-data"
+  },
+  "provider": {
+    "unique_receipts": 2,
+    "send_counts": {
+      "business-flow-2af8cf211e:0182d7c7-d379-4738-9a2c-fabd3ffc3028": 1,
+      "business-flow-2af8cf211e:326c1974-1720-4f6b-b0e0-33f89e77fdd1": 1
+    }
+  },
+  "final_retained_state": {
+    "budgets": {
+      "business": {
+        "cap": 16,
+        "reserved": 9
+      }
+    },
+    "pending_count": 0,
+    "current": true
+  },
+  "missing_receipt_lookup": {
+    "rejected": true,
+    "sends": 0
+  },
+  "effect_reconciliation": {
+    "approvers": [
+      "board",
+      "reviewer2"
+    ],
+    "evidence_sha": "426f8d89fe33e9f50948a8273cf72225364d615005d5bcc912439022524c4cc0",
+    "inventory_admitted": "7d6f116c5e34754810fd9066d19fb826e20db60ec88afdaa03d0dccddad4abd1",
+    "job": "326c1974-1720-4f6b-b0e0-33f89e77fdd1",
+    "kind": "reconciled_effect",
+    "lease_before": {
+      "deadline": 1793904746390,
+      "epoch": 2,
+      "worker": "76146dd6de924c2488de2953324d68a9"
+    },
+    "operation_id": "business-flow-2af8cf211e:8759fc20de1595da53b0cf78cfbfc4bd07a756a0376019de362316805e21f4f5",
+    "owner": "owner",
+    "reason": "Reconcile the independently looked-up durable provider receipt without sending the effect again.",
+    "receipt": {
+      "deliveries": 1,
+      "found": true,
+      "receipt": "2e04a6b46b7328ec38edefdc",
+      "source_run": "326c1974-1720-4f6b-b0e0-33f89e77fdd1"
+    },
+    "replayed": true,
+    "reservation": "retained_not_refunded"
+  },
+  "second_restore_status": {
+    "current": true,
+    "seq": 29,
+    "head": "91c693a05105e5189d0e46d0f12a5952b04f6d615d395e3afa1119a87a2c49fd",
+    "budgets": {
+      "business": {
+        "cap": 16,
+        "reserved": 9
+      }
+    }
+  },
+  "result": "PASS_BOUNDED_GOVERNED_RECOVERY",
+  "seconds": 27.16973159997724,
+  "disposable_resources_removed": true
+}

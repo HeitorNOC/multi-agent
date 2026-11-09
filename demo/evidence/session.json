@@ -1,0 +1,775 @@
+{
+  "url": "http://127.0.0.1:59587",
+  "environment": {
+    "installation": "business-flow-2a1b154951",
+    "versions": {
+      "langgraph": "1.2.19",
+      "langgraph-checkpoint": "4.3.1",
+      "langgraph-checkpoint-postgres": "3.2.0",
+      "psycopg": "3.3.7",
+      "pytest": "9.2.0"
+    },
+    "langgraph_sha": "3c916d750575b22c464790e9774494d810ccd322",
+    "ui": "React 19.2.8 / esbuild 0.28.2",
+    "sources": [
+      {
+        "source": "sales-january",
+        "version": 1,
+        "content": "ACME January sales: 100 orders, average price 100 units, revenue 10000 units. Source: sales-january.",
+        "sha256": "f3d860e11853fc46538b4e8b0c3877d5eebf9b22ee269610b3b387bad18eeab7",
+        "projection": "49e58c5296e8fe693f6295a7aba074a85be33e3e117f5c21288288e9ed7d60fc",
+        "mode": "publicação fictícia de demonstração"
+      },
+      {
+        "source": "sales-february",
+        "version": 1,
+        "content": "ACME February sales: 80 orders, average price 100 units, revenue 8000 units. Source: sales-february.",
+        "sha256": "52eb018b3cd618488ccccf23badb7def03ababfe0ca4191e2fde2211bcaa3703",
+        "projection": "bec772ccc02ade4b4242130ca22f2a9e4b131c49ba6fba937c514179edc65feb",
+        "mode": "publicação fictícia de demonstração"
+      },
+      {
+        "source": "inventory",
+        "version": 1,
+        "content": "ACME February stockouts count 0. January stockouts count 0. No explanation for revenue decline is established.",
+        "sha256": "6126f553e23949d81c71b1c2e685ae89ac1f0bd186f589259e51090a7763d6d3",
+        "projection": "e83ae437770c9239d2eb600df0ea824e8ad03a8f1bacd6f2b0b9fb14ac7ac2f2",
+        "mode": "publicação fictícia de demonstração"
+      }
+    ],
+    "production_approved": false
+  },
+  "usage": {
+    "calls": 11,
+    "max_calls": 16,
+    "input_tokens": 137888,
+    "cached_input_tokens": 50048,
+    "output_tokens": 2248,
+    "money": "Custo monetário não medido; chamadas Codex de bancada, sem fatura API atribuível."
+  },
+  "jobs": [
+    {
+      "id": "2722b8b6-88d1-4241-95fa-d657d1f0f1c1",
+      "goal": "Analise as vendas e o estoque da ACME de janeiro e fevereiro e proponha uma ação comercial revisável.",
+      "status": "awaiting_approval",
+      "plan": {
+        "strategy": "A3",
+        "capabilities": [
+          "sales_analysis",
+          "inventory_analysis"
+        ],
+        "reason": "A análise de vendas permite comparar o desempenho de janeiro e fevereiro, enquanto a análise de estoque identifica a disponibilidade dos produtos. Juntas, elas permitem planejar uma ação comercial revisável com base na relação entre demanda e estoque, sem executá-la.",
+        "requires_approval": true,
+        "max_model_calls": 4
+      },
+      "review": {
+        "job": "2722b8b6-88d1-4241-95fa-d657d1f0f1c1",
+        "report": {
+          "january_revenue": 10000,
+          "february_revenue": 8000,
+          "revenue_drop_pct": 20,
+          "january_stockouts": 0,
+          "february_stockouts": 0,
+          "causal_proof": false,
+          "summary": "De janeiro para fevereiro, a receita caiu de 10.000 para 8.000 unidades e os pedidos caíram de 100 para 80, ambos 20%, enquanto o preço médio permaneceu em 100 unidades. Foram registradas zero rupturas de estoque nos dois meses, mas os níveis e a composição do estoque não foram informados. A causa da queda não foi estabelecida.",
+          "hypotheses": [
+            "Hipótese não comprovada: a queda pode estar relacionada a uma redução da demanda.",
+            "Hipótese não comprovada: mudanças no perfil dos produtos ou clientes podem ter contribuído para a queda."
+          ],
+          "cited_sources": [
+            "sales-january",
+            "sales-february",
+            "inventory"
+          ],
+          "action": "Investigar a queda dos pedidos e da receita, examinando dados por produto e cliente, níveis e composição do estoque e margens. Com base nos resultados, elaborar uma proposta de campanha direcionada para revisão, com produtos e condições definidos posteriormente. O conteúdo exato deve ser aprovado antes de qualquer execução.",
+          "requires_approval": true
+        },
+        "payload": {
+          "operation": "simulated-commercial-proposal",
+          "recipient": "quadro-comercial-local",
+          "content": "Investigar a queda dos pedidos e da receita, examinando dados por produto e cliente, níveis e composição do estoque e margens. Com base nos resultados, elaborar uma proposta de campanha direcionada para revisão, com produtos e condições definidos posteriormente. O conteúdo exato deve ser aprovado antes de qualquer execução."
+        },
+        "hash": "ca08feb57a773806ce02b0107a90fc9be354c43d1b67532c75ca397a5cb2349e",
+        "requires_approval": true
+      },
+      "approval": false,
+      "receipt": null,
+      "error": null,
+      "created": "2026-11-05T06:28:19.237Z",
+      "worker_active": false,
+      "events": [
+        {
+          "seq": 33,
+          "at": "2026-11-05T06:28:19.238Z",
+          "node": "admission",
+          "detail": {
+            "goal": "Analise as vendas e o estoque da ACME de janeiro e fevereiro e proponha uma ação comercial revisável."
+          }
+        },
+        {
+          "seq": 34,
+          "at": "2026-11-05T06:28:19.245Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 33588
+          }
+        },
+        {
+          "seq": 35,
+          "at": "2026-11-05T06:28:20.259Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [],
+            "has_state": false,
+            "process": 20340
+          }
+        },
+        {
+          "seq": 36,
+          "at": "2026-11-05T06:28:20.274Z",
+          "node": "chief_of_staff",
+          "detail": {
+            "message": "Planejando a análise de vendas e estoque."
+          }
+        },
+        {
+          "seq": 37,
+          "at": "2026-11-05T06:28:26.767Z",
+          "node": "plan",
+          "detail": {
+            "strategy": "A3",
+            "capabilities": [
+              "sales_analysis",
+              "inventory_analysis"
+            ],
+            "reason": "A análise de vendas permite comparar o desempenho de janeiro e fevereiro, enquanto a análise de estoque identifica a disponibilidade dos produtos. Juntas, elas permitem planejar uma ação comercial revisável com base na relação entre demanda e estoque, sem executá-la.",
+            "requires_approval": true,
+            "max_model_calls": 4
+          }
+        },
+        {
+          "seq": 38,
+          "at": "2026-11-05T06:28:26.774Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "sales_analysis"
+          }
+        },
+        {
+          "seq": 39,
+          "at": "2026-11-05T06:28:26.775Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "inventory_analysis"
+          }
+        },
+        {
+          "seq": 40,
+          "at": "2026-11-05T06:28:32.402Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "inventory_analysis",
+            "sources": [
+              "inventory"
+            ]
+          }
+        },
+        {
+          "seq": 41,
+          "at": "2026-11-05T06:28:39.879Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "sales_analysis",
+            "sources": [
+              "sales-january",
+              "sales-february"
+            ]
+          }
+        },
+        {
+          "seq": 42,
+          "at": "2026-11-05T06:28:39.886Z",
+          "node": "synthesis",
+          "detail": {
+            "message": "Consolidando fatos, fontes e hipóteses."
+          }
+        },
+        {
+          "seq": 43,
+          "at": "2026-11-05T06:28:50.977Z",
+          "node": "review_ready",
+          "detail": {
+            "hash": "ca08feb57a773806ce02b0107a90fc9be354c43d1b67532c75ca397a5cb2349e",
+            "model_approval_mismatch": false
+          }
+        },
+        {
+          "seq": 44,
+          "at": "2026-11-05T06:28:50.988Z",
+          "node": "checkpoint_saved",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "completed": false
+          }
+        },
+        {
+          "seq": 45,
+          "at": "2026-11-05T06:28:51.082Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 33588,
+            "exit_code": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "207b88d0-ed55-4da3-b74f-02e5420c7c7c",
+      "goal": "Analise as vendas e o estoque da ACME de janeiro e fevereiro e proponha uma ação comercial revisável.",
+      "status": "completed",
+      "plan": {
+        "strategy": "A3",
+        "capabilities": [
+          "sales_analysis",
+          "inventory_analysis"
+        ],
+        "reason": "A análise de vendas é necessária para comparar o desempenho de janeiro e fevereiro, enquanto a análise de estoque permite avaliar a disponibilidade dos produtos e embasar uma proposta comercial revisável.",
+        "requires_approval": true,
+        "max_model_calls": 4
+      },
+      "review": {
+        "job": "207b88d0-ed55-4da3-b74f-02e5420c7c7c",
+        "report": {
+          "january_revenue": 10000,
+          "february_revenue": 8000,
+          "revenue_drop_pct": 20,
+          "january_stockouts": 0,
+          "february_stockouts": 0,
+          "causal_proof": false,
+          "summary": "De janeiro para fevereiro, a receita caiu de 10.000 para 8.000 unidades e os pedidos diminuíram de 100 para 80, ambos com queda de 20%; o preço médio permaneceu em 100 unidades. Não houve rupturas de estoque registradas nos dois meses, mas os níveis de estoque não foram informados. A causa da queda não foi estabelecida.",
+          "hypotheses": [
+            "Hipótese não comprovada: uma redução na demanda pode ter contribuído para a queda no número de pedidos.",
+            "Hipótese não comprovada: mudanças na disponibilidade de produtos podem ter influenciado os pedidos, embora não tenham sido registradas rupturas e os níveis de estoque não sejam conhecidos."
+          ],
+          "cited_sources": [
+            "sales-january",
+            "sales-february",
+            "inventory"
+          ],
+          "action": "Investigar a queda dos pedidos, verificando os níveis de estoque disponíveis e outros dados relevantes de vendas. Em seguida, definir metas e critérios de acompanhamento e submeter uma possível campanha de estímulo a pedidos para revisão e aprovação de seu conteúdo exato.",
+          "requires_approval": true
+        },
+        "payload": {
+          "operation": "simulated-commercial-proposal",
+          "recipient": "quadro-comercial-local",
+          "content": "Investigar a queda dos pedidos, verificando os níveis de estoque disponíveis e outros dados relevantes de vendas. Em seguida, definir metas e critérios de acompanhamento e submeter uma possível campanha de estímulo a pedidos para revisão e aprovação de seu conteúdo exato."
+        },
+        "hash": "d7ea5ab0307718677008ab56ed33390864e4d9f8af1fc85dcfd56be43d4a483c",
+        "requires_approval": true
+      },
+      "approval": true,
+      "receipt": {
+        "id": "5e6f5f1d-9a41-4863-a27c-0358e5b85455",
+        "job": "207b88d0-ed55-4da3-b74f-02e5420c7c7c",
+        "hash": "d7ea5ab0307718677008ab56ed33390864e4d9f8af1fc85dcfd56be43d4a483c",
+        "simulated": true,
+        "recipient": "quadro-comercial-local",
+        "content": "Investigar a queda dos pedidos, verificando os níveis de estoque disponíveis e outros dados relevantes de vendas. Em seguida, definir metas e critérios de acompanhamento e submeter uma possível campanha de estímulo a pedidos para revisão e aprovação de seu conteúdo exato.",
+        "created": "2026-11-05T06:25:54.877Z"
+      },
+      "error": null,
+      "created": "2026-11-05T06:25:23.288Z",
+      "worker_active": false,
+      "events": [
+        {
+          "seq": 1,
+          "at": "2026-11-05T06:25:23.289Z",
+          "node": "admission",
+          "detail": {
+            "goal": "Analise as vendas e o estoque da ACME de janeiro e fevereiro e proponha uma ação comercial revisável."
+          }
+        },
+        {
+          "seq": 2,
+          "at": "2026-11-05T06:25:23.300Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 16784
+          }
+        },
+        {
+          "seq": 3,
+          "at": "2026-11-05T06:25:24.243Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [],
+            "has_state": false,
+            "process": 1752
+          }
+        },
+        {
+          "seq": 4,
+          "at": "2026-11-05T06:25:24.272Z",
+          "node": "chief_of_staff",
+          "detail": {
+            "message": "Planejando a análise de vendas e estoque."
+          }
+        },
+        {
+          "seq": 5,
+          "at": "2026-11-05T06:25:29.213Z",
+          "node": "plan",
+          "detail": {
+            "strategy": "A3",
+            "capabilities": [
+              "sales_analysis",
+              "inventory_analysis"
+            ],
+            "reason": "A análise de vendas é necessária para comparar o desempenho de janeiro e fevereiro, enquanto a análise de estoque permite avaliar a disponibilidade dos produtos e embasar uma proposta comercial revisável.",
+            "requires_approval": true,
+            "max_model_calls": 4
+          }
+        },
+        {
+          "seq": 6,
+          "at": "2026-11-05T06:25:29.220Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "inventory_analysis"
+          }
+        },
+        {
+          "seq": 7,
+          "at": "2026-11-05T06:25:29.221Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "sales_analysis"
+          }
+        },
+        {
+          "seq": 8,
+          "at": "2026-11-05T06:25:35.383Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "inventory_analysis",
+            "sources": [
+              "inventory"
+            ]
+          }
+        },
+        {
+          "seq": 9,
+          "at": "2026-11-05T06:25:42.293Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "sales_analysis",
+            "sources": [
+              "sales-january",
+              "sales-february"
+            ]
+          }
+        },
+        {
+          "seq": 10,
+          "at": "2026-11-05T06:25:42.298Z",
+          "node": "synthesis",
+          "detail": {
+            "message": "Consolidando fatos, fontes e hipóteses."
+          }
+        },
+        {
+          "seq": 11,
+          "at": "2026-11-05T06:25:52.215Z",
+          "node": "review_ready",
+          "detail": {
+            "hash": "d7ea5ab0307718677008ab56ed33390864e4d9f8af1fc85dcfd56be43d4a483c",
+            "model_approval_mismatch": false
+          }
+        },
+        {
+          "seq": 12,
+          "at": "2026-11-05T06:25:52.226Z",
+          "node": "checkpoint_saved",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "completed": false
+          }
+        },
+        {
+          "seq": 13,
+          "at": "2026-11-05T06:25:52.319Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 16784,
+            "exit_code": 0
+          }
+        },
+        {
+          "seq": 14,
+          "at": "2026-11-05T06:25:52.390Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 19308
+          }
+        },
+        {
+          "seq": 15,
+          "at": "2026-11-05T06:25:53.280Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "has_state": true,
+            "process": 11988
+          }
+        },
+        {
+          "seq": 16,
+          "at": "2026-11-05T06:25:53.291Z",
+          "node": "checkpoint_saved",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "completed": false
+          }
+        },
+        {
+          "seq": 17,
+          "at": "2026-11-05T06:25:53.378Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 19308,
+            "exit_code": 0
+          }
+        },
+        {
+          "seq": 18,
+          "at": "2026-11-05T06:25:54.016Z",
+          "node": "human_approved",
+          "detail": {
+            "hash": "d7ea5ab0307718677008ab56ed33390864e4d9f8af1fc85dcfd56be43d4a483c",
+            "actor": "operador-local-demo"
+          }
+        },
+        {
+          "seq": 19,
+          "at": "2026-11-05T06:25:54.021Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 32004
+          }
+        },
+        {
+          "seq": 20,
+          "at": "2026-11-05T06:25:54.865Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [
+              "approval"
+            ],
+            "has_state": true,
+            "process": 6060
+          }
+        },
+        {
+          "seq": 21,
+          "at": "2026-11-05T06:25:54.871Z",
+          "node": "approval_resumed",
+          "detail": {
+            "hash": "d7ea5ab0307718677008ab56ed33390864e4d9f8af1fc85dcfd56be43d4a483c"
+          }
+        },
+        {
+          "seq": 22,
+          "at": "2026-11-05T06:25:54.877Z",
+          "node": "effect_receipt",
+          "detail": {
+            "id": "5e6f5f1d-9a41-4863-a27c-0358e5b85455",
+            "replayed": false,
+            "simulated": true
+          }
+        },
+        {
+          "seq": 23,
+          "at": "2026-11-05T06:25:54.889Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 32004,
+            "exit_code": 88
+          }
+        },
+        {
+          "seq": 24,
+          "at": "2026-11-05T06:25:55.708Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 6308
+          }
+        },
+        {
+          "seq": 25,
+          "at": "2026-11-05T06:25:56.569Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [
+              "effect"
+            ],
+            "has_state": true,
+            "process": 29864
+          }
+        },
+        {
+          "seq": 26,
+          "at": "2026-11-05T06:25:56.598Z",
+          "node": "effect_receipt",
+          "detail": {
+            "id": "5e6f5f1d-9a41-4863-a27c-0358e5b85455",
+            "replayed": true,
+            "simulated": true
+          }
+        },
+        {
+          "seq": 27,
+          "at": "2026-11-05T06:25:56.607Z",
+          "node": "checkpoint_saved",
+          "detail": {
+            "next": [],
+            "completed": true
+          }
+        },
+        {
+          "seq": 28,
+          "at": "2026-11-05T06:25:56.695Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 6308,
+            "exit_code": 0
+          }
+        },
+        {
+          "seq": 29,
+          "at": "2026-11-05T06:25:57.360Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 16312
+          }
+        },
+        {
+          "seq": 30,
+          "at": "2026-11-05T06:25:58.305Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [],
+            "has_state": true,
+            "process": 20824
+          }
+        },
+        {
+          "seq": 31,
+          "at": "2026-11-05T06:25:58.313Z",
+          "node": "checkpoint_saved",
+          "detail": {
+            "next": [],
+            "completed": true
+          }
+        },
+        {
+          "seq": 32,
+          "at": "2026-11-05T06:25:58.402Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 16312,
+            "exit_code": 0
+          }
+        }
+      ]
+    }
+  ],
+  "model_calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "seconds": 7.991059600026347,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13870,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 254,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "seconds": 7.952053799992427,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13871,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 264,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "seconds": 8.254060600011144,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13077,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 279,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "seconds": 4.901091200008523,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11287,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 71,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "seconds": 6.0418096000212245,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11503,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 149,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "seconds": 6.882509600021876,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12526,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 214,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "model": "gpt-6.1-terra",
+      "seconds": 9.865758500003722,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12430,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 289,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "model": "gpt-6.1-terra",
+      "seconds": 6.42491699999664,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12077,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 86,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 9,
+      "model": "gpt-6.1-terra",
+      "seconds": 5.382490799995139,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12293,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 130,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 10,
+      "model": "gpt-6.1-terra",
+      "seconds": 7.464879599981941,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11736,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 231,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 11,
+      "model": "gpt-6.1-terra",
+      "seconds": 11.022865500010084,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13218,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 281,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ],
+  "effect_count": 1,
+  "production_approved": false,
+  "business_v1_requalified": false
+}

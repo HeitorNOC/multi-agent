@@ -1,0 +1,10 @@
+{
+  "new_status": 429,
+  "closed_fingerprint_status": 409,
+  "history_reads": 16,
+  "history_exact": true,
+  "admission_created": false,
+  "authority_seq_unchanged": true,
+  "actual_cli_calls": 0,
+  "reserved": 40
+}

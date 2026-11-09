@@ -1,0 +1,159 @@
+{
+  "type": "ESTIMATE from published prices and assumed volumes, not measured or invoiced cost",
+  "priced_at": "2026-11-03",
+  "tier": "standard, global, short-context text; no enterprise discounts, batch, residency premiums, tax or FX",
+  "not_included": [
+    "hosting/HA",
+    "object/graph/vector storage",
+    "cache storage hours",
+    "OCR",
+    "reranking",
+    "entity/relationship embeddings",
+    "tool/API charges",
+    "reindexing",
+    "egress",
+    "observability",
+    "backup",
+    "support/operations"
+  ],
+  "cards_usd_per_million_tokens": {
+    "openai:gpt-6.1-sol": {
+      "fresh": "2",
+      "read": "0.10",
+      "write_short": "2.50",
+      "write_long": "5",
+      "output": "10"
+    },
+    "openai:gpt-6-luna": {
+      "fresh": "0.10",
+      "read": "0.01",
+      "write_short": "0.125",
+      "write_long": "0.25",
+      "output": "0.50"
+    },
+    "anthropic:claude-sonnet-5-5": {
+      "fresh": "2",
+      "read": "0.10",
+      "write_short": "2.50",
+      "write_long": "4",
+      "output": "10"
+    },
+    "google:gemini-3.5-flash-lite": {
+      "fresh": "0.30",
+      "read": "0.03",
+      "write_short": null,
+      "write_long": null,
+      "output": "2.50"
+    }
+  },
+  "scenarios": [
+    {
+      "name": "pilot",
+      "users": 20,
+      "active_workflows": 5,
+      "tasks_day": 50,
+      "documents": 2000,
+      "assumptions": {
+        "aggregate_input_tokens_per_task": 40000,
+        "aggregate_output_tokens_per_task": 8000,
+        "retry_work_multiplier": "1.20",
+        "days_month": 30,
+        "tokens_per_doc": 8000,
+        "extraction_output_ratio": "0.20"
+      },
+      "models": {
+        "openai:gpt-6.1-sol": {
+          "monthly_task_tokens_usd": "288.0000",
+          "initial_extraction_tokens_usd": "64"
+        },
+        "openai:gpt-6-luna": {
+          "monthly_task_tokens_usd": "14.40000",
+          "initial_extraction_tokens_usd": "3.20"
+        },
+        "anthropic:claude-sonnet-5-5": {
+          "monthly_task_tokens_usd": "288.0000",
+          "initial_extraction_tokens_usd": "64"
+        },
+        "google:gemini-3.5-flash-lite": {
+          "monthly_task_tokens_usd": "57.60000",
+          "initial_extraction_tokens_usd": "12.80"
+        }
+      },
+      "embedding_raw_document_pass_usd_at_0_02_per_million": "0.32",
+      "chunk_vectors_approx": 17778,
+      "raw_chunk_vectors_gib_1536_float32": "0.10"
+    },
+    {
+      "name": "large-enterprise-design-target",
+      "users": 2000,
+      "active_workflows": 100,
+      "tasks_day": 10000,
+      "documents": 1000000,
+      "assumptions": {
+        "aggregate_input_tokens_per_task": 40000,
+        "aggregate_output_tokens_per_task": 8000,
+        "retry_work_multiplier": "1.20",
+        "days_month": 30,
+        "tokens_per_doc": 8000,
+        "extraction_output_ratio": "0.20"
+      },
+      "models": {
+        "openai:gpt-6.1-sol": {
+          "monthly_task_tokens_usd": "57600.0000",
+          "initial_extraction_tokens_usd": "32000"
+        },
+        "openai:gpt-6-luna": {
+          "monthly_task_tokens_usd": "2880.00000",
+          "initial_extraction_tokens_usd": "1600.00"
+        },
+        "anthropic:claude-sonnet-5-5": {
+          "monthly_task_tokens_usd": "57600.0000",
+          "initial_extraction_tokens_usd": "32000"
+        },
+        "google:gemini-3.5-flash-lite": {
+          "monthly_task_tokens_usd": "11520.00000",
+          "initial_extraction_tokens_usd": "6400.00"
+        }
+      },
+      "embedding_raw_document_pass_usd_at_0_02_per_million": "160.00",
+      "chunk_vectors_approx": 8888889,
+      "raw_chunk_vectors_gib_1536_float32": "50.86"
+    },
+    {
+      "name": "stress-hypothesis-not-capacity-claim",
+      "users": 10000,
+      "active_workflows": 500,
+      "tasks_day": 50000,
+      "documents": 10000000,
+      "assumptions": {
+        "aggregate_input_tokens_per_task": 40000,
+        "aggregate_output_tokens_per_task": 8000,
+        "retry_work_multiplier": "1.20",
+        "days_month": 30,
+        "tokens_per_doc": 8000,
+        "extraction_output_ratio": "0.20"
+      },
+      "models": {
+        "openai:gpt-6.1-sol": {
+          "monthly_task_tokens_usd": "288000.0000",
+          "initial_extraction_tokens_usd": "320000"
+        },
+        "openai:gpt-6-luna": {
+          "monthly_task_tokens_usd": "14400.00000",
+          "initial_extraction_tokens_usd": "16000.00"
+        },
+        "anthropic:claude-sonnet-5-5": {
+          "monthly_task_tokens_usd": "288000.0000",
+          "initial_extraction_tokens_usd": "320000"
+        },
+        "google:gemini-3.5-flash-lite": {
+          "monthly_task_tokens_usd": "57600.00000",
+          "initial_extraction_tokens_usd": "64000.00"
+        }
+      },
+      "embedding_raw_document_pass_usd_at_0_02_per_million": "1600.00",
+      "chunk_vectors_approx": 88888889,
+      "raw_chunk_vectors_gib_1536_float32": "508.63"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "process_results": [
+    [
+      {
+        "granted": true,
+        "id": "e45e4a8f-c591-4db5-9ba4-a9a155357a87",
+        "number": 2,
+        "scope": "stress"
+      },
+      {
+        "granted": true,
+        "id": "b10cb262-2e89-4d24-a06c-6934b8185efc",
+        "number": 3,
+        "scope": "stress"
+      },
+      {
+        "granted": true,
+        "id": "ca6adb23-479c-4e7c-b3d6-946cfdb555c6",
+        "number": 5,
+        "scope": "stress"
+      },
+      {
+        "granted": true,
+        "id": "e9438987-ef14-482a-b82e-9a39fd383456",
+        "number": 6,
+        "scope": "stress"
+      },
+      {
+        "granted": false,
+        "id": "ca272fe2-e368-4428-a93b-1b18ba6d1daf",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "44512d57-eece-4c26-b69c-b142442c3bfc",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "a56cbe34-be4c-4711-ad56-179762f9f01f",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "07abae66-e2e4-4686-b823-ab41216efbc7",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "ddcb2118-1805-4b54-8809-3033088ad425",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "8410e454-f841-4339-875c-74f62ce18fca",
+        "status": 409
+      }
+    ],
+    [
+      {
+        "granted": true,
+        "id": "86447d0f-9c92-40cd-ad5a-fb0236e5ec12",
+        "number": 1,
+        "scope": "stress"
+      },
+      {
+        "granted": true,
+        "id": "a1e01803-368c-4a8d-91da-31295cec3ce0",
+        "number": 4,
+        "scope": "stress"
+      },
+      {
+        "granted": true,
+        "id": "1ed83e4a-d220-464e-a88a-0baa3fba633e",
+        "number": 7,
+        "scope": "stress"
+      },
+      {
+        "granted": false,
+        "id": "f717f87b-6cdb-44ca-83bb-8097e5961cc8",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "2da46905-88e5-476d-a6c3-d7c466eb34b3",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "d0a47bd6-9ee1-4e8a-81e3-19acec5db4b7",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "29b3455a-1fb9-48d6-92ba-866b9ce20658",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "d305a641-0c3b-43dc-8456-2bc6a819dd45",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "3cdf21dc-8a9e-459e-88d2-de2431b44437",
+        "status": 409
+      },
+      {
+        "granted": false,
+        "id": "d77a9034-12de-42a4-bfff-387c8df35e78",
+        "status": 409
+      }
+    ]
+  ],
+  "idempotent_retry": {
+    "id": "e45e4a8f-c591-4db5-9ba4-a9a155357a87",
+    "number": 2,
+    "scope": "stress"
+  }
+}

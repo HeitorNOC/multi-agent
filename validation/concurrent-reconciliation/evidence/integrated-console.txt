@@ -1,0 +1,14 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+CHECKPOINT two_api_processes_and_editorial_grant_revocation_enforced
+CHECKPOINT eight_identical_requests_across_two_processes_one_admission_and_result
+CHECKPOINT distinct_requests_from_both_api_processes_complete_without_call_id_collision
+CHECKPOINT governance_reconciles_after_fresh_receipt_without_model_or_changed_response
+CHECKPOINT governance_reconciles_after_receipt_without_model_or_changed_response
+CHECKPOINT two_governance_identities_close_unknown_intent_without_success_or_reexecution
+CHECKPOINT two_process_reservation_race_twenty_requests_exactly_seven_admitted
+CHECKPOINT authority_and_both_clients_restart_preserve_limits_tombstone_and_original_results
+.
+1 passed in 205.23s (0:03:25)

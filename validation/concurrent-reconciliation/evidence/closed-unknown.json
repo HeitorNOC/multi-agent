@@ -1,0 +1,14 @@
+{
+  "outcome": {
+    "kind": "closed_unknown_intent",
+    "seq": 9,
+    "operation_id": "9e1a938c-7927-56ff-9005-74a0eeef1ac5",
+    "request_id": "78c23566-9f87-4a95-a55b-816f9c667c59",
+    "reason": "Intenção persistida e processo interrompido; resultado original desconhecido, sem repetição ou declaração de sucesso.",
+    "prepared_by": "1f744bae-fb0b-4605-8bfd-6d518f916044",
+    "confirmed_by": "74f41779-f241-4591-aa4f-074c5f93e23d",
+    "original_outcome": "unknown_not_reexecuted"
+  },
+  "matches": true,
+  "recovering": false
+}

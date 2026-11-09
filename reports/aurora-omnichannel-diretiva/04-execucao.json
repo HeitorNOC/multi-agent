@@ -1,0 +1,197 @@
+{
+  "directive_sha256": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "manifest_sha256": "97d6e22428920294595a661b46f7d842ef9e006b2c5b9269636ab8a616378c81",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "a83b0381f9fc73b24545054b29e8625217612a907313616168d69913239232af",
+      "reservation_id": "chief-plan",
+      "instance": "executive-omnichannel",
+      "seconds": 17.861701000016183,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 21602,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 692,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "4e8747ba9ad230c3c2fbbea8c3274e4e13d12d19020f56ebbaab44a635b9c784",
+      "reservation_id": "technology_director-delegation",
+      "instance": "executive-omnichannel",
+      "seconds": 5.846269499976188,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 19294,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 157,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "f41672849b57551cc4b4581510c1f32d73c61ebc1cffeb173a121e4212f1e971",
+      "reservation_id": "technology_director-report",
+      "instance": "executive-omnichannel",
+      "seconds": 34.05964829999721,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 19788,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1711,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "6271685d4751f769a26a2c2832b3f750d01706a673afdfdd9f3b88c2d0d8c8a9",
+      "reservation_id": "product_director-delegation",
+      "instance": "executive-omnichannel",
+      "seconds": 6.274978400004329,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 18030,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 148,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "9d46d25b8941a9652ebb36a817fc7a8c5d3b3ffc676b0e6515e622e853a3df5f",
+      "reservation_id": "product_director-report",
+      "instance": "executive-omnichannel",
+      "seconds": 29.414470099989558,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 19703,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1468,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "a49b38ec7e0d6f6f97e6b63fdc1e504ced33fb08b3e4bdedb55a920336fcb8ec",
+      "reservation_id": "customer_director-delegation",
+      "instance": "executive-omnichannel",
+      "seconds": 6.56277570000384,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 18816,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 167,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "c7bdbf54f9978f27fbc1033ba7139400f738ba8f2138f4f19bb99a4da23a2c52",
+      "reservation_id": "customer_director-report",
+      "instance": "executive-omnichannel",
+      "seconds": 32.52238860001671,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 19498,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1621,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "e75d957165dc91312ab52869744e462549dc0d995446efe780b9874ace53d74f",
+      "reservation_id": "legal_director-delegation",
+      "instance": "executive-omnichannel",
+      "seconds": 6.749620899994625,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 18900,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 185,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 9,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "b85fff5ed436f9422e0c2fdf816fcf2cc045fd1a7bda45c66a245f070225f39f",
+      "reservation_id": "legal_director-report",
+      "instance": "executive-omnichannel",
+      "seconds": 33.987215000001015,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 19806,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1704,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 10,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "90cfd1680f9d867a2c9814e296dac1f5ac91f3c0fed57044c89327255c25ccf3",
+      "reservation_id": "chief-review",
+      "instance": "executive-omnichannel",
+      "seconds": 72.21697969999514,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 28953,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3817,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

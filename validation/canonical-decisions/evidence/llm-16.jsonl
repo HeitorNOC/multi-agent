@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a5f3-d7b2-70e3-97c1-063600a205b2"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O valor do estudo de aquisição sintética SIGILO_AQUISICAO_2026 é **R$ 9.700.000**. O arquivo-fonte informa que não existe transação real. [1]\\n\\nA fonte não informa uma data de vigência; portanto, não é possível confirmar se esse valor se aplica especificamente a 15 de fevereiro de 2026. [1]\\n\\n### References\\n\\n* [1] aquisicao@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12215,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":113,"reasoning_output_tokens":0}}

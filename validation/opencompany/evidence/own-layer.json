@@ -1,0 +1,20 @@
+{
+  "registered": true,
+  "result": {
+    "success": true,
+    "result": {
+      "source_id": "synthetic-sales-v1",
+      "content": "Sales dropped 20 percent"
+    },
+    "execution_time": 0.013,
+    "timestamp": "2026-11-03T15:17:56.664703+00:00"
+  },
+  "cross_company": {
+    "success": false,
+    "error": "company mismatch",
+    "error_type": "PermissionDeniedError",
+    "execution_time": 0.0,
+    "timestamp": "2026-11-03T15:17:56.664703+00:00"
+  },
+  "scope": "actual OpenCompany ActionNode execute and registry, explicit module import outside clone; no full app or Temporal worker qualified"
+}

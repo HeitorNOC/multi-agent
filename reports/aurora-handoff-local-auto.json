@@ -1,0 +1,2102 @@
+{
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "corpora": {
+    "focused": {
+      "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+      "documents": 3,
+      "passages": 206,
+      "queries": [
+        {
+          "id": "handoff",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 4,
+              "page": 3,
+              "id": "288bc8f3f68f964d6c56cf1bf661c2f9eb85a696eae87a41a881cf915e98b7b1",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 28,
+              "page": 12,
+              "id": "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 6,
+              "page": 4,
+              "id": "f72df4c1a993fd4c645a90c48c91636992d8171f1bb07c0fd3484e3eb07716ca",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 27,
+              "page": 11,
+              "id": "0a478f4e97d2c4d7930ac0b47b87dcf8aebb3770b61b6f9d127446da77b3fa42",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 74,
+              "page": 17,
+              "id": "e38a8f176674605298e153d36ff03e1680a237bdead2dcbe7e39319595fa3595",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 1,
+              "page": 3,
+              "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q01",
+          "evidence_found": 0,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 39,
+              "page": 13,
+              "id": "73dcbeaa0ef21213939b3238cc802e71582d093b8c5afdef9cf6cebbd2957a8b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 54,
+              "page": 15,
+              "id": "0f7eb4d9a6486afff6707b6011a0c2c3b74475e7aae56bddd8d02cef1454c40a",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 73,
+              "page": 17,
+              "id": "9eb9f283aca7b3dd055ab6d42b07dd9f02b6a417343653c6c046b642b80abb94",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 68,
+              "page": 16,
+              "id": "85eb8855409ab14e470c060f21a5fe3d1075ffd1816fbd868bbba101e1e2b399",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "3d3882d01c4e9dc73a24dab50891a3f893dd07db5f67465a568d2a5886eeb516",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 29,
+              "page": 13,
+              "id": "41af672d95d13f1028f6794fd8e7004340d8fd502b0a0f3d325aef1786de5f1a",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q02",
+          "evidence_found": 0,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 27,
+              "page": 10,
+              "id": "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 5,
+              "page": 9,
+              "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 22,
+              "page": 10,
+              "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "ea852f33f6ff4830dfe54c14fe6bfbc36ba6f039e2ee830fe741b20e0b24ac4e",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q03",
+          "evidence_found": 1,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 9,
+              "page": 4,
+              "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 11,
+              "page": 4,
+              "id": "62a8cd894cb87991c941ea3e7cc38794ce07226cbb6d705492bc81d2084a27fb",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 1,
+              "page": 3,
+              "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 7,
+              "page": 4,
+              "id": "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q04",
+          "evidence_found": 1,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 68,
+              "page": 16,
+              "id": "85eb8855409ab14e470c060f21a5fe3d1075ffd1816fbd868bbba101e1e2b399",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 66,
+              "page": 16,
+              "id": "3f513622b7de671fea7bbc46f90e4567fbf1199b737a8f461460d0275affe8bd",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 53,
+              "page": 15,
+              "id": "e04453cca023bc44bbba8746ef0830fbcdbe199a31991ce19c11f6fb03dc849d",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 56,
+              "page": 15,
+              "id": "ad8506e435c93f0d0f1a9422c40e9a0a2077372e85d46a0221844545a00d5df7",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 59,
+              "page": 15,
+              "id": "e0783ea2d196ebaa0bbae63e4aeda9710b4aff84aa5e7e576258216e3226ce0b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 52,
+              "page": 15,
+              "id": "7bcfcdaa7c70795366dfd52e6d687bd41b78b43ca569726376307d3a86f315d1",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q05",
+          "evidence_found": 0,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 22,
+              "page": 10,
+              "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 7,
+              "page": 9,
+              "id": "756f6fd118a32a65115a8e283398db96c9d249d1f6f56cc3bfb896d1c2410a20",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q06",
+          "evidence_found": 1,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 53,
+              "page": 15,
+              "id": "e04453cca023bc44bbba8746ef0830fbcdbe199a31991ce19c11f6fb03dc849d",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 68,
+              "page": 16,
+              "id": "85eb8855409ab14e470c060f21a5fe3d1075ffd1816fbd868bbba101e1e2b399",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 44,
+              "page": 15,
+              "id": "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "6cbded879c1ea4d0eb6a9e96ab6803434a4b44c3f0bb56f95d0f53fcd42f5118",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 6,
+              "page": 9,
+              "id": "a7a3a915ab562955d6832bc8c247295ce84ececffa79bb652cdb08121beeb848",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "3d3882d01c4e9dc73a24dab50891a3f893dd07db5f67465a568d2a5886eeb516",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q07",
+          "evidence_found": 0,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "ea852f33f6ff4830dfe54c14fe6bfbc36ba6f039e2ee830fe741b20e0b24ac4e",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 5,
+              "page": 9,
+              "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 74,
+              "page": 17,
+              "id": "f4b0def831b84264e684401889b0bd6679391f42d5af239459e03a3c2f0904a4",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q08",
+          "evidence_found": 1,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 24,
+              "page": 10,
+              "id": "3c140eabd7790bb417f405ea9646fd53bc820b488480bfd4e30a6c9c2599524c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 21,
+              "page": 10,
+              "id": "eca24df5fab84988ef0172105febe11f31fd5cf51e27beecd6f0baf3a0611992",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q09",
+          "evidence_found": 1,
+          "evidence_expected": 3,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 26,
+              "page": 11,
+              "id": "544bbaf32d813dc8d7d0348baf34833e798b328361dc79f5d3a96028af2beecf",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 33,
+              "page": 13,
+              "id": "d6fdf215baa60424a3b3eb8c6e950f169d3d7e8e3c44de67bc40730729c3ad62",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "6cbded879c1ea4d0eb6a9e96ab6803434a4b44c3f0bb56f95d0f53fcd42f5118",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 39,
+              "page": 13,
+              "id": "73dcbeaa0ef21213939b3238cc802e71582d093b8c5afdef9cf6cebbd2957a8b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 21,
+              "page": 11,
+              "id": "697f48bb7efe5e0bfe0eaacd0d26717fd62d8f904d7f1f160bbbbfeefd35706d",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "3d3882d01c4e9dc73a24dab50891a3f893dd07db5f67465a568d2a5886eeb516",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q10",
+          "evidence_found": 1,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 9,
+              "page": 4,
+              "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 7,
+              "page": 9,
+              "id": "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 40,
+              "page": 15,
+              "id": "f9a69924830c92a6820ddaecd74ef073f514aa73d9c3beeed929c4fcba7a397f",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 14,
+              "page": 9,
+              "id": "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N01",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 6,
+              "page": 4,
+              "id": "f72df4c1a993fd4c645a90c48c91636992d8171f1bb07c0fd3484e3eb07716ca",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 21,
+              "page": 10,
+              "id": "eca24df5fab84988ef0172105febe11f31fd5cf51e27beecd6f0baf3a0611992",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b1381c7dd334135168cab9a5e3c40599f58d07b0fab1b0391ea10af146091f41",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 19,
+              "page": 11,
+              "id": "eaabcf758eb48a06de2aed68f5c607bdd84dadb6c21674f1e8b1e8c846c060a3",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N02",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 19,
+              "page": 10,
+              "id": "a2af7af2bccd17a210cd1c933bf54667abf3a8aa74d687b93da06022cc81749a",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 54,
+              "page": 15,
+              "id": "0f7eb4d9a6486afff6707b6011a0c2c3b74475e7aae56bddd8d02cef1454c40a",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 22,
+              "page": 10,
+              "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 5,
+              "page": 9,
+              "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "433afdc61dd44fd7960d8f1be3ffc24b3346b6037435d66d9492d72431b9af16",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "cf520786754033d6b4e8f4ee9a84b7def866a9c127b4d814680eef33f7d5c5b5",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N03",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 43,
+              "page": 15,
+              "id": "3441612dbce6b9d89eeecdb62a7a079f914d206198878e74e031c29e6d9b8692",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 58,
+              "page": 15,
+              "id": "99ecb90b1b4245ef31f39ce1e8266c6a619e31ea5d60f577e4f102262030710b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 56,
+              "page": 15,
+              "id": "ad8506e435c93f0d0f1a9422c40e9a0a2077372e85d46a0221844545a00d5df7",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 7,
+              "page": 9,
+              "id": "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 55,
+              "page": 15,
+              "id": "1279ef988f4f43e8b823553072f1215265a5c2bce2236e92f494040e732e566a",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N04",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": []
+        }
+      ]
+    },
+    "mixed": {
+      "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+      "documents": 6,
+      "passages": 213,
+      "queries": [
+        {
+          "id": "handoff",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "mba-academic",
+              "line": 1,
+              "page": null,
+              "id": "f66c4b943f58104f1cd336e98b1d361384ea6019df35854e61c67417d9f72802",
+              "supplemental": true
+            },
+            {
+              "source": "webchat-sandbox",
+              "line": 1,
+              "page": null,
+              "id": "8c13e4a0902dd296d0276f79ff35a9600995a5db5f38d9a82f93d7a1bf0ac4c9",
+              "supplemental": true
+            },
+            {
+              "source": "mba-academic",
+              "line": 1,
+              "page": null,
+              "id": "6d70796e3690892b674b2f2897a617baf37dd147a3d6892d9fe586ad76660281",
+              "supplemental": true
+            },
+            {
+              "source": "mba",
+              "line": 4,
+              "page": 3,
+              "id": "288bc8f3f68f964d6c56cf1bf661c2f9eb85a696eae87a41a881cf915e98b7b1",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 28,
+              "page": 12,
+              "id": "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 6,
+              "page": 4,
+              "id": "f72df4c1a993fd4c645a90c48c91636992d8171f1bb07c0fd3484e3eb07716ca",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q01",
+          "evidence_found": 0,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 39,
+              "page": 13,
+              "id": "73dcbeaa0ef21213939b3238cc802e71582d093b8c5afdef9cf6cebbd2957a8b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 54,
+              "page": 15,
+              "id": "0f7eb4d9a6486afff6707b6011a0c2c3b74475e7aae56bddd8d02cef1454c40a",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 73,
+              "page": 17,
+              "id": "9eb9f283aca7b3dd055ab6d42b07dd9f02b6a417343653c6c046b642b80abb94",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 68,
+              "page": 16,
+              "id": "85eb8855409ab14e470c060f21a5fe3d1075ffd1816fbd868bbba101e1e2b399",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "3d3882d01c4e9dc73a24dab50891a3f893dd07db5f67465a568d2a5886eeb516",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 29,
+              "page": 13,
+              "id": "41af672d95d13f1028f6794fd8e7004340d8fd502b0a0f3d325aef1786de5f1a",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q02",
+          "evidence_found": 0,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 27,
+              "page": 10,
+              "id": "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 5,
+              "page": 9,
+              "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 22,
+              "page": 10,
+              "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "ea852f33f6ff4830dfe54c14fe6bfbc36ba6f039e2ee830fe741b20e0b24ac4e",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q03",
+          "evidence_found": 1,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 9,
+              "page": 4,
+              "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 11,
+              "page": 4,
+              "id": "62a8cd894cb87991c941ea3e7cc38794ce07226cbb6d705492bc81d2084a27fb",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 1,
+              "page": 3,
+              "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 7,
+              "page": 4,
+              "id": "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q04",
+          "evidence_found": 1,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 68,
+              "page": 16,
+              "id": "85eb8855409ab14e470c060f21a5fe3d1075ffd1816fbd868bbba101e1e2b399",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 66,
+              "page": 16,
+              "id": "3f513622b7de671fea7bbc46f90e4567fbf1199b737a8f461460d0275affe8bd",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 53,
+              "page": 15,
+              "id": "e04453cca023bc44bbba8746ef0830fbcdbe199a31991ce19c11f6fb03dc849d",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 56,
+              "page": 15,
+              "id": "ad8506e435c93f0d0f1a9422c40e9a0a2077372e85d46a0221844545a00d5df7",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 59,
+              "page": 15,
+              "id": "e0783ea2d196ebaa0bbae63e4aeda9710b4aff84aa5e7e576258216e3226ce0b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 52,
+              "page": 15,
+              "id": "7bcfcdaa7c70795366dfd52e6d687bd41b78b43ca569726376307d3a86f315d1",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q05",
+          "evidence_found": 0,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 22,
+              "page": 10,
+              "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 7,
+              "page": 9,
+              "id": "756f6fd118a32a65115a8e283398db96c9d249d1f6f56cc3bfb896d1c2410a20",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q06",
+          "evidence_found": 1,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 53,
+              "page": 15,
+              "id": "e04453cca023bc44bbba8746ef0830fbcdbe199a31991ce19c11f6fb03dc849d",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 68,
+              "page": 16,
+              "id": "85eb8855409ab14e470c060f21a5fe3d1075ffd1816fbd868bbba101e1e2b399",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 44,
+              "page": 15,
+              "id": "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "6cbded879c1ea4d0eb6a9e96ab6803434a4b44c3f0bb56f95d0f53fcd42f5118",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 6,
+              "page": 9,
+              "id": "a7a3a915ab562955d6832bc8c247295ce84ececffa79bb652cdb08121beeb848",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "3d3882d01c4e9dc73a24dab50891a3f893dd07db5f67465a568d2a5886eeb516",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q07",
+          "evidence_found": 0,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "ea852f33f6ff4830dfe54c14fe6bfbc36ba6f039e2ee830fe741b20e0b24ac4e",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 5,
+              "page": 9,
+              "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f",
+              "supplemental": false
+            },
+            {
+              "source": "webchat-sandbox",
+              "line": 1,
+              "page": null,
+              "id": "abf345379e595ce165e101f12094c8e408a123fd29a6ad0ce7a59935f23d4f2e",
+              "supplemental": true
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 74,
+              "page": 17,
+              "id": "f4b0def831b84264e684401889b0bd6679391f42d5af239459e03a3c2f0904a4",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q08",
+          "evidence_found": 1,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 24,
+              "page": 10,
+              "id": "3c140eabd7790bb417f405ea9646fd53bc820b488480bfd4e30a6c9c2599524c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 21,
+              "page": 10,
+              "id": "eca24df5fab84988ef0172105febe11f31fd5cf51e27beecd6f0baf3a0611992",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q09",
+          "evidence_found": 1,
+          "evidence_expected": 3,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 26,
+              "page": 11,
+              "id": "544bbaf32d813dc8d7d0348baf34833e798b328361dc79f5d3a96028af2beecf",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 33,
+              "page": 13,
+              "id": "d6fdf215baa60424a3b3eb8c6e950f169d3d7e8e3c44de67bc40730729c3ad62",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "6cbded879c1ea4d0eb6a9e96ab6803434a4b44c3f0bb56f95d0f53fcd42f5118",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 39,
+              "page": 13,
+              "id": "73dcbeaa0ef21213939b3238cc802e71582d093b8c5afdef9cf6cebbd2957a8b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 21,
+              "page": 11,
+              "id": "697f48bb7efe5e0bfe0eaacd0d26717fd62d8f904d7f1f160bbbbfeefd35706d",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "3d3882d01c4e9dc73a24dab50891a3f893dd07db5f67465a568d2a5886eeb516",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q10",
+          "evidence_found": 1,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 9,
+              "page": 4,
+              "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 7,
+              "page": 9,
+              "id": "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 40,
+              "page": 15,
+              "id": "f9a69924830c92a6820ddaecd74ef073f514aa73d9c3beeed929c4fcba7a397f",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 14,
+              "page": 9,
+              "id": "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N01",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "webchat-sandbox",
+              "line": 1,
+              "page": null,
+              "id": "abf345379e595ce165e101f12094c8e408a123fd29a6ad0ce7a59935f23d4f2e",
+              "supplemental": true
+            },
+            {
+              "source": "mba",
+              "line": 6,
+              "page": 4,
+              "id": "f72df4c1a993fd4c645a90c48c91636992d8171f1bb07c0fd3484e3eb07716ca",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 21,
+              "page": 10,
+              "id": "eca24df5fab84988ef0172105febe11f31fd5cf51e27beecd6f0baf3a0611992",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b1381c7dd334135168cab9a5e3c40599f58d07b0fab1b0391ea10af146091f41",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N02",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 19,
+              "page": 10,
+              "id": "a2af7af2bccd17a210cd1c933bf54667abf3a8aa74d687b93da06022cc81749a",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 54,
+              "page": 15,
+              "id": "0f7eb4d9a6486afff6707b6011a0c2c3b74475e7aae56bddd8d02cef1454c40a",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 22,
+              "page": 10,
+              "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 5,
+              "page": 9,
+              "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "433afdc61dd44fd7960d8f1be3ffc24b3346b6037435d66d9492d72431b9af16",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "cf520786754033d6b4e8f4ee9a84b7def866a9c127b4d814680eef33f7d5c5b5",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N03",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 43,
+              "page": 15,
+              "id": "3441612dbce6b9d89eeecdb62a7a079f914d206198878e74e031c29e6d9b8692",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 58,
+              "page": 15,
+              "id": "99ecb90b1b4245ef31f39ce1e8266c6a619e31ea5d60f577e4f102262030710b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 56,
+              "page": 15,
+              "id": "ad8506e435c93f0d0f1a9422c40e9a0a2077372e85d46a0221844545a00d5df7",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 7,
+              "page": 9,
+              "id": "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 55,
+              "page": 15,
+              "id": "1279ef988f4f43e8b823553072f1215265a5c2bce2236e92f494040e732e566a",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N04",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": []
+        }
+      ]
+    },
+    "real-mixed": {
+      "manifest_sha256": "7eb69ba3edc5c8185f08561a3377c8cd0a36467aeeb7d84bff6f63acf19d2f56",
+      "documents": 7,
+      "passages": 370,
+      "queries": [
+        {
+          "id": "handoff",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 4,
+              "page": 3,
+              "id": "288bc8f3f68f964d6c56cf1bf661c2f9eb85a696eae87a41a881cf915e98b7b1",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 28,
+              "page": 12,
+              "id": "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00",
+              "supplemental": false
+            },
+            {
+              "source": "portal",
+              "line": 1,
+              "page": 9,
+              "id": "187d7e97936ca8aa0db5002db0e2c6940af49f9500cef2680f1af69b7a29a74e",
+              "supplemental": true
+            },
+            {
+              "source": "mba",
+              "line": 6,
+              "page": 4,
+              "id": "f72df4c1a993fd4c645a90c48c91636992d8171f1bb07c0fd3484e3eb07716ca",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 27,
+              "page": 11,
+              "id": "0a478f4e97d2c4d7930ac0b47b87dcf8aebb3770b61b6f9d127446da77b3fa42",
+              "supplemental": false
+            },
+            {
+              "source": "mba-frontend",
+              "line": 1,
+              "page": 4,
+              "id": "f04820554eecdf6f35a801bef56db9aad05afaa576c200fda4c4493be761cf34",
+              "supplemental": true
+            }
+          ]
+        },
+        {
+          "id": "Q01",
+          "evidence_found": 0,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 39,
+              "page": 13,
+              "id": "73dcbeaa0ef21213939b3238cc802e71582d093b8c5afdef9cf6cebbd2957a8b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 54,
+              "page": 15,
+              "id": "0f7eb4d9a6486afff6707b6011a0c2c3b74475e7aae56bddd8d02cef1454c40a",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 73,
+              "page": 17,
+              "id": "9eb9f283aca7b3dd055ab6d42b07dd9f02b6a417343653c6c046b642b80abb94",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 68,
+              "page": 16,
+              "id": "85eb8855409ab14e470c060f21a5fe3d1075ffd1816fbd868bbba101e1e2b399",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "3d3882d01c4e9dc73a24dab50891a3f893dd07db5f67465a568d2a5886eeb516",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 29,
+              "page": 13,
+              "id": "41af672d95d13f1028f6794fd8e7004340d8fd502b0a0f3d325aef1786de5f1a",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q02",
+          "evidence_found": 0,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 27,
+              "page": 10,
+              "id": "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 5,
+              "page": 9,
+              "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 22,
+              "page": 10,
+              "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "ea852f33f6ff4830dfe54c14fe6bfbc36ba6f039e2ee830fe741b20e0b24ac4e",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q03",
+          "evidence_found": 1,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 9,
+              "page": 4,
+              "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 11,
+              "page": 4,
+              "id": "62a8cd894cb87991c941ea3e7cc38794ce07226cbb6d705492bc81d2084a27fb",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 1,
+              "page": 3,
+              "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 7,
+              "page": 4,
+              "id": "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead",
+              "supplemental": false
+            },
+            {
+              "source": "mba-frontend",
+              "line": 1,
+              "page": 4,
+              "id": "79bbd15eebd806e48fe3e0826a812eff296745b59fb314c59d8a5ce0b9030d70",
+              "supplemental": true
+            }
+          ]
+        },
+        {
+          "id": "Q04",
+          "evidence_found": 1,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 68,
+              "page": 16,
+              "id": "85eb8855409ab14e470c060f21a5fe3d1075ffd1816fbd868bbba101e1e2b399",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 66,
+              "page": 16,
+              "id": "3f513622b7de671fea7bbc46f90e4567fbf1199b737a8f461460d0275affe8bd",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 53,
+              "page": 15,
+              "id": "e04453cca023bc44bbba8746ef0830fbcdbe199a31991ce19c11f6fb03dc849d",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 56,
+              "page": 15,
+              "id": "ad8506e435c93f0d0f1a9422c40e9a0a2077372e85d46a0221844545a00d5df7",
+              "supplemental": false
+            },
+            {
+              "source": "reclame-aqui",
+              "line": 8,
+              "page": 10,
+              "id": "6f0f7751b458be334d5fc4811b9f982509f3b9491fdc400d83b3dd4811841f34",
+              "supplemental": true
+            },
+            {
+              "source": "contact",
+              "line": 59,
+              "page": 15,
+              "id": "e0783ea2d196ebaa0bbae63e4aeda9710b4aff84aa5e7e576258216e3226ce0b",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q05",
+          "evidence_found": 0,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 22,
+              "page": 10,
+              "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 7,
+              "page": 9,
+              "id": "756f6fd118a32a65115a8e283398db96c9d249d1f6f56cc3bfb896d1c2410a20",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q06",
+          "evidence_found": 1,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 53,
+              "page": 15,
+              "id": "e04453cca023bc44bbba8746ef0830fbcdbe199a31991ce19c11f6fb03dc849d",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 68,
+              "page": 16,
+              "id": "85eb8855409ab14e470c060f21a5fe3d1075ffd1816fbd868bbba101e1e2b399",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 44,
+              "page": 15,
+              "id": "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "6cbded879c1ea4d0eb6a9e96ab6803434a4b44c3f0bb56f95d0f53fcd42f5118",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 6,
+              "page": 9,
+              "id": "a7a3a915ab562955d6832bc8c247295ce84ececffa79bb652cdb08121beeb848",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "3d3882d01c4e9dc73a24dab50891a3f893dd07db5f67465a568d2a5886eeb516",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q07",
+          "evidence_found": 0,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "ea852f33f6ff4830dfe54c14fe6bfbc36ba6f039e2ee830fe741b20e0b24ac4e",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 5,
+              "page": 9,
+              "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 74,
+              "page": 17,
+              "id": "f4b0def831b84264e684401889b0bd6679391f42d5af239459e03a3c2f0904a4",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q08",
+          "evidence_found": 1,
+          "evidence_expected": 1,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 24,
+              "page": 10,
+              "id": "3c140eabd7790bb417f405ea9646fd53bc820b488480bfd4e30a6c9c2599524c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 21,
+              "page": 10,
+              "id": "eca24df5fab84988ef0172105febe11f31fd5cf51e27beecd6f0baf3a0611992",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 13,
+              "page": 10,
+              "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q09",
+          "evidence_found": 1,
+          "evidence_expected": 3,
+          "candidates": [
+            {
+              "source": "contact",
+              "line": 26,
+              "page": 11,
+              "id": "544bbaf32d813dc8d7d0348baf34833e798b328361dc79f5d3a96028af2beecf",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 33,
+              "page": 13,
+              "id": "d6fdf215baa60424a3b3eb8c6e950f169d3d7e8e3c44de67bc40730729c3ad62",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "6cbded879c1ea4d0eb6a9e96ab6803434a4b44c3f0bb56f95d0f53fcd42f5118",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 39,
+              "page": 13,
+              "id": "73dcbeaa0ef21213939b3238cc802e71582d093b8c5afdef9cf6cebbd2957a8b",
+              "supplemental": false
+            },
+            {
+              "source": "reclame-aqui",
+              "line": 6,
+              "page": 7,
+              "id": "5b52f92eecf428e9d4d69a9c1247ab57b55b5d9bbfadaf150b156ded85043e83",
+              "supplemental": true
+            },
+            {
+              "source": "contact",
+              "line": 21,
+              "page": 11,
+              "id": "697f48bb7efe5e0bfe0eaacd0d26717fd62d8f904d7f1f160bbbbfeefd35706d",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "Q10",
+          "evidence_found": 1,
+          "evidence_expected": 2,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 9,
+              "page": 4,
+              "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621",
+              "supplemental": false
+            },
+            {
+              "source": "mba",
+              "line": 13,
+              "page": 8,
+              "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 7,
+              "page": 9,
+              "id": "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+              "supplemental": false
+            },
+            {
+              "source": "portal",
+              "line": 1,
+              "page": 9,
+              "id": "d9762db4c44abad130e6fe011e568552cb501fc0759f8d371e1b5d92716c3803",
+              "supplemental": true
+            },
+            {
+              "source": "backend",
+              "line": 16,
+              "page": 24,
+              "id": "873eea7e0665aff0181c05a54f126a10e088e21dbe7de1dfc43800a7350f93a5",
+              "supplemental": true
+            }
+          ]
+        },
+        {
+          "id": "N01",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "mba",
+              "line": 6,
+              "page": 4,
+              "id": "f72df4c1a993fd4c645a90c48c91636992d8171f1bb07c0fd3484e3eb07716ca",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 21,
+              "page": 10,
+              "id": "eca24df5fab84988ef0172105febe11f31fd5cf51e27beecd6f0baf3a0611992",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 1,
+              "page": 9,
+              "id": "b1381c7dd334135168cab9a5e3c40599f58d07b0fab1b0391ea10af146091f41",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 10,
+              "page": 9,
+              "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 19,
+              "page": 11,
+              "id": "eaabcf758eb48a06de2aed68f5c607bdd84dadb6c21674f1e8b1e8c846c060a3",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N02",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "fluxo",
+              "line": 19,
+              "page": 10,
+              "id": "a2af7af2bccd17a210cd1c933bf54667abf3a8aa74d687b93da06022cc81749a",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 54,
+              "page": 15,
+              "id": "0f7eb4d9a6486afff6707b6011a0c2c3b74475e7aae56bddd8d02cef1454c40a",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 22,
+              "page": 10,
+              "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c",
+              "supplemental": false
+            },
+            {
+              "source": "fluxo",
+              "line": 5,
+              "page": 9,
+              "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "433afdc61dd44fd7960d8f1be3ffc24b3346b6037435d66d9492d72431b9af16",
+              "supplemental": false
+            },
+            {
+              "source": "contact",
+              "line": 36,
+              "page": 13,
+              "id": "cf520786754033d6b4e8f4ee9a84b7def866a9c127b4d814680eef33f7d5c5b5",
+              "supplemental": false
+            }
+          ]
+        },
+        {
+          "id": "N03",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": [
+            {
+              "source": "reclame-aqui",
+              "line": 1,
+              "page": 3,
+              "id": "9af0f991da901e59c2ab2c6e53fcc6f7f7931afd84ac1f4b6dfb946279d6c5b6",
+              "supplemental": true
+            },
+            {
+              "source": "contact",
+              "line": 43,
+              "page": 15,
+              "id": "3441612dbce6b9d89eeecdb62a7a079f914d206198878e74e031c29e6d9b8692",
+              "supplemental": false
+            },
+            {
+              "source": "reclame-aqui",
+              "line": 6,
+              "page": 7,
+              "id": "5cb8d430d5eff4a32fa3daf61f5901a47a1eb1f8bc650dfc42c30470223e7f00",
+              "supplemental": true
+            },
+            {
+              "source": "contact",
+              "line": 58,
+              "page": 15,
+              "id": "99ecb90b1b4245ef31f39ce1e8266c6a619e31ea5d60f577e4f102262030710b",
+              "supplemental": false
+            },
+            {
+              "source": "reclame-aqui",
+              "line": 8,
+              "page": 10,
+              "id": "26ca85ed78e2f6e5826321a97832af9cc32bdd99046cb45d711beb73ca13de2f",
+              "supplemental": true
+            },
+            {
+              "source": "reclame-aqui",
+              "line": 6,
+              "page": 7,
+              "id": "eb693b9e598bce8fd186f62a16bc8d7187f91c3718baa0171e4d1fd42c5e12bc",
+              "supplemental": true
+            }
+          ]
+        },
+        {
+          "id": "N04",
+          "evidence_found": 0,
+          "evidence_expected": 0,
+          "candidates": []
+        }
+      ]
+    }
+  }
+}

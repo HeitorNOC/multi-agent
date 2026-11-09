@@ -1,0 +1,1586 @@
+[
+  {
+    "phase": "setup",
+    "seconds": 0.1606409999949392,
+    "status": 200,
+    "path": "/drafts"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.25932909999391995,
+    "status": 200,
+    "path": "/review"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.2468821999791544,
+    "status": 200,
+    "path": "/publish"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.13184049999108538,
+    "status": 200,
+    "path": "/drafts"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.24010039999848232,
+    "status": 200,
+    "path": "/review"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.23705349999363534,
+    "status": 200,
+    "path": "/publish"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.1468276999949012,
+    "status": 200,
+    "path": "/drafts"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.2458692000072915,
+    "status": 200,
+    "path": "/review"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.2614088999980595,
+    "status": 200,
+    "path": "/publish"
+  },
+  {
+    "phase": "native-mix",
+    "seconds": 45.87791680000373,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-mix",
+    "seconds": 10.705796800000826,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-mix",
+    "seconds": 49.40224810002837,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-mix",
+    "seconds": 10.9557917000202,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-mix",
+    "seconds": 37.74370469999849,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-mix",
+    "seconds": 10.029584300005808,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-naive",
+    "seconds": 6.150015999999596,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-naive",
+    "seconds": 5.68802240001969,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-naive",
+    "seconds": 5.692995299992617,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-naive",
+    "seconds": 5.246328999986872,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-naive",
+    "seconds": 6.4590760999999475,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "native-naive",
+    "seconds": 5.952371099992888,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "negative",
+    "seconds": 0.046334800019394606,
+    "status": 403,
+    "path": "/advise"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.03781379997963086,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.049052200018195435,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.055011300020851195,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.045060800010105595,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04679510000278242,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.033665599999949336,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.059610299998894334,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.0582457999989856,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.0314082000113558,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04457420000107959,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.045232600008603185,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04447170000639744,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.031242999975802377,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04180690000066534,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04739030002383515,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04538200001115911,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.03042460000142455,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.043966100027319044,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04843909997725859,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.030711100000189617,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04309859999921173,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.047764599992660806,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04452400002628565,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04537709997384809,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.050944099988555536,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.05677560000913218,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.030907100008334965,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04406310000922531,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04696700000204146,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04483450000407174,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04500800001551397,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04508979999809526,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.02908390000811778,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.03038459998788312,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.030151399987516925,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04562859999714419,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04564520000712946,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.04425380000611767,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.030071700020926073,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c1",
+    "seconds": 0.03018790000351146,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.03337719998671673,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.0807988999877125,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.10002870002062991,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.05362500000046566,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.049268700007814914,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.045407600002363324,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.0456131000246387,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.04512339999200776,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.044851699989521876,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.29554770002141595,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.030232299992349,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.31886450000456534,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.03006180000375025,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.075366099976236,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.23809929998242296,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.05083839999861084,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.09480960000655614,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.09033300000010058,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.08981660002609715,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.05051430000457913,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.04768540000077337,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.045034300012048334,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.04609560000244528,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.03022009998676367,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.19662879998213612,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.04412350000347942,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.046963100001448765,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.034605299995746464,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.030638500000350177,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.5878597999981139,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.05466870000236668,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.2856407999934163,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.04416220000712201,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.38878379997913726,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.040781800023978576,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.2785656999913044,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.0309922999877017,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.2335083000070881,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.20655919998534955,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c4",
+    "seconds": 0.20355089998338372,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.04579770000418648,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.0613454999984242,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.03047949998290278,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.08845199999632314,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.1155426999903284,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.15380489997914992,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.08110169999417849,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.04198879998875782,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.10283160000108182,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.04616820000228472,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.27795710001373664,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.07510809999075718,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.3177624999952968,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.2637033000064548,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.07828200000221841,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.07388579999678768,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.07961839999188669,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.42135469999630004,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.10148060001665726,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.09266910000587814,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.3391270999854896,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.030471200007013977,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.08239690001937561,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.03134479999425821,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.07932559997425415,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.052402200002688915,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.09382120001828298,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.2804031000123359,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.03227339999284595,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.03159649998997338,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.1450040999916382,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.1419197999930475,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.4619589000067208,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.2505720999906771,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.4356336999917403,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.14904749998822808,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.6760981999977957,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.9206911000073887,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.26332180001190864,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-warm-c8",
+    "seconds": 0.38868529998580925,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-under-inference-poll",
+    "seconds": 0.011085700010880828,
+    "status": 200,
+    "path": "/freshness/status"
+  },
+  {
+    "phase": "baseline-under-inference-poll",
+    "seconds": 0.0358358999947086,
+    "status": 200,
+    "path": "/freshness/status"
+  },
+  {
+    "phase": "baseline-under-inference-inference",
+    "seconds": 11.09387899999274,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "baseline-under-inference",
+    "seconds": 11.022287600004347,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-under-inference",
+    "seconds": 11.066719399997965,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-under-inference",
+    "seconds": 11.083039899996947,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-under-inference",
+    "seconds": 11.12837849999778,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-under-inference",
+    "seconds": 11.142506000003777,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-under-inference",
+    "seconds": 11.191539599996759,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-under-inference",
+    "seconds": 11.203998500015587,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-under-inference",
+    "seconds": 11.268497799988836,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07966259997920133,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.0827096999855712,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.0863039999967441,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.08593410000321455,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.08786430000327528,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.0984623999975156,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.10102490001008846,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.10138929999084212,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.054339900001650676,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05489920001127757,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06996580000850372,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.0527758999960497,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05107350001344457,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.061336099985055625,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.08222129999194294,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.09456280001904815,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.057863499998347834,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05790069999056868,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05332190002081916,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.052609800011850893,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06307669999659993,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.04024949998711236,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07327100000111386,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.057818900007987395,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.04594360000919551,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07644499998423271,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06934180000098422,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06762539999908768,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.0680092999828048,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06772340001771227,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.09830670000519603,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07436219998635352,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05128400001558475,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06438500000513159,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06717910000588745,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.043380599992815405,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05610360001446679,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07161519999499433,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05815119997714646,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.04165550001198426,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.08479120000265539,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07489089999580756,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06798100000014529,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07262990000890568,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07719270000234246,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07656889999634586,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.058317999995779246,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07274340000003576,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.058513800002401695,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.04829020000761375,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05964360001962632,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06920749999699183,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05718059997889213,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06818969998857938,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07229409998399206,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07937209997908212,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.060079599992604926,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.10376999998698011,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.054571099986787885,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06253989998367615,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.050819800002500415,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05867930001113564,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.054052699997555465,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05477339998469688,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06933629998820834,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.08147969999117777,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07403820002218708,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06175939997774549,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.07146860001375899,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05360289997770451,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.052968300005886704,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.0722480000113137,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05369349999818951,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.047014999989187345,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.06821759999729693,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.043967199977487326,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.0518455000128597,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05117940000491217,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.054568199993809685,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-warm-c8",
+    "seconds": 0.05782539999927394,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-under-inference-poll",
+    "seconds": 0.011772500001825392,
+    "status": 200,
+    "path": "/freshness/status"
+  },
+  {
+    "phase": "parallel-under-inference-poll",
+    "seconds": 0.010814999986905605,
+    "status": 200,
+    "path": "/freshness/status"
+  },
+  {
+    "phase": "parallel-under-inference",
+    "seconds": 0.046326199983013794,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-under-inference",
+    "seconds": 0.049117499991552904,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-under-inference",
+    "seconds": 0.049634700000751764,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-under-inference",
+    "seconds": 0.047532299999147654,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-under-inference",
+    "seconds": 0.04828529999940656,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-under-inference",
+    "seconds": 0.050115999998524785,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-under-inference",
+    "seconds": 0.051902800012612715,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-under-inference",
+    "seconds": 0.06436509999912232,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "parallel-under-inference-inference",
+    "seconds": 11.796537999995053,
+    "status": 200,
+    "path": "/advise"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.26833270001225173,
+    "status": 200,
+    "path": "/recovery/freeze"
+  },
+  {
+    "phase": "negative",
+    "seconds": 0.04329590001725592,
+    "status": 503,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "negative",
+    "seconds": 0.043813299998873845,
+    "status": 503,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.03368539997609332,
+    "status": 200,
+    "path": "/recovery/thaw"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.04623979999450967,
+    "status": 200,
+    "path": "/admin/revoke"
+  },
+  {
+    "phase": "negative",
+    "seconds": 0.030881799990311265,
+    "status": 403,
+    "path": "/decisions/aef6b1fd-b31a-4a4a-9e92-ce2ee3f53918"
+  },
+  {
+    "phase": "negative",
+    "seconds": 0.05229739999049343,
+    "status": 403,
+    "path": "/decisions/aef6b1fd-b31a-4a4a-9e92-ce2ee3f53918"
+  },
+  {
+    "phase": "negative",
+    "seconds": 0.031871399987721816,
+    "status": 503,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.012660000007599592,
+    "status": 200,
+    "path": "/freshness/status"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.03188890000456013,
+    "status": 200,
+    "path": "/freshness/inspect"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.03959560001385398,
+    "status": 200,
+    "path": "/freshness/close-prepare"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.06204769999021664,
+    "status": 200,
+    "path": "/freshness/close-confirm"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.039043899974785745,
+    "status": 200,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "baseline-native-quota-exhausted",
+    "seconds": 0.883557799999835,
+    "status": 409,
+    "path": "/advise"
+  },
+  {
+    "phase": "baseline-history-after-quota",
+    "seconds": 0.03248569997958839,
+    "status": 503,
+    "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.010872699989704415,
+    "status": 200,
+    "path": "/freshness/status"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.03188729999237694,
+    "status": 200,
+    "path": "/freshness/inspect"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.03783549999934621,
+    "status": 200,
+    "path": "/freshness/close-prepare"
+  },
+  {
+    "phase": "setup",
+    "seconds": 0.07844959999783896,
+    "status": 200,
+    "path": "/freshness/close-confirm"
+  },
+  {
+    "phase": "preflight-quota-exhausted",
+    "seconds": 0.05658059997949749,
+    "status": 409,
+    "path": "/advise"
+  }
+]

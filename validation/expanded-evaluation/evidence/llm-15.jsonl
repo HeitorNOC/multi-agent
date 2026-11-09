@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e2-478c-7883-9636-fae15dc8c5dd"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O comprovante de despesa da equipe Aurora deve ser enviado **até as 18h30 do dia útil seguinte**. [1]\\n\\nO manual consultado está vigente desde 1º de janeiro de 2026 e, portanto, se aplica à data de 1º de fevereiro de 2026. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13124,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":99,"reasoning_output_tokens":0}}

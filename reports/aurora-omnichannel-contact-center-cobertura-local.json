@@ -1,0 +1,46 @@
+{
+  "document": "Contact-Center-e-Workspace.pdf",
+  "sha256": "f2cc07a7f78fd1f8f3210eef90d445d1847f2c6b223290e45e43f11d3e5fa2ff",
+  "page_count": 25,
+  "pages_with_extractable_text": 25,
+  "pages_without_extractable_text": [],
+  "model_approved_pages": [
+    9,
+    11,
+    13,
+    15,
+    16,
+    17
+  ],
+  "local_retrieval_candidates": {
+    "transferencia_e_ownership": [
+      15,
+      11,
+      2,
+      6,
+      9
+    ],
+    "historico": [
+      2,
+      3,
+      7,
+      13,
+      14
+    ],
+    "resposta_canal_original": [
+      7,
+      13,
+      16,
+      21,
+      8
+    ],
+    "encerramento_e_retorno": [
+      15,
+      16,
+      9,
+      10,
+      11
+    ]
+  },
+  "scope": "Extração textual e busca local; a lista de páginas não comprova contratos ou implementação."
+}

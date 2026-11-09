@@ -1,0 +1,86 @@
+{
+  "pages": [
+    {
+      "page": 21,
+      "summary": "O contact-center-control-queue-attendance-schedule percorre contas com contactCenterPositionInLine habilitado e publica mensagens de posição em <canal>-reply via Kafka para atendimentos que aguardam há pelo menos cinco minutos, com opção de separação por departamento. O contact-center-attendance-close-deadline-schedule solicita atendimentos além de 24 horas e aciona o cancelamento por inatividade; o aviso ao cliente está comentado."
+    },
+    {
+      "page": 22,
+      "summary": "Atendimentos de telefonia usam APP_STORE_TYPE_TELEPHONY e TelephonyCallPanel. O backend fornece credenciais SIP do terminal vinculado; o front usa sip.js (SimpleUser) para operações de chamada e emite eventos de runtime ao sair do atendimento. O controller e o router de telefonia do cc-message-socket não foram lidos."
+    },
+    {
+      "page": 23,
+      "summary": "O documento relaciona persistência de atendimentos e histórico no Postgres, registros de tempo em user_worktime, cache de atendimento via REST, cache de mensagens em attendance_message, estado em messaging-session e eventos de CRM e métricas no Kafka."
+    },
+    {
+      "page": 24,
+      "summary": "São apontados um bloqueio por userID fixo, domínio SIP de teste fixo, consultas periódicas e contagem por atendimento, decisões de acesso concentradas no front, nomes trocados em mutations, arquivos extensos, uso de Sequelize legado e nome de evento de encerramento potencialmente enganoso."
+    },
+    {
+      "page": 25,
+      "summary": "A página enumera partes não lidas: origens das chamadas createAttendance*, dois fluxos backend, dashboards e exportação, validações, servidor e infraestrutura de telefonia, implementação e TTL do cache, contact-center-api além das rotas e fluxos de outros workspaces."
+    }
+  ],
+  "contracts": [
+    {
+      "pages": [
+        21
+      ],
+      "finding": "Descrito: com contactCenterPositionInLine habilitado, atendimentos em espera há pelo menos cinco minutos recebem mensagem de posição em <canal>-reply via Kafka; contactCenterPositionInLineByDepartment altera o agrupamento. Os canais citados são Webchat, WhatsApp, Facebook, Telegram e Instagram.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        21,
+        23
+      ],
+      "finding": "Descrito: listAttendancesByDeadlineTime fornece atendimentos além de 24 horas ao schedule. CancelAttendanceByInactivityTimeUseCase aceita WAITING, ACTIVE e TRANSFERED, muda a sessão para bot e o status para 8, registra métricas e tempo de trabalho, apaga o cache de mensagens e executa o workflow de cancelamento por inatividade. O aviso ao cliente está comentado.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        22
+      ],
+      "finding": "Descrito: início e transferência de telefonia exigem terminal vinculado; o backend retorna usuário SIP, senha e nome de exibição. O front usa sip.js (SimpleUser), mantém os estados waiting, received, answered, hangup e error e emite attendance_done, attendance_cancelled, waiting_agent ou attendance_client_not_responding conforme a ação, saindo da sala e desconectando o telefone.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        23
+      ],
+      "finding": "Descrito: o cache de atendimento expõe operações REST de criar, ler, ler por sessão e atualizar; attendance_message é criado ao iniciar e apagado ao transferir, cancelar ou cancelar por inatividade. O Kafka recebe digital-attendance-created na criação e attendance-metrics ao finalizar, cancelar e transferir.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        24
+      ],
+      "finding": "Descrito: nos usecases lidos, as decisões de acesso estão em funções do front e as regras não são repetidas nas ações principais do backend. Inferido: isso pode permitir ações não autorizadas se os endpoints forem acessíveis diretamente; a exploração e a existência de outras barreiras dependem de verificação.",
+      "status": "inferido"
+    },
+    {
+      "pages": [
+        24
+      ],
+      "finding": "Descrito: StartAttendanceUseCase do contact-center-portal rejeita um userID fixo com a mensagem «Tente iniciar o atendimento novamente!». A hipótese de bloqueio de depuração esquecido é inferida e exige confirmação.",
+      "status": "inferido"
+    },
+    {
+      "pages": [
+        24
+      ],
+      "finding": "Descrito: o front monta o endereço SIP com tl-test-wss.tatodesk.net fixo. O nome sugere ambiente de teste, mas o ambiente efetivamente atendido e o impacto dependem de verificação.",
+      "status": "inferido"
+    }
+  ],
+  "gaps": [
+    "Pendente de verificação no código e em ambiente real: autorização no backend para iniciar, finalizar, cancelar, transferir e executar demais ações, incluindo isolamento entre contas e departamentos e eventuais barreiras fora dos usecases lidos. Proposto: testes de acesso direto aos endpoints com usuários autorizados e não autorizados.",
+    "Pendente de verificação no código e com o provedor: proteção, escopo e ciclo de vida das credenciais SIP, configuração do domínio por ambiente e comportamento do servidor e da infraestrutura de telefonia. Proposto: testes de terminal ausente, operações de chamada, falhas e desconexão.",
+    "Pendente de verificação no código e em ambiente real: contratos completos, autenticação, tratamento de falhas, duplicidade e ordenação das publicações Kafka e dos eventos de runtime. Proposto: testes de integração por canal e de repetição das operações.",
+    "Pendente de verificação no código e em ambiente real: limites de 5 minutos e 24 horas, agrupamento por departamento, concorrência entre schedules, repetição de mensagens e cancelamento silencioso. Proposto: testes de fronteira e de idempotência.",
+    "Pendente de verificação no código: implementação do contact-center-attendance-cache, Redis e TTL, consistência entre cache, Postgres e messaging-session, além das rotas do contact-center-api e das regras validate.startAttendance e demais validações.",
+    "Pendente de verificação no código: chamadores de createAttendance*, finishAttendanceClientNotResponding, transferAttendanceToDepartment, dashboards, relatórios, configurações, contact-center-attendance-export e workspaces presencial, ticket e QA.",
+    "Pendente de verificação em ambiente real: impacto da consulta a cada 10 segundos e de countAppMessages por atendimento ativo. Proposto: medir carga e latência com volumes representativos.",
+    "Pendente de verificação no código: nomes trocados nas mutations de intervalo, origem e necessidade da regra de userID fixo e efeito operacional do nome publish-to-telegram-reply em logs e integrações."
+  ]
+}

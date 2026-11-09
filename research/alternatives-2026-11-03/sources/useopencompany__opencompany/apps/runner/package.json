@@ -1,0 +1,46 @@
+{
+  "name": "@opencompany/runner",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "postgres:queue:maintenance": "bun src/postgres-queue-maintenance-cli.ts",
+    "start": "bun src/index.ts",
+    "typecheck": "tsc --noEmit --project tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fastify/rate-limit": "11.2.0",
+    "@fumari/image-size": "0.1.0",
+    "@modelcontextprotocol/sdk": "1.31.0",
+    "@opencompany/agent-runtime": "workspace:*",
+    "@opencompany/analytics": "workspace:*",
+    "@opencompany/billing": "workspace:*",
+    "@opencompany/chat-presentation": "workspace:*",
+    "@opencompany/core": "workspace:*",
+    "@opencompany/crypto": "workspace:*",
+    "@opencompany/db": "workspace:*",
+    "@opencompany/file-extract": "workspace:*",
+    "@opencompany/agent": "workspace:*",
+    "@opencompany/telemetry": "workspace:*",
+    "@opencompany/observability": "workspace:*",
+    "@opencompany/wiki": "workspace:*",
+    "@vercel/blob": "^2.8.0",
+    "ai": "^7.0.106",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "e2b": "^2.51.0",
+    "fastify": "^5.12.5",
+    "ws": "^8.21.3",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@types/node": "^25.9.1",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.23.13",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.11"
+  }
+}

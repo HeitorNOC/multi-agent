@@ -1,0 +1,33 @@
+{
+  "installation": "business-flow-2daa9325c4",
+  "checkpoints": [],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "result": "PASS_SELECTED_UNKNOWN_AND_REVOCATION",
+  "cases": 2,
+  "stale_evidence_rejected": true,
+  "revoked_replay_rejected": true,
+  "provider_executions": [
+    [
+      "business-flow-2daa9325c4:inference:bea6c58360816f00dd0f68cdec340debd4bece1d6e821932e98928518e27bd21",
+      "closed_unknown",
+      1
+    ],
+    [
+      "business-flow-2daa9325c4:inference:e1fa0fc5ee0e5a961e00c65ba4b9d471740791e16a0c95f64421d53b486fc651",
+      "closed_unknown",
+      1
+    ]
+  ]
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a806-5603-7711-957e-7d5624ceae33"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"limites diários de benefícios\\\",\\\"fonte de informação\\\"],\\\"low_level_keywords\\\":[\\\"Aurora\\\",\\\"valor máximo de transporte por dia\\\",\\\"teto diário de alimentação\\\",\\\"data de vigência: 2026-02-01\\\",\\\"manual-aurora@v1\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12704,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":79,"reasoning_output_tokens":0}}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a805-3a66-7561-9346-1b456de4ab79"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"teto de reembolso de hotel\\\"],\\\"low_level_keywords\\\":[\\\"Aurora\\\",\\\"data de vigência: 2026-02-01\\\",\\\"corte de conhecimento: 2026-11-04\\\",\\\"manual-aurora@v1\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12691,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":75,"reasoning_output_tokens":0}}

@@ -1,0 +1,281 @@
+{
+  "goal": "Quais estados e evidências são necessários para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?",
+  "status": "awaiting_approval",
+  "error": null,
+  "plan": {
+    "strategy": "A2",
+    "reason": "A transição entre o MBA e um atendente envolve estados de conversa, evidências de transferência e integração de sistemas para evitar respostas simultâneas.",
+    "teams": [
+      {
+        "lead": "technology_director",
+        "specialists": [
+          "data_analyst"
+        ],
+        "reason": "Avaliar a consistência dos estados e das evidências de transferência entre sistemas, incluindo qual parte está autorizada a responder."
+      }
+    ],
+    "capabilities": [
+      "technology_director",
+      "data_analyst"
+    ],
+    "not_selected": [
+      {
+        "id": "executive_director",
+        "reason": "Estratégia e portfólio não são o foco da pergunta."
+      },
+      {
+        "id": "business_analyst",
+        "reason": "Dependências entre unidades não são necessárias para avaliar a transferência da conversa."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "Priorização de investimentos não é solicitada."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "Campanhas e posicionamento não são o foco."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "Escopo e demanda de campanha não são pertinentes."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "Preços promocionais não são pertinentes."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Execução logística não é o foco."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Estoque e reservas não são pertinentes."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Prazos e capacidade logística não são pertinentes."
+      },
+      {
+        "id": "finance_director",
+        "reason": "Margem e caixa não são o foco."
+      },
+      {
+        "id": "controller",
+        "reason": "Descontos e orçamento não são pertinentes."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Liquidez e financiamento não são pertinentes."
+      },
+      {
+        "id": "people_director",
+        "reason": "Capacidade organizacional não é necessária para definir os estados de transferência."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "Não há demanda de admissões na pergunta."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "Disponibilidade e treinamento de equipes não são o foco da transferência técnica."
+      },
+      {
+        "id": "legal_director",
+        "reason": "Contratos e conformidade não são o foco."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "Governança de resposta a incidente não é solicitada."
+      },
+      {
+        "id": "contract_analyst",
+        "reason": "Obrigações contratuais não são pertinentes."
+      },
+      {
+        "id": "security_analyst",
+        "reason": "Não há indicação de incidente de segurança ou SLA interno a investigar."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 5
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 4,
+    "max_calls": 24,
+    "input_tokens": 50793,
+    "cached_input_tokens": 43264,
+    "output_tokens": 575,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    },
+    {
+      "source": "training-calendar",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "training-calendar",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "training-calendar.txt",
+      "sha256": "366c2f6da77c54ada89a52a3521f112aa11633749da560ad645bf03049d17210"
+    },
+    {
+      "source": "webchat-sandbox",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "webchat-sandbox",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "webchat-sandbox.txt",
+      "sha256": "b7ed48e69e4716596432686301b96f96879bfe5bf807a2b2f7eeeae8d69a1a6c"
+    },
+    {
+      "source": "mba-academic",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "mba-academic",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "mba-academic.txt",
+      "sha256": "91200ff7d105a64a4e65c08271ee9050290238cc61d5bc6ace12652052961111"
+    }
+  ],
+  "retrieval": "hybrid",
+  "facets": [],
+  "job_seconds": 28.72,
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "director_completed",
+    "synthesis",
+    "inference_requested",
+    "inference_completed",
+    "review_ready",
+    "checkpoint_saved",
+    "worker_stopped"
+  ],
+  "retrieval_observed": true,
+  "candidates": [
+    {
+      "source": "mba-academic",
+      "page": null,
+      "line": 1
+    },
+    {
+      "source": "webchat-sandbox",
+      "page": null,
+      "line": 1
+    },
+    {
+      "source": "mba-academic",
+      "page": null,
+      "line": 1
+    },
+    {
+      "source": "mba",
+      "page": 3,
+      "line": 4
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "mba",
+      "page": 4,
+      "line": 6
+    }
+  ],
+  "report": {
+    "status": "insufficient_evidence",
+    "summary": "Evidência insuficiente no acervo autorizado para responder à tarefa.",
+    "citations": [],
+    "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+    "requires_approval": true,
+    "unanswered": [
+      "Quais estados e evidências são necessários para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?"
+    ]
+  },
+  "diagnostics": [],
+  "model_call_metadata": [
+    {
+      "call": 1,
+      "seconds": 12.93699000000197,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "seconds": 3.7788524000061443,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "seconds": 3.3848166999960085,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "seconds": 5.842428600008134,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    }
+  ]
+}

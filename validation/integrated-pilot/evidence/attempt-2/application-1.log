@@ -1,0 +1,329 @@
+INFO: Creating working directory C:\Users\PC\multi-agent\validation\integrated-pilot\.state\f9aa149488\application-state\rag
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=4, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=4, timeout=240
+INFO:  - query: None/None, host=None, max_async=4, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=4, timeout=240
+INFO: PostgreSQL, Retry config: attempts=10, backoff=3.0s, backoff_max=30.0s, pool_close_timeout=5.0s
+INFO: PostgreSQL, VECTOR extension enabled
+INFO: PostgreSQL, Connected to database at 127.0.0.1:53896/knowledge without SSL
+ERROR: PostgreSQL database, error:relation "lightrag_doc_full" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_DOC_FULL in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_DOC_FULL in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_doc_chunks" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_DOC_CHUNKS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_DOC_CHUNKS in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_llm_cache" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_LLM_CACHE in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_LLM_CACHE in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_doc_status" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_DOC_STATUS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_DOC_STATUS in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_full_entities" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_FULL_ENTITIES in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_FULL_ENTITIES in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_full_relations" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_FULL_RELATIONS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_FULL_RELATIONS in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_entity_chunks" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_ENTITY_CHUNKS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_ENTITY_CHUNKS in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_relation_chunks" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_RELATION_CHUNKS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_RELATION_CHUNKS in PostgreSQL database
+INFO: PostgreSQL, Creating index idx_lightrag_doc_full_id on table LIGHTRAG_DOC_FULL
+INFO: PostgreSQL, Creating composite index idx_lightrag_doc_full_workspace_id on table LIGHTRAG_DOC_FULL
+INFO: PostgreSQL, Creating index idx_lightrag_doc_chunks_id on table LIGHTRAG_DOC_CHUNKS
+INFO: PostgreSQL, Creating composite index idx_lightrag_doc_chunks_workspace_id on table LIGHTRAG_DOC_CHUNKS
+INFO: PostgreSQL, Creating index idx_lightrag_llm_cache_id on table LIGHTRAG_LLM_CACHE
+INFO: PostgreSQL, Creating composite index idx_lightrag_llm_cache_workspace_id on table LIGHTRAG_LLM_CACHE
+INFO: PostgreSQL, Creating index idx_lightrag_doc_status_id on table LIGHTRAG_DOC_STATUS
+INFO: PostgreSQL, Creating composite index idx_lightrag_doc_status_workspace_id on table LIGHTRAG_DOC_STATUS
+INFO: PostgreSQL, Creating index idx_lightrag_full_entities_id on table LIGHTRAG_FULL_ENTITIES
+INFO: PostgreSQL, Creating composite index idx_lightrag_full_entities_workspace_id on table LIGHTRAG_FULL_ENTITIES
+INFO: PostgreSQL, Creating index idx_lightrag_full_relations_id on table LIGHTRAG_FULL_RELATIONS
+INFO: PostgreSQL, Creating composite index idx_lightrag_full_relations_workspace_id on table LIGHTRAG_FULL_RELATIONS
+INFO: PostgreSQL, Creating index idx_lightrag_entity_chunks_id on table LIGHTRAG_ENTITY_CHUNKS
+INFO: PostgreSQL, Creating composite index idx_lightrag_entity_chunks_workspace_id on table LIGHTRAG_ENTITY_CHUNKS
+INFO: PostgreSQL, Creating index idx_lightrag_relation_chunks_id on table LIGHTRAG_RELATION_CHUNKS
+INFO: PostgreSQL, Creating composite index idx_lightrag_relation_chunks_workspace_id on table LIGHTRAG_RELATION_CHUNKS
+INFO: chunk_id column already exists in LIGHTRAG_LLM_CACHE table
+INFO: cache_type column already exists in LIGHTRAG_LLM_CACHE table
+INFO: queryparam column already exists in LIGHTRAG_LLM_CACHE table
+INFO: mode column does not exist in LIGHTRAG_LLM_CACHE table
+INFO: chunks_list column already exists in LIGHTRAG_DOC_STATUS table
+INFO: llm_cache_list column already exists in LIGHTRAG_DOC_CHUNKS table
+INFO: track_id column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Creating index on track_id column for LIGHTRAG_DOC_STATUS table
+INFO: Successfully created index on track_id column for LIGHTRAG_DOC_STATUS table
+INFO: metadata column already exists in LIGHTRAG_DOC_STATUS table
+INFO: error_msg column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Creating pagination index: Composite index for workspace + status + updated_at pagination
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_status_updated_at
+INFO: Creating pagination index: Composite index for workspace + status + created_at pagination
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_status_created_at
+INFO: Creating pagination index: Index for workspace + updated_at pagination (all statuses)
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_updated_at
+INFO: Creating pagination index: Index for workspace + created_at pagination (all statuses)
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_created_at
+INFO: Creating pagination index: Index for workspace + file_path sorting
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_file_path
+INFO: Creating partial index idx_lightrag_doc_status_workspace_content_hash
+INFO: Creating index idx_lightrag_doc_status_ws_status_created_nf_id on LIGHTRAG_DOC_STATUS
+INFO: PostgreSQL, Creating index idx_lightrag_vdb_entity_synthetic_hash_v1_64d_id on table LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: PostgreSQL, Creating composite index idx_lightrag_vdb_entity_synthetic_hash_v1_64d_workspace_id on table LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: PostgreSQL: New table 'LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d' created successfully
+INFO: Creating HNSW index idx_lightrag_vdb_entity_synthetic_hash_v1_64d_hnsw_cosine on table LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: Successfully created vector index idx_lightrag_vdb_entity_synthetic_hash_v1_64d_hnsw_cosine on table LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: Ensure this new table creation is caused by new workspace setup and not an unexpected embedding model change.
+INFO: PostgreSQL, Creating index idx_lightrag_vdb_relation_synthetic_hash_v1_64d_id on table LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: PostgreSQL, Creating composite index idx_lightrag_vdb_relation_synthetic_hash_v1_64d_workspace_id on table LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: PostgreSQL: New table 'LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d' created successfully
+INFO: Creating HNSW index idx_lightrag_vdb_relation_synthetic_hash_v1_64d_hnsw_cosine on table LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: Successfully created vector index idx_lightrag_vdb_relation_synthetic_hash_v1_64d_hnsw_cosine on table LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: Ensure this new table creation is caused by new workspace setup and not an unexpected embedding model change.
+INFO: PostgreSQL, Creating index idx_lightrag_vdb_chunks_synthetic_hash_v1_64d_id on table LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: PostgreSQL, Creating composite index idx_lightrag_vdb_chunks_synthetic_hash_v1_64d_workspace_id on table LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: PostgreSQL: New table 'LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d' created successfully
+INFO: Creating HNSW index idx_lightrag_vdb_chunks_synthetic_hash_v1_64d_hnsw_cosine on table LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: Successfully created vector index idx_lightrag_vdb_chunks_synthetic_hash_v1_64d_hnsw_cosine on table LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: Ensure this new table creation is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [pilot_f9aa149488_g1_publico] Connected to neo4j at bolt://127.0.0.1:53897
+INFO: [pilot_f9aa149488_g1_publico] Ensured B-Tree index on entity_id for pilot_f9aa149488_g1_publico in neo4j
+INFO: [pilot_f9aa149488_g1_publico] No existing index 'entity_id_fulltext_idx_pilot_f9aa149488_g1_publico' found. Creating new index.
+INFO: [pilot_f9aa149488_g1_publico] Creating full-text index 'entity_id_fulltext_idx_pilot_f9aa149488_g1_publico' with Chinese tokenizer support.
+INFO: [pilot_f9aa149488_g1_publico] Successfully created full-text index 'entity_id_fulltext_idx_pilot_f9aa149488_g1_publico' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): vendas-janeiro:v1
+INFO: Extracting stage 1/1: vendas-janeiro@v1.md
+INFO: Processing d-id: vendas-janeiro:v1
+INFO: Chunking F(legacy): size=1200, split_only=False, overlap=100, doc_id: vendas-janeiro:v1
+INFO: Merging stage 1/1: vendas-janeiro@v1.md
+INFO: Phase 0: Writing recovery indexes for vendas-janeiro:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from vendas-janeiro:v1 (async: 8)
+INFO: Phase 2: Processing 1 relations from vendas-janeiro:v1 (async: 8)
+INFO: Upserting relation VDB: `ACME->VENDAS`
+INFO: Phase 2 relation processing completed for vendas-janeiro:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [pilot_f9aa149488_g1_publico] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: vendas-janeiro@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Processing 1 document(s)
+INFO: Parsing (native): vendas-fevereiro:v1
+INFO: Extracting stage 1/1: vendas-fevereiro@v1.md
+INFO: Processing d-id: vendas-fevereiro:v1
+INFO: Chunking F(legacy): size=1200, split_only=False, overlap=100, doc_id: vendas-fevereiro:v1
+INFO: Merging stage 1/1: vendas-fevereiro@v1.md
+INFO: Phase 0: Writing recovery indexes for vendas-fevereiro:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from vendas-fevereiro:v1 (async: 8)
+INFO: Merged: `ACME` | 1+1
+INFO: Merged: `VENDAS` | 1+1
+INFO: Phase 2: Processing 1 relations from vendas-fevereiro:v1 (async: 8)
+INFO: Merged: `ACME`~`VENDAS` | 1+1
+INFO: Upserting relation VDB: `ACME->VENDAS`
+INFO: Phase 2 relation processing completed for vendas-fevereiro:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [pilot_f9aa149488_g1_publico] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: vendas-fevereiro@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Processing 1 document(s)
+INFO: Parsing (native): campanha-fevereiro:v1
+INFO: Extracting stage 1/1: campanha-fevereiro@v1.md
+INFO: Processing d-id: campanha-fevereiro:v1
+INFO: Chunking F(legacy): size=1200, split_only=False, overlap=100, doc_id: campanha-fevereiro:v1
+INFO: Merging stage 1/1: campanha-fevereiro@v1.md
+INFO: Phase 0: Writing recovery indexes for campanha-fevereiro:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from campanha-fevereiro:v1 (async: 8)
+INFO: Merged: `VENDAS` | 2+1
+INFO: Merged: `ACME` | 2+1
+INFO: Phase 2: Processing 1 relations from campanha-fevereiro:v1 (async: 8)
+INFO: Merged: `ACME`~`VENDAS` | 2+1
+INFO: Upserting relation VDB: `ACME->VENDAS`
+INFO: Phase 2 relation processing completed for campanha-fevereiro:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [pilot_f9aa149488_g1_publico] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: campanha-fevereiro@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Processing 1 document(s)
+INFO: Parsing (native): politica-remoto:v1
+INFO: Extracting stage 1/1: politica-remoto@v1.md
+INFO: Processing d-id: politica-remoto:v1
+INFO: Chunking F(legacy): size=1200, split_only=False, overlap=100, doc_id: politica-remoto:v1
+INFO: Merging stage 1/1: politica-remoto@v1.md
+INFO: Phase 0: Writing recovery indexes for politica-remoto:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from politica-remoto:v1 (async: 8)
+INFO: Merged: `VENDAS` | 3+1
+INFO: Merged: `ACME` | 3+1
+INFO: Phase 2: Processing 1 relations from politica-remoto:v1 (async: 8)
+INFO: Merged: `ACME`~`VENDAS` | 3+1
+INFO: Upserting relation VDB: `ACME->VENDAS`
+INFO: Phase 2 relation processing completed for politica-remoto:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [pilot_f9aa149488_g1_publico] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: politica-remoto@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Processing 1 document(s)
+INFO: Parsing (native): comentario-externo:v1
+INFO: Extracting stage 1/1: comentario-externo@v1.md
+INFO: Processing d-id: comentario-externo:v1
+INFO: Chunking F(legacy): size=1200, split_only=False, overlap=100, doc_id: comentario-externo:v1
+INFO: Merging stage 1/1: comentario-externo@v1.md
+INFO: Phase 0: Writing recovery indexes for comentario-externo:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from comentario-externo:v1 (async: 8)
+INFO: Merged: `ACME` | 4+1
+INFO: Merged: `VENDAS` | 4+1
+INFO: Phase 2: Processing 1 relations from comentario-externo:v1 (async: 8)
+INFO: Merged: `ACME`~`VENDAS` | 4+1
+INFO: Upserting relation VDB: `ACME->VENDAS`
+INFO: Phase 2 relation processing completed for comentario-externo:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [pilot_f9aa149488_g1_publico] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: comentario-externo@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Processing 1 document(s)
+INFO: Parsing (native): politica-ferramentas:v1
+INFO: Extracting stage 1/1: politica-ferramentas@v1.md
+INFO: Processing d-id: politica-ferramentas:v1
+INFO: Chunking F(legacy): size=1200, split_only=False, overlap=100, doc_id: politica-ferramentas:v1
+INFO: Merging stage 1/1: politica-ferramentas@v1.md
+INFO: Phase 0: Writing recovery indexes for politica-ferramentas:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from politica-ferramentas:v1 (async: 8)
+INFO: Merged: `VENDAS` | 5+1
+INFO: Merged: `ACME` | 5+1
+INFO: Phase 2: Processing 1 relations from politica-ferramentas:v1 (async: 8)
+INFO: Merged: `ACME`~`VENDAS` | 5+1
+INFO: Upserting relation VDB: `ACME->VENDAS`
+INFO: Phase 2 relation processing completed for politica-ferramentas:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [pilot_f9aa149488_g1_publico] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_publico] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: politica-ferramentas@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=4, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=4, timeout=240
+INFO:  - query: None/None, host=None, max_async=4, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=4, timeout=240
+INFO: Creating LightRAG instance with workspace='pilot_f9aa149488_g1_financeiro' while default workspace is set to 'pilot_f9aa149488_g1_publico'
+INFO: HNSW vector index idx_lightrag_vdb_entity_synthetic_hash_v1_64d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_synthetic_hash_v1_64d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_relation_synthetic_hash_v1_64d_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_synthetic_hash_v1_64d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_synthetic_hash_v1_64d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_synthetic_hash_v1_64d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [pilot_f9aa149488_g1_financeiro] Connected to neo4j at bolt://127.0.0.1:53897
+INFO: [pilot_f9aa149488_g1_financeiro] Ensured B-Tree index on entity_id for pilot_f9aa149488_g1_financeiro in neo4j
+INFO: [pilot_f9aa149488_g1_financeiro] No existing index 'entity_id_fulltext_idx_pilot_f9aa149488_g1_financeiro' found. Creating new index.
+INFO: [pilot_f9aa149488_g1_financeiro] Creating full-text index 'entity_id_fulltext_idx_pilot_f9aa149488_g1_financeiro' with Chinese tokenizer support.
+INFO: [pilot_f9aa149488_g1_financeiro] Successfully created full-text index 'entity_id_fulltext_idx_pilot_f9aa149488_g1_financeiro' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): folha-financeira:v1
+INFO: Extracting stage 1/1: folha-financeira@v1.md
+INFO: Processing d-id: folha-financeira:v1
+INFO: Chunking F(legacy): size=1200, split_only=False, overlap=100, doc_id: folha-financeira:v1
+INFO: Merging stage 1/1: folha-financeira@v1.md
+INFO: Phase 0: Writing recovery indexes for folha-financeira:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from folha-financeira:v1 (async: 8)
+INFO: Phase 2: Processing 1 relations from folha-financeira:v1 (async: 8)
+INFO: Upserting relation VDB: `ACME->VENDAS`
+INFO: Phase 2 relation processing completed for folha-financeira:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [pilot_f9aa149488_g1_financeiro] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_financeiro] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_financeiro] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: folha-financeira@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aquisicao-reservada:v1
+INFO: Extracting stage 1/1: aquisicao-reservada@v1.md
+INFO: Processing d-id: aquisicao-reservada:v1
+INFO: Chunking F(legacy): size=1200, split_only=False, overlap=100, doc_id: aquisicao-reservada:v1
+INFO: Merging stage 1/1: aquisicao-reservada@v1.md
+INFO: Phase 0: Writing recovery indexes for aquisicao-reservada:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aquisicao-reservada:v1 (async: 8)
+INFO: Merged: `ACME` | 1+1
+INFO: Merged: `VENDAS` | 1+1
+INFO: Phase 2: Processing 1 relations from aquisicao-reservada:v1 (async: 8)
+INFO: Merged: `ACME`~`VENDAS` | 1+1
+INFO: Upserting relation VDB: `ACME->VENDAS`
+INFO: Phase 2 relation processing completed for aquisicao-reservada:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [pilot_f9aa149488_g1_financeiro] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_financeiro] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_f9aa149488_g1_financeiro] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aquisicao-reservada@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Query nodes: ACME (top_k:12, cosine:-1.0)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: empresa, campanha (top_k:12, cosine:-1.0)
+INFO: Global query: 2 entities, 1 relations
+INFO: Raw search results: 2 entities, 1 relations, 0 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 2 from 6 entity-related chunks by vector similarity
+INFO: Find 4 additional chunks in 1 relations (deduplicated 2)
+INFO: Selecting 2 from 4 relation-related chunks by vector similarity
+INFO: Round-robin merged chunks: 4 -> 4 (deduplicated 0)
+INFO: Final context: 2 entities, 1 relations, 4 chunks
+INFO: Final chunks S+F/O: E2/1 R1/1 E2/2 R1/2
+INFO: Query nodes: ACME (top_k:12, cosine:-1.0)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: empresa, campanha (top_k:12, cosine:-1.0)
+INFO: Global query: 2 entities, 1 relations
+INFO: Raw search results: 2 entities, 1 relations, 0 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 2 from 2 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 2 (deduplicated 0)
+INFO: Final context: 2 entities, 1 relations, 2 chunks
+INFO: Final chunks S+F/O: E2/1 E2/2
+INFO: Query nodes: ACME (top_k:12, cosine:-1.0)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: empresa, campanha (top_k:12, cosine:-1.0)
+INFO: Global query: 2 entities, 1 relations
+INFO: Raw search results: 2 entities, 1 relations, 0 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 2 from 6 entity-related chunks by vector similarity
+INFO: Find 4 additional chunks in 1 relations (deduplicated 2)
+INFO: Selecting 2 from 4 relation-related chunks by vector similarity
+INFO: Round-robin merged chunks: 4 -> 4 (deduplicated 0)
+INFO: Final context: 2 entities, 1 relations, 4 chunks
+INFO: Final chunks S+F/O: E2/1 R1/1 E2/2 R1/2
+INFO: Query nodes: ACME (top_k:12, cosine:-1.0)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: empresa, campanha (top_k:12, cosine:-1.0)
+INFO: Global query: 2 entities, 1 relations
+INFO: Raw search results: 2 entities, 1 relations, 0 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 2 from 6 entity-related chunks by vector similarity
+INFO: Find 4 additional chunks in 1 relations (deduplicated 2)
+INFO: Selecting 2 from 4 relation-related chunks by vector similarity
+INFO: Round-robin merged chunks: 4 -> 4 (deduplicated 0)
+INFO: Final context: 2 entities, 1 relations, 4 chunks
+INFO: Final chunks S+F/O: E2/1 R1/1 E2/2 R1/2

@@ -1,0 +1,178 @@
+[
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "LICENSE"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "README.md"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "requirements.txt"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-2/chatbot-external-memory.ipynb"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-3/dynamic-breakpoints.ipynb"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-4/sub-graph.ipynb"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-4/research-assistant.ipynb"
+  },
+  {
+    "repo": "langchain-ai/langchain-academy",
+    "path": "module-5/memory_store.ipynb"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "LICENSE"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "README.md"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "pyproject.toml"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "src/deep_research_from_scratch/multi_agent_supervisor.py"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "src/deep_research_from_scratch/research_agent.py"
+  },
+  {
+    "repo": "langchain-ai/deep_research_from_scratch",
+    "path": "notebooks/4_research_supervisor.ipynb"
+  },
+  {
+    "repo": "campusx-official/langgraph-tutorials",
+    "path": "requirements.txt"
+  },
+  {
+    "repo": "campusx-official/langgraph-tutorials",
+    "path": "10_persistence.ipynb"
+  },
+  {
+    "repo": "campusx-official/langgraph-tutorials",
+    "path": "14_hitl.ipynb"
+  },
+  {
+    "repo": "campusx-official/langgraph-tutorials",
+    "path": "15_subgraphs.ipynb"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "LICENSE"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "README.md"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/docs/ARCHITECTURE.md"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/docs/checkpoint-retention-contract.md"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/packages/harness/deerflow/config/checkpointer_config.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/packages/harness/deerflow/community/aio_sandbox/local_backend.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/app/channels/dedupe_store.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "LICENSE"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "README.md"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "pyproject.toml"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openswe/utils/turn_checkpoint.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openswe/webhooks/event_log.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "tests/slack/test_slack_event_dedupe.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "tests/auth/test_private_webhook_ingress.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openwiki/architecture/agent-graph.md"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openwiki/architecture/sandbox-lifecycle.md"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "LICENSE"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "libs/ARCHITECTURE.md"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "libs/deepagents/deepagents/middleware/subagents.py"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "libs/deepagents/tests/unit_tests/middleware/test_subagent_middleware_init.py"
+  },
+  {
+    "repo": "langchain-ai/deepagents",
+    "path": "libs/deepagents/pyproject.toml"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/tests/test_checkpoint_retention_contract.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/tests/test_multi_pod_inbound_dedupe.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/packages/harness/deerflow/agents/lead_agent/agent.py"
+  },
+  {
+    "repo": "bytedance/deer-flow",
+    "path": "backend/packages/harness/deerflow/sandbox/local/local_sandbox.py"
+  },
+  {
+    "repo": "langchain-ai/open-swe",
+    "path": "openswe/event_claims.py"
+  }
+]

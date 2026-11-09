@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a723-4384-7d31-a2a5-f871fd7a95fe"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"projeto de expansão da equipe\\\",\\\"vigência da versão selecionada\\\",\\\"fonte\\\"],\\\"low_level_keywords\\\":[\\\"Aurora\\\",\\\"politica-remoto@v1\\\",\\\"2026-03-15T00:00:00+00:00\\\",\\\"2026-11-04T15:16:06.634730+00:00\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12707,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":95,"reasoning_output_tokens":0}}

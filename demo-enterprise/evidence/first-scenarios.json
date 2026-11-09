@@ -1,0 +1,8 @@
+{
+  "scenarios": [],
+  "production_approved": false,
+  "business_v1_requalified": false,
+  "result": "FAIL",
+  "error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente', None, 10061, None))",
+  "seconds": 362.05425430001924
+}

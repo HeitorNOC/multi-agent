@@ -1,0 +1,20 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+EE...                                                                    [100%]
+=================================== ERRORS ====================================
+___ ERROR at setup of test_outbox_replays_after_remote_commit_and_lost_ack ____
+validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:925: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+E   OSError: could not create numbered dir with prefix pytest- in C:\Users\PC\AppData\Local\Packages\sandbox.{2c361e95-c48d-4d4a-ae8e-9dfd7528a37a}\AC\Temp\pytest-of-PC after 10 tries
+____ ERROR at setup of test_pending_events_and_artifacts_are_scoped_to_job ____
+validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:925: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+E   OSError: could not create numbered dir with prefix pytest- in C:\Users\PC\AppData\Local\Packages\sandbox.{2c361e95-c48d-4d4a-ae8e-9dfd7528a37a}\AC\Temp\pytest-of-PC after 10 tries
+=========================== short test summary info ===========================
+ERROR validation/observability-recovery/test_telemetry.py::test_outbox_replays_after_remote_commit_and_lost_ack
+ERROR validation/observability-recovery/test_telemetry.py::test_pending_events_and_artifacts_are_scoped_to_job
+3 passed, 2 errors in 0.93s

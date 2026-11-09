@@ -1,0 +1,37 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+F
+================================== FAILURES ===================================
+_________________ test_signed_budget_publication_and_restore __________________
+
+    def test_signed_budget_publication_and_restore():
+        lab=SignedLab();started=time.perf_counter()
+        def denied(fn,status):
+            with pytest.raises(Rejected) as error:fn()
+            assert error.value.status==status,str(error.value)
+        try:
+>           lab.start();lab.connect_authority()
+            ^^^^^^^^^^^
+
+validation\langgraph-retained-flow\test_signed_flow.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+validation\langgraph-business-flow\test_flow.py:100: in start
+    image = json.loads(self.docker('image','inspect','postgres:17.6-bookworm').stdout)[0]
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <test_signed_flow.SignedLab object at 0x00000279428B57F0>, input = None
+check = True, args = ('image', 'inspect', 'postgres:17.6-bookworm')
+
+    def docker(self,*args,input=None,check=True):
+        result = subprocess.run(['docker',*args],input=input,capture_output=True,timeout=50)
+        if check and result.returncode:
+>           raise RuntimeError(self.redact(result.stderr.decode(errors='replace'))[-2500:])
+E           RuntimeError: failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: O sistema n�o pode encontrar o arquivo especificado.
+
+validation\langgraph-business-flow\test_flow.py:64: RuntimeError
+=========================== short test summary info ===========================
+FAILED validation/langgraph-retained-flow/test_signed_flow.py::test_signed_budget_publication_and_restore
+1 failed in 1.33s

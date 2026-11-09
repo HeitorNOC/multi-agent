@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="2" time="0.917" timestamp="2026-11-05T18:56:04.967262-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.aurora-model-slots.test_slots" name="test_receipt_replay_divergence_and_budget" time="0.001"><error message="failed on setup with &quot;FileNotFoundError: [WinError 3] O sistema não pode encontrar o caminho especificado: 'C:\\Users\\PC\\multi-agent\\validation\\aurora-model-slots\\.state\\run1'&quot;">validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:925: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1311: in mkdir
+    os.mkdir(self, mode)
+E   FileNotFoundError: [WinError 3] O sistema não pode encontrar o caminho especificado: 'C:\\Users\\PC\\multi-agent\\validation\\aurora-model-slots\\.state\\run1'</error></testcase><testcase classname="validation.aurora-model-slots.test_slots" name="test_worker_failure_and_two_reviewer_terminal_closure" time="0.001"><error message="failed on setup with &quot;FileNotFoundError: [WinError 3] O sistema não pode encontrar o caminho especificado: 'C:\\Users\\PC\\multi-agent\\validation\\aurora-model-slots\\.state\\run1'&quot;">validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:925: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1311: in mkdir
+    os.mkdir(self, mode)
+E   FileNotFoundError: [WinError 3] O sistema não pode encontrar o caminho especificado: 'C:\\Users\\PC\\multi-agent\\validation\\aurora-model-slots\\.state\\run1'</error></testcase></testsuite></testsuites>

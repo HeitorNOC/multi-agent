@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a804-67df-7473-aeb0-a089a26b0f24"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O teto diário de alimentação da unidade Boreal é de **R$ 190 por pessoa por dia**. [1]\\n\\nA versão consultada está em vigor desde **1º de janeiro de 2026**. Ela foi publicada em **4 de novembro de 2026**; não foi informado fim de vigência.\\n\\n### References\\n\\n* [1] manual-boreal@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13789,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":100,"reasoning_output_tokens":0}}

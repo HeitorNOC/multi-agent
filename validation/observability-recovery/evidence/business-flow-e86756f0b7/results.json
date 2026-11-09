@@ -1,0 +1,77 @@
+{
+  "installation": "business-flow-e86756f0b7",
+  "checkpoints": [],
+  "worker_calls": [
+    {
+      "job": "a9c347af-10ad-4dc4-bd2e-146ec246add4",
+      "resume": false,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 1, \"epoch\": 1, \"heartbeat_count\": 0}\n",
+      "stderr": ""
+    }
+  ],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "cold_restore_new_postgres": {
+    "container": "business-flow-e86756f0b7-pg-restored-0aba3c",
+    "volume": "business-flow-e86756f0b7-pg-restored-0aba3c-data"
+  },
+  "result": "PASS_UNKNOWN_GOVERNED_CLOSURE",
+  "recovery_crash": false,
+  "recovery": {
+    "operation_id": "business-flow-e86756f0b7:close:9d95d132bbbb77459a879e541bb56d6a5157ffb6b856f30d5f0ff54796109bf0",
+    "job": "17748e2e-571b-4c58-9d66-babf58085d5c",
+    "owner": "owner",
+    "evidence_sha": "1ace878793941d926c29184d8f3829bd91f9d39afb837c7af431d8e910fb9b57",
+    "reason": "Verify provider evidence and exact inventory; retain reservations without regenerating inference.",
+    "approvers": [
+      "board",
+      "reviewer2"
+    ],
+    "reservation": "retained_not_refunded",
+    "kind": "closed_inference_unknown",
+    "receipt": {
+      "id": "business-flow-e86756f0b7:inference:663fbe42fb4ff964485f843176015ca7758e072700901d737488315ea49b5691",
+      "input_sha": "663fbe42fb4ff964485f843176015ca7758e072700901d737488315ea49b5691",
+      "state": "closed_unknown",
+      "outcome": "unknown_not_reexecuted"
+    },
+    "job_before": {
+      "epoch": 3,
+      "worker": "worker-451234b5481e439ab962a5e740c17ea4",
+      "deadline": 1793890609572,
+      "state": "admitted"
+    },
+    "original_outcome": "unknown_not_reexecuted"
+  },
+  "provider_executions": [
+    [
+      "business-flow-e86756f0b7:inference:5d5655e845b9a8196595c306db17ccbb55d8bd2d4d437d430f89ca946187a1a5",
+      "complete",
+      1
+    ],
+    [
+      "business-flow-e86756f0b7:inference:663fbe42fb4ff964485f843176015ca7758e072700901d737488315ea49b5691",
+      "closed_unknown",
+      1
+    ]
+  ],
+  "budgets": {
+    "business": {
+      "cap": 32,
+      "reserved": 1
+    }
+  },
+  "seconds": 9.180607800022699
+}

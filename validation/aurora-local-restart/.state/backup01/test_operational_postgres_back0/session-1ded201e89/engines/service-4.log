@@ -1,0 +1,798 @@
+INFO: Creating working directory C:\Users\PC\multi-agent\validation\aurora-local-restart\.state\backup01\test_operational_postgres_back0\session-1ded201e89\engines\native\rag
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: PostgreSQL, Retry config: attempts=10, backoff=3.0s, backoff_max=30.0s, pool_close_timeout=5.0s
+INFO: PostgreSQL, VECTOR extension enabled
+INFO: PostgreSQL, Connected to database at 127.0.0.1:52011/knowledge without SSL
+ERROR: PostgreSQL database, error:relation "lightrag_doc_full" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_DOC_FULL in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_DOC_FULL in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_doc_chunks" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_DOC_CHUNKS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_DOC_CHUNKS in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_llm_cache" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_LLM_CACHE in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_LLM_CACHE in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_doc_status" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_DOC_STATUS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_DOC_STATUS in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_full_entities" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_FULL_ENTITIES in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_FULL_ENTITIES in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_full_relations" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_FULL_RELATIONS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_FULL_RELATIONS in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_entity_chunks" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_ENTITY_CHUNKS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_ENTITY_CHUNKS in PostgreSQL database
+ERROR: PostgreSQL database, error:relation "lightrag_relation_chunks" does not exist
+INFO: PostgreSQL, Try Creating table LIGHTRAG_RELATION_CHUNKS in database
+INFO: PostgreSQL, Creation success table LIGHTRAG_RELATION_CHUNKS in PostgreSQL database
+INFO: PostgreSQL, Creating index idx_lightrag_doc_full_id on table LIGHTRAG_DOC_FULL
+INFO: PostgreSQL, Creating composite index idx_lightrag_doc_full_workspace_id on table LIGHTRAG_DOC_FULL
+INFO: PostgreSQL, Creating index idx_lightrag_doc_chunks_id on table LIGHTRAG_DOC_CHUNKS
+INFO: PostgreSQL, Creating composite index idx_lightrag_doc_chunks_workspace_id on table LIGHTRAG_DOC_CHUNKS
+INFO: PostgreSQL, Creating index idx_lightrag_llm_cache_id on table LIGHTRAG_LLM_CACHE
+INFO: PostgreSQL, Creating composite index idx_lightrag_llm_cache_workspace_id on table LIGHTRAG_LLM_CACHE
+INFO: PostgreSQL, Creating index idx_lightrag_doc_status_id on table LIGHTRAG_DOC_STATUS
+INFO: PostgreSQL, Creating composite index idx_lightrag_doc_status_workspace_id on table LIGHTRAG_DOC_STATUS
+INFO: PostgreSQL, Creating index idx_lightrag_full_entities_id on table LIGHTRAG_FULL_ENTITIES
+INFO: PostgreSQL, Creating composite index idx_lightrag_full_entities_workspace_id on table LIGHTRAG_FULL_ENTITIES
+INFO: PostgreSQL, Creating index idx_lightrag_full_relations_id on table LIGHTRAG_FULL_RELATIONS
+INFO: PostgreSQL, Creating composite index idx_lightrag_full_relations_workspace_id on table LIGHTRAG_FULL_RELATIONS
+INFO: PostgreSQL, Creating index idx_lightrag_entity_chunks_id on table LIGHTRAG_ENTITY_CHUNKS
+INFO: PostgreSQL, Creating composite index idx_lightrag_entity_chunks_workspace_id on table LIGHTRAG_ENTITY_CHUNKS
+INFO: PostgreSQL, Creating index idx_lightrag_relation_chunks_id on table LIGHTRAG_RELATION_CHUNKS
+INFO: PostgreSQL, Creating composite index idx_lightrag_relation_chunks_workspace_id on table LIGHTRAG_RELATION_CHUNKS
+INFO: chunk_id column already exists in LIGHTRAG_LLM_CACHE table
+INFO: cache_type column already exists in LIGHTRAG_LLM_CACHE table
+INFO: queryparam column already exists in LIGHTRAG_LLM_CACHE table
+INFO: mode column does not exist in LIGHTRAG_LLM_CACHE table
+INFO: chunks_list column already exists in LIGHTRAG_DOC_STATUS table
+INFO: llm_cache_list column already exists in LIGHTRAG_DOC_CHUNKS table
+INFO: track_id column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Creating index on track_id column for LIGHTRAG_DOC_STATUS table
+INFO: Successfully created index on track_id column for LIGHTRAG_DOC_STATUS table
+INFO: metadata column already exists in LIGHTRAG_DOC_STATUS table
+INFO: error_msg column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Creating pagination index: Composite index for workspace + status + updated_at pagination
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_status_updated_at
+INFO: Creating pagination index: Composite index for workspace + status + created_at pagination
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_status_created_at
+INFO: Creating pagination index: Index for workspace + updated_at pagination (all statuses)
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_updated_at
+INFO: Creating pagination index: Index for workspace + created_at pagination (all statuses)
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_created_at
+INFO: Creating pagination index: Index for workspace + file_path sorting
+INFO: Successfully created index: idx_lightrag_doc_status_workspace_file_path
+INFO: Creating partial index idx_lightrag_doc_status_workspace_content_hash
+INFO: Creating index idx_lightrag_doc_status_ws_status_created_nf_id on LIGHTRAG_DOC_STATUS
+INFO: PostgreSQL, Creating index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_id on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL, Creating composite index idx_acdcdd0989b5_workspace_id on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL: New table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' created successfully
+INFO: Creating HNSW index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: Successfully created vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: Ensure this new table creation is caused by new workspace setup and not an unexpected embedding model change.
+INFO: PostgreSQL, Creating index idx_lightrag_vdb_relation_minilm_faf4aa4_pool512_384d_id on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL, Creating composite index idx_97c61f37b311_workspace_id on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL: New table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' created successfully
+INFO: Creating HNSW index idx_97c61f37b311_hnsw_cosine on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: Successfully created vector index idx_97c61f37b311_hnsw_cosine on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: Ensure this new table creation is caused by new workspace setup and not an unexpected embedding model change.
+INFO: PostgreSQL, Creating index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_id on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL, Creating composite index idx_132a18208865_workspace_id on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL: New table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' created successfully
+INFO: Creating HNSW index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Successfully created vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Ensure this new table creation is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_71b6a73fbab5de5ffcc54d8ddd60] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_71b6a73fbab5de5ffcc54d8ddd60] Ensured B-Tree index on entity_id for brain_71b6a73fbab5de5ffcc54d8ddd60 in neo4j
+INFO: [brain_71b6a73fbab5de5ffcc54d8ddd60] No existing index 'entity_id_fulltext_idx_brain_71b6a73fbab5de5ffcc54d8ddd60' found. Creating new index.
+INFO: [brain_71b6a73fbab5de5ffcc54d8ddd60] Creating full-text index 'entity_id_fulltext_idx_brain_71b6a73fbab5de5ffcc54d8ddd60' with Chinese tokenizer support.
+INFO: [brain_71b6a73fbab5de5ffcc54d8ddd60] Successfully created full-text index 'entity_id_fulltext_idx_brain_71b6a73fbab5de5ffcc54d8ddd60' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-strategy:v1
+INFO: Extracting stage 1/1: aurora-strategy:v1.md
+INFO: Processing d-id: aurora-strategy:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-strategy:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:fbe4c7ae42717731fb96274b0693e306
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-strategy:v1-chunk-000
+INFO: Merging stage 1/1: aurora-strategy:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-strategy:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-strategy:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-strategy:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-strategy:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_71b6a73fbab5de5ffcc54d8ddd60] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_71b6a73fbab5de5ffcc54d8ddd60] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_71b6a73fbab5de5ffcc54d8ddd60] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-strategy:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_2e3c15aaa85cf33591f665e12af1' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_2e3c15aaa85cf33591f665e12af1] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_2e3c15aaa85cf33591f665e12af1] Ensured B-Tree index on entity_id for brain_2e3c15aaa85cf33591f665e12af1 in neo4j
+INFO: [brain_2e3c15aaa85cf33591f665e12af1] No existing index 'entity_id_fulltext_idx_brain_2e3c15aaa85cf33591f665e12af1' found. Creating new index.
+INFO: [brain_2e3c15aaa85cf33591f665e12af1] Creating full-text index 'entity_id_fulltext_idx_brain_2e3c15aaa85cf33591f665e12af1' with Chinese tokenizer support.
+INFO: [brain_2e3c15aaa85cf33591f665e12af1] Successfully created full-text index 'entity_id_fulltext_idx_brain_2e3c15aaa85cf33591f665e12af1' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-governance:v1
+INFO: Extracting stage 1/1: aurora-governance:v1.md
+INFO: Processing d-id: aurora-governance:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-governance:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:f1a7123edfc70350faef1fab67f0233e
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-governance:v1-chunk-000
+INFO: Merging stage 1/1: aurora-governance:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-governance:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-governance:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-governance:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-governance:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_2e3c15aaa85cf33591f665e12af1] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_2e3c15aaa85cf33591f665e12af1] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_2e3c15aaa85cf33591f665e12af1] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-governance:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_bce04dacca6bc048d555c2ea07e1' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_bce04dacca6bc048d555c2ea07e1] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_bce04dacca6bc048d555c2ea07e1] Ensured B-Tree index on entity_id for brain_bce04dacca6bc048d555c2ea07e1 in neo4j
+INFO: [brain_bce04dacca6bc048d555c2ea07e1] No existing index 'entity_id_fulltext_idx_brain_bce04dacca6bc048d555c2ea07e1' found. Creating new index.
+INFO: [brain_bce04dacca6bc048d555c2ea07e1] Creating full-text index 'entity_id_fulltext_idx_brain_bce04dacca6bc048d555c2ea07e1' with Chinese tokenizer support.
+INFO: [brain_bce04dacca6bc048d555c2ea07e1] Successfully created full-text index 'entity_id_fulltext_idx_brain_bce04dacca6bc048d555c2ea07e1' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-sales:v1
+INFO: Extracting stage 1/1: aurora-sales:v1.md
+INFO: Processing d-id: aurora-sales:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-sales:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:c196d01916cca67527e38df03c96b188
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-sales:v1-chunk-000
+INFO: Merging stage 1/1: aurora-sales:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-sales:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-sales:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-sales:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-sales:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_bce04dacca6bc048d555c2ea07e1] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_bce04dacca6bc048d555c2ea07e1] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_bce04dacca6bc048d555c2ea07e1] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-sales:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_b5981baa227635ce5018e64d1cce' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_b5981baa227635ce5018e64d1cce] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_b5981baa227635ce5018e64d1cce] Ensured B-Tree index on entity_id for brain_b5981baa227635ce5018e64d1cce in neo4j
+INFO: [brain_b5981baa227635ce5018e64d1cce] No existing index 'entity_id_fulltext_idx_brain_b5981baa227635ce5018e64d1cce' found. Creating new index.
+INFO: [brain_b5981baa227635ce5018e64d1cce] Creating full-text index 'entity_id_fulltext_idx_brain_b5981baa227635ce5018e64d1cce' with Chinese tokenizer support.
+INFO: [brain_b5981baa227635ce5018e64d1cce] Successfully created full-text index 'entity_id_fulltext_idx_brain_b5981baa227635ce5018e64d1cce' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-marketing:v1
+INFO: Extracting stage 1/1: aurora-marketing:v1.md
+INFO: Processing d-id: aurora-marketing:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-marketing:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:33b0b6b137319465851259ee4cdb0383
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-marketing:v1-chunk-000
+INFO: Merging stage 1/1: aurora-marketing:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-marketing:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-marketing:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-marketing:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-marketing:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_b5981baa227635ce5018e64d1cce] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_b5981baa227635ce5018e64d1cce] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_b5981baa227635ce5018e64d1cce] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-marketing:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_f58bac1362ea9db20c4f5fff180f' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_f58bac1362ea9db20c4f5fff180f] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_f58bac1362ea9db20c4f5fff180f] Ensured B-Tree index on entity_id for brain_f58bac1362ea9db20c4f5fff180f in neo4j
+INFO: [brain_f58bac1362ea9db20c4f5fff180f] No existing index 'entity_id_fulltext_idx_brain_f58bac1362ea9db20c4f5fff180f' found. Creating new index.
+INFO: [brain_f58bac1362ea9db20c4f5fff180f] Creating full-text index 'entity_id_fulltext_idx_brain_f58bac1362ea9db20c4f5fff180f' with Chinese tokenizer support.
+INFO: [brain_f58bac1362ea9db20c4f5fff180f] Successfully created full-text index 'entity_id_fulltext_idx_brain_f58bac1362ea9db20c4f5fff180f' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-pricing:v2
+INFO: Extracting stage 1/1: aurora-pricing:v2.md
+INFO: Processing d-id: aurora-pricing:v2
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-pricing:v2
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:12bef26bda4aff18dcf013621676ec35
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-pricing:v2-chunk-000
+INFO: Merging stage 1/1: aurora-pricing:v2.md
+INFO: Phase 0: Writing recovery indexes for aurora-pricing:v2: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-pricing:v2 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-pricing:v2 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-pricing:v2: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_f58bac1362ea9db20c4f5fff180f] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_f58bac1362ea9db20c4f5fff180f] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_f58bac1362ea9db20c4f5fff180f] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-pricing:v2.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_99be152bf8ac13a025d8d563277f' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_99be152bf8ac13a025d8d563277f] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_99be152bf8ac13a025d8d563277f] Ensured B-Tree index on entity_id for brain_99be152bf8ac13a025d8d563277f in neo4j
+INFO: [brain_99be152bf8ac13a025d8d563277f] No existing index 'entity_id_fulltext_idx_brain_99be152bf8ac13a025d8d563277f' found. Creating new index.
+INFO: [brain_99be152bf8ac13a025d8d563277f] Creating full-text index 'entity_id_fulltext_idx_brain_99be152bf8ac13a025d8d563277f' with Chinese tokenizer support.
+INFO: [brain_99be152bf8ac13a025d8d563277f] Successfully created full-text index 'entity_id_fulltext_idx_brain_99be152bf8ac13a025d8d563277f' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-costs:v1
+INFO: Extracting stage 1/1: aurora-costs:v1.md
+INFO: Processing d-id: aurora-costs:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-costs:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:868f541f2e5466eb48da3dab441f98d0
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-costs:v1-chunk-000
+INFO: Merging stage 1/1: aurora-costs:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-costs:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-costs:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-costs:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-costs:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_99be152bf8ac13a025d8d563277f] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_99be152bf8ac13a025d8d563277f] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_99be152bf8ac13a025d8d563277f] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-costs:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_0b0f9713693191c945197a260b95' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_0b0f9713693191c945197a260b95] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_0b0f9713693191c945197a260b95] Ensured B-Tree index on entity_id for brain_0b0f9713693191c945197a260b95 in neo4j
+INFO: [brain_0b0f9713693191c945197a260b95] No existing index 'entity_id_fulltext_idx_brain_0b0f9713693191c945197a260b95' found. Creating new index.
+INFO: [brain_0b0f9713693191c945197a260b95] Creating full-text index 'entity_id_fulltext_idx_brain_0b0f9713693191c945197a260b95' with Chinese tokenizer support.
+INFO: [brain_0b0f9713693191c945197a260b95] Successfully created full-text index 'entity_id_fulltext_idx_brain_0b0f9713693191c945197a260b95' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-treasury:v1
+INFO: Extracting stage 1/1: aurora-treasury:v1.md
+INFO: Processing d-id: aurora-treasury:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-treasury:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:8dd2ce52bd8c2aae16fb87fc27b630c0
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-treasury:v1-chunk-000
+INFO: Merging stage 1/1: aurora-treasury:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-treasury:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-treasury:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-treasury:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-treasury:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_0b0f9713693191c945197a260b95] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_0b0f9713693191c945197a260b95] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_0b0f9713693191c945197a260b95] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-treasury:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_74f62b72a48d810508db77bb344e' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_74f62b72a48d810508db77bb344e] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_74f62b72a48d810508db77bb344e] Ensured B-Tree index on entity_id for brain_74f62b72a48d810508db77bb344e in neo4j
+INFO: [brain_74f62b72a48d810508db77bb344e] No existing index 'entity_id_fulltext_idx_brain_74f62b72a48d810508db77bb344e' found. Creating new index.
+INFO: [brain_74f62b72a48d810508db77bb344e] Creating full-text index 'entity_id_fulltext_idx_brain_74f62b72a48d810508db77bb344e' with Chinese tokenizer support.
+INFO: [brain_74f62b72a48d810508db77bb344e] Successfully created full-text index 'entity_id_fulltext_idx_brain_74f62b72a48d810508db77bb344e' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-inventory:v1
+INFO: Extracting stage 1/1: aurora-inventory:v1.md
+INFO: Processing d-id: aurora-inventory:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-inventory:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:b991d56544f028368122d0a85428fdcd
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-inventory:v1-chunk-000
+INFO: Merging stage 1/1: aurora-inventory:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-inventory:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-inventory:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-inventory:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-inventory:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_74f62b72a48d810508db77bb344e] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_74f62b72a48d810508db77bb344e] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_74f62b72a48d810508db77bb344e] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-inventory:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_3b6ff1aaadb97a04d5cea4826cf1' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_3b6ff1aaadb97a04d5cea4826cf1] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_3b6ff1aaadb97a04d5cea4826cf1] Ensured B-Tree index on entity_id for brain_3b6ff1aaadb97a04d5cea4826cf1 in neo4j
+INFO: [brain_3b6ff1aaadb97a04d5cea4826cf1] No existing index 'entity_id_fulltext_idx_brain_3b6ff1aaadb97a04d5cea4826cf1' found. Creating new index.
+INFO: [brain_3b6ff1aaadb97a04d5cea4826cf1] Creating full-text index 'entity_id_fulltext_idx_brain_3b6ff1aaadb97a04d5cea4826cf1' with Chinese tokenizer support.
+INFO: [brain_3b6ff1aaadb97a04d5cea4826cf1] Successfully created full-text index 'entity_id_fulltext_idx_brain_3b6ff1aaadb97a04d5cea4826cf1' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-procurement:v1
+INFO: Extracting stage 1/1: aurora-procurement:v1.md
+INFO: Processing d-id: aurora-procurement:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-procurement:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:59f1914c03eb5ec6b9756183fe000f55
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-procurement:v1-chunk-000
+INFO: Merging stage 1/1: aurora-procurement:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-procurement:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-procurement:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-procurement:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-procurement:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_3b6ff1aaadb97a04d5cea4826cf1] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_3b6ff1aaadb97a04d5cea4826cf1] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_3b6ff1aaadb97a04d5cea4826cf1] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-procurement:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_6b99f7dee56523be1530efb7c21a' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_6b99f7dee56523be1530efb7c21a] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_6b99f7dee56523be1530efb7c21a] Ensured B-Tree index on entity_id for brain_6b99f7dee56523be1530efb7c21a in neo4j
+INFO: [brain_6b99f7dee56523be1530efb7c21a] No existing index 'entity_id_fulltext_idx_brain_6b99f7dee56523be1530efb7c21a' found. Creating new index.
+INFO: [brain_6b99f7dee56523be1530efb7c21a] Creating full-text index 'entity_id_fulltext_idx_brain_6b99f7dee56523be1530efb7c21a' with Chinese tokenizer support.
+INFO: [brain_6b99f7dee56523be1530efb7c21a] Successfully created full-text index 'entity_id_fulltext_idx_brain_6b99f7dee56523be1530efb7c21a' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-logistics:v1
+INFO: Extracting stage 1/1: aurora-logistics:v1.md
+INFO: Processing d-id: aurora-logistics:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-logistics:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:2cb27526faaa003d1f2e399396954bcd
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-logistics:v1-chunk-000
+INFO: Merging stage 1/1: aurora-logistics:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-logistics:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-logistics:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-logistics:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-logistics:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_6b99f7dee56523be1530efb7c21a] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_6b99f7dee56523be1530efb7c21a] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_6b99f7dee56523be1530efb7c21a] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-logistics:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_50a8b20ff31185c4cbd0fa83c966' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_50a8b20ff31185c4cbd0fa83c966] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_50a8b20ff31185c4cbd0fa83c966] Ensured B-Tree index on entity_id for brain_50a8b20ff31185c4cbd0fa83c966 in neo4j
+INFO: [brain_50a8b20ff31185c4cbd0fa83c966] No existing index 'entity_id_fulltext_idx_brain_50a8b20ff31185c4cbd0fa83c966' found. Creating new index.
+INFO: [brain_50a8b20ff31185c4cbd0fa83c966] Creating full-text index 'entity_id_fulltext_idx_brain_50a8b20ff31185c4cbd0fa83c966' with Chinese tokenizer support.
+INFO: [brain_50a8b20ff31185c4cbd0fa83c966] Successfully created full-text index 'entity_id_fulltext_idx_brain_50a8b20ff31185c4cbd0fa83c966' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-compliance:v1
+INFO: Extracting stage 1/1: aurora-compliance:v1.md
+INFO: Processing d-id: aurora-compliance:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-compliance:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:9e49c31151af18e5ee379f33cbff1b2a
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-compliance:v1-chunk-000
+INFO: Merging stage 1/1: aurora-compliance:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-compliance:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-compliance:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-compliance:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-compliance:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_50a8b20ff31185c4cbd0fa83c966] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_50a8b20ff31185c4cbd0fa83c966] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_50a8b20ff31185c4cbd0fa83c966] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-compliance:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_e72b2bf19b27d9c02a4e37cb1871' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_e72b2bf19b27d9c02a4e37cb1871] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_e72b2bf19b27d9c02a4e37cb1871] Ensured B-Tree index on entity_id for brain_e72b2bf19b27d9c02a4e37cb1871 in neo4j
+INFO: [brain_e72b2bf19b27d9c02a4e37cb1871] No existing index 'entity_id_fulltext_idx_brain_e72b2bf19b27d9c02a4e37cb1871' found. Creating new index.
+INFO: [brain_e72b2bf19b27d9c02a4e37cb1871] Creating full-text index 'entity_id_fulltext_idx_brain_e72b2bf19b27d9c02a4e37cb1871' with Chinese tokenizer support.
+INFO: [brain_e72b2bf19b27d9c02a4e37cb1871] Successfully created full-text index 'entity_id_fulltext_idx_brain_e72b2bf19b27d9c02a4e37cb1871' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-contracts:v1
+INFO: Extracting stage 1/1: aurora-contracts:v1.md
+INFO: Processing d-id: aurora-contracts:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-contracts:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:f7fa2346ec3b9cf02fbde6872ad97c80
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-contracts:v1-chunk-000
+INFO: Merging stage 1/1: aurora-contracts:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-contracts:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-contracts:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-contracts:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-contracts:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_e72b2bf19b27d9c02a4e37cb1871] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_e72b2bf19b27d9c02a4e37cb1871] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_e72b2bf19b27d9c02a4e37cb1871] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-contracts:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_ace68ece5d9a647e537c84d528e4' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_ace68ece5d9a647e537c84d528e4] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_ace68ece5d9a647e537c84d528e4] Ensured B-Tree index on entity_id for brain_ace68ece5d9a647e537c84d528e4 in neo4j
+INFO: [brain_ace68ece5d9a647e537c84d528e4] No existing index 'entity_id_fulltext_idx_brain_ace68ece5d9a647e537c84d528e4' found. Creating new index.
+INFO: [brain_ace68ece5d9a647e537c84d528e4] Creating full-text index 'entity_id_fulltext_idx_brain_ace68ece5d9a647e537c84d528e4' with Chinese tokenizer support.
+INFO: [brain_ace68ece5d9a647e537c84d528e4] Successfully created full-text index 'entity_id_fulltext_idx_brain_ace68ece5d9a647e537c84d528e4' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-workforce:v1
+INFO: Extracting stage 1/1: aurora-workforce:v1.md
+INFO: Processing d-id: aurora-workforce:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-workforce:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:37dd1fab5827906f156d6257459c262f
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-workforce:v1-chunk-000
+INFO: Merging stage 1/1: aurora-workforce:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-workforce:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-workforce:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-workforce:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-workforce:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_ace68ece5d9a647e537c84d528e4] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_ace68ece5d9a647e537c84d528e4] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_ace68ece5d9a647e537c84d528e4] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-workforce:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_8771df0f6a56b44e6e8d9c5f4ea9' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_8771df0f6a56b44e6e8d9c5f4ea9] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_8771df0f6a56b44e6e8d9c5f4ea9] Ensured B-Tree index on entity_id for brain_8771df0f6a56b44e6e8d9c5f4ea9 in neo4j
+INFO: [brain_8771df0f6a56b44e6e8d9c5f4ea9] No existing index 'entity_id_fulltext_idx_brain_8771df0f6a56b44e6e8d9c5f4ea9' found. Creating new index.
+INFO: [brain_8771df0f6a56b44e6e8d9c5f4ea9] Creating full-text index 'entity_id_fulltext_idx_brain_8771df0f6a56b44e6e8d9c5f4ea9' with Chinese tokenizer support.
+INFO: [brain_8771df0f6a56b44e6e8d9c5f4ea9] Successfully created full-text index 'entity_id_fulltext_idx_brain_8771df0f6a56b44e6e8d9c5f4ea9' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-data-platform:v1
+INFO: Extracting stage 1/1: aurora-data-platform:v1.md
+INFO: Processing d-id: aurora-data-platform:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-data-platform:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:cdf59e2bc949c010a7bb53054f04cb1e
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-data-platform:v1-chunk-000
+INFO: Merging stage 1/1: aurora-data-platform:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-data-platform:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-data-platform:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-data-platform:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-data-platform:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_8771df0f6a56b44e6e8d9c5f4ea9] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_8771df0f6a56b44e6e8d9c5f4ea9] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_8771df0f6a56b44e6e8d9c5f4ea9] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-data-platform:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_2c29b3269b2f0478962a108e67a8' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_2c29b3269b2f0478962a108e67a8] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_2c29b3269b2f0478962a108e67a8] Ensured B-Tree index on entity_id for brain_2c29b3269b2f0478962a108e67a8 in neo4j
+INFO: [brain_2c29b3269b2f0478962a108e67a8] No existing index 'entity_id_fulltext_idx_brain_2c29b3269b2f0478962a108e67a8' found. Creating new index.
+INFO: [brain_2c29b3269b2f0478962a108e67a8] Creating full-text index 'entity_id_fulltext_idx_brain_2c29b3269b2f0478962a108e67a8' with Chinese tokenizer support.
+INFO: [brain_2c29b3269b2f0478962a108e67a8] Successfully created full-text index 'entity_id_fulltext_idx_brain_2c29b3269b2f0478962a108e67a8' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-incident:v1
+INFO: Extracting stage 1/1: aurora-incident:v1.md
+INFO: Processing d-id: aurora-incident:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-incident:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:74ec00cce6ab21097948f64fba2e952f
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-incident:v1-chunk-000
+INFO: Merging stage 1/1: aurora-incident:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-incident:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-incident:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-incident:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-incident:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_2c29b3269b2f0478962a108e67a8] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_2c29b3269b2f0478962a108e67a8] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_2c29b3269b2f0478962a108e67a8] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-incident:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='brain_c0d4657a6d9fed28f5fad9c94330' while default workspace is set to 'brain_71b6a73fbab5de5ffcc54d8ddd60'
+INFO: HNSW vector index idx_lightrag_vdb_entity_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_97c61f37b311_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_lightrag_vdb_chunks_minilm_faf4aa4_pool512_384d_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_faf4aa4_pool512_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [brain_c0d4657a6d9fed28f5fad9c94330] Connected to neo4j at bolt://127.0.0.1:54891
+INFO: [brain_c0d4657a6d9fed28f5fad9c94330] Ensured B-Tree index on entity_id for brain_c0d4657a6d9fed28f5fad9c94330 in neo4j
+INFO: [brain_c0d4657a6d9fed28f5fad9c94330] No existing index 'entity_id_fulltext_idx_brain_c0d4657a6d9fed28f5fad9c94330' found. Creating new index.
+INFO: [brain_c0d4657a6d9fed28f5fad9c94330] Creating full-text index 'entity_id_fulltext_idx_brain_c0d4657a6d9fed28f5fad9c94330' with Chinese tokenizer support.
+INFO: [brain_c0d4657a6d9fed28f5fad9c94330] Successfully created full-text index 'entity_id_fulltext_idx_brain_c0d4657a6d9fed28f5fad9c94330' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aurora-response:v1
+INFO: Extracting stage 1/1: aurora-response:v1.md
+INFO: Processing d-id: aurora-response:v1
+INFO: Chunking F(legacy): size=512, split_only=False, overlap=32, doc_id: aurora-response:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:00097f4ba72d2e9c98b1e9162306514f
+INFO: Chunk 1 of 1 extracted 2 Ent + 1 Rel aurora-response:v1-chunk-000
+INFO: Merging stage 1/1: aurora-response:v1.md
+INFO: Phase 0: Writing recovery indexes for aurora-response:v1: 2 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 2 entities from aurora-response:v1 (async: 2)
+INFO: Phase 2: Processing 1 relations from aurora-response:v1 (async: 2)
+INFO: Upserting relation VDB: `Grupo Aurora->Política Aurora`
+INFO: Phase 2 relation processing completed for aurora-response:v1: edges=1 added_entities=0
+INFO: Completed merging: 2 entities, 0 extra entities, 1 relations
+INFO: [brain_c0d4657a6d9fed28f5fad9c94330] entities flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_c0d4657a6d9fed28f5fad9c94330] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [brain_c0d4657a6d9fed28f5fad9c94330] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aurora-response:v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Query nodes: aurora-compliance, SKU-AURA (top_k:6, cosine:0.25)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: legal, Grupo Aurora (top_k:6, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:6 cosine:0.25)
+INFO: Raw search results: 2 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 2 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E2/1
+INFO: Query nodes: aurora-response, INC-47 (top_k:6, cosine:0.25)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: legal, Grupo Aurora (top_k:6, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:6 cosine:0.25)
+INFO: Raw search results: 2 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 2 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E2/1
+INFO: Query nodes: aurora-incident, INC-47 (top_k:6, cosine:0.25)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: technology, Grupo Aurora (top_k:6, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:6 cosine:0.25)
+INFO: Raw search results: 2 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 2 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E2/1
+INFO: Query nodes: aurora-contracts, SKU-AURA (top_k:6, cosine:0.25)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: legal, Grupo Aurora (top_k:6, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:6 cosine:0.25)
+INFO: Raw search results: 2 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 2 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E2/1

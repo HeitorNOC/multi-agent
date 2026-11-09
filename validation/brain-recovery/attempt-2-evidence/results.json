@@ -1,0 +1,258 @@
+{
+  "installation": "business-flow-11c2f56a66",
+  "checkpoints": [
+    {
+      "name": "native_extraction_vectors_graph_and_advice_through_typescript_langgraph"
+    }
+  ],
+  "worker_calls": [
+    {
+      "job": "138cf38f-6565-4f76-bd24-db0668d2dd18",
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 2, \"epoch\": 1}\n",
+      "stderr": ""
+    }
+  ],
+  "model_calls": 6,
+  "production_approved": false,
+  "scope": "native LightRAG/ONNX projection and canonical recovery, deterministic coordination",
+  "postgres_image": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "publication_calls": [
+    {
+      "draft": "d2e1b32c-3ad8-441a-a3dd-6138912ebd54",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"15f5f50d185dadbfb708f5d031be6790237338c6b8f5247deb269d473df8b738\"}\n",
+      "stderr": ""
+    },
+    {
+      "draft": "9d2bfa79-fd06-41b8-a292-dda03636d46c",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"30c905204b75fda6bda8973c95b47455337cb57d95a12e583ce9010d5933a608\"}\n",
+      "stderr": ""
+    }
+  ],
+  "model_usage_records": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "5dbc7ec7134d54e69b4051d341f824348b92b7bb1610726eb53fd61ffca9ac51",
+      "reservation_id": "3218d927-2c80-4380-b02c-01015f4aa0f0",
+      "instance": "9f20df56f51141379d1de5e0eae85a9e",
+      "seconds": 8.47324779999326,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13880,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 270,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "37844c7dd7c41f04ac1fed4c56046967168d9194bf81665531c60d92dbe81d82",
+      "reservation_id": "c5534772-d754-4531-9461-6cfef209d739",
+      "instance": "9f20df56f51141379d1de5e0eae85a9e",
+      "seconds": 8.582305099989753,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13891,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 287,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "8bd5a08ed9b2d27869ebef5aff4d2b0f538aa579265cbecdf85cabc25cb084cf",
+      "reservation_id": "9f53a2a6-8ddc-4892-a5b6-b160340721c2",
+      "instance": "9f20df56f51141379d1de5e0eae85a9e",
+      "seconds": 4.243149500020081,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11862,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 47,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "7ce13d1ea41566d3f349ccd6c3a2b7ab21a78395d79d4b4e5e66b688e9126250",
+      "reservation_id": "b04db23a-bf1e-412f-955b-e5ad57412b8c",
+      "instance": "9f20df56f51141379d1de5e0eae85a9e",
+      "seconds": 4.864406800013967,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12217,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 75,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "afb260249d3c2c7b20e011c519b22f3ba4eea12f7795b243b314b0f43f1a587f",
+      "reservation_id": "c91c4212-3ba1-46ba-abf7-fa06b5846568",
+      "instance": "9f20df56f51141379d1de5e0eae85a9e",
+      "seconds": 5.068624099978479,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12646,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 46,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "228f378da40d3eba149a0ac0f11ff02aa36cc60c261790e936f3e38e433bb392",
+      "reservation_id": "c4c868ea-e783-435b-8070-47350cb1d393",
+      "instance": "9f20df56f51141379d1de5e0eae85a9e",
+      "seconds": 4.076751699991291,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12203,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 52,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ],
+  "embedding_calls": [
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 26,
+      "truncated_inputs": 0,
+      "seconds": 0.022401499998522922,
+      "input_hashes": [
+        "3386d655b160b08e8ef3057622dc9499ac9ba81abac8db98d29619066004359b",
+        "69cd9903cb7a416dc0583ec07b881878f31be4eb48a2d3bf85d2ff27c34ff301",
+        "c18c83410ecf692505de301958f33db69774b6e359e754c172847b6ddefd670f"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 37,
+      "truncated_inputs": 0,
+      "seconds": 0.029328000004170462,
+      "input_hashes": [
+        "06c9fc2f79ede134435f6b3f699b060b90a1331abfd75e7defbe3f33186940ed",
+        "21a8c04d72318120425e5284182e8e3b7a8a3d6450a3d003d07a2d0332902654",
+        "d2565a8dee482954216637f96698685580e4cc29d8687c9f4477181f13a60194"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 32,
+      "truncated_inputs": 0,
+      "seconds": 0.010514699999475852,
+      "input_hashes": [
+        "2662b13247793d791a892495feb4289d1cbb133927b80336fb5f93da10be8253"
+      ]
+    },
+    {
+      "batch": 4,
+      "dimension": 384,
+      "max_wordpiece_tokens": 27,
+      "truncated_inputs": 0,
+      "seconds": 0.037879500014241785,
+      "input_hashes": [
+        "c189908075a74e63dd9f7959b7fb2afe208cb3ef17f792f076bf7d8e7f534896",
+        "1ddb6de9e335c5d4f07837f9365b8eca3fa4c13e0e03ccc737dee3abc920919e",
+        "2ba00069ef31b5352b647c95484e024a91fc65976bccd4a041633c2a3f6c5b4b",
+        "9a68d1acdbeebe9b3c7476b9871d8c0c8e7207670e941669e5700243889d135a"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 48,
+      "truncated_inputs": 0,
+      "seconds": 0.01595080000697635,
+      "input_hashes": [
+        "a9c7ee0a9937085de1fe71f784880eb046a53862f8c40230f2da2039a29c86e7"
+      ]
+    },
+    {
+      "batch": 2,
+      "dimension": 384,
+      "max_wordpiece_tokens": 42,
+      "truncated_inputs": 0,
+      "seconds": 0.022036400012439117,
+      "input_hashes": [
+        "8555e68e9b593c773c699ec0fb8e9e66a969b71b4ca84acca32c98381b783361",
+        "093ae6adec2847ab131ddda5b418cbe16c14710f7ca4481b367fe1f8b5a74248"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 25,
+      "truncated_inputs": 0,
+      "seconds": 0.02033939998364076,
+      "input_hashes": [
+        "6dd767ebcfce38b291f2a0e365cb834d82f7f6553b4b1e43ceb0767ae3b9c821",
+        "a8308e8e2e4b73307d860de2effdc675fa122f64c2095e7974d8ef804b9d3b70",
+        "266c20ae0183de7f7619d0da3544adc2e231867c6962199c367dd938c3842389"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 20,
+      "truncated_inputs": 0,
+      "seconds": 0.01749759999802336,
+      "input_hashes": [
+        "a38b69b8b0d223534875c399c879eb0eeeef378b29f021ba2c3536e38c02ba68",
+        "8ea0c33b027397388fc4bff6951669204a8ac1215f5250d3a39b9d4284a3cdbe",
+        "e3e37f4f1538526f7a882c700648f99fda89c71318e45bed1e7568a51094526b"
+      ]
+    }
+  ],
+  "result": "FAIL",
+  "error": "Rejected('503: {\"error\":\"native brain refused operation\"}')",
+  "seconds": 98.64441660000011,
+  "disposable_resources_removed": true
+}

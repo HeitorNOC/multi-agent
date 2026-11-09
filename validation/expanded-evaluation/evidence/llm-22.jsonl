@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e3-0226-74f0-91d3-e577f3a7dea7"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O teto diário de reembolso de transporte da equipe Aurora é **R$ 85 por pessoa**. [1]\\n\\nO manual está vigente desde 1º de janeiro de 2026 e, portanto, abrange a data consultada de 1º de fevereiro de 2026. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13122,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":95,"reasoning_output_tokens":0}}

@@ -1,0 +1,311 @@
+{
+  "revision": "5cf77950e29c0d203b3ee1d10471b775f6b91af4",
+  "baseline": {
+    "exit_code": 0,
+    "files": 5,
+    "passed_tests": 11,
+    "failed_tests": 0,
+    "tests": [
+      {
+        "name": "cria order Point com referência e chave idempotente do charge",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "envia PIX como qr e rejeita valores com fração de centavo",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "confirma estorno somente quando a API retorna o id do refund",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "autentica webhook Point e associa external_reference à cobrança",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "creates a deterministic pending sandbox charge",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "accepts only a valid signed provider event",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "StripeTerminalProvider creates a hosted checkout session with tenant metadata and a usable URL",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "StripeTerminalProvider rejects Pix without explicit invitation and sub-cent amounts",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "StripeTerminalProvider refunds a settled session by its PaymentIntent",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "StripeTerminalProvider verifies signature and authenticated tenant metadata",
+        "status": "passed",
+        "failures": []
+      },
+      {
+        "name": "verifies and processes a provider event without a user session",
+        "status": "passed",
+        "failures": []
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "passed": true,
+      "suite": {
+        "exit_code": 0,
+        "files": 5,
+        "passed_tests": 12,
+        "failed_tests": 0,
+        "tests": [
+          {
+            "name": "cria order Point com referência e chave idempotente do charge",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "envia PIX como qr e rejeita valores com fração de centavo",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "confirma estorno somente quando a API retorna o id do refund",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "autentica webhook Point e associa external_reference à cobrança",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "creates a deterministic pending sandbox charge",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "accepts only a valid signed provider event",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "StripeTerminalProvider creates a hosted checkout session with tenant metadata and a usable URL",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "StripeTerminalProvider rejects Pix without explicit invitation and sub-cent amounts",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "StripeTerminalProvider refunds a settled session by its PaymentIntent",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "StripeTerminalProvider verifies signature and authenticated tenant metadata",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "verifies and processes a provider event without a user session",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "skips the unit of work when the provider ignores the event",
+            "status": "passed",
+            "failures": []
+          }
+        ]
+      },
+      "mutation": {
+        "exit_code": 1,
+        "files": 1,
+        "passed_tests": 1,
+        "failed_tests": 1,
+        "tests": [
+          {
+            "name": "verifies and processes a provider event without a user session",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "skips the unit of work when the provider ignores the event",
+            "status": "failed",
+            "failures": [
+              "AssertionError: expected \"vi.fn()\" to not be called at all, but actually been called 1 times\u001b[90m\n\nReceived:\n\n\u001b[1m  1st vi.fn() call:\n\n\u001b[22m    Array [\n      \"organization\",\n      [Function anonymous],\n    ]\n\u001b[39m\u001b[90m\n\nNumber of calls: \u001b[1m1\u001b[22m\n\u001b[39m\n    at Proxy.<anonymous> (file:///repo/node_modules/.pnpm/@vitest+expect@4.1.10/node_modules/@vitest/expect/dist/index.js:1467:10)\n    at Proxy.<anonymous> (file:///repo/node_modules/.pnpm/@vitest+expect@4.1.10/node_modules/@vitest/expect/dist/index.js:1156:15)\n    at Proxy.methodWrapper (file:///repo/node_modules/.pnpm/chai@6.2.2/node_modules/chai/index.js:1700:25)\n    at /repo/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts:62:25\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20"
+            ]
+          }
+        ]
+      },
+      "revision": "5cf77950e29c0d203b3ee1d10471b775f6b91af4",
+      "scope": "Apenas o spec mudou e git apply --check passou nesta execução.",
+      "diff": "--- a/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n+++ b/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n@@ -36,3 +36,28 @@\n   ).resolves.toBe(confirmed);\n   expect(scope.repository.processProviderEvent).toHaveBeenCalledWith(\"charge\", \"SANDBOX\", event);\n });\n+\n+it(\"skips the unit of work when the provider ignores the event\", async () => {\n+  const runSystem = vi.fn();\n+  const verifyWebhook = vi.fn().mockResolvedValue(null);\n+  const service = new ProcessTerminalPaymentWebhook(\n+    { run: vi.fn(), runSystem },\n+    {\n+      resolve: () => ({\n+        refund: vi.fn(),\n+        start: vi.fn(),\n+        verifyWebhook,\n+      }),\n+    },\n+  );\n+  await expect(\n+    service.execute({\n+      chargeId: \"charge\",\n+      organizationId: \"organization\",\n+      provider: \"SANDBOX\",\n+      rawBody: \"{}\",\n+      signature: \"signature\",\n+    }),\n+  ).resolves.toBeNull();\n+  expect(runSystem).not.toHaveBeenCalled();\n+});\n"
+    }
+  ],
+  "state": {
+    "roster": [
+      "tech_lead",
+      "backend_engineer",
+      "qa_engineer",
+      "platform_engineer"
+    ],
+    "assignments": [
+      {
+        "agent": "tech_lead",
+        "task": "Definir a abordagem do teste usando a entrada fictícia, as APIs públicas e os imports existentes, mantendo a alteração restrita ao arquivo spec."
+      },
+      {
+        "agent": "backend_engineer",
+        "task": "Acrescentar ao final do spec o teste 'skips the unit of work when the provider ignores the event', com mocks locais, verificando que execute retorna null e runSystem não é chamado quando verifyWebhook resolve null."
+      },
+      {
+        "agent": "qa_engineer",
+        "task": "Verificar o teste solicitado e confirmar que o conteúdo existente foi preservado e que somente o arquivo spec foi alterado."
+      }
+    ],
+    "design": "Ao final do spec existente, acrescente o teste `skips the unit of work when the provider ignores the event`, preservando o conteúdo e os imports atuais. Crie mocks locais com `vi.fn()`: configure `verifyWebhook` para resolver `null` e mantenha `runSystem` como mock observável; forneça também os demais membros exigidos pelo construtor, seguindo o teste existente. Instancie `ProcessTerminalPaymentWebhook` e chame a API pública `execute` com a mesma entrada fictícia do teste existente. Verifique que a promessa resolve para `null` e que `runSystem` não foi chamado. Restrinja a alteração ao arquivo spec, sem rede, banco ou credenciais.",
+    "attempt": 1,
+    "tests": {
+      "passed": true,
+      "suite": {
+        "exit_code": 0,
+        "files": 5,
+        "passed_tests": 12,
+        "failed_tests": 0,
+        "tests": [
+          {
+            "name": "cria order Point com referência e chave idempotente do charge",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "envia PIX como qr e rejeita valores com fração de centavo",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "confirma estorno somente quando a API retorna o id do refund",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "autentica webhook Point e associa external_reference à cobrança",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "creates a deterministic pending sandbox charge",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "accepts only a valid signed provider event",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "StripeTerminalProvider creates a hosted checkout session with tenant metadata and a usable URL",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "StripeTerminalProvider rejects Pix without explicit invitation and sub-cent amounts",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "StripeTerminalProvider refunds a settled session by its PaymentIntent",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "StripeTerminalProvider verifies signature and authenticated tenant metadata",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "verifies and processes a provider event without a user session",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "skips the unit of work when the provider ignores the event",
+            "status": "passed",
+            "failures": []
+          }
+        ]
+      },
+      "mutation": {
+        "exit_code": 1,
+        "files": 1,
+        "passed_tests": 1,
+        "failed_tests": 1,
+        "tests": [
+          {
+            "name": "verifies and processes a provider event without a user session",
+            "status": "passed",
+            "failures": []
+          },
+          {
+            "name": "skips the unit of work when the provider ignores the event",
+            "status": "failed",
+            "failures": [
+              "AssertionError: expected \"vi.fn()\" to not be called at all, but actually been called 1 times\u001b[90m\n\nReceived:\n\n\u001b[1m  1st vi.fn() call:\n\n\u001b[22m    Array [\n      \"organization\",\n      [Function anonymous],\n    ]\n\u001b[39m\u001b[90m\n\nNumber of calls: \u001b[1m1\u001b[22m\n\u001b[39m\n    at Proxy.<anonymous> (file:///repo/node_modules/.pnpm/@vitest+expect@4.1.10/node_modules/@vitest/expect/dist/index.js:1467:10)\n    at Proxy.<anonymous> (file:///repo/node_modules/.pnpm/@vitest+expect@4.1.10/node_modules/@vitest/expect/dist/index.js:1156:15)\n    at Proxy.methodWrapper (file:///repo/node_modules/.pnpm/chai@6.2.2/node_modules/chai/index.js:1700:25)\n    at /repo/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts:62:25\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20"
+            ]
+          }
+        ]
+      },
+      "revision": "5cf77950e29c0d203b3ee1d10471b775f6b91af4",
+      "scope": "Apenas o spec mudou e git apply --check passou nesta execução.",
+      "diff": "--- a/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n+++ b/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n@@ -36,3 +36,28 @@\n   ).resolves.toBe(confirmed);\n   expect(scope.repository.processProviderEvent).toHaveBeenCalledWith(\"charge\", \"SANDBOX\", event);\n });\n+\n+it(\"skips the unit of work when the provider ignores the event\", async () => {\n+  const runSystem = vi.fn();\n+  const verifyWebhook = vi.fn().mockResolvedValue(null);\n+  const service = new ProcessTerminalPaymentWebhook(\n+    { run: vi.fn(), runSystem },\n+    {\n+      resolve: () => ({\n+        refund: vi.fn(),\n+        start: vi.fn(),\n+        verifyWebhook,\n+      }),\n+    },\n+  );\n+  await expect(\n+    service.execute({\n+      chargeId: \"charge\",\n+      organizationId: \"organization\",\n+      provider: \"SANDBOX\",\n+      rawBody: \"{}\",\n+      signature: \"signature\",\n+    }),\n+  ).resolves.toBeNull();\n+  expect(runSystem).not.toHaveBeenCalled();\n+});\n"
+    },
+    "qa": {
+      "verdict": "pass",
+      "evidence": "O diff acrescenta o teste solicitado ao final do spec, sem remover ou alterar conteúdo existente, e o escopo informa que somente o spec mudou. O teste usa mocks locais, faz verifyWebhook resolver null e verifica que execute retorna null e runSystem não é chamado. A suíte passou com 12 testes; na mutação, o novo teste falhou ao detectar uma chamada indevida a runSystem, confirmando que essa condição é verificada."
+    },
+    "technical_review": {
+      "verdict": "pass",
+      "evidence": "O teste solicitado foi acrescentado ao final do spec, preservando o conteúdo e os imports existentes. Ele usa mocks locais, configura verifyWebhook para resolver null, chama execute com a mesma entrada fictícia e verifica o retorno null e zero chamadas a runSystem. Apenas o spec foi alterado. A suíte passou, e o teste detectou a mutação que chama runSystem indevidamente."
+    },
+    "decision": {
+      "action": "human_review",
+      "reason": "QA e revisão técnica aprovaram a alteração; a suíte passou e o teste detectou a chamada indevida a runSystem na mutação."
+    },
+    "review_history": [
+      {
+        "attempt": 1,
+        "passed": true,
+        "decision": {
+          "action": "human_review",
+          "reason": "QA e revisão técnica aprovaram a alteração; a suíte passou e o teste detectou a chamada indevida a runSystem na mutação."
+        }
+      }
+    ]
+  },
+  "calls": [
+    "chief",
+    "director_assign",
+    "tech_lead_design",
+    "backend_implement:1",
+    "qa_review:1",
+    "tech_lead_review:1",
+    "director_review:1"
+  ]
+}

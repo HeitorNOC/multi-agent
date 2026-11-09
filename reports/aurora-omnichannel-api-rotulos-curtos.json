@@ -1,0 +1,317 @@
+{
+  "goal": "Analisar a diretiva executiva vinculada a esta tarefa. SHA-256 5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "status": "recovery_required",
+  "error": "Consulte a evidência da inferência na central Precisa de você.",
+  "plan": null,
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 1,
+    "max_calls": 24,
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    }
+  ],
+  "retrieval": "hybrid",
+  "facets": [],
+  "job_seconds": 4.55,
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "worker_stopped"
+  ],
+  "retrieval_observed": false,
+  "candidates": [
+    {
+      "source": "mba",
+      "page": 3,
+      "line": 4
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 66
+    },
+    {
+      "source": "mba",
+      "page": 3,
+      "line": 1
+    }
+  ],
+  "report": null,
+  "admission_replay": {
+    "job_ids": [
+      "233d53d6-00c7-4de7-a097-f041a76d2402",
+      "233d53d6-00c7-4de7-a097-f041a76d2402",
+      "233d53d6-00c7-4de7-a097-f041a76d2402"
+    ],
+    "same_job": true,
+    "jobs_visible": 1,
+    "worker_starts": 1
+  },
+  "directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "retrieval_by_agent": [],
+  "directive_dispatches": [
+    {
+      "pilot_directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+      "job": "233d53d6-00c7-4de7-a097-f041a76d2402",
+      "characters": 23385
+    }
+  ],
+  "diagnostics": [
+    {
+      "native_error": "ProviderError",
+      "service": "native",
+      "causes": [
+        {
+          "type": "ProviderError",
+          "code": "provider_nonzero_exit",
+          "frames": [
+            {
+              "file": "native.py",
+              "function": "handler",
+              "line": 554
+            },
+            {
+              "file": "model_slots.py",
+              "function": "run",
+              "line": 99
+            },
+            {
+              "file": "model_slots.py",
+              "function": "execute",
+              "line": 67
+            },
+            {
+              "file": "native.py",
+              "function": "generate_slot",
+              "line": 112
+            },
+            {
+              "file": "codex_provider.py",
+              "function": "run_reserved",
+              "line": 30
+            },
+            {
+              "file": "threads.py",
+              "function": "to_thread",
+              "line": 25
+            },
+            {
+              "file": "thread.py",
+              "function": "run",
+              "line": 59
+            },
+            {
+              "file": "codex_provider.py",
+              "function": "run",
+              "line": 140
+            }
+          ]
+        }
+      ],
+      "job": "233d53d6-00c7-4de7-a097-f041a76d2402",
+      "action": "model_slot_run",
+      "slot": "plan"
+    },
+    {
+      "service": "launcher",
+      "causes": [
+        {
+          "type": "HTTPError",
+          "code": "upstream_http_error",
+          "status": 409,
+          "frames": [
+            {
+              "file": "model_gateway.py",
+              "function": "call_model",
+              "line": 24
+            },
+            {
+              "file": "local_engine.py",
+              "function": "native",
+              "line": 522
+            },
+            {
+              "file": "request.py",
+              "function": "urlopen",
+              "line": 215
+            },
+            {
+              "file": "request.py",
+              "function": "open",
+              "line": 521
+            },
+            {
+              "file": "request.py",
+              "function": "http_response",
+              "line": 630
+            },
+            {
+              "file": "request.py",
+              "function": "error",
+              "line": 559
+            },
+            {
+              "file": "request.py",
+              "function": "_call_chain",
+              "line": 492
+            },
+            {
+              "file": "request.py",
+              "function": "http_error_default",
+              "line": 639
+            }
+          ]
+        }
+      ],
+      "job": "233d53d6-00c7-4de7-a097-f041a76d2402",
+      "action": "llm",
+      "slot": "plan"
+    },
+    {
+      "service": "worker",
+      "causes": [
+        {
+          "type": "RuntimeError",
+          "code": "unexpected_exception",
+          "frames": [
+            {
+              "file": "_runnable.py",
+              "function": "ainvoke",
+              "line": 836
+            },
+            {
+              "file": "_runnable.py",
+              "function": "ainvoke",
+              "line": 554
+            },
+            {
+              "file": "worker.py",
+              "function": "cos",
+              "line": 240
+            },
+            {
+              "file": "worker.py",
+              "function": "llm",
+              "line": 134
+            },
+            {
+              "file": "worker.py",
+              "function": "backend",
+              "line": 83
+            },
+            {
+              "file": "threads.py",
+              "function": "to_thread",
+              "line": 25
+            },
+            {
+              "file": "thread.py",
+              "function": "run",
+              "line": 59
+            },
+            {
+              "file": "worker.py",
+              "function": "request",
+              "line": 60
+            }
+          ]
+        },
+        {
+          "type": "HTTPError",
+          "code": "upstream_http_error",
+          "status": 409,
+          "frames": [
+            {
+              "file": "worker.py",
+              "function": "request",
+              "line": 50
+            },
+            {
+              "file": "request.py",
+              "function": "urlopen",
+              "line": 215
+            },
+            {
+              "file": "request.py",
+              "function": "open",
+              "line": 521
+            },
+            {
+              "file": "request.py",
+              "function": "http_response",
+              "line": 630
+            },
+            {
+              "file": "request.py",
+              "function": "error",
+              "line": 559
+            },
+            {
+              "file": "request.py",
+              "function": "_call_chain",
+              "line": 492
+            },
+            {
+              "file": "request.py",
+              "function": "http_error_default",
+              "line": 639
+            }
+          ]
+        }
+      ],
+      "job": "233d53d6-00c7-4de7-a097-f041a76d2402"
+    }
+  ],
+  "model_call_metadata": [
+    {
+      "call": 1,
+      "seconds": 2.0527089000097476,
+      "exit_code": 1,
+      "unexpected_tool_events": 0
+    }
+  ]
+}

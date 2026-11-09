@@ -1,0 +1,94 @@
+{
+  "captured_utc": "2026-11-04T20:09:51.146591+00:00",
+  "image": "langgenius/dify-sandbox@sha256:750e1111426ef31a9217b81c98cccfb750f17b182af3221102e420afa9f0928e",
+  "deployment": "dedicated Docker internal network; localhost port; no host mounts; resource limits",
+  "health": {
+    "status": 200,
+    "body": "ok",
+    "seconds": 0.01672781699744519
+  },
+  "unauthenticated": {
+    "status": 401,
+    "body": "",
+    "seconds": 0.0010340840090066195
+  },
+  "cases": {
+    "basic": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "",
+          "stdout": "QUALIFICATION_BASIC_OK\n"
+        }
+      },
+      "seconds": 0.07277400599559769
+    },
+    "service_canary": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "",
+          "stdout": "FileNotFoundError\n"
+        }
+      },
+      "seconds": 0.062011266010813415
+    },
+    "service_process_environment": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "",
+          "stdout": "FileNotFoundError\n"
+        }
+      },
+      "seconds": 0.05300337899825536
+    },
+    "external_network": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "",
+          "stdout": "OSError\n"
+        }
+      },
+      "seconds": 0.06868255400331691
+    },
+    "spawn_process": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "error: operation not permitted\n",
+          "stdout": ""
+        }
+      },
+      "seconds": 0.07929450100346003
+    },
+    "worker_timeout": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "error: operation not permitted\n",
+          "stdout": ""
+        }
+      },
+      "seconds": 0.07257449800090399
+    }
+  },
+  "post_timeout_health": {
+    "status": 200,
+    "body": "ok",
+    "seconds": 0.0008329120028065518
+  }
+}

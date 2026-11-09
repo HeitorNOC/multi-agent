@@ -1,0 +1,3 @@
+CHECK 16 current documents, 1 historical, 21 available agents
+CHECK campaign: 8/21 agents, 10 slots, resume without inference
+CHECK incident: 4/21 agents, 6 slots, resume without inference

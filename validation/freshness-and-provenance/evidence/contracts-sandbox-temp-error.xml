@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="2" time="1.097" timestamp="2026-11-04T12:11:47.765359-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.freshness-and-provenance.test_contracts" name="test_signed_proof_rejects_replay_and_alteration" time="0.036"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\PC\AppData\Local\Packages\sandbox.{cb022ab9-6748-4cc8-9538-b25963432bc9}\AC\Temp\pytest-of-PC after 10 tries&quot;">fixturedef = &lt;FixtureDef argname='tmp_path' scope='function' baseid=''&gt;
+request = &lt;SubRequest 'tmp_path' for &lt;Function test_signed_proof_rejects_replay_and_alteration&gt;&gt;
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -&gt; object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+&gt;               return (yield)
+                        ^^^^^
+E               OSError: could not create numbered dir with prefix pytest- in C:\Users\PC\AppData\Local\Packages\sandbox.{cb022ab9-6748-4cc8-9538-b25963432bc9}\AC\Temp\pytest-of-PC after 10 tries
+
+validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:925: OSError</error></testcase><testcase classname="validation.freshness-and-provenance.test_contracts" name="test_authority_ids_and_completions_are_immutable" time="0.031"><error message="failed on setup with &quot;OSError: could not create numbered dir with prefix pytest- in C:\Users\PC\AppData\Local\Packages\sandbox.{cb022ab9-6748-4cc8-9538-b25963432bc9}\AC\Temp\pytest-of-PC after 10 tries&quot;">fixturedef = &lt;FixtureDef argname='tmp_path' scope='function' baseid=''&gt;
+request = &lt;SubRequest 'tmp_path' for &lt;Function test_authority_ids_and_completions_are_immutable&gt;&gt;
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -&gt; object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+&gt;               return (yield)
+                        ^^^^^
+E               OSError: could not create numbered dir with prefix pytest- in C:\Users\PC\AppData\Local\Packages\sandbox.{cb022ab9-6748-4cc8-9538-b25963432bc9}\AC\Temp\pytest-of-PC after 10 tries
+
+validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:925: OSError</error></testcase></testsuite></testsuites>

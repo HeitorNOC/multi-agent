@@ -1,0 +1,28 @@
+{
+  "teams": [
+    {
+      "lead": "technology_director",
+      "mission": "Liderar a análise e a execução técnica: estudar os documentos disponibilizados e validar as capacidades oficiais da Meta e da 360dialog; distinguir requisitos, referências, capacidades confirmadas, hipóteses e decisões. Documentar arquitetura simples, limites de módulos, fluxos, máquina de estados, dados, contratos Kafka e Socket.IO, segurança e backlog técnico. Entregar primeiro um fluxo vertical compartilhado executável e testável; depois evoluir WhatsApp/MBA, Webchat independente, Contact Center e ferramentas de negócio compartilhadas. Garantir isolamento, idempotência, observabilidade, handoff confirmado quando possível e testes de falhas, concorrência e recuperação; distinguir mocks de integrações reais. A diretora escolherá os especialistas necessários."
+    },
+    {
+      "lead": "product_director",
+      "mission": "Definir e priorizar com Tecnologia os requisitos, jornadas, critérios de aceite e backlog incremental, preservando histórico unificado, vínculo confiável de identidades, handoff seguro e reutilização de ferramentas. Desenhar a experiência do Webchat e os contratos necessários ao futuro workspace, priorizando os fluxos confiáveis de backend. A diretora escolherá os especialistas necessários."
+    },
+    {
+      "lead": "customer_director",
+      "mission": "Definir com Produto e Tecnologia os fluxos operacionais de atendimento humano: entrada em fila, acesso ao histórico observado, identificação dos participantes, resposta pelo canal original, conclusão e retorno controlado à IA. Contribuir com cenários de aceite e operação do Contact Center. A diretora escolherá os especialistas necessários."
+    },
+    {
+      "lead": "legal_director",
+      "mission": "Avaliar requisitos de privacidade, retenção, direitos dos titulares, riscos e controles para histórico, identidade, credenciais e operações entre empresas; revisar obrigações aplicáveis dos provedores e fornecer orientações para a arquitetura e os testes. O diretor escolherá os especialistas necessários."
+    }
+  ],
+  "sequence": [
+    "Tecnologia estuda os documentos disponibilizados e as fontes oficiais; Produto e Atendimento detalham jornadas e aceite, enquanto Jurídico identifica requisitos e riscos. Nenhum componente descrito nas referências deve ser presumido existente.",
+    "Tecnologia consolida, com as demais diretorias, arquitetura, contratos, estados, modelo de dados, decisões e backlog por dependências; registra lacunas e capacidades externas ainda não confirmadas antes da implementação principal.",
+    "Tecnologia implementa e testa o primeiro fluxo vertical completo no núcleo compartilhado, usando adaptadores de teste quando necessário; Produto valida os critérios funcionais e Jurídico acompanha os controles aplicáveis.",
+    "Após validar o fluxo vertical, Tecnologia integra incrementalmente WhatsApp e MBA conforme capacidades confirmadas e, em seguida, Webchat com interface independente de IA. Atendimento e Produto refinam os fluxos humanos em paralelo.",
+    "Tecnologia entrega os contratos e fluxos do Contact Center, incluindo histórico e transferência segura; Atendimento e Produto validam as jornadas. A devolução ao MBA depende dos mecanismos efetivamente suportados pelo provedor.",
+    "Tecnologia executa a validação integrada de resiliência, segurança, isolamento e operação, com evidências reproduzíveis; Produto e Atendimento verificam os critérios de aceite e Jurídico revisa os controles e riscos remanescentes. Limitações e testes com mocks permanecem explicitamente identificados."
+  ]
+}

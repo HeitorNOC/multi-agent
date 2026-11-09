@@ -1,0 +1,199 @@
+{
+  "goal": "Quais estados e evidências são necessários para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?",
+  "status": "awaiting_approval",
+  "error": null,
+  "plan": {
+    "strategy": "A2",
+    "reason": "A transferência de uma conversa entre MBA e atendente envolve estados e evidências de integração dos sistemas.",
+    "teams": [
+      {
+        "lead": "technology_director",
+        "specialists": [
+          "data_analyst"
+        ],
+        "reason": "Avaliar os estados da conversa e as evidências de integração necessárias para evitar respostas simultâneas."
+      }
+    ],
+    "capabilities": [
+      "technology_director",
+      "data_analyst"
+    ],
+    "not_selected": [
+      {
+        "id": "executive_director",
+        "reason": "Estratégia e portfólio não são necessários para esta análise."
+      },
+      {
+        "id": "business_analyst",
+        "reason": "Dependências entre unidades não são o foco da pergunta."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "Priorização de investimentos não é necessária."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "Campanhas e posicionamento não são o foco."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "O escopo de campanhas não é relevante."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "Preços promocionais não são relevantes."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Disponibilidade e logística não são o foco."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Estoque e reservas não são relevantes."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Capacidade logística e prazos regionais não são relevantes."
+      },
+      {
+        "id": "finance_director",
+        "reason": "Margem e caixa não são o foco."
+      },
+      {
+        "id": "controller",
+        "reason": "Margem, desconto e orçamento não são relevantes."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Liquidez e financiamento não são relevantes."
+      },
+      {
+        "id": "people_director",
+        "reason": "Capacidade organizacional não é o foco da transição entre sistemas."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "Admissões não são relevantes."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "Disponibilidade de equipes e treinamento não respondem diretamente à pergunta sobre estados e evidências."
+      },
+      {
+        "id": "legal_director",
+        "reason": "Contratos e conformidade não são o foco."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "Alegações de campanha e governança de incidente não são o foco."
+      },
+      {
+        "id": "contract_analyst",
+        "reason": "Obrigações contratuais não são relevantes."
+      },
+      {
+        "id": "security_analyst",
+        "reason": "Incidentes de segurança e SLA interno não são mencionados na pergunta."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 4
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 4,
+    "max_calls": 24,
+    "input_tokens": 50239,
+    "cached_input_tokens": 11392,
+    "output_tokens": 587,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    }
+  ],
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "director_completed",
+    "synthesis",
+    "inference_requested",
+    "inference_completed",
+    "review_ready",
+    "checkpoint_saved",
+    "worker_stopped"
+  ],
+  "candidates": [
+    {
+      "source": "mba",
+      "page": 3,
+      "line": 4
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 66
+    },
+    {
+      "source": "mba",
+      "page": 3,
+      "line": 1
+    }
+  ],
+  "report": {
+    "status": "insufficient_evidence",
+    "summary": "Evidência insuficiente no acervo autorizado para responder à tarefa.",
+    "citations": [],
+    "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+    "requires_approval": true
+  }
+}

@@ -1,0 +1,6 @@
+2026-11-04 — independent Docker inventory after final pytest exit 0.
+docker ps -a --filter name=decision-pilot- --format '{{.Names}}': exit 0, empty.
+docker ps -a --filter name=decision-tool- --format '{{.Names}}': exit 0, empty.
+docker volume ls --filter name=decision-pilot- --format '{{.Name}}': exit 0, empty.
+docker network ls --filter name=decision-pilot- --format '{{.Name}}': exit 0, empty.
+No unrelated resources were deleted or inspected for contents. No global prune.

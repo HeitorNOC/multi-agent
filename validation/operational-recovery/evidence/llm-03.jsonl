@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a70d-1945-7420-a23f-353bc34537de"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"A equipe Aurora pode trabalhar remotamente **dois dias por semana**, segundo o arquivo `politica-remoto@v1.md` [1].\\n\\nO trecho fornecido não informa a data de vigência da regra. Portanto, não há informação suficiente para confirmar que ela se aplicava em **1º de fevereiro de 2026**.\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13090,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":103,"reasoning_output_tokens":0}}

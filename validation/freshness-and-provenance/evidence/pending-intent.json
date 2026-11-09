@@ -1,0 +1,22 @@
+{
+  "seq": 11,
+  "head": "3ea3e3aa3c570d3ffed4bd08301edebcdf4bd7a2cb73c97a8be1a7c3bea96cf5",
+  "pending": [
+    {
+      "seq": 11,
+      "id": "02e30cc9-82e1-516c-9696-9d203a3f18b8",
+      "kind": "decision",
+      "receipt_sha": null
+    }
+  ],
+  "missing": [
+    {
+      "seq": 11,
+      "id": "02e30cc9-82e1-516c-9696-9d203a3f18b8",
+      "kind": "decision",
+      "receipt_sha": null
+    }
+  ],
+  "matches": false,
+  "local_count": 10
+}

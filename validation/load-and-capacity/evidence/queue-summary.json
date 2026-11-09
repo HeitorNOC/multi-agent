@@ -1,0 +1,26 @@
+{
+  "baseline-warm-c1": {
+    "samples": 40,
+    "p95_seconds": 0.0019310999778099358
+  },
+  "baseline-warm-c4": {
+    "samples": 40,
+    "p95_seconds": 0.25739500002237037
+  },
+  "baseline-warm-c8": {
+    "samples": 40,
+    "p95_seconds": 0.430047600006219
+  },
+  "baseline-under-inference": {
+    "samples": 8,
+    "p95_seconds": 11.223467200004961
+  },
+  "parallel-warm-c8": {
+    "samples": 80,
+    "p95_seconds": 0.027029499993659556
+  },
+  "parallel-under-inference": {
+    "samples": 8,
+    "p95_seconds": 0.021724099991843104
+  }
+}

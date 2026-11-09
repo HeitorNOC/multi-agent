@@ -1,0 +1,3 @@
+.state/
+.temp-*/
+__pycache__/

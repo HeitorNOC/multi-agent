@@ -1,0 +1,31 @@
+{
+  "scope": "local Docker fixture; not enterprise MCP, TLS/SSO, independent host or commercial billing",
+  "result": "PASS_BOUNDED_LOCAL_CONTROLS",
+  "image": "mcr.microsoft.com/playwright@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27",
+  "capability_rejections": 3,
+  "observed": {
+    "uid": 65534,
+    "secret_env_names": [],
+    "/etc/investment-write-test": "OSError",
+    "/var/run/docker.sock": "OSError",
+    "/host/customer-secret": "FileNotFoundError",
+    "egress": "OSError"
+  },
+  "child_timeout": {
+    "exit_code": 137,
+    "timeout": true,
+    "stdout": "",
+    "stderr": "",
+    "output_truncated": false
+  },
+  "encrypted_recovery": {
+    "wrong_key_rejected": true,
+    "correct_key_recovers": true,
+    "content_sha256": "5228d5fa28e9097440e55c9618906b16e598b6cc4eb996e5b791d514309691ba",
+    "off_host_recovery_tested": false
+  },
+  "containers_removed": [
+    true,
+    true
+  ]
+}

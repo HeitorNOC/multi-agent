@@ -1,0 +1,41 @@
+✔ editing does not publish and editor cannot self-approve (29.2065ms)
+✔ review binds exact bytes and rejects changed content (29.8546ms)
+✔ publication requires approval and approved file must remain unchanged until preparation (43.5698ms)
+✔ approved publication receipt is signed and snapshot is immutable on replay (56.3228ms)
+✔ published source/version cannot be silently overwritten (76.5836ms)
+✔ frontmatter cannot change registered classification or authorize publication (13.4214ms)
+✔ restricted YAML profile rejects duplicates and vault traversal (9.6632ms)
+✔ public editor cannot import a financial note (20.8249ms)
+✔ invalid calendar dates are rejected before review or publication (21.1166ms)
+✖ immutable canonical snapshots select valid time and prior knowledge without rewriting graph facts (118.8349ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 585.4172
+
+✖ failing tests:
+
+test at validation\temporal-editorial\editorial.test.ts:67:1
+✖ immutable canonical snapshots select valid time and prior knowledge without rewriting graph facts (118.8349ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 3
+  
+      at TestContext.<anonymous> (file:///C:/Users/PC/multi-agent/validation/temporal-editorial/editorial.test.ts:84:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 3,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

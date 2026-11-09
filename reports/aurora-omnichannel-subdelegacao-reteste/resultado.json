@@ -1,0 +1,127 @@
+{
+  "directive_sha256": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+  "results": {
+    "backend1": {
+      "agent": "backend_engineer",
+      "result": {
+        "finding": "O fluxo esperado compreende recebimento, validação e normalização da mensagem, identificação da empresa e da sessão, persistência inicial e posterior consulta do histórico, com rastreabilidade. O contrato de normalização deve contemplar empresa e integração, canal de origem, identificadores de sessão e conversa, identificador da mensagem no provedor, participante, tipo e conteúdo, metadados, timestamps e dados de correlação. No fluxo WhatsApp descrito, parserWhatsappMessage normaliza a mensagem; para mídia, o provedor é consultado, o arquivo é baixado em base64 e enviado ao serviço message-file. Em sessão HUMAN, URLs de mídia são substituídas por URLs de longa duração e a mensagem é publicada em message-human; em sessão ML_MODEL, o serviço do modelo é chamado por REST. Para cada mensagem enviada, publica-se em whatsapp-storage o tipo de usuário agente para sessão humana ou bot nos demais casos, junto com o messageProviderID ou o erro do provedor. Critérios de teste derivados dessas evidências incluem verificar a presença e preservação dos campos do contrato normalizado, o processamento de mídia, os destinos conforme o tipo de sessão, a persistência inicial, a consulta do histórico por sessão e o registro do identificador ou erro do provedor. Os resultados e mecanismos desses testes não estão demonstrados nos trechos.",
+        "evidence_ids": [
+          "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb",
+          "0b4da400ec0c767ef7160ef0c8ea1985064253744f203829d56b55d960614377",
+          "279faba492ab0397d16d07d1db418f02d0e12770ae642ee5495c79d9a58d897a",
+          "86bae635e0c18076bb7ecd833218099065f01f6b9564f4fee6a31261e713a9ca",
+          "f4d1c6211c2f28750a9cec77c2d6668f9939113cdcf7e9c40c3e6d95f69bb381",
+          "ab29397772689c8b08e9e6e8533b33cf930ab6c960cf2b31e9b702be740d4980"
+        ],
+        "pending": [
+          "Definir esquema, tipos, campos obrigatórios, regras de validação e tratamento de mensagens inválidas ou incompletas.",
+          "Definir como identificar e vincular empresa, integração, sessão, conversa e participante a partir da mensagem recebida, incluindo resolução de ambiguidades.",
+          "Definir o contrato de recebimento, autenticação da origem, identificadores de correlação e semântica dos timestamps.",
+          "Definir modelo e operação de persistência inicial, regras de idempotência e deduplicação, e associação entre mensagem recebida e resultado do envio.",
+          "Definir contrato de consulta do histórico por sessão, incluindo ordenação, paginação e isolamento por empresa.",
+          "Esclarecer limites e falhas no processamento de mídia, além dos critérios verificáveis para cenários de erro e recuperação."
+        ],
+        "citations": {
+          "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb": {
+            "source": "fluxo",
+            "page": 10,
+            "line": 27,
+            "section": null
+          },
+          "0b4da400ec0c767ef7160ef0c8ea1985064253744f203829d56b55d960614377": {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "section": null
+          },
+          "279faba492ab0397d16d07d1db418f02d0e12770ae642ee5495c79d9a58d897a": {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "section": null
+          },
+          "86bae635e0c18076bb7ecd833218099065f01f6b9564f4fee6a31261e713a9ca": {
+            "source": "fluxo",
+            "page": 9,
+            "line": 9,
+            "section": null
+          },
+          "f4d1c6211c2f28750a9cec77c2d6668f9939113cdcf7e9c40c3e6d95f69bb381": {
+            "source": "directive",
+            "page": null,
+            "line": 81,
+            "section": "DIRETIVA EXECUTIVA — Desenvolvimento da Plataforma de Mensageria Omnichannel com Integração ao Meta Business Agent / 4. Arquitetura esperada / 4.2. Normalização e validação"
+          },
+          "ab29397772689c8b08e9e6e8533b33cf930ab6c960cf2b31e9b702be740d4980": {
+            "source": "directive",
+            "page": null,
+            "line": 338,
+            "section": "DIRETIVA EXECUTIVA — Desenvolvimento da Plataforma de Mensageria Omnichannel com Integração ao Meta Business Agent / 10. Decisão arquitetural obrigatória da liderança / 10.4. Desenvolvimento vertical e incremental"
+          }
+        }
+      },
+      "children": {}
+    },
+    "backend2": {
+      "agent": "backend_engineer_2",
+      "result": {
+        "finding": "O fluxo previsto compreende roteamento ao destinatário apropriado, processamento ou geração e envio da resposta, persistência do resultado, consulta do histórico e rastreabilidade. O núcleo compartilhado deve abranger contratos de mensagens, sessões, ownership, estados, roteamento, handoff, histórico, auditoria e idempotência. No handoff para atendimento humano, a sessão de mensageria passa a HUMAN; o fluxo também cita ML_MODEL como tipo associado ao bot. Ao encerrar o atendimento, a sessão retorna ao tipo bot, o status passa a DONE e são registrados métricas, observação e tempo de trabalho. Para cada mensagem enviada, publica-se em whatsapp-storage o tipo de usuário agente quando a sessão é humana ou bot nos demais casos, junto ao messageProviderID ou ao erro devolvido pelo provedor. Como critérios de teste derivados dessas evidências, verificar as transições para HUMAN e de volta ao bot, a classificação agente/bot e o registro do identificador ou erro, além da presença das etapas previstas e da rastreabilidade. As evidências não comprovam a implementação ou execução integral dessas etapas.",
+        "evidence_ids": [
+          "544bbaf32d813dc8d7d0348baf34833e798b328361dc79f5d3a96028af2beecf",
+          "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e",
+          "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb",
+          "c0a38efed23add9593074c4e26afd8877e5e04944491ac72db0b4c5aef39e769",
+          "ab29397772689c8b08e9e6e8533b33cf930ab6c960cf2b31e9b702be740d4980",
+          "63e88d711540f56a53809aaf0298053893f9bec97dd3f0ec9185e555c69884f1"
+        ],
+        "pending": [
+          "Identificar o provedor e seus contratos de envio, respostas e erros.",
+          "Definir destinatários, regras de roteamento e controle de ownership, incluindo comportamento nas transições de sessão.",
+          "Especificar o mecanismo de processamento ou geração da resposta e sua relação com ML_MODEL.",
+          "Detalhar contratos e formatos das mensagens, armazenamento e consulta do histórico, correlação de ponta a ponta, auditoria e idempotência.",
+          "Definir critérios verificáveis para falhas, reenvios, concorrência e persistência do resultado; confirmar a equivalência entre o tipo bot e ML_MODEL."
+        ],
+        "citations": {
+          "544bbaf32d813dc8d7d0348baf34833e798b328361dc79f5d3a96028af2beecf": {
+            "source": "contact",
+            "page": 11,
+            "line": 26,
+            "section": null
+          },
+          "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e": {
+            "source": "fluxo",
+            "page": 12,
+            "line": 30,
+            "section": null
+          },
+          "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb": {
+            "source": "fluxo",
+            "page": 10,
+            "line": 27,
+            "section": null
+          },
+          "c0a38efed23add9593074c4e26afd8877e5e04944491ac72db0b4c5aef39e769": {
+            "source": "contact",
+            "page": 15,
+            "line": 59,
+            "section": null
+          },
+          "ab29397772689c8b08e9e6e8533b33cf930ab6c960cf2b31e9b702be740d4980": {
+            "source": "directive",
+            "page": null,
+            "line": 338,
+            "section": "DIRETIVA EXECUTIVA — Desenvolvimento da Plataforma de Mensageria Omnichannel com Integração ao Meta Business Agent / 10. Decisão arquitetural obrigatória da liderança / 10.4. Desenvolvimento vertical e incremental"
+          },
+          "63e88d711540f56a53809aaf0298053893f9bec97dd3f0ec9185e555c69884f1": {
+            "source": "directive",
+            "page": null,
+            "line": 281,
+            "section": "DIRETIVA EXECUTIVA — Desenvolvimento da Plataforma de Mensageria Omnichannel com Integração ao Meta Business Agent / 10. Decisão arquitetural obrigatória da liderança / 10.2. Núcleo de mensageria compartilhado"
+          }
+        }
+      },
+      "children": {}
+    }
+  }
+}

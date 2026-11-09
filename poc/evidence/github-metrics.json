@@ -1,0 +1,50 @@
+[
+  {
+    "repo": "paperclipai/paperclip",
+    "captured_utc": "2026-11-03T04:45:18.524989+00:00",
+    "stargazers_count": 110515,
+    "forks_count": 18292,
+    "open_issues_count": 6628,
+    "default_branch": "master",
+    "pushed_at": "2026-11-03T04:41:30Z",
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    }
+  },
+  {
+    "repo": "langchain-ai/langgraph",
+    "captured_utc": "2026-11-03T04:45:19.007399+00:00",
+    "stargazers_count": 44356,
+    "forks_count": 7626,
+    "open_issues_count": 445,
+    "default_branch": "main",
+    "pushed_at": "2026-11-03T03:39:19Z",
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    }
+  },
+  {
+    "repo": "HKUDS/LightRAG",
+    "captured_utc": "2026-11-03T04:45:19.515074+00:00",
+    "stargazers_count": 40494,
+    "forks_count": 5754,
+    "open_issues_count": 433,
+    "default_branch": "main",
+    "pushed_at": "2026-10-29T18:05:03Z",
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    }
+  }
+]

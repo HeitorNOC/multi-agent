@@ -1,0 +1,9 @@
+{"phase": "setup", "path": "/drafts", "method": "POST", "status": 200, "seconds": 0.2480556999798864, "queue_seconds": 0.0017857000057119876, "instance": "025560c2b56e43bd8e7bad9583b0dd0e"}
+{"phase": "setup", "path": "/review", "method": "POST", "status": 200, "seconds": 0.2672825999907218, "queue_seconds": 0.0016964999958872795, "instance": "025560c2b56e43bd8e7bad9583b0dd0e"}
+{"phase": "setup", "path": "/publish", "method": "POST", "status": 200, "seconds": 0.2540523000061512, "queue_seconds": 0.0018641999922692776, "instance": "025560c2b56e43bd8e7bad9583b0dd0e"}
+{"phase": "setup", "path": "/drafts", "method": "POST", "status": 200, "seconds": 0.13607810001121834, "queue_seconds": 0.0015860999992582947, "instance": "025560c2b56e43bd8e7bad9583b0dd0e"}
+{"phase": "setup", "path": "/review", "method": "POST", "status": 200, "seconds": 0.2565149999863934, "queue_seconds": 0.0016956999897956848, "instance": "025560c2b56e43bd8e7bad9583b0dd0e"}
+{"phase": "setup", "path": "/publish", "method": "POST", "status": 200, "seconds": 0.24895709997508675, "queue_seconds": 0.0019961999787483364, "instance": "025560c2b56e43bd8e7bad9583b0dd0e"}
+{"phase": "setup", "path": "/drafts", "method": "POST", "status": 200, "seconds": 0.12512310000602156, "queue_seconds": 0.0016395000275224447, "instance": "025560c2b56e43bd8e7bad9583b0dd0e"}
+{"phase": "setup", "path": "/review", "method": "POST", "status": 200, "seconds": 0.24538189999293536, "queue_seconds": 0.0017746999801602215, "instance": "025560c2b56e43bd8e7bad9583b0dd0e"}
+{"phase": "setup", "path": "/publish", "method": "POST", "status": 200, "seconds": 0.2499004999990575, "queue_seconds": 0.0017744999786373228, "instance": "025560c2b56e43bd8e7bad9583b0dd0e"}

@@ -1,0 +1,56 @@
+
+ RUN  v5.0.3 C:/Users/PC/multi-agent/vendor/paperclip/server
+
+[01:39:58] [33mWARN[39m: [36mdeferred environment lease destruction until warm native sessions close[39m [90m{"runId":"busy","warmNativeSessions":{"closed":0,"busy":1,"failed":0}}[39m
+[01:41:11] [33mWARN[39m: [36mDeferred cancelled workspace teardown until file retention is recorded[39m [90m{"runId":"546e69b1-1021-4baa-ae20-b679ba59493a"}[39m
+[01:41:14] [33mWARN[39m: [36mDeferred cancelled workspace teardown until file retention is recorded[39m [90m{"runId":"6ed3beac-943a-495b-97a0-775d0782ca1f"}[39m
+ ❯ src/services/heartbeat/run-control.test.ts (51 tests) 99877ms
+[01:41:46] [33mWARN[39m: [36mBudget cancellation delivery pending; accounting is committed[39m [90m{"policyId":"9db1597c-5d0f-4996-a297-f1fc3b093faa"}[39m
+    err: {
+      "type": "Error",
+      "message": "Controlled stop delivery failure",
+      "stack":
+          Error: Controlled stop delivery failure
+              at C:/Users/PC/multi-agent/vendor/paperclip/server/src/__tests__/budgets-service.test.ts:427:62
+              at processTicksAndRejections (node:internal/process/task_queues:104:5)
+              at file:///C:/Users/PC/multi-agent/vendor/paperclip/node_modules/.pnpm/vitest@5.0.3_@opentelemetry+api@1.9.1_@types+node@24.13.3_jsdom@30.0.1_@noble+hashes@2.4.0__v_rv5bm4asruuay5qyvxrxd6xvsu/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:2783:20
+    }
+[01:42:37] [33mWARN[39m: [36mUsage receipt is durable on disk; database replay pending[39m [90m{"runId":"5d6e09ca-4b73-4cfd-8316-8f9a70add5f3","receiptId":"0d225cf6-5f61-4e4a-9e00-8e354ce5ea26"}[39m
+    err: {
+      "type": "Error",
+      "message": "Database unavailable",
+      "stack":
+          Error: Database unavailable
+              at Proxy.<anonymous> (C:/Users/PC/multi-agent/vendor/paperclip/server/src/__tests__/budget-live-attempts.test.ts:39:78)
+              at C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/accounting-transaction.ts:13:81
+              at C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/budget-tracing.ts:14:66
+              at withDatabaseOperation (C:/Users/PC/multi-agent/vendor/paperclip/packages/db/src/response-capture.ts:25:10)
+              at withBudgetSpan (C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/budget-tracing.ts:13:10)
+              at withAccountingTransaction (C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/accounting-transaction.ts:13:24)
+              at persistUsageReceipt (C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/usage-receipts.ts:72:10)
+              at capture (C:/Users/PC/multi-agent/vendor/paperclip/server/src/services/usage-receipts.ts:360:17)
+    }
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/services/heartbeat/run-control.test.ts > heartbeat run-control database wiring
+Error: Test PostgreSQL did not exit after fast and immediate shutdown; its data directory is retained
+ ❯ ../packages/db/src/test-postgres-owner.ts:159:23
+    157|               await requestStop(child, "immediate", false);
+    158|               if (!await settlesWithin(exited, 5_000)) {
+    159|                 throw new TestPostgresShutdownError("Test PostgreSQL d…
+       |                       ^
+    160|               }
+    161|             }
+ ❯ stopEmbeddedPostgresBounded ../packages/db/src/test-embedded-postgres.ts:183:3
+ ❯ Object.cleanup ../packages/db/src/test-embedded-postgres.ts:683:11
+ ❯ src/services/heartbeat/__tests__/run-control-fixtures.ts:84:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 5 passed (6)
+      Tests  116 passed (116)
+   Start at  01:39:38
+   Duration  192.02s (tests 84%, transform 9%, import 7%)
+

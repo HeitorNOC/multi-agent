@@ -1,0 +1,73 @@
+{
+  "pages": [
+    {
+      "page": 6,
+      "summary": "O documento relaciona serviços do Contact Center: contact-center-attendance-cache cria, lê por ID ou sessão e atualiza o cache de atendimento; cc-message-consumer e cc-message-socket participam da entrega de mensagens em tempo real via Kafka e Socket.IO. Também descreve schedules de posição na fila e cancelamento por inatividade, serviços de distribuição e exportação de atendimentos, esta última marcada como não lida."
+    },
+    {
+      "page": 7,
+      "summary": "A página descreve a composição do workspace, suas abas por domínio e o layout do Contact Center. ListAttendances apresenta, entre outros dados, a última mensagem e um contador de mensagens novas; a coluna central exibe o chat e a direita, informações do atendimento. Há ainda um painel de atendimentos relacionados e uma função de download do atendimento."
+    },
+    {
+      "page": 8,
+      "summary": "O menu oferece baixar o atendimento e consultar atendimentos relacionados. No chat, estão disponíveis citação de mensagem, anexos, colagem de arquivo e gravação de áudio; o botão Traduzir está desabilitado."
+    },
+    {
+      "page": 9,
+      "summary": "A página enumera os status do atendimento e suas principais transições. O significado de CLIENT_NOT_RESPONDING é inferido pelo nome da operação; os IDs dos status são atribuídos a workspace-ui/src/main/constants/status.ts."
+    },
+    {
+      "page": 10,
+      "summary": "O documento descreve as operações que alteram o status e afirma que cada mudança registra o status anterior e o novo em attendance_status_processing."
+    }
+  ],
+  "contracts": [
+    {
+      "pages": [
+        6
+      ],
+      "finding": "contact-center-attendance-cache oferece criação, leitura por ID ou sessão e atualização do cache de atendimento; o documento não especifica se o cache contém o histórico de mensagens.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        6
+      ],
+      "finding": "cc-message-consumer e cc-message-socket participam da entrega de mensagens em tempo real entre cliente e atendente usando Kafka e Socket.IO; a persistência e a recuperação do histórico não são descritas neste trecho.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        7,
+        8
+      ],
+      "finding": "O workspace apresenta a última mensagem e a contagem de mensagens novas na lista, exibe o chat e oferece atendimentos relacionados e download do atendimento. Os trechos não definem o alcance do histórico disponibilizado ao agente.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        9,
+        10
+      ],
+      "finding": "Cada mudança de status registra uma linha em attendance_status_processing com os status anterior e novo; esse registro constitui histórico de status, sem evidência de que contenha mensagens da conversa.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        7,
+        8
+      ],
+      "finding": "A existência de chat, atendimentos relacionados e download sugere mecanismos de acesso a informações de atendimentos, mas não comprova acesso de agentes a conversas anteriores ou de outros canais.",
+      "status": "inferido"
+    }
+  ],
+  "gaps": [
+    "Pendente de verificação no código: onde e por quanto tempo as mensagens e seus anexos são persistidos, e como o chat recupera e pagina o histórico.",
+    "Pendente de verificação no código e em ambiente real: quais atendimentos anteriores e canais ficam disponíveis a cada agente, inclusive após transferência, mudança de departamento ou reabertura.",
+    "Pendente de verificação no código e em ambiente real: regras de autorização, isolamento entre clientes e departamentos e tratamento de dados sensíveis no acesso ao histórico e ao download.",
+    "Pendente de verificação no código: conteúdo e critérios de vínculo de atendimentos relacionados, além do formato e alcance do download e da exportação; contact-center-attendance-export está marcado como não lido.",
+    "Pendente de verificação em ambiente real e com os provedores: sincronização, completude e disponibilidade do histórico entre canais, especialmente após desconexões e falhas de entrega.",
+    "Proposto: rastrear as operações de leitura do chat e de atendimentos relacionados, testar os acessos por perfil e canal e conferir os contratos de retenção com os provedores.",
+    "O material fornecido cobre somente as páginas 6 a 10; não é possível sintetizar ou verificar as demais páginas do PDF."
+  ]
+}

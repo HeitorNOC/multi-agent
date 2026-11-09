@@ -1,0 +1,24 @@
+CHECKPOINT real_graphiti_neo4j_oidc_and_pretrained_embeddings_ready
+CHECKPOINT obsidian_compatible_note_requires_review_and_publication_is_replayed_without_reingestion
+ACCEPTANCE january_after_march_update PASS
+ACCEPTANCE february_before_retroactive_correction PASS
+ACCEPTANCE march_after_update PASS
+CHECKPOINT native_policy_update_valid_time_observed
+ACCEPTANCE january_after_backdated_correction PASS
+ACCEPTANCE february_after_backdated_correction PASS
+ACCEPTANCE march_unchanged_by_backdated_correction PASS
+ACCEPTANCE what_was_known_before_correction_about_february FAIL
+CHECKPOINT retroactive_and_knowledge_time_results_recorded_without_manual_edge_repair
+CHECKPOINT native_temporal_partition_authorization_and_source_revocation
+CHECKPOINT restart_preserves_editorial_canonical_state_and_revocation
+F
+================================== FAILURES ===================================
+__________ test_editorial_publication_and_native_temporal_acceptance __________
+validation\temporal-editorial\test_temporal.py:87: in test_editorial_publication_and_native_temporal_acceptance
+    assert passed==len(checks),f'Native temporal acceptance {passed}/{len(checks)}; all observed facts and dates preserved in evidence'
+E   AssertionError: Native temporal acceptance 6/7; all observed facts and dates preserved in evidence
+E   assert 6 == 7
+E    +  where 7 = len([{'name': 'january_after_march_update', 'expected_days': 2, 'observed_days': [2], 'pass': True, ...}, {'name': 'februa... {'name': 'march_unchanged_by_backdated_correction', 'expected_days': 3, 'observed_days': [3], 'pass': True, ...}, ...])
+=========================== short test summary info ===========================
+FAILED validation/temporal-editorial/test_temporal.py::test_editorial_publication_and_native_temporal_acceptance
+1 failed in 232.28s (0:03:52)

@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "own_layer": "outside upstream repository",
+  "boundary": "real FastAPI ASGI event API and real SQLite fixture, no network service",
+  "publish_status": 200,
+  "poll_status": 200,
+  "trace_metadata_preserved": true,
+  "invalid_token": 401,
+  "limits": "Workspace legacy token mode only; no cognitive runtime, budget or full enterprise knowledge qualified"
+}

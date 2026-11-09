@@ -1,0 +1,67 @@
+{
+  "installation": "business-flow-818d616d0a",
+  "checkpoints": [],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "cold_restore_new_postgres": {
+    "container": "business-flow-818d616d0a-pg-restored-82780b",
+    "volume": "business-flow-818d616d0a-pg-restored-82780b-data"
+  },
+  "result": "PASS_READ_COMMIT_RECOVERY",
+  "stage": "after_receipt",
+  "recovery_crash": true,
+  "provider_executions": [
+    [
+      "business-flow-818d616d0a:inference:40e710d0e099e795bbb49aaa9f34b6c18c480dbcaaf060c638e9985fe6b8367e",
+      "complete",
+      1
+    ]
+  ],
+  "recovery": {
+    "approvers": [
+      "board",
+      "reviewer2"
+    ],
+    "evidence_sha": "7a76ee68960d0475784021bcf8d49921f05dba8932d64469cad5867bb8d11770",
+    "job": "e1ee1a25-9232-4204-bd63-849d9768d41b",
+    "job_before": {
+      "deadline": 1793890147148,
+      "epoch": 1,
+      "state": "admitted",
+      "worker": "worker-cce231eb131d428984240971170da7cb"
+    },
+    "kind": "reconciled_read",
+    "operation_id": "business-flow-818d616d0a:e2d0af8ec5949abf5d706f23d6e572299642838efce9a11e0c1b893e77b24c8a",
+    "original_outcome": "known_receipt_recovered",
+    "owner": "owner",
+    "reason": "Verify provider evidence and exact inventory; retain reservations without regenerating inference.",
+    "receipt": {
+      "id": "business-flow-818d616d0a:inference:40e710d0e099e795bbb49aaa9f34b6c18c480dbcaaf060c638e9985fe6b8367e",
+      "input_sha": "40e710d0e099e795bbb49aaa9f34b6c18c480dbcaaf060c638e9985fe6b8367e",
+      "semantic": {
+        "answer": "Controlled fixture response; no semantic model invoked.",
+        "native": false
+      },
+      "state": "complete"
+    },
+    "reservation": "retained_not_refunded"
+  },
+  "budgets": {
+    "business": {
+      "cap": 32,
+      "reserved": 1
+    }
+  },
+  "seconds": 11.839679599972442
+}

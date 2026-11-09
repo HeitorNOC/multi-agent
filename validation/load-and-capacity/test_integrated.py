@@ -1,0 +1,162 @@
+import concurrent.futures as cf
+import hashlib,json,math,re,time,uuid,threading
+from datetime import datetime,timezone
+from pathlib import Path
+from urllib.request import Request,urlopen
+from urllib.error import HTTPError
+import pytest
+from harness import Installation,HERE
+from protocol import Rejected
+from authority_client import request as authority
+
+CASES=[
+ ('aurora_meal','manual-aurora','analista','Qual o teto diário de alimentação da unidade Aurora?',r'240|duzentos e quarenta'),
+ ('aurora_deadline','manual-aurora','analista','Até que horário a Aurora entrega comprovantes?',r'18[:h]30|dezoito.*trinta'),
+ ('boreal_meal','manual-boreal','analista','Qual o teto diário de alimentação da unidade Boreal?',r'190|cento e noventa'),
+ ('boreal_reviewers','manual-boreal','analista','Quantos revisores distintos a Boreal exige para despesas extraordinárias?',r'tr[eê]s|\b3\b'),
+ ('celeste_cap','manual-celeste','financeiro','Qual o teto financeiro de estudo da iniciativa Celeste?',r'9[.,]700[.,]000|9[,.]7\s*(?:milh|mil)|nove milh'),
+ ('missing_hotel','manual-aurora','analista','Qual o teto de reembolso de hotel na Aurora?',r'não (?:há|define|informa|consta)|não.*informad|sem informa'),
+]
+
+def test_load_corpus_pressure_and_exhaustion():
+    s=Installation();started=time.perf_counter();rows=[];records=[];latencies=[];blocks=[];fillers=[];trace_lock=threading.Lock()
+    def save(name,v):(HERE/'evidence'/name).write_text(json.dumps(v,ensure_ascii=False,indent=2,default=str),encoding='utf-8')
+    def mark(name,**kw):s.evidence['scenarios'].append({'name':name,**kw});print('CHECKPOINT '+name,flush=True)
+    def cfg():return {k:s.app_config[k] for k in ('freshness_url','freshness_secret','freshness_public','installation')}
+    def proof():return authority(cfg(),action='proof')
+    def calls():return proof()['budgets']['model']['reserved']
+    def invoke(api,actor,path,data=None,phase='setup',token=None,method=None):
+        token=token or s.token(actor);raw=json.dumps(data,ensure_ascii=False).encode() if data is not None else None
+        req=Request(api+path,raw,{'content-type':'application/json','authorization':'Bearer '+token,'x-audit-phase':phase},method=method)
+        begin=time.perf_counter()
+        try:
+            with urlopen(req,timeout=900) as r:result=json.load(r);status=r.status
+        except HTTPError as e:status=e.code;result={'error':e.read().decode()}
+        item={'phase':phase,'seconds':time.perf_counter()-begin,'status':status,'path':path}
+        with trace_lock:latencies.append(item);save('latencies.json',latencies)
+        return status,result
+    def ok(api,actor,path,data=None,phase='setup',token=None,method=None):
+        status,result=invoke(api,actor,path,data,phase,token,method);assert status==200,(status,result);return result
+    def denied(api,actor,path,data,status,phase='negative',method=None):
+        code,result=invoke(api,actor,path,data,phase,method=method);assert code==status,(code,result);return result
+    def payload(source,q):return {'request_id':str(uuid.uuid4()),'source':source,'question':q,'as_of':'2026-02-01T00:00:00Z','known_at':cut}
+    def record(p,out):
+        assert hashlib.sha256(out['record_json'].encode()).hexdigest()==out['sha256'];records.append({'input':p,'envelope':out});save('decisions.json',records)
+    def switch(mode=None,parallel=None,preflight=None):
+        s.stop_apps()
+        if mode is not None:s.retrieval_mode=mode
+        if parallel is not None:s.parallel_history=parallel
+        if preflight is not None:s.quota_preflight=preflight
+        s.start_apps()
+    def stats(phase,concurrency):
+        values=sorted(x['seconds'] for x in latencies if x['phase']==phase);n=len(values)
+        return {'phase':phase,'count':n,'concurrency':concurrency,'p50_seconds':values[math.ceil(.5*n)-1],'p95_seconds':values[math.ceil(.95*n)-1],
+            'max_seconds':values[-1],'errors':sum(x['status']!=200 for x in latencies if x['phase']==phase),'exploratory_p95_limit_seconds':1.0,'slo_passed':values[math.ceil(.95*n)-1]<=1.0}
+    def read_batch(phase,n,c,old,verify_no_calls=True):
+        token=s.token('analista');before=calls();begin=time.perf_counter()
+        with cf.ThreadPoolExecutor(c) as pool:
+            outs=list(pool.map(lambda i:ok(s.api if i%2==0 else s.peer_api,'analista','/decisions/'+old['id'],None,phase,token,'GET'),range(n)))
+        assert all(o==old for o in outs)
+        if verify_no_calls:assert calls()==before
+        metric={**stats(phase,c),'wall_seconds':time.perf_counter()-begin};metric['requests_per_second']=n/metric['wall_seconds'];blocks.append(metric);save('load-blocks.json',blocks)
+    def pressure(phase,question,old):
+        before=calls();p=payload('manual-aurora',question);token=s.token('analista')
+        with cf.ThreadPoolExecutor(1) as pool:
+            f=pool.submit(ok,s.api,'analista','/advise',p,phase+'-inference')
+            for _ in range(600):
+                pending=ok(s.peer_api,'controlador','/freshness/status',{},phase+'-poll')['pending']
+                if pending:break
+                if f.done():f.result();raise AssertionError('uncached inference did not become active')
+                time.sleep(.05)
+            else:raise AssertionError('inference pending deadline')
+            read_batch(phase,8,8,old,verify_no_calls=False)
+            out=f.result(timeout=180);record(p,out)
+        assert calls()>before
+        blocks[-1]['real_cli_calls_in_pressure_window']=calls()-before;save('load-blocks.json',blocks)
+    try:
+        save('protocol.json',{'cases':CASES,'corpus_sources':3,'modes':['mix','naive'],'calls_cap':40,
+            'warm_read_blocks':{'concurrency':[1,4,8],'requests_each':40},'optimized_read_requests':80,
+            'pressure_reads':8,'pilot_history_p95_limit_seconds':1.0,'limit_is':'exploratory lab criterion, not an enterprise SLO',
+            'timing':'HTTP incl JWT verification, DB and retained proof; excludes token issuance; urllib opens connections',
+            'native_budget_exhaustion':'warm source, no new CLI after cap; preserve baseline failure and compare pre-admission check'})
+        s.start();s.start_peer();corpus=json.loads((HERE/'corpus.json').read_text(encoding='utf-8'))
+        for source,note in corpus.items():
+            raw=f"---\nsource: {source}\nversion: 1\nvalid_at: 2026-01-01T00:00:00Z\ndomain: {note['domain']}\n---\n{note['content']}\n"
+            path=Path(s.app_config['vault'])/(source+'.md');path.write_text(raw,encoding='utf-8')
+            d=ok(s.api,note['author'],'/drafts',{'path':path.name});ok(s.api,'controlador','/review',{'id':d['id'],'raw_sha':d['raw_sha']});ok(s.api,'controlador','/publish',{'id':d['id']})
+        cut=datetime.now(timezone.utc).isoformat();private_record=None;old=None
+        for mode in ['mix','naive']:
+            if mode=='naive':switch(mode=mode)
+            for name,source,actor,q,pattern in CASES:
+                p=payload(source,q);before=calls();t=time.perf_counter();out=ok(s.api,actor,'/advise',p,'native-'+mode);record(p,out)
+                rec=json.loads(out['record_json']);answer=rec['response']['llm_response']['content']
+                checks={'value_or_absence':bool(re.search(pattern,answer,re.I)),'citation':bool(re.search(r'\[\d+\]',answer)) and source+'@v1.md' in answer,
+                    'native_file':source+'@v1.md' in json.dumps(rec['response']['data']),'private_isolation':source=='manual-celeste' or 'SIGILO_CELESTE_2026' not in out['record_json']}
+                rows.append({'case':name,'mode':mode,'checks':checks,'answer':answer,'model_calls':calls()-before,'seconds':time.perf_counter()-t});save('acceptance.json',rows)
+                if old is None:old=out
+                if source=='manual-celeste':private_record=out
+        mark('three_approved_sources_two_retrieval_modes_and_twelve_real_answers')
+        before=calls();denied(s.peer_api,'analista','/advise',payload('manual-celeste','Qual o teto de Celeste?'),403)
+        assert calls()==before
+        # Baseline retains the global business lock even for immutable historical reads.
+        switch(mode='mix')
+        for c in [1,4,8]:read_batch('baseline-warm-c'+str(c),40,c,old)
+        pressure('baseline-under-inference','Compare os tetos diários de alimentação e de transporte da Aurora, com os respectivos valores e a fonte.',old)
+        mark('baseline_warm_and_real_inference_pressure_measured')
+        switch(parallel=True,preflight=True)
+        read_batch('parallel-warm-c8',80,8,old)
+        pressure('parallel-under-inference','Na Aurora, informe juntos o valor máximo de transporte por dia e o teto diário de alimentação, citando a fonte.',old)
+        mark('parallel_historical_read_profile_measured_with_real_inference')
+        # Read optimization cannot bypass maintenance or stale/crash gates.
+        frozen=ok(s.api,'controlador','/recovery/freeze',{})
+        for api in [s.api,s.peer_api]:denied(api,'analista','/decisions/'+old['id'],None,503,method='GET')
+        ok(s.api,'controlador','/recovery/thaw',{'token':frozen['token']})
+        finance_id=next(x['id'] for x in s.principals if x['name']=='financeiro')
+        ok(s.api,'controlador','/admin/revoke',{'principal':finance_id,'source':'manual-celeste'})
+        for api in [s.api,s.peer_api]:denied(api,'financeiro','/decisions/'+private_record['id'],None,403,method='GET')
+        state=Path(s.app_config['state']);pending_input=payload('manual-aurora','Qual prazo adicional não especificado a Aurora usa?')
+        (state/'fault-arm.json').write_text(json.dumps({'stage':'after_fresh_intent','instance':s.app_config['instance']}));(state/'fault-reached.json').write_text('{}')
+        with cf.ThreadPoolExecutor(1) as pool:
+            f=pool.submit(invoke,s.api,'analista','/advise',pending_input,'read-gate-crash')
+            for _ in range(300):
+                if json.loads((state/'fault-reached.json').read_text()).get('stage')=='after_fresh_intent':break
+                if f.done():f.result();raise AssertionError('fault not reached')
+                time.sleep(.1)
+            else:raise AssertionError('fault deadline')
+            s.stop_app()
+            try:f.result(timeout=20)
+            except Exception as e:save('read-gate-disconnect.json',{'type':type(e).__name__,'message':str(e)})
+        denied(s.peer_api,'analista','/decisions/'+old['id'],None,503,method='GET')
+        def close_unknown(api):
+            status=ok(api,'controlador','/freshness/status',{});assert len(status['pending'])==1;seq=status['pending'][0]['seq']
+            inspection=ok(api,'auditor','/freshness/inspect',{'seq':seq});e=inspection['evidence_sha']
+            ok(api,'auditor','/freshness/close-prepare',{'seq':seq,'evidence_sha':e,'reason':'Encerrar intenção interrompida sem recibo como desconhecida; sem sucesso inventado ou repetição automática.'})
+            return ok(api,'controlador','/freshness/close-confirm',{'seq':seq,'evidence_sha':e})
+        close_unknown(s.peer_api);s.start_app();assert ok(s.api,'analista','/decisions/'+old['id'],None,method='GET')==old
+        mark('parallel_reads_respect_freeze_current_acl_and_crash_pending_gate')
+        # Fill remaining reservations without starting Codex, then observe the actual native failure path.
+        current=proof()['budgets']['model'];assert current['reserved']<current['cap'],'corpus consumed entire cap before exhaustion experiment'
+        while proof()['budgets']['model']['reserved']<40:
+            fillers.append(authority(cfg(),action='reserve_call',scope='model',id=str(uuid.uuid4()))['reservation'])
+        save('unused-reservations.json',fillers)
+        switch(mode='naive',preflight=False)
+        exhausted=payload('manual-aurora','Qual a combinação do teto de alimentação e do horário-limite de comprovantes da Aurora?')
+        code,result=invoke(s.api,'analista','/advise',exhausted,'baseline-native-quota-exhausted')
+        assert code>=400 and calls()==40
+        history_code,history_body=invoke(s.peer_api,'analista','/decisions/'+old['id'],None,'baseline-history-after-quota',method='GET')
+        assert history_code==503
+        save('quota-baseline.json',{'native_status':code,'native_error':result,'history_status':history_code,'history_error':history_body,'reserved':calls()})
+        close_unknown(s.peer_api)
+        switch(preflight=True)
+        before_seq=proof()['seq'];new_exhausted={**exhausted,'request_id':str(uuid.uuid4()),'question':'Segundo o manual Aurora, informe o prazo de comprovantes e o valor de transporte.'}
+        for api in [s.api,s.peer_api]:denied(api,'analista','/advise',new_exhausted,429,'preflight-quota-exhausted')
+        assert proof()['seq']==before_seq and calls()==40
+        assert s.sql("SELECT count(*) FROM decision_admissions WHERE id='"+new_exhausted['request_id']+"'",'pilot')=='0'
+        read_batch('history-after-quota-preflight',16,8,old)
+        save('quota-preflight.json',{'status':429,'admission_created':False,'authority_seq_unchanged':True,'history_available':True,'reserved':calls()})
+        mark('native_quota_baseline_failure_preserved_preflight_refuses_before_admission_and_keeps_history_available')
+        save('final-proof.json',proof())
+        s.evidence.update(result='PASS_CONTRACTS',execution_completed=True,semantic_passed=sum(all(x['checks'].values()) for x in rows),semantic_total=len(rows),
+            pilot_slo_failures=[b['phase'] for b in blocks if not b['slo_passed']],model_reserved=40,elapsed_seconds=time.perf_counter()-started)
+    except Exception as e:s.evidence.update(result='FAIL',error=str(e),elapsed_seconds=time.perf_counter()-started);raise
+    finally:s.close()

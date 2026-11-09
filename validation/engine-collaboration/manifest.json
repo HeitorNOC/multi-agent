@@ -1,0 +1,173 @@
+{
+  "captured_utc": "2026-11-03T15:54:14.553526+00:00",
+  "projects": {
+    "paperclip": {
+      "sha": "1e3ab690b072bbf6a1c1f1d0454ea49315b2074c",
+      "tracked_diff": "",
+      "origin": "https://github.com/paperclipai/paperclip.git"
+    },
+    "langgraph": {
+      "sha": "3c916d750575b22c464790e9774494d810ccd322",
+      "tracked_diff": "",
+      "origin": "https://github.com/langchain-ai/langgraph.git"
+    },
+    "lightrag": {
+      "sha": "aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a",
+      "tracked_diff": "",
+      "origin": "https://github.com/HKUDS/LightRAG.git"
+    },
+    "agentscope": {
+      "sha": "9668b4c90c70cc214e1b7bb65dec2a6e70b90010",
+      "tracked_diff": "",
+      "origin": "https://github.com/agentscope-ai/agentscope.git"
+    },
+    "openagents": {
+      "sha": "6a330c789c321bdce5856578b7c47c2539ea7fc6",
+      "tracked_diff": "",
+      "origin": "https://github.com/openagents-org/openagents.git"
+    }
+  },
+  "scope": "local synthetic recheck and engine/collaboration integration; not production qualification",
+  "files": {
+    "validation/paperclip-recheck/live_e2e.ts": {
+      "bytes": 10172,
+      "sha256": "3810e5a29d6cd07c2a64258d2cf3b93f54cbd33d1ab640263708f4a8e4a42329"
+    },
+    "validation/paperclip-recheck/package.json": {
+      "bytes": 61,
+      "sha256": "4816f7e2377940c1857935d4ae1dc68890559c0018229478cd8322377d678a33"
+    },
+    "validation/paperclip-recheck/REPORT.md": {
+      "bytes": 5840,
+      "sha256": "1a06acbd6a7e1e400878e627ff251cf24f2a5873c644c2b6f021b6c448fbe70e"
+    },
+    "validation/paperclip-recheck/runtime.py": {
+      "bytes": 9512,
+      "sha256": "c0e3301f790d369abca09d9488f9860d0d30a9809588e1b4a2d845caddcf07ec"
+    },
+    "validation/paperclip-recheck/test_store.py": {
+      "bytes": 1296,
+      "sha256": "ba3310097aefe8418c918a04c8694fcea245575896671af4e6b9a8bd9a7b96c9"
+    },
+    "validation/paperclip-recheck/adapter/index.ts": {
+      "bytes": 4547,
+      "sha256": "aec905bddc6328aaed3eee06a37d3bc92c1a8aa6bd9898181e8106efc7b60745"
+    },
+    "validation/paperclip-recheck/adapter/package.json": {
+      "bytes": 120,
+      "sha256": "f4abc85f12aa1c3882aa2b42062dc849ad2071abbd9b12ccccedb8b2c613bccd"
+    },
+    "validation/paperclip-recheck/evidence/live-e2e-before-receipt.json": {
+      "bytes": 42710,
+      "sha256": "95fc8c17dfd5be7cddc832555bb721902b493a8756d7ead50b881d94c5669431"
+    },
+    "validation/paperclip-recheck/evidence/live-e2e-before-receipt.log": {
+      "bytes": 43846,
+      "sha256": "f018b7bf38d118cfe5b9233bb426980fde2f72779881e7d71e7ba43cc49286cb"
+    },
+    "validation/paperclip-recheck/evidence/live-e2e-first-pass.json": {
+      "bytes": 42992,
+      "sha256": "afe666d8faa69d991190ab0275a99e06055ad9003ece9d234c43214c5e7cdf59"
+    },
+    "validation/paperclip-recheck/evidence/live-e2e.json": {
+      "bytes": 43214,
+      "sha256": "44bcf6ad957bec747f841eb88cdcc1b781a94290a653187c36b789518666f1c3"
+    },
+    "validation/paperclip-recheck/evidence/live-e2e.log": {
+      "bytes": 44375,
+      "sha256": "a8e9421961e09d6c58e32c73d8f00eae0ca66a34bcef0bbe850849b4451f362a"
+    },
+    "validation/paperclip-recheck/evidence/store-corrected.log": {
+      "bytes": 745,
+      "sha256": "e643b4974495fc01bfd1d4e4a8d17233e142f7541315be48fef6cc252bc8986c"
+    },
+    "validation/paperclip-recheck/evidence/store-corrected.xml": {
+      "bytes": 749,
+      "sha256": "14865f333d386f624693c31ae8f331743660cc512048bad26f0aaeea9bc8f2a3"
+    },
+    "validation/paperclip-recheck/evidence/store.log": {
+      "bytes": 1856,
+      "sha256": "c769da80e98f23d63e1c0cd896cb40e072f715a8026b836c36fc5cb6e2c53d21"
+    },
+    "validation/paperclip-recheck/evidence/store.xml": {
+      "bytes": 1216,
+      "sha256": "fc090fe0b96727960df0c0105e0ab0b06e3a0c22d6deff8a8f1cc887141a674b"
+    },
+    "validation/paperclip-recheck/evidence/upstream-contracts.log": {
+      "bytes": 476,
+      "sha256": "bd700e8e2f67510d02f59a5ae25ef572c7d0d6c13e024224e610f486960b8381"
+    },
+    "validation/engine-collaboration/boundary.py": {
+      "bytes": 3585,
+      "sha256": "4f9a5f7cbe8b781adaeff87ae0ca25dfe096f523f9a799efe72384712e3016a3"
+    },
+    "validation/engine-collaboration/engine_worker.py": {
+      "bytes": 2965,
+      "sha256": "081dae3bfc7866ce3e2ba357a16d94c0bddda61bec7cf4aa324b12b5c8c31937"
+    },
+    "validation/engine-collaboration/REPORT.md": {
+      "bytes": 8928,
+      "sha256": "92c648c04084a6baac428debd11bc6cbdedd9f3beddbf37e81cc758cc40a2ffd"
+    },
+    "validation/engine-collaboration/test_integration.py": {
+      "bytes": 5240,
+      "sha256": "62fa2798204702d24bd346d1d03129799b4b2525568cb0d269ef745e1c323b77"
+    },
+    "validation/engine-collaboration/evidence/agentscope-freeze.txt": {
+      "bytes": 2391,
+      "sha256": "0336dcf03615a6681beb7bef8b1f6edd3d7c411aa31028791c43beb4aa5cbc0d"
+    },
+    "validation/engine-collaboration/evidence/delivery-ambiguity.json": {
+      "bytes": 383,
+      "sha256": "2d51771fb7bb3b5ab8e678940dc301b9cf312be66c355b1cb92b77eec6910028"
+    },
+    "validation/engine-collaboration/evidence/generated-packaging.diff": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "validation/engine-collaboration/evidence/integration-first.log": {
+      "bytes": 764,
+      "sha256": "90eb32ae28b9a9acd3a65bf08e0f71cf903e6ffbfd4ca719eef480c1424b161c"
+    },
+    "validation/engine-collaboration/evidence/integration-first.xml": {
+      "bytes": 908,
+      "sha256": "b93de2b243d686ea614df0c18495626307e6855531cdf3033078a8cce40c42b0"
+    },
+    "validation/engine-collaboration/evidence/integration.log": {
+      "bytes": 764,
+      "sha256": "56b360a62eeccf9ef56d9b326935f585cb34ecb44eb1e487c5f874679101bf56"
+    },
+    "validation/engine-collaboration/evidence/integration.xml": {
+      "bytes": 1046,
+      "sha256": "01578c937b4048bcc132a835c0f942c3881bdecd015452ae8a7c2b8f3565ece5"
+    },
+    "validation/engine-collaboration/evidence/joint.json": {
+      "bytes": 1303,
+      "sha256": "c11b95e508364f264ac7e44c4774fa20e31be154d909d21efd8b43c37ee37ff7"
+    },
+    "validation/engine-collaboration/evidence/openagents-freeze.txt": {
+      "bytes": 1992,
+      "sha256": "26f501f48d439354e4792a20b2c418b61de0c374c0a5cdb73d3f023d42e1cf65"
+    },
+    "validation/engine-collaboration/evidence/paperclip-runtime-freeze.txt": {
+      "bytes": 2014,
+      "sha256": "53252b772137433f415b447bcf05e2fb75734017c41c37ce1700590e1a7bab71"
+    },
+    "poc/runtime.py": {
+      "bytes": 9455,
+      "sha256": "e81756742106bef3fecc33762a101b6050fbe5135100a4d2562510d4387255bc"
+    },
+    "poc/DOSSIER.md": {
+      "bytes": 27520,
+      "sha256": "0999f8b3a71cdea40bb2e9c9603edc0652db8fe246b0c59c398f8500d67662c2"
+    },
+    "validation/agentscope/own_layer/probe.py": {
+      "bytes": 5119,
+      "sha256": "28201b355707b61df97ca9e1187923a3c919658c486f4600a54e86fa43451a02"
+    },
+    "validation/manifest.json": {
+      "bytes": 2534,
+      "sha256": "df0f02a1eba8a7fe50bbdae37fe51c7ea6c8dc44346f0043f233d02d352d4a55"
+    }
+  }
+}

@@ -1,0 +1,533 @@
+{
+  "id": "df894225-5854-40a4-9883-fbded6834b3e",
+  "goal": "Acrescente um teste para rejeitar um evento de webhook que referencia outra cobrança, sem abrir a unidade de trabalho.",
+  "status": "completed",
+  "plan": null,
+  "review": {
+    "job": "df894225-5854-40a4-9883-fbded6834b3e",
+    "report": {
+      "roster": [
+        "tech_lead",
+        "backend_engineer",
+        "qa_engineer",
+        "platform_engineer"
+      ],
+      "assignments": [
+        {
+          "agent": "tech_lead",
+          "task": "Definir a abordagem técnica para acrescentar o teste ao final do spec, preservando o teste existente e usando os imports e mocks locais."
+        },
+        {
+          "agent": "backend_engineer",
+          "task": "Implementar somente no spec o teste Vitest 'rejects a provider event for a different requested charge', verificando a rejeição com code PAYMENT_CHARGE_NOT_FOUND e que runSystem não seja chamado."
+        },
+        {
+          "agent": "qa_engineer",
+          "task": "Verificar o novo cenário e a preservação do teste existente, executando os testes aplicáveis e registrando os resultados."
+        }
+      ],
+      "tests": {
+        "passed": true,
+        "exit_code": 0,
+        "log": "12 testes passaram · regressão detectada: sim\ngit apply --check passou em 5cf77950e29c0d203b3ee1d10471b775f6b91af4.",
+        "diff": "--- a/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n+++ b/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n@@ -36,3 +36,38 @@\n   ).resolves.toBe(confirmed);\n   expect(scope.repository.processProviderEvent).toHaveBeenCalledWith(\"charge\", \"SANDBOX\", event);\n });\n+\n+it(\"rejects a provider event for a different requested charge\", async () => {\n+  const runSystem = vi.fn();\n+  const verifyWebhook = vi.fn().mockResolvedValue({\n+    chargeId: \"different-charge\",\n+    event: {\n+      eventId: \"event-002\",\n+      externalId: \"external-charge\",\n+      feeAmount: \"1.0000\",\n+      occurredAt: \"2026-08-20T12:00:00.000Z\",\n+      status: \"CONFIRMED\" as const,\n+    },\n+  });\n+  const service = new ProcessTerminalPaymentWebhook(\n+    { run: vi.fn(), runSystem },\n+    {\n+      resolve: () => ({\n+        refund: vi.fn(),\n+        start: vi.fn(),\n+        verifyWebhook,\n+      }),\n+    },\n+  );\n+\n+  await expect(\n+    service.execute({\n+      chargeId: \"requested-charge\",\n+      organizationId: \"organization\",\n+      provider: \"SANDBOX\",\n+      rawBody: \"{}\",\n+      signature: \"signature\",\n+    }),\n+  ).rejects.toMatchObject({ code: \"PAYMENT_CHARGE_NOT_FOUND\" });\n+  expect(runSystem).not.toHaveBeenCalled();\n+});\n",
+        "evidence": {
+          "suite": {
+            "exit_code": 0,
+            "files": 5,
+            "passed_tests": 12,
+            "failed_tests": 0,
+            "tests": [
+              {
+                "name": "cria order Point com referência e chave idempotente do charge",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "envia PIX como qr e rejeita valores com fração de centavo",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "confirma estorno somente quando a API retorna o id do refund",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "autentica webhook Point e associa external_reference à cobrança",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "creates a deterministic pending sandbox charge",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "accepts only a valid signed provider event",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "StripeTerminalProvider creates a hosted checkout session with tenant metadata and a usable URL",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "StripeTerminalProvider rejects Pix without explicit invitation and sub-cent amounts",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "StripeTerminalProvider refunds a settled session by its PaymentIntent",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "StripeTerminalProvider verifies signature and authenticated tenant metadata",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "verifies and processes a provider event without a user session",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "rejects a provider event for a different requested charge",
+                "status": "passed",
+                "failures": []
+              }
+            ]
+          },
+          "mutation": {
+            "exit_code": 1,
+            "files": 1,
+            "passed_tests": 1,
+            "failed_tests": 1,
+            "tests": [
+              {
+                "name": "verifies and processes a provider event without a user session",
+                "status": "passed",
+                "failures": []
+              },
+              {
+                "name": "rejects a provider event for a different requested charge",
+                "status": "failed",
+                "failures": [
+                  "Error: promise resolved \"undefined\" instead of rejecting\n    at _Assertion.__VITEST_REJECTS__ (file:///repo/node_modules/.pnpm/@vitest+expect@4.1.10/node_modules/@vitest/expect/dist/index.js:1747:17)\n    at _Assertion.propertyGetter (file:///repo/node_modules/.pnpm/chai@6.2.2/node_modules/chai/index.js:1570:27)\n    at Reflect.get (<anonymous>)\n    at Object.proxyGetter [as get] (file:///repo/node_modules/.pnpm/chai@6.2.2/node_modules/chai/index.js:1659:22)\n    at /repo/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts:71:4\n    at file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11\n    at file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26\n    at file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "qa": {
+        "verdict": "pass",
+        "evidence": "A suíte aplicável passou com 12 testes em 5 arquivos, incluindo o teste existente e o novo cenário. O diff apenas acrescenta o teste ao spec; ele verifica a rejeição com PAYMENT_CHARGE_NOT_FOUND e que runSystem não é chamado. Na execução com mutação, o novo teste falhou porque a promessa foi resolvida em vez de rejeitada, enquanto o teste existente passou, demonstrando detecção da regressão. O git apply --check também passou."
+      },
+      "technical_review": {
+        "verdict": "pass",
+        "evidence": "O diff acrescenta ao final do spec o teste solicitado, preserva o teste existente e não adiciona imports. O evento verificado usa chargeId diferente do pedido; o teste exige rejeição com code PAYMENT_CHARGE_NOT_FOUND e verifica que runSystem não foi chamado. A suíte passou com 12 testes, e o teste novo falhou na execução com mutação, detectando a regressão."
+      },
+      "decision": {
+        "action": "human_review",
+        "reason": "A QA e a revisão técnica aprovaram a alteração. A suíte passou, o teste existente foi preservado e o novo teste detectou a regressão na execução com mutação."
+      },
+      "review_history": [
+        {
+          "attempt": 1,
+          "passed": true,
+          "decision": {
+            "action": "human_review",
+            "reason": "A QA e a revisão técnica aprovaram a alteração. A suíte passou, o teste existente foi preservado e o novo teste detectou a regressão na execução com mutação."
+          }
+        }
+      ],
+      "repository": {
+        "name": "que",
+        "revision": "5cf77950e29c0d203b3ee1d10471b775f6b91af4"
+      },
+      "kind": "engineering",
+      "diff": "--- a/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n+++ b/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n@@ -36,3 +36,38 @@\n   ).resolves.toBe(confirmed);\n   expect(scope.repository.processProviderEvent).toHaveBeenCalledWith(\"charge\", \"SANDBOX\", event);\n });\n+\n+it(\"rejects a provider event for a different requested charge\", async () => {\n+  const runSystem = vi.fn();\n+  const verifyWebhook = vi.fn().mockResolvedValue({\n+    chargeId: \"different-charge\",\n+    event: {\n+      eventId: \"event-002\",\n+      externalId: \"external-charge\",\n+      feeAmount: \"1.0000\",\n+      occurredAt: \"2026-08-20T12:00:00.000Z\",\n+      status: \"CONFIRMED\" as const,\n+    },\n+  });\n+  const service = new ProcessTerminalPaymentWebhook(\n+    { run: vi.fn(), runSystem },\n+    {\n+      resolve: () => ({\n+        refund: vi.fn(),\n+        start: vi.fn(),\n+        verifyWebhook,\n+      }),\n+    },\n+  );\n+\n+  await expect(\n+    service.execute({\n+      chargeId: \"requested-charge\",\n+      organizationId: \"organization\",\n+      provider: \"SANDBOX\",\n+      rawBody: \"{}\",\n+      signature: \"signature\",\n+    }),\n+  ).rejects.toMatchObject({ code: \"PAYMENT_CHARGE_NOT_FOUND\" });\n+  expect(runSystem).not.toHaveBeenCalled();\n+});\n"
+    },
+    "payload": {
+      "operation": "engineering-review",
+      "recipient": "registro-local-engenharia",
+      "content": "Registrar a revisão humana da entrega de engenharia."
+    },
+    "hash": "fbfe051f9255e812d106a932f3300a9c37b451cf073fe9ecb28772720adade00",
+    "requires_approval": true
+  },
+  "approval": true,
+  "receipt": {
+    "id": "020f0a0f-b46b-42a4-bea4-ca336440c5e0",
+    "job": "df894225-5854-40a4-9883-fbded6834b3e",
+    "hash": "fbfe051f9255e812d106a932f3300a9c37b451cf073fe9ecb28772720adade00",
+    "simulated": true,
+    "recipient": "registro-local-engenharia",
+    "content": "Registrar a revisão humana da entrega de engenharia.",
+    "created": "2026-11-07T04:04:01.701Z"
+  },
+  "error": null,
+  "created": "2026-11-07T03:42:23.571Z",
+  "worker_active": false,
+  "events": [
+    {
+      "seq": 24,
+      "at": "2026-11-07T03:42:23.571Z",
+      "node": "admission",
+      "detail": {
+        "goal": "Acrescente um teste para rejeitar um evento de webhook que referencia outra cobrança, sem abrir a unidade de trabalho."
+      }
+    },
+    {
+      "seq": 25,
+      "at": "2026-11-07T03:42:23.571Z",
+      "node": "job_queued",
+      "detail": {
+        "position_id": 3,
+        "kind": "new",
+        "queued_at": "2026-11-07T03:42:23.571Z"
+      }
+    },
+    {
+      "seq": 26,
+      "at": "2026-11-07T03:42:23.578Z",
+      "node": "job_dequeued",
+      "detail": {
+        "position_id": 3,
+        "wait_ms": 7
+      }
+    },
+    {
+      "seq": 27,
+      "at": "2026-11-07T03:42:23.578Z",
+      "node": "worker_requested",
+      "detail": {}
+    },
+    {
+      "seq": 28,
+      "at": "2026-11-07T03:42:23.588Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 5924,
+        "running": 1
+      }
+    },
+    {
+      "seq": 29,
+      "at": "2026-11-07T00:42:25.005754-03:00",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [],
+        "process": 24532,
+        "has_state": false,
+        "telemetry": {
+          "span_id": "9e8e6e799c23b113",
+          "parent_span_id": "4d274b086d323769",
+          "checkpoint_id": null,
+          "occurred_at": "2026-11-07T00:42:25.005754-03:00",
+          "worker_run_id": "d2b81c1db4944eaa8d61ab9fbe8d0233"
+        }
+      }
+    },
+    {
+      "seq": 30,
+      "at": "2026-11-07T03:42:30.411Z",
+      "node": "engineering_chief",
+      "detail": {
+        "attempt": 0,
+        "roster": [
+          "tech_lead",
+          "backend_engineer",
+          "qa_engineer",
+          "platform_engineer"
+        ]
+      }
+    },
+    {
+      "seq": 31,
+      "at": "2026-11-07T03:42:37.262Z",
+      "node": "engineering_assign",
+      "detail": {
+        "attempt": 0,
+        "assignments": [
+          {
+            "agent": "tech_lead",
+            "task": "Definir a abordagem técnica para acrescentar o teste ao final do spec, preservando o teste existente e usando os imports e mocks locais."
+          },
+          {
+            "agent": "backend_engineer",
+            "task": "Implementar somente no spec o teste Vitest 'rejects a provider event for a different requested charge', verificando a rejeição com code PAYMENT_CHARGE_NOT_FOUND e que runSystem não seja chamado."
+          },
+          {
+            "agent": "qa_engineer",
+            "task": "Verificar o novo cenário e a preservação do teste existente, executando os testes aplicáveis e registrando os resultados."
+          }
+        ]
+      }
+    },
+    {
+      "seq": 32,
+      "at": "2026-11-07T03:43:10.822Z",
+      "node": "engineering_qa",
+      "detail": {
+        "attempt": 1,
+        "tests": {
+          "passed": true,
+          "exit_code": 0,
+          "log": "12 testes passaram · regressão detectada: sim\ngit apply --check passou em 5cf77950e29c0d203b3ee1d10471b775f6b91af4.",
+          "diff": "--- a/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n+++ b/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts\n@@ -36,3 +36,38 @@\n   ).resolves.toBe(confirmed);\n   expect(scope.repository.processProviderEvent).toHaveBeenCalledWith(\"charge\", \"SANDBOX\", event);\n });\n+\n+it(\"rejects a provider event for a different requested charge\", async () => {\n+  const runSystem = vi.fn();\n+  const verifyWebhook = vi.fn().mockResolvedValue({\n+    chargeId: \"different-charge\",\n+    event: {\n+      eventId: \"event-002\",\n+      externalId: \"external-charge\",\n+      feeAmount: \"1.0000\",\n+      occurredAt: \"2026-08-20T12:00:00.000Z\",\n+      status: \"CONFIRMED\" as const,\n+    },\n+  });\n+  const service = new ProcessTerminalPaymentWebhook(\n+    { run: vi.fn(), runSystem },\n+    {\n+      resolve: () => ({\n+        refund: vi.fn(),\n+        start: vi.fn(),\n+        verifyWebhook,\n+      }),\n+    },\n+  );\n+\n+  await expect(\n+    service.execute({\n+      chargeId: \"requested-charge\",\n+      organizationId: \"organization\",\n+      provider: \"SANDBOX\",\n+      rawBody: \"{}\",\n+      signature: \"signature\",\n+    }),\n+  ).rejects.toMatchObject({ code: \"PAYMENT_CHARGE_NOT_FOUND\" });\n+  expect(runSystem).not.toHaveBeenCalled();\n+});\n",
+          "evidence": {
+            "suite": {
+              "exit_code": 0,
+              "files": 5,
+              "passed_tests": 12,
+              "failed_tests": 0,
+              "tests": [
+                {
+                  "name": "cria order Point com referência e chave idempotente do charge",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "envia PIX como qr e rejeita valores com fração de centavo",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "confirma estorno somente quando a API retorna o id do refund",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "autentica webhook Point e associa external_reference à cobrança",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "creates a deterministic pending sandbox charge",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "accepts only a valid signed provider event",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "StripeTerminalProvider creates a hosted checkout session with tenant metadata and a usable URL",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "StripeTerminalProvider rejects Pix without explicit invitation and sub-cent amounts",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "StripeTerminalProvider refunds a settled session by its PaymentIntent",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "StripeTerminalProvider verifies signature and authenticated tenant metadata",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "verifies and processes a provider event without a user session",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "rejects a provider event for a different requested charge",
+                  "status": "passed",
+                  "failures": []
+                }
+              ]
+            },
+            "mutation": {
+              "exit_code": 1,
+              "files": 1,
+              "passed_tests": 1,
+              "failed_tests": 1,
+              "tests": [
+                {
+                  "name": "verifies and processes a provider event without a user session",
+                  "status": "passed",
+                  "failures": []
+                },
+                {
+                  "name": "rejects a provider event for a different requested charge",
+                  "status": "failed",
+                  "failures": [
+                    "Error: promise resolved \"undefined\" instead of rejecting\n    at _Assertion.__VITEST_REJECTS__ (file:///repo/node_modules/.pnpm/@vitest+expect@4.1.10/node_modules/@vitest/expect/dist/index.js:1747:17)\n    at _Assertion.propertyGetter (file:///repo/node_modules/.pnpm/chai@6.2.2/node_modules/chai/index.js:1570:27)\n    at Reflect.get (<anonymous>)\n    at Object.proxyGetter [as get] (file:///repo/node_modules/.pnpm/chai@6.2.2/node_modules/chai/index.js:1659:22)\n    at /repo/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts:71:4\n    at file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11\n    at file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26\n    at file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///repo/node_modules/.pnpm/@vitest+runner@4.1.10/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "seq": 33,
+      "at": "2026-11-07T03:43:16.111Z",
+      "node": "engineering_review",
+      "detail": {
+        "attempt": 1,
+        "technical_review": {
+          "verdict": "pass",
+          "evidence": "O diff acrescenta ao final do spec o teste solicitado, preserva o teste existente e não adiciona imports. O evento verificado usa chargeId diferente do pedido; o teste exige rejeição com code PAYMENT_CHARGE_NOT_FOUND e verifica que runSystem não foi chamado. A suíte passou com 12 testes, e o teste novo falhou na execução com mutação, detectando a regressão."
+        }
+      }
+    },
+    {
+      "seq": 34,
+      "at": "2026-11-07T03:43:21.46Z",
+      "node": "engineering_director",
+      "detail": {
+        "attempt": 1,
+        "decision": {
+          "action": "human_review",
+          "reason": "A QA e a revisão técnica aprovaram a alteração. A suíte passou, o teste existente foi preservado e o novo teste detectou a regressão na execução com mutação."
+        }
+      }
+    },
+    {
+      "seq": 35,
+      "at": "2026-11-07T03:43:21.467Z",
+      "node": "review_ready",
+      "detail": {
+        "hash": "fbfe051f9255e812d106a932f3300a9c37b451cf073fe9ecb28772720adade00",
+        "model_approval_mismatch": true
+      }
+    },
+    {
+      "seq": 36,
+      "at": "2026-11-07T00:43:21.478628-03:00",
+      "node": "checkpoint_saved",
+      "detail": {
+        "next": [
+          "approval"
+        ],
+        "completed": false,
+        "telemetry": {
+          "span_id": "839a3cb19dd6680e",
+          "parent_span_id": "4d274b086d323769",
+          "checkpoint_id": "1f1da5d6-0b82-6715-8008-1a195e986043",
+          "occurred_at": "2026-11-07T00:43:21.478628-03:00",
+          "worker_run_id": "d2b81c1db4944eaa8d61ab9fbe8d0233"
+        }
+      }
+    },
+    {
+      "seq": 37,
+      "at": "2026-11-07T03:43:21.601Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 5924,
+        "exit_code": 0
+      }
+    },
+    {
+      "seq": 38,
+      "at": "2026-11-07T04:04:00.552Z",
+      "node": "human_approved",
+      "detail": {
+        "hash": "fbfe051f9255e812d106a932f3300a9c37b451cf073fe9ecb28772720adade00",
+        "actor": "operador-local-demo"
+      }
+    },
+    {
+      "seq": 39,
+      "at": "2026-11-07T04:04:00.552Z",
+      "node": "job_queued",
+      "detail": {
+        "position_id": 4,
+        "kind": "resume",
+        "queued_at": "2026-11-07T04:04:00.552Z"
+      }
+    },
+    {
+      "seq": 40,
+      "at": "2026-11-07T04:04:00.583Z",
+      "node": "job_dequeued",
+      "detail": {
+        "position_id": 4,
+        "wait_ms": 31
+      }
+    },
+    {
+      "seq": 41,
+      "at": "2026-11-07T04:04:00.583Z",
+      "node": "worker_requested",
+      "detail": {}
+    },
+    {
+      "seq": 42,
+      "at": "2026-11-07T04:04:00.591Z",
+      "node": "worker_started",
+      "detail": {
+        "pid": 27776,
+        "running": 1
+      }
+    },
+    {
+      "seq": 43,
+      "at": "2026-11-07T01:04:01.672711-03:00",
+      "node": "checkpoint_loaded",
+      "detail": {
+        "next": [
+          "approval"
+        ],
+        "process": 25260,
+        "has_state": true,
+        "telemetry": {
+          "span_id": "aee54356eba3206c",
+          "parent_span_id": "ff93beb30a6bc7f1",
+          "checkpoint_id": "1f1da5d6-0b82-6715-8008-1a195e986043",
+          "occurred_at": "2026-11-07T01:04:01.672711-03:00",
+          "worker_run_id": "bc97dfdc6ed44035a9e2294ad72b7176"
+        }
+      }
+    },
+    {
+      "seq": 44,
+      "at": "2026-11-07T04:04:01.701Z",
+      "node": "effect_receipt",
+      "detail": {
+        "id": "020f0a0f-b46b-42a4-bea4-ca336440c5e0",
+        "replayed": false,
+        "simulated": true
+      }
+    },
+    {
+      "seq": 45,
+      "at": "2026-11-07T01:04:01.709268-03:00",
+      "node": "checkpoint_saved",
+      "detail": {
+        "next": [],
+        "completed": true,
+        "telemetry": {
+          "span_id": "076bb7225c1873e9",
+          "parent_span_id": "ff93beb30a6bc7f1",
+          "checkpoint_id": "1f1da604-3f4e-6595-800a-cae87a11bdc9",
+          "occurred_at": "2026-11-07T01:04:01.709268-03:00",
+          "worker_run_id": "bc97dfdc6ed44035a9e2294ad72b7176"
+        }
+      }
+    },
+    {
+      "seq": 46,
+      "at": "2026-11-07T04:04:01.82Z",
+      "node": "worker_stopped",
+      "detail": {
+        "pid": 27776,
+        "exit_code": 0
+      }
+    }
+  ]
+}

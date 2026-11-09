@@ -1,0 +1,39 @@
+{
+  "seq": 9,
+  "head": "921f67f95295958254b71554d093baeda3be145f49989e13c13add07420a95cd",
+  "pending": [],
+  "missing": [
+    {
+      "seq": 5,
+      "id": "a31133ad-06ae-557a-84d2-b10671e15d07",
+      "kind": "approval",
+      "receipt_sha": "fdddd8a3ef213eaa3d978cac6f182d990a0334c62f0fc6b6310221c04d384c6e"
+    },
+    {
+      "seq": 6,
+      "id": "f706296c-f337-554c-9fac-4a65e63d0163",
+      "kind": "publication",
+      "receipt_sha": "208ac40fa05ff149234eb1b4e74fa662342d75153f1ea08e2c233981737d6f82"
+    },
+    {
+      "seq": 7,
+      "id": "7701404a-f7d5-597a-8a23-353ef7ed2bb5",
+      "kind": "decision",
+      "receipt_sha": "36c387f9d74da385d4392fbb293a0101f6dfffd25f8f9a1b7e23a1d635386fcd"
+    },
+    {
+      "seq": 8,
+      "id": "f65864a9-6519-512d-bea0-2a06a988a092",
+      "kind": "decision",
+      "receipt_sha": "8aa9a53fd259b58694161067b0b112354c3282621d7907f4ba29e8b011002ef9"
+    },
+    {
+      "seq": 9,
+      "id": "931fb2ce-629a-5109-b6f7-aed11a77ecc9",
+      "kind": "decision",
+      "receipt_sha": "c7c871c2bd2a3677fe370f849a8c5ca09e9b6c4de6b6498f3c74e6670808d500"
+    }
+  ],
+  "matches": false,
+  "local_count": 4
+}

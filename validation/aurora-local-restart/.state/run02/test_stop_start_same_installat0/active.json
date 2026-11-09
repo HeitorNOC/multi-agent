@@ -1,0 +1,7 @@
+{
+  "url": "http://127.0.0.1:55772",
+  "backend": "http://127.0.0.1:50838",
+  "token": "1e67e1390f4b0200a26a17f24e5dd31dcf4adf3d23ed99122e40aa465976273e",
+  "state": "C:\\Users\\PC\\multi-agent\\validation\\aurora-local-restart\\.state\\run02\\test_stop_start_same_installat0\\session-b45d1d7496",
+  "launcher_pid": 24924
+}

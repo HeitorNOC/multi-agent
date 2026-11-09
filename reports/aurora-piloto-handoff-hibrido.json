@@ -1,0 +1,236 @@
+{
+  "goal": "Quais estados e evidências são necessários para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?",
+  "status": "recovery_required",
+  "error": "Consulte a evidência da inferência na central Precisa de você.",
+  "plan": {
+    "strategy": "A2",
+    "reason": "A questão envolve estados de transferência, exclusão de respostas simultâneas e evidências de integração entre sistemas.",
+    "teams": [
+      {
+        "lead": "technology_director",
+        "specialists": [
+          "data_analyst",
+          "security_analyst"
+        ],
+        "reason": "O analista de dados avalia estados e integração; o analista de segurança examina evidências ausentes e registro do incidente."
+      }
+    ],
+    "capabilities": [
+      "technology_director",
+      "data_analyst",
+      "security_analyst"
+    ],
+    "not_selected": [
+      {
+        "id": "executive_director",
+        "reason": "Estratégia e portfólio não são o foco da transferência."
+      },
+      {
+        "id": "business_analyst",
+        "reason": "Dependências entre unidades não são centrais à questão."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "A questão não envolve priorização de investimentos."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "Campanhas e posicionamento não são pertinentes."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "Não há demanda de planejamento de campanha."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "Preços e promoções não estão em questão."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Disponibilidade logística não é o foco."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Estoque e reservas não são pertinentes."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Capacidade logística e prazos regionais não são pertinentes."
+      },
+      {
+        "id": "finance_director",
+        "reason": "Margem e caixa não estão em questão."
+      },
+      {
+        "id": "controller",
+        "reason": "Descontos e orçamento não são pertinentes."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Liquidez e financiamento não são pertinentes."
+      },
+      {
+        "id": "people_director",
+        "reason": "A questão trata dos estados do sistema, não do planejamento de pessoal."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "Não há demanda demonstrada de admissões."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "Disponibilidade de equipes e treinamento não respondem aos estados de transferência."
+      },
+      {
+        "id": "legal_director",
+        "reason": "Contratos e conformidade não são o foco da pergunta."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "A governança jurídica de resposta não é necessária para identificar os estados técnicos."
+      },
+      {
+        "id": "contract_analyst",
+        "reason": "Obrigações contratuais não estão em questão."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 5
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 3,
+    "max_calls": 24,
+    "input_tokens": 12989,
+    "cached_input_tokens": 0,
+    "output_tokens": 493,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    }
+  ],
+  "retrieval": "hybrid-with-task-vocabulary",
+  "facets": [
+    {
+      "query": "WAITING atendimento criado e aguardando um atendente na fila.",
+      "anchors": [
+        "waiting"
+      ]
+    },
+    {
+      "query": "ACTIVE um atendente iniciou e assumiu o atendimento humano.",
+      "anchors": [
+        "active"
+      ]
+    },
+    {
+      "query": "control_passed transferência de controle da conversa MESSAGING_HANDOVER.",
+      "anchors": [
+        "control_passed"
+      ]
+    },
+    {
+      "query": "STANDBY_CUSTOMER cliente falando enquanto o MBA responde: só arquiva, sem resposta concorrente.",
+      "anchors": [
+        "standby_customer"
+      ]
+    },
+    {
+      "query": "Handoff entre bot e humano muda o tipo de sessão ML_MODEL para HUMAN.",
+      "anchors": [
+        "ml_model"
+      ]
+    },
+    {
+      "query": "Limitações da transferência de controle do Meta Business Agent ainda incompletas.",
+      "anchors": [
+        "incompletas"
+      ]
+    }
+  ],
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "specialist_started",
+    "retrieval_completed",
+    "inference_requested",
+    "retrieval_completed",
+    "inference_requested",
+    "worker_stopped"
+  ],
+  "candidates": [
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 4
+    },
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 5
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 15
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 30
+    },
+    {
+      "source": "mba",
+      "page": 8,
+      "line": 14
+    }
+  ],
+  "report": null
+}

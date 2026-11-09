@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "image": "mcr.microsoft.com/playwright@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27",
+  "blocked": [
+    "assinatura",
+    "expirada",
+    "operação",
+    "código alterado",
+    "entrada alterada",
+    "replay"
+  ],
+  "tool": {
+    "uid": 65534,
+    "computed": 15,
+    "scratch_write": true,
+    "root_write": "OSError",
+    "docker_socket": false,
+    "host_credentials": [],
+    "egress_to_sink": "gaierror",
+    "egress_without_dns": "OSError"
+  },
+  "local_sink_host_control": true,
+  "tool_requests_at_sink": 0,
+  "timeout_with_child": true,
+  "containers_removed": [
+    true,
+    true
+  ]
+}

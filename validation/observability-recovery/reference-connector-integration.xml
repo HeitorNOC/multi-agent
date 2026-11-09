@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="1.697" timestamp="2026-11-06T21:32:32.149298-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.observability-recovery.test_reference_destination" name="test_external_destination_revocation_and_lost_receipt" time="0.495" /><testcase classname="validation.observability-recovery.test_reference_destination" name="test_upstream_revocation_requires_destination_confirmation" time="0.197" /><testcase classname="validation.observability-recovery.test_reference_destination" name="test_aurora_persists_pending_revocation_and_reconciles_without_redispatch" time="0.798"><failure message="AssertionError: API não iniciou&#10;assert ''">validation\observability-recovery\test_reference_destination.py:387: in test_aurora_persists_pending_revocation_and_reconciles_without_redispatch
+    with aurora_api(api_config) as (request, wait_for_job):
+         ^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+validation\observability-recovery\test_reference_destination.py:296: in aurora_api
+    assert startup, "API não iniciou"
+E   AssertionError: API não iniciou
+E   assert ''</failure></testcase></testsuite></testsuites>

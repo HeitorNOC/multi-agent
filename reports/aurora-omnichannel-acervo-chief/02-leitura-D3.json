@@ -1,0 +1,109 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "note": "Apresenta a cópia de trabalho da documentação dos fluxos de integração com o Reclame Aqui."
+    },
+    {
+      "number": 2,
+      "note": "Lista as seções e informa que faltam os diagramas das seções 3 a 6 e que o diagrama de entrada foi redesenhado."
+    },
+    {
+      "number": 3,
+      "note": "Documenta o limite de 10 requisições por minuto por app, sua distribuição e a configuração de credenciais e destino dos tickets."
+    },
+    {
+      "number": 4,
+      "note": "Descreve a seleção periódica de apps para entrada, os estados iniciais e o tratamento de erros."
+    },
+    {
+      "number": 5,
+      "note": "Detalha a paginação das reclamações, a criação e atualização dos dados e as condições de status dos tickets."
+    },
+    {
+      "number": 6,
+      "note": "Identifica os projetos de anexos pendentes, cujos detalhes não constam no texto original."
+    },
+    {
+      "number": 7,
+      "note": "Descreve o envio de mensagens, suas restrições e o processamento de até duas mensagens por empresa."
+    },
+    {
+      "number": 8,
+      "note": "Descreve os requisitos e o processamento das solicitações de avaliação."
+    },
+    {
+      "number": 9,
+      "note": "Descreve as restrições, os limites e os estados das solicitações de moderação."
+    },
+    {
+      "number": 10,
+      "note": "Descreve as condições, os horários, as retentativas e os estados da conclusão de sessão."
+    },
+    {
+      "number": 11,
+      "note": "Descreve a coleta mensal de reputação e seu armazenamento para o dashboard."
+    },
+    {
+      "number": 12,
+      "note": "Descreve a retomada de registros em processamento há mais de seis horas."
+    }
+  ],
+  "classification": "referência funcional",
+  "reason": "A fonte interna descreve regras e fluxos da integração existente, úteis para orientar testes, mas não se apresenta como padrão normativo nem comprova execução de testes.",
+  "findings": [
+    {
+      "pages": [
+        3,
+        5,
+        7
+      ],
+      "text": "Testar o limite compartilhado de 10 requisições por minuto por app, a distribuição por worker, a paginação iniciada em 1 e o limite de duas páginas de até 50 reclamações."
+    },
+    {
+      "pages": [
+        4,
+        5,
+        6,
+        12
+      ],
+      "text": "Validar transições de processamento, recuperação de erros, criação e atualização de tickets e anexos pendentes; a fonte descreve o funcionamento, sem evidência de testes executados."
+    },
+    {
+      "pages": [
+        5,
+        7
+      ],
+      "text": "Validar os estados do ticket e as restrições de mensagens: anexo apenas privado, conteúdo não repetido, canal aberto e ticket ativo; esclarecer a relação entre os estados respondido e concluído após avaliação."
+    },
+    {
+      "pages": [
+        8,
+        9
+      ],
+      "text": "Testar avaliação somente após resposta pública e antes de avaliação existente, além dos limites e estados da moderação por empresa e reclamação."
+    },
+    {
+      "pages": [
+        10,
+        12
+      ],
+      "text": "Testar os pré-requisitos de conclusão, a janela normal, a retentativa às 6h e os estados de erro, assim como a retomada após seis horas em processamento."
+    },
+    {
+      "pages": [
+        3,
+        4,
+        5,
+        11
+      ],
+      "text": "Verificar integrações com a API do Reclame Aqui, Temporal, Postgres e APIs de tickets, além da coleta de reputação no dia 2 e persistência para o dashboard."
+    }
+  ],
+  "gaps": [
+    "Os diagramas dos fluxos de mensagens, avaliação, moderação e conclusão não estão disponíveis; o diagrama de entrada foi redesenhado.",
+    "O texto não detalha o processamento de download e enfileiramento de anexos nem o conjunto adicional de regras de moderação.",
+    "Não há evidência de testes executados, resultados observados ou confirmação de que a documentação corresponde à implementação atual.",
+    "A fonte não especifica fuso horário dos agendamentos nem resolve explicitamente a precedência dos estados respondido e concluído após avaliação."
+  ]
+}

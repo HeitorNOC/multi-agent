@@ -1,0 +1,4 @@
+.state/
+.temp*/
+__pycache__/
+model-io/

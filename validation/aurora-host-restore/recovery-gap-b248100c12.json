@@ -1,0 +1,18 @@
+{
+  "result": "PASS_LOCAL_RECOVERY_GAP",
+  "accepted_at_backup": 4,
+  "acknowledged_at_outage": 7,
+  "restored_admissions": 4,
+  "acknowledged_admissions_missing": 3,
+  "seconds_backup_ready_to_process_exit": 0.641,
+  "missing_ack_seconds_after_backup": [
+    0.203,
+    0.422,
+    0.625
+  ],
+  "older_backup_rejected_when_authority_advanced": true,
+  "dispatched_before_restore": 0,
+  "controlled_dispatch_for_fence_probe": 1,
+  "paid_model_calls": 0,
+  "scope": "local admission-only experiment; no inferred production RPO"
+}

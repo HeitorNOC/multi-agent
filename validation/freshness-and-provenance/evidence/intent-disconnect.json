@@ -1,0 +1,4 @@
+{
+  "type": "ConnectionResetError",
+  "message": "[WinError 10054] Foi forçado o cancelamento de uma conexão existente pelo host remoto"
+}

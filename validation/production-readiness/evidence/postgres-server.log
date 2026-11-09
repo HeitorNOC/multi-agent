@@ -1,0 +1,100 @@
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+waiting for server to start....2026-11-03 16:51:25.775 UTC [53] LOG:  starting PostgreSQL 16.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-11-03 16:51:25.775 UTC [53] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-03 16:51:25.780 UTC [56] LOG:  database system was shut down at 2026-11-03 16:51:25 UTC
+2026-11-03 16:51:25.785 UTC [53] LOG:  database system is ready to accept connections
+ done
+server started
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+waiting for server to shut down...2026-11-03 16:51:25.872 UTC [53] LOG:  received fast shutdown request
+.2026-11-03 16:51:25.875 UTC [53] LOG:  aborting any active transactions
+2026-11-03 16:51:25.877 UTC [53] LOG:  background worker "logical replication launcher" (PID 59) exited with exit code 1
+2026-11-03 16:51:25.877 UTC [54] LOG:  shutting down
+2026-11-03 16:51:25.878 UTC [54] LOG:  checkpoint starting: shutdown immediate
+2026-11-03 16:51:25.889 UTC [54] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.002 s, total=0.013 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/14F70F0, redo lsn=0/14F70F0
+2026-11-03 16:51:25.893 UTC [53] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+chmod: /var/run/postgresql: Operation not permitted
+********************************************************************************
+WARNING: POSTGRES_HOST_AUTH_METHOD has been set to "trust". This will allow
+         anyone with access to the Postgres port to access your database without
+         a password, even if POSTGRES_PASSWORD is set. See PostgreSQL
+         documentation about "trust":
+         https://www.postgresql.org/docs/current/auth-trust.html
+         In Docker's default configuration, this is effectively any other
+         container on the same system.
+
+         It is not recommended to use POSTGRES_HOST_AUTH_METHOD=trust. Replace
+         it with "-e POSTGRES_PASSWORD=password" instead to set a password in
+         "docker run".
+********************************************************************************
+sh: locale: not found
+2026-11-03 16:51:25.059 UTC [29] WARNING:  no usable system locales were found
+initdb: warning: enabling "trust" authentication for local connections
+initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+2026-11-03 16:51:25.996 UTC [1] LOG:  starting PostgreSQL 16.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-11-03 16:51:25.996 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-11-03 16:51:25.996 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-11-03 16:51:25.998 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-03 16:51:26.003 UTC [73] LOG:  database system was shut down at 2026-11-03 16:51:25 UTC
+2026-11-03 16:51:26.009 UTC [1] LOG:  database system is ready to accept connections
+2026-11-03 16:51:28.476 UTC [160] ERROR:  new row for relation "source_versions" violates check constraint "source_versions_check1"
+2026-11-03 16:51:28.476 UTC [160] DETAIL:  Failing row contains (public, 1, tampered, \xd34e1630cf05a59a7c1b0327bb9498a88f5598df592eca70dfc615d64984f9..., 2026-01-01 00:00:00+00, null).
+2026-11-03 16:51:28.476 UTC [160] STATEMENT:  UPDATE source_versions SET content='tampered' WHERE source_id='public';
+2026-11-03 16:51:28.665 UTC [167] ERROR:  insert or update on table "fact_sources" violates foreign key constraint "fact_sources_source_id_version_fkey"
+2026-11-03 16:51:28.665 UTC [167] DETAIL:  Key (source_id, version)=(missing, 1) is not present in table "source_versions".
+2026-11-03 16:51:28.665 UTC [167] STATEMENT:  INSERT INTO fact_sources VALUES('derived','missing',1);
+2026-11-03 16:51:28.862 UTC [175] ERROR:  permission denied for table source_versions
+2026-11-03 16:51:28.862 UTC [175] STATEMENT:  UPDATE source_versions SET version=2;
+2026-11-03 16:51:29.054 UTC [182] ERROR:  permission denied to set role "reader_finance"
+2026-11-03 16:51:29.054 UTC [182] STATEMENT:  SET ROLE reader_finance;
+2026-11-03 16:51:29.816 UTC [210] ERROR:  Incomplete index generation
+2026-11-03 16:51:29.816 UTC [210] CONTEXT:  PL/pgSQL function publish_snapshot(text) line 3 at RAISE
+2026-11-03 16:51:29.816 UTC [210] STATEMENT:  SELECT publish_snapshot('g2');
+chmod: /var/run/postgresql: Operation not permitted
+2026-11-03 16:51:31.292 UTC [1] LOG:  starting PostgreSQL 16.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-11-03 16:51:31.293 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-11-03 16:51:31.293 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-11-03 16:51:31.294 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-03 16:51:31.299 UTC [16] LOG:  database system was interrupted; last known up at 2026-11-03 16:51:26 UTC
+2026-11-03 16:51:31.459 UTC [23] FATAL:  the database system is starting up
+2026-11-03 16:51:31.473 UTC [16] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-11-03 16:51:31.476 UTC [16] LOG:  redo starts at 0/14F7168
+2026-11-03 16:51:31.480 UTC [16] LOG:  invalid record length at 0/1591E38: expected at least 24, got 0
+2026-11-03 16:51:31.480 UTC [16] LOG:  redo done at 0/1591E10 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-11-03 16:51:31.484 UTC [14] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-11-03 16:51:31.515 UTC [14] LOG:  checkpoint complete: wrote 164 buffers (1.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.006 s, sync=0.020 s, total=0.033 s; sync files=99, longest=0.003 s, average=0.001 s; distance=619 kB, estimate=619 kB; lsn=0/1591E38, redo lsn=0/1591E38
+2026-11-03 16:51:31.520 UTC [1] LOG:  database system is ready to accept connections

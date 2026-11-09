@@ -1,0 +1,98 @@
+[
+  {
+    "case": "v1_validity_only_metadata",
+    "original_checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": false,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "revised_checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": true,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "answer_sha256": "c87b1276f2e25f0a7922ee12c252fc20151b86b5e56c39badb324a211be94647",
+    "review": "The answer explicitly provides valid_from; absence statement concerns only the end date, which is not asserted by canonical metadata.",
+    "revision_scope": "only lexical start/end distinction; same output, same model call, post-hoc evaluation, not an independent benchmark"
+  },
+  {
+    "case": "v2_validity_only_metadata",
+    "original_checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": true,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "revised_checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": true,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "answer_sha256": "b17093f00cf711204f1b5740e72be035509549640dc1126a165aab235d10a593",
+    "review": "The answer explicitly provides valid_from; absence statement concerns only the end date, which is not asserted by canonical metadata.",
+    "revision_scope": "only lexical start/end distinction; same output, same model call, post-hoc evaluation, not an independent benchmark"
+  },
+  {
+    "case": "historical_knowledge_cutoff",
+    "original_checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": false,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "revised_checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": true,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "answer_sha256": "da8fd43efac5295130cca5cc88ca781372cef4a7f5ffc164f36a85fcf7bbcc46",
+    "review": "The answer explicitly provides valid_from; absence statement concerns only the end date, which is not asserted by canonical metadata.",
+    "revision_scope": "only lexical start/end distinction; same output, same model call, post-hoc evaluation, not an independent benchmark"
+  },
+  {
+    "case": "new_after_latest_restore",
+    "original_checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": false,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "revised_checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": true,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "answer_sha256": "c9bb62c5ded4ed010731052a4ff6c3e21bad92f5c42db892fc5c2cd0c0d26779",
+    "review": "The answer explicitly provides valid_from; absence statement concerns only the end date, which is not asserted by canonical metadata.",
+    "revision_scope": "only lexical start/end distinction; same output, same model call, post-hoc evaluation, not an independent benchmark"
+  }
+]

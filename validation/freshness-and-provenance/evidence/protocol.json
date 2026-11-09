@@ -1,0 +1,17 @@
+{
+  "provider": "gpt-6.1-terra",
+  "cap": 40,
+  "temporal_cases": [
+    "v1_validity_only_metadata",
+    "v2_validity_only_metadata",
+    "historical_knowledge_cutoff",
+    "new_after_latest_restore"
+  ],
+  "oracle": "project, selected version, valid_from date and citation; no claim that canonical validity is missing",
+  "restore_cases": [
+    "old_g1_rejected_with_missing_approval_publication_decision",
+    "latest_g2_opens_after_joint_inventory_and_live_nonce_proof",
+    "pending_intent_fences_after_crash"
+  ],
+  "scope": "synthetic, one process; authority same host but separate store outside backup; no external business actions"
+}

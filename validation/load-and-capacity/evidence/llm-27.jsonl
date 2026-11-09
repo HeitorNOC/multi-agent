@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a805-e216-7ad3-a9c6-10b0fc160c25"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O manual da Aurora **não define um teto de reembolso para hotel**. Portanto, não há informação suficiente para informar esse valor na data consultada. [1]\\n\\nA versão selecionada tem início de vigência em **1º de janeiro de 2026** e foi publicada em **4 de novembro de 2026**. [1]\\n\\n### References\\n\\n* [1] manual-aurora@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13233,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":105,"reasoning_output_tokens":0}}

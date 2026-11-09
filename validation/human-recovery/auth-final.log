@@ -1,0 +1,11 @@
+✔ sessão é opaca, isolada e perde validade após rotação de credencial (2.6306ms)
+✔ ponte configurada para outra instalação é recusada (0.4953ms)
+✔ cookie de outra instalação não identifica o revisor (0.5695ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 122.7546

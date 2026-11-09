@@ -1,0 +1,19 @@
+# Primeira fatia local
+
+Salve os campos como `core.ts`, `core.test.ts` e `README.md`. Com Node.js 24, execute `node --test core.test.ts`. Não há dependências externas; SQLite da biblioteca padrão persiste os dados localmente.
+
+A fatia valida e normaliza texto, preserva a entrada original, identifica tenant e sessão, persiste histórico e correlação e registra uma resposta simulada. A chave composta deduplica entradas e respostas; a transação serializa decisões locais. Eventos de transferência são deduplicados: a solicitação bloqueia respostas, e a confirmação muda o estado para atendimento humano, no qual respostas automáticas continuam bloqueadas. O teste verifica duas chamadas de resposta concorrentes, reentrega de evento, isolamento por tenant e reabertura do banco. A saída simulada é o registro persistido, sem envio externo.
+
+O parâmetro tenant representa um contexto já confiável no protótipo. A saída simulada agora tem um registro observável que guarda ator e texto junto ao histórico. Após a confirmação local, somente o atendente pode registrar a resposta. A reentrega da confirmação e a repetição da resposta preservam um único registro de saída. Em caso de bloqueio de escrita, a resposta faz retentativas limitadas.
+
+O teste mantém uma transação aberta em uma segunda conexão SQLite e dispara as duas tentativas enquanto há contenção. Após liberar o banco e confirmar a transferência, observa uma saída humana, inclusive ao reabrir o arquivo. As tentativas usam o mesmo processo.
+
+O retorno local mantém o status do atendimento separado do controle da conversa. Durante a devolução, o atendimento permanece `ACTIVE` e o controle fica em `RETURN_PENDING`, bloqueando respostas dos dois atores. Uma falha restaura o controle humano. A confirmação da tentativa atual marca o atendimento como `DONE` e libera o bot. O teste cobre reabertura do banco, reentrega e confirmação atrasada de uma tentativa anterior. Os eventos são simulados e a saída é apenas um registro local.
+
+Para verificar o contrato real, conferir primeiro quem chama a criação do atendimento, os identificadores e a autorização no GraphQL e REST. Depois, rastrear eventos Socket.IO e tópicos Kafka desde a resposta do atendente até a confirmação do provedor no canal original. Por fim, conferir o retorno ao bot em cada forma de encerramento e testar falha, reentrega e mensagens em trânsito. Essas verificações exigem o código dos serviços e um ambiente de integração.
+
+A resposta gravada entra em fila. O laboratório pode reservar um envio com o canal e a correlação da mensagem original e registrar aceite, rejeição ou resultado desconhecido. Um aceite exige o identificador externo e significa aceitação pelo adaptador simulado. O recebimento pelo cliente depende de evidência adicional. Após reabrir o banco, um envio reservado ou incerto aguarda reconciliação e fica indisponível para novo despacho. Por decisão local, a troca de controle aguarda envios em trânsito ou incertos e cancela os itens ainda em fila. Respostas legadas sem registro de despacho ficam fora da fila.
+
+Quando o novo responsável responde à mesma mensagem, o núcleo pode substituir uma resposta cancelada antes do despacho. A substituição atualiza o registro de saída do histórico, o ator e a fila em uma única transação. O histórico local passa a mostrar a resposta substituta. As regras de idempotência continuam aplicáveis a respostas já reservadas ou aceitas.
+
+WhatsApp, 360dialog, MBA, Webchat em tempo real, Contact Center, IA real, Kafka, PostgreSQL, Prisma, observabilidade operacional e validação das APIs e documentos oficiais permanecem pendentes. Nenhuma integração real foi implementada ou validada. Antes de produção, definir identidade autenticada, autorização, concorrência distribuída, reconciliação e tratamento de envios incertos.

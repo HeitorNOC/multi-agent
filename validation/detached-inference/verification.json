@@ -1,0 +1,64 @@
+{
+  "controlled": {
+    "proofs_verified": 188,
+    "pending_authority_operations": 0,
+    "budgets": {
+      "business": {
+        "cap": 32,
+        "reserved": 9
+      }
+    },
+    "model_calls": 0,
+    "model_reservations": 0,
+    "reservations_without_usage": 0,
+    "tokens_observed": {}
+  },
+  "native": {
+    "proofs_verified": 117,
+    "pending_authority_operations": 0,
+    "budgets": {
+      "business": {
+        "cap": 64,
+        "reserved": 3
+      },
+      "model": {
+        "cap": 16,
+        "reserved": 9
+      }
+    },
+    "model_calls": 9,
+    "model_reservations": 9,
+    "reservations_without_usage": 0,
+    "tokens_observed": {
+      "input_tokens": 117719,
+      "cached_input_tokens": 78464,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1059,
+      "reasoning_output_tokens": 0
+    }
+  },
+  "governed_regression": {
+    "proofs_verified": 198,
+    "pending_authority_operations": 0,
+    "budgets": {
+      "business": {
+        "cap": 16,
+        "reserved": 9
+      }
+    },
+    "model_calls": 0,
+    "model_reservations": 0,
+    "reservations_without_usage": 0,
+    "tokens_observed": {}
+  },
+  "unknown_inferences_in_controlled_fixture": 1,
+  "native_receipts_after_cold_restore": 3,
+  "node_tests": 16,
+  "python_authority_tests": 6,
+  "control_latency_seconds": [
+    0.046782499994151294,
+    0.0271416999748908
+  ],
+  "production_approved": false,
+  "monetary_cost_observed": false
+}

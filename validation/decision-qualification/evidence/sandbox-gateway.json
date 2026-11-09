@@ -1,0 +1,26 @@
+{
+  "image": "mcr.microsoft.com/playwright@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27",
+  "scope": "local single-use capability + untrusted Python code in Docker; not a remote MCP gateway or kernel security certification",
+  "result": "PASS",
+  "negative_capability_cases": 4,
+  "controls": {
+    "context": "Vendas p\u00fablicas sint\u00e9ticas: 100000 e 80000",
+    "uid": 65534,
+    "credential_names": [],
+    "/var/run/docker.sock": "OSError",
+    "/host/secret.txt": "FileNotFoundError",
+    "/etc/forbidden": "OSError",
+    "egress": "OSError"
+  },
+  "cancel_with_child": {
+    "exit_code": 137,
+    "timeout": true,
+    "stdout": "",
+    "stderr": "",
+    "output_truncated": false
+  },
+  "containers_removed": [
+    true,
+    true
+  ]
+}

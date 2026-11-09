@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a804-f218-7201-bacc-b6cb710c040f"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"entity<|#|>Documento<|#|>Content<|#|>Documento que, por si só, não concede permissões nem autoriza ferramentas ou mensagens.\\n<|COMPLETE|>\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13840,"cached_input_tokens":13696,"cache_write_input_tokens":0,"output_tokens":57,"reasoning_output_tokens":0}}

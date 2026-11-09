@@ -1,0 +1,8 @@
+{
+  "scenarios": [],
+  "production_approved": false,
+  "business_v1_requalified": false,
+  "result": "FAIL",
+  "error": "AssertionError('Startup failed; private logs preserved')",
+  "seconds": 0.03847609995864332
+}

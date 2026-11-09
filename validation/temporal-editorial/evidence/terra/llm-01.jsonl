@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a5ce-89d5-7c93-9e1f-b1b72e1baf57"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"extracted_entities\\\":[{\\\"name\\\":\\\"ACME\\\",\\\"entity_type_id\\\":1,\\\"episode_indices\\\":[0]},{\\\"name\\\":\\\"PoliticaRemotaACME\\\",\\\"entity_type_id\\\":2,\\\"episode_indices\\\":[0]}]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13834,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":62,"reasoning_output_tokens":0}}

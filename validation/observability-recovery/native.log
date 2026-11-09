@@ -1,0 +1,11 @@
+CHECK 16 current documents, 1 historical, 21 available agents
+FAIL campaign: review not accepted; preserved
+CHECK incident: 4/21 agents, 6 slots, resume without inference
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\demo-enterprise\test_scenarios.py", line 63, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\PC\multi-agent\demo-enterprise\test_scenarios.py", line 57, in main
+    assert set(evidence['scenarios'][0]['plan']['capabilities'])!=set(evidence['scenarios'][1]['plan']['capabilities'])
+               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable

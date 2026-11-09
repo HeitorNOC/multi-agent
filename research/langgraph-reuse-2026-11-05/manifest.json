@@ -1,0 +1,29 @@
+{
+  "files": {
+    "research/langgraph-reuse-2026-11-05/.gitignore": "5d7b18deae5f8d0d7da076222aa4c1cc61f393094a92485f217c65785ad8729e",
+    "research/langgraph-reuse-2026-11-05/COMMANDS.md": "40740d141dec9e20a4ad7453e4420ca56d381bb63acb01b9b3231cf4889111d3",
+    "research/langgraph-reuse-2026-11-05/native-first.log": "3569edc22288f635001b276b0fa72a479ba1e57130b6077ecf38323520947e37",
+    "research/langgraph-reuse-2026-11-05/native-first.xml": "a7330b88d0042cc1ea4fe88d5f206490ba158ae2279a646f79828313185027b7",
+    "research/langgraph-reuse-2026-11-05/native.log": "a3d25c30753351d38b416819b8be58c6f8f3eb59bb30d86e4f0ba4059a453777",
+    "research/langgraph-reuse-2026-11-05/native.xml": "7421d3afe8a7f98a02b130ea795b4924f8ee09e3edc08b3678e350642b64f8e2",
+    "research/langgraph-reuse-2026-11-05/native_worker.py": "62dfc809b89d9692e9102160dcc6bf1198df1521de8245a508c906bfe88891f2",
+    "research/langgraph-reuse-2026-11-05/REPORT.md": "f39ebcc4ee2150b729c6f1a45e3a983f79d57be018b1d2072fe0ca206737d517",
+    "research/langgraph-reuse-2026-11-05/source-manifest.json": "0a6474ef7c2157f23d8bf54125b49c8fa302d355cdf2fa918dc85d0da50d7289",
+    "research/langgraph-reuse-2026-11-05/test_native.py": "4891978813fb68ea615d53549fe494ccfd52919c4bccb6ecd9f0d8f3a92a5e1c",
+    "research/langgraph-reuse-2026-11-05/verification.json": "569c70842027a1d852bb6691d539929112d6d65a6081284d9572487524f450aa",
+    "research/langgraph-reuse-2026-11-05/evidence/first-results.json": "3a05098e945209934b064bb1781611cd666c074d94ed9fe840a4c7864b622846",
+    "research/langgraph-reuse-2026-11-05/evidence/results.json": "a261cda6c546abd4bb0bfbccafebcbd74b909fad6b89490123921db742bc8554",
+    "research/langgraph-reuse-2026-11-05/sources/deepagents/LICENSE": "4ec67e4ca6e6721dba849b2ca82261597c86a61ee214bbf21416006b7b2d0478",
+    "research/langgraph-reuse-2026-11-05/sources/deepagents/README.md": "738b16b9e3451b3e51f2818baa8e5c752960495b938c2b3ed4011c816fe9718d",
+    "research/langgraph-reuse-2026-11-05/sources/langgraph-supervisor-py/LICENSE": "31499b144b24d8e898681069d3cdb32aa509f4117f39d9b593f56b5a94e2af40",
+    "research/langgraph-reuse-2026-11-05/sources/langgraph-supervisor-py/README.md": "c8feb34ade9f3f0eab11ac934f3c80fd4f41eef48fd5ce3e97db83f8f642f4ec",
+    "research/langgraph-reuse-2026-11-05/sources/open_deep_research/LICENSE": "3404cb66935968edefe1149c9bfcb44bd8532c437c01ac095ec53b6e195ce110",
+    "research/langgraph-reuse-2026-11-05/sources/open_deep_research/README.md": "0fc75629079c025b0200e6032a038edf9c91c332d4ce925cbc6165910008267f",
+    "research/langgraph-reuse-2026-11-05/sources/deepagents/libs/deepagents/pyproject.toml": "a53c3760eda43e182c3b3647c23fd45438abf3c14807a8cd092b5dff0fa80a72",
+    "research/langgraph-reuse-2026-11-05/sources/deepagents/libs/deepagents/deepagents/graph.py": "5964f538571f415331870230b86eae1833f11e52c0d91b38e3c37e6e0c609569",
+    "research/langgraph-reuse-2026-11-05/sources/open_deep_research/src/open_deep_research/deep_researcher.py": "af128d5d8773008d021b6ef7562e9fb90a45f7eb5e886483d1e6e835223275e0",
+    "vendor/langgraph/libs/langgraph/langgraph/func/__init__.py": "875358da14002d5c498a9982dc8d063aabac49355949c7cd8a1f90d6e4671410",
+    "vendor/langgraph/libs/langgraph/langgraph/types.py": "d221929263ad3eb8c172f477408c01f28b87149e93060ab124a1344b0ac72a7e",
+    "vendor/langgraph/libs/checkpoint-postgres/langgraph/checkpoint/postgres/aio.py": "38cbc01eaf7c590984de6c43c33ed048bb51402e23d373eccc6bb7cf5b82558f"
+  }
+}

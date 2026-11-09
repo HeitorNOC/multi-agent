@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="240.676" timestamp="2026-11-04T21:41:48.837314-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.brain-recovery.test_brain" name="test_native_brain_release_and_joint_restore" time="240.415" /></testsuite></testsuites>

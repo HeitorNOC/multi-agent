@@ -1,0 +1,112 @@
+{
+  "lead": "customer_director",
+  "assignment": {
+    "specialists": [
+      "support_specialist",
+      "customer_experience_analyst"
+    ],
+    "queries": [
+      "Quais são os fluxos de triagem, fila, distribuição e escalonamento do atendimento humano?",
+      "Como o operador acessa o histórico observado, identifica participantes e responde pelo canal original?",
+      "Quais condições e confirmações governam conclusão, transferência e retorno controlado à IA?",
+      "Quais cenários de aceite cobrem falhas, histórico incompleto, duplicidade e continuidade do atendimento?"
+    ],
+    "deliverable": "Proposta dos fluxos operacionais do Contact Center, com responsabilidades, estados, exceções e cenários de aceite para validação com Produto e Tecnologia, distinguindo evidências, requisitos e hipóteses."
+  },
+  "search": [
+    {
+      "query": "Quais são os fluxos de triagem, fila, distribuição e escalonamento do atendimento humano?",
+      "sources": [
+        "contact",
+        "portal",
+        "portal",
+        "portal",
+        "contact",
+        "contact"
+      ]
+    },
+    {
+      "query": "Como o operador acessa o histórico observado, identifica participantes e responde pelo canal original?",
+      "sources": [
+        "portal",
+        "mba",
+        "contact",
+        "portal",
+        "backend",
+        "reclame-aqui"
+      ]
+    },
+    {
+      "query": "Quais condições e confirmações governam conclusão, transferência e retorno controlado à IA?",
+      "sources": [
+        "backend",
+        "contact",
+        "portal",
+        "contact",
+        "reclame-aqui",
+        "contact"
+      ]
+    },
+    {
+      "query": "Quais cenários de aceite cobrem falhas, histórico incompleto, duplicidade e continuidade do atendimento?",
+      "sources": [
+        "contact",
+        "portal",
+        "portal",
+        "reclame-aqui",
+        "mba",
+        "reclame-aqui"
+      ]
+    }
+  ],
+  "report": {
+    "analysis_md": "## Referência e requisitos\n\nA diretiva exige fila, acesso ao histórico observado, identificação dos participantes, resposta pelo canal original, conclusão e retorno controlado à IA. Exige também estados explícitos, auditoria, prevenção de respostas simultâneas e distinção entre controle interno e externo. O histórico deve indicar suas limitações; identidades de canais diferentes só devem ser vinculadas com identificação confiável.\n\nNos trechos fornecidos, o Contact Center de referência descreve um ciclo de atendimento [a3889dd0b43b34c8a000c481f24268e47d9278d21ad101512290c35431944972], associação de tipos de atendimento por hierarquia [0a478f4e97d2c4d7930ac0b47b87dcf8aebb3770b61b6f9d127446da77b3fa42], notas internas [bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243] e um estado finalizado pelo atendente [b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b]. Esses trechos não estabelecem que tais recursos já existam no novo projeto. O material de referência afirma que o MBA ativado é o respondente principal do número [d4ba32eb90ab3b4eaa05d8d0e0df54843cedd624cef864dd089562e0a8ee8631] e aponta limitações em transferência, cobrança e arquivos [ad32ec16b497276fb9242eed8118177e14c775dc031bc084ab97b3c95168dcce]; capacidades atuais dependem de validação oficial.\n\n## Proposta operacional para validação\n\n1. **Triagem e transferência:** registrar motivo, prioridade, canal, empresa e histórico observado. A solicitação de atendimento humano inicia transferência pendente; enquanto o controle externo não estiver confirmado, impedir respostas humanas concorrentes e mostrar a situação ao operador. Falha ou ausência de confirmação leva a tratamento de exceção e reconciliação, sem declarar a transferência concluída.\n2. **Fila e distribuição:** após a condição de controle necessária ser confirmada, colocar a conversa em fila elegível. Propor distribuição por disponibilidade, capacidade e especialidade, com atribuição exclusiva e auditável. Produto e Operações devem definir prioridade, tempos de espera, redistribuição e escalonamento; a hierarquia de tipos da referência é uma opção a avaliar, não uma regra adotada.\n3. **Atendimento ativo:** ao assumir, o operador visualiza mensagens e eventos disponíveis em ordem, origem e horário, com participantes identificados como cliente, MBA, IA própria ou humano quando conhecidos. Sinalizar lacunas, incertezas e ausência de histórico; nunca apresentar o histórico observado como necessariamente completo. Notas internas, se aprovadas, devem ser claramente separadas das mensagens ao cliente.\n4. **Resposta:** enviar pelo canal original por meio do fluxo oficial de saída, com validação, persistência e estado de entrega. Mostrar envio pendente, confirmado ou falho conforme evidência disponível; impedir reenvios que produzam duplicidade e oferecer recuperação controlada.\n5. **Conclusão e retorno:** registrar motivo e resultado do atendimento. Quando aplicável, iniciar retorno pendente à IA, mantendo visível quem detém o controle e sem presumir sucesso pela chamada iniciada. Confirmar pelos mecanismos suportados; em falha ou ambiguidade, manter exceção operacional, impedir respostas concorrentes e permitir reconciliação ou escalonamento. Encerramento e retorno à IA devem ser decisões distintas.\n\nEstados propostos: solicitação de transferência, transferência pendente, em fila, atribuído, humano ativo, conclusão em andamento, retorno à IA pendente, IA no controle, encerrado e exceção. As transições devem registrar responsável, motivo, horário, correlação e confirmação disponível; os nomes e regras são propostas, não estados confirmados do provedor.\n\nResponsabilidades propostas: Produto e Operações definem prioridades, filas, políticas de espera e conclusão; Tecnologia implementa contratos, controle de concorrência, segurança, auditoria e reconciliação; o operador assume, responde, registra desfecho e encaminha exceções; supervisão acompanha filas e casos sem resolução.\n\n## Cenários de aceite propostos\n\n- Uma solicitação confirmada entra na fila correta; dois operadores concorrentes não conseguem assumir a mesma conversa. Falta de confirmação mantém a transferência pendente e visível.\n- O operador recebe o histórico observado e distingue participantes e canal; lacunas e identidades desconhecidas são sinalizadas, sem vinculação presumida entre canais.\n- Uma resposta humana segue pelo canal original, é persistida e apresenta seu estado; falha ou repetição de evento não gera envio duplicado.\n- Durante transferência ou retorno pendente, respostas simultâneas de IA e humano são impedidas; timeout ou confirmação ambígua gera exceção e reconciliação.\n- A conclusão registra responsável e desfecho; retorno ao MBA só é marcado como confirmado mediante evidência suportada. A continuidade é verificável com o histórico disponível.\n- Falha de processamento, redistribuição ou reconexão preserva os eventos já registrados, permite recuperação e torna o problema visível; empresas distintas não acessam conversas ou credenciais umas das outras.\n\nOs cenários dependentes do MBA devem distinguir testes com adaptadores simulados de validações reais com o provedor.",
+    "evidence_ids": [
+      "a3889dd0b43b34c8a000c481f24268e47d9278d21ad101512290c35431944972",
+      "0a478f4e97d2c4d7930ac0b47b87dcf8aebb3770b61b6f9d127446da77b3fa42",
+      "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243",
+      "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+      "d4ba32eb90ab3b4eaa05d8d0e0df54843cedd624cef864dd089562e0a8ee8631",
+      "ad32ec16b497276fb9242eed8118177e14c775dc031bc084ab97b3c95168dcce"
+    ],
+    "pending": [
+      "Validar com Produto e Operações regras de triagem, prioridade, capacidade, tempos de espera, escalonamento, conclusão e uso de notas internas.",
+      "Confirmar com Tecnologia e documentação oficial os mecanismos atuais de transferência, confirmação, retorno ao MBA, eventos disponíveis e limites de histórico.",
+      "Definir tratamento operacional para controle externo desconhecido, falhas prolongadas e reconciliação, incluindo responsáveis e critérios de retomada.",
+      "Detalhar contratos do Contact Center, permissões, estados de entrega e critérios reproduzíveis de teste com ambientes simulados e integrações reais.",
+      "Estudar integralmente os documentos de referência e padrões disponibilizados antes de consolidar as decisões."
+    ]
+  },
+  "citations": {
+    "a3889dd0b43b34c8a000c481f24268e47d9278d21ad101512290c35431944972": {
+      "source": "contact",
+      "page": 9,
+      "quote": "O ciclo de vida de um atendimento"
+    },
+    "0a478f4e97d2c4d7930ac0b47b87dcf8aebb3770b61b6f9d127446da77b3fa42": {
+      "source": "contact",
+      "page": 11,
+      "quote": "Associa os tipos de atendimento: os informados ou, se nenhum, o primeiro encontrado subindo da subárea à área, da subespecialização, da especialização e do grupo."
+    },
+    "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243": {
+      "source": "contact",
+      "page": 17,
+      "quote": "Observações do atendimento Notas internas (sticky notes) do atendimento."
+    },
+    "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b": {
+      "source": "contact",
+      "page": 9,
+      "quote": "5 DONE Finalizado pelo atendente."
+    },
+    "d4ba32eb90ab3b4eaa05d8d0e0df54843cedd624cef864dd089562e0a8ee8631": {
+      "source": "mba",
+      "page": 3,
+      "quote": "Quando ativado, ele se torna o respondente principal do número."
+    },
+    "ad32ec16b497276fb9242eed8118177e14c775dc031bc084ab97b3c95168dcce": {
+      "source": "mba",
+      "page": 8,
+      "quote": "Cobrança, transferência e arquivos: ainda são áreas incompletas, com soluções alternativas descritas na página de limitações conhecidas."
+    }
+  }
+}

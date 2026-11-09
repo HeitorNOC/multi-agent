@@ -1,0 +1,410 @@
+from __future__ import annotations
+
+from typing import Any
+
+import pytest
+import yaml
+
+from graphon.dsl import inspect as inspect_dsl
+from graphon.dsl import loads
+from graphon.dsl.entities import LoadStatus
+from graphon.dsl.errors import DslError
+from graphon.engine_events.graph import GraphRunSucceededEvent
+from graphon.engine_events.node import NodeRunSucceededEvent
+
+_OPENAI_PLUGIN_ID = "langgenius/openai:0.3.8@test"
+
+
+def _graph_dsl_for_node(node_data: dict[str, Any]) -> str:
+    return _graph_dsl_for_nodes(
+        nodes=[{"id": "node", "data": node_data}],
+        edges=[{"source": "start", "target": "node"}],
+    )
+
+
+def _graph_dsl_for_nodes(
+    *,
+    nodes: list[dict[str, Any]],
+    edges: list[dict[str, Any]],
+) -> str:
+    return yaml.safe_dump({
+        "kind": "graph",
+        "dependencies": [
+            {
+                "type": "marketplace",
+                "value": {
+                    "marketplace_plugin_unique_identifier": _OPENAI_PLUGIN_ID,
+                },
+            },
+        ],
+        "graph": {
+            "nodes": [
+                {"id": "start", "data": {"type": "start", "variables": []}},
+                *nodes,
+            ],
+            "edges": edges,
+        },
+    })
+
+
+def _http_request_data() -> dict[str, Any]:
+    return {
+        "type": "http-request",
+        "method": "get",
+        "url": "https://example.com/api",
+        "authorization": {"type": "no-auth"},
+        "headers": "",
+        "params": "",
+        "body": {"type": "none"},
+    }
+
+
+def _variable_aggregator_data() -> dict[str, Any]:
+    return {
+        "type": "variable-aggregator",
+        "output_type": "string",
+        "variables": [["missing", "value"], ["start", "candidate"]],
+    }
+
+
+def _assigner_data() -> dict[str, Any]:
+    return {
+        "type": "assigner",
+        "version": "2",
+        "items": [
+            {
+                "variable_selector": ["conversation", "topic"],
+                "input_type": "variable",
+                "operation": "over-write",
+                "value": ["start", "value"],
+            },
+        ],
+    }
+
+
+def _list_operator_data() -> dict[str, Any]:
+    return {
+        "type": "list-operator",
+        "variable": ["start", "items"],
+        "filter_by": {"enabled": False, "conditions": []},
+        "order_by": {"enabled": False},
+        "limit": {"enabled": False},
+    }
+
+
+def _model(name: str) -> dict[str, Any]:
+    return {
+        "provider": "langgenius/openai/openai",
+        "name": name,
+        "mode": "chat",
+        "completion_params": {"temperature": 0.1},
+    }
+
+
+def _question_classifier_data() -> dict[str, Any]:
+    return {
+        "type": "question-classifier",
+        "query_variable_selector": ["start", "query"],
+        "model": _model("classifier-model"),
+        "classes": [
+            {"id": "billing", "name": "Billing questions", "label": "Billing"},
+            {"id": "refund", "name": "Refund requests", "label": "Refunds"},
+        ],
+        "instruction": "Choose the best category.",
+    }
+
+
+def _parameter_extractor_data() -> dict[str, Any]:
+    return {
+        "type": "parameter-extractor",
+        "query": ["start", "query"],
+        "model": _model("extractor-model"),
+        "parameters": [
+            {
+                "name": "location",
+                "type": "string",
+                "description": "The requested location",
+                "required": True,
+            },
+        ],
+        "instruction": "Extract the requested location.",
+        "reasoning_mode": "prompt",
+    }
+
+
+@pytest.mark.parametrize("has_cycle", [False, True])
+def test_graph_loading_rejects_cycles_and_runs_dags(has_cycle: bool) -> None:
+    edges = [
+        {"source": "start", "target": "a"},
+        {"source": "a", "target": "b"},
+    ]
+    if has_cycle:
+        edges.append({"source": "b", "target": "a"})
+    dsl = _graph_dsl_for_nodes(
+        nodes=[
+            {
+                "id": node_id,
+                "data": {
+                    "type": "template-transform",
+                    "variables": [],
+                    "template": node_id,
+                },
+            }
+            for node_id in ("a", "b")
+        ],
+        edges=edges,
+    )
+
+    if has_cycle:
+        with pytest.raises(DslError) as exc_info:
+            loads(dsl)
+
+        assert exc_info.value.code == "graph.validation_failed"
+        issues = exc_info.value.details["issues"]
+        assert any(issue["node_id"] in {"a", "b"} for issue in issues)
+        assert all(issue["code"] and issue["message"] for issue in issues)
+    else:
+        events = list(loads(dsl).run())
+
+        assert isinstance(events[-1], GraphRunSucceededEvent)
+        assert {
+            event.node_id
+            for event in events
+            if isinstance(event, NodeRunSucceededEvent)
+        } == {"start", "a", "b"}
+
+
+@pytest.mark.parametrize("source_handle", [None, 1])
+def test_graph_loading_rejects_non_string_handles(source_handle: object) -> None:
+    dsl = _graph_dsl_for_nodes(
+        nodes=[
+            {
+                "id": "node",
+                "data": {
+                    "type": "template-transform",
+                    "variables": [],
+                    "template": "hello",
+                },
+            },
+        ],
+        edges=[
+            {"source": "start", "target": "node", "sourceHandle": source_handle},
+        ],
+    )
+
+    with pytest.raises(DslError):
+        loads(dsl)
+
+
+def test_graph_loading_reports_invalid_root_as_structured_error() -> None:
+    dsl = _graph_dsl_for_node({
+        "type": "template-transform",
+        "variables": [],
+        "template": "hello",
+    })
+
+    with pytest.raises(DslError) as exc_info:
+        loads(dsl, root_node_id="node")
+
+    assert exc_info.value.code == "graph.validation_failed"
+    assert any(
+        issue["code"] == "INVALID_ROOT"
+        and issue["node_id"] == "node"
+        and issue["message"]
+        for issue in exc_info.value.details["issues"]
+    )
+
+
+@pytest.mark.parametrize(
+    "node_data",
+    [
+        _http_request_data(),
+        _variable_aggregator_data(),
+        _assigner_data(),
+        _list_operator_data(),
+        _question_classifier_data(),
+        _parameter_extractor_data(),
+    ],
+)
+def test_default_factory_node_type_is_loadable(node_data: dict[str, Any]) -> None:
+    plan = inspect_dsl(_graph_dsl_for_node(node_data))
+
+    assert plan.load_status == LoadStatus.LOADABLE
+    assert plan.load_reason is None
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        {
+            "type": "binary",
+            "data": [{"type": "file", "file": ["start", "file"]}],
+        },
+        {
+            "type": "form-data",
+            "data": [
+                {"key": "file", "type": "file", "file": ["start", "file"]},
+            ],
+        },
+    ],
+)
+def test_http_request_file_request_bodies_are_not_loadable(
+    body: dict[str, Any],
+) -> None:
+    node_data = _http_request_data()
+    node_data["body"] = body
+
+    plan = inspect_dsl(_graph_dsl_for_node(node_data))
+
+    assert plan.load_status == LoadStatus.UNSUPPORTED
+    assert "HTTP request node 'node' is unsupported" in str(plan.load_reason)
+
+
+def test_http_request_form_data_text_fields_remain_loadable() -> None:
+    node_data = _http_request_data()
+    node_data["body"] = {
+        "type": "form-data",
+        "data": [
+            {"key": "query", "type": "text", "value": "{{#start.query#}}"},
+        ],
+    }
+
+    plan = inspect_dsl(_graph_dsl_for_node(node_data))
+
+    assert plan.load_status == LoadStatus.LOADABLE
+    assert plan.load_reason is None
+
+
+def test_unsupported_node_type_and_http_file_body_reasons_are_joined() -> None:
+    http_data = _http_request_data()
+    http_data["body"] = {
+        "type": "binary",
+        "data": [{"type": "file", "file": ["start", "file"]}],
+    }
+    dsl = _graph_dsl_for_nodes(
+        nodes=[
+            {"id": "unknown", "data": {"type": "not-supported"}},
+            {"id": "http", "data": http_data},
+        ],
+        edges=[
+            {"source": "start", "target": "unknown"},
+            {"source": "start", "target": "http"},
+        ],
+    )
+
+    plan = inspect_dsl(dsl)
+
+    assert plan.load_status == LoadStatus.UNSUPPORTED
+    assert plan.load_reason == (
+        "Unsupported node types: not-supported; "
+        "HTTP request node 'http' is unsupported: "
+        "binary request bodies require file download support"
+    )
+
+
+@pytest.mark.parametrize(
+    "node_data",
+    [
+        _question_classifier_data(),
+        _parameter_extractor_data(),
+    ],
+)
+def test_model_node_provider_is_normalized_to_plugin_vendor(
+    node_data: dict[str, Any],
+) -> None:
+    plan = inspect_dsl(_graph_dsl_for_node(node_data))
+
+    assert plan.document.graph_config is not None
+    loaded_node = plan.document.graph_config["nodes"][1]
+    assert loaded_node["data"]["model"]["provider"] == "openai"
+
+
+def test_legacy_variable_assigner_remains_unsupported_by_default() -> None:
+    plan = inspect_dsl(_graph_dsl_for_node({"type": "variable-assigner"}))
+
+    assert plan.load_status == LoadStatus.UNSUPPORTED
+    assert plan.load_reason == "Unsupported node types: variable-assigner"
+
+
+@pytest.mark.parametrize(
+    "node_type",
+    [
+        "iteration",
+        "iteration-start",
+        "loop",
+        "loop-start",
+        "loop-end",
+    ],
+)
+def test_container_nodes_are_loadable_by_default(node_type: str) -> None:
+    plan = inspect_dsl(_graph_dsl_for_node({"type": node_type}))
+
+    assert plan.load_status == LoadStatus.LOADABLE
+    assert plan.load_reason is None
+
+
+@pytest.mark.parametrize("edge_id", ["", None, 1])
+def test_graph_edge_id_must_be_a_non_empty_string(edge_id: object) -> None:
+    dsl = _graph_dsl_for_nodes(
+        nodes=[{"id": "node", "data": {"type": "answer"}}],
+        edges=[{"id": edge_id, "source": "start", "target": "node"}],
+    )
+
+    with pytest.raises(DslError) as exc_info:
+        inspect_dsl(dsl)
+
+    assert exc_info.value.code == "graph.invalid_edge_id"
+    assert exc_info.value.path == "/workflow/graph/edges/0/id"
+
+
+def test_graph_edge_id_must_be_unique_within_one_graph() -> None:
+    dsl = _graph_dsl_for_nodes(
+        nodes=[
+            {"id": "left", "data": {"type": "answer"}},
+            {"id": "right", "data": {"type": "answer"}},
+        ],
+        edges=[
+            {"id": "shared", "source": "start", "target": "left"},
+            {"id": "shared", "source": "start", "target": "right"},
+        ],
+    )
+
+    with pytest.raises(DslError) as exc_info:
+        inspect_dsl(dsl)
+
+    assert exc_info.value.code == "graph.duplicate_edge_id"
+    assert exc_info.value.path == "/workflow/graph/edges/1/id"
+
+
+@pytest.mark.parametrize("owner_field", ["container_id", "iteration_id", "loop_id"])
+def test_sibling_graphs_may_reuse_edge_ids(owner_field: str) -> None:
+    dsl = _graph_dsl_for_nodes(
+        nodes=[
+            {"id": "left", "data": {"type": "loop"}},
+            {"id": "right", "data": {"type": "loop"}},
+            {
+                "id": "left-start",
+                "data": {"type": "answer", owner_field: "left"},
+            },
+            {
+                "id": "left-end",
+                "data": {"type": "answer", owner_field: "left"},
+            },
+            {
+                "id": "right-start",
+                "data": {"type": "answer", owner_field: "right"},
+            },
+            {
+                "id": "right-end",
+                "data": {"type": "answer", owner_field: "right"},
+            },
+        ],
+        edges=[
+            {"id": "shared", "source": "left-start", "target": "left-end"},
+            {"id": "shared", "source": "right-start", "target": "right-end"},
+        ],
+    )
+
+    plan = inspect_dsl(dsl)
+
+    assert plan.load_status == LoadStatus.LOADABLE

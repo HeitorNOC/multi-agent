@@ -1,0 +1,9 @@
+# Revisão estática adicional e limites de interpretação
+
+O E2E exercitou boards com grants de origem. Não há teste nesta rodada que revogue o grant de um board e tente aprovação/publicação editorial depois. Inspeção de application.py/editorial.ts mostra preflight editorial baseado no papel board e conteúdo exato; as rotas de review/publicação não invocam allowed(actor,source) como as consultas e leituras de registros. Portanto, não se deve transferir a garantia de revogação de leitura para esses atos. Se o requisito é grant atual por fonte também para atos editoriais, é necessária adaptação e teste de revogação antes/durante a operação. Não se declara exploração dinâmica testada nem aprovação dessa política.
+
+As provas da autoridade atestam somente operações que passaram pelos hooks, sob a hipótese de que a autoridade não é restaurada junto com o bundle. Não detectam rollback da própria autoridade com sua chave legítima, gravação privilegiada fora do serviço ou mutações de conectores não instrumentados. O inventário frio e o head retido são condições diferentes; nenhum deles substitui recuperação do conteúdo perdido.
+
+O fluxo fonte canônica → projeção → resposta segue sem transação distribuída. Uma intenção sem recibo bloqueia a abertura, inclusive quando nenhum objeto local chegou a ser criado. O procedimento anterior de fechamento de admission sem recibo não resolve automaticamente esse caso novo, pois pode nem existir admission; isso deve ser tratado como novo gate de conciliação.
+
+O arquivo test_integrated.py atual só mudou no uso do grader revisado após a execução. A implementação de aplicação, autoridade, TypeScript, storage e restore foi a que executou os cinco checkpoints. Console/JUnit/acceptance originais não foram reescritos; teste original também está no pacote. O resultado offline não deve ser descrito como uma segunda execução E2E.

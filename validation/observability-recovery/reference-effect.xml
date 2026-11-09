@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testcase name="catálogo amplo admite subconjunto com hierarquia, exclusões e orçamento" time="0.001084" classname="test" file="C:\Users\PC\multi-agent\demo-enterprise\policy.test.ts"/>
+	<testcase name="chief não pode inventar agente, misturar subordinação, duplicar ou omitir exclusão" time="0.000446" classname="test" file="C:\Users\PC\multi-agent\demo-enterprise\policy.test.ts"/>
+	<testcase name="cenário livre fora do corpus é recusado" time="0.000191" classname="test" file="C:\Users\PC\multi-agent\demo-enterprise\policy.test.ts"/>
+	<testcase name="margem histórica e entradas não confirmadas não passam como fatos vigentes" time="0.000600" classname="test" file="C:\Users\PC\multi-agent\demo-enterprise\policy.test.ts"/>
+	<testcase name="aprovação permanece vinculada à proposta exata" time="0.000919" classname="test" file="C:\Users\PC\multi-agent\demo-enterprise\policy.test.ts"/>
+	<testcase name="modelo não amplia equipe nem dispensa aprovação" time="0.001259" classname="test" file="C:\Users\PC\multi-agent\demo\policy.test.ts"/>
+	<testcase name="aprovação ausente, hash alterado e conteúdo adulterado bloqueiam efeito" time="0.000992" classname="test" file="C:\Users\PC\multi-agent\demo\policy.test.ts"/>
+	<testcase name="fato errado, causalidade inventada ou fonte desconhecida bloqueiam a proposta" time="0.000199" classname="test" file="C:\Users\PC\multi-agent\demo\policy.test.ts"/>
+	<testcase name="new admissions cannot take the last two places reserved for existing jobs" time="0.418726" classname="test" file="C:\Users\PC\multi-agent\validation\aurora-queue\reserve.test.ts"/>
+	<testcase name="aprovação, evento e recibo persistem após queda 88 e restart da API; um efeito" time="1.366611" classname="test" file="C:\Users\PC\multi-agent\validation\observability-recovery\api_effect.test.ts"/>
+	<testcase name="revogação e efeito têm ordem única e recibo sobrevive à retomada" time="2.226587" classname="test" file="C:\Users\PC\multi-agent\validation\observability-recovery\reference_effect.test.ts"/>
+	<!-- tests 11 -->
+	<!-- suites 0 -->
+	<!-- pass 11 -->
+	<!-- fail 0 -->
+	<!-- cancelled 0 -->
+	<!-- skipped 0 -->
+	<!-- todo 0 -->
+	<!-- duration_ms 2420.6713 -->
+</testsuites>

@@ -1,0 +1,7 @@
+basic {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "", "stdout": "QUALIFICATION_BASIC_OK\n"}}, "seconds": 0.07277400599559769}
+service_canary {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "", "stdout": "FileNotFoundError\n"}}, "seconds": 0.062011266010813415}
+service_process_environment {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "", "stdout": "FileNotFoundError\n"}}, "seconds": 0.05300337899825536}
+external_network {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "", "stdout": "OSError\n"}}, "seconds": 0.06868255400331691}
+spawn_process {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "error: operation not permitted\n", "stdout": ""}}, "seconds": 0.07929450100346003}
+worker_timeout {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "error: operation not permitted\n", "stdout": ""}}, "seconds": 0.07257449800090399}
+Evidence saved to sandbox-results.json; this script records observations without declaring a production PASS.

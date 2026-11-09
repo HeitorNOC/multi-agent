@@ -1,0 +1,98 @@
+[
+  {
+    "case": "v1_validity_only_metadata",
+    "checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": false,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "answer": "O projeto de expansão se chama **Horizonte**. [1]\n\nA versão selecionada da fonte está vigente desde **1º de janeiro de 2026**. Ela foi publicada em 4 de novembro de 2026; não há informação sobre o fim de sua vigência.\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "canonical_basis": {
+      "as_of": "2026-02-01T00:00:00+00:00",
+      "content_sha": "0cc46d0ec9ab27f962b5804d9031a979dfde035462542e105197508c97eaccd2",
+      "interpretation": "valid_from is the start of the selected source version, not an inferred fact date; no end date is asserted",
+      "kind": "backend_selected_approved_source",
+      "knowledge_cutoff": "2026-11-04T15:16:06.634730+00:00",
+      "published_at": "2026-11-04T15:16:06.610Z",
+      "source": "politica-remoto",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "case": "v2_validity_only_metadata",
+    "checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": true,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "answer": "O projeto de expansão da equipe Aurora chama-se **Solstício**. [1]\n\nA versão selecionada está vigente desde **1º de março de 2026**. Ela foi publicada em 4 de novembro de 2026; não foi informada uma data de fim de vigência. [1]\n\n### References\n\n* [1] politica-remoto@v2.md",
+    "canonical_basis": {
+      "as_of": "2026-03-15T00:00:00+00:00",
+      "content_sha": "d408905770a6bd9284e3ec6c46195a7aa75cc747f574b43e704175d27323a241",
+      "interpretation": "valid_from is the start of the selected source version, not an inferred fact date; no end date is asserted",
+      "kind": "backend_selected_approved_source",
+      "knowledge_cutoff": "2026-11-04T15:17:22.545119+00:00",
+      "published_at": "2026-11-04T15:17:22.524Z",
+      "source": "politica-remoto",
+      "valid_from": "2026-03-01T00:00:00Z",
+      "version": 2
+    }
+  },
+  {
+    "case": "historical_knowledge_cutoff",
+    "checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": false,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "answer": "O projeto de expansão chama-se **Horizonte**. [1]\n\nA versão selecionada está vigente desde **1º de janeiro de 2026**. Ela foi publicada em 4 de novembro de 2026; não há data de fim de vigência informada. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "canonical_basis": {
+      "as_of": "2026-03-15T00:00:00+00:00",
+      "content_sha": "0cc46d0ec9ab27f962b5804d9031a979dfde035462542e105197508c97eaccd2",
+      "interpretation": "valid_from is the start of the selected source version, not an inferred fact date; no end date is asserted",
+      "kind": "backend_selected_approved_source",
+      "knowledge_cutoff": "2026-11-04T15:16:06.634730+00:00",
+      "published_at": "2026-11-04T15:16:06.610Z",
+      "source": "politica-remoto",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "version": 1
+    }
+  },
+  {
+    "case": "new_after_latest_restore",
+    "checks": {
+      "project": true,
+      "valid_from": true,
+      "no_missing_date_claim": false,
+      "source_version": true,
+      "basis_dates": true,
+      "citation": true,
+      "hash": true
+    },
+    "answer": "O projeto de expansão da equipe Aurora chama-se **Solstício**. [1]\n\nA versão selecionada está vigente desde **1º de março de 2026**, conforme os metadados canônicos. Sua publicação ocorreu em 4 de novembro de 2026. Não há informação sobre o fim da vigência.\n\n### References\n\n* [1] politica-remoto@v2.md",
+    "canonical_basis": {
+      "as_of": "2026-04-01T00:00:00+00:00",
+      "content_sha": "d408905770a6bd9284e3ec6c46195a7aa75cc747f574b43e704175d27323a241",
+      "interpretation": "valid_from is the start of the selected source version, not an inferred fact date; no end date is asserted",
+      "kind": "backend_selected_approved_source",
+      "knowledge_cutoff": "2026-11-04T15:17:22.545119+00:00",
+      "published_at": "2026-11-04T15:17:22.524Z",
+      "source": "politica-remoto",
+      "valid_from": "2026-03-01T00:00:00Z",
+      "version": 2
+    }
+  }
+]

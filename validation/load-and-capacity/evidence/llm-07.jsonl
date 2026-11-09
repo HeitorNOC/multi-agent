@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a803-a366-7c52-8e1a-447607330b03"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"A Aurora deve enviar os comprovantes até **18h30 do dia útil seguinte**. [1]\\n\\nPara a data consultada, 1º de fevereiro de 2026, foi selecionada a versão com início de vigência em 1º de janeiro de 2026, publicada em 4 de novembro de 2026. Não há informação sobre o fim de sua vigência.\\n\\n### References\\n\\n* [1] manual-aurora@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12875,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":114,"reasoning_output_tokens":0}}

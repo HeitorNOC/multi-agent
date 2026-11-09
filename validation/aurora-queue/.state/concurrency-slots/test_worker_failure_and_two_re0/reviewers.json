@@ -1,0 +1,16 @@
+{
+  "installation": "aurora-slots-3077f78494",
+  "scope": "development-only; separate identities, not enterprise SSO",
+  "accounts": [
+    {
+      "id": "board",
+      "label": "Revisor local 1",
+      "credential": "acf505f47b59b52d263bb8251211863ccab25fb2dbb15780e25ea0ee9f6609e3"
+    },
+    {
+      "id": "reviewer2",
+      "label": "Revisor local 2",
+      "credential": "ab087b70e5823bbf2b03bfb9b38e1db5b6ea7bd75315c205d3382dd8fec190af"
+    }
+  ]
+}

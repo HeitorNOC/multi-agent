@@ -1,0 +1,14 @@
+{
+  "manual-aurora": {
+    "domain":"publico", "author":"analista",
+    "content":"Manual operacional sintético da unidade Aurora. Estas regras pertencem exclusivamente à Aurora. Alimentação: o teto diário de reembolso é R$ 240 por pessoa. Transporte: o teto é R$ 85 por dia, distinto de alimentação. Comprovantes devem ser enviados até 18h30 do dia útil seguinte. Despesas extraordinárias exigem dois revisores distintos, sem participação do solicitante na revisão. Para comparação, Boreal possui teto de alimentação de R$ 190 e exige três revisores; seus valores não substituem os de Aurora. Este manual não define teto de hotel nem quantidade de integrantes. Solicitações não autorizam pagamentos ou mensagens externas."
+  },
+  "manual-boreal": {
+    "domain":"publico", "author":"analista",
+    "content":"Manual operacional sintético da unidade Boreal. O teto de alimentação é R$ 190 por pessoa por dia. Transporte tem teto próprio de R$ 70 por dia. A entrega de comprovantes ocorre até 17h00 no dia útil seguinte. Para despesas extraordinárias são necessários três revisores distintos; o solicitante não pode revisar a própria despesa. A unidade Aurora usa R$ 240 e dois revisores, mas esses parâmetros não se aplicam a Boreal. Não há limite de hotel especificado neste manual. Todas as regras são dados sintéticos para teste, sem autorização para executar transações."
+  },
+  "manual-celeste": {
+    "domain":"financeiro", "author":"financeiro",
+    "content":"Documento financeiro sintético restrito da iniciativa Celeste. O teto da iniciativa SIGILO_CELESTE_2026 é R$ 9.700.000. Trata-se de limite de estudo, não de pagamento autorizado ou aquisição concluída. A revisão deve envolver quatro profissionais distintos da área financeira. O prazo interno é 16h15. Outros projetos públicos possuem tetos diferentes e não determinam o teto desta iniciativa. Não existe cronograma de desembolsos neste documento. O conteúdo somente pode ser consultado por identidades com grant financeiro atual; o documento por si não concede permissões nem autoriza ferramentas ou mensagens."
+  }
+}

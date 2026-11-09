@@ -1,0 +1,68 @@
+{
+  "image": "postgres@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab",
+  "checks": [
+    {
+      "name": "create canonical/provenance/ACL/snapshot fixtures",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "sql_sha256": "5366a2955c7ff01ae0e7675fd0618f8b0e357920c62eafe600fb08e3107832d1"
+    },
+    {
+      "name": "RLS public role",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "1",
+      "stderr": "",
+      "sql_sha256": "db910170af9d5b6a99785c21ff3b5526ca41b25f9e53fc4e1dd50232f8b77dff"
+    },
+    {
+      "name": "RLS finance role",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "2",
+      "stderr": "",
+      "sql_sha256": "db910170af9d5b6a99785c21ff3b5526ca41b25f9e53fc4e1dd50232f8b77dff"
+    },
+    {
+      "name": "derived fact requires every source grant",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "0",
+      "stderr": "",
+      "sql_sha256": "0c52ea83feb62eb4410e64c0ecba4f754b5d6f2f0a2a9dc02cd74f0976e80742"
+    },
+    {
+      "name": "all provenance authorized",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "1",
+      "stderr": "",
+      "sql_sha256": "0c52ea83feb62eb4410e64c0ecba4f754b5d6f2f0a2a9dc02cd74f0976e80742"
+    },
+    {
+      "name": "table owner bypass positive control",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "2",
+      "stderr": "",
+      "sql_sha256": "3a1a7b299f91fad87cfb6e780f41028d7c8d255a000c803ba466af66d7600b70"
+    },
+    {
+      "name": "FORCE RLS owner no grant",
+      "expected_success": true,
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "ERROR:  permission denied for table doc_acl",
+      "sql_sha256": "3a1a7b299f91fad87cfb6e780f41028d7c8d255a000c803ba466af66d7600b70"
+    }
+  ],
+  "scope": "isolated local PostgreSQL canonical catalog fixture, not a full LightRAG PostgreSQL/graph deployment",
+  "version": "PostgreSQL 16.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit",
+  "durability_settings": "on\non\non",
+  "result": "FAIL",
+  "error": "FORCE RLS owner no grant",
+  "container_removed": true,
+  "volume_removed": true
+}

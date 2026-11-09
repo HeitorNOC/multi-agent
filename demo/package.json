@@ -1,0 +1,1 @@
+{"name":"enterprise-journey-demo","private":true,"type":"module","scripts":{"build":"node build.cjs","test":"node --test policy.test.ts"}}

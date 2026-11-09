@@ -1,0 +1,643 @@
+{
+  "installation": "business-flow-dbf193ddac",
+  "checkpoints": [
+    {
+      "name": "native_extraction_vectors_graph_and_advice_through_typescript_langgraph"
+    },
+    {
+      "name": "stage_before_canonical_commit_crash_resumes_without_model_reingestion"
+    },
+    {
+      "name": "signed_bundle_witness_refuses_stale_and_modified_dumps_before_live_changes"
+    },
+    {
+      "name": "cold_joint_restore_vectors_graph_canonical_checkpoints_keys_and_revocation"
+    }
+  ],
+  "worker_calls": [
+    {
+      "job": "ff1178c4-d777-4c58-9f58-b325acac5f10",
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 2, \"epoch\": 1}\n",
+      "stderr": ""
+    },
+    {
+      "job": "7aa4a45b-a4fa-4461-b6ed-331c4faa7a3f",
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 1, \"epoch\": 1}\n",
+      "stderr": ""
+    }
+  ],
+  "model_calls": 9,
+  "production_approved": false,
+  "scope": "native LightRAG/ONNX projection and canonical recovery, deterministic coordination",
+  "postgres_image": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "publication_calls": [
+    {
+      "draft": "56b3981c-41d9-41cf-afe9-23ca592e55cc",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"b912ba79057b8c13a61e78dd421b7285d8fd58a86e44de572e2dcdcaa618940f\"}\n",
+      "stderr": ""
+    },
+    {
+      "draft": "8d814059-1179-437a-992a-dea02fbe82e9",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"cf7d05941b03dcef92f9f3013cf02fb0924bbb0fc02d5bbc3447de7a41c0107e\"}\n",
+      "stderr": ""
+    },
+    {
+      "draft": "7916d0aa-7de0-47d4-bced-557eee714fee",
+      "crash": true,
+      "exit_code": 79,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "draft": "7916d0aa-7de0-47d4-bced-557eee714fee",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"68e8d0c4e0cf0d5a2a53535a0a3b02561f4609cee10a00dddb4b2121e23a9215\"}\n",
+      "stderr": ""
+    }
+  ],
+  "model_usage_records": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "5dbc7ec7134d54e69b4051d341f824348b92b7bb1610726eb53fd61ffca9ac51",
+      "reservation_id": "03af5884-e614-403e-83fb-8c81fadb8269",
+      "instance": "f2ebea87982f476dac437b442119e6c2",
+      "seconds": 6.34053370001493,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13874,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 149,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "37844c7dd7c41f04ac1fed4c56046967168d9194bf81665531c60d92dbe81d82",
+      "reservation_id": "73e4ed59-4a36-4a18-96d5-f99ee1da9ec8",
+      "instance": "f2ebea87982f476dac437b442119e6c2",
+      "seconds": 8.520832699985476,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13885,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 284,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "afb260249d3c2c7b20e011c519b22f3ba4eea12f7795b243b314b0f43f1a587f",
+      "reservation_id": "f7d1c972-c316-4c9c-a3a5-49a30f3b7dbd",
+      "instance": "f2ebea87982f476dac437b442119e6c2",
+      "seconds": 4.061422200000379,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12640,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 43,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "c918167f74a8fab462ddb182793f253b42421278522573fdf7eec4f29cd398f1",
+      "reservation_id": "790201d8-4428-42f9-a405-d7f56e78acfe",
+      "instance": "f2ebea87982f476dac437b442119e6c2",
+      "seconds": 4.419559300004039,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12884,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 52,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "8bd5a08ed9b2d27869ebef5aff4d2b0f538aa579265cbecdf85cabc25cb084cf",
+      "reservation_id": "fdd3c48c-5223-49e4-9854-6966339a18ef",
+      "instance": "f2ebea87982f476dac437b442119e6c2",
+      "seconds": 4.150980399979744,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12646,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 45,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "75ee6d6de7f3dc379adac6735333a58566f472e536e46223176e39e665c0ac39",
+      "reservation_id": "9e6c0033-93d9-4c51-8664-e8623f5f7af4",
+      "instance": "f2ebea87982f476dac437b442119e6c2",
+      "seconds": 4.796325799979968,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12236,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 67,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "9d5673f63b12de387913278d42b5d4dd66a693a40496f585ced0d01cc410309f",
+      "reservation_id": "60aef2d9-edf5-4af9-9a9a-6f58ce319888",
+      "instance": "fb44dc85050c490aa70eda0394ee8c17",
+      "seconds": 10.146676200005459,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13880,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 391,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "afb260249d3c2c7b20e011c519b22f3ba4eea12f7795b243b314b0f43f1a587f",
+      "reservation_id": "351fd01c-cfc6-4863-9b83-2f1fd4819c41",
+      "instance": "b7b61bb4b02c49c382bfca814e4b9a76",
+      "seconds": 4.383830899983877,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12640,
+          "cached_input_tokens": 12416,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 43,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 9,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "00136114fdab19fa22e979c5e4cf7dbcbc07ed951d2d9b76ba78962df7be7b90",
+      "reservation_id": "eb294caa-6192-494f-bf14-771cf5fcfe61",
+      "instance": "b7b61bb4b02c49c382bfca814e4b9a76",
+      "seconds": 4.385046300012618,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13103,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 55,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ],
+  "embedding_calls": [
+    {
+      "batch": 2,
+      "dimension": 384,
+      "max_wordpiece_tokens": 22,
+      "truncated_inputs": 0,
+      "seconds": 0.014800100005231798,
+      "input_hashes": [
+        "3386d655b160b08e8ef3057622dc9499ac9ba81abac8db98d29619066004359b",
+        "69cd9903cb7a416dc0583ec07b881878f31be4eb48a2d3bf85d2ff27c34ff301"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 32,
+      "truncated_inputs": 0,
+      "seconds": 0.012251499982085079,
+      "input_hashes": [
+        "2662b13247793d791a892495feb4289d1cbb133927b80336fb5f93da10be8253"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 41,
+      "truncated_inputs": 0,
+      "seconds": 0.012233400018885732,
+      "input_hashes": [
+        "0402561f7c3bc888c94b4d825b8cadb4ab07330a4e9b8a728ac794ddb7f4a9d6"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 48,
+      "truncated_inputs": 0,
+      "seconds": 0.01415969998924993,
+      "input_hashes": [
+        "a9c7ee0a9937085de1fe71f784880eb046a53862f8c40230f2da2039a29c86e7"
+      ]
+    },
+    {
+      "batch": 2,
+      "dimension": 384,
+      "max_wordpiece_tokens": 38,
+      "truncated_inputs": 0,
+      "seconds": 0.02185049999388866,
+      "input_hashes": [
+        "700b793d5a967eea81bfdf1bf4d79d45aa6b39b0484edb0c2c8910d2e78bd21d",
+        "17951a3e866a675cd91054bc4d4c93a78c95133c90483bb71d4e6fe2be36238f"
+      ]
+    },
+    {
+      "batch": 4,
+      "dimension": 384,
+      "max_wordpiece_tokens": 28,
+      "truncated_inputs": 0,
+      "seconds": 0.02905420001479797,
+      "input_hashes": [
+        "e2e4e5c44e2024ce9eabea53d4e22a9a9d4ca3e22dcc8de49c037112003df922",
+        "5ed5d6a9864686f72e156b2a54d22ea21a84cdd801a6029e43be7334bcd1a713",
+        "2ba00069ef31b5352b647c95484e024a91fc65976bccd4a041633c2a3f6c5b4b",
+        "297ea09cd369724fc6e270ac549a6afdebe0d2a3a1ae1f4d055a114be8f233d2"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 20,
+      "truncated_inputs": 0,
+      "seconds": 0.01596279998193495,
+      "input_hashes": [
+        "a38b69b8b0d223534875c399c879eb0eeeef378b29f021ba2c3536e38c02ba68",
+        "1052333cb085a3e08bb8c965b89385b8dc91a0644059b3d5daddce00a9cb640d",
+        "e3e37f4f1538526f7a882c700648f99fda89c71318e45bed1e7568a51094526b"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 25,
+      "truncated_inputs": 0,
+      "seconds": 0.02031739999074489,
+      "input_hashes": [
+        "6dd767ebcfce38b291f2a0e365cb834d82f7f6553b4b1e43ceb0767ae3b9c821",
+        "a739c343b400622fa870182d9001123aee132b7f970a4b911efd6c8730ea06da",
+        "78b74e9b879ae6e1db0b617b4ee6b331d2542ee98223e999ce32775caa786918"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 35,
+      "truncated_inputs": 0,
+      "seconds": 0.010751800000434741,
+      "input_hashes": [
+        "77906b0d042ccc9f7e954601f4e08d6fc1db3651b7abb4e8f95b27ff65a2b4a2"
+      ]
+    },
+    {
+      "batch": 4,
+      "dimension": 384,
+      "max_wordpiece_tokens": 42,
+      "truncated_inputs": 0,
+      "seconds": 0.04843520000576973,
+      "input_hashes": [
+        "eb8f24a17e6e317002d93d428efd85908cd022a934f868688fb08748a902f25f",
+        "fc536d45ebeaf62543778371883c3ca5e544ff87be50f3f24481a65f9a3ae4e4",
+        "0779b90e8cbb9a0328600d9f9acebeb53dcc589e55d271c84f9df6f0cd00b220",
+        "da3b497930ea79e6c15944d9d877f28b115a43d7e25cef83b61abac1a92cc595"
+      ]
+    },
+    {
+      "batch": 4,
+      "dimension": 384,
+      "max_wordpiece_tokens": 25,
+      "truncated_inputs": 0,
+      "seconds": 0.03020989999640733,
+      "input_hashes": [
+        "1767e02424332a5682851325c7436478f5d38c782b5b4bf94c8c6b07446e86bf",
+        "db9f1c33c31af0f6e30bf8c34363db9bdf54c7599c94db140c7bff34cd91bcac",
+        "04e1673f8065ca8eab668ff3a1c7f49a4564ce151df70fd1d81d50a068ddc24b",
+        "89101995c6dde0d29bc9ec8257a9fffadf7a45ebe22f068f13a6bba42a71eeb2"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 20,
+      "truncated_inputs": 0,
+      "seconds": 0.016153399978065863,
+      "input_hashes": [
+        "a38b69b8b0d223534875c399c879eb0eeeef378b29f021ba2c3536e38c02ba68",
+        "1052333cb085a3e08bb8c965b89385b8dc91a0644059b3d5daddce00a9cb640d",
+        "e3e37f4f1538526f7a882c700648f99fda89c71318e45bed1e7568a51094526b"
+      ]
+    }
+  ],
+  "cold_restore_new_postgres": {
+    "container": "business-flow-dbf193ddac-pg-restored-4a489e",
+    "volume": "business-flow-dbf193ddac-pg-restored-4a489e-data"
+  },
+  "responses": {
+    "original": {
+      "job": "ff1178c4-d777-4c58-9f58-b325acac5f10",
+      "planHash": "5937a2d4d227dbf0b3f974e4ab6318bee344f334b38630e188e15940918f8d9b",
+      "strategy": "A3",
+      "evidence": [
+        {
+          "capability": "finance_review",
+          "snapshot": {
+            "found": true,
+            "id": "8d814059-1179-437a-992a-dea02fbe82e9",
+            "source": "aquisicao",
+            "version": 1,
+            "valid_at": "2026-01-01T00:00:00Z",
+            "known_at": "2026-11-05T00:41:51.679Z",
+            "raw_sha": "d8a2ddd778f07f36f5841851f3ae6a08bb05514e005e31ada1ba056ac34b7f53",
+            "content_sha": "a9c7ee0a9937085de1fe71f784880eb046a53862f8c40230f2da2039a29c86e7",
+            "content": "A empresa ACME adota a Política de Aquisição. A Política de Aquisição limita compras da ACME a 1000 unidades monetárias por pedido. Código interno: SIGILO_FIXTURE_FINANCEIRO",
+            "kind": "approved_source_snapshot_not_extracted_fact",
+            "semantic": {
+              "answer": "O limite de aquisição da ACME é de **1000 unidades monetárias por pedido**. O código interno citado é **SIGILO_FIXTURE_FINANCEIRO** [1].\n\n### References\n\n* [1] aquisicao:v1.md",
+              "projection": {
+                "id": "cf7d05941b03dcef92f9f3013cf02fb0924bbb0fc02d5bbc3447de7a41c0107e",
+                "payload": {
+                  "installation": "business-flow-dbf193ddac",
+                  "draft": "8d814059-1179-437a-992a-dea02fbe82e9",
+                  "source": "aquisicao",
+                  "version": 1,
+                  "domain": "financeiro",
+                  "valid_at": "2026-01-01T00:00:00Z",
+                  "raw_sha": "d8a2ddd778f07f36f5841851f3ae6a08bb05514e005e31ada1ba056ac34b7f53",
+                  "content_sha": "a9c7ee0a9937085de1fe71f784880eb046a53862f8c40230f2da2039a29c86e7",
+                  "reviewer": "board"
+                },
+                "inventory": {
+                  "tables": {
+                    "lightrag_doc_chunks": {
+                      "count": 1,
+                      "sha": "aa7c1f11fc9bb0f18c996df6e76babebae0bbd339b41e8468612004e5e21da46"
+                    },
+                    "lightrag_doc_full": {
+                      "count": 1,
+                      "sha": "5ed37d9c0c13cb24ab450e1b0d9ac964221b6f537027d1b1e41274519b422c1a"
+                    },
+                    "lightrag_doc_status": {
+                      "count": 1,
+                      "sha": "63934a89596d4a09b364fca5ceb14581a8b338fe327584be79c70f55c360c26f"
+                    },
+                    "lightrag_entity_chunks": {
+                      "count": 4,
+                      "sha": "204389630f6b6db5115cf723e364bcb01cb8d207c105652f567edd5525817621"
+                    },
+                    "lightrag_full_entities": {
+                      "count": 1,
+                      "sha": "d057e9c5c44bb520f1ccb0c162eb9548f8069b49a5b93149f54cd645c615e7f2"
+                    },
+                    "lightrag_full_relations": {
+                      "count": 1,
+                      "sha": "696315e98ec261d02bc3d146b32e9006f0c72b74e2dc5e00558e304cdac27452"
+                    },
+                    "lightrag_relation_chunks": {
+                      "count": 2,
+                      "sha": "a68d324a1455c9c9cf38050defe65c4c2757faf827b1a5de11eb5ed145c94631"
+                    },
+                    "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+                      "count": 1,
+                      "sha": "a04de9e28aedc9aa4f0378a276f527f75591e911b1cede2f89f32fc3e5f194a6"
+                    },
+                    "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+                      "count": 4,
+                      "sha": "5342de6bbd09c9952f13162a99ba1345648a268435124ed5f38e0443464d244e"
+                    },
+                    "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+                      "count": 2,
+                      "sha": "235505772fa73e75d10e68f3bed0ba7e843b7e2dafde81a6f45ea7a7d5b7cbf4"
+                    }
+                  },
+                  "nodes": 4,
+                  "edges": 2,
+                  "graph": "1328337911f245bba5530be2ea280d3e4be00ae20b0532a009d22c8842db7f37"
+                },
+                "inventory_sha": "a3ae336929278ebae5ece1dcccc1cffe7668f3509cce4730813c2d4aa622153d"
+              },
+              "native": true
+            }
+          }
+        },
+        {
+          "capability": "policy_lookup",
+          "snapshot": {
+            "found": true,
+            "id": "56b3981c-41d9-41cf-afe9-23ca592e55cc",
+            "source": "politica-remoto",
+            "version": 1,
+            "valid_at": "2026-01-01T00:00:00Z",
+            "known_at": "2026-11-05T00:41:51.388Z",
+            "raw_sha": "5965083435ed9f9f150ef72cecffcba84e0e083686a16d7796a572b1219a5ff7",
+            "content_sha": "2662b13247793d791a892495feb4289d1cbb133927b80336fb5f93da10be8253",
+            "content": "A empresa ACME adota a Política Remoto. A Política Remoto autoriza os funcionários da ACME a trabalhar remotamente dois dias por semana.",
+            "kind": "approved_source_snapshot_not_extracted_fact",
+            "semantic": {
+              "answer": "A ACME permite que seus funcionários trabalhem remotamente **dois dias por semana**. [1]\n\n### References\n\n* [1] politica-remoto:v1.md",
+              "projection": {
+                "id": "b912ba79057b8c13a61e78dd421b7285d8fd58a86e44de572e2dcdcaa618940f",
+                "payload": {
+                  "installation": "business-flow-dbf193ddac",
+                  "draft": "56b3981c-41d9-41cf-afe9-23ca592e55cc",
+                  "source": "politica-remoto",
+                  "version": 1,
+                  "domain": "publico",
+                  "valid_at": "2026-01-01T00:00:00Z",
+                  "raw_sha": "5965083435ed9f9f150ef72cecffcba84e0e083686a16d7796a572b1219a5ff7",
+                  "content_sha": "2662b13247793d791a892495feb4289d1cbb133927b80336fb5f93da10be8253",
+                  "reviewer": "board"
+                },
+                "inventory": {
+                  "tables": {
+                    "lightrag_doc_chunks": {
+                      "count": 1,
+                      "sha": "6c9374af2b55f86587b9120ad7905c673ecc3747f21781578fb3978b480fb736"
+                    },
+                    "lightrag_doc_full": {
+                      "count": 1,
+                      "sha": "be42b6edf47719733a3ad7445d6352c5ac628c3b3d91f27269bec93a91cba542"
+                    },
+                    "lightrag_doc_status": {
+                      "count": 1,
+                      "sha": "370a62dc1a36e8c14bcffa0f419d013e42b03ce4c1021c0645407bd6e4d29c46"
+                    },
+                    "lightrag_entity_chunks": {
+                      "count": 2,
+                      "sha": "13eedbeb13fb04748db9115ea184e940ac2e9081becd844ad1784bda36b5601b"
+                    },
+                    "lightrag_full_entities": {
+                      "count": 1,
+                      "sha": "f2d7c86b09cd7a95af5af75fd21d2c382fba09f5b3f34f3cc02401842b64c6c8"
+                    },
+                    "lightrag_full_relations": {
+                      "count": 1,
+                      "sha": "88427b04566b36eab5f14bf1beddba0f5c5883e5fae8708ed19a594e0a6b88e3"
+                    },
+                    "lightrag_relation_chunks": {
+                      "count": 1,
+                      "sha": "eeb857428f94e14ee1de5010a9d2d9dd2e0bfa7a1e9ec9ffc93c4cbd16b29e7f"
+                    },
+                    "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+                      "count": 1,
+                      "sha": "3b0865600ae89d1eec421e2194ee5a46e500aad15d6f4f7a7e18d41d4bc6c307"
+                    },
+                    "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+                      "count": 2,
+                      "sha": "a9341ae86af21aed3ea544a2c2b94ad3d21ddb742f26828bb7a4442c81b36a1b"
+                    },
+                    "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+                      "count": 1,
+                      "sha": "f875c8391fd688e83bc5cb06adb6e40f695355a6f53af3b0fda6968367438b0e"
+                    }
+                  },
+                  "nodes": 2,
+                  "edges": 1,
+                  "graph": "05d62af3693cdb3b03575aa93f25a6c50e5a29f1febbba65d0dff05926ea04a1"
+                },
+                "inventory_sha": "10f2b6ec306424faffc5d5c767c3055067f698debac581f56eaa1c6a9bf6f5c0"
+              },
+              "native": true
+            }
+          }
+        }
+      ],
+      "receipt": null,
+      "kind": "native_knowledge_with_deterministic_coordination"
+    },
+    "current": {
+      "found": true,
+      "id": "7916d0aa-7de0-47d4-bced-557eee714fee",
+      "source": "politica-remoto",
+      "version": 2,
+      "valid_at": "2026-02-01T00:00:00Z",
+      "known_at": "2026-11-05T00:44:07.244Z",
+      "raw_sha": "74bcf9c1443ede3cf8d3a6ae2b12469f4ca091eed6318cdf16cb1ccbd6294ca5",
+      "content_sha": "77906b0d042ccc9f7e954601f4e08d6fc1db3651b7abb4e8f95b27ff65a2b4a2",
+      "content": "A empresa ACME adota a Política Remoto versão 2. A Política Remoto versão 2 autoriza os funcionários da ACME a trabalhar remotamente três dias por semana.",
+      "kind": "approved_source_snapshot_not_extracted_fact",
+      "semantic": {
+        "answer": "A ACME permite trabalho remoto **três dias por semana**, conforme a Política Remoto versão 2 [1].\n\n### References\n\n* [1] politica-remoto:v2.md",
+        "projection": {
+          "id": "68e8d0c4e0cf0d5a2a53535a0a3b02561f4609cee10a00dddb4b2121e23a9215",
+          "payload": {
+            "installation": "business-flow-dbf193ddac",
+            "draft": "7916d0aa-7de0-47d4-bced-557eee714fee",
+            "source": "politica-remoto",
+            "version": 2,
+            "domain": "publico",
+            "valid_at": "2026-02-01T00:00:00Z",
+            "raw_sha": "74bcf9c1443ede3cf8d3a6ae2b12469f4ca091eed6318cdf16cb1ccbd6294ca5",
+            "content_sha": "77906b0d042ccc9f7e954601f4e08d6fc1db3651b7abb4e8f95b27ff65a2b4a2",
+            "reviewer": "board"
+          },
+          "inventory": {
+            "tables": {
+              "lightrag_doc_chunks": {
+                "count": 1,
+                "sha": "7ebca7c4010ae1cae23b836e223c28848b6de26c42ae0bcd697c30d24b21e2ed"
+              },
+              "lightrag_doc_full": {
+                "count": 1,
+                "sha": "105927f1745e11b9a8dfe63b74235a93ee7cfa8f34e9dffe57bfe3b2bf619df9"
+              },
+              "lightrag_doc_status": {
+                "count": 1,
+                "sha": "b765d133b60b9c02084173e2d5ce5dc3676aead11c23bc7c9e70abda71325a68"
+              },
+              "lightrag_entity_chunks": {
+                "count": 4,
+                "sha": "8570ea13fb92d87deceb1fbd4ce05b468707879201a496abbf6002da29f8667c"
+              },
+              "lightrag_full_entities": {
+                "count": 1,
+                "sha": "aa69e0998ffaea15fb3f6635b37c57db362a82119bf18998a46b4f8e6f8004b3"
+              },
+              "lightrag_full_relations": {
+                "count": 1,
+                "sha": "489444606822cc2d55f58f89ba40a6de548d4e8b8037680545301519524156f0"
+              },
+              "lightrag_relation_chunks": {
+                "count": 4,
+                "sha": "84e5a162963295621c32ea6e716346bb495b64a1f4aca6c57d910c59aa3d0b8a"
+              },
+              "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+                "count": 1,
+                "sha": "6698ebfa7cf431109d2197dc1ae9050ac3719170052a289daea9c198fd7047f0"
+              },
+              "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+                "count": 4,
+                "sha": "1a43928dc67883f9651dbe91bddc7e9af4c31a8285bdd3c9f37fd36c38cde0b8"
+              },
+              "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+                "count": 4,
+                "sha": "89ce3111fc4a4165c48bf7a2da40c92981803af08460cdea31eab67b215c82c3"
+              }
+            },
+            "nodes": 4,
+            "edges": 4,
+            "graph": "d8fa958397183d7412d6c5b22520f66877dac9d69aa993a25e46c73a5778ed0e"
+          },
+          "inventory_sha": "ecb76aa6f4d5396b149d47e8cd36b0734aaca85279c40fa7542757cb8004a2c6"
+        },
+        "native": true
+      }
+    }
+  },
+  "result": "PASS_BOUNDED_NATIVE_BRAIN_RECOVERY",
+  "seconds": 236.02241770000546,
+  "disposable_resources_removed": true
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a4ae-7293-7da1-8c43-bcf6b1356202"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"vendas\\\",\\\"política\\\"],\\\"low_level_keywords\\\":[\\\"ACME\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":11819,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":39,"reasoning_output_tokens":0}}

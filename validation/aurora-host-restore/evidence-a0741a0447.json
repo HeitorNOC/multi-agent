@@ -1,0 +1,23 @@
+{
+  "result": "PASS_LOCAL_HOST_LOSS_DRILL",
+  "backup_seconds": 50.858,
+  "recovery_to_working_queue_seconds": 62.662,
+  "recovery_and_checks_seconds": 66.057,
+  "jobs_at_cut": [
+    "awaiting_approval",
+    "interrupted",
+    "queued",
+    "running"
+  ],
+  "jobs_recovered": 4,
+  "documents_recovered": 4,
+  "bundle_files": 15,
+  "new_model_dispatches": 4,
+  "model_reservations": 13,
+  "effect_receipts": 2,
+  "paid_model_calls": 0,
+  "tampered_bundle_rejected": true,
+  "wrong_key_rejected": true,
+  "authority_process_recreated": true,
+  "rpo_scope": "four known jobs at a fenced cut; no ongoing replication measured"
+}

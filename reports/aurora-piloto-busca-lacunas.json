@@ -1,0 +1,1529 @@
+{
+  "manifest_sha256": "97d6e22428920294595a661b46f7d842ef9e006b2c5b9269636ab8a616378c81",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "reranker": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "173760f",
+    "files": {
+      "model_quint8_avx2.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "tokenizer.json": "3a56def25aa40facc030ea8b0b87f3688e4b3c39eb8b45d5702b3a1300fe2a20"
+    },
+    "onnxruntime": "1.31.1",
+    "startup_ms": 964.62
+  },
+  "cases": [
+    {
+      "id": "handoff",
+      "queries": [
+        "Como verificar se um humano já assumiu o atendimento no WhatsApp antes de enviar uma resposta?",
+        "Qual sinal ou evento registrado indica a transferência do controle do atendimento para um humano no WhatsApp?",
+        "Como distinguir o sinal de transferência de controle do simples recebimento de uma mensagem no WhatsApp?"
+      ],
+      "error": null,
+      "seconds": 4.129,
+      "expected": 3,
+      "baseline_found": [
+        3
+      ],
+      "in_envelope": [
+        3
+      ],
+      "verified_found": [
+        3
+      ],
+      "candidates": [
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          10,
+          13
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "fluxo",
+          10,
+          22
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          10,
+          15
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "fluxo",
+          9,
+          6
+        ],
+        [
+          "fluxo",
+          9,
+          8
+        ],
+        [
+          "fluxo",
+          9,
+          7
+        ],
+        [
+          "fluxo",
+          10,
+          21
+        ],
+        [
+          "fluxo",
+          9,
+          1
+        ],
+        [
+          "contact",
+          17,
+          74
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          10,
+          11
+        ],
+        [
+          "contact",
+          17,
+          73
+        ],
+        [
+          "fluxo",
+          9,
+          5
+        ],
+        [
+          "contact",
+          15,
+          54
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          1
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "fluxo",
+          10,
+          19
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "mba-academic",
+          null,
+          1
+        ],
+        [
+          "training-markdown",
+          null,
+          3
+        ]
+      ],
+      "slots": [
+        [],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ],
+          [
+            "fluxo",
+            10,
+            13
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [
+          "No fluxo de atendimento do WhatsApp, qual estado ou registro permite verificar, antes de uma resposta, se o humano já assumiu o atendimento?",
+          "No evento control_passed de WhatsApp, quais campos ou valores identificam que o controle foi transferido para o humano?"
+        ],
+        "error": null,
+        "seconds": 12.598,
+        "in_followup_envelope": [
+          3
+        ],
+        "verified_combined": [
+          3
+        ],
+        "accepted_distractors": [],
+        "candidates": [
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            10,
+            15
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            12,
+            30
+          ],
+          [
+            "fluxo",
+            10,
+            27
+          ],
+          [
+            "fluxo",
+            10,
+            19
+          ],
+          [
+            "fluxo",
+            10,
+            13
+          ],
+          [
+            "fluxo",
+            10,
+            22
+          ],
+          [
+            "fluxo",
+            10,
+            21
+          ],
+          [
+            "fluxo",
+            9,
+            1
+          ],
+          [
+            "fluxo",
+            9,
+            1
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            9,
+            7
+          ],
+          [
+            "fluxo",
+            10,
+            11
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            9,
+            5
+          ],
+          [
+            "contact",
+            17,
+            74
+          ],
+          [
+            "contact",
+            15,
+            59
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "mba",
+            3,
+            4
+          ],
+          [
+            "contact",
+            15,
+            54
+          ],
+          [
+            "contact",
+            9,
+            3
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            1
+          ],
+          [
+            "contact",
+            16,
+            65
+          ],
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "mba-academic",
+            null,
+            1
+          ],
+          [
+            "training-markdown",
+            null,
+            3
+          ]
+        ],
+        "slots": [
+          [
+            [
+              "fluxo",
+              12,
+              30
+            ]
+          ],
+          []
+        ],
+        "combined": [
+          [
+            "fluxo",
+            10,
+            15
+          ],
+          [
+            "fluxo",
+            10,
+            13
+          ],
+          [
+            "fluxo",
+            12,
+            30
+          ]
+        ]
+      }
+    },
+    {
+      "id": "limit",
+      "queries": [
+        "Quantas chamadas por segundo o Contact Center aceita na operação startAttendance para a mesma conta?"
+      ],
+      "error": null,
+      "seconds": 4.112,
+      "expected": 0,
+      "baseline_found": [],
+      "in_envelope": [],
+      "verified_found": [],
+      "candidates": [
+        [
+          "contact",
+          16,
+          63
+        ],
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "contact",
+          9,
+          11
+        ],
+        [
+          "contact",
+          16,
+          65
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          16,
+          62
+        ],
+        [
+          "contact",
+          11,
+          21
+        ],
+        [
+          "contact",
+          11,
+          18
+        ],
+        [
+          "contact",
+          11,
+          19
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          17,
+          71
+        ],
+        [
+          "contact",
+          15,
+          45
+        ],
+        [
+          "contact",
+          9,
+          12
+        ],
+        [
+          "fluxo",
+          10,
+          17
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "fluxo",
+          9,
+          6
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "contact",
+          13,
+          39
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          9,
+          9
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          13,
+          33
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ]
+      ],
+      "slots": [
+        []
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [
+          "Qual é o limite de chamadas por segundo da operação startAttendance do Contact Center para uma mesma conta?"
+        ],
+        "error": null,
+        "seconds": 9.4,
+        "in_followup_envelope": [],
+        "verified_combined": [],
+        "accepted_distractors": [],
+        "candidates": [
+          [
+            "contact",
+            15,
+            43
+          ],
+          [
+            "contact",
+            17,
+            71
+          ],
+          [
+            "contact",
+            13,
+            36
+          ],
+          [
+            "contact",
+            13,
+            30
+          ],
+          [
+            "contact",
+            11,
+            21
+          ],
+          [
+            "contact",
+            11,
+            18
+          ],
+          [
+            "contact",
+            11,
+            19
+          ],
+          [
+            "contact",
+            15,
+            40
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "contact",
+            15,
+            45
+          ],
+          [
+            "contact",
+            9,
+            12
+          ],
+          [
+            "contact",
+            13,
+            36
+          ],
+          [
+            "fluxo",
+            9,
+            6
+          ],
+          [
+            "contact",
+            9,
+            11
+          ],
+          [
+            "contact",
+            13,
+            33
+          ],
+          [
+            "contact",
+            15,
+            40
+          ],
+          [
+            "mba",
+            3,
+            4
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "contact",
+            9,
+            9
+          ],
+          [
+            "contact",
+            13,
+            39
+          ],
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ]
+        ],
+        "slots": [
+          []
+        ],
+        "combined": []
+      }
+    },
+    {
+      "id": "handoff-original",
+      "queries": [
+        "Qual estado operacional do MBA é necessário para transferir uma conversa a um atendente?",
+        "Qual estado da conversa ou do atendimento indica que o atendente assumiu a conversa, e que evento registrado comprova a transferência?",
+        "Qual mecanismo impede que o MBA e o atendente respondam simultaneamente durante e após a transferência?"
+      ],
+      "error": null,
+      "seconds": 5.91,
+      "expected": 3,
+      "baseline_found": [],
+      "in_envelope": [
+        1
+      ],
+      "verified_found": [
+        1
+      ],
+      "candidates": [
+        [
+          "mba-academic",
+          null,
+          1
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "contact",
+          16,
+          66
+        ],
+        [
+          "mba",
+          3,
+          4
+        ],
+        [
+          "contact",
+          15,
+          42
+        ],
+        [
+          "training-markdown",
+          null,
+          2
+        ],
+        [
+          "contact",
+          15,
+          52
+        ],
+        [
+          "contact",
+          13,
+          39
+        ],
+        [
+          "contact",
+          15,
+          48
+        ],
+        [
+          "contact",
+          9,
+          3
+        ],
+        [
+          "contact",
+          9,
+          5
+        ],
+        [
+          "contact",
+          9,
+          13
+        ],
+        [
+          "contact",
+          9,
+          4
+        ],
+        [
+          "contact",
+          9,
+          6
+        ],
+        [
+          "contact",
+          9,
+          7
+        ],
+        [
+          "contact",
+          15,
+          56
+        ],
+        [
+          "mba-academic",
+          null,
+          1
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "contact",
+          13,
+          35
+        ],
+        [
+          "mba",
+          4,
+          6
+        ],
+        [
+          "contact",
+          9,
+          8
+        ],
+        [
+          "mba",
+          8,
+          14
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "training-markdown",
+          null,
+          3
+        ]
+      ],
+      "slots": [
+        [],
+        [
+          [
+            "contact",
+            9,
+            5
+          ]
+        ],
+        []
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [
+          "Qual evento registrado comprova a transferência da conversa do MBA para o atendente?"
+        ],
+        "error": null,
+        "seconds": 8.875,
+        "in_followup_envelope": [
+          1,
+          3
+        ],
+        "verified_combined": [
+          1,
+          3
+        ],
+        "accepted_distractors": [],
+        "candidates": [
+          [
+            "mba-academic",
+            null,
+            1
+          ],
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "contact",
+            16,
+            66
+          ],
+          [
+            "mba",
+            3,
+            4
+          ],
+          [
+            "fluxo",
+            9,
+            3
+          ],
+          [
+            "mba-academic",
+            null,
+            1
+          ],
+          [
+            "mba",
+            4,
+            6
+          ],
+          [
+            "training-markdown",
+            null,
+            2
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "mba",
+            3,
+            1
+          ],
+          [
+            "contact",
+            17,
+            74
+          ],
+          [
+            "fluxo",
+            10,
+            19
+          ],
+          [
+            "contact",
+            16,
+            64
+          ],
+          [
+            "contact",
+            15,
+            53
+          ],
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "fluxo",
+            10,
+            15
+          ],
+          [
+            "mba",
+            8,
+            14
+          ],
+          [
+            "contact",
+            9,
+            6
+          ],
+          [
+            "contact",
+            9,
+            7
+          ],
+          [
+            "contact",
+            15,
+            56
+          ],
+          [
+            "fluxo",
+            10,
+            20
+          ],
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "contact",
+            9,
+            13
+          ],
+          [
+            "contact",
+            11,
+            23
+          ],
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "training-markdown",
+            null,
+            3
+          ]
+        ],
+        "slots": [
+          [
+            [
+              "fluxo",
+              10,
+              15
+            ]
+          ]
+        ],
+        "combined": [
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "id": "csv-control",
+      "queries": [
+        "No laboratório azul, o que deve ser conferido na retomada de fila?",
+        "No laboratório azul, quem aprova a retomada de fila?"
+      ],
+      "error": null,
+      "seconds": 4.141,
+      "expected": 2,
+      "baseline_found": [
+        1,
+        2
+      ],
+      "in_envelope": [
+        1,
+        2
+      ],
+      "verified_found": [
+        1,
+        2
+      ],
+      "candidates": [
+        [
+          "rehearsal-csv",
+          null,
+          2
+        ],
+        [
+          "rehearsal-note",
+          null,
+          1
+        ],
+        [
+          "contact",
+          15,
+          50
+        ],
+        [
+          "contact",
+          9,
+          8
+        ],
+        [
+          "contact",
+          15,
+          56
+        ],
+        [
+          "contact",
+          9,
+          7
+        ],
+        [
+          "contact",
+          15,
+          57
+        ],
+        [
+          "training-calendar",
+          null,
+          1
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "contact",
+          15,
+          53
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          15,
+          45
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          9,
+          9
+        ],
+        [
+          "contact",
+          15,
+          42
+        ],
+        [
+          "contact",
+          15,
+          48
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "contact",
+          13,
+          29
+        ],
+        [
+          "contact",
+          15,
+          44
+        ],
+        [
+          "contact",
+          11,
+          26
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ]
+        ],
+        []
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [
+          "No laboratório azul, qual registro ou fluxo operacional identifica quem aprova a retomada de fila?"
+        ],
+        "error": null,
+        "seconds": 10.563,
+        "in_followup_envelope": [
+          1,
+          2
+        ],
+        "verified_combined": [
+          1,
+          2
+        ],
+        "accepted_distractors": [],
+        "candidates": [
+          [
+            "rehearsal-note",
+            null,
+            1
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ],
+          [
+            "fluxo",
+            10,
+            19
+          ],
+          [
+            "contact",
+            15,
+            52
+          ],
+          [
+            "contact",
+            16,
+            68
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "contact",
+            15,
+            45
+          ],
+          [
+            "contact",
+            13,
+            33
+          ],
+          [
+            "contact",
+            11,
+            25
+          ],
+          [
+            "contact",
+            15,
+            40
+          ],
+          [
+            "contact",
+            9,
+            8
+          ],
+          [
+            "contact",
+            15,
+            50
+          ],
+          [
+            "training-calendar",
+            null,
+            1
+          ],
+          [
+            "fluxo",
+            9,
+            1
+          ],
+          [
+            "contact",
+            15,
+            48
+          ],
+          [
+            "contact",
+            15,
+            56
+          ],
+          [
+            "contact",
+            15,
+            42
+          ],
+          [
+            "contact",
+            15,
+            53
+          ],
+          [
+            "fluxo",
+            12,
+            28
+          ],
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "contact",
+            16,
+            63
+          ],
+          [
+            "contact",
+            9,
+            7
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            1
+          ]
+        ],
+        "slots": [
+          [
+            [
+              "rehearsal-csv",
+              null,
+              2
+            ],
+            [
+              "rehearsal-csv",
+              null,
+              1
+            ]
+          ]
+        ],
+        "combined": [
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            1
+          ]
+        ]
+      }
+    }
+  ],
+  "model_calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0a23fbd30b42ca01c7c8363db415d846227453fc961cb77e0540917532a9a885",
+      "reservation_id": "handoff",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.1209298000030685,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13503,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "ad0d5c42b45828db44a7cb7a98d0a2a3092ceabb3abb491e2baf7f9490ba6014",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 6.712924600025872,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12298,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 112,
+          "reasoning_output_tokens": 34
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "bfd7a159ee33a6ac900f1a843ba3c19871003f728ba2e4cef26be30798b773cc",
+      "reservation_id": "followup-verify",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.334892699989723,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12656,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 25,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "ce6ae882ab03106603b5e8d3df469e2077d70eb77eb9fdee4dae65b0b5aae19c",
+      "reservation_id": "limit",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.103103500005091,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13423,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "09949330ca6de356b18a539893f6814b1cc759dd6e4470f6a04fba65d066f3b9",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.23608420000528,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12181,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 41,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "dfe906534345f0a11e735e81078a8e5458b27be4ac632fd414c25d13f78a8bb1",
+      "reservation_id": "followup-verify",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.373805699986406,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12478,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "7b9cb1c1a2fb27c76dff3a34006938ef6573eb27cab8ef5ddfa609944fd6a34c",
+      "reservation_id": "handoff-original",
+      "instance": "scope-verifier-eval",
+      "seconds": 5.901944599987473,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13319,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 119,
+          "reasoning_output_tokens": 91
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "e241fdf8a9d2bf2855fd82a531c52a56f5d422948b9914d7c169ff54f4d69442",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.9828493000241,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12260,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 55,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 9,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0f983cbdaac4ff1f48d323abce7a00f984ff7aefbdc6f4e5f0342b9bb158e703",
+      "reservation_id": "followup-verify",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.4673383999906946,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12426,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 10,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "8d4f2d9fdde1341fd83c439095cb04d69afe3d8ce888ed835cd86f0987c40ab2",
+      "reservation_id": "csv-control",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.132889899978181,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13121,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 25,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 11,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "1d7f1b0413098f56d0c137ba076d88cb1953a1a30e8fc62260d466f37fe6825a",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 5.714000200008741,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11437,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 77,
+          "reasoning_output_tokens": 35
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 12,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0738cdd10f1f78be2e26ed766c67f6e8e6cf21668dcccf74380ff1d9080a455c",
+      "reservation_id": "followup-verify",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.9349619999993593,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12401,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 25,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+INFO: Creating working directory C:\Users\PC\multi-agent\validation\paperclip-recheck\live-home-byVhcX\runtime-state\knowledge\A
+INFO: [A] Created new empty graph file: C:\Users\PC\multi-agent\validation\paperclip-recheck\live-home-byVhcX\runtime-state\knowledge\A\A\graph_chunk_entity_relation.graphml
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=4, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=4, timeout=240
+INFO:  - query: None/None, host=None, max_async=4, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=4, timeout=240
+INFO: [A] Process 26128 KV load full_docs with 0 records
+INFO: [A] Process 26128 KV load text_chunks with 0 records
+INFO: [A] Process 26128 KV load full_entities with 0 records
+INFO: [A] Process 26128 KV load full_relations with 0 records
+INFO: [A] Process 26128 KV load entity_chunks with 0 records
+INFO: [A] Process 26128 KV load relation_chunks with 0 records
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\runtime-state\\knowledge\\A\\A\\vdb_entities.json'} 0 data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\runtime-state\\knowledge\\A\\A\\vdb_relationships.json'} 0 data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\runtime-state\\knowledge\\A\\A\\vdb_chunks.json'} 0 data
+INFO: [A] Process 26128 KV load llm_response_cache with 0 records
+INFO: [A] Process 26128 doc status load doc_status with 0 records
+INFO: [A] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: [A] Writing graph with 0 nodes, 0 edges
+INFO: In memory DB persist to disk
+INFO: Creating working directory C:\Users\PC\multi-agent\validation\paperclip-recheck\live-home-byVhcX\runtime-state\knowledge\B
+INFO: [B] Created new empty graph file: C:\Users\PC\multi-agent\validation\paperclip-recheck\live-home-byVhcX\runtime-state\knowledge\B\B\graph_chunk_entity_relation.graphml
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=4, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=4, timeout=240
+INFO:  - query: None/None, host=None, max_async=4, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=4, timeout=240
+INFO: Creating LightRAG instance with workspace='B' while default workspace is set to 'A'
+INFO: [B] Process 26128 KV load full_docs with 0 records
+INFO: [B] Process 26128 KV load text_chunks with 0 records
+INFO: [B] Process 26128 KV load full_entities with 0 records
+INFO: [B] Process 26128 KV load full_relations with 0 records
+INFO: [B] Process 26128 KV load entity_chunks with 0 records
+INFO: [B] Process 26128 KV load relation_chunks with 0 records
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\runtime-state\\knowledge\\B\\B\\vdb_entities.json'} 0 data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\runtime-state\\knowledge\\B\\B\\vdb_relationships.json'} 0 data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\runtime-state\\knowledge\\B\\B\\vdb_chunks.json'} 0 data
+INFO: [B] Process 26128 KV load llm_response_cache with 0 records
+INFO: [B] Process 26128 doc status load doc_status with 0 records
+INFO: [B] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: [B] Writing graph with 0 nodes, 0 edges
+INFO: In memory DB persist to disk
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:29 -0300] "POST /rpc HTTP/1.1" 202 331 "-" "node"
+INFO: Naive query: 1 chunks (chunk_top_k:4 cosine:-1.0)
+INFO: Naive query: 1 chunks (chunk_top_k:4 cosine:-1.0)
+INFO: Final context: 1 chunks
+INFO: Final context: 1 chunks
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:29 -0300] "POST /rpc HTTP/1.1" 200 324 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:29 -0300] "POST /rpc HTTP/1.1" 200 324 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:29 -0300] "POST /rpc HTTP/1.1" 200 1942 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:31 -0300] "POST /rpc HTTP/1.1" 202 331 "-" "node"
+INFO: Naive query: 1 chunks (chunk_top_k:4 cosine:-1.0)
+INFO: Naive query: 1 chunks (chunk_top_k:4 cosine:-1.0)
+INFO: Final context: 1 chunks
+INFO: Final context: 1 chunks
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:31 -0300] "POST /rpc HTTP/1.1" 200 324 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:31 -0300] "POST /rpc HTTP/1.1" 200 324 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:31 -0300] "POST /rpc HTTP/1.1" 200 1942 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:31 -0300] "POST /rpc HTTP/1.1" 200 1942 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 323 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 323 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 323 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 323 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 323 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 323 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 323 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 202 331 "-" "node"
+INFO: Naive query: 1 chunks (chunk_top_k:4 cosine:-1.0)
+INFO: Naive query: 1 chunks (chunk_top_k:4 cosine:-1.0)
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 324 "-" "node"
+INFO: Final context: 1 chunks
+INFO: Final context: 1 chunks
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 324 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:32 -0300] "POST /rpc HTTP/1.1" 200 325 "-" "node"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:12:48:35 -0300] "POST /rpc HTTP/1.1" 200 325 "-" "node"

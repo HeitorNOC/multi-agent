@@ -1,0 +1,30 @@
+{
+  "main_original_result": "FAIL",
+  "main_failure": "test expected quota 429 for an already closed fingerprint; actual 409 is correct",
+  "quota_fixture_result": "PASS",
+  "full_main_e2e_after_test_input_fix": "NOT_RUN",
+  "native_cases_passed": 12,
+  "native_cases_total": 12,
+  "main_completed_cli_calls": 31,
+  "main_reservations_without_cli": 9,
+  "cancelled_setup_reserved_execution_or_usage_unknown": 1,
+  "quota_fixture_cli_calls": 0,
+  "quota_fixture_reservations_without_cli": 40,
+  "usage_observed_completed_calls_only": {
+    "input_tokens": 409633,
+    "cached_input_tokens": 316544,
+    "output_tokens": 5028,
+    "reasoning_output_tokens": 0
+  },
+  "baseline_pressure_p95_seconds": 11.268497799988836,
+  "parallel_pressure_p95_seconds": 0.06436509999912232,
+  "exploratory_p95_limit_seconds": 1,
+  "slo_failures": [
+    "baseline-under-inference"
+  ],
+  "proofs_verified": 534,
+  "cancelled_setup_proofs_not_verified": 28,
+  "backend_identical_in_quota_fixture": true,
+  "production": "NO_GO",
+  "model_tool_events": 0
+}

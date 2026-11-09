@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e2-793d-7ec1-90d3-b666e4b7ab57"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O manual vigente em **1º de fevereiro de 2026** não define um limite de diárias de hotel para a equipe Aurora. Consulte o departamento responsável; não há informação suficiente para determinar esse valor. [1]\\n\\nO manual está vigente desde 1º de janeiro de 2026. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13121,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":96,"reasoning_output_tokens":0}}

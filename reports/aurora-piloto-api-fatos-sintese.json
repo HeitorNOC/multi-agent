@@ -1,0 +1,468 @@
+{
+  "goal": "Quais estados e evidências são necessários para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?",
+  "status": "recovery_required",
+  "error": "Consulte a evidência da inferência na central Precisa de você.",
+  "plan": {
+    "strategy": "A3",
+    "reason": "A transferência exige definir o fluxo de atendimento e verificar os estados e controles técnicos que impedem respostas simultâneas.",
+    "teams": [
+      {
+        "lead": "technology_director",
+        "specialists": [
+          "backend_engineer",
+          "qa_engineer"
+        ],
+        "reason": "Definir e verificar transições de estado, exclusividade de resposta e evidências de funcionamento."
+      },
+      {
+        "lead": "customer_director",
+        "specialists": [
+          "support_specialist"
+        ],
+        "reason": "Definir as condições operacionais de escalonamento e aceitação pelo atendente."
+      }
+    ],
+    "capabilities": [
+      "technology_director",
+      "backend_engineer",
+      "qa_engineer",
+      "customer_director",
+      "support_specialist"
+    ],
+    "not_selected": [
+      {
+        "id": "executive_director",
+        "reason": "Estratégia de portfólio não é necessária para este fluxo."
+      },
+      {
+        "id": "project_manager",
+        "reason": "Planejamento de entrega não é o foco da pergunta."
+      },
+      {
+        "id": "business_analyst",
+        "reason": "Dependências entre unidades não são o foco da pergunta."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "Priorização de investimentos não é necessária."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "Campanhas e posicionamento não são necessários."
+      },
+      {
+        "id": "content_specialist",
+        "reason": "Conteúdo de marca não é necessário."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "Escopo de campanha não é necessário."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "Preços promocionais não são necessários."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Suprimentos e logística não são o foco."
+      },
+      {
+        "id": "procurement_analyst",
+        "reason": "Compras e fornecedores não são necessários."
+      },
+      {
+        "id": "process_quality_analyst",
+        "reason": "O fluxo de atendimento e sua verificação já estão cobertos pelas equipes selecionadas."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Estoque e reservas não são necessários."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Capacidade logística não é necessária."
+      },
+      {
+        "id": "finance_director",
+        "reason": "Finanças não são necessárias para definir a transferência."
+      },
+      {
+        "id": "financial_planning_analyst",
+        "reason": "Projeções financeiras não são necessárias."
+      },
+      {
+        "id": "accounting_analyst",
+        "reason": "Conciliação contábil não é necessária."
+      },
+      {
+        "id": "controller",
+        "reason": "Margem e orçamento não são necessários."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Liquidez não é necessária."
+      },
+      {
+        "id": "people_director",
+        "reason": "Gestão de pessoas não é o foco da pergunta."
+      },
+      {
+        "id": "people_development_specialist",
+        "reason": "Treinamento não é necessário para definir os estados."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "Admissões não são necessárias."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "Dimensionamento da equipe não é o foco."
+      },
+      {
+        "id": "legal_director",
+        "reason": "Contratos e conformidade não são o foco da pergunta."
+      },
+      {
+        "id": "privacy_specialist",
+        "reason": "Tratamento de dados pessoais não é o foco da pergunta."
+      },
+      {
+        "id": "risk_controls_analyst",
+        "reason": "Auditoria de controles não é necessária para definir o fluxo."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "Governança de incidentes não é o foco."
+      },
+      {
+        "id": "contract_analyst",
+        "reason": "Obrigações contratuais não são necessárias."
+      },
+      {
+        "id": "tech_lead",
+        "reason": "Implementação e verificação dos controles estão cobertas pelos especialistas selecionados."
+      },
+      {
+        "id": "frontend_engineer",
+        "reason": "Estados de interface não são necessários para responder sobre a exclusividade de resposta."
+      },
+      {
+        "id": "platform_engineer",
+        "reason": "Ambientes e infraestrutura não são o foco da pergunta."
+      },
+      {
+        "id": "data_engineer",
+        "reason": "Pipelines de dados não são necessários."
+      },
+      {
+        "id": "security_analyst",
+        "reason": "Resposta a incidente de segurança não é o foco."
+      },
+      {
+        "id": "data_analyst",
+        "reason": "Reconciliação de contagens não é necessária."
+      },
+      {
+        "id": "product_director",
+        "reason": "Gestão de produto não é necessária para esta definição operacional."
+      },
+      {
+        "id": "product_manager",
+        "reason": "Priorização de backlog não é o foco."
+      },
+      {
+        "id": "ux_designer",
+        "reason": "Pesquisa e prototipação não são necessárias para definir o controle."
+      },
+      {
+        "id": "service_designer",
+        "reason": "O escalonamento operacional está coberto pelo especialista de suporte."
+      },
+      {
+        "id": "sales_director",
+        "reason": "Vendas não são o foco da pergunta."
+      },
+      {
+        "id": "sales_operations_analyst",
+        "reason": "Pipeline comercial não é necessário."
+      },
+      {
+        "id": "account_specialist",
+        "reason": "Propostas comerciais não são necessárias."
+      },
+      {
+        "id": "customer_success_specialist",
+        "reason": "Adoção e retenção não são o foco."
+      },
+      {
+        "id": "customer_experience_analyst",
+        "reason": "Análise de satisfação não é necessária para definir a transferência."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 8
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 4,
+    "max_calls": 24,
+    "input_tokens": 55877,
+    "cached_input_tokens": 45568,
+    "output_tokens": 1531,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    },
+    {
+      "source": "training-calendar",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "training-calendar",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "training-calendar.txt",
+      "sha256": "366c2f6da77c54ada89a52a3521f112aa11633749da560ad645bf03049d17210"
+    },
+    {
+      "source": "webchat-sandbox",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "webchat-sandbox",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "webchat-sandbox.txt",
+      "sha256": "b7ed48e69e4716596432686301b96f96879bfe5bf807a2b2f7eeeae8d69a1a6c"
+    },
+    {
+      "source": "mba-academic",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "mba-academic",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "mba-academic.txt",
+      "sha256": "91200ff7d105a64a4e65c08271ee9050290238cc61d5bc6ace12652052961111"
+    }
+  ],
+  "retrieval": "hybrid-handoff-runtime-lab",
+  "facets": [],
+  "job_seconds": 45.33,
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "specialist_started",
+    "specialist_started",
+    "retrieval_completed",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_requested",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "worker_stopped"
+  ],
+  "retrieval_observed": true,
+  "candidates": [
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 5
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 30
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 15
+    },
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 3
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 59
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 13
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 43
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 22
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 41
+    },
+    {
+      "source": "contact",
+      "page": 11,
+      "line": 26
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 27
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 7
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 52
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "contact",
+      "page": 11,
+      "line": 23
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 7
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 21
+    }
+  ],
+  "report": null,
+  "admission_replay": {
+    "job_ids": [
+      "62462916-6095-47ab-b15c-03dad69663a4",
+      "62462916-6095-47ab-b15c-03dad69663a4",
+      "62462916-6095-47ab-b15c-03dad69663a4"
+    ],
+    "same_job": true,
+    "jobs_visible": 1,
+    "worker_starts": 1
+  },
+  "diagnostics": [
+    "ValueError"
+  ],
+  "model_call_metadata": [
+    {
+      "call": 1,
+      "seconds": 22.26284469998791,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "seconds": 5.951064799999585,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "seconds": 6.2704512999916915,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "seconds": 6.741624499991303,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    }
+  ]
+}

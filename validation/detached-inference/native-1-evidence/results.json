@@ -1,0 +1,13 @@
+{
+  "installation": "business-flow-1a901000c0",
+  "checkpoints": [],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "native LightRAG/ONNX projection and canonical recovery, deterministic coordination",
+  "postgres_image": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+  "result": "FAIL",
+  "error": "RuntimeError('service readiness deadline; see private service logs')",
+  "seconds": 28.41004280000925,
+  "disposable_resources_removed": true
+}

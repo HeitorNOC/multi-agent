@@ -1,0 +1,1 @@
+{"call": 1, "model": "gpt-6.1-terra", "prompt_sha256": "2cf8c130cb93bcd37cdb4c4ffa00b76dbe7e08fdacf439dbf2e2f3d1e0c03f2b", "reservation_id": "test", "instance": "fixture", "seconds": 3.879998985212296e-05, "exit_code": 0, "usage": [{"input_tokens": 10, "output_tokens": 2}], "unexpected_tool_events": 1}

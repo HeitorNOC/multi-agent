@@ -1,0 +1,586 @@
+{
+  "goal": "Analisar a diretiva executiva vinculada a esta tarefa. SHA-256 5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "status": "awaiting_approval",
+  "error": null,
+  "plan": {
+    "strategy": "A3",
+    "reason": "A análise exige liderança técnica sobre arquitetura e integrações, além de planejamento das dependências e entregas incrementais.",
+    "teams": [
+      {
+        "lead": "technology_director",
+        "specialists": [
+          "tech_lead",
+          "backend_engineer"
+        ],
+        "reason": "Conduzir a arquitetura, os contratos e a fundação executável do núcleo compartilhado e das integrações.",
+        "queries": [
+          "Quais responsabilidades, fluxos, tópicos e sessões o Fluxo-de-Mensageria.pdf descreve como referência, e quais decisões de módulos e serviços precisam ser justificadas para o novo projeto?",
+          "Quais capacidades atuais e limitações oficiais da Meta e da 360dialog governam standby, histórico, conectores e transferência e retorno de controle do MBA?",
+          "Como os documentos de padrões orientam contratos, validação, erros, persistência e organização dos módulos, e quais estados e eventos são necessários para handoff seguro e isolamento entre empresas?",
+          "Quais contratos Kafka e Socket.IO, interfaces de IA, controles de idempotência e observabilidade compõem o primeiro fluxo vertical e sua evolução para os dois canais e o Contact Center?"
+        ]
+      },
+      {
+        "lead": "executive_director",
+        "specialists": [
+          "project_manager"
+        ],
+        "reason": "Ordenar a análise e as entregas por dependências, riscos e valor demonstrável.",
+        "queries": [
+          "Quais documentos obrigatórios e validações externas são pré-requisitos da arquitetura e quais lacunas permanecem como hipóteses?",
+          "Quais dependências ordenam o primeiro fluxo vertical e as fases de WhatsApp, MBA, Webchat, Contact Center e resiliência?",
+          "Quais critérios reproduzíveis comprovam cada marco e distinguem testes com mocks de integrações reais?"
+        ]
+      }
+    ],
+    "capabilities": [
+      "technology_director",
+      "tech_lead",
+      "backend_engineer",
+      "executive_director",
+      "project_manager"
+    ],
+    "not_selected": [
+      {
+        "id": "business_analyst",
+        "reason": "O planejamento selecionado cobre as dependências imediatas."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "A diretiva já prioriza a iniciativa e suas fases."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "Campanhas não fazem parte da missão inicial."
+      },
+      {
+        "id": "content_specialist",
+        "reason": "Conteúdo de marca não é necessário para a análise técnica."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "Não há campanha a planejar."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "Não há mecânica promocional em análise."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Suprimentos e logística não são o foco do projeto."
+      },
+      {
+        "id": "procurement_analyst",
+        "reason": "A diretiva não solicita contratação de fornecedores."
+      },
+      {
+        "id": "process_quality_analyst",
+        "reason": "A análise prioriza arquitetura e fluxos de software."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Não há demanda de estoque."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Não há distribuição física a planejar."
+      },
+      {
+        "id": "finance_director",
+        "reason": "A diretiva não solicita avaliação financeira."
+      },
+      {
+        "id": "financial_planning_analyst",
+        "reason": "Não há orçamento ou cenário financeiro fornecido."
+      },
+      {
+        "id": "accounting_analyst",
+        "reason": "Não há fechamento contábil em questão."
+      },
+      {
+        "id": "controller",
+        "reason": "Margem e caixa não são requisitos desta análise."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Não há necessidade de financiamento apresentada."
+      },
+      {
+        "id": "people_director",
+        "reason": "A missão não solicita planejamento de pessoas."
+      },
+      {
+        "id": "people_development_specialist",
+        "reason": "Treinamento não é entregável inicial."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "Não há demanda demonstrada de admissões."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "A diretiva não fornece dados de disponibilidade de equipes."
+      },
+      {
+        "id": "legal_director",
+        "reason": "A análise inicial prioriza a arquitetura técnica."
+      },
+      {
+        "id": "privacy_specialist",
+        "reason": "Os controles de isolamento e acesso serão abordados na arquitetura inicial."
+      },
+      {
+        "id": "risk_controls_analyst",
+        "reason": "Os riscos técnicos serão registrados pela equipe selecionada."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "Campanhas e resposta a incidentes não são o foco inicial."
+      },
+      {
+        "id": "contract_analyst",
+        "reason": "Não há contratos comerciais fornecidos para análise."
+      },
+      {
+        "id": "frontend_engineer",
+        "reason": "A diretiva prioriza contratos e fluxos de backend."
+      },
+      {
+        "id": "qa_engineer",
+        "reason": "A equipe técnica definirá os critérios de verificação inicial."
+      },
+      {
+        "id": "platform_engineer",
+        "reason": "Observabilidade e operação serão consideradas na arquitetura inicial."
+      },
+      {
+        "id": "data_engineer",
+        "reason": "A persistência inicial integra a frente de backend."
+      },
+      {
+        "id": "security_analyst",
+        "reason": "A segurança inicial será tratada na arquitetura e nos contratos."
+      },
+      {
+        "id": "data_analyst",
+        "reason": "Não há contagens ou bases existentes a reconciliar."
+      },
+      {
+        "id": "product_director",
+        "reason": "A diretiva já estabelece o escopo e as prioridades iniciais."
+      },
+      {
+        "id": "product_manager",
+        "reason": "O backlog técnico será ordenado pela equipe selecionada."
+      },
+      {
+        "id": "ux_designer",
+        "reason": "Pesquisa e prototipação de interface não são a primeira prioridade."
+      },
+      {
+        "id": "service_designer",
+        "reason": "Os fluxos de atendimento serão definidos na análise técnica inicial."
+      },
+      {
+        "id": "sales_director",
+        "reason": "Vendas não integram a missão inicial."
+      },
+      {
+        "id": "sales_operations_analyst",
+        "reason": "Não há pipeline comercial a analisar."
+      },
+      {
+        "id": "account_specialist",
+        "reason": "Não há propostas ou contas comerciais em escopo."
+      },
+      {
+        "id": "customer_director",
+        "reason": "Os requisitos de atendimento humano já estão definidos na diretiva."
+      },
+      {
+        "id": "support_specialist",
+        "reason": "Não há solicitações de suporte a triar."
+      },
+      {
+        "id": "customer_success_specialist",
+        "reason": "Adoção e retenção não são o foco desta fase."
+      },
+      {
+        "id": "customer_experience_analyst",
+        "reason": "Não foram fornecidos dados de satisfação ou reclamações."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 8
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 8,
+    "max_calls": 24,
+    "input_tokens": 114453,
+    "cached_input_tokens": 81920,
+    "output_tokens": 2258,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    },
+    {
+      "source": "training-calendar",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "training-calendar",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "training-calendar.txt",
+      "sha256": "366c2f6da77c54ada89a52a3521f112aa11633749da560ad645bf03049d17210"
+    },
+    {
+      "source": "webchat-sandbox",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "webchat-sandbox",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "webchat-sandbox.txt",
+      "sha256": "b7ed48e69e4716596432686301b96f96879bfe5bf807a2b2f7eeeae8d69a1a6c"
+    },
+    {
+      "source": "mba-academic",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "mba-academic",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "mba-academic.txt",
+      "sha256": "91200ff7d105a64a4e65c08271ee9050290238cc61d5bc6ace12652052961111"
+    }
+  ],
+  "retrieval": "hybrid",
+  "facets": [],
+  "job_seconds": 72.48,
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "specialist_started",
+    "specialist_started",
+    "retrieval_completed",
+    "inference_requested",
+    "retrieval_completed",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "director_completed",
+    "inference_completed",
+    "director_completed",
+    "synthesis",
+    "inference_requested",
+    "inference_completed",
+    "inference_requested",
+    "inference_completed",
+    "review_ready",
+    "checkpoint_saved",
+    "worker_stopped"
+  ],
+  "retrieval_observed": true,
+  "candidates": [
+    {
+      "source": "mba",
+      "page": 8,
+      "line": 14
+    },
+    {
+      "source": "webchat-sandbox",
+      "page": null,
+      "line": 1
+    },
+    {
+      "source": "webchat-sandbox",
+      "page": null,
+      "line": 1
+    },
+    {
+      "source": "mba",
+      "page": 4,
+      "line": 11
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 1
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 60
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 57
+    },
+    {
+      "source": "contact",
+      "page": 11,
+      "line": 27
+    },
+    {
+      "source": "mba",
+      "page": 4,
+      "line": 9
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 3
+    },
+    {
+      "source": "mba",
+      "page": 8,
+      "line": 12
+    },
+    {
+      "source": "contact",
+      "page": 11,
+      "line": 21
+    },
+    {
+      "source": "mba",
+      "page": 4,
+      "line": 6
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 20
+    },
+    {
+      "source": "contact",
+      "page": 11,
+      "line": 18
+    },
+    {
+      "source": "mba",
+      "page": 8,
+      "line": 13
+    }
+  ],
+  "report": {
+    "status": "partial_evidence",
+    "summary": "Parte da pergunta tem evidência para revisão humana.",
+    "citations": [
+      {
+        "id": "bbaf3760fb4e8c0ba6180e734c2625b55fb78db0dd7fb5a271a2fd2ef3b3b6f0",
+        "source": "contact",
+        "version": 1,
+        "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510",
+        "line": 29,
+        "quote": "7.1 Conexão O workspace abre uma única conexão Socket.IO (transporte websocket) com o cc-message-socket, a partir de connectionDAAppSocketIO em common-ui.",
+        "pdf_page": 13
+      }
+    ],
+    "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+    "requires_approval": true,
+    "unanswered": [
+      "Quais responsabilidades, fluxos, tópicos e sessões o Fluxo-de-Mensageria.pdf descreve como referência, e quais decisões de módulos e serviços precisam ser justificadas para o novo projeto?",
+      "Quais capacidades atuais e limitações oficiais da Meta e da 360dialog governam standby, histórico, conectores e transferência e retorno de controle do MBA?",
+      "Como os documentos de padrões orientam contratos, validação, erros, persistência e organização dos módulos, e quais estados e eventos são necessários para handoff seguro e isolamento entre empresas?",
+      "Quais documentos obrigatórios e validações externas são pré-requisitos da arquitetura e quais lacunas permanecem como hipóteses?",
+      "Quais dependências ordenam o primeiro fluxo vertical e as fases de WhatsApp, MBA, Webchat, Contact Center e resiliência?",
+      "Quais critérios reproduzíveis comprovam cada marco e distinguem testes com mocks de integrações reais?"
+    ],
+    "directive_sha256": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+    "requirements": [
+      "Quais responsabilidades, fluxos, tópicos e sessões o Fluxo-de-Mensageria.pdf descreve como referência, e quais decisões de módulos e serviços precisam ser justificadas para o novo projeto?",
+      "Quais capacidades atuais e limitações oficiais da Meta e da 360dialog governam standby, histórico, conectores e transferência e retorno de controle do MBA?",
+      "Como os documentos de padrões orientam contratos, validação, erros, persistência e organização dos módulos, e quais estados e eventos são necessários para handoff seguro e isolamento entre empresas?",
+      "Quais contratos Kafka e Socket.IO, interfaces de IA, controles de idempotência e observabilidade compõem o primeiro fluxo vertical e sua evolução para os dois canais e o Contact Center?",
+      "Quais documentos obrigatórios e validações externas são pré-requisitos da arquitetura e quais lacunas permanecem como hipóteses?",
+      "Quais dependências ordenam o primeiro fluxo vertical e as fases de WhatsApp, MBA, Webchat, Contact Center e resiliência?",
+      "Quais critérios reproduzíveis comprovam cada marco e distinguem testes com mocks de integrações reais?"
+    ]
+  },
+  "admission_replay": {
+    "job_ids": [
+      "6a5a991c-689c-44b5-af57-69b9a6d6bba8",
+      "6a5a991c-689c-44b5-af57-69b9a6d6bba8",
+      "6a5a991c-689c-44b5-af57-69b9a6d6bba8"
+    ],
+    "same_job": true,
+    "jobs_visible": 1,
+    "worker_starts": 1
+  },
+  "directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "retrieval_by_agent": [
+    {
+      "agent": "project_manager",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba",
+        "webchat-sandbox"
+      ]
+    },
+    {
+      "agent": "backend_engineer",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba",
+        "mba-academic"
+      ]
+    },
+    {
+      "agent": "tech_lead",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba",
+        "mba-academic"
+      ]
+    },
+    {
+      "agent": "executive_director",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba",
+        "webchat-sandbox"
+      ]
+    },
+    {
+      "agent": "technology_director",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba",
+        "mba-academic"
+      ]
+    }
+  ],
+  "directive_dispatches": [
+    {
+      "pilot_directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+      "job": "6a5a991c-689c-44b5-af57-69b9a6d6bba8",
+      "characters": 23385
+    }
+  ],
+  "diagnostics": [],
+  "model_call_metadata": [
+    {
+      "call": 1,
+      "seconds": 25.850259999977425,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "seconds": 4.542892900004517,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "seconds": 8.047792599973036,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "seconds": 6.065356500010239,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "seconds": 3.5485859000182245,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "seconds": 6.587243300018599,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "seconds": 6.861905599973397,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "seconds": 7.6643371999962255,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a805-208d-78f1-96e6-4f1f1b797bad"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O teto financeiro de estudo da iniciativa Celeste é **R$ 9.700.000**, identificado como SIGILO_CELESTE_2026. Esse valor é um limite de estudo, não um pagamento autorizado nem uma aquisição concluída. [1]\\n\\nA versão selecionada tem início de vigência em **1º de janeiro de 2026**, abrangendo a data consultada de 1º de fevereiro de 2026. Ela foi publicada em 4 de novembro de 2026. Não foi informado fim de vigência. [1]\\n\\n### References\\n\\n* [1] manual-celeste@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13785,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":147,"reasoning_output_tokens":0}}

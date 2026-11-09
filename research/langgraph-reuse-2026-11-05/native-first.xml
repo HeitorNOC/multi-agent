@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="10.560" timestamp="2026-11-05T00:54:20.657174-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="research.langgraph-reuse-2026-11-05.test_native" name="test_native_recovery_patterns_in_new_processes" time="10.379"><failure message="AssertionError: Traceback (most recent call last):&#10;    File &quot;C:\Users\PC\multi-agent\research\langgraph-reuse-2026-11-05\native_worker.py&quot;, line 71, in &lt;module&gt;&#10;      asyncio.run(main(json.loads(sys.stdin.readline())))&#10;    File &quot;C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py&quot;, line 195, in run&#10;      return runner.run(main)&#10;             ^^^^^^^^^^^^^^^^&#10;[+23 more lines; full report in element text]">def test_native_recovery_patterns_in_new_processes():
+        lab=Lab();started=time.perf_counter()
+        try:
+            lab.start()
+            paused=lab.worker('task_interrupt');assert paused['status']=='paused'
+            completed=lab.worker('task_interrupt',resume=True)
+            assert completed['value']['result']==paused['interrupts'][0]['result'] and lab.counts()['expensive']==1
+            lab.mark('completed_task_result_reused_across_process_and_human_interrupt')
+            failed=lab.worker('siblings');assert failed['status']=='failed'
+            resumed=lab.worker('siblings',resume=True)
+            assert resumed['status']=='done' and lab.counts()['a']==1 and lab.counts()['b']==2
+            lab.mark('pending_writes_preserve_successful_parallel_node_across_process')
+&gt;           lab.worker('effect',crash=True);result=lab.worker('effect',resume=True)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+research\langgraph-reuse-2026-11-05\test_native.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;test_native.Lab object at 0x000001BE337E60F0&gt;, mode = 'effect'
+payload = {'resume': True}
+
+    def worker(self,mode,**payload):
+        c={'mode':mode,'dsn':self.dsn,'store':str(self.state/'supplier.sqlite'),'thread':self.id+':'+mode,**payload}
+        proc=subprocess.run([str(PY),str(HERE/'native_worker.py')],input=json.dumps(c),capture_output=True,text=True,encoding='utf-8',cwd=ROOT,timeout=25)
+        self.evidence.setdefault('calls',[]).append({'mode':mode,'resume':bool(payload.get('resume')),'exit_code':proc.returncode,'stderr':self.redact(proc.stderr)[-2000:]})
+        if payload.get('crash'):assert proc.returncode==88;return
+&gt;       assert proc.returncode==0,self.redact(proc.stderr)[-2000:]
+E       AssertionError: Traceback (most recent call last):
+E           File "C:\Users\PC\multi-agent\research\langgraph-reuse-2026-11-05\native_worker.py", line 71, in &lt;module&gt;
+E             asyncio.run(main(json.loads(sys.stdin.readline())))
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py", line 195, in run
+E             return runner.run(main)
+E                    ^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py", line 118, in run
+E             return self._loop.run_until_complete(task)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py", line 691, in run_until_complete
+E             return future.result()
+E                    ^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\research\langgraph-reuse-2026-11-05\native_worker.py", line 42, in main
+E             value=await workflow.ainvoke(None if c.get('resume') else {'business_key':'stable-fixture-intent'},cfg,durability='sync')
+E                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\main.py", line 4177, in ainvoke
+E             async for chunk in self.astream(
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\main.py", line 3437, in astream
+E             async with AsyncPregelLoop(
+E                        ^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\_loop.py", line 2147, in __aenter__
+E             self.updated_channels = self._first(
+E                                     ^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\_loop.py", line 1187, in _first
+E             raise EmptyInputError(f"Received no input for {input_keys}")
+E         langgraph.errors.EmptyInputError: Received no input for __start__
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['C:\\Users\\PC\\multi-agent\\validation\\integrated-pilot\\.venv\\Scripts\\python.exe', 'C:\\Us...nputError(f"Received no input for {input_keys}")\nlanggraph.errors.EmptyInputError: Received no input for __start__\n').returncode
+
+research\langgraph-reuse-2026-11-05\test_native.py:19: AssertionError</failure></testcase></testsuite></testsuites>

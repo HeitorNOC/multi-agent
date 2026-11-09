@@ -1,0 +1,110 @@
+{
+  "installation": "business-flow-27c4ba5e70",
+  "checkpoints": [
+    {
+      "name": "two_apis_progress_and_lease_renewal_beyond_original_deadline"
+    },
+    {
+      "name": "duplicate_admissions_one_provider_execution_and_stale_epoch_cannot_commit"
+    },
+    {
+      "name": "expired_lease_rejects_late_response_and_current_epoch_recovers_same_receipt"
+    },
+    {
+      "name": "revocation_during_inference_prevents_commit_and_delivery"
+    },
+    {
+      "name": "business_process_loss_after_admission_recovers_provider_receipt_without_reexecution"
+    },
+    {
+      "name": "provider_process_loss_after_durable_receipt_recovers_without_reexecution"
+    },
+    {
+      "name": "provider_admission_without_receipt_stays_unknown_and_never_reexecutes"
+    },
+    {
+      "name": "real_langgraph_worker_uses_detached_path"
+    }
+  ],
+  "worker_calls": [
+    {
+      "job": "6c35214e-ac23-4213-8201-8847da886bd4",
+      "resume": false,
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 1, \"epoch\": 1}\n",
+      "stderr": ""
+    }
+  ],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "unknown_inference_id": "business-flow-27c4ba5e70:inference:ffc6537a55065e3e2849df465a109b07e369031a18e949d4fdc8038450f387bb",
+  "result": "PASS_BOUNDED_DETACHED_INFERENCE",
+  "control_latencies_seconds": [
+    0.046782499994151294,
+    0.0271416999748908
+  ],
+  "provider_executions": [
+    [
+      "business-flow-27c4ba5e70:inference:199829391d669f24e80d2c2e8a87430f9814037d93f03c47bdc2f61d985ba2ac",
+      "complete",
+      1
+    ],
+    [
+      "business-flow-27c4ba5e70:inference:4d993fcbb8a3ffa110bfe81b317e9434c38366029ccaeb0febc543f068300adf",
+      "complete",
+      1
+    ],
+    [
+      "business-flow-27c4ba5e70:inference:69dd07918712f8cf1b7f965a8be9c6c76cb355786c06b5bc94f606182243dde6",
+      "complete",
+      1
+    ],
+    [
+      "business-flow-27c4ba5e70:inference:8a0c2dc7c26f50cda171c0617ee792d66cd2c6c9d10f15e8665e663f795d8700",
+      "complete",
+      1
+    ],
+    [
+      "business-flow-27c4ba5e70:inference:bd348c91d4ccfe43b5ba468c301bb63cd68970b8f28e51128b400401f72f4417",
+      "complete",
+      1
+    ],
+    [
+      "business-flow-27c4ba5e70:inference:c490f43c263909a143eca1667bc95bd7442d00240139e91b9828471c08c56ad5",
+      "complete",
+      1
+    ],
+    [
+      "business-flow-27c4ba5e70:inference:e24b03eea2214ddc6cef6bf5d1e5afe758d3d1756e1557c0c5374447c097299f",
+      "complete",
+      1
+    ],
+    [
+      "business-flow-27c4ba5e70:inference:ffc6537a55065e3e2849df465a109b07e369031a18e949d4fdc8038450f387bb",
+      "admitted",
+      1
+    ]
+  ],
+  "signed_final": {
+    "budgets": {
+      "business": {
+        "cap": 32,
+        "reserved": 9
+      }
+    },
+    "pending_operations": 0
+  },
+  "seconds": 13.071603599993978,
+  "disposable_resources_removed": true
+}

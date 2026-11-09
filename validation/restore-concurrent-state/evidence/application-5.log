@@ -1,0 +1,40 @@
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: PostgreSQL, Retry config: attempts=10, backoff=3.0s, backoff_max=30.0s, pool_close_timeout=5.0s
+INFO: PostgreSQL, VECTOR extension enabled
+INFO: PostgreSQL, Connected to database at 127.0.0.1:63194/knowledge without SSL
+INFO: chunk_id column already exists in LIGHTRAG_LLM_CACHE table
+INFO: cache_type column already exists in LIGHTRAG_LLM_CACHE table
+INFO: queryparam column already exists in LIGHTRAG_LLM_CACHE table
+INFO: mode column does not exist in LIGHTRAG_LLM_CACHE table
+INFO: chunks_list column already exists in LIGHTRAG_DOC_STATUS table
+INFO: llm_cache_list column already exists in LIGHTRAG_DOC_CHUNKS table
+INFO: track_id column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Index on track_id column already exists for LIGHTRAG_DOC_STATUS table
+INFO: metadata column already exists in LIGHTRAG_DOC_STATUS table
+INFO: error_msg column already exists in LIGHTRAG_DOC_STATUS table
+INFO: HNSW vector index idx_60a018b75b81_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_e7b623ae5c8a_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_c8dc6c405ffd_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: [audit_8d32106e97_e2ae99b0e728704976ab8960edd337fe311dd192cd77fc816e77b0740bd8caa6] Connected to neo4j at bolt://127.0.0.1:63195
+INFO: [audit_8d32106e97_e2ae99b0e728704976ab8960edd337fe311dd192cd77fc816e77b0740bd8caa6] Ensured B-Tree index on entity_id for audit_8d32106e97_e2ae99b0e728704976ab8960edd337fe311dd192cd77fc816e77b0740bd8caa6 in neo4j
+INFO: [audit_8d32106e97_e2ae99b0e728704976ab8960edd337fe311dd192cd77fc816e77b0740bd8caa6] Found existing index 'entity_id_fulltext_idx_audit_8d32106e97_e2ae99b0e728704976ab8960edd337fe311dd192cd77fc816e77b0740bd8caa6' with state: ONLINE
+INFO: [audit_8d32106e97_e2ae99b0e728704976ab8960edd337fe311dd192cd77fc816e77b0740bd8caa6] Full-text index 'entity_id_fulltext_idx_audit_8d32106e97_e2ae99b0e728704976ab8960edd337fe311dd192cd77fc816e77b0740bd8caa6' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Query nodes: equipe Aurora, data de vigência, 2026-02-01T00:00:00+00:00, corte de conhecimento, 2026-11-04T18:52:16.083988+00:00, politica-remoto@v1 (top_k:8, cosine:0.25)
+INFO: Local query: 1 entities, 0 relations
+INFO: Query edges: nome do projeto (top_k:8, cosine:0.25)
+INFO: Naive query: 1 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 1 entities, 0 relations, 1 vector chunks
+INFO: After truncation: 1 entities, 0 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 1 entities, 0 relations, 1 chunks
+INFO: Final chunks S+F/O: E1/1
+INFO:  == LLM cache == Query cache hit, using cached response as query result

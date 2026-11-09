@@ -1,0 +1,13 @@
+{
+  "installation": "business-flow-4c26c45df4",
+  "checkpoints": [],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "result": "FAIL",
+  "error": "RuntimeError('service readiness deadline; see private service logs')",
+  "seconds": 33.7680648000096,
+  "disposable_resources_removed": true
+}

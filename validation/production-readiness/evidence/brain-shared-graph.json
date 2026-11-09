@@ -1,0 +1,10 @@
+{
+  "result": "RISK CONFIRMED",
+  "engine": "real LightRAG hybrid + journaled ainsert",
+  "extraction": "deterministic fixture",
+  "entities": 2,
+  "relationships": 1,
+  "chunks": 2,
+  "secret_remains_after_only_filtering_chunks": true,
+  "required": "pre-retrieval authorization of graph/vector/cache partitions or proven source-aware retrieval, not only post-filtered citations"
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a4ae-e19d-7e12-9196-6f6abd6c555b"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"Não há informação suficiente no contexto para determinar o valor aprovado da meta de vendas de março de 2026.\\n\\nOs dados disponíveis informam apenas as vendas realizadas em janeiro e fevereiro de 2026. [1]\\n\\n### References\\n\\n* [1] vendas-campanha@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12822,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":77,"reasoning_output_tokens":0}}

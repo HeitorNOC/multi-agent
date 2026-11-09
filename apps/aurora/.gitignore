@@ -1,0 +1,6 @@
+node_modules/
+.venv/
+.embedding-venv/
+.models/
+.cache/
+__pycache__/

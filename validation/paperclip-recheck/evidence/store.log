@@ -1,0 +1,22 @@
+C:\Users\PC\multi-agent\poc\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+
+=================================== ERRORS ====================================
+_________ ERROR collecting validation/paperclip-recheck/test_store.py _________
+ImportError while importing test module 'C:\Users\PC\multi-agent\validation\paperclip-recheck\test_store.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validation\paperclip-recheck\test_store.py:4: in <module>
+    from runtime import Store
+validation\paperclip-recheck\runtime.py:10: in <module>
+    from runtime import Knowledge
+E   ImportError: cannot import name 'Knowledge' from partially initialized module 'runtime' (most likely due to a circular import) (C:\Users\PC\multi-agent\validation\paperclip-recheck\runtime.py)
+=========================== short test summary info ===========================
+ERROR validation/paperclip-recheck/test_store.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 2.33s

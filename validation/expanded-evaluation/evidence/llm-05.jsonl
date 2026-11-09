@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e0-e740-7363-89c3-03bfec27e9bb"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"entity<|#|>Pagamentos<|#|>Concept<|#|>Pagamentos mencionados no texto de entrada.\\nentity<|#|>Dados Sintéticos<|#|>Data<|#|>Dados descritos como sintéticos e que não autorizam ações externas.\\n<|COMPLETE|>\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13837,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":84,"reasoning_output_tokens":0}}

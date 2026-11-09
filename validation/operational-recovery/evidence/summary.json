@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "operational_result": "PASS",
+  "semantic_review": "FAIL_TEMPORAL_METADATA_PRESENTATION",
+  "production": "NO_GO",
+  "elapsed_seconds": 328.83893110000645,
+  "model_calls": 10,
+  "usage": {
+    "input_tokens": 129920,
+    "cached_input_tokens": 86528,
+    "output_tokens": 1157,
+    "reasoning_output_tokens": 27
+  },
+  "unexpected_model_tools": 0,
+  "checkpoints": 7,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a7e8-1b4e-70a0-b781-147b1e013188"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O teto diário de alimentação da equipe Aurora é **R$ 240**. [1]\\n\\nA versão consultada entrou em vigor em 1º de janeiro de 2026. Os metadados não informam uma data de término de vigência.\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13162,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":85,"reasoning_output_tokens":0}}

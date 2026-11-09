@@ -1,0 +1,85 @@
+C:\Users\PC\multi-agent\validation\openagents\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+.F.F...F....F                                                            [100%]
+================================== FAILURES ===================================
+________________ test_human_gate_budget_and_trace[agentscope] _________________
+
+host = <test_comparison.Host object at 0x000001A9AB3684D0>
+engine = 'agentscope'
+
+    @pytest.mark.parametrize('engine',['langgraph','agentscope'])
+    def test_human_gate_budget_and_trace(host,engine):
+        c=host.create(engine)
+        result=host.worker(c);assert result['returncode']==0,result
+        waiting=host.call(c,'/status');assert waiting['state']=='waiting_approval'
+        assert waiting['actual']==2 and waiting['held']==2 and waiting['deliveries']==0
+        for finding in waiting['findings'].values():
+            assert finding['sources'] and all(s['file_path']=='synthetic-A.md' and s['version']==1 for s in finding['sources'])
+        with pytest.raises(Rejected) as denied:host.call(c,'/effect',{'approved':True})
+        assert denied.value.code==403
+        with pytest.raises(Rejected):host.call(c,'/approve',{'run':c['run'],'plan':waiting['plan']})
+        with pytest.raises(Rejected):host.board_call('/approve',{'run':c['run'],'plan':'stale-plan'})
+        host.approve(c)
+>       result=host.worker(c,'act');assert result['returncode']==0,result
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {'run': 'agentscope-0b7b8a76617e', 'engine': 'agentscope', 'phase': 'act', 'fault': {}, ...}
+E       assert 1 == 0
+
+validation\motor-comparison\test_comparison.py:94: AssertionError
+______________ test_abrupt_worker_exit_and_recovery[agentscope] _______________
+
+host = <test_comparison.Host object at 0x000001A9AB3684D0>
+engine = 'agentscope'
+
+    @pytest.mark.parametrize('engine',['langgraph','agentscope'])
+    def test_abrupt_worker_exit_and_recovery(host,engine):
+        c=host.create(engine)
+        crashed=host.worker(c,crash_after_sales=True);assert crashed['returncode']==71,crashed
+        partial=host.call(c,'/status');assert set(partial['findings'])=={'sales'} and partial['actual']==1
+        resumed=host.worker(c);assert resumed['returncode']==0,resumed
+>       host.approve(c);assert host.worker(c,'act')['returncode']==0
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       assert 1 == 0
+
+validation\motor-comparison\test_comparison.py:109: AssertionError
+________ test_effect_ack_loss_then_control_server_restart[agentscope] _________
+
+host = <test_comparison.Host object at 0x000001A9AB3684D0>
+engine = 'agentscope'
+
+    @pytest.mark.parametrize('engine',['langgraph','agentscope'])
+    def test_effect_ack_loss_then_control_server_restart(host,engine):
+        c=host.create(engine,fault='after_effect')
+        assert host.worker(c)['returncode']==0
+        host.approve(c)
+        failed=host.worker(c,'act');assert failed['returncode']!=0
+>       uncertain=host.call(c,'/status');assert uncertain['state']=='effect_pending' and uncertain['deliveries']==1
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert ('approved' == 'effect_pending'
+E         
+E         - effect_pending
+E         + approved)
+
+validation\motor-comparison\test_comparison.py:151: AssertionError
+___________ test_real_openagents_redelivery_inbox_dedup[agentscope] ___________
+
+host = <test_comparison.Host object at 0x000001A9AB3684D0>
+engine = 'agentscope'
+client = <starlette.testclient.TestClient object at 0x000001A9AB41BA40>
+workspace = {'id': 'cfce780b-6a8c-432b-8e0d-885cf7f4a11e', 'slug': '3c590cee', 'name': 'Test Workspace', 'token': 'plRDymIiFH8nF_UC0IcNueW69rU6vAUoVrxVplwJUd0', ...}
+
+    @pytest.mark.parametrize('engine',['langgraph','agentscope'])
+    def test_real_openagents_redelivery_inbox_dedup(host,engine,client,workspace):
+>       c=host.create(engine);assert host.worker(c)['returncode']==0;host.approve(c);assert host.worker(c,'act')['returncode']==0
+                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       assert 1 == 0
+
+validation\motor-comparison\test_comparison.py:189: AssertionError
+=========================== short test summary info ===========================
+FAILED validation/motor-comparison/test_comparison.py::test_human_gate_budget_and_trace[agentscope]
+FAILED validation/motor-comparison/test_comparison.py::test_abrupt_worker_exit_and_recovery[agentscope]
+FAILED validation/motor-comparison/test_comparison.py::test_effect_ack_loss_then_control_server_restart[agentscope]
+FAILED validation/motor-comparison/test_comparison.py::test_real_openagents_redelivery_inbox_dedup[agentscope]
+4 failed, 9 passed in 47.72s

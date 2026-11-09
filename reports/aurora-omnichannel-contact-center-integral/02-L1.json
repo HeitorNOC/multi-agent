@@ -1,0 +1,55 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "summary": "Capa e escopo: o documento aborda Contact Center e workspace, ciclo de vida, mensagens em tempo real, distribuição automática e schedules, com foco na tela do atendente. A versão é de 06/11/2026 e declara base em tatodesk-ui (workspace-ui) e no GitLab."
+    },
+    {
+      "page": 2,
+      "summary": "Sumário das seções sobre arquitetura, workspace, estados e transições, entrada na fila, jornada do atendente, mensagens em tempo real e ações como iniciar, transferir, pausar e finalizar."
+    },
+    {
+      "page": 3,
+      "summary": "O Contact Center coloca clientes em fila e os conecta a atendentes humanos em canais digitais e telefonia; o workspace permite conversar e gerir o atendimento. O documento informa as versões e os repositórios consultados e distingue evidência lida no código de deduções marcadas como inferidas."
+    },
+    {
+      "page": 4,
+      "summary": "A legenda define [mapeamento anterior] como informação de documentação anterior que não foi relida nesta rodada."
+    },
+    {
+      "page": 5,
+      "summary": "O mapa descreve workspace-ui chamando contact-center-portal via GraphQL, que repassa chamadas ao contact-center REST. O portal extrai accountID e userID do token; contact-center mantém atendimentos e outras funções. O diagrama também associa cc-message-socket, cc-message-consumer e tópicos de mensagens ao fluxo em tempo real."
+    }
+  ],
+  "contracts": [
+    {
+      "pages": [
+        3
+      ],
+      "finding": "O Contact Center coloca clientes em fila e os conecta a atendentes humanos nos canais WhatsApp, Webchat, Telegram, Instagram e Facebook, além de telefonia. O trecho não especifica o mecanismo de handoff do bot.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        5
+      ],
+      "finding": "workspace-ui chama contact-center-portal por GraphQL; o portal extrai accountID e userID do token e repassa as chamadas ao contact-center REST, núcleo responsável pelos atendimentos.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        5
+      ],
+      "finding": "O mapa indica que cc-message-socket escreve em <canal>-reply e que cc-message-consumer recebe de message-human e repassa ao socket. O trecho não define o conteúdo nem as garantias dessas mensagens.",
+      "status": "documentado"
+    }
+  ],
+  "gaps": [
+    "As páginas fornecidas não descrevem os estados e as transições do handoff entre bot e atendimento humano, seus gatilhos ou tratamento de falhas; verificar as seções indicadas no sumário e o código.",
+    "Não estão descritas as regras de roteamento do bot para fila, área, departamento ou atendente, nem os critérios de distribuição; verificar código e ambiente real.",
+    "Não está definido qual contexto do bot é transferido ao humano, seu formato, persistência, disponibilidade no workspace ou vínculo com o atendimento; verificar código e ambiente real.",
+    "Não há contrato de API ou eventos específico do handoff, incluindo payloads, autenticação, ordenação, idempotência e confirmação de entrega; verificar os serviços envolvidos.",
+    "O comportamento efetivo dos canais e eventuais limites ou garantias de provedores externos permanecem pendentes de verificação com os provedores e em ambiente real.",
+    "Não foram fornecidas propostas de alteração nem as páginas posteriores indicadas pelo sumário; as afirmações do documento sobre código não foram verificadas independentemente nesta análise."
+  ]
+}

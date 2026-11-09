@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1b3f5-2e45-70c3-8049-e02d5b93661a"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"verdict\\\":\\\"pass\\\",\\\"evidence\\\":\\\"O teste passou com código de saída 0. O registro confirma um único efeito para entregas repetidas, conflito sem alteração do payload original, isolamento entre tenants, reconhecimento de duplicata após reabrir o banco SQLite e aceitação da nova tentativa após falha de escrita sem efeito persistido.\\\"}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":11670,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":84,"reasoning_output_tokens":0}}

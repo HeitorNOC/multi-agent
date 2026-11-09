@@ -1,0 +1,33 @@
+✔ canonical historical read succeeds while another connection holds an uncommitted editorial write (147.4198ms)
+✖ concurrent canonical readers return the committed snapshot without transient write-lock errors (1491.31ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1821.235
+
+✖ failing tests:
+
+test at validation\langgraph-business-flow\editorial_read.test.ts:28:1
+✖ concurrent canonical readers return the committed snapshot without transient write-lock errors (1491.31ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'database is locked'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///C:/Users/PC/multi-agent/validation/langgraph-business-flow/editorial_read.test.ts:43:10)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'database is locked' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

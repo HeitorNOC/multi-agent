@@ -1,0 +1,7 @@
+2026-11-04 — independent Docker inventory after the completed canonical/advice experiment.
+First request was not executed: automatic approval review could not complete because of a usage limit. This was not a safety determination and was not bypassed.
+After the user resumed work, the same read-only inventory was retried through the normal approval flow.
+docker ps -a --filter name=canonical-audit- --format '{{.Names}}': exit 0, empty.
+docker volume ls --filter name=canonical-audit- --format '{{.Name}}': exit 0, empty.
+docker network ls --filter name=canonical-audit- --format '{{.Name}}': exit 0, empty.
+No unrelated resources were removed or global prune used.

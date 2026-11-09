@@ -1,0 +1,122 @@
+{
+  "authority_head": "ff0b1def42873f75127d26f27ef96a1a1742c7a4904f7f0d6bddb8694e95dcfa",
+  "authority_seq": 5,
+  "budget_floors": {
+    "model": {
+      "cap": 40,
+      "reserved": 5
+    },
+    "stress": {
+      "cap": 7,
+      "reserved": 4
+    }
+  },
+  "format": "restore-state-v1",
+  "inventory": {
+    "editorial": "7967d86389994947fefb20e6fc5af5069419b591cc691d69f02608ddba8edd44",
+    "grants": [
+      [
+        "0f855f31-1b54-4527-903c-30473439acc8",
+        "aquisicao"
+      ],
+      [
+        "0f855f31-1b54-4527-903c-30473439acc8",
+        "politica-remoto"
+      ],
+      [
+        "26955afb-8c4d-4011-9bf3-dc021108ea9e",
+        "aquisicao"
+      ],
+      [
+        "26955afb-8c4d-4011-9bf3-dc021108ea9e",
+        "politica-remoto"
+      ],
+      [
+        "35807392-7b45-4dba-9623-85cf2f9f5a75",
+        "aquisicao"
+      ],
+      [
+        "35807392-7b45-4dba-9623-85cf2f9f5a75",
+        "politica-remoto"
+      ],
+      [
+        "7b62383a-5b30-47bb-b0a2-e90fc0d018f5",
+        "aquisicao"
+      ],
+      [
+        "7b62383a-5b30-47bb-b0a2-e90fc0d018f5",
+        "politica-remoto"
+      ],
+      [
+        "b777a69f-c342-41a1-a40e-4247c212e382",
+        "politica-remoto"
+      ]
+    ],
+    "knowledge": {
+      "lightrag_doc_chunks": {
+        "rows": 1,
+        "sha256": "2f6f860fdb17614788c98e897061cdd2f53dfcda856f157cdd067653842f07e2"
+      },
+      "lightrag_doc_full": {
+        "rows": 1,
+        "sha256": "d3076623b4e03d316aee856e11fa7c528e0776888405fe18e47e49daf213b4ed"
+      },
+      "lightrag_doc_status": {
+        "rows": 1,
+        "sha256": "518fedc56cbbf5922221830b3b792bc63ac107bba1c163197c766f8679c9155f"
+      },
+      "lightrag_entity_chunks": {
+        "rows": 5,
+        "sha256": "da0ac5eb717f6f90aa7f7e6e330b2ace2f6a8b0dc9c5dae50e7a00bbab2eb17a"
+      },
+      "lightrag_full_entities": {
+        "rows": 1,
+        "sha256": "c81fc7fe2adfbf451e62314c3053de295f480eb99241b700cd2ae27043ec281e"
+      },
+      "lightrag_full_relations": {
+        "rows": 1,
+        "sha256": "2140cc2a3cb9dbcbbf80705610d4e237ab73f778f5f7c57bf1886180c6c45525"
+      },
+      "lightrag_llm_cache": {
+        "rows": 5,
+        "sha256": "b732d86732032da376c5bef0894b3b5861da29a02d9368265373ca18bc97b991"
+      },
+      "lightrag_relation_chunks": {
+        "rows": 1,
+        "sha256": "e1e0dcf14f963c9414895fea9b4914e735529d6594b6eaf919e28a687d7d2ac6"
+      },
+      "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+        "rows": 1,
+        "sha256": "c67f00273f12fe3f4fd9691dcbb8e4fe633dc0866dcc48547547ff0213650218"
+      },
+      "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+        "rows": 5,
+        "sha256": "4cb21d3c774879d0b97e380a15716fc0ec1428a0c7029edb18e3d9412a3520be"
+      },
+      "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+        "rows": 1,
+        "sha256": "2dd52fab0551e0f5920e842480fee749952c1ca779df3d27ae0292f6ff9c72a4"
+      }
+    },
+    "neo4j": "eeaf2b493ac67210bfaca0d8e4d78aa8bc2ef2bd014b150cc165d3db01c39837",
+    "neo4j_edges": 1,
+    "neo4j_nodes": 5,
+    "tables": {
+      "decision_admissions": "895d9630154ca6f636e4c4fb5801415998cc98c21100c3964b0539a9ac7d0e42",
+      "decision_receipts": "d5ac6b0d7008612b1dad4c2033d41c7c690b25cebd7b85b4b382cef06ab44c33",
+      "decisions": "d5ac6b0d7008612b1dad4c2033d41c7c690b25cebd7b85b4b382cef06ab44c33",
+      "format_control": "5789e5e5184bfcf74cccd11d2d80f4f8ffd8d0f05a75a763dbea8a1d704dc119",
+      "freshness_receipts": "79a2f8bd738907a9287d02330e5bf888c02a31c23b606282da3b3344b2781760",
+      "intent_proposals": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "intent_tombstones": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "principals": "f68042241eb840fe6bc8d5ee6e262b2a4b1d512ed58c77ead47191385d8b2667",
+      "projections": "6b89063b58bcd76d4fb06dd554a2fa445c13f592a5aecf18a9f150084c24c58f",
+      "reconciliation_audit": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "request_closures": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "request_context": "a84138dfe51a9e367407f2a9860abbcc523f0dad9ea2759fc67bcfbbdfc2709b",
+      "request_replacements": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sources": "282b309d1aff4a2d2bbb2a33d37de23082c4314266ecd0e440b6adf447b08167"
+    }
+  },
+  "token": "36bf6719-c5ec-4e11-97ca-a2846eadce6a"
+}

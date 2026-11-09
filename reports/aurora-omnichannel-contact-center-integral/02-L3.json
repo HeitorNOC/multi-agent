@@ -1,0 +1,85 @@
+{
+  "pages": [
+    {
+      "page": 11,
+      "summary": "A entrada na fila ocorre por endpoints REST de criação de atendimento. O CreateAttendanceUseCase gera ou recebe o protocolo, define WAITING e o canal, registra dados e configurações, atualiza cache e publica eventos. Para aplicativos de mensageria, updateAppSessionToHuman muda a sessão para HUMAN, fazendo o sent-consumer publicar em message-human."
+    },
+    {
+      "page": 12,
+      "summary": "O atendente recebe e vê a fila durante um attendance_flow aberto. A página descreve abertura e fechamento do fluxo, consulta periódica da tela e operações de intervalo; também registra a troca de nomes entre métodos do controller e mutations de intervalo."
+    },
+    {
+      "page": 13,
+      "summary": "O workspace conecta-se ao cc-message-socket por Socket.IO e participa de salas room:attendance:<sessionID>. O evento tatodesk.conversation_agent_to_client:utter envia texto, arquivo ou áudio ao servidor, que publica em <canal>-reply; tatodesk.message:request informa outros atendentes na sala. A reconexão recompõe salas e recarrega mensagens, enquanto a lista de atendimentos é consultada a cada 10 segundos."
+    },
+    {
+      "page": 14,
+      "summary": "A página descreve a composição e atualização da lista de atendimentos e as fontes do histórico de mensagens. Para aplicativos de mensageria, o front consulta appMessagesByIntegrationIDAndSessionID com useCache; arquivos privados exigem link temporário gerado por generateLinkMessagingFile."
+    },
+    {
+      "page": 15,
+      "summary": "As operações passam pelo contact-center-portal, que acrescenta accountID e userID do token. A página descreve início, transferência, pausa e finalização; na pausa, o chat avisa sobre template após 24 horas. Na finalização, o backend devolve a sessão ao bot e, se algo falhar no processo, devolve-a ao tipo humano."
+    }
+  ],
+  "contracts": [
+    {
+      "pages": [
+        11,
+        13
+      ],
+      "finding": "O canal é resolvido a partir de appStoreType na criação do atendimento; o servidor publica a resposta do atendente em <canal>-reply. A relação exata entre o canal resolvido e o tópico publicado permanece pendente de verificação no código.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        13
+      ],
+      "finding": "O workspace envia texto, arquivo ou áudio por tatodesk.conversation_agent_to_client:utter. Após publicar a resposta, o servidor emite tatodesk.message:request para a sala, e o próprio remetente ignora o evento com seu userID. A emissão à sala não documenta confirmação de entrega ao cliente.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        11
+      ],
+      "finding": "Em aplicativos de mensageria, updateAppSessionToHuman altera a sessão para HUMAN, e o sent-consumer passa a publicar em message-human.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        13
+      ],
+      "finding": "Na reconexão do socket, o workspace volta a entrar nas salas, recarrega as mensagens do atendimento aberto e recalcula mensagens novas. Isso permite recuperar a visualização, mas não comprova reenvio nem entrega de respostas pendentes.",
+      "status": "inferido"
+    },
+    {
+      "pages": [
+        14
+      ],
+      "finding": "O histórico de mensagens de aplicativos é consultado por appMessagesByIntegrationIDAndSessionID com useCache; o modelo inclui messageProviderID e referencedMessageProviderID. O documento não define esses campos como confirmação de entrega.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        15
+      ],
+      "finding": "Ao finalizar um atendimento de mensageria, o backend chama updateAppSessionToBot; se houver falha durante o processo, devolve a sessão ao tipo humano. O documento não estabelece que essa compensação trate falhas de entrega de mensagens.",
+      "status": "documentado"
+    },
+    {
+      "pages": [
+        15
+      ],
+      "finding": "Após pausa superior a 24 horas desde lastInteraction, o chat avisa que é preciso enviar um template antes de continuar, conforme a regra descrita para WhatsApp. A aplicação dessa regra no backend e pelo provedor está pendente de verificação.",
+      "status": "documentado"
+    }
+  ],
+  "gaps": [
+    "Pendente de verificação no código: como <canal>-reply é escolhido, como a resposta chega ao consumidor e ao provedor original e como conta, sessão e destinatário são associados.",
+    "Pendente de verificação no código e em ambiente real: validações, autorização, persistência, ordenação e comportamento para texto, arquivo e áudio; publicação e emissão ao socket não comprovam entrega ao cliente.",
+    "Pendente de verificação no código, em ambiente real e com cada provedor: confirmações de aceitação, envio, entrega e leitura, correlação por messageProviderID e tratamento de falhas síncronas ou assíncronas.",
+    "Pendente de verificação no código e em ambiente real: retries, backoff, idempotência, mensagens duplicadas, filas de erro, perda de conexão e apresentação de falhas ou reenvio ao atendente.",
+    "Pendente de verificação no código e com o provedor: aplicação da janela de 24 horas e dos requisitos de template do WhatsApp, inclusive rejeições e comunicação ao atendente.",
+    "Pendente de verificação no código e em ambiente real: concorrência entre envio, transferência, pausa e finalização, incluindo mensagens em trânsito quando a sessão muda entre HUMAN e bot.",
+    "Proposto: rastrear cada resposta por identificador de correlação e expor ao atendente estados e falhas de entrega confirmados pelo provedor; definir política de retry e idempotência após verificar o comportamento existente."
+  ]
+}

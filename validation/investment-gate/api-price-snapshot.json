@@ -1,0 +1,12 @@
+{
+  "consulted_date": "2026-11-05",
+  "source": "https://developers.openai.com/api/docs/pricing",
+  "model": "gpt-6.1-terra",
+  "mode": "Standard",
+  "currency": "USD",
+  "per_million_tokens": {"input":1.0,"cached_input":0.05,"output":5.0,"cache_write_30m":1.25,"cache_write_12h":2.5},
+  "meaning": "List-price scenario, not observed Codex billing. Excludes infrastructure, operations, other tools, tax, exchange rates, regional uplift and any unknown cache-write charges.",
+  "commercial_api_called": false,
+  "OPENAI_API_KEY_present_in_process_environment": false,
+  "credential_values_read": false
+}

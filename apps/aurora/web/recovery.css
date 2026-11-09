@@ -1,0 +1,64 @@
+.recovery-center {
+  max-width: 1000px;
+  margin: 25px auto;
+}
+.recovery-center form,
+.recovery-center label {
+  display: block;
+  margin: 16px 0;
+}
+.recovery-center input,
+.recovery-center textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  background: #102333;
+  color: #d9edf1;
+  border: 1px solid #51748a;
+  border-radius: 6px;
+  font: inherit;
+}
+.recovery-center textarea {
+  min-height: 90px;
+}
+.recovery-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.recovery-case,
+.recovery-inspection {
+  padding: 18px;
+  margin: 15px 0;
+  border: 1px solid #37526a;
+  border-radius: 8px;
+  background: #172b3b;
+}
+.recovery-case p,
+.recovery-inspection p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.recovery-inspection code {
+  font-size: 11px;
+}
+.recovery-center label {
+  font-size: 12px;
+  color: #bfdae1;
+}
+.recovery-center h3 {
+  font-size: 15px;
+}
+.recovery-history {
+  padding: 12px 0;
+  border-top: 1px solid #314d63;
+}
+.recovery-center button {
+  margin: 8px 0;
+}
+.recovery-center .small {
+  line-height: 1.8;
+}

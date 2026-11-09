@@ -1,0 +1,21 @@
+{
+  "seq": 7,
+  "head": "a4c817716e9a74f2d82b9e7ec921610fadf26f8ed544c3af5c3ce083ab741ad7",
+  "pending": [],
+  "missing": [
+    {
+      "seq": 6,
+      "id": "94fc7c3f-0256-5924-b83f-95b5b887aba5",
+      "kind": "decision",
+      "receipt_sha": "3791c4f96f0ff4a58a393f8cb24c16345bffe04c3605c9fcb84dcba5f8a57c42"
+    },
+    {
+      "seq": 7,
+      "id": "930fbcd5-e402-5e18-953d-77d352354c0f",
+      "kind": "decision",
+      "receipt_sha": "c875f101eba31dfce3be30a32dd4c3b2f4b7ca189bc074e73c94a5467ce0b0da"
+    }
+  ],
+  "matches": false,
+  "local_count": 5
+}

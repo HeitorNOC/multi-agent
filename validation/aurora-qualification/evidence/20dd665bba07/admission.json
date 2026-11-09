@@ -1,0 +1,16 @@
+{
+  "concurrent_clients": 64,
+  "requests": 128,
+  "outcomes": {
+    "409": 128
+  },
+  "p95_seconds": 0.1143,
+  "reasons": {
+    "Aguarde o trabalho em execução": 128
+  },
+  "requests_per_second": 570.74,
+  "active_jobs": 1,
+  "profile": "Aurora API and process admission with controlled busy worker",
+  "durable_queue_observed": false,
+  "model_calls": 0
+}

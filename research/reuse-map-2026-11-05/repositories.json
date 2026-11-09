@@ -1,0 +1,182 @@
+[
+  {
+    "repository": "langchain-ai/langgraph",
+    "captured_at_utc": "2026-11-05T06:03:56.739927+00:00",
+    "url": "https://github.com/langchain-ai/langgraph",
+    "stars": 44484,
+    "forks": 7653,
+    "open_issues_and_prs": 460,
+    "archived": false,
+    "pushed_at": "2026-11-05T05:07:34Z",
+    "license": "MIT",
+    "default_branch": "main",
+    "head_sha": "302a4d4caf7fa90d78efa4e9f0636a6d72d24ac8",
+    "head_committed_at": "2026-11-05T02:28:17Z",
+    "files": [
+      {
+        "path": "README.md",
+        "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/302a4d4caf7fa90d78efa4e9f0636a6d72d24ac8/README.md",
+        "sha256": "3a13e257af1216962d53d72414a7f44ac1fc5cea34d994bdff60ea2a3b045933"
+      },
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/302a4d4caf7fa90d78efa4e9f0636a6d72d24ac8/LICENSE",
+        "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7"
+      }
+    ]
+  },
+  {
+    "repository": "keycloak/keycloak",
+    "captured_at_utc": "2026-11-05T06:03:56.722203+00:00",
+    "url": "https://github.com/keycloak/keycloak",
+    "stars": 37708,
+    "forks": 9142,
+    "open_issues_and_prs": 3440,
+    "archived": false,
+    "pushed_at": "2026-11-05T04:54:32Z",
+    "license": "Apache-2.0",
+    "default_branch": "main",
+    "head_sha": "970b7c75893a6ed571daa67b3af0fdeee8b3edd8",
+    "head_committed_at": "2026-11-04T17:55:43Z",
+    "files": [
+      {
+        "path": "README.md",
+        "url": "https://raw.githubusercontent.com/keycloak/keycloak/970b7c75893a6ed571daa67b3af0fdeee8b3edd8/README.md",
+        "sha256": "5a5b61cb4caa1e113cc53fd07794fc8b78cafce254761ab6c690dcfb7355879c"
+      },
+      {
+        "path": "LICENSE",
+        "error": "HTTP Error 404: Not Found"
+      },
+      {
+        "path": "CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/keycloak/keycloak/970b7c75893a6ed571daa67b3af0fdeee8b3edd8/CONTRIBUTING.md",
+        "sha256": "126df01fb7c33263d3c5e7e49f89b789c116d70f834eeeaf55063388bf3a3175"
+      },
+      {
+        "path": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/keycloak/keycloak/970b7c75893a6ed571daa67b3af0fdeee8b3edd8/LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      }
+    ]
+  },
+  {
+    "repository": "HKUDS/LightRAG",
+    "captured_at_utc": "2026-11-05T06:03:56.792943+00:00",
+    "url": "https://github.com/HKUDS/LightRAG",
+    "stars": 40540,
+    "forks": 5761,
+    "open_issues_and_prs": 437,
+    "archived": false,
+    "pushed_at": "2026-11-03T18:06:26Z",
+    "license": "MIT",
+    "default_branch": "main",
+    "head_sha": "aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a",
+    "head_committed_at": "2026-10-14T14:55:37Z",
+    "files": [
+      {
+        "path": "README.md",
+        "url": "https://raw.githubusercontent.com/HKUDS/LightRAG/aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a/README.md",
+        "sha256": "b495a0fb015976fca63152962ebd4a4daf82f32fdd8c3bb146fab90a0b09e8e4"
+      },
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/HKUDS/LightRAG/aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a/LICENSE",
+        "sha256": "0c16924564059e493c86854574660a47ed1dcc2a476ba7b5f949d3f2f73a1984"
+      }
+    ]
+  },
+  {
+    "repository": "openfga/openfga",
+    "captured_at_utc": "2026-11-05T06:03:58.277683+00:00",
+    "url": "https://github.com/openfga/openfga",
+    "stars": 6088,
+    "forks": 554,
+    "open_issues_and_prs": 243,
+    "archived": false,
+    "pushed_at": "2026-11-04T20:00:02Z",
+    "license": "Apache-2.0",
+    "default_branch": "main",
+    "head_sha": "ff8394da6ca3a14583668d5dd7f02aeacb5da47b",
+    "head_committed_at": "2026-11-03T10:57:22Z",
+    "files": [
+      {
+        "path": "README.md",
+        "url": "https://raw.githubusercontent.com/openfga/openfga/ff8394da6ca3a14583668d5dd7f02aeacb5da47b/README.md",
+        "sha256": "a5e381b4a754fd6d091eca196a257a7187e0abb98bd52e967237748656d3fbba"
+      },
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/openfga/openfga/ff8394da6ca3a14583668d5dd7f02aeacb5da47b/LICENSE",
+        "sha256": "1c46d7b2bed94d457d745f28cabeb31f8d6c81dd9035bc5d24039989ee1e1bff"
+      },
+      {
+        "path": "CONTRIBUTING.md",
+        "url": "https://raw.githubusercontent.com/openfga/openfga/ff8394da6ca3a14583668d5dd7f02aeacb5da47b/CONTRIBUTING.md",
+        "sha256": "45d08bfc304156bf46baca45f7131ca98f825d9478d97edf13f4c5f1034e2563"
+      },
+      {
+        "path": "pkg/server/check.go",
+        "url": "https://raw.githubusercontent.com/openfga/openfga/ff8394da6ca3a14583668d5dd7f02aeacb5da47b/pkg/server/check.go",
+        "sha256": "d217030282fd954046e3998107a3ff70f03ffc9d7beec83b573c23bd4738d538"
+      },
+      {
+        "path": "pkg/server/check_test.go",
+        "url": "https://raw.githubusercontent.com/openfga/openfga/ff8394da6ca3a14583668d5dd7f02aeacb5da47b/pkg/server/check_test.go",
+        "sha256": "88674d266ad027686c1b2d8e280003969d6da5af5f7c0c3d26e69b23d9e3139b"
+      }
+    ]
+  },
+  {
+    "repository": "BerriAI/litellm",
+    "captured_at_utc": "2026-11-05T06:03:58.257555+00:00",
+    "url": "https://github.com/BerriAI/litellm",
+    "stars": 62732,
+    "forks": 13015,
+    "open_issues_and_prs": 5703,
+    "archived": false,
+    "pushed_at": "2026-11-05T06:03:18Z",
+    "license": "NOASSERTION",
+    "default_branch": "main",
+    "head_sha": "74493f39fbdb8476af09a1421c2b294ad470fd96",
+    "head_committed_at": "2026-11-05T05:59:57Z",
+    "files": [
+      {
+        "path": "README.md",
+        "url": "https://raw.githubusercontent.com/BerriAI/litellm/74493f39fbdb8476af09a1421c2b294ad470fd96/README.md",
+        "sha256": "374d8fdb228a6d528cdcf075aa807b43c5cec7669ee3adf0b21aedbbafd90e7b"
+      },
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/BerriAI/litellm/74493f39fbdb8476af09a1421c2b294ad470fd96/LICENSE",
+        "sha256": "b170d6bf8e8835dd357e011681db028f4d51e2fb0ea892058f56e01fb39b8273"
+      }
+    ]
+  },
+  {
+    "repository": "google/gvisor",
+    "captured_at_utc": "2026-11-05T06:03:58.325503+00:00",
+    "url": "https://github.com/google/gvisor",
+    "stars": 19872,
+    "forks": 2055,
+    "open_issues_and_prs": 1072,
+    "archived": false,
+    "pushed_at": "2026-11-05T04:52:33Z",
+    "license": "Apache-2.0",
+    "default_branch": "master",
+    "head_sha": "90d4e2253f004cdc73a35dbc4050eab3e9a8495d",
+    "head_committed_at": "2026-11-05T04:38:11Z",
+    "files": [
+      {
+        "path": "README.md",
+        "url": "https://raw.githubusercontent.com/google/gvisor/90d4e2253f004cdc73a35dbc4050eab3e9a8495d/README.md",
+        "sha256": "0164b6a864027e506c90185bb3c8b5bc0d70e51dc6e872b2b1d8719364dfcba3"
+      },
+      {
+        "path": "LICENSE",
+        "url": "https://raw.githubusercontent.com/google/gvisor/90d4e2253f004cdc73a35dbc4050eab3e9a8495d/LICENSE",
+        "sha256": "0fbab5c58efbdf6d31e8085214f2dd821659c03d73cff3ed2b08e98826ea1cd9"
+      }
+    ]
+  }
+]

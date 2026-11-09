@@ -1,0 +1,5 @@
+finite_cpu {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "", "stdout": "CPU_STARTED\n4999950000\n"}}, "seconds": 0.059762072007288225}
+sleep_timeout {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "error: operation not permitted\n", "stdout": "SLEEP_STARTED\n"}}, "seconds": 0.07876977800333407}
+loop_timeout {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "error: operation not permitted\n", "stdout": "LOOP_STARTED\n"}}, "seconds": 0.07057347400404979}
+basic_after_failures {"status": 200, "body": {"code": 0, "message": "success", "data": {"error": "", "stdout": "BASIC_AFTER_FAILURES_OK\n"}}, "seconds": 0.060031853994587436}
+Evidence saved to sandbox-results.json; this script records observations without declaring a production PASS.

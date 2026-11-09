@@ -1,0 +1,19 @@
+{
+  "model": "gpt-6.1-terra",
+  "attempt_limit": 1,
+  "account_mode": "ChatGPT CLI",
+  "invoiced_usd": null,
+  "completed": true,
+  "usage": {
+    "input_tokens": 11216,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 20,
+    "reasoning_output_tokens": 0
+  },
+  "seconds": 5.13,
+  "exit_code": 0,
+  "unexpected_tool_events": 0,
+  "hypothetical_standard_api_usd": "0.011316",
+  "hypothetical_standard_codex_credits": "0.2829"
+}

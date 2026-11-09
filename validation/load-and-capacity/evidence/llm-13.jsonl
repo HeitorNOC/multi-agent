@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a804-7bf8-7480-b878-2dfc05a00b40"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"exigência de revisores\\\",\\\"despesas extraordinárias\\\"],\\\"low_level_keywords\\\":[\\\"Boreal\\\",\\\"revisores distintos\\\",\\\"data de vigência: 2026-02-01\\\",\\\"corte de conhecimento: 2026-11-04\\\",\\\"manual-boreal@v1\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12694,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":85,"reasoning_output_tokens":0}}

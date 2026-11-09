@@ -1,0 +1,672 @@
+{
+  "agents": [
+    {
+      "id": "executive_director",
+      "title": "Diretor executivo",
+      "kind": "director",
+      "domain": "executive",
+      "parent": "brain",
+      "focus": "Estratégia e portfólio",
+      "sources": [
+        "aurora-strategy",
+        "aurora-governance"
+      ],
+      "children": [
+        "business_analyst",
+        "portfolio_analyst",
+        "project_manager"
+      ]
+    },
+    {
+      "id": "project_manager",
+      "title": "Especialista em gestão de projetos",
+      "kind": "specialist",
+      "domain": "executive",
+      "parent": "executive_director",
+      "focus": "Planejamento de entregas, dependências entre equipes e acompanhamento de riscos e marcos",
+      "sources": [
+        "aurora-strategy",
+        "aurora-governance"
+      ]
+    },
+    {
+      "id": "business_analyst",
+      "title": "Analista de negócios",
+      "kind": "specialist",
+      "domain": "executive",
+      "parent": "executive_director",
+      "focus": "Dependências e prioridades entre unidades",
+      "sources": [
+        "aurora-strategy",
+        "aurora-governance"
+      ]
+    },
+    {
+      "id": "portfolio_analyst",
+      "title": "Analista de portfólio",
+      "kind": "specialist",
+      "domain": "executive",
+      "parent": "executive_director",
+      "focus": "Priorização de investimentos e iniciativas",
+      "sources": [
+        "aurora-strategy",
+        "aurora-governance"
+      ]
+    },
+    {
+      "id": "marketing_director",
+      "title": "Diretora de marketing",
+      "kind": "director",
+      "domain": "marketing",
+      "parent": "brain",
+      "focus": "Campanhas e posicionamento",
+      "sources": [
+        "aurora-marketing",
+        "aurora-sales"
+      ],
+      "children": [
+        "campaign_planner",
+        "pricing_analyst",
+        "content_specialist"
+      ]
+    },
+    {
+      "id": "content_specialist",
+      "title": "Especialista em conteúdo",
+      "kind": "specialist",
+      "domain": "marketing",
+      "parent": "marketing_director",
+      "focus": "Mensagens de marca, conteúdo de campanha, proposta de valor e consistência editorial",
+      "sources": [
+        "aurora-marketing"
+      ]
+    },
+    {
+      "id": "campaign_planner",
+      "title": "Planejador de campanhas",
+      "kind": "specialist",
+      "domain": "marketing",
+      "parent": "marketing_director",
+      "focus": "Escopo, público, demanda incremental e limites de campanha",
+      "sources": [
+        "aurora-marketing",
+        "aurora-sales",
+        "aurora-logistics"
+      ]
+    },
+    {
+      "id": "pricing_analyst",
+      "title": "Analista de preço comercial",
+      "kind": "specialist",
+      "domain": "marketing",
+      "parent": "marketing_director",
+      "focus": "Mecânica promocional e consistência comercial de preços",
+      "sources": [
+        "aurora-marketing",
+        "aurora-pricing",
+        "aurora-costs"
+      ]
+    },
+    {
+      "id": "operations_director",
+      "title": "Diretor de operações",
+      "kind": "director",
+      "domain": "operations",
+      "parent": "brain",
+      "focus": "Execução operacional, suprimentos, fornecedores, qualidade e logística",
+      "sources": [
+        "aurora-inventory",
+        "aurora-procurement",
+        "aurora-logistics"
+      ],
+      "children": [
+        "supply_planner",
+        "logistics_analyst",
+        "procurement_analyst",
+        "process_quality_analyst"
+      ]
+    },
+    {
+      "id": "procurement_analyst",
+      "title": "Analista de compras",
+      "kind": "specialist",
+      "domain": "operations",
+      "parent": "operations_director",
+      "focus": "Cotação e avaliação de fornecedores, condições de compra e compromissos de suprimento",
+      "sources": [
+        "aurora-procurement",
+        "aurora-contracts"
+      ]
+    },
+    {
+      "id": "process_quality_analyst",
+      "title": "Analista de processos e qualidade",
+      "kind": "specialist",
+      "domain": "operations",
+      "parent": "operations_director",
+      "focus": "Mapeamento de processos operacionais, indicadores de serviço, causas de falhas e melhoria contínua",
+      "sources": [
+        "aurora-governance",
+        "aurora-logistics"
+      ]
+    },
+    {
+      "id": "supply_planner",
+      "title": "Planejadora de suprimentos",
+      "kind": "specialist",
+      "domain": "operations",
+      "parent": "operations_director",
+      "focus": "Estoque livre, reservas, demanda conjunta e lote não confirmado",
+      "sources": [
+        "aurora-inventory",
+        "aurora-sales",
+        "aurora-procurement"
+      ]
+    },
+    {
+      "id": "logistics_analyst",
+      "title": "Analista de logística",
+      "kind": "specialist",
+      "domain": "operations",
+      "parent": "operations_director",
+      "focus": "Capacidade diária e prazos regionais",
+      "sources": [
+        "aurora-inventory",
+        "aurora-procurement",
+        "aurora-logistics"
+      ]
+    },
+    {
+      "id": "finance_director",
+      "title": "Diretora financeira",
+      "kind": "director",
+      "domain": "finance",
+      "parent": "brain",
+      "focus": "Controladoria, contabilidade, orçamento, margem e caixa",
+      "sources": [
+        "aurora-pricing",
+        "aurora-costs",
+        "aurora-treasury"
+      ],
+      "children": [
+        "controller",
+        "treasury_analyst",
+        "financial_planning_analyst",
+        "accounting_analyst"
+      ]
+    },
+    {
+      "id": "financial_planning_analyst",
+      "title": "Analista de planejamento financeiro",
+      "kind": "specialist",
+      "domain": "finance",
+      "parent": "finance_director",
+      "focus": "Orçamento, projeções, comparação de cenários, viabilidade e desvios financeiros",
+      "sources": [
+        "aurora-costs",
+        "aurora-treasury",
+        "aurora-pricing"
+      ]
+    },
+    {
+      "id": "accounting_analyst",
+      "title": "Analista contábil",
+      "kind": "specialist",
+      "domain": "finance",
+      "parent": "finance_director",
+      "focus": "Conciliação de registros, critérios de reconhecimento e evidências de fechamento contábil",
+      "sources": [
+        "aurora-costs",
+        "aurora-governance"
+      ]
+    },
+    {
+      "id": "controller",
+      "title": "Controladoria",
+      "kind": "specialist",
+      "domain": "finance",
+      "parent": "finance_director",
+      "focus": "Margem sobre preço, desconto, caixa livre e insuficiência de orçamento",
+      "sources": [
+        "aurora-costs",
+        "aurora-pricing",
+        "aurora-treasury",
+        "aurora-marketing"
+      ]
+    },
+    {
+      "id": "treasury_analyst",
+      "title": "Analista de tesouraria",
+      "kind": "specialist",
+      "domain": "finance",
+      "parent": "finance_director",
+      "focus": "Liquidez, compromissos e necessidade de financiamento",
+      "sources": [
+        "aurora-treasury",
+        "aurora-marketing",
+        "aurora-procurement"
+      ]
+    },
+    {
+      "id": "people_director",
+      "title": "Diretora de pessoas",
+      "kind": "director",
+      "domain": "people",
+      "parent": "brain",
+      "focus": "Pessoas e capacidade organizacional",
+      "sources": [
+        "aurora-workforce"
+      ],
+      "children": [
+        "recruitment_analyst",
+        "workforce_analyst",
+        "people_development_specialist"
+      ]
+    },
+    {
+      "id": "people_development_specialist",
+      "title": "Especialista em desenvolvimento de pessoas",
+      "kind": "specialist",
+      "domain": "people",
+      "parent": "people_director",
+      "focus": "Onboarding, trilhas de aprendizagem e desenvolvimento de competências",
+      "sources": [
+        "aurora-workforce"
+      ]
+    },
+    {
+      "id": "recruitment_analyst",
+      "title": "Analista de recrutamento",
+      "kind": "specialist",
+      "domain": "people",
+      "parent": "people_director",
+      "focus": "Planejamento de admissões quando houver demanda demonstrada",
+      "sources": [
+        "aurora-workforce"
+      ]
+    },
+    {
+      "id": "workforce_analyst",
+      "title": "Analista de capacidade humana",
+      "kind": "specialist",
+      "domain": "people",
+      "parent": "people_director",
+      "focus": "Disponibilidade de equipes e treinamento",
+      "sources": [
+        "aurora-workforce"
+      ]
+    },
+    {
+      "id": "legal_director",
+      "title": "Diretor jurídico",
+      "kind": "director",
+      "domain": "legal",
+      "parent": "brain",
+      "focus": "Contratos, conformidade, privacidade, riscos e controles",
+      "sources": [
+        "aurora-compliance",
+        "aurora-contracts",
+        "aurora-response"
+      ],
+      "children": [
+        "compliance_advisor",
+        "contract_analyst",
+        "privacy_specialist",
+        "risk_controls_analyst"
+      ]
+    },
+    {
+      "id": "privacy_specialist",
+      "title": "Especialista em privacidade",
+      "kind": "specialist",
+      "domain": "legal",
+      "parent": "legal_director",
+      "focus": "Tratamento de dados pessoais, retenção, direitos dos titulares e avaliação de impacto à privacidade",
+      "sources": [
+        "aurora-compliance",
+        "aurora-response",
+        "aurora-data-platform"
+      ]
+    },
+    {
+      "id": "risk_controls_analyst",
+      "title": "Analista de riscos e controles",
+      "kind": "specialist",
+      "domain": "legal",
+      "parent": "legal_director",
+      "focus": "Mapa de riscos, controles internos, evidências de auditoria e acompanhamento de remediações",
+      "sources": [
+        "aurora-governance",
+        "aurora-compliance"
+      ]
+    },
+    {
+      "id": "compliance_advisor",
+      "title": "Assessora de conformidade",
+      "kind": "specialist",
+      "domain": "legal",
+      "parent": "legal_director",
+      "focus": "Alegações da campanha e governança de resposta a incidente",
+      "sources": [
+        "aurora-compliance",
+        "aurora-response",
+        "aurora-incident"
+      ]
+    },
+    {
+      "id": "contract_analyst",
+      "title": "Analista de contratos",
+      "kind": "specialist",
+      "domain": "legal",
+      "parent": "legal_director",
+      "focus": "Diferença entre contratos firmes, negociação e obrigações",
+      "sources": [
+        "aurora-compliance",
+        "aurora-contracts",
+        "aurora-response"
+      ]
+    },
+    {
+      "id": "technology_director",
+      "title": "Diretora de tecnologia",
+      "kind": "director",
+      "domain": "technology",
+      "parent": "brain",
+      "focus": "Engenharia de software, arquitetura, qualidade, plataforma, dados e segurança de sistemas",
+      "sources": [
+        "aurora-data-platform",
+        "aurora-incident"
+      ],
+      "children": [
+        "security_analyst",
+        "data_analyst",
+        "tech_lead",
+        "backend_engineer",
+        "frontend_engineer",
+        "qa_engineer",
+        "platform_engineer",
+        "data_engineer"
+      ]
+    },
+    {
+      "id": "tech_lead",
+      "title": "Tech Lead",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Arquitetura de software, decisões técnicas, divisão da implementação e revisão de código",
+      "sources": [
+        "aurora-data-platform",
+        "aurora-governance"
+      ]
+    },
+    {
+      "id": "backend_engineer",
+      "title": "Engenheiro de software backend",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Implementação de APIs, integrações, persistência, mensageria e idempotência",
+      "sources": [
+        "aurora-data-platform"
+      ]
+    },
+    {
+      "id": "frontend_engineer",
+      "title": "Engenheira de software frontend",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Implementação de interfaces web, estados de UI, acessibilidade e integração com APIs",
+      "sources": [
+        "aurora-data-platform"
+      ]
+    },
+    {
+      "id": "qa_engineer",
+      "title": "Especialista em qualidade de software (QA)",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Estratégia de testes, critérios de aceitação, regressões, cenários de falha e evidências de verificação",
+      "sources": [
+        "aurora-data-platform",
+        "aurora-governance"
+      ]
+    },
+    {
+      "id": "platform_engineer",
+      "title": "Engenheiro de plataforma e confiabilidade",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Ambientes, pipelines de entrega, observabilidade, capacidade e recuperação de serviços",
+      "sources": [
+        "aurora-data-platform",
+        "aurora-incident",
+        "aurora-response"
+      ]
+    },
+    {
+      "id": "data_engineer",
+      "title": "Engenheira de dados",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Ingestão, modelagem, linhagem e confiabilidade de pipelines de dados",
+      "sources": [
+        "aurora-data-platform"
+      ]
+    },
+    {
+      "id": "security_analyst",
+      "title": "Analista de segurança",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Incidente, evidências ausentes e tempo do SLA interno",
+      "sources": [
+        "aurora-incident",
+        "aurora-response",
+        "aurora-data-platform"
+      ]
+    },
+    {
+      "id": "data_analyst",
+      "title": "Analista de dados",
+      "kind": "specialist",
+      "domain": "technology",
+      "parent": "technology_director",
+      "focus": "Consistência de contagens e integração dos sistemas",
+      "sources": [
+        "aurora-data-platform",
+        "aurora-incident",
+        "aurora-response"
+      ]
+    },
+    {
+      "id": "product_director",
+      "title": "Diretora de produtos e serviços",
+      "kind": "director",
+      "domain": "product",
+      "parent": "brain",
+      "focus": "Descoberta de necessidades, gestão do portfólio de produto e desenho de serviços",
+      "sources": [
+        "aurora-strategy",
+        "aurora-sales"
+      ],
+      "children": [
+        "product_manager",
+        "ux_designer",
+        "service_designer"
+      ]
+    },
+    {
+      "id": "product_manager",
+      "title": "Gerente de produto",
+      "kind": "specialist",
+      "domain": "product",
+      "parent": "product_director",
+      "focus": "Requisitos, resultados esperados, priorização do backlog e escopo de MVP",
+      "sources": [
+        "aurora-strategy",
+        "aurora-sales"
+      ]
+    },
+    {
+      "id": "ux_designer",
+      "title": "Designer de experiência",
+      "kind": "specialist",
+      "domain": "product",
+      "parent": "product_director",
+      "focus": "Pesquisa de necessidades, jornadas, protótipos e usabilidade",
+      "sources": [
+        "aurora-strategy",
+        "aurora-sales"
+      ]
+    },
+    {
+      "id": "service_designer",
+      "title": "Especialista em desenho de serviços",
+      "kind": "specialist",
+      "domain": "product",
+      "parent": "product_director",
+      "focus": "Desenho de processos e pontos de contato que conectam a experiência do cliente à operação",
+      "sources": [
+        "aurora-strategy",
+        "aurora-governance"
+      ]
+    },
+    {
+      "id": "sales_director",
+      "title": "Diretor comercial",
+      "kind": "director",
+      "domain": "sales",
+      "parent": "brain",
+      "focus": "Vendas, gestão de contas, funil e negociação comercial",
+      "sources": [
+        "aurora-sales",
+        "aurora-pricing"
+      ],
+      "children": [
+        "sales_operations_analyst",
+        "account_specialist"
+      ]
+    },
+    {
+      "id": "sales_operations_analyst",
+      "title": "Analista de operações comerciais",
+      "kind": "specialist",
+      "domain": "sales",
+      "parent": "sales_director",
+      "focus": "Pipeline de vendas, previsões, conversão e qualidade de dados do CRM comercial",
+      "sources": [
+        "aurora-sales"
+      ]
+    },
+    {
+      "id": "account_specialist",
+      "title": "Especialista em contas e propostas",
+      "kind": "specialist",
+      "domain": "sales",
+      "parent": "sales_director",
+      "focus": "Qualificação de oportunidades, propostas comerciais e compromissos com contas",
+      "sources": [
+        "aurora-sales",
+        "aurora-contracts",
+        "aurora-pricing"
+      ]
+    },
+    {
+      "id": "customer_director",
+      "title": "Diretora de atendimento e clientes",
+      "kind": "director",
+      "domain": "customer",
+      "parent": "brain",
+      "focus": "Atendimento, suporte, adoção e retenção de clientes",
+      "sources": [
+        "aurora-sales",
+        "aurora-governance"
+      ],
+      "children": [
+        "support_specialist",
+        "customer_success_specialist",
+        "customer_experience_analyst"
+      ]
+    },
+    {
+      "id": "support_specialist",
+      "title": "Especialista em atendimento",
+      "kind": "specialist",
+      "domain": "customer",
+      "parent": "customer_director",
+      "focus": "Triagem de solicitações, diagnóstico inicial, escalonamento e níveis de serviço ao cliente",
+      "sources": [
+        "aurora-sales",
+        "aurora-response"
+      ]
+    },
+    {
+      "id": "customer_success_specialist",
+      "title": "Especialista em sucesso do cliente",
+      "kind": "specialist",
+      "domain": "customer",
+      "parent": "customer_director",
+      "focus": "Adoção, acompanhamento de contas, retenção e planos para reduzir risco de saída",
+      "sources": [
+        "aurora-sales",
+        "aurora-strategy"
+      ]
+    },
+    {
+      "id": "customer_experience_analyst",
+      "title": "Analista de experiência do cliente",
+      "kind": "specialist",
+      "domain": "customer",
+      "parent": "customer_director",
+      "focus": "Análise de satisfação e causas recorrentes de reclamações e atrito",
+      "sources": [
+        "aurora-sales",
+        "aurora-governance"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "campaign",
+      "title": "Campanha Horizonte",
+      "label": "Marketing · Operações · Finanças · Jurídico",
+      "goal": "Avalie se o Grupo Aurora pode lançar a campanha Horizonte em novembro, considerando a oportunidade Orion, estoque e suprimento, desconto e margem vigente, caixa disponível, prazos regionais e a alegação carbono neutro. Proponha um plano condicionado, sem executar ações externas."
+    },
+    {
+      "id": "incident",
+      "title": "Incidente no CRM",
+      "label": "Tecnologia · Jurídico",
+      "goal": "Priorize a primeira avaliação do incidente INC-47 no CRM europeu. Distinga suspeita e fato confirmado, apure o prazo interno restante às 16h45 e proponha um checklist técnico e jurídico. Não execute contenção ou comunicação externa nem envolva áreas sem necessidade."
+    },
+    {
+      "id": "engineering_webhook",
+      "title": "Engenharia de webhook",
+      "label": "Tecnologia · Implementação · QA",
+      "goal": "Implemente e teste a ingestão idempotente de um webhook fictício e encaminhe o diff para revisão humana."
+    },
+    {
+      "id": "engineering_webhook_team",
+      "title": "Webhook com equipe Backend",
+      "label": "Tecnologia · Subdelegação · QA",
+      "goal": "Implemente e teste a ingestão idempotente de um webhook fictício com frentes Backend e subdelegação aprovada pelo Chief of Staff."
+    },
+    {
+      "id": "engineering_que_review",
+      "title": "Revisar entrega do que",
+      "label": "Engenharia · Repositório externo · Evidência validada",
+      "goal": "Revise a proposta de teste do webhook de pagamentos do repositório que."
+    },
+    {
+      "id": "engineering_que_run",
+      "title": "Executar nova tarefa no que",
+      "label": "Engenharia · Repositório que · Webhook de pagamentos",
+      "goal": "Acrescente um teste para rejeitar um evento de webhook que referencia outra cobrança, sem abrir a unidade de trabalho."
+    }
+  ]
+}

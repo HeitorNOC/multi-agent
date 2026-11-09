@@ -1,0 +1,40 @@
+{
+  "documents": {
+    "D1": {
+      "name": "Base-de-Conhecimento-MBA-Frontend.pdf",
+      "pages": 16,
+      "sha256": "9ea13f5ab1e04a9d1290a75999bc4abffff8326859482134c44d56f53c779596"
+    },
+    "D2": {
+      "name": "Contact-Center-e-Workspace.pdf",
+      "pages": 25,
+      "sha256": "f2cc07a7f78fd1f8f3210eef90d445d1847f2c6b223290e45e43f11d3e5fa2ff"
+    },
+    "D3": {
+      "name": "Documentacao-Projetos-Reclame-Aqui.pdf",
+      "pages": 12,
+      "sha256": "74f3baf605a9b1602ea032a81d30919c7aa0bdeb40ad91c2ded54c0371ebc5d8"
+    },
+    "D4": {
+      "name": "Fluxo-de-Mensageria.pdf",
+      "pages": 16,
+      "sha256": "24f36e5bd86fc28e6035cbfa7912016741ed0bfc2aec7f6690b59bf1259f520e"
+    },
+    "D5": {
+      "name": "Guia-Desenvolvimento-Tatodesk-Parte-1.pdf",
+      "pages": 44,
+      "sha256": "01e1b11b9fb0cfd8ec8b55ee3697db017bfb20bde665739905edf56997152e9b"
+    },
+    "D6": {
+      "name": "Portal-Tatodesk-Mapa-de-Conteudo.pdf",
+      "pages": 21,
+      "sha256": "a9c0f083ec714caadc2d52600fd7c63ccf64b7ce6d5d1f978aa5271e519fdb7e"
+    },
+    "D7": {
+      "name": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "pages": 9,
+      "sha256": "f904a5fee3e3749f99643051c39d36586e2fde9e4dfc39110dfefe962de62931"
+    }
+  },
+  "directive_sha256": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb"
+}

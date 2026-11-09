@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a5d5-c51f-7851-9e64-ef2dfaed566c"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"edges\\\":[{\\\"source_entity_name\\\":\\\"ACME\\\",\\\"target_entity_name\\\":\\\"SIGILO_AQUISICAO_2026\\\",\\\"relation_type\\\":\\\"ESTUDA_ADQUIRIR\\\",\\\"fact\\\":\\\"A ACME considera a aquisição do projeto SIGILO_AQUISICAO_2026 por um valor sintético de R$9.700.000, sem que exista uma transação real.\\\",\\\"valid_at\\\":\\\"2026-01-01T00:00:00Z\\\",\\\"invalid_at\\\":null,\\\"episode_indices\\\":[0]}]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":15069,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":124,"reasoning_output_tokens":0}}

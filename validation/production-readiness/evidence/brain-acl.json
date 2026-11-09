@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "partitioned_hybrid_queries": 4,
+  "reader_excludes_finance": true,
+  "revoke_checked_before_cached_result": true,
+  "authority": "own test wrapper, not native LightRAG document ACL",
+  "scope": "logical partitions behind one brain API; no production identity or multi-node cache certified"
+}

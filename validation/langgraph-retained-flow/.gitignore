@@ -1,0 +1,6 @@
+.state/
+__pycache__/
+.unit*/
+.integration*/
+.baseline-regression/
+.test-temp/

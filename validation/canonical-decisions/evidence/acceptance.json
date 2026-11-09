@@ -1,0 +1,77 @@
+[
+  {
+    "case": "february_known_before_correction",
+    "expected_version": 1,
+    "expected_days": 2,
+    "checks": {
+      "selected_version": true,
+      "answer_value": true,
+      "citation": true,
+      "native_source": true,
+      "no_other_version_in_native_context": true,
+      "no_private_canary": true
+    },
+    "answer": "Na data de vigência consultada, **15 de fevereiro de 2026**, a política da ACME permitia **dois dias de trabalho remoto por semana**. Essa regra estava em vigor desde 1º de janeiro de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "record_request": "18630f35-1e4a-4afa-97a6-221c2f84af8e"
+  },
+  {
+    "case": "march_known_before_correction",
+    "expected_version": 2,
+    "expected_days": 3,
+    "checks": {
+      "selected_version": true,
+      "answer_value": true,
+      "citation": true,
+      "native_source": true,
+      "no_other_version_in_native_context": true,
+      "no_private_canary": true
+    },
+    "answer": "Em **15 de março de 2026**, a política da ACME permitia **três dias de trabalho remoto por semana**. Essa regra entrou em vigor em 1º de março de 2026 e substituiu a permissão anterior de dois dias por semana. [1]\n\n### References\n\n* [1] politica-remoto@v2.md",
+    "record_request": "a29346b4-7539-488f-b723-b156f7fba5ab"
+  },
+  {
+    "case": "february_known_after_correction",
+    "expected_version": 3,
+    "expected_days": 1,
+    "checks": {
+      "selected_version": true,
+      "answer_value": true,
+      "citation": true,
+      "native_source": true,
+      "no_other_version_in_native_context": true,
+      "no_private_canary": true
+    },
+    "answer": "Em **15 de fevereiro de 2026**, a política de trabalho remoto da ACME permitia **um dia por semana**. [1]\n\nEssa regra vigorava de 1º de fevereiro até 1º de março de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v3.md",
+    "record_request": "3bbf6772-a17a-4f69-a10f-6aad8ecee5b9"
+  },
+  {
+    "case": "march_unchanged_after_correction",
+    "expected_version": 2,
+    "expected_days": 3,
+    "checks": {
+      "selected_version": true,
+      "answer_value": true,
+      "citation": true,
+      "native_source": true,
+      "no_other_version_in_native_context": true,
+      "no_private_canary": true
+    },
+    "answer": "Em 15 de março de 2026, a política da ACME permitia **três dias de trabalho remoto por semana**. [1]\n\nEssa regra entrou em vigor em 1º de março de 2026 e substituiu a permissão anterior de dois dias por semana. [1]\n\n### References\n\n* [1] politica-remoto@v2.md",
+    "record_request": "98984229-ba2f-46a7-baf0-88a2cab6ecfc"
+  },
+  {
+    "case": "january_after_correction",
+    "expected_version": 1,
+    "expected_days": 2,
+    "checks": {
+      "selected_version": true,
+      "answer_value": true,
+      "citation": true,
+      "native_source": true,
+      "no_other_version_in_native_context": true,
+      "no_private_canary": true
+    },
+    "answer": "Em 15 de janeiro de 2026, a política da ACME permitia **dois dias de trabalho remoto por semana**. Essa regra estava em vigor desde 1º de janeiro de 2026. [1]\n\n### References\n\n* [1] politica-remoto@v1.md",
+    "record_request": "81c17aee-a815-4b82-94d1-7d89f4a75442"
+  }
+]

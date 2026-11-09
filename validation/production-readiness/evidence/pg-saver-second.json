@@ -1,0 +1,8 @@
+{
+  "image": "postgres@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab",
+  "scope": "native checkpoint and interrupt recovery only; no HA/failover/TLS/cross-client checkpoint ACL certified",
+  "result": "FAIL",
+  "error": "Command '['C:\\\\Users\\\\PC\\\\multi-agent\\\\validation\\\\production-readiness\\\\postgres-runtime\\\\Scripts\\\\python.exe', '-X', 'utf8', 'C:\\\\Users\\\\PC\\\\multi-agent\\\\validation\\\\production-readiness\\\\pg_saver_worker.py']' timed out after 30 seconds",
+  "container_removed": true,
+  "volume_removed": true
+}

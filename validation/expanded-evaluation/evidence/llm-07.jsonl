@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e1-3eeb-77d3-9967-ec2e15255dea"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O teto diário de reembolso de **alimentação da equipe Aurora é de R$ 240 por pessoa**. Valores acima desse teto não são reembolsáveis. O manual está vigente desde 1º de janeiro de 2026 e, portanto, já estava vigente na data consultada, 1º de fevereiro de 2026. [1]\\n\\nO teto de **transporte** é distinto: R$ 85 por pessoa por dia. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13510,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":128,"reasoning_output_tokens":0}}

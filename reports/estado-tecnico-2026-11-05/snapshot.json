@@ -1,0 +1,634 @@
+{
+  "captured_at_utc": "2026-11-05T13:59:25.078609+00:00",
+  "new_model_calls": 0,
+  "new_e2e_runs": 0,
+  "root_git": {
+    "exit_code": 128,
+    "stdout": "",
+    "stderr": "fatal: not a git repository (or any of the parent directories): .git"
+  },
+  "vendor": {
+    "langgraph": {
+      "head": {
+        "exit_code": 0,
+        "stdout": "3c916d750575b22c464790e9774494d810ccd322",
+        "stderr": ""
+      },
+      "last_commit": {
+        "exit_code": 0,
+        "stdout": "3c916d750575b22c464790e9774494d810ccd322\n2026-11-03T01:03:26Z\nfeat(sdk-py): remove fairness_weight from PrioritySettings (#9441)",
+        "stderr": ""
+      },
+      "tracked_changes": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "lightrag": {
+      "head": {
+        "exit_code": 0,
+        "stdout": "aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a",
+        "stderr": ""
+      },
+      "last_commit": {
+        "exit_code": 0,
+        "stdout": "aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a\n2026-10-14T22:55:37+08:00\nMerge pull request #4210 from ModestXin/fix/pgvector-filtered-ann",
+        "stderr": ""
+      },
+      "tracked_changes": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "paperclip": {
+      "head": {
+        "exit_code": 0,
+        "stdout": "1e3ab690b072bbf6a1c1f1d0454ea49315b2074c",
+        "stderr": ""
+      },
+      "last_commit": {
+        "exit_code": 0,
+        "stdout": "1e3ab690b072bbf6a1c1f1d0454ea49315b2074c\n2026-11-02T21:37:11-06:00\nfix(routines): prevent recursive Sentry run repairs (#18714)",
+        "stderr": ""
+      },
+      "tracked_changes": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "graphiti-audit": {
+      "head": {
+        "exit_code": 0,
+        "stdout": "7e0342a49ce5a04f6415ac2f64ce150bb81b0689",
+        "stderr": ""
+      },
+      "last_commit": {
+        "exit_code": 0,
+        "stdout": "7e0342a49ce5a04f6415ac2f64ce150bb81b0689\n2026-11-03T09:43:49Z\n@Tyagiquamar has signed the CLA in getzep/graphiti#2119",
+        "stderr": ""
+      },
+      "tracked_changes": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "opencompany-zeenie": {
+      "head": {
+        "exit_code": 0,
+        "stdout": "dc69aec7cfa70732de486512c1ba424bb855fd52",
+        "stderr": ""
+      },
+      "last_commit": {
+        "exit_code": 0,
+        "stdout": "dc69aec7cfa70732de486512c1ba424bb855fd52\n2026-11-03T14:59:26+05:30\nfix(kimi): Kimi requests no longer carry a temperature (#152)",
+        "stderr": ""
+      },
+      "tracked_changes": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "openagents-audit": {
+      "head": {
+        "exit_code": 0,
+        "stdout": "6a330c789c321bdce5856578b7c47c2539ea7fc6",
+        "stderr": ""
+      },
+      "last_commit": {
+        "exit_code": 0,
+        "stdout": "6a330c789c321bdce5856578b7c47c2539ea7fc6\n2026-11-03T07:45:33-07:00\nMerge pull request #902 from openagents-org/bugfix/daily-report-error-surfacing",
+        "stderr": ""
+      },
+      "tracked_changes": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "eigent-audit": {
+      "head": {
+        "exit_code": 0,
+        "stdout": "4958c94bd91faf4e0bfff270a971d4d1810fb6db",
+        "stderr": ""
+      },
+      "last_commit": {
+        "exit_code": 0,
+        "stdout": "4958c94bd91faf4e0bfff270a971d4d1810fb6db\n2026-11-02T14:46:40+01:00\nfix: stop the interrupted-Run status check from reloading whenever the host object changes (#2143)",
+        "stderr": ""
+      },
+      "tracked_changes": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "agentscope-audit": {
+      "head": {
+        "exit_code": 0,
+        "stdout": "9668b4c90c70cc214e1b7bb65dec2a6e70b90010",
+        "stderr": ""
+      },
+      "last_commit": {
+        "exit_code": 0,
+        "stdout": "9668b4c90c70cc214e1b7bb65dec2a6e70b90010\n2026-11-03T18:13:37+08:00\nfix(channel): propagate reply stream subscription failures (#3374)",
+        "stderr": ""
+      },
+      "tracked_changes": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    }
+  },
+  "live": {
+    "demo": {
+      "reachable": true,
+      "url": "http://127.0.0.1:59587",
+      "phase": "ready",
+      "sources": 3,
+      "catalog": 0,
+      "usage": {
+        "calls": 11,
+        "max_calls": 16,
+        "input_tokens": 137888,
+        "cached_input_tokens": 50048,
+        "output_tokens": 2248,
+        "money": "Custo monetário não medido; chamadas Codex de bancada, sem fatura API atribuível."
+      },
+      "jobs": [
+        {
+          "id": "2722b8b6-88d1-4241-95fa-d657d1f0f1c1",
+          "status": "completed",
+          "worker_active": false,
+          "selected": [
+            "sales_analysis",
+            "inventory_analysis"
+          ],
+          "approval": true,
+          "receipt_id": "17e1c1d7-3817-4b58-bf8c-caeb8f9a0e37",
+          "simulated": true,
+          "events": 20
+        },
+        {
+          "id": "207b88d0-ed55-4da3-b74f-02e5420c7c7c",
+          "status": "completed",
+          "worker_active": false,
+          "selected": [
+            "sales_analysis",
+            "inventory_analysis"
+          ],
+          "approval": true,
+          "receipt_id": "5e6f5f1d-9a41-4863-a27c-0358e5b85455",
+          "simulated": true,
+          "events": 32
+        }
+      ]
+    },
+    "demo-enterprise": {
+      "reachable": true,
+      "url": "http://127.0.0.1:58678",
+      "phase": "ready",
+      "sources": 16,
+      "catalog": 21,
+      "usage": {
+        "calls": 32,
+        "max_calls": 41,
+        "input_tokens": 471017,
+        "cached_input_tokens": 314112,
+        "output_tokens": 33723,
+        "money": "Uso Codex de bancada; valor monetário não medido."
+      },
+      "jobs": [
+        {
+          "id": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+          "status": "awaiting_approval",
+          "worker_active": false,
+          "selected": [
+            "technology_director",
+            "security_analyst",
+            "legal_director",
+            "compliance_advisor"
+          ],
+          "approval": false,
+          "receipt_id": null,
+          "simulated": null,
+          "events": 25
+        },
+        {
+          "id": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+          "status": "failed",
+          "worker_active": false,
+          "selected": [
+            "marketing_director",
+            "campaign_planner",
+            "operations_director",
+            "supply_planner",
+            "finance_director",
+            "controller",
+            "legal_director",
+            "compliance_advisor"
+          ],
+          "approval": false,
+          "receipt_id": null,
+          "simulated": null,
+          "events": 31
+        }
+      ]
+    }
+  },
+  "manifest_checks": {
+    "demo": {
+      "files": 20,
+      "mismatches": [
+        "server.ts"
+      ],
+      "missing": []
+    },
+    "demo-enterprise": {
+      "files": 25,
+      "mismatches": [],
+      "missing": []
+    }
+  },
+  "junit": [
+    {
+      "path": "validation/brain-recovery/attempt-1.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 99.685
+    },
+    {
+      "path": "validation/brain-recovery/attempt-2.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 101.442
+    },
+    {
+      "path": "validation/brain-recovery/attempt-3.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 240.676
+    },
+    {
+      "path": "validation/brain-recovery/regression.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 30.22
+    },
+    {
+      "path": "validation/detached-inference/attempt-1.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 35.271
+    },
+    {
+      "path": "validation/detached-inference/attempt-2.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 5.809
+    },
+    {
+      "path": "validation/detached-inference/attempt-3.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 13.792
+    },
+    {
+      "path": "validation/detached-inference/final.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 14.368
+    },
+    {
+      "path": "validation/detached-inference/governed-regression.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 33.738
+    },
+    {
+      "path": "validation/detached-inference/native-1.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 29.808
+    },
+    {
+      "path": "validation/detached-inference/native-2.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 251.422
+    },
+    {
+      "path": "validation/detached-inference/postgres-startup-failed.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 4.576
+    },
+    {
+      "path": "validation/detached-inference/units.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.357
+    },
+    {
+      "path": "validation/governed-recovery/attempt-1.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 30.909
+    },
+    {
+      "path": "validation/governed-recovery/attempt-2.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 32.809
+    },
+    {
+      "path": "validation/governed-recovery/brain-regression.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 30.22
+    },
+    {
+      "path": "validation/governed-recovery/final.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 39.559
+    },
+    {
+      "path": "validation/governed-recovery/pre-missing-receipt.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 38.809
+    },
+    {
+      "path": "validation/governed-recovery/signed-regression.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 23.833
+    },
+    {
+      "path": "validation/governed-recovery/stale-bundle-failed.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 37.335
+    },
+    {
+      "path": "validation/governed-recovery/units-final.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.446
+    },
+    {
+      "path": "validation/governed-recovery/units.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.294
+    },
+    {
+      "path": "validation/investment-gate/governed.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 29.177
+    },
+    {
+      "path": "validation/investment-gate/grader.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.365
+    },
+    {
+      "path": "validation/investment-gate/units.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.38
+    },
+    {
+      "path": "validation/investment-gate/unknown.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 5.947
+    },
+    {
+      "path": "validation/investment-gate/v1.xml",
+      "tests": 4,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 41.694
+    },
+    {
+      "path": "validation/investment-gate/v23-first.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 161.658
+    },
+    {
+      "path": "validation/investment-gate/v23-second.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 191.183
+    },
+    {
+      "path": "validation/investment-gate/v23.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 211.92
+    },
+    {
+      "path": "validation/investment-gate/v4.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 4.106
+    },
+    {
+      "path": "validation/langgraph-business-flow/final-run.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 27.25
+    },
+    {
+      "path": "validation/langgraph-business-flow/first-run.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 37.02
+    },
+    {
+      "path": "validation/langgraph-business-flow/two-api-failed.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 24.461
+    },
+    {
+      "path": "validation/langgraph-retained-flow/baseline-regression.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 25.543
+    },
+    {
+      "path": "validation/langgraph-retained-flow/budget-final.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.271
+    },
+    {
+      "path": "validation/langgraph-retained-flow/budget-retry.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.335
+    },
+    {
+      "path": "validation/langgraph-retained-flow/budget.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 3,
+      "skipped": 0,
+      "seconds": 0.85
+    },
+    {
+      "path": "validation/langgraph-retained-flow/signed-attempt-1.xml",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.333
+    },
+    {
+      "path": "validation/langgraph-retained-flow/signed-attempt-2.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 19.699
+    },
+    {
+      "path": "validation/langgraph-retained-flow/signed-before-idempotency.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 21.685
+    },
+    {
+      "path": "validation/langgraph-retained-flow/signed-final.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 21.43
+    },
+    {
+      "path": "validation/platform-fit-2026-11-04/dify-queue.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.451
+    },
+    {
+      "path": "validation/platform-fit-2026-11-04/graphon-upstream.xml",
+      "tests": 45,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 9.419
+    }
+  ],
+  "versions": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "node": "v24.20.0",
+    "versions": {
+      "lightrag-hku": "1.5.8",
+      "langgraph": "1.2.19",
+      "langgraph-checkpoint": "4.3.1",
+      "langgraph-checkpoint-postgres": "3.2.0",
+      "neo4j": "6.4.1",
+      "asyncpg": "0.32.0",
+      "psycopg": "3.3.7",
+      "cryptography": "50.0.2"
+    },
+    "vendor_sha": {
+      "langgraph": "3c916d750575b22c464790e9774494d810ccd322",
+      "lightrag": "aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a"
+    },
+    "postgres_image": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+    "neo4j_image": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+    "model": "gpt-6.1-terra",
+    "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0"
+  }
+}

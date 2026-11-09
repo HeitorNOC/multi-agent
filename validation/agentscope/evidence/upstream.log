@@ -1,0 +1,65 @@
+
+=================================== ERRORS ====================================
+________________ ERROR collecting tests/pipeline_team_test.py _________________
+ImportError while importing test module 'C:\Users\PC\multi-agent\vendor\agentscope-audit\tests\pipeline_team_test.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\pipeline_team_test.py:9: in <module>
+    from utils import AnyString, MockModel
+tests\utils.py:8: in <module>
+    from agentscope.app.workspace_manager import WorkspaceManagerBase
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\__init__.py:6: in <module>
+    from ._app import create_app
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_app.py:11: in <module>
+    from ._lifespan import lifespan
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_lifespan.py:9: in <module>
+    from ._manager import (
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\__init__.py:5: in <module>
+    from ._scheduler import SchedulerManager
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\_scheduler\__init__.py:4: in <module>
+    from ._scheduler_manager import SchedulerManager
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\_scheduler\_scheduler_manager.py:17: in <module>
+    from ._tools import ScheduleCreate, ScheduleDelete, ScheduleList, ScheduleView
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\_scheduler\_tools\__init__.py:5: in <module>
+    from ._schedule_delete import ScheduleDelete
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\_scheduler\_tools\_schedule_delete.py:6: in <module>
+    from apscheduler.jobstores.base import JobLookupError
+E   ModuleNotFoundError: No module named 'apscheduler'
+____________ ERROR collecting tests/pipeline_team_cleanup_test.py _____________
+ImportError while importing test module 'C:\Users\PC\multi-agent\vendor\agentscope-audit\tests\pipeline_team_cleanup_test.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\pipeline_team_cleanup_test.py:7: in <module>
+    from pipeline_team_test import SlowTool, _agent, _text, _tool_call
+tests\pipeline_team_test.py:9: in <module>
+    from utils import AnyString, MockModel
+tests\utils.py:8: in <module>
+    from agentscope.app.workspace_manager import WorkspaceManagerBase
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\__init__.py:6: in <module>
+    from ._app import create_app
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_app.py:11: in <module>
+    from ._lifespan import lifespan
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_lifespan.py:9: in <module>
+    from ._manager import (
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\__init__.py:5: in <module>
+    from ._scheduler import SchedulerManager
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\_scheduler\__init__.py:4: in <module>
+    from ._scheduler_manager import SchedulerManager
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\_scheduler\_scheduler_manager.py:17: in <module>
+    from ._tools import ScheduleCreate, ScheduleDelete, ScheduleList, ScheduleView
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\_scheduler\_tools\__init__.py:5: in <module>
+    from ._schedule_delete import ScheduleDelete
+..\..\validation\agentscope\.venv\Lib\site-packages\agentscope\app\_manager\_scheduler\_tools\_schedule_delete.py:6: in <module>
+    from apscheduler.jobstores.base import JobLookupError
+E   ModuleNotFoundError: No module named 'apscheduler'
+=========================== short test summary info ===========================
+ERROR tests/pipeline_team_test.py
+ERROR tests/pipeline_team_cleanup_test.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+2 errors in 9.12s

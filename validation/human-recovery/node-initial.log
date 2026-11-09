@@ -1,0 +1,12 @@
+✔ HTTP: origem, token interno e falha de admissão não liberam efeitos nem bloqueiam próximo pedido (354.932ms)
+✔ sessão é opaca, isolada e perde validade após rotação de credencial (3.0104ms)
+✔ cookie de outra instalação não identifica o revisor (0.7763ms)
+✔ aprovação, evento e recibo persistem após queda 88 e restart da API; um efeito (1314.7312ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1474.3187

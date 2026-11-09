@@ -1,0 +1,10 @@
+npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+ RUN  v5.0.3 C:/Users/PC/multi-agent/vendor/paperclip
+
+No test files found, exiting with code 1
+
+filter: server/src/adapters/http/execute.test.ts, server/src/__tests__/http-adapter-remote-fetch.test.ts, server/src/__tests__/remote-http-rebinding.test.ts, server/src/__tests__/authorization-service.test.ts, server/src/__tests__/issues-checkout-wakeup.test.ts, server/src/services/heartbeat/queue.test.ts, server/src/services/heartbeat/recovery.test.ts, server/src/services/heartbeat/budget-cancellation.test.ts
+include: src/**/*.test.ts, scripts/**/*.test.mjs
+exclude:  **/node_modules/**, **/.git/**
+

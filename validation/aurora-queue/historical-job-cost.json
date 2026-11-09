@@ -1,0 +1,32 @@
+{
+  "model": "gpt-6.1-terra",
+  "rate_reference_date": "2026-11-06",
+  "case_scope": "historical direct inference through review",
+  "historical_cli_calls": 33,
+  "matched_cli_calls": 16,
+  "unattributed_cli_calls": 17,
+  "invoiced_usd": null,
+  "new_calls": 0,
+  "cases": [
+    {
+      "scenario": "campaign",
+      "status": "awaiting_approval",
+      "slots": 10,
+      "input_tokens": 170494,
+      "cached_input_tokens": 88832,
+      "output_tokens": 12779,
+      "api_standard_usd_equivalent": "0.1499986",
+      "codex_standard_credit_equivalent": "3.749965"
+    },
+    {
+      "scenario": "incident",
+      "status": "awaiting_approval",
+      "slots": 6,
+      "input_tokens": 92315,
+      "cached_input_tokens": 43264,
+      "output_tokens": 5011,
+      "api_standard_usd_equivalent": "0.0762692",
+      "codex_standard_credit_equivalent": "1.90673"
+    }
+  ]
+}

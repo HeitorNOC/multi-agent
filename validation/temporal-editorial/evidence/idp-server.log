@@ -1,0 +1,42 @@
+Changes detected in configuration. Updating the server image.
+Updating the configuration and installing your custom providers, if any. Please wait.
+2026-11-04 09:21:44,911 WARN  [org.keycloak.common.Profile] (build-7) Deprecated features identity-brokering-api:v1, twitter-broker:v1 enabled by default. Check the upgrading guide for steps to use later versions if available.
+2026-11-04 09:21:58,081 INFO  [io.quarkus.deployment.QuarkusAugmentor] (main) Quarkus augmentation completed in 18935ms
+Server configuration updated and persisted. Run the following command to review the configuration:
+
+	kc.sh show-config
+
+Next time you run the server, just add --optimized to the command to ensure this build is used.
+2026-11-04 09:22:01,823 WARN  [org.keycloak.models.sessions.infinispan.InfinispanStickySessionEncoderProviderFactory] (main) The option `shouldAttachRoute` is deprecated and will be removed in a future release. Disable it by setting `spi-sticky-session-encoder--infinispan--should-attach-route` to `false`
+2026-11-04 09:22:04,344 INFO  [org.infinispan.CONTAINER] (main) ISPN000974: Virtual threads support: disabled
+2026-11-04 09:22:06,137 INFO  [org.hibernate.orm.jdbc.batch] (JPA Startup Thread) HHH100501: Automatic JDBC statement batching enabled (maximum batch size 32)
+2026-11-04 09:22:06,220 WARN  [org.keycloak.common.Profile] (main) Deprecated features identity-brokering-api:v1, twitter-broker:v1 enabled by default. Check the upgrading guide for steps to use later versions if available.
+2026-11-04 09:22:07,974 INFO  [org.keycloak.quarkus.runtime.storage.database.liquibase.QuarkusJpaUpdaterProvider] (main) Initializing database schema. Using changelog META-INF/jpa-changelog-master.xml
+2026-11-04 09:22:21,753 INFO  [org.keycloak.spi.infinispan.impl.embedded.JGroupsConfigurator] (main) JGroups JDBC_PING discovery enabled.
+2026-11-04 09:22:22,322 INFO  [org.keycloak.spi.infinispan.impl.embedded.JGroupsConfigurator] (main) JGroups Encryption enabled (mTLS).
+2026-11-04 09:22:22,632 INFO  [org.keycloak.jgroups.certificates.CertificateReloadManager] (main) Starting JGroups certificate reload manager
+2026-11-04 09:22:23,445 INFO  [org.infinispan.CONTAINER] (main) ISPN000556: Starting user marshaller 'org.infinispan.commons.marshall.ImmutableProtoStreamMarshaller'
+2026-11-04 09:22:23,624 INFO  [org.infinispan.CLUSTER] (main) ISPN000078: Starting JGroups channel `ISPN` with stack `jdbc-ping`
+2026-11-04 09:22:23,626 INFO  [org.jgroups.JChannel] (main) local_addr: 00000000-0000-0000-0000-000000000001(v=16.0.15), name: b507a6b30b81-17807
+2026-11-04 09:22:23,632 INFO  [org.jgroups.protocols.FD_SOCK2] (main) server listening on *:57800
+2026-11-04 09:22:23,720 INFO  [org.infinispan.CLUSTER] (main) ISPN000094: Received new cluster view for channel ISPN: [b507a6b30b81-17807(v=16.0.15)|0] (1) [b507a6b30b81-17807(v=16.0.15)]
+2026-11-04 09:22:23,721 INFO  [org.keycloak.jgroups.certificates.CertificateReloadManager] (blocking-thread--p3-t2) Reloading JGroups Certificate
+2026-11-04 09:22:23,821 INFO  [org.infinispan.CLUSTER] (main) ISPN000079: Channel `ISPN` local address is `b507a6b30b81-17807`, physical addresses are `[172.20.0.4:7800]`
+2026-11-04 09:22:24,431 INFO  [org.keycloak.connections.infinispan.DefaultInfinispanConnectionProviderFactory] (main) Node name: b507a6b30b81-17807, Site name: null, Cluster name: ISPN
+2026-11-04 09:22:24,709 INFO  [org.keycloak.models.workflow.WorkflowsEventListenerFactory] (main) Workflow runner task scheduled: next execution at 21:22:24, then every PT12H
+2026-11-04 09:22:24,909 INFO  [org.keycloak.services] (main) KC-SERVICES0050: Initializing master realm
+2026-11-04 09:22:27,612 INFO  [org.keycloak.services] (main) KC-SERVICES0077: Created temporary admin user with username pilot-admin
+2026-11-04 09:22:27,835 INFO  [org.keycloak.services.resources.KeycloakApplication] (main) Bootstrap completed in 21.615000 seconds
+2026-11-04 09:22:28,012 INFO  [io.quarkus] (main) Keycloak 26.8.1 on JVM (powered by Quarkus 3.40.1) started in 29.774s. Listening on: http://0.0.0.0:8080
+2026-11-04 09:22:28,013 INFO  [io.quarkus] (main) Profile prod activated. 
+2026-11-04 09:22:28,013 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, hibernate-orm, jdbc-postgresql, keycloak, narayana-jta, opentelemetry, rest, rest-jackson, smallrye-context-propagation, vertx]
+2026-11-04 09:22:41,515 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'analista' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 09:22:41,694 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'aprovador' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 09:22:41,813 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'aprovador' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 09:23:03,662 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'analista' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 09:23:03,701 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'analista' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 09:23:05,282 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'analista' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 09:23:05,304 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'aprovador' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 09:23:05,491 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'analista' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 09:23:05,605 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'analista' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 09:23:05,727 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'aprovador' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope

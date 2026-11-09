@@ -1,0 +1,574 @@
+{
+  "goal": "Analisar a diretiva executiva vinculada a esta tarefa. SHA-256 5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "status": "awaiting_approval",
+  "error": null,
+  "plan": {
+    "strategy": "A2",
+    "reason": "A missão inicial concentra-se na análise arquitetural e na fundação técnica de uma plataforma de mensageria.",
+    "teams": [
+      {
+        "lead": "technology_director",
+        "specialists": [
+          "tech_lead",
+          "backend_engineer"
+        ],
+        "reason": "A liderança técnica e a engenharia de backend cobrem arquitetura, contratos, integrações, estados e confiabilidade do núcleo compartilhado.",
+        "queries": [
+          "Quais contratos de eventos e interfaces são definidos nos documentos de referência?",
+          "Quais estados e transições de conversa são documentados?",
+          "Quais mecanismos oficiais de transferência de controle do MBA estão confirmados?",
+          "Quais garantias de execução e recuperação são documentadas para o processamento de mensagens?"
+        ]
+      }
+    ],
+    "capabilities": [
+      "technology_director",
+      "tech_lead",
+      "backend_engineer"
+    ],
+    "not_selected": [
+      {
+        "id": "executive_director",
+        "reason": "A missão é predominantemente técnica."
+      },
+      {
+        "id": "project_manager",
+        "reason": "O planejamento técnico cabe à equipe selecionada nesta etapa."
+      },
+      {
+        "id": "business_analyst",
+        "reason": "Não há dependência entre unidades especificada para análise inicial."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "Não há decisão de investimento de portfólio solicitada."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "Campanhas e posicionamento estão fora do escopo."
+      },
+      {
+        "id": "content_specialist",
+        "reason": "Conteúdo de marca não integra a missão inicial."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "Não há campanha a planejar."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "Não há mecânica promocional a analisar."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Suprimentos e logística não são o foco da plataforma."
+      },
+      {
+        "id": "procurement_analyst",
+        "reason": "Não há contratação de fornecedores solicitada."
+      },
+      {
+        "id": "process_quality_analyst",
+        "reason": "A análise inicial exige arquitetura de software especializada."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Estoque e reservas estão fora do escopo."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Capacidade logística está fora do escopo."
+      },
+      {
+        "id": "finance_director",
+        "reason": "Não há análise financeira solicitada."
+      },
+      {
+        "id": "financial_planning_analyst",
+        "reason": "Orçamento e projeções não são objeto da missão."
+      },
+      {
+        "id": "accounting_analyst",
+        "reason": "Fechamento contábil está fora do escopo."
+      },
+      {
+        "id": "controller",
+        "reason": "Margem e caixa não são objeto da análise."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Liquidez e financiamento não são solicitados."
+      },
+      {
+        "id": "people_director",
+        "reason": "Capacidade organizacional não é o foco da missão."
+      },
+      {
+        "id": "people_development_specialist",
+        "reason": "Treinamento de pessoas não é solicitado."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "Não há demanda demonstrada de admissões."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "Disponibilidade de equipes não é o foco inicial."
+      },
+      {
+        "id": "legal_director",
+        "reason": "A diretiva prioriza a fundação técnica nesta análise."
+      },
+      {
+        "id": "privacy_specialist",
+        "reason": "A análise inicial de isolamento técnico cabe à equipe selecionada."
+      },
+      {
+        "id": "risk_controls_analyst",
+        "reason": "Riscos técnicos iniciais serão tratados pela equipe de tecnologia."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "Campanhas e resposta a incidentes não são o foco inicial."
+      },
+      {
+        "id": "contract_analyst",
+        "reason": "Não há contratos comerciais a revisar."
+      },
+      {
+        "id": "frontend_engineer",
+        "reason": "A diretiva prioriza contratos e fluxos de backend."
+      },
+      {
+        "id": "qa_engineer",
+        "reason": "Os especialistas selecionados priorizam decisões arquiteturais e integração inicial."
+      },
+      {
+        "id": "platform_engineer",
+        "reason": "A operação de plataforma será detalhada na arquitetura inicial."
+      },
+      {
+        "id": "data_engineer",
+        "reason": "Pipelines analíticos de dados não são o foco inicial."
+      },
+      {
+        "id": "security_analyst",
+        "reason": "O foco específico em incidentes e SLA não corresponde à missão inicial."
+      },
+      {
+        "id": "data_analyst",
+        "reason": "Contagens e integração analítica não são o foco inicial."
+      },
+      {
+        "id": "product_director",
+        "reason": "O escopo e as prioridades iniciais já estão definidos na diretiva."
+      },
+      {
+        "id": "product_manager",
+        "reason": "O backlog técnico inicial pode ser definido pela liderança técnica."
+      },
+      {
+        "id": "ux_designer",
+        "reason": "Pesquisa e prototipação de interface não são prioritárias nesta fase."
+      },
+      {
+        "id": "service_designer",
+        "reason": "A missão inicial concentra-se nos contratos e fluxos técnicos."
+      },
+      {
+        "id": "sales_director",
+        "reason": "Vendas e negociação comercial estão fora do escopo."
+      },
+      {
+        "id": "sales_operations_analyst",
+        "reason": "Pipeline comercial não é objeto da missão."
+      },
+      {
+        "id": "account_specialist",
+        "reason": "Qualificação de oportunidades não é solicitada."
+      },
+      {
+        "id": "customer_director",
+        "reason": "A operação de atendimento não é a frente inicial de análise."
+      },
+      {
+        "id": "support_specialist",
+        "reason": "Triagem de solicitações não é necessária para a fundação técnica."
+      },
+      {
+        "id": "customer_success_specialist",
+        "reason": "Retenção de contas não é objeto da missão."
+      },
+      {
+        "id": "customer_experience_analyst",
+        "reason": "Não há dados de satisfação ou reclamações para analisar."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 6
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 6,
+    "max_calls": 24,
+    "input_tokens": 89060,
+    "cached_input_tokens": 68352,
+    "output_tokens": 2118,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    }
+  ],
+  "retrieval": "hybrid",
+  "facets": [],
+  "job_seconds": 61.94,
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "specialist_started",
+    "retrieval_completed",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "director_completed",
+    "synthesis",
+    "inference_requested",
+    "inference_completed",
+    "inference_requested",
+    "inference_completed",
+    "review_ready",
+    "checkpoint_saved",
+    "worker_stopped"
+  ],
+  "retrieval_observed": true,
+  "candidates": [
+    {
+      "source": "mba",
+      "page": 4,
+      "line": 8
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "mba",
+      "page": 4,
+      "line": 6
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 20
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "mba",
+      "page": 8,
+      "line": 14
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "mba",
+      "page": 3,
+      "line": 4
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 60
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 73
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 44
+    },
+    {
+      "source": "contact",
+      "page": 11,
+      "line": 23
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 30
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 67
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 19
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 8
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 63
+    }
+  ],
+  "report": {
+    "status": "partial_evidence",
+    "summary": "Parte da pergunta tem evidência para revisão humana.",
+    "citations": [
+      {
+        "id": "6f2bed582a47a245f9a4355d0442c72766cab9f37b0311ffb2f207b2e4c602b2",
+        "source": "contact",
+        "version": 1,
+        "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510",
+        "line": 23,
+        "quote": "Publica um evento de CRM (\"digital-attendance-created\") com os dados do atendimento.",
+        "pdf_page": 11
+      },
+      {
+        "id": "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+        "source": "contact",
+        "version": 1,
+        "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510",
+        "line": 44,
+        "quote": "O backend valida; se for telefonia, exige um terminal de telefonia vinculado ao usuário; se estava PAUSED, reativa a expiração da sessão; soma o tempo de espera; muda o status para ACTIVE e o responsável para o usuário; atualiza o cache; grava a mudança de status; cria o cache de mensagens do atendimento; e executa a ação de workflow \"iniciar atendimento\", se houver.",
+        "pdf_page": 15
+      },
+      {
+        "id": "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e",
+        "source": "fluxo",
+        "version": 1,
+        "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1",
+        "line": 30,
+        "quote": "O handoff entre bot e humano muda o tipo da sessão no messaging-session (tipos ML_MODEL e HUMAN).",
+        "pdf_page": 12
+      },
+      {
+        "id": "288bc8f3f68f964d6c56cf1bf661c2f9eb85a696eae87a41a881cf915e98b7b1",
+        "source": "mba",
+        "version": 1,
+        "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af",
+        "line": 4,
+        "quote": "Transfere a conversa para o aplicativo da empresa ou para um atendente humano quando necessário.",
+        "pdf_page": 3
+      }
+    ],
+    "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+    "requires_approval": true,
+    "unanswered": [
+      "Quais contratos de eventos e interfaces são definidos nos documentos de referência?",
+      "Quais estados e transições de conversa são documentados?",
+      "Quais mecanismos oficiais de transferência de controle do MBA estão confirmados?",
+      "Quais garantias de execução e recuperação são documentadas para o processamento de mensagens?"
+    ],
+    "directive_sha256": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+    "requirements": [
+      "Quais contratos de eventos e interfaces são definidos nos documentos de referência?",
+      "Quais estados e transições de conversa são documentados?",
+      "Quais mecanismos oficiais de transferência de controle do MBA estão confirmados?",
+      "Quais garantias de execução e recuperação são documentadas para o processamento de mensagens?"
+    ],
+    "requirement_assessments": [
+      {
+        "requirement": "Quais contratos de eventos e interfaces são definidos nos documentos de referência?",
+        "status": "partial",
+        "note": "O evento de CRM digital-attendance-created é citado com dados do atendimento, mas seu esquema e os contratos de interfaces não são detalhados.",
+        "evidence_ids": [
+          "6f2bed582a47a245f9a4355d0442c72766cab9f37b0311ffb2f207b2e4c602b2"
+        ]
+      },
+      {
+        "requirement": "Quais estados e transições de conversa são documentados?",
+        "status": "partial",
+        "note": "Documenta-se a transição de PAUSED para ACTIVE e a mudança do tipo de sessão entre ML_MODEL e HUMAN no handoff, mas não o conjunto completo de estados e transições.",
+        "evidence_ids": [
+          "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+          "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e"
+        ]
+      },
+      {
+        "requirement": "Quais mecanismos oficiais de transferência de controle do MBA estão confirmados?",
+        "status": "partial",
+        "note": "O resumo do MBA menciona transferência para o aplicativo da empresa ou um atendente humano, mas não detalha os mecanismos oficiais usados.",
+        "evidence_ids": [
+          "288bc8f3f68f964d6c56cf1bf661c2f9eb85a696eae87a41a881cf915e98b7b1"
+        ]
+      },
+      {
+        "requirement": "Quais garantias de execução e recuperação são documentadas para o processamento de mensagens?",
+        "status": "unanswered",
+        "note": "Os trechos não documentam garantias de execução ou recuperação para o processamento de mensagens.",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "admission_replay": {
+    "job_ids": [
+      "a6538495-96e9-44aa-9707-fca4785addc1",
+      "a6538495-96e9-44aa-9707-fca4785addc1",
+      "a6538495-96e9-44aa-9707-fca4785addc1"
+    ],
+    "same_job": true,
+    "jobs_visible": 1,
+    "worker_starts": 1
+  },
+  "directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "retrieval_by_agent": [
+    {
+      "agent": "tech_lead",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    },
+    {
+      "agent": "backend_engineer",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    },
+    {
+      "agent": "technology_director",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    }
+  ],
+  "directive_dispatches": [
+    {
+      "pilot_directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+      "job": "a6538495-96e9-44aa-9707-fca4785addc1",
+      "characters": 23385
+    }
+  ],
+  "diagnostics": [],
+  "model_call_metadata": [
+    {
+      "call": 1,
+      "seconds": 23.397535800002515,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "seconds": 6.302520299999742,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "seconds": 7.5342667999793775,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "seconds": 6.610141700017266,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "seconds": 5.832645300019067,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "seconds": 9.401149499986786,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    }
+  ]
+}

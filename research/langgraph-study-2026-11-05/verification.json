@@ -1,0 +1,9 @@
+{
+  "capture_integrity": "PASS",
+  "source_files": 44,
+  "notebooks": 9,
+  "errors": [],
+  "upstream_tests_executed": false,
+  "business_v1_requalified": false,
+  "new_inference_calls": 0
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a5f3-a6a2-7f60-8839-9960a9a71220"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"entity<|#|>ACME<|#|>Organization<|#|>Organização que estuda uma aquisição sintética.\\nentity<|#|>SIGILO_AQUISICAO_2026<|#|>Event<|#|>Aquisição sintética estudada pela ACME, com valor de R$ 9.700.000; não existe transação real.\\nrelation<|#|>ACME<|#|>SIGILO_AQUISICAO_2026<|#|>estudo, aquisição sintética<|#|>A ACME estuda a aquisição sintética SIGILO_AQUISICAO_2026 por R$ 9.700.000.\\n<|COMPLETE|>\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13857,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":175,"reasoning_output_tokens":0}}

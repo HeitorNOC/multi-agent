@@ -1,0 +1,12 @@
+{"result": "FAIL"}
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\validation\production-readiness\pg_saver_probe.py", line 83, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\PC\multi-agent\validation\production-readiness\pg_saver_probe.py", line 38, in main
+    docker('volume','create','--label','audit.owner='+NAME,VOLUME)
+  File "C:\Users\PC\multi-agent\validation\production-readiness\pg_saver_probe.py", line 20, in docker
+    if check and result.returncode:raise RuntimeError(result.stderr.decode(errors='replace'))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: O sistema não pode encontrar o arquivo especificado.
+

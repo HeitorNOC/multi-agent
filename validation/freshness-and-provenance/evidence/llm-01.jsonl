@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a721-be08-7c61-b386-c4c239f15db7"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"entity<|#|>Aurora<|#|>Organization<|#|>Equipe que tem dois dias de trabalho remoto por semana.\\nentity<|#|>Horizonte<|#|>Other<|#|>Projeto de expansão.\\nentity<|#|>Trabalho Remoto<|#|>Concept<|#|>Modalidade de trabalho realizada pela equipe Aurora dois dias por semana.\\nrelation<|#|>Aurora<|#|>Trabalho Remoto<|#|>modalidade de trabalho,frequência<|#|>A equipe Aurora tem dois dias de trabalho remoto por semana.\\n<|COMPLETE|>\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13059,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":158,"reasoning_output_tokens":0}}

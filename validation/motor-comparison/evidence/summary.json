@@ -1,0 +1,41 @@
+{
+  "scope": "functional comparison of local synthetic integrations; not a model-quality, billing or performance benchmark",
+  "pytest": {
+    "tests": 17,
+    "passed": 17,
+    "duration_seconds": 78.47
+  },
+  "recorded_scenario_snapshots": 20,
+  "recovery": [
+    {
+      "scenario": "abrupt_worker_recovery",
+      "engine": "langgraph",
+      "knowledge_requests": 2,
+      "own_finding_cache_hits": 0
+    },
+    {
+      "scenario": "abrupt_worker_recovery",
+      "engine": "agentscope",
+      "knowledge_requests": 3,
+      "own_finding_cache_hits": 1
+    }
+  ],
+  "worker_invocations": {
+    "langgraph": 18,
+    "agentscope": 18
+  },
+  "common_finance": {
+    "units": "synthetic integer units, not USD or provider tokens",
+    "reservation": 4,
+    "successful_first_delivery_actual": 3,
+    "new_run_same_intent_actual": 2,
+    "cancel_during_first_read_actual": 1,
+    "overrun_actual": 5,
+    "overrun_reservation": 4
+  },
+  "delivery": {
+    "openagents_events_per_replayed_business_result": 2,
+    "durable_consumer_applications": 1
+  },
+  "decision": "Prefer LangGraph as workflow owner in the tested architecture; AgentScope remains viable; production NO-GO pending remaining requirements"
+}

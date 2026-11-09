@@ -1,0 +1,84 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+EE                                                                       [100%]
+=================================== ERRORS ====================================
+______ ERROR at setup of test_signed_proof_rejects_replay_and_alteration ______
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_signed_proof_rejects_replay_and_alteration>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:925: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/PC/multi-agent/validation/freshness-and-provenance/.test-temp/contracts-1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] O sistema não pode encontrar o caminho especificado: 'C:\\Users\\PC\\multi-agent\\validation\\freshness-and-provenance\\.test-temp\\contracts-1'
+
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1311: FileNotFoundError
+_____ ERROR at setup of test_authority_ids_and_completions_are_immutable ______
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_authority_ids_and_completions_are_immutable>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+>               return (yield)
+                        ^^^^^
+
+validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:925: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/PC/multi-agent/validation/freshness-and-provenance/.test-temp/contracts-1')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] O sistema não pode encontrar o caminho especificado: 'C:\\Users\\PC\\multi-agent\\validation\\freshness-and-provenance\\.test-temp\\contracts-1'
+
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1311: FileNotFoundError
+=========================== short test summary info ===========================
+ERROR validation/freshness-and-provenance/test_contracts.py::test_signed_proof_rejects_replay_and_alteration
+ERROR validation/freshness-and-provenance/test_contracts.py::test_authority_ids_and_completions_are_immutable
+2 errors in 1.04s

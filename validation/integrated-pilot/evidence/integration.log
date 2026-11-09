@@ -1,0 +1,20 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+PROVISIONING isolated PostgreSQL/Neo4j/Keycloak
+CHECKPOINT real_services_and_oidc_ready
+CHECKPOINT journaled_server_backed_generation_g1_published
+CHECKPOINT signed_identity_and_acl_on_actual_hybrid_graph
+CHECKPOINT native_pg_checkpoint_human_approval_and_source_injection_fenced
+CHECKPOINT coherent_cold_backup_pg_graph_objects_and_identity
+CHECKPOINT backup_tampering_rejected_before_restore
+CHECKPOINT new_generation_and_explicit_historical_snapshot
+CHECKPOINT single_source_revocation_fences_mixed_partition_before_cached_result
+CHECKPOINT source_version_reindex_does_not_regrant_revoked_access
+CHECKPOINT external_effect_committed_but_completion_not_falsely_reported
+CHECKPOINT restored_into_empty_pg_and_graph_volumes_with_recovery_gate_closed
+CHECKPOINT post_backup_revocation_replayed_and_old_graph_does_not_restore_permission
+CHECKPOINT native_workflow_restored_without_rerunning_reads_or_duplicating_external_effect
+.
+1 passed in 277.38s (0:04:37)

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a805-7124-75b0-8121-77f224060b96"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O teto diário de reembolso de alimentação da unidade Aurora é **R$ 240 por pessoa**. [1]\\n\\nA versão consultada entrou em vigor em **1º de janeiro de 2026** e foi publicada em **4 de novembro de 2026**. [1]\\n\\n### References\\n\\n* [1] manual-aurora@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13196,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":93,"reasoning_output_tokens":0}}

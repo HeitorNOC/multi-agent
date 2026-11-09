@@ -1,0 +1,11 @@
+Using Python 3.12.14 environment at: validation\temporal-editorial\.venv
+WARN Retry attempt #0. Sleeping 1.2032919s before the next attempt
+WARN Retry attempt #1. Sleeping 3.1878227s before the next attempt
+WARN Retry attempt #2. Sleeping 4.679883s before the next attempt
+error: Request failed after 3 retries in 9.1s
+  cause: Failed to fetch: https://pypi.org/simple/asyncpg/
+  cause: error sending request for url (https://pypi.org/simple/asyncpg/)
+  cause: client error (Connect)
+  cause: dns error
+  cause: error resolving DNS
+  cause: Este host não é conhecido. (os error 11001)

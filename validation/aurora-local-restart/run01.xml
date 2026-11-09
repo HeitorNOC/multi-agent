@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="194.445" timestamp="2026-11-06T00:51:08.749965-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.aurora-local-restart.test_launcher" name="test_stop_start_same_installation" time="194.101"><failure message="AssertionError: launcher exited early; see private launcher log">validation\aurora-local-restart\test_launcher.py:75: in test_stop_start_same_installation
+    ???
+validation\aurora-local-restart\test_launcher.py:21: in wait_for
+    value=check()
+          ^^^^^^^
+validation\aurora-local-restart\test_launcher.py:52: in ready
+    def active():return json.loads((tmp_path/'active.json').read_text(encoding='utf-8'))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: launcher exited early; see private launcher log</failure></testcase></testsuite></testsuites>

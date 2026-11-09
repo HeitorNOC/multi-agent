@@ -1,0 +1,14 @@
+{
+  "provider": "gpt-6.1-terra",
+  "live_attempt_cap": 40,
+  "reservation_stress_cap": 7,
+  "replicas": 2,
+  "identical_requests": 8,
+  "recovery_windows": [
+    "after_fresh_receipt",
+    "after_receipt",
+    "after_fresh_intent"
+  ],
+  "no_external_actions": true,
+  "scope": "PG session exclusion serializes business operations; 2 OS probe processes reserve concurrently, no inference in stress scope; attempt count is not money"
+}

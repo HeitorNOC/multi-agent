@@ -1,0 +1,149 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "note": "Identificação, escopo e versão da fonte, baseada na leitura declarada da branch main do GitLab em 06/11/2026."
+    },
+    {
+      "number": 2,
+      "note": "Sumário das seções e início da visão geral."
+    },
+    {
+      "number": 3,
+      "note": "Escopo, método, níveis de confiança e correções sobre tópicos, armazenamento e socket."
+    },
+    {
+      "number": 4,
+      "note": "Diagrama da equipe e percurso principal da mensagem entre canal, serviços e workspace."
+    },
+    {
+      "number": 5,
+      "note": "Confirmação dos produtores de tópicos de resposta no cc-message-socket."
+    },
+    {
+      "number": 6,
+      "note": "Responsabilidades dos serviços, com distinção entre confirmações gerais e específicas do WhatsApp."
+    },
+    {
+      "number": 7,
+      "note": "Pipeline e produtores e consumidores dos tópicos Kafka do WhatsApp."
+    },
+    {
+      "number": 8,
+      "note": "Tópicos adicionais, convenção de nomes e grupos de consumo independentes."
+    },
+    {
+      "number": 9,
+      "note": "Processamento confirmado do sent-consumer do WhatsApp, sessão, destinos, mídia e cache em Postgres."
+    },
+    {
+      "number": 10,
+      "note": "Filter, auditoria, histórico e envio de respostas do WhatsApp."
+    },
+    {
+      "number": 11,
+      "note": "Integração com Contact Center, eventos Socket.IO e referências de mapeamento anterior."
+    },
+    {
+      "number": 12,
+      "note": "Responsabilidade pela sessão e pela mensagem, processamento de sessão e handoff."
+    },
+    {
+      "number": 13,
+      "note": "Entrada e retorno do Webchat, distinguindo tópicos confirmados de mapeamento anterior."
+    },
+    {
+      "number": 14,
+      "note": "Diferenças entre canais, limites da leitura e stack distinta de e-mail."
+    },
+    {
+      "number": 15,
+      "note": "Riscos e pontos de atenção observados na implementação descrita."
+    },
+    {
+      "number": 16,
+      "note": "Lista explícita de componentes e comportamentos ainda não lidos."
+    }
+  ],
+  "classification": "referência funcional",
+  "reason": "A fonte descreve o fluxo existente da Tatodesk e as responsabilidades observadas ou relatadas, servindo como referência para análise funcional e técnica. Não estabelece requisitos nem padrão obrigatório para o novo projeto; suas confirmações dizem respeito à versão e aos serviços examinados pela fonte.",
+  "findings": [
+    {
+      "pages": [
+        1,
+        3,
+        4
+      ],
+      "text": "A fonte declara leitura do código na branch main em 06/11/2026 e reproduz diagrama fornecido pela equipe. Distingue código confirmado, informação declarada e inferência; a leitura detalhada concentrou-se no WhatsApp e em componentes compartilhados. Isso é trabalho relatado pela fonte, não execução ou verificação independente nesta análise."
+    },
+    {
+      "pages": [
+        3,
+        4,
+        6,
+        8
+      ],
+      "text": "Como referência, o fluxo é assíncrono com Kafka: webhook publica entrada crua em <canal>-messages; filter interpreta e publica em <canal>-sent; register audita a entrada; sent-consumer orquestra a conversa; storage grava histórico; reply envia ao canal. Filter e register usam grupos de consumo distintos. A confirmação detalhada dessas responsabilidades é principalmente do WhatsApp, e a generalização para outros canais deve ser validada."
+    },
+    {
+      "pages": [
+        7,
+        8,
+        10
+      ],
+      "text": "No WhatsApp, whatsapp-messages alimenta filter e register; whatsapp-sent alimenta sent-consumer; whatsapp-reply alimenta reply-consumer; e whatsapp-storage alimenta storage-consumer. message-human concentra mensagens destinadas ao atendimento humano; eventos de status e interação de marketing seguem tópicos próprios, sujeitos às condições descritas na fonte."
+    },
+    {
+      "pages": [
+        9,
+        10,
+        12
+      ],
+      "text": "No WhatsApp, o sent-consumer valida o evento e o app, obtém contato e chatbot, cria ou recupera sessão via REST no messaging-session e normaliza a mensagem, incluindo tratamento de mídia. Conforme origem e estado, arquiva, encaminha ao chatbot, chama modelo por REST ou publica em message-human. O handoff altera o tipo da sessão entre ML_MODEL e HUMAN; a sessão é de responsabilidade do messaging-session."
+    },
+    {
+      "pages": [
+        9,
+        10
+      ],
+      "text": "O register registra payloads crus para auditoria e o storage grava mensagens normalizadas no histórico Postgres. O cache de mensagens do atendimento citado também usa a tabela Postgres attendance_message; a fonte corrige a hipótese anterior de atualização de Redis pelo storage."
+    },
+    {
+      "pages": [
+        5,
+        6,
+        11
+      ],
+      "text": "Na integração de referência com Contact Center, cc-message-consumer transforma eventos de message-human e os envia ao cc-message-socket por tatodesk.conversation_client_to_agent:utter. O socket entrega tatodesk.message:response à sala room:attendance:<sessionID>; recebe respostas do workspace por tatodesk.conversation_agent_to_client:utter e publica em <canal>-reply. A resposta não passa pelo cc-message-consumer."
+    },
+    {
+      "pages": [
+        10,
+        11,
+        13
+      ],
+      "text": "O reply-consumer do WhatsApp consulta sessão e app, aplica limites, prepara links privados de mídia, envia pelo provedor e publica o resultado para armazenamento. No Webchat, a fonte confirma os tópicos e descreve, com base em mapeamento anterior, o retorno via evento Socket.IO tatodesk.conversation-platform:utter."
+    },
+    {
+      "pages": [
+        12,
+        13,
+        14
+      ],
+      "text": "Há diferenças entre canais: o Webchat usa Socket.IO na entrada; Telegram e Instagram têm tópicos de entrada confirmados, mas seu restante é inferido; a lógica interna de Facebook e RCS não foi lida em detalhe. A versão examinada não tinha produtor rcs-reply no cc-message-socket. O fluxo reduzido de e-mail é descrito em mapeamento anterior com MongoDB, Kafka e Temporal, enquanto o histórico de WhatsApp descrito usa Postgres: essas stacks não devem ser uniformizadas por suposição."
+    },
+    {
+      "pages": [
+        15
+      ],
+      "text": "A fonte aponta como atenção o processamento assíncrono após o OK do webhook, a criticidade do sent-consumer e do contrato compartilhado message-human, token de handshake fixo, trechos de depuração e a ausência de ASC Brazil no ramo de resposta única. São observações sobre a implementação examinada, não requisitos ou alterações executadas no novo projeto."
+    }
+  ],
+  "gaps": [
+    "Não há requisitos, decisão de arquitetura ou evidência de que os serviços, eventos, tópicos, canais ou integrações descritos existam ou devam existir no novo projeto.",
+    "A lógica interna de Webchat, Telegram, Instagram, Facebook e RCS não foi lida integralmente pela fonte; afirmações por analogia permanecem hipóteses.",
+    "O mp-platform, o produtor exato e o processamento de mp-session-processing, o chatbot-message-socket além de seus tópicos, o serviço de modelo de IA e os schedules de sessão permanecem sem leitura detalhada.",
+    "Referências identificadas como mapeamento anterior, inclusive consulta de histórico, controle de atendimento, eventos de Webchat e fluxo de e-mail, precisam de validação na versão pertinente.",
+    "A fonte relata verificações no GitLab, mas o conteúdo fornecido não permite verificar independentemente o código nem o estado posterior à versão de 06/11/2026."
+  ]
+}

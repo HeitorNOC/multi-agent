@@ -1,0 +1,57 @@
+{
+  "scope": "HTTP replay of one previously persisted slot; no production SLO",
+  "exploratory_p95_seconds": 1.0,
+  "stages": [
+    {
+      "concurrent_clients": 1,
+      "requests": 80,
+      "p50_s": 0.0151,
+      "p95_s": 0.0322,
+      "max_s": 0.0434,
+      "requests_per_second": 61.24,
+      "outcomes": {
+        "exact": 80
+      },
+      "criterion_met": true
+    },
+    {
+      "concurrent_clients": 8,
+      "requests": 80,
+      "p50_s": 0.0251,
+      "p95_s": 0.0454,
+      "max_s": 0.0607,
+      "requests_per_second": 294.21,
+      "outcomes": {
+        "exact": 80
+      },
+      "criterion_met": true
+    },
+    {
+      "concurrent_clients": 32,
+      "requests": 128,
+      "p50_s": 0.1349,
+      "p95_s": 0.1912,
+      "max_s": 0.2086,
+      "requests_per_second": 199.52,
+      "outcomes": {
+        "exact": 128
+      },
+      "criterion_met": true
+    },
+    {
+      "concurrent_clients": 64,
+      "requests": 256,
+      "p50_s": 0.2593,
+      "p95_s": 0.3398,
+      "max_s": 0.3551,
+      "requests_per_second": 225.01,
+      "outcomes": {
+        "exact": 256
+      },
+      "criterion_met": true
+    }
+  ],
+  "provider_dispatches": 1,
+  "reservations": 1,
+  "paid_model_calls": 0
+}

@@ -1,0 +1,24 @@
+{
+  "at_utc": "2026-11-05T12:58:03.626771+00:00",
+  "authorization": "User explicitly requested approval in chat",
+  "job": "2722b8b6-88d1-4241-95fa-d657d1f0f1c1",
+  "approved_hash": "ca08feb57a773806ce02b0107a90fc9be354c43d1b67532c75ca397a5cb2349e",
+  "payload": {
+    "operation": "simulated-commercial-proposal",
+    "recipient": "quadro-comercial-local",
+    "content": "Investigar a queda dos pedidos e da receita, examinando dados por produto e cliente, níveis e composição do estoque e margens. Com base nos resultados, elaborar uma proposta de campanha direcionada para revisão, com produtos e condições definidos posteriormente. O conteúdo exato deve ser aprovado antes de qualquer execução."
+  },
+  "status": "completed",
+  "receipt": {
+    "id": "17e1c1d7-3817-4b58-bf8c-caeb8f9a0e37",
+    "job": "2722b8b6-88d1-4241-95fa-d657d1f0f1c1",
+    "hash": "ca08feb57a773806ce02b0107a90fc9be354c43d1b67532c75ca397a5cb2349e",
+    "simulated": true,
+    "recipient": "quadro-comercial-local",
+    "content": "Investigar a queda dos pedidos e da receita, examinando dados por produto e cliente, níveis e composição do estoque e margens. Com base nos resultados, elaborar uma proposta de campanha direcionada para revisão, com produtos e condições definidos posteriormente. O conteúdo exato deve ser aprovado antes de qualquer execução.",
+    "created": "2026-11-05T12:58:03.513Z"
+  },
+  "model_calls_before": 11,
+  "model_calls_after": 11,
+  "simulated_only": true
+}

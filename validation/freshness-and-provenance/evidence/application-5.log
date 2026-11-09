@@ -1,0 +1,116 @@
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: PostgreSQL, Retry config: attempts=10, backoff=3.0s, backoff_max=30.0s, pool_close_timeout=5.0s
+INFO: PostgreSQL, VECTOR extension enabled
+INFO: PostgreSQL, Connected to database at 127.0.0.1:53559/knowledge without SSL
+INFO: chunk_id column already exists in LIGHTRAG_LLM_CACHE table
+INFO: cache_type column already exists in LIGHTRAG_LLM_CACHE table
+INFO: queryparam column already exists in LIGHTRAG_LLM_CACHE table
+INFO: mode column does not exist in LIGHTRAG_LLM_CACHE table
+INFO: chunks_list column already exists in LIGHTRAG_DOC_STATUS table
+INFO: llm_cache_list column already exists in LIGHTRAG_DOC_CHUNKS table
+INFO: track_id column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Index on track_id column already exists for LIGHTRAG_DOC_STATUS table
+INFO: metadata column already exists in LIGHTRAG_DOC_STATUS table
+INFO: error_msg column already exists in LIGHTRAG_DOC_STATUS table
+INFO: HNSW vector index idx_60a018b75b81_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_e7b623ae5c8a_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_c8dc6c405ffd_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe] Connected to neo4j at bolt://127.0.0.1:53560
+INFO: [audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe] Ensured B-Tree index on entity_id for audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe in neo4j
+INFO: [audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe] No existing index 'entity_id_fulltext_idx_audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe' found. Creating new index.
+INFO: [audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe] Creating full-text index 'entity_id_fulltext_idx_audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe' with Chinese tokenizer support.
+INFO: [audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe] Successfully created full-text index 'entity_id_fulltext_idx_audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): politica-remoto:v2
+INFO: Extracting stage 1/1: politica-remoto@v2.md
+INFO: Processing d-id: politica-remoto:v2
+INFO: Chunking F(legacy): size=64, split_only=False, overlap=8, doc_id: politica-remoto:v2
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:0938c6b369c3b3f3485661ddf673e4d9
+INFO: Chunk 1 of 1 extracted 3 Ent + 1 Rel politica-remoto:v2-chunk-000
+INFO: Merging stage 1/1: politica-remoto@v2.md
+INFO: Phase 0: Writing recovery indexes for politica-remoto:v2: 3 candidate entities, 1 candidate relations
+INFO: Phase 1: Processing 3 entities from politica-remoto:v2 (async: 2)
+INFO: Phase 2: Processing 1 relations from politica-remoto:v2 (async: 2)
+INFO: Upserting relation VDB: `Aurora->Trabalho Remoto`
+INFO: Phase 2 relation processing completed for politica-remoto:v2: edges=1 added_entities=0
+INFO: Completed merging: 3 entities, 0 extra entities, 1 relations
+INFO: [audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe] entities flush: embedding 3 vectors in 1 batch(es) (batch_num=10)
+INFO: [audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe] relationships flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: politica-remoto@v2.md
+INFO: Enqueued document processing pipeline stopped
+INFO: keyword LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: mix:keywords:dfb76bee64a20faa409c58108bad1672
+INFO: Query nodes: equipe Aurora, 2026-03-15T00:00:00+00:00, 2026-11-04T15:17:22.545119+00:00, politica-remoto@v2 (top_k:8, cosine:0.25)
+INFO: Local query: 3 entities, 1 relations
+INFO: Query edges: projeto de expansão da equipe, vigência da versão selecionada, fonte (top_k:8, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 3 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 3 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 3 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E3/1
+INFO: query LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: mix:query:099984a8ba5008600e311c536802d565
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='audit_d8313d53c3_5aa97d7f62537b333c1ad8a60953ad6f0f9c0a68c21d18b17b7b9218bd53fdd2' while default workspace is set to 'audit_d8313d53c3_1393cd640f1dc34307e73e8f719c93f55cb384ee55b9a9e7daf355cefefdf1fe'
+INFO: HNSW vector index idx_60a018b75b81_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_e7b623ae5c8a_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_c8dc6c405ffd_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: [audit_d8313d53c3_5aa97d7f62537b333c1ad8a60953ad6f0f9c0a68c21d18b17b7b9218bd53fdd2] Connected to neo4j at bolt://127.0.0.1:53560
+INFO: [audit_d8313d53c3_5aa97d7f62537b333c1ad8a60953ad6f0f9c0a68c21d18b17b7b9218bd53fdd2] Ensured B-Tree index on entity_id for audit_d8313d53c3_5aa97d7f62537b333c1ad8a60953ad6f0f9c0a68c21d18b17b7b9218bd53fdd2 in neo4j
+INFO: [audit_d8313d53c3_5aa97d7f62537b333c1ad8a60953ad6f0f9c0a68c21d18b17b7b9218bd53fdd2] Found existing index 'entity_id_fulltext_idx_audit_d8313d53c3_5aa97d7f62537b333c1ad8a60953ad6f0f9c0a68c21d18b17b7b9218bd53fdd2' with state: ONLINE
+INFO: [audit_d8313d53c3_5aa97d7f62537b333c1ad8a60953ad6f0f9c0a68c21d18b17b7b9218bd53fdd2] Full-text index 'entity_id_fulltext_idx_audit_d8313d53c3_5aa97d7f62537b333c1ad8a60953ad6f0f9c0a68c21d18b17b7b9218bd53fdd2' already exists and is online. Skipping recreation.
+INFO: keyword LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: mix:keywords:2f6816e3685444b927bc30b787fff09c
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Query nodes: Aurora, politica-remoto@v1, 2026-03-15T00:00:00+00:00, 2026-11-04T15:16:06.634730+00:00 (top_k:8, cosine:0.25)
+INFO: Local query: 1 entities, 0 relations
+INFO: Query edges: projeto de expansão da equipe, vigência da versão selecionada, fonte (top_k:8, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 1 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 3 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 3 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 3 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E3/1
+INFO: query LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: mix:query:b34dcccc92489b45c415d80ff3776794
+INFO:  == LLM cache == saving: mix:keywords:29f13eb1d60635197618a7dc30a4108b
+INFO: Query nodes: equipe Aurora, data de vigência: 2026-03-15T00:00:00+00:00, corte de conhecimento: 2026-11-04T15:17:22.545119+00:00, politica-remoto@v2 (top_k:8, cosine:0.25)
+INFO: Local query: 2 entities, 1 relations
+INFO: Query edges: tamanho da equipe (top_k:8, cosine:0.25)
+INFO: Naive query: 1 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 2 entities, 1 relations, 1 vector chunks
+INFO: After truncation: 2 entities, 1 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 1 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 2 entities, 1 relations, 1 chunks
+INFO: Final chunks S+F/O: E2/1
+INFO:  == LLM cache == saving: mix:query:da7e76dbc3c2659f9c06c61f813b5b43

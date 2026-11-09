@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a70d-9695-7531-ba09-44a97c8de279"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O manual informa que despesas extraordinárias exigem **dois revisores distintos** [1].\\n\\nPorém, a fonte não informa sua data de vigência; portanto, não é possível confirmar se essa regra se aplicava em 1º de fevereiro de 2026 [1].\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13122,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":121,"reasoning_output_tokens":27}}

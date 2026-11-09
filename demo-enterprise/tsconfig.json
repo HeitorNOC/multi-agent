@@ -1,0 +1,4 @@
+{
+  "extends": "../apps/aurora/tsconfig.json",
+  "include": ["*.ts", "*.tsx", "../apps/aurora/web/assets.d.ts"]
+}

@@ -1,0 +1,956 @@
+{
+  "rubric_sha256": "edc01d16d76d1f0e1360541513d96cba356c8d56031a42d0878dd6a3120dbd36",
+  "manifest_sha256": "78b2a7fb555cfe2038d6a271e966a4f29aababf78d671a7834a5c23e7108768c",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "reranker": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "173760f",
+    "files": {
+      "model_quint8_avx2.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "tokenizer.json": "3a56def25aa40facc030ea8b0b87f3688e4b3c39eb8b45d5702b3a1300fe2a20"
+    },
+    "onnxruntime": "1.31.1",
+    "startup_ms": 960.71
+  },
+  "documents": 10,
+  "passages": 377,
+  "results": [
+    {
+      "id": "handoff",
+      "expected": 3,
+      "queries": [
+        "WhatsApp como identificar que o atendente humano assumiu a sessão antes de responder",
+        "WhatsApp sinal de transferência de controle para atendimento humano versus recebimento de mensagem",
+        "whatsapp-reply consumidor evento de tomada de atendimento humano"
+      ],
+      "error": null,
+      "model_seconds": 5.776,
+      "local_seconds": 2.855,
+      "baseline": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 27,
+            "id": "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 13,
+            "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 1,
+            "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 21,
+            "id": "eca24df5fab84988ef0172105febe11f31fd5cf51e27beecd6f0baf3a0611992"
+          }
+        ]
+      },
+      "rerank": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "6cbded879c1ea4d0eb6a9e96ab6803434a4b44c3f0bb56f95d0f53fcd42f5118"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 27,
+            "id": "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 21,
+            "id": "eca24df5fab84988ef0172105febe11f31fd5cf51e27beecd6f0baf3a0611992"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 6,
+            "id": "a4d96741600f4d6c79f2ffe12dae14c2cc6fd62543f40e167733a9350dd30c69"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5"
+          }
+        ]
+      },
+      "chief": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "6cbded879c1ea4d0eb6a9e96ab6803434a4b44c3f0bb56f95d0f53fcd42f5118"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 27,
+            "id": "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 22,
+            "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 7,
+            "id": "756f6fd118a32a65115a8e283398db96c9d249d1f6f56cc3bfb896d1c2410a20"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5"
+          },
+          {
+            "source": "contact",
+            "page": 16,
+            "line": 66,
+            "id": "3f513622b7de671fea7bbc46f90e4567fbf1199b737a8f461460d0275affe8bd"
+          }
+        ]
+      }
+    },
+    {
+      "id": "persistence",
+      "expected": 2,
+      "queries": [
+        "WhatsApp entrada onde armazenar payload original recebido intacto auditoria",
+        "WhatsApp entrada onde consultar mensagens transformadas reconstrução da conversa"
+      ],
+      "error": null,
+      "model_seconds": 5.262,
+      "local_seconds": 2.133,
+      "baseline": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 22,
+            "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 27,
+            "id": "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 5,
+            "id": "0306ef3c483057948f09bc0ec5ebf3c60672fc112e7f6670ad07dc651f581f4f"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 1,
+            "id": "b6118807220c685e71414980644e0799c60eead063cc6b07157855b2c0f0df9b"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 13,
+            "id": "f136962d2f2cf351e29b731403c9b8811d6cf1a116426724d93c5e1736240b84"
+          }
+        ]
+      },
+      "rerank": {
+        "evidence": [
+          2
+        ],
+        "candidates": [
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 20,
+            "id": "ce5ffdbc04454c2713c5a7ff65bbe1945bbfbd458bea55f7017c067b2e626757"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 6,
+            "id": "a7a3a915ab562955d6832bc8c247295ce84ececffa79bb652cdb08121beeb848"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 27,
+            "id": "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 22,
+            "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "0eda3c1056c13bf9ea7c0d60c5546706e771246e43cf58e70defd4e5f8dca2f7"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 10,
+            "id": "193b0d7ca9fc24e23e446608c84d4e6ca6745b558ff0006e5655e8b4358a01c5"
+          }
+        ]
+      },
+      "chief": {
+        "evidence": [
+          1,
+          2
+        ],
+        "candidates": [
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 20,
+            "id": "ce5ffdbc04454c2713c5a7ff65bbe1945bbfbd458bea55f7017c067b2e626757"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 19,
+            "id": "a2af7af2bccd17a210cd1c933bf54667abf3a8aa74d687b93da06022cc81749a"
+          },
+          {
+            "source": "fluxo",
+            "page": 9,
+            "line": 6,
+            "id": "a7a3a915ab562955d6832bc8c247295ce84ececffa79bb652cdb08121beeb848"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 27,
+            "id": "b05eb6bb8f8d0042f699a951099dccba5d8868ae81f10aa85f004671c80346eb"
+          },
+          {
+            "source": "fluxo",
+            "page": 12,
+            "line": 29,
+            "id": "168a8d395a42e73c84d8a9ff95c0a74e9dd8716226105d547f004f3b2a0d61a5"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 22,
+            "id": "d9137e11eb9a9469425c166ca0d882955e4ac1b5097c6c63947f722861dc722c"
+          }
+        ]
+      }
+    },
+    {
+      "id": "release",
+      "expected": 2,
+      "queries": [
+        "Como configurar o teste do Meta Business Agent no WhatsApp para um grupo restrito de contatos?",
+        "Como liberar o Meta Business Agent no WhatsApp para toda a base de clientes após o teste?"
+      ],
+      "error": null,
+      "model_seconds": 4.766,
+      "local_seconds": 2.646,
+      "baseline": {
+        "evidence": [
+          2
+        ],
+        "candidates": [
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 9,
+            "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 4,
+            "line": 1,
+            "id": "79bbd15eebd806e48fe3e0826a812eff296745b59fb314c59d8a5ce0b9030d70"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 7,
+            "id": "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387"
+          },
+          {
+            "source": "mba",
+            "page": 8,
+            "line": 13,
+            "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 11,
+            "id": "62a8cd894cb87991c941ea3e7cc38794ce07226cbb6d705492bc81d2084a27fb"
+          }
+        ]
+      },
+      "rerank": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 9,
+            "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 7,
+            "id": "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 15,
+            "line": 9,
+            "id": "e71cee1886f37e50bde1cc49015b870a3553a530af3eab1d58360b2289fbd3cc"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 8,
+            "id": "a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "d4ba32eb90ab3b4eaa05d8d0e0df54843cedd624cef864dd089562e0a8ee8631"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba"
+          }
+        ]
+      },
+      "chief": {
+        "evidence": [
+          2
+        ],
+        "candidates": [
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 9,
+            "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 11,
+            "id": "62a8cd894cb87991c941ea3e7cc38794ce07226cbb6d705492bc81d2084a27fb"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 7,
+            "id": "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387"
+          },
+          {
+            "source": "portal",
+            "page": 13,
+            "line": 7,
+            "id": "cb468657a3c59bc0e9eac50812f318603bd00e8a0d103c232b8795562cc8cf02"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 4,
+            "id": "288bc8f3f68f964d6c56cf1bf661c2f9eb85a696eae87a41a881cf915e98b7b1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "frontend",
+      "expected": 1,
+      "queries": [
+        "Meta Business Agent botões administrar conhecimento após onboarding concluído",
+        "MBA gerenciamento de conhecimento interface onboarding finalizado botões",
+        "agente da Meta opções adicionar editar conhecimento após configuração"
+      ],
+      "error": null,
+      "model_seconds": 4.459,
+      "local_seconds": 4.355,
+      "baseline": {
+        "evidence": [
+          1
+        ],
+        "candidates": [
+          {
+            "source": "mba-frontend",
+            "page": 4,
+            "line": 2,
+            "id": "6b5abe9cc6ac5aebd4e73691cb66443a831a4766b981128b667e4c171853c442"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 4,
+            "line": 1,
+            "id": "79bbd15eebd806e48fe3e0826a812eff296745b59fb314c59d8a5ce0b9030d70"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 15,
+            "line": 9,
+            "id": "e71cee1886f37e50bde1cc49015b870a3553a530af3eab1d58360b2289fbd3cc"
+          },
+          {
+            "source": "mba",
+            "page": 8,
+            "line": 13,
+            "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 8,
+            "id": "a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407"
+          }
+        ]
+      },
+      "rerank": {
+        "evidence": [
+          1
+        ],
+        "candidates": [
+          {
+            "source": "mba-frontend",
+            "page": 4,
+            "line": 2,
+            "id": "bd1c0b9ae4ed9c661c654c99762dbf90d9f3568ae00e04bd7784c2aaae0f32c3"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 4,
+            "line": 2,
+            "id": "6b5abe9cc6ac5aebd4e73691cb66443a831a4766b981128b667e4c171853c442"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 15,
+            "line": 9,
+            "id": "e71cee1886f37e50bde1cc49015b870a3553a530af3eab1d58360b2289fbd3cc"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 8,
+            "id": "a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407"
+          },
+          {
+            "source": "contact",
+            "page": 16,
+            "line": 63,
+            "id": "d245decfec8cf8c1dc38e19da9bc1465ae343f3c438bbee59ca39e265427b17f"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 4,
+            "line": 1,
+            "id": "79bbd15eebd806e48fe3e0826a812eff296745b59fb314c59d8a5ce0b9030d70"
+          }
+        ]
+      },
+      "chief": {
+        "evidence": [
+          1
+        ],
+        "candidates": [
+          {
+            "source": "mba-frontend",
+            "page": 4,
+            "line": 2,
+            "id": "bd1c0b9ae4ed9c661c654c99762dbf90d9f3568ae00e04bd7784c2aaae0f32c3"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 15,
+            "line": 9,
+            "id": "e71cee1886f37e50bde1cc49015b870a3553a530af3eab1d58360b2289fbd3cc"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 4,
+            "line": 2,
+            "id": "6b5abe9cc6ac5aebd4e73691cb66443a831a4766b981128b667e4c171853c442"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 8,
+            "id": "a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 4,
+            "line": 1,
+            "id": "f04820554eecdf6f35a801bef56db9aad05afaa576c200fda4c4493be761cf34"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 2,
+            "id": "d26a56ff3f94288b9770bc8160903a86f5e87f15259a053f3ef6cfbb256e5cc1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "limit",
+      "expected": 0,
+      "queries": [
+        "Contact Center startAttendance limite de chamadas por segundo mesma conta",
+        "startAttendance rate limit requisições por segundo accountID"
+      ],
+      "error": null,
+      "model_seconds": 4.938,
+      "local_seconds": 2.571,
+      "baseline": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "contact",
+            "page": 11,
+            "line": 21,
+            "id": "697f48bb7efe5e0bfe0eaacd0d26717fd62d8f904d7f1f160bbbbfeefd35706d"
+          },
+          {
+            "source": "contact",
+            "page": 11,
+            "line": 18,
+            "id": "576c7eef53cc133e92bc09376b7ce279843e45b3115a803acc55b405a382ec02"
+          },
+          {
+            "source": "contact",
+            "page": 11,
+            "line": 19,
+            "id": "eaabcf758eb48a06de2aed68f5c607bdd84dadb6c21674f1e8b1e8c846c060a3"
+          },
+          {
+            "source": "contact",
+            "page": 11,
+            "line": 15,
+            "id": "ffebe27f56bafacb8819cd52ed005ac7ff2deabfc6682031cb9338eae2527ad3"
+          },
+          {
+            "source": "contact",
+            "page": 17,
+            "line": 71,
+            "id": "ea69aff40ab043805e0e00cfc56573f687f1be309725bb075193f7e2cb3c4246"
+          },
+          {
+            "source": "contact",
+            "page": 15,
+            "line": 40,
+            "id": "f9b258b62ff59ab654d97eb221f0963f606e02ecbeac69940dc492ed0c2841e5"
+          }
+        ]
+      },
+      "rerank": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "contact",
+            "page": 15,
+            "line": 43,
+            "id": "3441612dbce6b9d89eeecdb62a7a079f914d206198878e74e031c29e6d9b8692"
+          },
+          {
+            "source": "contact",
+            "page": 16,
+            "line": 65,
+            "id": "ae1b5633b71149399ccddcd5062eb43a78e0032c9eec5929d14ff08728a28ded"
+          },
+          {
+            "source": "contact",
+            "page": 9,
+            "line": 11,
+            "id": "1a6aaaab87b3a3b30fdd14d1e1bb164e26ea3f62232f899554b667f010f503ad"
+          },
+          {
+            "source": "contact",
+            "page": 11,
+            "line": 15,
+            "id": "ffebe27f56bafacb8819cd52ed005ac7ff2deabfc6682031cb9338eae2527ad3"
+          },
+          {
+            "source": "contact",
+            "page": 17,
+            "line": 71,
+            "id": "ea69aff40ab043805e0e00cfc56573f687f1be309725bb075193f7e2cb3c4246"
+          },
+          {
+            "source": "contact",
+            "page": 9,
+            "line": 9,
+            "id": "68e46f41b09828dba35af53211a3a9a1c69d886b745356a42d2a438f74fcf87c"
+          }
+        ]
+      },
+      "chief": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "contact",
+            "page": 15,
+            "line": 43,
+            "id": "3441612dbce6b9d89eeecdb62a7a079f914d206198878e74e031c29e6d9b8692"
+          },
+          {
+            "source": "contact",
+            "page": 9,
+            "line": 11,
+            "id": "1a6aaaab87b3a3b30fdd14d1e1bb164e26ea3f62232f899554b667f010f503ad"
+          },
+          {
+            "source": "contact",
+            "page": 17,
+            "line": 71,
+            "id": "ea69aff40ab043805e0e00cfc56573f687f1be309725bb075193f7e2cb3c4246"
+          },
+          {
+            "source": "reclame-aqui",
+            "page": 7,
+            "line": 6,
+            "id": "eb693b9e598bce8fd186f62a16bc8d7187f91c3718baa0171e4d1fd42c5e12bc"
+          },
+          {
+            "source": "contact",
+            "page": 13,
+            "line": 30,
+            "id": "b8fcba8066ad07c7b260ba1c83bfdc037c0ccd9eb9f33f7644a772c147c49ecc"
+          },
+          {
+            "source": "contact",
+            "page": 16,
+            "line": 65,
+            "id": "ae1b5633b71149399ccddcd5062eb43a78e0032c9eec5929d14ff08728a28ded"
+          }
+        ]
+      }
+    },
+    {
+      "id": "price",
+      "expected": 0,
+      "queries": [
+        "360dialog preço mensal em reais por número habilitado para Meta Business Agent",
+        "360dialog custo por número por mês agente da Meta WhatsApp"
+      ],
+      "error": null,
+      "model_seconds": 4.615,
+      "local_seconds": 2.041,
+      "baseline": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "mba-frontend",
+            "page": 15,
+            "line": 9,
+            "id": "e71cee1886f37e50bde1cc49015b870a3553a530af3eab1d58360b2289fbd3cc"
+          },
+          {
+            "source": "fluxo",
+            "page": 10,
+            "line": 26,
+            "id": "e7d205a32c9c390ae7e3ff799b6f4fa80eaf9230dbb44b09480e88e6a26f336f"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 7,
+            "id": "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387"
+          },
+          {
+            "source": "reclame-aqui",
+            "page": 7,
+            "line": 6,
+            "id": "5cb8d430d5eff4a32fa3daf61f5901a47a1eb1f8bc650dfc42c30470223e7f00"
+          },
+          {
+            "source": "reclame-aqui",
+            "page": 10,
+            "line": 8,
+            "id": "26ca85ed78e2f6e5826321a97832af9cc32bdd99046cb45d711beb73ca13de2f"
+          }
+        ]
+      },
+      "rerank": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 7,
+            "id": "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "d4ba32eb90ab3b4eaa05d8d0e0df54843cedd624cef864dd089562e0a8ee8631"
+          },
+          {
+            "source": "mba",
+            "page": 8,
+            "line": 13,
+            "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 9,
+            "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 15,
+            "line": 9,
+            "id": "e71cee1886f37e50bde1cc49015b870a3553a530af3eab1d58360b2289fbd3cc"
+          }
+        ]
+      },
+      "chief": {
+        "evidence": [],
+        "candidates": [
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 7,
+            "id": "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba"
+          },
+          {
+            "source": "mba",
+            "page": 3,
+            "line": 1,
+            "id": "d4ba32eb90ab3b4eaa05d8d0e0df54843cedd624cef864dd089562e0a8ee8631"
+          },
+          {
+            "source": "mba",
+            "page": 8,
+            "line": 13,
+            "id": "1e1923e2dbb29c5c7d91168747684c376578388015380b91a1f50e6ea1825ead"
+          },
+          {
+            "source": "mba",
+            "page": 4,
+            "line": 9,
+            "id": "5ee0fc878444e60c608dfb39ad0e06a7c2e9a676971b4dd5445cf0773e1d8621"
+          },
+          {
+            "source": "mba-frontend",
+            "page": 15,
+            "line": 9,
+            "id": "e71cee1886f37e50bde1cc49015b870a3553a530af3eab1d58360b2289fbd3cc"
+          }
+        ]
+      }
+    }
+  ],
+  "model_calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "5f0a52f835f72db71fdf5ee591d015946774b18e7398e859e461f6331e1f439c",
+      "reservation_id": "handoff",
+      "instance": "chief-search-eval",
+      "seconds": 5.768157300000894,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12278,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 65,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "55292b04b7d0f00ac720a62481c41d14a4b7aac6a3a2c7c32b16adbf279b5344",
+      "reservation_id": "persistence",
+      "instance": "chief-search-eval",
+      "seconds": 5.254456399998162,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12285,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 47,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "5825021e65425c476c1a470c4c5bb0f360b589ffbb264655065f91b0c93711ea",
+      "reservation_id": "release",
+      "instance": "chief-search-eval",
+      "seconds": 4.758019200002309,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12249,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 60,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "3d69830566ad748119b90e9393f2077cae9e0251a1fdb308a97025b43fd43dc2",
+      "reservation_id": "frontend",
+      "instance": "chief-search-eval",
+      "seconds": 4.4510991999995895,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12223,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 54,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "d54aa51da6bb77280e119d2206b562a9cb0c751e5ae28a44df983044804119fe",
+      "reservation_id": "limit",
+      "instance": "chief-search-eval",
+      "seconds": 4.930186400000821,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12303,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 44,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "cec5fb370609aa069bf70f702ebb4c949e0e0caaa11fe954d3d96c87ae229947",
+      "reservation_id": "price",
+      "instance": "chief-search-eval",
+      "seconds": 4.601405700013856,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12238,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 48,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

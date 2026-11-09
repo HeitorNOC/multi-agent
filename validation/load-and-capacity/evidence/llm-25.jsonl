@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a805-b405-75f0-8f02-3bf828862abc"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"A Boreal exige **três revisores distintos** para despesas extraordinárias. O solicitante não pode revisar a própria despesa. [1]\\n\\nA versão consultada está vigente desde 1º de janeiro de 2026 e foi publicada em 4 de novembro de 2026. [1]\\n\\n### References\\n\\n* [1] manual-boreal@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13202,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":96,"reasoning_output_tokens":0}}

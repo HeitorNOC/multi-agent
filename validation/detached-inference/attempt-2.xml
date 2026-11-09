@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="5.809" timestamp="2026-11-04T22:44:00.432355-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.detached-inference.test_detached" name="test_detached_read_fencing_renewal_revocation_and_recovery" time="5.335"><failure message="test_flow.Rejected: 503: {&quot;error&quot;:&quot;local inventory differs from retained receipt&quot;}">url = 'http://127.0.0.1:52935'
+token = 'b2564df6f44905aaa9ef3c535f4e227bff88ea992294e92b'
+payload = {'action': 'create', 'capabilities': ['policy_lookup'], 'execute': False, 'maxUnits': 1, ...}
+
+    def request(url, token, payload):
+        req = Request(url+'/rpc',json.dumps(payload).encode(),{'content-type':'application/json','authorization':'Bearer '+token})
+        try:
+&gt;           with urlopen(req,timeout=15) as response:
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+validation\langgraph-business-flow\test_flow.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:215: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:521: in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:630: in http_response
+    response = self.parent.error(
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:559: in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;urllib.request.HTTPDefaultErrorHandler object at 0x0000018368253650&gt;
+req = &lt;urllib.request.Request object at 0x0000018368253740&gt;
+fp = &lt;http.client.HTTPResponse object at 0x00000183667DBDF0&gt;, code = 503
+msg = 'Service Unavailable'
+hdrs = &lt;http.client.HTTPMessage object at 0x0000018368253B90&gt;
+
+    def http_error_default(self, req, fp, code, msg, hdrs):
+&gt;       raise HTTPError(req.full_url, code, msg, hdrs, fp)
+E       urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:639: HTTPError
+
+The above exception was the direct cause of the following exception:
+
+    def test_detached_read_fencing_renewal_revocation_and_recovery():
+        lab=DetachedLab();start=time.perf_counter();latencies=[]
+        def denied(fn,status):
+            with pytest.raises(Rejected) as error:fn()
+            assert error.value.status==status,str(error.value)
+        try:
+            lab.start()
+            with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
+&gt;               job,p,row=lab.admission();lab.control('hold',row['id'])
+                          ^^^^^^^^^^^^^^^
+
+validation\detached-inference\test_detached.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+validation\detached-inference\test_detached.py:33: in admission
+    job=self.new_signed([capability],execute=False,maxUnits=1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validation\langgraph-retained-flow\test_signed_flow.py:66: in new_signed
+    return self.call('owner','create',capabilities=capabilities or ['policy_lookup','finance_review'],execute=execute,
+validation\langgraph-business-flow\test_flow.py:149: in call
+    return request(self.api,self.tokens[actor],{'action':action,**payload})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+url = 'http://127.0.0.1:52935'
+token = 'b2564df6f44905aaa9ef3c535f4e227bff88ea992294e92b'
+payload = {'action': 'create', 'capabilities': ['policy_lookup'], 'execute': False, 'maxUnits': 1, ...}
+
+    def request(url, token, payload):
+        req = Request(url+'/rpc',json.dumps(payload).encode(),{'content-type':'application/json','authorization':'Bearer '+token})
+        try:
+            with urlopen(req,timeout=15) as response:
+                return json.load(response)
+        except HTTPError as error:
+&gt;           raise Rejected(error.code,error.read().decode()) from error
+E           test_flow.Rejected: 503: {"error":"local inventory differs from retained receipt"}
+
+validation\langgraph-business-flow\test_flow.py:42: Rejected</failure></testcase></testsuite></testsuites>

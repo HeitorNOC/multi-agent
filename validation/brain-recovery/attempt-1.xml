@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="99.685" timestamp="2026-11-04T21:37:01.139054-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.brain-recovery.test_brain" name="test_native_brain_release_and_joint_restore" time="98.944"><failure message="AssertionError: run_until_complete&#10;      return future.result()&#10;             ^^^^^^^^^^^^^^^&#10;    File &quot;C:\Users\PC\multi-agent\validation\langgraph-business-flow\worker.py&quot;, line 72, in main&#10;      await graph.ainvoke(value,graph_config)&#10;    File &quot;C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\main.py&quot;, line 4177, in ainvoke&#10;      async for chunk in self.astream(&#10;[+52 more lines; full report in element text]">def test_native_brain_release_and_joint_restore():
+        lab=BrainLab();started=time.perf_counter()
+        def denied(fn,status):
+            with pytest.raises(Rejected) as error:fn()
+            assert error.value.status==status,str(error.value)
+        try:
+            lab.start()
+            denied(lambda:lab.new_signed(['policy_lookup'],execute=False,maxUnits=1),503)
+            # Missing projection is rejected before a retained intent/model admission.
+            # If a failed quote created no journal entry, bootstrap remains coherent.
+            assert lab.call('board','retained_status')['current']
+            with sqlite3.connect(lab.config['editorial']) as db:
+                drafts={s:d for s,d in db.execute('SELECT source,draft FROM canonical')}
+            for draft in drafts.values():lab.publish(draft)
+&gt;           first=lab.new_signed(execute=False,maxUnits=2);assert lab.run_worker(first['id'])['completed']
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+validation\brain-recovery\test_brain.py:212: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;test_brain.BrainLab object at 0x0000020B92E765A0&gt;
+job = '8c0afe0d-5086-448a-b113-2523f9e4fcc1', resume = False, kwargs = {}
+
+    def run_worker(self,job,resume=False,**kwargs):
+        config={'api':self.api,'token':self.tokens['worker'],'job':job,'installation':self.id,'dsn':self.dsn,'resume':resume,'request_timeout':330}
+        result=subprocess.run([str(PY),str(ROOT/'validation/langgraph-business-flow/worker.py')],input=json.dumps(config),capture_output=True,text=True,encoding='utf-8',cwd=ROOT,
+            timeout=800,env={**os.environ,'LANGSMITH_TRACING':'false','LANGCHAIN_TRACING_V2':'false'})
+        self.evidence['worker_calls'].append({'job':job,'exit_code':result.returncode,'stdout':result.stdout,'stderr':self.redact(result.stderr)[-5000:]})
+&gt;       assert result.returncode==0,self.redact(result.stderr)[-4000:]
+E       AssertionError: run_until_complete
+E             return future.result()
+E                    ^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\validation\langgraph-business-flow\worker.py", line 72, in main
+E             await graph.ainvoke(value,graph_config)
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\main.py", line 4177, in ainvoke
+E             async for chunk in self.astream(
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\main.py", line 3528, in astream
+E             async for _ in runner.atick(
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\_runner.py", line 558, in atick
+E             _panic_or_proceed(
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\_runner.py", line 694, in _panic_or_proceed
+E             raise exc
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\pregel\_retry.py", line 738, in arun_with_retry
+E             return await task.proc.ainvoke(task.input, config)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\_internal\_runnable.py", line 836, in ainvoke
+E             input = await asyncio.create_task(
+E                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\vendor\langgraph\libs\langgraph\langgraph\_internal\_runnable.py", line 554, in ainvoke
+E             ret = await self.afunc(*args, **kwargs)
+E                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\validation\langgraph-business-flow\worker.py", line 41, in specialist
+E             snapshot = await call('read', capability=state['capability'])
+E                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\validation\langgraph-business-flow\worker.py", line 35, in call
+E             return await asyncio.to_thread(request, action, worker=worker_id, epoch=claim['epoch'], **payload)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\threads.py", line 25, in to_thread
+E             return await loop.run_in_executor(None, func_call)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\concurrent\futures\thread.py", line 59, in run
+E             result = self.fn(*self.args, **self.kwargs)
+E                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\multi-agent\validation\langgraph-business-flow\worker.py", line 31, in request
+E             with urlopen(req, timeout=config.get('request_timeout',12)) as response:
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 215, in urlopen
+E             return opener.open(url, data, timeout)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 521, in open
+E             response = meth(req, response)
+E                        ^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 630, in http_response
+E             response = self.parent.error(
+E                        ^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 559, in error
+E             return self._call_chain(*args)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 492, in _call_chain
+E             result = func(*args)
+E                      ^^^^^^^^^^^
+E           File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 639, in http_error_default
+E             raise HTTPError(req.full_url, code, msg, hdrs, fp)
+E         urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+E         During task with name 'specialist' and id 'beaf14a7-f6ec-e518-226b-21d07f7ea690'
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['C:\\Users\\PC\\multi-agent\\validation\\integrated-pilot\\.venv\\Scripts\\python.exe', 'C:\\Us...rror 503: Service Unavailable\nDuring task with name \'specialist\' and id \'beaf14a7-f6ec-e518-226b-21d07f7ea690\'\n').returncode
+
+validation\brain-recovery\test_brain.py:131: AssertionError</failure></testcase></testsuite></testsuites>

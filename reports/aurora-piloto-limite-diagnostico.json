@@ -1,0 +1,367 @@
+{
+  "manifest_sha256": "6aae821c602a187b2116d97be0991a5a9292f944fceba383d85c7bf912ce47bd",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "reranker": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "173760f",
+    "files": {
+      "model_quint8_avx2.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "tokenizer.json": "3a56def25aa40facc030ea8b0b87f3688e4b3c39eb8b45d5702b3a1300fe2a20"
+    },
+    "onnxruntime": "1.31.1",
+    "startup_ms": 956.8
+  },
+  "cases": [
+    {
+      "id": "limit",
+      "queries": [
+        "Qual é o limite de chamadas por segundo da operação startAttendance do Contact Center para uma mesma conta?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "general",
+      "seconds": 3.646,
+      "expected": 0,
+      "baseline_found": [],
+      "in_envelope": [],
+      "verified_found": [],
+      "candidates": [
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "contact",
+          17,
+          71
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "contact",
+          13,
+          30
+        ],
+        [
+          "contact",
+          11,
+          21
+        ],
+        [
+          "contact",
+          11,
+          18
+        ],
+        [
+          "contact",
+          11,
+          19
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          15,
+          45
+        ],
+        [
+          "contact",
+          9,
+          12
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "fluxo",
+          9,
+          6
+        ],
+        [
+          "contact",
+          9,
+          11
+        ],
+        [
+          "contact",
+          13,
+          33
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "mba",
+          3,
+          4
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          9,
+          9
+        ],
+        [
+          "contact",
+          13,
+          39
+        ]
+      ],
+      "slots": [
+        []
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [
+          "Qual valor de chamadas por segundo a documentação estabelece para startAttendance por conta no Contact Center?"
+        ],
+        "facts": [
+          {
+            "fact": "Limite de chamadas por segundo aceitas pela operação startAttendance para uma mesma conta no Contact Center.",
+            "status": "search",
+            "citations": [],
+            "query": "Qual valor de chamadas por segundo a documentação estabelece para startAttendance por conta no Contact Center?"
+          }
+        ],
+        "error": null,
+        "error_code": null,
+        "error_stage": null,
+        "outcome": "searched",
+        "seconds": 9.289,
+        "in_followup_envelope": [],
+        "verified_combined": [],
+        "accepted_distractors": [],
+        "candidates": [
+          [
+            "contact",
+            17,
+            71
+          ],
+          [
+            "contact",
+            15,
+            43
+          ],
+          [
+            "contact",
+            17,
+            74
+          ],
+          [
+            "contact",
+            15,
+            52
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "contact",
+            11,
+            19
+          ],
+          [
+            "contact",
+            11,
+            18
+          ],
+          [
+            "contact",
+            11,
+            21
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "contact",
+            15,
+            40
+          ],
+          [
+            "contact",
+            17,
+            74
+          ],
+          [
+            "contact",
+            13,
+            36
+          ],
+          [
+            "contact",
+            15,
+            45
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "contact",
+            11,
+            23
+          ],
+          [
+            "mba",
+            4,
+            5
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "mba",
+            3,
+            4
+          ],
+          [
+            "fluxo",
+            9,
+            6
+          ],
+          [
+            "contact",
+            13,
+            39
+          ],
+          [
+            "fluxo",
+            10,
+            20
+          ],
+          [
+            "contact",
+            11,
+            20
+          ],
+          [
+            "contact",
+            13,
+            33
+          ]
+        ],
+        "slots": [
+          []
+        ],
+        "combined": []
+      },
+      "parecer": []
+    }
+  ],
+  "model_calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0a0ad5f186bfa9a2c408e8140ebb74f477671e91bd584ac7350f5db195838fbe",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.003817600023467,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12111,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 45,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "96df30bd57d41a313496063a9cd6ba29f1f6fb862ac744eb07907ce7db3f504f",
+      "reservation_id": "limit",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.6375733999884687,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13291,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "50384d2baf5a8e55f4a550474630fe7c1abbde2b1f1c2156b86d599fca51d759",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 5.044616099999985,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12266,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 75,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "43550c2849f0694a0b2168136f8921ebee74177fd967ed943423aa514c729068",
+      "reservation_id": "followup-verify",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.6670218000072055,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12545,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

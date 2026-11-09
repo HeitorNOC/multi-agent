@@ -1,0 +1,85 @@
+{
+  "installation": "business-flow-92900ce2ef",
+  "checkpoints": [
+    {
+      "name": "completed_task_result_reused_across_process_and_human_interrupt"
+    },
+    {
+      "name": "pending_writes_preserve_successful_parallel_node_across_process"
+    },
+    {
+      "name": "lost_ack_retries_same_key_with_one_fixture_supplier_effect"
+    },
+    {
+      "name": "native_retry_policy_recovers_transient_error"
+    }
+  ],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "deterministic capability policy, synthetic auth, canonical snapshots, synthetic provider",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "calls": [
+    {
+      "mode": "task_interrupt",
+      "resume": false,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "mode": "task_interrupt",
+      "resume": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "mode": "siblings",
+      "resume": false,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "mode": "siblings",
+      "resume": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "mode": "effect",
+      "resume": false,
+      "exit_code": 88,
+      "stderr": ""
+    },
+    {
+      "mode": "effect",
+      "resume": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "mode": "retry",
+      "resume": false,
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "result": "PASS_BOUNDED_UPSTREAM_PATTERNS",
+  "counts": {
+    "expensive": 1,
+    "a": 1,
+    "b": 2,
+    "supplier_attempts": 2,
+    "transient": 3
+  },
+  "business_read_commit_requalified": false,
+  "seconds": 9.94816740002716,
+  "disposable_resources_removed": true
+}

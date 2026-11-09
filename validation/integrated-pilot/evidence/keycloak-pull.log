@@ -1,0 +1,16 @@
+quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7: Pulling from keycloak/keycloak
+5c61820a7800: Pulling fs layer
+28b1672eb1e0: Pulling fs layer
+25582d7c77aa: Pulling fs layer
+59a96ebf27cd: Pulling fs layer
+5c61820a7800: Download complete
+25582d7c77aa: Download complete
+25582d7c77aa: Pull complete
+28b1672eb1e0: Download complete
+28b1672eb1e0: Pull complete
+59a96ebf27cd: Download complete
+5c61820a7800: Pull complete
+59a96ebf27cd: Pull complete
+Digest: sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7
+Status: Downloaded newer image for quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7
+quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7

@@ -1,0 +1,1 @@
+{"result":"INTERRUPTED_DURING_PROVISIONING","functional_assertions_executed":false,"reason":"Docker internal network exposed empty published port mapping despite healthy services","adaptation":"bridge with explicit localhost bindings; egress remains unqualified"}

@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "sources_preserved": 16,
+  "restart_to_ready_seconds": 50.563,
+  "new_extraction_calls": 0,
+  "same_installation": true,
+  "same_resources": true,
+  "queued_job_kept_id": true,
+  "unknown_required_review": true,
+  "effect_receipt_reused": true,
+  "jobs": 3,
+  "controlled_dispatches_before": 5,
+  "controlled_dispatches_after": 4,
+  "paid_model_calls": 0
+}

@@ -1,0 +1,25 @@
+{
+  "result": "PASS_CONTRACTS",
+  "cases": 12,
+  "value_or_abstention_passed": 12,
+  "citation_passed": 12,
+  "calls": 23,
+  "usage": {
+    "input_tokens": 308290,
+    "cached_input_tokens": 136832,
+    "output_tokens": 3426,
+    "reasoning_output_tokens": 0
+  },
+  "model_tool_events": 0,
+  "fixed_prompt_pairs": 4,
+  "embedding_vectors": 53,
+  "embedding_truncated_inputs": 0,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true
+    ],
+    "network_removed": true
+  },
+  "elapsed_seconds": 352.3352042999759
+}

@@ -1,0 +1,19 @@
+{
+  "operation": {
+    "context": {
+      "fingerprint": "36b9e71dd70c27fc84ec39a5a4a05d05390b1a81b12038523db7263da210e72c",
+      "key": "78c23566-9f87-4a95-a55b-816f9c667c59",
+      "owner": "e4192117-2984-4c7c-b0e7-8de430ec9a81",
+      "request_id": "78c23566-9f87-4a95-a55b-816f9c667c59",
+      "source": "politica-remoto"
+    },
+    "id": "9e1a938c-7927-56ff-9005-74a0eeef1ac5",
+    "input_sha": "12fd6215f24c074d1bd6d0cd42c3b7ba889e07fa507ca5930c9ddf56fad2d351",
+    "kind": "decision",
+    "outcome": null,
+    "receipt_sha": null,
+    "seq": 9
+  },
+  "evidence_sha": "373b80daf3b6fafcdf5b0b95f0b0594db921307cd1d871b47d2924c2df553c34",
+  "local_receipt": false
+}

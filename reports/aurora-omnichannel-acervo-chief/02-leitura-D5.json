@@ -1,0 +1,346 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "note": "Capa: guia de backend REST, versão de trabalho e título provisório."
+    },
+    {
+      "number": 2,
+      "note": "Sumário: plataforma, princípios, arquitetura, pastas e nomenclatura."
+    },
+    {
+      "number": 3,
+      "note": "Sumário: implementação de rota, erros, paginação, persistência e segurança."
+    },
+    {
+      "number": 4,
+      "note": "Sumário: auditoria, configuração, entrega, revisão e pontos em aberto."
+    },
+    {
+      "number": 5,
+      "note": "Escopo, partes futuras e ressalva de que os exemplos ainda não foram validados como feature completa."
+    },
+    {
+      "number": 6,
+      "note": "Papéis dos repositórios e tecnologias da plataforma."
+    },
+    {
+      "number": 7,
+      "note": "Fluxo típico entre front-end, Portal e serviço REST."
+    },
+    {
+      "number": 8,
+      "note": "Separação de camadas, dependências, operações, rotas e erros."
+    },
+    {
+      "number": 9,
+      "note": "Validação, segurança, consistência e contenção de escopo."
+    },
+    {
+      "number": 10,
+      "note": "Responsabilidades das camadas e ciclo de requisição."
+    },
+    {
+      "number": 11,
+      "note": "Direção das dependências e tratamento de falhas."
+    },
+    {
+      "number": 12,
+      "note": "Árvore de feature e exemplo real de webhook com MongoDB."
+    },
+    {
+      "number": 13,
+      "note": "Responsabilidades das pastas e inicialização do processo."
+    },
+    {
+      "number": 14,
+      "note": "Sufixos e convenções de nomes, propriedades e colunas."
+    },
+    {
+      "number": 15,
+      "note": "Verbos de rota e consistência de nomes entre camadas."
+    },
+    {
+      "number": 16,
+      "note": "Ordem recomendada de implementação e regras de entity."
+    },
+    {
+      "number": 17,
+      "note": "Update de entity completa, model e transformer."
+    },
+    {
+      "number": 18,
+      "note": "Contratos de entrada e saída e interfaces do usecase."
+    },
+    {
+      "number": 19,
+      "note": "Interfaces de validação e common; início do formato do usecase."
+    },
+    {
+      "number": 20,
+      "note": "Tratamento do usecase, ordem de dependências e fluxo de update."
+    },
+    {
+      "number": 21,
+      "note": "Contagem antes da listagem e validação síncrona ou assíncrona."
+    },
+    {
+      "number": 22,
+      "note": "Validação de enum, exceção para guard clauses e implementação de repository e internal."
+    },
+    {
+      "number": 23,
+      "note": "Receita do controller, rotas POST e registro de middleware."
+    },
+    {
+      "number": 24,
+      "note": "Checklist de uma feature nova."
+    },
+    {
+      "number": 25,
+      "note": "Envelope HTTP 200, tipos de erro, logs e resposta ao cliente."
+    },
+    {
+      "number": 26,
+      "note": "Paginação, limites e correspondência entre count e lista."
+    },
+    {
+      "number": 27,
+      "note": "Postgres, TypeORM, wrappers e regras de SQL."
+    },
+    {
+      "number": 28,
+      "note": "Alterações manuais de schema e propagação de colunas."
+    },
+    {
+      "number": 29,
+      "note": "Local das transformações e proteção de consultas por chave externa."
+    },
+    {
+      "number": 30,
+      "note": "Autenticação de serviços internos e exceção operacional de webhooks."
+    },
+    {
+      "number": 31,
+      "note": "Identidade, segredos, TLS e prevenção de injeção."
+    },
+    {
+      "number": 32,
+      "note": "Auditoria opcional e processamento assíncrono."
+    },
+    {
+      "number": 33,
+      "note": "Arquivos de configuração e scripts do serviço."
+    },
+    {
+      "number": 34,
+      "note": "Versão de TypeScript, configuração do compilador e ESLint."
+    },
+    {
+      "number": 35,
+      "note": "Variáveis de ambiente, Consul e Dockerfile."
+    },
+    {
+      "number": 36,
+      "note": "Compose e inicialização do APM antes do restante da aplicação."
+    },
+    {
+      "number": 37,
+      "note": "Pipelines GitLab e Tekton; caminho principal indicado como inferência."
+    },
+    {
+      "number": 38,
+      "note": "Sincronização de versões e verificações antes do merge request."
+    },
+    {
+      "number": 39,
+      "note": "Estilo de código cobrado em reviews."
+    },
+    {
+      "number": 40,
+      "note": "Checklist de revisão e divergências conhecidas em serviços existentes."
+    },
+    {
+      "number": 41,
+      "note": "Lições de incidentes técnicos e de processo."
+    },
+    {
+      "number": 42,
+      "note": "Perguntas e arquivos para novo serviço; serviços fora do padrão comum."
+    },
+    {
+      "number": 43,
+      "note": "Glossário dos termos e componentes."
+    },
+    {
+      "number": 44,
+      "note": "Partes futuras e dúvidas pendentes do próprio guia."
+    }
+  ],
+  "classification": "padrão",
+  "reason": "O documento prescreve convenções e regras de arquitetura e código para backend REST, incluindo itens cobrados em review. É uma versão de trabalho: exemplos e observações reais servem de referência, enquanto inferências e pontos não validados não devem ser tratados como requisitos confirmados.",
+  "findings": [
+    {
+      "pages": [
+        1,
+        5,
+        44
+      ],
+      "text": "Escopo e evidência: a Parte 1 cobre fundamentos de backend REST. Os exemplos Widget são modelos derivados de serviços e regras informadas pelo time, mas ainda não foram usados para produzir uma feature completa validada. As partes de Portal, outros backends e front-end são futuras."
+    },
+    {
+      "pages": [
+        8,
+        10,
+        11,
+        13
+      ],
+      "text": "Padrão arquitetural: delivery traduz a entrada e monta dependências; domain contém entidades, usecases e interfaces e importa somente domain; infrastructure implementa interfaces. Provider delega o acesso real a internal. Controller não decide regras de negócio e usecase não escreve SQL nem importa infraestrutura."
+    },
+    {
+      "pages": [
+        8,
+        14,
+        15,
+        18,
+        19,
+        20
+      ],
+      "text": "Convenções: uma classe de usecase por operação, contratos de request e response próprios, nomes de arquivo snake_case consistentes entre camadas, classes PascalCase, identificadores com ID maiúsculo e colunas snake_case. Rotas REST usam POST e nome de ação; construtores recebem common, validate e repository nessa ordem, omitindo common quando não aplicável."
+    },
+    {
+      "pages": [
+        16,
+        17,
+        18,
+        20
+      ],
+      "text": "Entidades são classes de domínio sem decorators de banco; models TypeORM ficam na infraestrutura e transformers puros convertem entre formatos. Em update, busca-se a entity completa, alteram-se os campos e salva-se o todo; entity parcial é exceção quando create e update diferem muito. Respostas incluem error e listas incluem count."
+    },
+    {
+      "pages": [
+        9,
+        19,
+        20,
+        21,
+        22
+      ],
+      "text": "Validação precede o trabalho do usecase e retorna mensagem em português para o usuário ou null; reutilizam-se helpers e validam-se enums externos. É síncrona por padrão e assíncrona quando consulta banco ou serviço, exigindo contrato e chamada compatíveis. Guard clauses são admitidas no validate, embora o guia as desaconselhe em regras e transformers."
+    },
+    {
+      "pages": [
+        8,
+        19,
+        20,
+        25
+      ],
+      "text": "Usecases envolvem o corpo em try/catch, transformam falhas esperadas em PreconditionError de código 1 e exceções em InternalServerError de código 2. O padrão descrito retorna HTTP 200 com error no corpo; o catch registra o erro completo com etiqueta e devolve apenas error.message. Código novo usa SuccessResponse."
+    },
+    {
+      "pages": [
+        20,
+        25,
+        31
+      ],
+      "text": "Conflito de segurança a resolver: o guia manda devolver error.message original, mas também proíbe expor SQL ou detalhes internos. Uma mensagem de exceção pode conter esses dados; não há regra de sanitização que concilie as duas instruções."
+    },
+    {
+      "pages": [
+        21,
+        26,
+        27
+      ],
+      "text": "Listagens contam primeiro, só buscam itens se count for positivo e devolvem o total. page começa em zero; CRUD simples usa limit 10 e relatórios ou exportações aceitam limite validado de 1 a 1000. COUNT deve refletir filtros e agrupamento da lista; limit null usa MAX_DATA_PAGE do projeto."
+    },
+    {
+      "pages": [
+        6,
+        12,
+        27,
+        28,
+        40,
+        42
+      ],
+      "text": "Stack padrão para serviço comum: TypeScript/Node 20, Express e PostgreSQL com TypeORM; CRUD usa query builder e consultas complexas usam wrappers SQL parametrizados. MongoDB existe em alguns serviços, incluindo o webhook citado; contact-center e ticket usam Sequelize e outras estruturas legadas. chatbot-ml-model usa Mongo e gRPC e não é modelo para serviço comum. Essas divergências não devem ser apagadas ou presumidas como migrações executadas."
+    },
+    {
+      "pages": [
+        27,
+        28
+      ],
+      "text": "Persistência: cada domínio controla seus dados e acessa outro domínio pela API. Wrappers estendem diretamente a base, sem classe abstrata intermediária; SQL usa parâmetros, account_id primeiro no WHERE e count coerente com a lista. O guia determina alteração manual do schema, sem migrations, e aviso ao time antes da entrega."
+    },
+    {
+      "pages": [
+        9,
+        23,
+        30,
+        31,
+        42
+      ],
+      "text": "Segurança: rotas REST internas exigem middleware de TATODESK-API-KEY e recurso cadastrado no serviço api-key; webhooks externos são descritos como exceção a esse middleware. No Portal, accountID e userID vêm do token validado. Segredos ficam em ambiente ou Consul, fora do código; manter validação TLS e parametrizar SQL."
+    },
+    {
+      "pages": [
+        29,
+        31
+      ],
+      "text": "Transformações de banco ficam em transformers de infraestrutura; transformações de negócio ficam em funções puras de domain/usecase. Dados externos usados como chaves de consulta precisam de proteção, por exemplo switch com enum ou verificação de propriedade própria."
+    },
+    {
+      "pages": [
+        32
+      ],
+      "text": "Auditoria é opcional, somente quando a feature exigir e após confirmação; quando usada, é a última dependência do construtor e o exemplo observado cria registro PENDING_PROCESSING para processamento posterior."
+    },
+    {
+      "pages": [
+        33,
+        34,
+        35,
+        36,
+        38
+      ],
+      "text": "Build e entrega: o guia prescreve TypeScript ^5.9.3, configuração de segredos por ambiente, APM inicializado antes dos demais módulos e alinhamento de versão entre package.json, Dockerfile e pipeline GitLab no exemplo. Antes do MR, executar instalação, lint e build; diferenças de tsconfig entre serviços devem ser preservadas quando não houver necessidade de mudança."
+    },
+    {
+      "pages": [
+        37,
+        38,
+        44
+      ],
+      "text": "Hipóteses, não fatos confirmados: Tekton é apontado como provável caminho principal na maioria dos casos; a pipeline oficial de cada serviço e o efeito exato de versão repetida no check-version precisam de confirmação."
+    },
+    {
+      "pages": [
+        24,
+        39,
+        40,
+        41
+      ],
+      "text": "Estilo e revisão: código novo deve evitar comentários, any evitável, imports não usados, bibliotecas de data citadas e abstrações auxiliares de wrapper; usar export no final e seguir formatação vizinha. Em review, o documento orienta relatar achados com evidência e só corrigir quando solicitado. Incidentes relatados incluem bypass de autenticação e perda de trabalho não commitado."
+    },
+    {
+      "pages": [
+        5,
+        12,
+        21,
+        29,
+        30,
+        40,
+        41
+      ],
+      "text": "Trabalho executado nesta resposta: leitura do conteúdo fornecido das 44 páginas e síntese dos requisitos, referências e ressalvas. Exemplos de serviços e incidentes são evidências relatadas pelo guia, não verificações independentes nem implementação realizada nesta tarefa."
+    }
+  ],
+  "gaps": [
+    "O documento é uma versão de trabalho; a validação integral dos modelos por uma feature real e pelo time permanece pendente (páginas 1, 5 e 44).",
+    "É necessário confirmar a pipeline oficial por serviço e o comportamento de check-version para versões repetidas (páginas 37, 38 e 44).",
+    "O contrato completo da classe Wrapper base não é reproduzido; consultar uma implementação existente do serviço (páginas 27 e 44).",
+    "Falta definir como impedir vazamento de detalhes internos quando error.message contiver SQL ou informação técnica (páginas 20, 25 e 31).",
+    "O exemplo de controller recebe accountID do corpo, enquanto a identidade deve derivar de token validado no Portal; o contrato de confiança e a propagação segura até o REST não são detalhados nesta parte (páginas 22, 23 e 31).",
+    "O guia não especifica o mecanismo de autenticação ou verificação de origem para webhooks externos; apenas informa que não usam a API key interna (página 30).",
+    "A padronização de HTTP 200 é afirmada amplamente, mas o material não demonstra como falhas anteriores ao usecase ou erros do servidor HTTP são convertidos nesse envelope (páginas 11, 23 e 25).",
+    "O título definitivo do documento geral ainda está em aberto (páginas 1 e 44)."
+  ]
+}

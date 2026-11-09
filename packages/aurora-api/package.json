@@ -1,0 +1,5 @@
+{
+  "name": "@aurora/local-api",
+  "private": true,
+  "type": "module"
+}

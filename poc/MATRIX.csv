@@ -1,0 +1,56 @@
+﻿id,requisito,contrato_arquivo,teste_evidencia,resultado,limite
+A1,SHAs/versões e core intacto,evidence/manifest.json,gather_evidence.py,PASS,Três clones sem diff versionado
+A2,Baseline Docker,docker info,inventário,BLOCKED,Daemon ausente; usada alternativa PostgreSQL embarcada
+A3,Licença cores,LICENSE em cada clone,hashes manifesto,PASS,MIT observado; transitivas/assets não auditados
+B1,HTTP/auth baseline,testes server,upstream-baseline-server.log,PASS,116 asserções; outras suites bloqueadas pelo SDK
+B2,SDK disponível,plugin-sdk dist,upstream-baseline-server.log + sdk-build-deps.log,FAIL,Falha inicial; resolvida pelo preparo oficial
+B3,Recovery de processos vivos,heartbeat/recovery.test.ts:446,upstream-heartbeat-after-sdk.log,FAIL,Duas asserções processGroupAlive; hipótese de portabilidade
+B4,Teardown PostgreSQL,db/test-embedded-postgres.ts:183,upstream-heartbeat-after-sdk.log;upstream-security-budget.log,FAIL,Encerramento não confirmado no prazo
+B5,Company/agente/issue reais,API company/agents/issues,live-e2e.json,PASS,Companies A/B sintéticas; não decisão SaaS
+C1,Ack 200/202 não conclui job,http/execute.ts:46,http-probe.json,FAIL,Adapter retorna sucesso com remoto ainda running
+C2,4xx/5xx propagados,http/execute.ts:41,http-probe.json,PASS,400/500 erro; não há retry no execute
+C3,timeoutMs,http/execute.ts:11,http-probe.json,PASS,Timeout efetivo
+C4,timeoutSec docs/schema,docs HTTP vs execute,http-probe.json,FAIL,Campo documentado ignorado
+C5,ctx.signal HTTP builtin,http/execute.ts,http-probe.json,FAIL,Request ocorre mesmo já abortado
+C6,Identidade no webhook,http/execute.ts:14,http-probe.json,FAIL,companyId não automático top-level; contexto não assinado
+C7,Usage/cost body HTTP,http/execute.ts,http-probe.json,FAIL,Body ignorado
+C8,SSRF privados/metadata/DNS,remote-fetch e endpoint guard,http-probe.json;upstream-baseline-server.log,PASS,Allowlist exata e guard; sem ampliar para internet ofensiva
+C9,Plugin sem fork,routes/adapters.ts:330,live-e2e.json,PASS,Factory carregada por API oficial
+C10,LangGraph+LightRAG E2E,adapter/index.ts;runtime.py,live-e2e.json,PASS,Bibliotecas reais; especialistas/vetores sintéticos
+C11,IDs/fontes retrieval,LightRAG.aquery_data,test_boundary.py;live-e2e.json,PASS,Chunks preparados; naive; sem qualidade LLM
+C12,Estado final Paperclip,heartbeat/run-completion.ts,live-e2e.json,PASS,Run succeeded e issue done
+C13,waiting_approval/cancel protocolo,runtime.py,fault-probe.json,FAIL,Sem cancel/ack durável; aprovação bool é fixture
+D1,Replay runId concorrente,Ledger+lock no serviço real,fault-probe.json,PASS,Duas HTTP requests; um efeito
+D2,Idempotência reabrindo conexão,Ledger SQLite,test_boundary.py,PASS,Não equivale a matar worker
+D3,Checkpoint novo processo OS,LangGraph SqliteSaver,test_boundary.py,PASS,Dois subprocessos com pausa limpa
+D4,Worker morto entre efeito e ack,boundary ownership,não executado,NOT TESTED,Sem recuperação completa do serviço Python
+D5,Timeout após efeito e retry mesmo run,inbox SQLite,test_boundary.py,PASS,"Efeito transacional local, não MCP externo"
+D6,Retry novo runId mesma intenção,idempotency key negócio,não executado,NOT TESTED,Chave atual por run não resolve intenção entre runs
+D7,Evento fora de ordem,Ledger.transition seq,test_boundary.py,PASS,Sem callbacks reais arbitrários
+D8,Cancel enquanto worker executa,HTTP AbortSignal/runtime,fault-probe.json,FAIL,Efeito continuou após timeout cliente
+D9,Cancel cada etapa e recovery,Paperclip+worker integrado,não executado,NOT TESTED,Unit tests run-control não substituem E2E
+D10,Perda de rede e retry limitado,RetryPolicy 2 tentativas,test_boundary.py,PASS,ConnectionError simulado; sem efeito
+D11,Erro fornecedor LLM/MCP real,MCP gateway/modelo,não executado,NOT TESTED,Nenhuma chamada paga ou credencial pessoal
+D12,Payload stale/task conflitante,Ledger.admit,fault-probe.json,PASS,409 antes de novo efeito
+D13,Checkpoint corrompido/migração,schema checkpoint,não executado,NOT TESTED,Digest não qualifica migração de grafo
+D14,Tool sem scope/approval,Ledger.effect,test_boundary.py,PASS,Email fixture; não policy MCP real
+D15,Knowledge cross-company,Knowledge.query pre-retrieval,test_boundary.py,PASS,A/B e negação antes de retrieval
+D16,ACL confidencial intradomínio,Knowledge API,não executado,NOT TESTED,Não prova ACL documental no mesmo workspace
+D17,Paperclip cross-company,authorization.ts:2270,live-e2e.json,PASS,Token A não lista agentes B:403
+D18,Orçamento concorrente fixture,Ledger BEGIN IMMEDIATE,test_boundary.py,PASS,3 de 12 admitidos; orçamento fictício 9
+D19,Policies/receipts orçamento upstream,budgets.ts,upstream-security-budget.log,PASS,116 asserções agregadas; teardown arquivo run-control falhou
+D20,Mensal/tarefa/estimado-real E2E,budgets+plugin receipts,não executado,NOT TESTED,E2E só custo/tokens zero
+D21,Hire permanente sem aprovação,company flag/agents route,live-e2e.json,PASS,409 com gate ligado; default upstream false
+D22,Temporário dentro policy,Controller delegado,não executado,NOT TESTED,Duas capacidades fixture; policy completa ausente
+D23,Spoof contexto/expiração,runtime.verify,fault-probe.json;test_boundary.py,PASS,Assinatura forjada/tamper/expirado negados
+D24,Token revogado,auth middleware/agent keys,live-e2e.json,PASS,401 após revogação
+D25,Chave vazada/rotação/mTLS/sandbox,workload identity,não executado,NOT TESTED,HMAC efêmero loopback apenas
+D26,Backup restore SQLite,Connection.backup,test_boundary.py,PASS,Dedupe preservado
+D27,Backup restore PostgreSQL,pg_ctl+cópia fria,postgres-restore.json,PASS,Cópia física com origem sem processo/porta; mesmo host/versão; não DR completo
+D28,Restore secrets/storage/cache entre hosts,pacote instalação,não executado,NOT TESTED,DR completo não ensaiado
+D29,Trace empresa/agente/task/run,context+findings,live-e2e.json,PASS,IDs e razão A3 registrados
+D30,RAG híbrido/grafo/tempo/qualidade,LightRAG/Graphiti,não executado,NOT TESTED,Vetores constantes/chunks preparados
+D31,Workspace core LightRAG,tests/workspace,lightrag-upstream.log,PASS,42 asserções
+D32,Workspace API upload LightRAG,DocumentManager tests,lightrag-upstream.log,BLOCKED,Quatro falhas por FastAPI ausente no SDK-only
+E1,A1/A2/A3/A4 e p50/p95,Controlador Adaptativo,não executado,NOT TESTED,Sem benchmark/qualidade comparativa
+E2,JARVIS/brain/instalação por cliente,DOSSIER.md invariantes,REPORT.md,NOT TESTED,Requisitos preservados; operação e UI adiadas

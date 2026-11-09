@@ -1,0 +1,25 @@
+{
+  "result": "PASS_LOCAL_HOST_LOSS_DRILL",
+  "backup_seconds": 51.295,
+  "recovery_to_working_queue_seconds": 64.074,
+  "recovery_and_checks_seconds": 67.54,
+  "jobs_at_cut": [
+    "awaiting_approval",
+    "interrupted",
+    "queued",
+    "running"
+  ],
+  "jobs_recovered": 4,
+  "documents_recovered": 4,
+  "bundle_files": 15,
+  "new_model_dispatches": 4,
+  "model_reservations": 13,
+  "effect_receipts": 2,
+  "paid_model_calls": 0,
+  "tampered_bundle_rejected": true,
+  "wrong_key_rejected": true,
+  "authority_process_recreated": true,
+  "checkpoint_writer_released_at_cut": true,
+  "original_database_containers_removed": true,
+  "rpo_scope": "four known jobs at a fenced cut; no ongoing replication measured"
+}

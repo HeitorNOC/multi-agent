@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e1-a8ec-7f33-a978-350a13d8fc32"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"As despesas extraordinárias da equipe Aurora exigem **dois revisores distintos**. O solicitante não pode revisar a própria despesa. [1]\\n\\nO manual está vigente desde 1º de janeiro de 2026, portanto estava vigente na data consultada, 1º de fevereiro de 2026. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":14147,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":100,"reasoning_output_tokens":0}}

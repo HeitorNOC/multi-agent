@@ -1,0 +1,67 @@
+{
+  "installation": "business-flow-3d177e84f3",
+  "checkpoints": [],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "cold_restore_new_postgres": {
+    "container": "business-flow-3d177e84f3-pg-restored-34c8c8",
+    "volume": "business-flow-3d177e84f3-pg-restored-34c8c8-data"
+  },
+  "result": "PASS_READ_COMMIT_RECOVERY",
+  "stage": "after_receipt",
+  "recovery_crash": false,
+  "provider_executions": [
+    [
+      "business-flow-3d177e84f3:inference:f6f472cb07e6943048ff7a494bdc6f19cd4f5ee960a685500f2588d10e849e9c",
+      "complete",
+      1
+    ]
+  ],
+  "recovery": {
+    "operation_id": "business-flow-3d177e84f3:a13fdeac30eb34919442dbfd917caeb840d72c4b1a03af5214643b251eb53941",
+    "job": "8c44d893-c239-4988-bd12-b4f1288c1039",
+    "owner": "owner",
+    "evidence_sha": "ffffbca12edb8fac07558b3294bea539afca615789a53da5aa0481f724498b65",
+    "reason": "Verify provider evidence and exact inventory; retain reservations without regenerating inference.",
+    "approvers": [
+      "board",
+      "reviewer2"
+    ],
+    "reservation": "retained_not_refunded",
+    "kind": "reconciled_read",
+    "receipt": {
+      "id": "business-flow-3d177e84f3:inference:f6f472cb07e6943048ff7a494bdc6f19cd4f5ee960a685500f2588d10e849e9c",
+      "input_sha": "f6f472cb07e6943048ff7a494bdc6f19cd4f5ee960a685500f2588d10e849e9c",
+      "state": "complete",
+      "semantic": {
+        "answer": "Controlled fixture response; no semantic model invoked.",
+        "native": false
+      }
+    },
+    "job_before": {
+      "epoch": 1,
+      "worker": "worker-763c72a11546469090f3756e8928d340",
+      "deadline": 1793890547484,
+      "state": "admitted"
+    },
+    "original_outcome": "known_receipt_recovered"
+  },
+  "budgets": {
+    "business": {
+      "cap": 32,
+      "reserved": 1
+    }
+  },
+  "seconds": 10.509944599994924
+}

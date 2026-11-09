@@ -1,0 +1,213 @@
+{
+  "input_sha256": "1f4b13ccfcc5464a8e7b4cb1020f62b4f25e387370ec35b952bdf372cdf3d23c",
+  "input": "aurora-omnichannel-api-parecer-por-requisito.json",
+  "questions": [
+    "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+    "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+    "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+    "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+  ],
+  "candidates": [
+    {
+      "id": "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+      "source": "fluxo",
+      "page": 9
+    },
+    {
+      "id": "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454",
+      "source": "fluxo",
+      "page": 12
+    },
+    {
+      "id": "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+      "source": "contact",
+      "page": 15
+    },
+    {
+      "id": "de7d022faddd59b3127c65954480a878d23d2e8ba636f4f0d4cd97b1cc0d28e2",
+      "source": "contact",
+      "page": 15
+    }
+  ],
+  "runs": [
+    {
+      "trial": 1,
+      "mode": "previous",
+      "citations": [
+        "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+        "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454",
+        "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+        "de7d022faddd59b3127c65954480a878d23d2e8ba636f4f0d4cd97b1cc0d28e2"
+      ],
+      "gaps": [
+        "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+      ],
+      "assessments": [
+        {
+          "requirement": "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+          "status": "documented",
+          "note": "O sent-consumer arquiva mensagens de clientes em whatsapp-storage quando a origem é STANDBY_CUSTOMER e outro aplicativo é dono da conversa.",
+          "evidence_ids": [
+            "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce"
+          ]
+        },
+        {
+          "requirement": "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+          "status": "documented",
+          "note": "O processamento de sessão consome o tópico mp-session-processing; os trechos não especificam contratos Socket.IO.",
+          "evidence_ids": [
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+          "status": "documented",
+          "note": "O backend muda o status de PAUSED para ACTIVE ao iniciar atendimento e grava TRANSFERED ao transferi-lo para outro usuário.",
+          "evidence_ids": [
+            "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+            "de7d022faddd59b3127c65954480a878d23d2e8ba636f4f0d4cd97b1cc0d28e2"
+          ]
+        },
+        {
+          "requirement": "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?",
+          "status": "unanswered",
+          "note": "Os trechos fornecidos não estabelecem garantias de idempotência ou recuperação para o processamento de mensagens.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "trial": 1,
+      "mode": "updated",
+      "citations": [
+        "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+        "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+      ],
+      "gaps": [
+        "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+        "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+        "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+        "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+      ],
+      "assessments": [
+        {
+          "requirement": "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+          "status": "partial",
+          "note": "Os trechos atribuem ao sent-consumer o arquivamento de mensagens do cliente em STANDBY_CUSTOMER e ao messaging-session-processin o consumo de mp-session-processing, mas não descrevem todos os componentes e fluxos de referência.",
+          "evidence_ids": [
+            "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+          "status": "partial",
+          "note": "O tópico mp-session-processing é identificado como origem de consumo, mas faltam os demais detalhes do contrato Kafka e qualquer contrato Socket.IO.",
+          "evidence_ids": [
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+          "status": "unanswered",
+          "note": "Os trechos descrevem fluxos internos de atendimento, mas não documentam estados ou transições de controle de conversa pelo provedor.",
+          "evidence_ids": []
+        },
+        {
+          "requirement": "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?",
+          "status": "unanswered",
+          "note": "Os trechos não especificam garantias de idempotência ou recuperação para o processamento de mensagens.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "mode": "previous",
+      "error": "evidence_not_authorized"
+    },
+    {
+      "trial": 2,
+      "mode": "updated",
+      "error": "evidence_not_authorized"
+    }
+  ],
+  "calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "2a9f18b0d67a7e8cbf638f35f82fa2b5252d482d6d6bbfc352dd11cc3f99aad3",
+      "reservation_id": "previous",
+      "instance": "fixed-requirement-review",
+      "seconds": 10.130782599997474,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11885,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 371,
+          "reasoning_output_tokens": 36
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "b7e752c0f1442c3693137f3d6f073bfe74c71f58e8b0884c81a08b81bf904e2d",
+      "reservation_id": "updated",
+      "instance": "fixed-requirement-review",
+      "seconds": 8.973868799977936,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12760,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 318,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "2a9f18b0d67a7e8cbf638f35f82fa2b5252d482d6d6bbfc352dd11cc3f99aad3",
+      "reservation_id": "previous",
+      "instance": "fixed-requirement-review",
+      "seconds": 12.347430099995108,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12675,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 426,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "b7e752c0f1442c3693137f3d6f073bfe74c71f58e8b0884c81a08b81bf904e2d",
+      "reservation_id": "updated",
+      "instance": "fixed-requirement-review",
+      "seconds": 9.223532699979842,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12760,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 342,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

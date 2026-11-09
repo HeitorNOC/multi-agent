@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a5d4-612f-7b03-865c-7b2cc3e423a3"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"edges\\\":[{\\\"source_entity_name\\\":\\\"ACME\\\",\\\"target_entity_name\\\":\\\"PoliticaRemotaACME\\\",\\\"relation_type\\\":\\\"REMOTE_POLICY\\\",\\\"fact\\\":\\\"A política PoliticaRemotaACME da empresa ACME permite dois dias de trabalho remoto por semana desde 1 de janeiro de 2026.\\\",\\\"valid_at\\\":\\\"2026-01-01T00:00:00Z\\\",\\\"invalid_at\\\":null,\\\"episode_indices\\\":[0]}]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":15265,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":106,"reasoning_output_tokens":0}}

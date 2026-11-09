@@ -1,0 +1,16 @@
+{
+  "capture_integrity": "PASS",
+  "repositories": 6,
+  "source_files_verified": 16,
+  "errors": [],
+  "historical_download_errors": [
+    {
+      "repository": "keycloak/keycloak",
+      "path": "LICENSE",
+      "error": "HTTP Error 404: Not Found"
+    }
+  ],
+  "new_inference_calls": 0,
+  "new_upstream_tests_executed": 0,
+  "business_v1_requalified": false
+}

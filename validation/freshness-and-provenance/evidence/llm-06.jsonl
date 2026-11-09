@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a723-2db7-7893-a1e3-8286f8938ced"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O projeto de expansão da equipe Aurora chama-se **Solstício**. [1]\\n\\nA versão selecionada está vigente desde **1º de março de 2026**. Ela foi publicada em 4 de novembro de 2026; não foi informada uma data de fim de vigência. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v2.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13259,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":97,"reasoning_output_tokens":0}}

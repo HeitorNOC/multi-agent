@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="82.651" timestamp="2026-11-06T11:37:04.630018-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.aurora-local-restart.test_launcher" name="test_operational_postgres_backup_restore" time="82.446"><failure message="AssertionError: launcher exited early; see private launcher log">tmp_path = WindowsPath('C:/Users/PC/multi-agent/validation/aurora-local-restart/.state/independent-01/test_operational_postgres_back0')
+
+    def test_operational_postgres_backup_restore(tmp_path):
+&gt;       run_drill(tmp_path, restore_pg=True)
+
+validation\aurora-local-restart\test_launcher.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+validation\aurora-local-restart\test_launcher.py:150: in run_drill
+    resumed=wait_for(ready)
+            ^^^^^^^^^^^^^^^
+validation\aurora-local-restart\test_launcher.py:22: in wait_for
+    value=check()
+          ^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def ready():
+&gt;       if launcher.poll() is not None:raise AssertionError('launcher exited early; see private launcher log')
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: launcher exited early; see private launcher log
+
+validation\aurora-local-restart\test_launcher.py:65: AssertionError</failure></testcase></testsuite></testsuites>

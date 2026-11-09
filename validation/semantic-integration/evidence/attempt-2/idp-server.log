@@ -1,0 +1,34 @@
+Changes detected in configuration. Updating the server image.
+Updating the configuration and installing your custom providers, if any. Please wait.
+2026-11-04 03:42:21,672 WARN  [org.keycloak.common.Profile] (build-2) Deprecated features identity-brokering-api:v1, twitter-broker:v1 enabled by default. Check the upgrading guide for steps to use later versions if available.
+2026-11-04 03:42:34,489 INFO  [io.quarkus.deployment.QuarkusAugmentor] (main) Quarkus augmentation completed in 18316ms
+Server configuration updated and persisted. Run the following command to review the configuration:
+
+	kc.sh show-config
+
+Next time you run the server, just add --optimized to the command to ensure this build is used.
+2026-11-04 03:42:38,296 WARN  [org.keycloak.models.sessions.infinispan.InfinispanStickySessionEncoderProviderFactory] (main) The option `shouldAttachRoute` is deprecated and will be removed in a future release. Disable it by setting `spi-sticky-session-encoder--infinispan--should-attach-route` to `false`
+2026-11-04 03:42:41,000 INFO  [org.infinispan.CONTAINER] (main) ISPN000974: Virtual threads support: disabled
+2026-11-04 03:42:42,803 INFO  [org.hibernate.orm.jdbc.batch] (JPA Startup Thread) HHH100501: Automatic JDBC statement batching enabled (maximum batch size 32)
+2026-11-04 03:42:42,878 WARN  [org.keycloak.common.Profile] (main) Deprecated features identity-brokering-api:v1, twitter-broker:v1 enabled by default. Check the upgrading guide for steps to use later versions if available.
+2026-11-04 03:42:44,618 INFO  [org.keycloak.quarkus.runtime.storage.database.liquibase.QuarkusJpaUpdaterProvider] (main) Initializing database schema. Using changelog META-INF/jpa-changelog-master.xml
+2026-11-04 03:42:57,870 INFO  [org.keycloak.spi.infinispan.impl.embedded.JGroupsConfigurator] (main) JGroups JDBC_PING discovery enabled.
+2026-11-04 03:42:58,778 INFO  [org.keycloak.spi.infinispan.impl.embedded.JGroupsConfigurator] (main) JGroups Encryption enabled (mTLS).
+2026-11-04 03:42:59,492 INFO  [org.keycloak.jgroups.certificates.CertificateReloadManager] (main) Starting JGroups certificate reload manager
+2026-11-04 03:42:59,890 INFO  [org.infinispan.CONTAINER] (main) ISPN000556: Starting user marshaller 'org.infinispan.commons.marshall.ImmutableProtoStreamMarshaller'
+2026-11-04 03:43:00,066 INFO  [org.infinispan.CLUSTER] (main) ISPN000078: Starting JGroups channel `ISPN` with stack `jdbc-ping`
+2026-11-04 03:43:00,067 INFO  [org.jgroups.JChannel] (main) local_addr: 00000000-0000-0000-0000-000000000001(v=16.0.15), name: 3e7bc6865221-29245
+2026-11-04 03:43:00,074 INFO  [org.jgroups.protocols.FD_SOCK2] (main) server listening on *:57800
+2026-11-04 03:43:00,104 INFO  [org.infinispan.CLUSTER] (main) ISPN000094: Received new cluster view for channel ISPN: [3e7bc6865221-29245(v=16.0.15)|0] (1) [3e7bc6865221-29245(v=16.0.15)]
+2026-11-04 03:43:00,106 INFO  [org.keycloak.jgroups.certificates.CertificateReloadManager] (blocking-thread--p3-t2) Reloading JGroups Certificate
+2026-11-04 03:43:00,197 INFO  [org.infinispan.CLUSTER] (main) ISPN000079: Channel `ISPN` local address is `3e7bc6865221-29245`, physical addresses are `[172.20.0.4:7800]`
+2026-11-04 03:43:00,693 INFO  [org.keycloak.connections.infinispan.DefaultInfinispanConnectionProviderFactory] (main) Node name: 3e7bc6865221-29245, Site name: null, Cluster name: ISPN
+2026-11-04 03:43:00,886 INFO  [org.keycloak.models.workflow.WorkflowsEventListenerFactory] (main) Workflow runner task scheduled: next execution at 15:43, then every PT12H
+2026-11-04 03:43:01,187 INFO  [org.keycloak.services] (main) KC-SERVICES0050: Initializing master realm
+2026-11-04 03:43:03,570 INFO  [org.keycloak.services] (main) KC-SERVICES0077: Created temporary admin user with username pilot-admin
+2026-11-04 03:43:03,782 INFO  [org.keycloak.services.resources.KeycloakApplication] (main) Bootstrap completed in 20.903000 seconds
+2026-11-04 03:43:04,005 INFO  [io.quarkus] (main) Keycloak 26.8.1 on JVM (powered by Quarkus 3.40.1) started in 29.285s. Listening on: http://0.0.0.0:8080
+2026-11-04 03:43:04,006 INFO  [io.quarkus] (main) Profile prod activated. 
+2026-11-04 03:43:04,006 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, hibernate-orm, jdbc-postgresql, keycloak, narayana-jta, opentelemetry, rest, rest-jackson, smallrye-context-propagation, vertx]
+2026-11-04 03:43:16,248 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'aprovador' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope
+2026-11-04 03:44:06,219 WARN  [org.keycloak.protocol.oidc.endpoints.TokenEndpoint.full-scope-allowed] (executor-thread-1) Client 'aprovador' in the realm 'piloto' has 'Full scope allowed' switch enabled. This client switch is deprecated and will be removed in the future. Please update your client settings to disable the switch and configure needed roles, which this client application needs, to the client role scope

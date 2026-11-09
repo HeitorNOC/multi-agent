@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e2-cd27-75d3-af2f-9ce1cf9c92d3"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"Para a vigência consultada de **1 de fevereiro de 2026**, as despesas extraordinárias da equipe Aurora exigem aprovação de **dois revisores distintos**. O solicitante não pode revisar a própria despesa. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13421,"cached_input_tokens":9216,"cache_write_input_tokens":0,"output_tokens":80,"reasoning_output_tokens":0}}

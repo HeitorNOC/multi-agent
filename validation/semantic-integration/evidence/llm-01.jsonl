@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a4aa-63a8-7b62-82a8-9f37c1b9f55a"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"entity<|#|>Política ACME Versão 1<|#|>Content<|#|>Política que permitia trabalho remoto em dois dias por semana até 28/02/2026.\\nentity<|#|>Trabalho Remoto<|#|>Concept<|#|>Modalidade de trabalho permitida pela Política ACME versão 1 em dois dias por semana até 28/02/2026.\\nrelation<|#|>Política ACME Versão 1<|#|>Trabalho Remoto<|#|>permissão, frequência<|#|>A Política ACME versão 1 permitia trabalho remoto em dois dias por semana até 28/02/2026.\\n<|COMPLETE|>\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13849,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":180,"reasoning_output_tokens":0}}

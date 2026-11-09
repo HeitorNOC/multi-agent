@@ -1,0 +1,22 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+CHECKPOINT real_services_oidc_and_local_pretrained_embedding_ready
+F
+================================== FAILURES ===================================
+__________________ test_native_semantic_path_and_restoration __________________
+validation\semantic-integration\test_semantic.py:52: in test_native_semantic_path_and_restoration
+    result=stack.sql('SELECT vector_dims(content_vector),count(*) FROM "'+table+'" GROUP BY 1;','knowledge')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validation\semantic-integration\harness.py:66: in sql
+    return self.d('exec','-i',self.pg_name,'psql','-XqAt','-v','ON_ERROR_STOP=1','-U','postgres','-d',database,input=q.encode()).stdout.decode().strip()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validation\semantic-integration\harness.py:51: in d
+    raise RuntimeError(error[-6000:])
+E   RuntimeError: ERROR:  relation "LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d" does not exist
+E   LINE 1: SELECT vector_dims(content_vector),count(*) FROM "LIGHTRAG_V...
+E                                                            ^
+=========================== short test summary info ===========================
+FAILED validation/semantic-integration/test_semantic.py::test_native_semantic_path_and_restoration
+1 failed in 150.79s (0:02:30)

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="149.936" timestamp="2026-11-06T01:32:51.012772-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.aurora-queue.test_sustained" name="test_two_workers_sustained" time="148.688" /></testsuite></testsuites>

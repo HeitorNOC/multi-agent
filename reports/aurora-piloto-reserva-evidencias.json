@@ -1,0 +1,2161 @@
+{
+  "manifest_sha256": "78b2a7fb555cfe2038d6a271e966a4f29aababf78d671a7834a5c23e7108768c",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "reranker": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "173760f",
+    "files": {
+      "model_quint8_avx2.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "tokenizer.json": "3a56def25aa40facc030ea8b0b87f3688e4b3c39eb8b45d5702b3a1300fe2a20"
+    },
+    "onnxruntime": "1.31.1",
+    "startup_ms": 969.69
+  },
+  "passages": 377,
+  "cases": [
+    {
+      "id": "Q01",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Quando o navegador volta a se conectar ap\u00f3s uma queda, o que \u00e9 refeito para o operador continuar vendo as conversas?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 688,
+          "candidates": [
+            [
+              "contact",
+              13,
+              34
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "contact",
+              13,
+              29
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Quando o navegador volta a se conectar ap\u00f3s uma queda, o que \u00e9 refeito para o operador continuar vendo as conversas?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 6019,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              23
+            ],
+            [
+              "fluxo",
+              12,
+              29
+            ],
+            [
+              "contact",
+              13,
+              34
+            ],
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ],
+            [
+              "fluxo",
+              9,
+              1
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q02",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Quais identificadores comp\u00f5em a chave usada para recuperar a sess\u00e3o de um contato no WhatsApp?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 541,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              12,
+              28
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Quais identificadores comp\u00f5em a chave usada para recuperar a sess\u00e3o de um contato no WhatsApp?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 5630,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q03",
+      "critical": false,
+      "expected": 2,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Na implanta\u00e7\u00e3o do agente da Meta, como limitar a estreia a poucos destinat\u00e1rios antes de expandir a disponibilidade?"
+          ],
+          "found_in_pool": [
+            2
+          ],
+          "found": [
+            2
+          ],
+          "elapsed_ms": 676,
+          "candidates": [
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba",
+              4,
+              11
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Na implanta\u00e7\u00e3o do agente da Meta, como limitar a estreia a poucos destinat\u00e1rios antes de expandir a disponibilidade?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [],
+          "elapsed_ms": 5952,
+          "candidates": [
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              8,
+              12
+            ],
+            [
+              "mba",
+              4,
+              11
+            ],
+            [
+              "mba",
+              8,
+              14
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q04",
+      "critical": true,
+      "expected": 2,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Ao encerrar um atendimento de mensageria pelo bot\u00e3o Finalizar, qual estado \u00e9 gravado?",
+            "Ao encerrar um atendimento de mensageria pelo bot\u00e3o Finalizar, o que acontece com o tipo da sess\u00e3o se a opera\u00e7\u00e3o falhar no meio?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [
+            1,
+            2
+          ],
+          "elapsed_ms": 1589,
+          "candidates": [
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              16,
+              65
+            ],
+            [
+              "contact",
+              15,
+              56
+            ],
+            [
+              "contact",
+              15,
+              59
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Ao encerrar um atendimento de mensageria pelo bot\u00e3o Finalizar, qual estado \u00e9 gravado?",
+            "Ao encerrar um atendimento de mensageria pelo bot\u00e3o Finalizar, o que acontece com o tipo da sess\u00e3o se a opera\u00e7\u00e3o falhar no meio?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [
+            1,
+            2
+          ],
+          "elapsed_ms": 11913,
+          "candidates": [
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              16,
+              65
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q05",
+      "critical": true,
+      "expected": 2,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Onde fica o evento original recebido do WhatsApp?",
+            "onde fica a vers\u00e3o normalizada que comp\u00f5e o hist\u00f3rico?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [
+            2
+          ],
+          "elapsed_ms": 563,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              13
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "portal",
+              9,
+              1
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "mba-frontend",
+              4,
+              1
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Onde fica o evento original recebido do WhatsApp?",
+            "onde fica a vers\u00e3o normalizada que comp\u00f5e o hist\u00f3rico?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [
+            2
+          ],
+          "elapsed_ms": 11220,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              13
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q06",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Enquanto um atendimento est\u00e1 suspenso pelo operador, a sess\u00e3o de mensagens pode vencer?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 733,
+          "candidates": [
+            [
+              "contact",
+              15,
+              53
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              44
+            ],
+            [
+              "contact",
+              16,
+              69
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              16,
+              68
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Enquanto um atendimento est\u00e1 suspenso pelo operador, a sess\u00e3o de mensagens pode vencer?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 5696,
+          "candidates": [
+            [
+              "contact",
+              15,
+              53
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              15,
+              44
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              16,
+              68
+            ],
+            [
+              "contact",
+              16,
+              69
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q07",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Quando a notifica\u00e7\u00e3o de entrada do WhatsApp chega sem o identificador da integra\u00e7\u00e3o, qual campo permite encontrar o aplicativo?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 814,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              12
+            ],
+            [
+              "fluxo",
+              9,
+              4
+            ],
+            [
+              "fluxo",
+              10,
+              16
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              7
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Quando a notifica\u00e7\u00e3o de entrada do WhatsApp chega sem o identificador da integra\u00e7\u00e3o, qual campo permite encontrar o aplicativo?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 6089,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              12
+            ],
+            [
+              "fluxo",
+              10,
+              16
+            ],
+            [
+              "fluxo",
+              9,
+              4
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              7
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q08",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "O que o consumidor de sa\u00edda faz quando uma resposta do WhatsApp cont\u00e9m mais de trinta mensagens?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 594,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              22
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "O que o consumidor de sa\u00edda faz quando uma resposta do WhatsApp cont\u00e9m mais de trinta mensagens?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 5855,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q09",
+      "critical": true,
+      "expected": 3,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Ao abrir um atendimento que veio da mensageria, qual estado inicial fica na fila?",
+            "Ao abrir um atendimento que veio da mensageria, o que muda no destino das mensagens recebidas?"
+          ],
+          "found_in_pool": [
+            2,
+            3
+          ],
+          "found": [
+            2
+          ],
+          "elapsed_ms": 1387,
+          "candidates": [
+            [
+              "contact",
+              9,
+              3
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              11,
+              26
+            ],
+            [
+              "contact",
+              11,
+              15
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "fluxo",
+              10,
+              19
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Ao abrir um atendimento que veio da mensageria, qual estado inicial fica na fila?",
+            "Ao abrir um atendimento que veio da mensageria, o que muda no destino das mensagens recebidas?"
+          ],
+          "found_in_pool": [
+            1,
+            2,
+            3
+          ],
+          "found": [
+            2
+          ],
+          "elapsed_ms": 11082,
+          "candidates": [
+            [
+              "contact",
+              9,
+              3
+            ],
+            [
+              "contact",
+              11,
+              26
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "critical": true,
+      "expected": 2,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Que falhas intermitentes podem ocorrer nos endpoints do agente da Meta?",
+            "ap\u00f3s quanto tempo o material orienta repetir a tentativa?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [
+            1,
+            2
+          ],
+          "elapsed_ms": 949,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "reclame-aqui",
+              12,
+              9
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              11
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Que falhas intermitentes podem ocorrer nos endpoints do agente da Meta?",
+            "ap\u00f3s quanto tempo o material orienta repetir a tentativa?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [
+            1,
+            2
+          ],
+          "elapsed_ms": 10421,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "reclame-aqui",
+              12,
+              9
+            ],
+            [
+              "fluxo",
+              10,
+              12
+            ],
+            [
+              "reclame-aqui",
+              10,
+              8
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "N01",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Qual a taxa mensal em reais por n\u00famero de WhatsApp com o MBA ativado?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 333,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "fluxo",
+              9,
+              5
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              10,
+              11
+            ],
+            [
+              "mba-academic",
+              null,
+              1
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Qual a taxa mensal em reais por n\u00famero de WhatsApp com o MBA ativado?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 5413,
+          "candidates": [
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "backend",
+              8,
+              14
+            ],
+            [
+              "fluxo",
+              10,
+              12
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "N02",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Por quantos dias o Tatodesk ret\u00e9m o payload cru armazenado no WhatsappMessage?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 473,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              19
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "contact",
+              13,
+              38
+            ],
+            [
+              "contact",
+              16,
+              60
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Por quantos dias o Tatodesk ret\u00e9m o payload cru armazenado no WhatsappMessage?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 5775,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              19
+            ],
+            [
+              "backend",
+              39,
+              17
+            ],
+            [
+              "contact",
+              15,
+              54
+            ],
+            [
+              "backend",
+              24,
+              16
+            ],
+            [
+              "backend",
+              24,
+              16
+            ],
+            [
+              "backend",
+              39,
+              17
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "N03",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Qual \u00e9 o limite de requisi\u00e7\u00f5es por segundo do endpoint startAttendance por conta?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 653,
+          "candidates": [
+            [
+              "reclame-aqui",
+              3,
+              1
+            ],
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Qual \u00e9 o limite de requisi\u00e7\u00f5es por segundo do endpoint startAttendance por conta?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 5678,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "reclame-aqui",
+              3,
+              1
+            ],
+            [
+              "contact",
+              17,
+              71
+            ],
+            [
+              "mba-frontend",
+              7,
+              5
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "contact",
+              15,
+              43
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "N04",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Qual \u00e9 o ponto de ebuli\u00e7\u00e3o do merc\u00fario \u00e0 press\u00e3o atmosf\u00e9rica padr\u00e3o?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 83,
+          "candidates": [
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "portal",
+              13,
+              4
+            ],
+            [
+              "contact",
+              11,
+              18
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Qual \u00e9 o ponto de ebuli\u00e7\u00e3o do merc\u00fario \u00e0 press\u00e3o atmosf\u00e9rica padr\u00e3o?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 5579,
+          "candidates": [
+            [
+              "backend",
+              8,
+              14
+            ],
+            [
+              "fluxo",
+              9,
+              2
+            ],
+            [
+              "backend",
+              8,
+              15
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "fluxo",
+              10,
+              12
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "handoff",
+      "critical": false,
+      "expected": 3,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Antes de o humano responder pelo WhatsApp, como sabemos se ele j\u00e1 assumiu o atendimento e que sinal separa a troca de controle do mero recebimento de uma mensagem?"
+          ],
+          "found_in_pool": [
+            3
+          ],
+          "found": [],
+          "elapsed_ms": 695,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Antes de o humano responder pelo WhatsApp, como sabemos se ele j\u00e1 assumiu o atendimento e que sinal separa a troca de controle do mero recebimento de uma mensagem?"
+          ],
+          "found_in_pool": [
+            1,
+            2,
+            3
+          ],
+          "found": [],
+          "elapsed_ms": 6686,
+          "candidates": [
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              9,
+              10
+            ],
+            [
+              "fluxo",
+              10,
+              24
+            ],
+            [
+              "fluxo",
+              10,
+              21
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        },
+        "manual_concepts_shortlist": {
+          "queries": [
+            "Qual status indica que um atendente iniciou o atendimento?",
+            "O que muda no tipo da sess\u00e3o de mensageria quando \u00e9 aberto um atendimento digital?",
+            "Qual evento do WhatsApp representa transfer\u00eancia de controle em vez de mensagem recebida?"
+          ],
+          "found_in_pool": [
+            1,
+            2,
+            3
+          ],
+          "found": [
+            1,
+            3
+          ],
+          "elapsed_ms": 1978,
+          "candidates": [
+            [
+              "contact",
+              9,
+              5
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "fluxo",
+              10,
+              13
+            ]
+          ]
+        },
+        "manual_concepts_full_scan": {
+          "queries": [
+            "Qual status indica que um atendente iniciou o atendimento?",
+            "O que muda no tipo da sess\u00e3o de mensageria quando \u00e9 aberto um atendimento digital?",
+            "Qual evento do WhatsApp representa transfer\u00eancia de controle em vez de mensagem recebida?"
+          ],
+          "found_in_pool": [
+            1,
+            2,
+            3
+          ],
+          "found": [
+            1,
+            3
+          ],
+          "elapsed_ms": 15711,
+          "candidates": [
+            [
+              "contact",
+              9,
+              5
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ],
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "fluxo",
+              10,
+              13
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "persistence",
+      "critical": false,
+      "expected": 2,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Para uma auditoria da entrada de WhatsApp, onde rastrear o conte\u00fado recebido intacto?",
+            "em qual ponto consultar o registro transformado usado para reconstruir a conversa?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [
+            1,
+            2
+          ],
+          "elapsed_ms": 1122,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "fluxo",
+              10,
+              19
+            ],
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Para uma auditoria da entrada de WhatsApp, onde rastrear o conte\u00fado recebido intacto?",
+            "em qual ponto consultar o registro transformado usado para reconstruir a conversa?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [
+            2
+          ],
+          "elapsed_ms": 10842,
+          "candidates": [
+            [
+              "fluxo",
+              10,
+              20
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "fluxo",
+              10,
+              27
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ],
+            [
+              "fluxo",
+              9,
+              6
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "release",
+      "critical": false,
+      "expected": 2,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Como testar o agente da Meta com um grupo restrito de contatos e depois disponibilizar para a base inteira?"
+          ],
+          "found_in_pool": [
+            2
+          ],
+          "found": [],
+          "elapsed_ms": 695,
+          "candidates": [
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Como testar o agente da Meta com um grupo restrito de contatos e depois disponibilizar para a base inteira?"
+          ],
+          "found_in_pool": [
+            1,
+            2
+          ],
+          "found": [],
+          "elapsed_ms": 5793,
+          "candidates": [
+            [
+              "mba",
+              4,
+              9
+            ],
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "contact",
+              16,
+              64
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              3,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "frontend",
+      "critical": false,
+      "expected": 1,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Quais bot\u00f5es aparecem para administrar o conhecimento do agente da Meta quando o onboarding foi conclu\u00eddo?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 692,
+          "candidates": [
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              1
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Quais bot\u00f5es aparecem para administrar o conhecimento do agente da Meta quando o onboarding foi conclu\u00eddo?"
+          ],
+          "found_in_pool": [
+            1
+          ],
+          "found": [
+            1
+          ],
+          "elapsed_ms": 5918,
+          "candidates": [
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              2
+            ],
+            [
+              "mba-frontend",
+              4,
+              1
+            ],
+            [
+              "mba-frontend",
+              15,
+              9
+            ],
+            [
+              "mba",
+              4,
+              8
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "limit",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Quantas chamadas por segundo o Contact Center aceita na opera\u00e7\u00e3o startAttendance para a mesma conta?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 592,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "contact",
+              9,
+              11
+            ],
+            [
+              "contact",
+              16,
+              65
+            ],
+            [
+              "contact",
+              11,
+              15
+            ],
+            [
+              "contact",
+              16,
+              62
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Quantas chamadas por segundo o Contact Center aceita na opera\u00e7\u00e3o startAttendance para a mesma conta?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 5883,
+          "candidates": [
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              13,
+              30
+            ],
+            [
+              "contact",
+              9,
+              14
+            ],
+            [
+              "contact",
+              9,
+              11
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "price",
+      "critical": false,
+      "expected": 0,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Qual valor em reais a 360dialog cobra por n\u00famero habilitado para o agente da Meta a cada m\u00eas?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 504,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              6
+            ],
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              4,
+              11
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Qual valor em reais a 360dialog cobra por n\u00famero habilitado para o agente da Meta a cada m\u00eas?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 5729,
+          "candidates": [
+            [
+              "mba",
+              8,
+              13
+            ],
+            [
+              "mba",
+              3,
+              1
+            ],
+            [
+              "mba",
+              4,
+              10
+            ],
+            [
+              "mba",
+              4,
+              7
+            ],
+            [
+              "mba",
+              3,
+              2
+            ],
+            [
+              "mba",
+              8,
+              13
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "handoff-original",
+      "critical": false,
+      "expected": 3,
+      "modes": {
+        "automatic_shortlist": {
+          "queries": [
+            "Quais estados e evid\u00eancias s\u00e3o necess\u00e1rios para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?"
+          ],
+          "found_in_pool": [],
+          "found": [],
+          "elapsed_ms": 469,
+          "candidates": [
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ],
+            [
+              "mba-academic",
+              null,
+              1
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "mba",
+              3,
+              4
+            ],
+            [
+              "fluxo",
+              9,
+              5
+            ],
+            [
+              "mba-academic",
+              null,
+              1
+            ]
+          ]
+        },
+        "automatic_full_scan": {
+          "queries": [
+            "Quais estados e evid\u00eancias s\u00e3o necess\u00e1rios para que uma conversa passe do MBA para um atendente sem que ambos respondam ao mesmo tempo?"
+          ],
+          "found_in_pool": [
+            1,
+            2,
+            3
+          ],
+          "found": [],
+          "elapsed_ms": 6428,
+          "candidates": [
+            [
+              "webchat-sandbox",
+              null,
+              1
+            ],
+            [
+              "mba-academic",
+              null,
+              1
+            ],
+            [
+              "contact",
+              16,
+              66
+            ],
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              13,
+              36
+            ],
+            [
+              "fluxo",
+              12,
+              29
+            ]
+          ]
+        },
+        "manual_concepts_shortlist": {
+          "queries": [
+            "Qual status indica que um atendente iniciou o atendimento?",
+            "O que muda no tipo da sess\u00e3o de mensageria quando \u00e9 aberto um atendimento digital?",
+            "Qual evento do WhatsApp representa transfer\u00eancia de controle em vez de mensagem recebida?"
+          ],
+          "found_in_pool": [
+            1,
+            2,
+            3
+          ],
+          "found": [
+            1,
+            3
+          ],
+          "elapsed_ms": 1922,
+          "candidates": [
+            [
+              "contact",
+              9,
+              5
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ],
+            [
+              "contact",
+              15,
+              43
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "fluxo",
+              10,
+              13
+            ]
+          ]
+        },
+        "manual_concepts_full_scan": {
+          "queries": [
+            "Qual status indica que um atendente iniciou o atendimento?",
+            "O que muda no tipo da sess\u00e3o de mensageria quando \u00e9 aberto um atendimento digital?",
+            "Qual evento do WhatsApp representa transfer\u00eancia de controle em vez de mensagem recebida?"
+          ],
+          "found_in_pool": [
+            1,
+            2,
+            3
+          ],
+          "found": [
+            1,
+            3
+          ],
+          "elapsed_ms": 15921,
+          "candidates": [
+            [
+              "contact",
+              9,
+              5
+            ],
+            [
+              "fluxo",
+              12,
+              30
+            ],
+            [
+              "fluxo",
+              10,
+              15
+            ],
+            [
+              "contact",
+              16,
+              63
+            ],
+            [
+              "contact",
+              15,
+              59
+            ],
+            [
+              "fluxo",
+              10,
+              13
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

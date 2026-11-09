@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="13" time="47.715" timestamp="2026-11-03T13:12:51.699277-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.motor-comparison.test_comparison" name="test_human_gate_budget_and_trace[langgraph]" time="3.734" /><testcase classname="validation.motor-comparison.test_comparison" name="test_human_gate_budget_and_trace[agentscope]" time="5.250"><failure message="AssertionError: {'run': 'agentscope-0b7b8a76617e', 'engine': 'agentscope', 'phase': 'act', 'fault': {}, ...}&#10;assert 1 == 0">host = &lt;test_comparison.Host object at 0x000001A9AB3684D0&gt;
+engine = 'agentscope'
+
+    @pytest.mark.parametrize('engine',['langgraph','agentscope'])
+    def test_human_gate_budget_and_trace(host,engine):
+        c=host.create(engine)
+        result=host.worker(c);assert result['returncode']==0,result
+        waiting=host.call(c,'/status');assert waiting['state']=='waiting_approval'
+        assert waiting['actual']==2 and waiting['held']==2 and waiting['deliveries']==0
+        for finding in waiting['findings'].values():
+            assert finding['sources'] and all(s['file_path']=='synthetic-A.md' and s['version']==1 for s in finding['sources'])
+        with pytest.raises(Rejected) as denied:host.call(c,'/effect',{'approved':True})
+        assert denied.value.code==403
+        with pytest.raises(Rejected):host.call(c,'/approve',{'run':c['run'],'plan':waiting['plan']})
+        with pytest.raises(Rejected):host.board_call('/approve',{'run':c['run'],'plan':'stale-plan'})
+        host.approve(c)
+&gt;       result=host.worker(c,'act');assert result['returncode']==0,result
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: {'run': 'agentscope-0b7b8a76617e', 'engine': 'agentscope', 'phase': 'act', 'fault': {}, ...}
+E       assert 1 == 0
+
+validation\motor-comparison\test_comparison.py:94: AssertionError</failure></testcase><testcase classname="validation.motor-comparison.test_comparison" name="test_abrupt_worker_exit_and_recovery[langgraph]" time="2.809" /><testcase classname="validation.motor-comparison.test_comparison" name="test_abrupt_worker_exit_and_recovery[agentscope]" time="7.764"><failure message="assert 1 == 0">host = &lt;test_comparison.Host object at 0x000001A9AB3684D0&gt;
+engine = 'agentscope'
+
+    @pytest.mark.parametrize('engine',['langgraph','agentscope'])
+    def test_abrupt_worker_exit_and_recovery(host,engine):
+        c=host.create(engine)
+        crashed=host.worker(c,crash_after_sales=True);assert crashed['returncode']==71,crashed
+        partial=host.call(c,'/status');assert set(partial['findings'])=={'sales'} and partial['actual']==1
+        resumed=host.worker(c);assert resumed['returncode']==0,resumed
+&gt;       host.approve(c);assert host.worker(c,'act')['returncode']==0
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       assert 1 == 0
+
+validation\motor-comparison\test_comparison.py:109: AssertionError</failure></testcase><testcase classname="validation.motor-comparison.test_comparison" name="test_cancel_while_retrieval_inflight[langgraph]" time="3.143" /><testcase classname="validation.motor-comparison.test_comparison" name="test_cancel_while_retrieval_inflight[agentscope]" time="4.588" /><testcase classname="validation.motor-comparison.test_comparison" name="test_effect_ack_loss_then_control_server_restart[langgraph]" time="4.121" /><testcase classname="validation.motor-comparison.test_comparison" name="test_effect_ack_loss_then_control_server_restart[agentscope]" time="5.000"><failure message="AssertionError: assert ('approved' == 'effect_pending'&#10;  &#10;  - effect_pending&#10;  + approved)">host = &lt;test_comparison.Host object at 0x000001A9AB3684D0&gt;
+engine = 'agentscope'
+
+    @pytest.mark.parametrize('engine',['langgraph','agentscope'])
+    def test_effect_ack_loss_then_control_server_restart(host,engine):
+        c=host.create(engine,fault='after_effect')
+        assert host.worker(c)['returncode']==0
+        host.approve(c)
+        failed=host.worker(c,'act');assert failed['returncode']!=0
+&gt;       uncertain=host.call(c,'/status');assert uncertain['state']=='effect_pending' and uncertain['deliveries']==1
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert ('approved' == 'effect_pending'
+E         
+E         - effect_pending
+E         + approved)
+
+validation\motor-comparison\test_comparison.py:151: AssertionError</failure></testcase><testcase classname="validation.motor-comparison.test_comparison" name="test_identity_scope_revocation_and_overrun[langgraph]" time="0.151" /><testcase classname="validation.motor-comparison.test_comparison" name="test_identity_scope_revocation_and_overrun[agentscope]" time="0.176" /><testcase classname="validation.motor-comparison.test_comparison" name="test_concurrent_aggregate_admission" time="0.071" /><testcase classname="validation.motor-comparison.test_comparison" name="test_real_openagents_redelivery_inbox_dedup[langgraph]" time="3.673" /><testcase classname="validation.motor-comparison.test_comparison" name="test_real_openagents_redelivery_inbox_dedup[agentscope]" time="5.142"><failure message="assert 1 == 0">host = &lt;test_comparison.Host object at 0x000001A9AB3684D0&gt;
+engine = 'agentscope'
+client = &lt;starlette.testclient.TestClient object at 0x000001A9AB41BA40&gt;
+workspace = {'id': 'cfce780b-6a8c-432b-8e0d-885cf7f4a11e', 'slug': '3c590cee', 'name': 'Test Workspace', 'token': 'plRDymIiFH8nF_UC0IcNueW69rU6vAUoVrxVplwJUd0', ...}
+
+    @pytest.mark.parametrize('engine',['langgraph','agentscope'])
+    def test_real_openagents_redelivery_inbox_dedup(host,engine,client,workspace):
+&gt;       c=host.create(engine);assert host.worker(c)['returncode']==0;host.approve(c);assert host.worker(c,'act')['returncode']==0
+                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       assert 1 == 0
+
+validation\motor-comparison\test_comparison.py:189: AssertionError</failure></testcase></testsuite></testsuites>

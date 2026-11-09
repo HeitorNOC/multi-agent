@@ -1,0 +1,93 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "note": "Apresenta um resumo próprio da documentação da 360dialog sobre o MBA e sua relação com o Tatodesk."
+    },
+    {
+      "number": 2,
+      "note": "Identifica a fonte consultada em 06/11/2026 e alerta que cobrança e comportamentos podem mudar."
+    },
+    {
+      "number": 3,
+      "note": "Descreve o MBA como respondente principal no WhatsApp, com conhecimento empresarial, conectores e transferência."
+    },
+    {
+      "number": 4,
+      "note": "Resume as seis etapas de elegibilidade, ativação, configuração, teste, allowlist e liberação geral."
+    },
+    {
+      "number": 5,
+      "note": "Apresenta integração por API, fluxo guiado e gestão pelo Hub da 360dialog."
+    },
+    {
+      "number": 6,
+      "note": "Lista WABA elegível na Cloud API, acesso ao Business Manager, condições de pagamento e chave do canal."
+    },
+    {
+      "number": 7,
+      "note": "Descreve a API da 360dialog e informa que rotas e campos completos estão em outra referência."
+    },
+    {
+      "number": 8,
+      "note": "Registra erros intermitentes e limitações em cobrança, transferência e arquivos."
+    },
+    {
+      "number": 9,
+      "note": "Relaciona telas e operações GraphQL do Tatodesk à jornada, com associações explicitamente inferidas."
+    }
+  ],
+  "classification": "referência funcional",
+  "reason": "O documento resume capacidades e requisitos de terceiros e relaciona a jornada a telas existentes; não estabelece um padrão de implementação nem comprova o funcionamento atual do backend.",
+  "findings": [
+    {
+      "pages": [
+        3,
+        4
+      ],
+      "text": "A referência descreve respostas baseadas em conhecimento, ações por conectores e transferência, além de configuração de skills, políticas de transferência e acompanhamento, testes e rollout gradual."
+    },
+    {
+      "pages": [
+        5,
+        6,
+        7
+      ],
+      "text": "A integração programática usa a API WhatsApp Business da 360dialog e a chave D360-API-KEY do canal; exige WABA elegível na Cloud API e acesso ao Business Manager para aceite dos termos."
+    },
+    {
+      "pages": [
+        4,
+        6
+      ],
+      "text": "O resumo condiciona a liberação EVERYONE a pagamento junto à Meta e informa que ALLOWLISTED_ONLY dispensa pagamento; modalidade e data de suporte a cartão devem ser confirmadas nas fontes oficiais atuais."
+    },
+    {
+      "pages": [
+        2,
+        8
+      ],
+      "text": "O resumo relata erros intermitentes 4XX ou 500 e áreas incompletas de cobrança, transferência e arquivos; essas limitações e suas soluções alternativas requerem confirmação atual."
+    },
+    {
+      "pages": [
+        9
+      ],
+      "text": "A página relata telas do tatodesk-ui no pacote automation-ui e operações GraphQL para onboarding, conhecimento, configurações e allowlist; elegibilidade e associação do campo rollout estão marcadas como inferidas."
+    },
+    {
+      "pages": [
+        5,
+        7,
+        9
+      ],
+      "text": "A referência distingue a API HTTP da 360dialog das operações GraphQL do front-end Tatodesk e não descreve como o backend conecta as duas interfaces."
+    }
+  ],
+  "gaps": [
+    "Confirmar nas fontes oficiais atuais elegibilidade, disponibilidade, cobrança, pagamento, limitações e comportamento de transferência e arquivos.",
+    "Consultar a referência específica da API para rotas, campos, respostas, eventos e mecanismos de controle; estes detalhes não constam no resumo.",
+    "Verificar no código e em execução as associações inferidas e as capacidades de front-end relatadas, incluindo sua implementação no backend.",
+    "O documento não comprova testes executados nem trabalho de implementação concluído para esta atribuição."
+  ]
+}

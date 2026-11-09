@@ -1,0 +1,51 @@
+{
+  "terra": {
+    "mutates_native_records": false,
+    "passed": 3,
+    "total": 7,
+    "fact_attribute_inconsistencies": [
+      {
+        "check": "january_after_march_update",
+        "edge": "0bccc2ae-11b9-4ca9-9482-88c7b599c747",
+        "fact": "A ACME concedia dois dias de trabalho remoto por semana pela política PoliticaRemotaACME até a substituição por três dias em 1 de março de 2026.",
+        "attributes": {
+          "dias_remotos": 3
+        }
+      },
+      {
+        "check": "february_before_retroactive_correction",
+        "edge": "0bccc2ae-11b9-4ca9-9482-88c7b599c747",
+        "fact": "A ACME concedia dois dias de trabalho remoto por semana pela política PoliticaRemotaACME até a substituição por três dias em 1 de março de 2026.",
+        "attributes": {
+          "dias_remotos": 3
+        }
+      },
+      {
+        "check": "january_after_backdated_correction",
+        "edge": "0bccc2ae-11b9-4ca9-9482-88c7b599c747",
+        "fact": "A ACME concedia dois dias de trabalho remoto por semana pela política PoliticaRemotaACME até a substituição por três dias em 1 de março de 2026.",
+        "attributes": {
+          "dias_remotos": 3
+        }
+      }
+    ],
+    "knowledge_time_probe": {
+      "expected_days": 2,
+      "native_observed": [],
+      "records_matching_valid_time_and_created_cutoff_even_without_expired_filter": [],
+      "interpretation": "Flat current edge dates do not by themselves prove reconstruction of prior knowledge. Removing the expired_at predicate is insufficient if the historical invalid_at boundary was overwritten."
+    }
+  },
+  "sol": {
+    "mutates_native_records": false,
+    "passed": 6,
+    "total": 7,
+    "fact_attribute_inconsistencies": [],
+    "knowledge_time_probe": {
+      "expected_days": 2,
+      "native_observed": [],
+      "records_matching_valid_time_and_created_cutoff_even_without_expired_filter": [],
+      "interpretation": "Flat current edge dates do not by themselves prove reconstruction of prior knowledge. Removing the expired_at predicate is insufficient if the historical invalid_at boundary was overwritten."
+    }
+  }
+}

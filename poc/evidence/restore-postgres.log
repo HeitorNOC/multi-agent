@@ -1,0 +1,17 @@
+2026-11-03 02:04:53.062 -03 [7564] LOG:  starting PostgreSQL 18.1 on x86_64-windows, compiled by msvc-19.44.35219, 64-bit
+2026-11-03 02:04:53.063 -03 [7564] LOG:  listening on IPv4 address "127.0.0.1", port 54349
+2026-11-03 02:04:53.130 -03 [24828] LOG:  database system was interrupted; last known up at 2026-11-03 01:36:55 -03
+2026-11-03 02:04:54.665 -03 [24828] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-11-03 02:04:54.672 -03 [24828] LOG:  redo starts at 0/17F1540
+2026-11-03 02:04:55.533 -03 [24828] LOG:  invalid record length at 0/2EE7C08: expected at least 24, got 0
+2026-11-03 02:04:55.533 -03 [24828] LOG:  redo done at 0/2EE7BE0 system usage: CPU: user: 0.17 s, system: 0.67 s, elapsed: 0.86 s
+2026-11-03 02:04:55.588 -03 [31280] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-11-03 02:04:56.795 -03 [31280] LOG:  checkpoint complete: wrote 4105 buffers (25.1%), wrote 2 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.227 s, sync=0.976 s, total=1.209 s; sync files=2504, longest=0.006 s, average=0.001 s; distance=23513 kB, estimate=23513 kB; lsn=0/2EE7C08, redo lsn=0/2EE7C08
+2026-11-03 02:04:56.937 -03 [7564] LOG:  database system is ready to accept connections
+2026-11-03 02:05:22.974 -03 [7564] LOG:  received fast shutdown request
+2026-11-03 02:05:22.975 -03 [7564] LOG:  aborting any active transactions
+2026-11-03 02:05:22.980 -03 [7564] LOG:  background worker "logical replication launcher" (PID 30660) exited with exit code 1
+2026-11-03 02:05:22.980 -03 [31280] LOG:  shutting down
+2026-11-03 02:05:22.981 -03 [31280] LOG:  checkpoint starting: shutdown immediate
+2026-11-03 02:05:23.008 -03 [31280] LOG:  checkpoint complete: wrote 227 buffers (1.4%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 1 recycled; write=0.005 s, sync=0.013 s, total=0.028 s; sync files=17, longest=0.003 s, average=0.001 s; distance=1660 kB, estimate=21328 kB; lsn=0/3086D20, redo lsn=0/3086D20
+2026-11-03 02:05:23.027 -03 [7564] LOG:  database system is shut down

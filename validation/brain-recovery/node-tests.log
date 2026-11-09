@@ -1,0 +1,24 @@
+✔ canonical historical read succeeds while another connection holds an uncommitted editorial write (43.8556ms)
+✔ concurrent canonical readers return the committed snapshot without transient write-lock errors (612.4118ms)
+✔ TypeScript accepts a real Python signature with Unicode and integer-valued floats (2.6129ms)
+✔ tampered payload is rejected (0.4402ms)
+✔ tampered canonical bytes or operations cannot be substituted (0.6739ms)
+✔ nonce, installation and expiry are enforced (0.7762ms)
+✔ editing does not publish and editor cannot self-approve (28.6017ms)
+✔ review binds exact bytes and rejects changed content (23.6522ms)
+✔ publication requires approval and approved file must remain unchanged until preparation (37.8159ms)
+✔ approved publication receipt is signed and snapshot is immutable on replay (39.5876ms)
+✔ published source/version cannot be silently overwritten (51.6889ms)
+✔ frontmatter cannot change registered classification or authorize publication (7.9798ms)
+✔ restricted YAML profile rejects duplicates and vault traversal (6.8649ms)
+✔ public editor cannot import a financial note (15.2887ms)
+✔ invalid calendar dates are rejected before review or publication (14.64ms)
+✔ immutable canonical snapshots select valid time and prior knowledge without rewriting graph facts (90.3392ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 793.1078

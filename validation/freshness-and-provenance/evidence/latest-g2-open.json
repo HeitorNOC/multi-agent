@@ -1,0 +1,98 @@
+{
+  "opened": true,
+  "inventory": {
+    "tables": {
+      "decisions": "4383bf8f5abe8968ad0879d276fc7d97c4b5cd4949c5b1690e82fce510b64549",
+      "decision_receipts": "4383bf8f5abe8968ad0879d276fc7d97c4b5cd4949c5b1690e82fce510b64549",
+      "decision_admissions": "c06ebdcf27101a4368e09da6931857c86db52d36d31a1bbb7cdfe346963d377a",
+      "request_context": "ccc1ddf32c41ae081cb1de86f11fd278f12df4059b0ee3bbed26792b31dad0bc",
+      "request_closures": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "request_replacements": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "projections": "d8c3a0e242743897b553d72d8cb90bd95b57285943e31474160ffa62878d9efb",
+      "sources": "282b309d1aff4a2d2bbb2a33d37de23082c4314266ecd0e440b6adf447b08167",
+      "principals": "694a72194e3971fdcc753454a37cc7c778f99b52772543ebcaaa815659f8446e",
+      "freshness_receipts": "8a5edbc747b04fc6b7495af2fe14cfbd3db88149688960126f2f8c10f508e128"
+    },
+    "knowledge": {
+      "lightrag_doc_chunks": {
+        "rows": 2,
+        "sha256": "a2f341ff886933ccb0893b46cb8b1438cae5fc203cbe6b722c4d2badcf1dc006"
+      },
+      "lightrag_doc_full": {
+        "rows": 2,
+        "sha256": "2151cd9644b950bfd5423da5b2a4a4211ce0f6525c3bfe2ae7bb8697023d2171"
+      },
+      "lightrag_doc_status": {
+        "rows": 2,
+        "sha256": "fbbe2c828adcadbc80b74a4b3b08998edf6e91f20e2440e7e912456bc599957c"
+      },
+      "lightrag_entity_chunks": {
+        "rows": 6,
+        "sha256": "646c500aa0c1eab48f858ef300622171e7c7d56ffb1c9971c8109f1605046ffe"
+      },
+      "lightrag_full_entities": {
+        "rows": 2,
+        "sha256": "7ec55728ad0269da63cc6419c39a9046c1a41fd619dc24acb8d70d9f434914cf"
+      },
+      "lightrag_full_relations": {
+        "rows": 2,
+        "sha256": "e749a1ac1bd6300c9a59ec014673def424da113d34403e97688863a258720a40"
+      },
+      "lightrag_llm_cache": {
+        "rows": 10,
+        "sha256": "5740947bc637d8854de7f0ba9b35c7d357935423a859cd86cd3bbb64b373971e"
+      },
+      "lightrag_relation_chunks": {
+        "rows": 2,
+        "sha256": "e9af990e1fcff12fdfd02d6cb0cc43c0138f16cbeb4a93a6f51fd6ec5a11c0cf"
+      },
+      "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+        "rows": 2,
+        "sha256": "99d3e8e569d7de0abd27425988bebf896bfeddc0e4ec801d5390aa5a78bc6068"
+      },
+      "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+        "rows": 6,
+        "sha256": "603180d65796b9c9aa52dfdd0379227fd7bee02669400abfa4fd202673c0431b"
+      },
+      "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+        "rows": 2,
+        "sha256": "109dba48bd30b0d463163f3b132529768920981dc88c0fcdf3c27331d490f24b"
+      }
+    },
+    "grants": [
+      [
+        "35dd87d0-cd22-414c-93c4-4a832720339c",
+        "aquisicao"
+      ],
+      [
+        "35dd87d0-cd22-414c-93c4-4a832720339c",
+        "politica-remoto"
+      ],
+      [
+        "3ef518e6-f097-45d5-bde0-530091e027fb",
+        "aquisicao"
+      ],
+      [
+        "3ef518e6-f097-45d5-bde0-530091e027fb",
+        "politica-remoto"
+      ],
+      [
+        "45a696fa-a2c4-435b-b4df-c30777a4fcb6",
+        "aquisicao"
+      ],
+      [
+        "45a696fa-a2c4-435b-b4df-c30777a4fcb6",
+        "politica-remoto"
+      ],
+      [
+        "46db9105-3d8a-4b39-9b32-ddbbb11bfd44",
+        "politica-remoto"
+      ]
+    ],
+    "editorial": "f4ba790a7a36225329c6e96534d5ad6d53271f7c4bb462f2bbded19e296913e3",
+    "neo4j": "655a5db7e4cf63d1747867db30613d46874c25b77c244610e81a2828029a35e9",
+    "neo4j_nodes": 6,
+    "neo4j_edges": 2
+  },
+  "journal_events": 0
+}

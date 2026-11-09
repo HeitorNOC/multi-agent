@@ -1,0 +1,734 @@
+{
+  "manifest_sha256": "97d6e22428920294595a661b46f7d842ef9e006b2c5b9269636ab8a616378c81",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "reranker": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "173760f",
+    "files": {
+      "model_quint8_avx2.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "tokenizer.json": "3a56def25aa40facc030ea8b0b87f3688e4b3c39eb8b45d5702b3a1300fe2a20"
+    },
+    "onnxruntime": "1.31.1",
+    "startup_ms": 976.13
+  },
+  "cases": [
+    {
+      "id": "handoff",
+      "queries": [
+        "Como verificar se um humano já assumiu o atendimento no WhatsApp antes de enviar uma resposta?",
+        "Qual sinal ou evento registrado indica a transferência do controle do atendimento para um humano no WhatsApp?",
+        "Como distinguir o sinal de transferência de controle do simples recebimento de uma mensagem no WhatsApp?"
+      ],
+      "error": null,
+      "seconds": 3.556,
+      "expected": 3,
+      "baseline_found": [
+        3
+      ],
+      "in_envelope": [
+        3
+      ],
+      "verified_found": [
+        3
+      ],
+      "candidates": [
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          10,
+          13
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "fluxo",
+          10,
+          22
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          10,
+          15
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "fluxo",
+          9,
+          6
+        ],
+        [
+          "fluxo",
+          9,
+          8
+        ],
+        [
+          "fluxo",
+          9,
+          7
+        ],
+        [
+          "fluxo",
+          10,
+          21
+        ],
+        [
+          "fluxo",
+          9,
+          1
+        ],
+        [
+          "contact",
+          17,
+          74
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          10,
+          11
+        ],
+        [
+          "contact",
+          17,
+          73
+        ],
+        [
+          "fluxo",
+          9,
+          5
+        ],
+        [
+          "contact",
+          15,
+          54
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          1
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "fluxo",
+          10,
+          19
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "mba-academic",
+          null,
+          1
+        ],
+        [
+          "training-markdown",
+          null,
+          3
+        ]
+      ],
+      "slots": [
+        [],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ],
+          [
+            "fluxo",
+            10,
+            13
+          ]
+        ]
+      ],
+      "accepted_distractors": []
+    },
+    {
+      "id": "limit",
+      "queries": [
+        "Quantas chamadas por segundo o Contact Center aceita na operação startAttendance para a mesma conta?"
+      ],
+      "error": null,
+      "seconds": 5.926,
+      "expected": 0,
+      "baseline_found": [],
+      "in_envelope": [],
+      "verified_found": [],
+      "candidates": [
+        [
+          "contact",
+          16,
+          63
+        ],
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "contact",
+          9,
+          11
+        ],
+        [
+          "contact",
+          16,
+          65
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          16,
+          62
+        ],
+        [
+          "contact",
+          11,
+          21
+        ],
+        [
+          "contact",
+          11,
+          18
+        ],
+        [
+          "contact",
+          11,
+          19
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          17,
+          71
+        ],
+        [
+          "contact",
+          15,
+          45
+        ],
+        [
+          "contact",
+          9,
+          12
+        ],
+        [
+          "fluxo",
+          10,
+          17
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "fluxo",
+          9,
+          6
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "contact",
+          13,
+          39
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          9,
+          9
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          13,
+          33
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ]
+      ],
+      "slots": [
+        []
+      ],
+      "accepted_distractors": []
+    },
+    {
+      "id": "handoff-original",
+      "queries": [
+        "Qual estado operacional do MBA é necessário para transferir uma conversa a um atendente?",
+        "Qual estado da conversa ou do atendimento indica que o atendente assumiu a conversa, e que evento registrado comprova a transferência?",
+        "Qual mecanismo impede que o MBA e o atendente respondam simultaneamente durante e após a transferência?"
+      ],
+      "error": null,
+      "seconds": 4.24,
+      "expected": 3,
+      "baseline_found": [],
+      "in_envelope": [
+        1
+      ],
+      "verified_found": [
+        1
+      ],
+      "candidates": [
+        [
+          "mba-academic",
+          null,
+          1
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "contact",
+          16,
+          66
+        ],
+        [
+          "mba",
+          3,
+          4
+        ],
+        [
+          "contact",
+          15,
+          42
+        ],
+        [
+          "training-markdown",
+          null,
+          2
+        ],
+        [
+          "contact",
+          15,
+          52
+        ],
+        [
+          "contact",
+          13,
+          39
+        ],
+        [
+          "contact",
+          15,
+          48
+        ],
+        [
+          "contact",
+          9,
+          3
+        ],
+        [
+          "contact",
+          9,
+          5
+        ],
+        [
+          "contact",
+          9,
+          13
+        ],
+        [
+          "contact",
+          9,
+          4
+        ],
+        [
+          "contact",
+          9,
+          6
+        ],
+        [
+          "contact",
+          9,
+          7
+        ],
+        [
+          "contact",
+          15,
+          56
+        ],
+        [
+          "mba-academic",
+          null,
+          1
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "contact",
+          13,
+          35
+        ],
+        [
+          "mba",
+          4,
+          6
+        ],
+        [
+          "contact",
+          9,
+          8
+        ],
+        [
+          "mba",
+          8,
+          14
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "training-markdown",
+          null,
+          3
+        ]
+      ],
+      "slots": [
+        [],
+        [
+          [
+            "contact",
+            9,
+            5
+          ]
+        ],
+        []
+      ],
+      "accepted_distractors": []
+    },
+    {
+      "id": "csv-control",
+      "queries": [
+        "No laboratório azul, o que deve ser conferido na retomada de fila?",
+        "No laboratório azul, quem aprova a retomada de fila?"
+      ],
+      "error": null,
+      "seconds": 3.697,
+      "expected": 2,
+      "baseline_found": [
+        1,
+        2
+      ],
+      "in_envelope": [
+        1,
+        2
+      ],
+      "verified_found": [
+        1,
+        2
+      ],
+      "candidates": [
+        [
+          "rehearsal-csv",
+          null,
+          2
+        ],
+        [
+          "rehearsal-note",
+          null,
+          1
+        ],
+        [
+          "contact",
+          15,
+          50
+        ],
+        [
+          "contact",
+          9,
+          8
+        ],
+        [
+          "contact",
+          15,
+          56
+        ],
+        [
+          "contact",
+          9,
+          7
+        ],
+        [
+          "contact",
+          15,
+          57
+        ],
+        [
+          "training-calendar",
+          null,
+          1
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "contact",
+          15,
+          53
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          15,
+          45
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          9,
+          9
+        ],
+        [
+          "contact",
+          15,
+          42
+        ],
+        [
+          "contact",
+          15,
+          48
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "contact",
+          13,
+          29
+        ],
+        [
+          "contact",
+          15,
+          44
+        ],
+        [
+          "contact",
+          11,
+          26
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ]
+        ],
+        []
+      ],
+      "accepted_distractors": []
+    }
+  ],
+  "model_calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0a23fbd30b42ca01c7c8363db415d846227453fc961cb77e0540917532a9a885",
+      "reservation_id": "handoff",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.5466424000042025,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13499,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "ce6ae882ab03106603b5e8d3df469e2077d70eb77eb9fdee4dae65b0b5aae19c",
+      "reservation_id": "limit",
+      "instance": "scope-verifier-eval",
+      "seconds": 5.918058800016297,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13419,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "7b9cb1c1a2fb27c76dff3a34006938ef6573eb27cab8ef5ddfa609944fd6a34c",
+      "reservation_id": "handoff-original",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.232083200011402,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12525,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 26,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "8d4f2d9fdde1341fd83c439095cb04d69afe3d8ce888ed835cd86f0987c40ab2",
+      "reservation_id": "csv-control",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.6882220999978017,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13117,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 25,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

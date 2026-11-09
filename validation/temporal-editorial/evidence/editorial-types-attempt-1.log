@@ -1,0 +1,2 @@
+validation/temporal-editorial/editorial.ts(91,67): error TS1470: The 'import.meta' meta-property is not allowed in files which will build into CommonJS output.
+validation/temporal-editorial/editorial.ts(92,19): error TS1309: The current file is a CommonJS module and cannot use 'await' at the top level.

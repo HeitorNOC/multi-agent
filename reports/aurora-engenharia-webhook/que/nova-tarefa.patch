@@ -1,0 +1,41 @@
+--- a/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts
++++ b/packages/modules/sales/src/application/commands/process-terminal-payment-webhook/process-terminal-payment-webhook.spec.ts
+@@ -36,3 +36,38 @@
+   ).resolves.toBe(confirmed);
+   expect(scope.repository.processProviderEvent).toHaveBeenCalledWith("charge", "SANDBOX", event);
+ });
++
++it("rejects a provider event for a different requested charge", async () => {
++  const runSystem = vi.fn();
++  const verifyWebhook = vi.fn().mockResolvedValue({
++    chargeId: "different-charge",
++    event: {
++      eventId: "event-002",
++      externalId: "external-charge",
++      feeAmount: "1.0000",
++      occurredAt: "2026-08-20T12:00:00.000Z",
++      status: "CONFIRMED" as const,
++    },
++  });
++  const service = new ProcessTerminalPaymentWebhook(
++    { run: vi.fn(), runSystem },
++    {
++      resolve: () => ({
++        refund: vi.fn(),
++        start: vi.fn(),
++        verifyWebhook,
++      }),
++    },
++  );
++
++  await expect(
++    service.execute({
++      chargeId: "requested-charge",
++      organizationId: "organization",
++      provider: "SANDBOX",
++      rawBody: "{}",
++      signature: "signature",
++    }),
++  ).rejects.toMatchObject({ code: "PAYMENT_CHARGE_NOT_FOUND" });
++  expect(runSystem).not.toHaveBeenCalled();
++});

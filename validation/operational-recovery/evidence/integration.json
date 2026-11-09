@@ -1,0 +1,195 @@
+{
+  "installation": "3bfb23fd8c",
+  "images": {
+    "postgres": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+    "neo4j": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+    "keycloak": "quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7"
+  },
+  "scenarios": [
+    {
+      "name": "real_native_public_and_private_advice_before_disaster"
+    },
+    {
+      "name": "unknown_closed_without_reexecution_and_separately_authorized_replacement"
+    },
+    {
+      "name": "corrupt_bundle_rejected_before_live_containers_touched"
+    },
+    {
+      "name": "cold_restore_new_volumes_and_canonical_keys_stays_fenced_across_restart"
+    },
+    {
+      "name": "joint_inventory_matches_old_records_exact_and_postbackup_revocation_survives"
+    },
+    {
+      "name": "restored_native_index_answers_new_question",
+      "new_model_calls": 2
+    },
+    {
+      "name": "restored_editorial_can_review_and_publish_new_version_without_mutating_old_advice"
+    }
+  ],
+  "worker_calls": [],
+  "versions": {
+    "postgres": "PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "pgvector": "0.8.7",
+    "neo4j": "versions\n[\"5.26.32\"]",
+    "keycloak": "26.8.1"
+  },
+  "joint_bundle": {
+    "generation": "joint-g1",
+    "files": {
+      "editorial.sqlite": {
+        "bytes": 28672,
+        "sha256": "24b4e62f78bba4bebeaf28b981efaf235d193a51958ad09de7bf5a0ebb55c10f"
+      },
+      "identity.dump": {
+        "bytes": 259795,
+        "sha256": "2d8be6d212069e23b1f9eb0df0870c7330222df4f085bcca402a75be6784eee6"
+      },
+      "keys.enc": {
+        "bytes": 193,
+        "sha256": "9b09e5c11fd5f4af2294a014fbd4811ed7065f23fced71a47eae3dd0ac301598"
+      },
+      "knowledge.dump": {
+        "bytes": 61649,
+        "sha256": "3a831d37e7ada1f51e912800e60d40a512eeac14e360dc6b8805546dbf3d24d4"
+      },
+      "neo4j.dump": {
+        "bytes": 20833,
+        "sha256": "95ee35f5970df620d85534ed398806afb4f0c2450d10fd98f2596c62da40dc7d"
+      },
+      "pilot.dump": {
+        "bytes": 23500,
+        "sha256": "79bf9bf8d7aedcc1b552784a2bc1c322eb38019cd6fd6d54f71b4a68e0a623e1"
+      },
+      "roles.sql": {
+        "bytes": 2074,
+        "sha256": "0dc92f3f78f742083dc50b77de62ac6785a681fa276531055793a1a39916b88f"
+      },
+      "application-state/fault-arm.json": {
+        "bytes": 2,
+        "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      "application-state/fault-reached.json": {
+        "bytes": 27,
+        "sha256": "259e86347c092686c3078a63e3faad1c01b72fb250fac318c572f8a01e5430c1"
+      },
+      "vault/aquisicao.md": {
+        "bytes": 206,
+        "sha256": "9c69fe96c7a6e7de55441625ef6e217847c603aa3002731ce2c4ae5e4fd929d1"
+      },
+      "vault/politica-remoto.md": {
+        "bytes": 301,
+        "sha256": "b690ecca21ee8a6e80ecc077594e4988fcc2caa012c7c88e5b22d90055db642c"
+      }
+    },
+    "inventory": {
+      "tables": {
+        "decisions": "e45bf90013fca244cf2e0cb8f67ac24d953be8218a4fbde97c27d45b82fffbea",
+        "decision_receipts": "e45bf90013fca244cf2e0cb8f67ac24d953be8218a4fbde97c27d45b82fffbea",
+        "decision_admissions": "8249998f06ea2768f9b5e560bed524cc7ca279416442a3532fdc319c56521830",
+        "request_context": "23993d2e86de176f76292915470b27937d3565cc9055746e0850447994517414",
+        "request_closures": "ad6712ad515b2a1cfcdb5d34a7c7faf523cd9627a5d70f2503d0e5e806067c89",
+        "request_replacements": "d71d2555726b5c81a04594820ee66da7b39b8e2faaf87da721fe2f1528b66ffb",
+        "projections": "0ebea623202843191feb3a7f2c5b584af2aa427fd4eedcb8c34d6fd4773802b2",
+        "sources": "282b309d1aff4a2d2bbb2a33d37de23082c4314266ecd0e440b6adf447b08167",
+        "principals": "c841564a0be6cae4e490268056e6e4d4e2d8abd216210a12c620442fc50332b4"
+      },
+      "knowledge": {
+        "lightrag_doc_chunks": {
+          "rows": 2,
+          "sha256": "b0085e1c45131256bf8cd14e0d22aaf5db57578864daf49de4d97b6f870f97d2"
+        },
+        "lightrag_doc_full": {
+          "rows": 2,
+          "sha256": "e68476d81e7c96833033b17dc29bd7683abb152f5effdc74d5c977b396987fa9"
+        },
+        "lightrag_doc_status": {
+          "rows": 2,
+          "sha256": "188ce58d89494837f4a9920ade9ba2b4839817424b46d6589ae09c26df944fa5"
+        },
+        "lightrag_entity_chunks": {
+          "rows": 6,
+          "sha256": "c033c964d32c575b166fa5e0535d03588c7ec29984b641cbf83b942c8d560312"
+        },
+        "lightrag_full_entities": {
+          "rows": 2,
+          "sha256": "017d7379c281e0138f2bcd3c01dd8c49c4147aff8d44fba026acd416581ba493"
+        },
+        "lightrag_full_relations": {
+          "rows": 2,
+          "sha256": "d11bacdd53a5b3ef7748880d9e12453d4f116a6bf3bff3e37b85f580ecf77f2b"
+        },
+        "lightrag_llm_cache": {
+          "rows": 8,
+          "sha256": "1e03e592776ebaccf47aae1ebad7a2428d4bc0cdb8313060e1c794ec1a723ee6"
+        },
+        "lightrag_relation_chunks": {
+          "rows": 3,
+          "sha256": "586ffad1cf85797b104a66c184cd85bb8fc3d82b09f3caf446dd6a62747becd7"
+        },
+        "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+          "rows": 2,
+          "sha256": "07805489970049306cf1dc2b445f88c35bf096a0dc2f8c7f4459a7b6f29e1e5f"
+        },
+        "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+          "rows": 6,
+          "sha256": "bd00196c9f4a9a3a551ba35c52f4223e3eea31bff16867699e7e5f15bd803c63"
+        },
+        "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+          "rows": 3,
+          "sha256": "d5f225a8d9994255d1b82e8e10af1af0d650f4e5242f83c0fa4239cf319aa639"
+        }
+      },
+      "grants": [
+        [
+          "48e1bf70-e5cc-4175-a597-4ada3c7e3f4b",
+          "aquisicao"
+        ],
+        [
+          "48e1bf70-e5cc-4175-a597-4ada3c7e3f4b",
+          "politica-remoto"
+        ],
+        [
+          "597b4a6f-1494-45a8-9b29-c69720220705",
+          "aquisicao"
+        ],
+        [
+          "597b4a6f-1494-45a8-9b29-c69720220705",
+          "politica-remoto"
+        ],
+        [
+          "8fb3dfe8-1d28-46cf-bba2-b371d3ade05f",
+          "politica-remoto"
+        ],
+        [
+          "a4074c93-cd1b-4da0-b2e2-f25a328a479d",
+          "aquisicao"
+        ],
+        [
+          "a4074c93-cd1b-4da0-b2e2-f25a328a479d",
+          "politica-remoto"
+        ]
+      ],
+      "editorial": "2d6c89be8d747ea927909edf3e74e953102b45fa9f623e89fdd7094a8315c5a6",
+      "neo4j": "0f977b8c9758855b9ba400ab1196ba466a235011042325032db7a2e1698b53d2",
+      "neo4j_nodes": 6,
+      "neo4j_edges": 3
+    },
+    "keys": "AES-256-GCM; KEK retained in lab memory; not KMS qualification"
+  },
+  "result": "PASS",
+  "execution_completed": true,
+  "model_calls": 10,
+  "elapsed_seconds": 328.83893110000645,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

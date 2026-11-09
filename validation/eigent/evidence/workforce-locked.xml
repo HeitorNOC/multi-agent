@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="8" skipped="0" tests="8" time="86.355" timestamp="2026-11-03T12:18:46.094859-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="tests.app.workspace_runtime.test_workforce_adapter" name="test_actual_task_dependencies_and_private_handoff[False]" time="14.917"><failure message="TimeoutError">predicate = &lt;function test_actual_task_dependencies_and_private_handoff.&lt;locals&gt;.&lt;lambda&gt; at 0x000002146FAFFCE0&gt;
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+&gt;               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay &lt;= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+&gt;           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = &lt;tests.app.workspace_runtime.test_service.World object at 0x000002146B8F3990&gt;
+tokenizer = &lt;app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146B960CD0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002146B8F1790&gt;
+git = False
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("git", [False, True])
+    async def test_actual_task_dependencies_and_private_handoff(
+        world, tokenizer, monkeypatch, git
+    ):
+        script = None
+        seen_content = []
+    
+        async def workers(context, role, call, messages):
+            if role == "author":
+                if call == 1:
+                    return response(
+                        tool="write_to_file",
+                        arguments={
+                            "file_path": "draft.txt",
+                            "content": "private draft",
+                        },
+                    )
+            elif call == 1:
+                workforce = script.executions[context.run_id].workforce
+                assert workforce._completed_tasks[0].id.endswith(".1")
+                return response(
+                    tool="read_file", arguments={"file_path": "draft.txt"}
+                )
+            elif call == 2:
+                assert messages[-1]["content"] == "private draft"
+                seen_content.append(messages[-1]["content"])
+                return response(
+                    tool="write_to_file",
+                    arguments={
+                        "file_path": "checked.txt",
+                        "content": "checked private draft",
+                    },
+                    call_id="second",
+                )
+            return response(
+                content=json.dumps(
+                    {
+                        "content": "The requested work is completed with the private file content.",
+                        "failed": False,
+                    }
+                )
+            )
+    
+        script = ModelScript(monkeypatch, workers, dependent=True)
+        _, policy = register(world, tokenizer, "p", git=git)
+        await world.submit("p", "run")
+        await world.service.start()
+&gt;       await eventually(
+            lambda: world.agent_errors or world.completed("run"), timeout=12
+        )
+
+tests\app\workspace_runtime\test_workforce_adapter.py:322: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x000002146FB1BFC0&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError</failure></testcase><testcase classname="tests.app.workspace_runtime.test_workforce_adapter" name="test_actual_task_dependencies_and_private_handoff[True]" time="12.313"><failure message="TimeoutError">predicate = &lt;function test_actual_task_dependencies_and_private_handoff.&lt;locals&gt;.&lt;lambda&gt; at 0x000002146E2B9800&gt;
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+&gt;               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay &lt;= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+&gt;           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = &lt;tests.app.workspace_runtime.test_service.World object at 0x000002146FD997D0&gt;
+tokenizer = &lt;app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146FD98210&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002146B8F2FD0&gt;
+git = True
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize("git", [False, True])
+    async def test_actual_task_dependencies_and_private_handoff(
+        world, tokenizer, monkeypatch, git
+    ):
+        script = None
+        seen_content = []
+    
+        async def workers(context, role, call, messages):
+            if role == "author":
+                if call == 1:
+                    return response(
+                        tool="write_to_file",
+                        arguments={
+                            "file_path": "draft.txt",
+                            "content": "private draft",
+                        },
+                    )
+            elif call == 1:
+                workforce = script.executions[context.run_id].workforce
+                assert workforce._completed_tasks[0].id.endswith(".1")
+                return response(
+                    tool="read_file", arguments={"file_path": "draft.txt"}
+                )
+            elif call == 2:
+                assert messages[-1]["content"] == "private draft"
+                seen_content.append(messages[-1]["content"])
+                return response(
+                    tool="write_to_file",
+                    arguments={
+                        "file_path": "checked.txt",
+                        "content": "checked private draft",
+                    },
+                    call_id="second",
+                )
+            return response(
+                content=json.dumps(
+                    {
+                        "content": "The requested work is completed with the private file content.",
+                        "failed": False,
+                    }
+                )
+            )
+    
+        script = ModelScript(monkeypatch, workers, dependent=True)
+        _, policy = register(world, tokenizer, "p", git=git)
+        await world.submit("p", "run")
+        await world.service.start()
+&gt;       await eventually(
+            lambda: world.agent_errors or world.completed("run"), timeout=12
+        )
+
+tests\app\workspace_runtime\test_workforce_adapter.py:322: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x000002146FB49600&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError</failure></testcase><testcase classname="tests.app.workspace_runtime.test_workforce_adapter" name="test_unapproved_assignments_fail_before_worker_model_or_tools[unknown_worker]" time="8.089"><failure message="TimeoutError">predicate = &lt;function test_unapproved_assignments_fail_before_worker_model_or_tools.&lt;locals&gt;.&lt;lambda&gt; at 0x00000214700E47C0&gt;
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+&gt;               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay &lt;= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+&gt;           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = &lt;tests.app.workspace_runtime.test_service.World object at 0x0000021470062750&gt;
+tokenizer = &lt;app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x0000021470060250&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000021470063CD0&gt;
+mode = 'unknown_worker'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+&gt;       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x000002146FB4A680&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError</failure></testcase><testcase classname="tests.app.workspace_runtime.test_workforce_adapter" name="test_unapproved_assignments_fail_before_worker_model_or_tools[unknown_task]" time="8.083"><failure message="TimeoutError">predicate = &lt;function test_unapproved_assignments_fail_before_worker_model_or_tools.&lt;locals&gt;.&lt;lambda&gt; at 0x00000214700E5300&gt;
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+&gt;               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay &lt;= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+&gt;           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = &lt;tests.app.workspace_runtime.test_service.World object at 0x000002146FD98710&gt;
+tokenizer = &lt;app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146FD99810&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002146FCED510&gt;
+mode = 'unknown_task'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+&gt;       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x0000021470060F80&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError</failure></testcase><testcase classname="tests.app.workspace_runtime.test_workforce_adapter" name="test_unapproved_assignments_fail_before_worker_model_or_tools[cycle]" time="8.090"><failure message="TimeoutError">predicate = &lt;function test_unapproved_assignments_fail_before_worker_model_or_tools.&lt;locals&gt;.&lt;lambda&gt; at 0x000002146B8B63E0&gt;
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+&gt;               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay &lt;= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+&gt;           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = &lt;tests.app.workspace_runtime.test_service.World object at 0x000002146B9036D0&gt;
+tokenizer = &lt;app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146B903910&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002146FAF01D0&gt;
+mode = 'cycle'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+&gt;       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x000002146FB2A180&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError</failure></testcase><testcase classname="tests.app.workspace_runtime.test_workforce_adapter" name="test_unapproved_assignments_fail_before_worker_model_or_tools[missing]" time="8.090"><failure message="TimeoutError">predicate = &lt;function test_unapproved_assignments_fail_before_worker_model_or_tools.&lt;locals&gt;.&lt;lambda&gt; at 0x00000214700E6200&gt;
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+&gt;               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay &lt;= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+&gt;           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = &lt;tests.app.workspace_runtime.test_service.World object at 0x000002146FB2BD10&gt;
+tokenizer = &lt;app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146FB1B410&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002146B914A50&gt;
+mode = 'missing'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+&gt;       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x000002146FB2DEC0&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError</failure></testcase><testcase classname="tests.app.workspace_runtime.test_workforce_adapter" name="test_unapproved_assignments_fail_before_worker_model_or_tools[duplicate]" time="8.085"><failure message="TimeoutError">predicate = &lt;function test_unapproved_assignments_fail_before_worker_model_or_tools.&lt;locals&gt;.&lt;lambda&gt; at 0x00000214700E5D00&gt;
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+&gt;               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay &lt;= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+&gt;           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = &lt;tests.app.workspace_runtime.test_service.World object at 0x000002147013C590&gt;
+tokenizer = &lt;app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002147013F790&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002147013DDD0&gt;
+mode = 'duplicate'
+
+    @pytest.mark.asyncio
+    @pytest.mark.parametrize(
+        "mode", ["unknown_worker", "unknown_task", "cycle", "missing", "duplicate"]
+    )
+    async def test_unapproved_assignments_fail_before_worker_model_or_tools(
+        world, tokenizer, monkeypatch, mode
+    ):
+        def invalid(items):
+            if mode == "unknown_worker":
+                items[0]["assignee_id"] = "browser"
+            elif mode == "unknown_task":
+                items[0]["dependencies"] = ["external"]
+            elif mode == "cycle":
+                items[0]["dependencies"] = [items[1]["task_id"]]
+                items[1]["dependencies"] = [items[0]["task_id"]]
+            elif mode == "missing":
+                items.pop()
+            else:
+                items[1]["task_id"] = items[0]["task_id"]
+    
+        script = ModelScript(monkeypatch, assign=invalid)
+        register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+&gt;       await eventually(lambda: bool(world.agent_errors))
+
+tests\app\workspace_runtime\test_workforce_adapter.py:364: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x000002147027AF80&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError</failure></testcase><testcase classname="tests.app.workspace_runtime.test_workforce_adapter" name="test_worker_failure_preserves_partial_without_publishing_or_retry" time="8.112"><failure message="TimeoutError">predicate = &lt;function test_worker_failure_preserves_partial_without_publishing_or_retry.&lt;locals&gt;.&lt;lambda&gt; at 0x000002146B8B6F20&gt;
+
+    async def eventually(predicate, *, timeout=8):
+        async with asyncio.timeout(timeout):
+            while not predicate():
+&gt;               await asyncio.sleep(0.01)
+
+tests\app\workspace_runtime\test_service.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+delay = 0.01, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay &lt;= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+&gt;           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\tasks.py:649: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+world = &lt;tests.app.workspace_runtime.test_service.World object at 0x000002146B9237D0&gt;
+tokenizer = &lt;app.workspace_runtime.agent_model_resources.LoadedOpenAITokenizer object at 0x000002146B8F3990&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002146B8F3ED0&gt;
+
+    @pytest.mark.asyncio
+    async def test_worker_failure_preserves_partial_without_publishing_or_retry(
+        world, tokenizer, monkeypatch
+    ):
+        async def workers(context, role, call, messages):
+            if role == "author" and call == 1:
+                return response(
+                    tool="write_to_file",
+                    arguments={
+                        "file_path": "partial.txt",
+                        "content": "preserved partial",
+                    },
+                )
+            if role == "editor":
+                raise AssertionError(
+                    "dependent worker cannot execute after failure"
+                )
+            return response(
+                content=json.dumps(
+                    {
+                        "content": "The file is partial; the task could not be completed.",
+                        "failed": True,
+                    }
+                )
+            )
+    
+        script = ModelScript(monkeypatch, workers, dependent=True)
+        _, policy = register(world, tokenizer, "p")
+        await world.submit("p", "run")
+        await world.service.start()
+&gt;       await eventually(
+            lambda: (
+                world.journal.get_run("run") is not None
+                and world.journal.get_run("run").status == "failed"
+            )
+        )
+
+tests\app\workspace_runtime\test_workforce_adapter.py:1021: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\app\workspace_runtime\test_service.py:57: in eventually
+    async with asyncio.timeout(timeout):
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x000002146FB2A180&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+..\..\..\validation\python\cpython-3.11.18-windows-x86_64-none\Lib\asyncio\timeouts.py:115: TimeoutError</failure></testcase></testsuite></testsuites>

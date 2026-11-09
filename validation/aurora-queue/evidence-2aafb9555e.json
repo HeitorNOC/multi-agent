@@ -1,0 +1,40 @@
+{
+  "capacity": 8,
+  "burst": 24,
+  "admitted": 8,
+  "saturated_http_429": 16,
+  "admission_seconds": 0.018,
+  "worker_limit": 1,
+  "peak_active_workers": 1,
+  "consecutive_waves": [
+    {
+      "jobs": 4,
+      "seconds_to_review": 8.724,
+      "seconds_to_complete": 12.958
+    },
+    {
+      "jobs": 4,
+      "seconds_to_review": 9.73,
+      "seconds_to_complete": 14.293
+    }
+  ],
+  "seconds_to_review_8_after_restart": 19.366,
+  "seconds_approval_to_completion_8": 9.333,
+  "queue_wait_p95_ms": 15132,
+  "jobs_completed": 16,
+  "jobs_rejected": 1,
+  "durable_fifo": true,
+  "api_restarted_at_same_address": true,
+  "receipt_replayed_after_crash": true,
+  "reservations": 68,
+  "provider_dispatches": 68,
+  "paid_model_calls": 0,
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  }
+}

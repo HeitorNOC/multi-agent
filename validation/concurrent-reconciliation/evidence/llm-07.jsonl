@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a7c5-cf7e-7570-808c-f8d79e806650"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O horário limite para envio de comprovantes é **18h30 do dia útil seguinte**. [1]\\n\\nA versão selecionada está vigente desde 1º de janeiro de 2026 e foi publicada em 4 de novembro de 2026. Não há informação sobre o fim de sua vigência.\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12492,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":95,"reasoning_output_tokens":0}}

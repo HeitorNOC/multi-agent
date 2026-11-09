@@ -1,0 +1,111 @@
+{
+  "installation": "cd17069d81",
+  "images": {
+    "postgres": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+    "neo4j": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+    "keycloak": "quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7"
+  },
+  "scenarios": [
+    {
+      "name": "real_services_oidc_and_local_pretrained_embedding_ready"
+    },
+    {
+      "name": "native_ainsert_extracted_graph_and_persisted_384d_vectors",
+      "vector_rows": [
+        "384|5"
+      ],
+      "partitions": [
+        {
+          "domain": "publico",
+          "nodes": 7,
+          "edges": 5
+        },
+        {
+          "domain": "financeiro",
+          "nodes": 4,
+          "edges": 3
+        }
+      ]
+    },
+    {
+      "name": "real_generated_answer_citation_and_private_partition_acl"
+    },
+    {
+      "name": "cold_backup_includes_native_extraction_and_real_vectors"
+    },
+    {
+      "name": "restored_old_brain_stays_fenced_until_current_inventory_matches"
+    },
+    {
+      "name": "native_current_and_historical_answers_after_joint_restore_preserve_acl"
+    },
+    {
+      "name": "native_generation_preserves_uncertainty_and_abstains_without_source"
+    },
+    {
+      "name": "revoked_query_denied_before_any_model_invocation"
+    }
+  ],
+  "worker_calls": [],
+  "versions": {
+    "postgres": "PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "pgvector": "0.8.7",
+    "neo4j": "versions\n[\"5.26.32\"]",
+    "keycloak": "26.8.1"
+  },
+  "backup_manifest": {
+    "generation": "g1",
+    "files": {
+      "identity.dump": {
+        "bytes": 259516,
+        "sha256": "c56a31610dd1ca1aace6ce70e82898e6237c64bad016610aceb69b90d60a8169"
+      },
+      "knowledge.dump": {
+        "bytes": 89283,
+        "sha256": "7a7ac78b6abcc1146d0a2b474a817546d76a65ea407e10f89bab98ca1a036076"
+      },
+      "neo4j.dump": {
+        "bytes": 23205,
+        "sha256": "92ebfe5e21358ee3bb1557888aa4401d0f41c389e4394c3d7c0dcd5bdac13746"
+      },
+      "pilot.dump": {
+        "bytes": 21117,
+        "sha256": "25cbbfa26922c60937283f4ddfd57f9bd09954ab7ecd640127add1f28d1436bb"
+      },
+      "roles.sql": {
+        "bytes": 1791,
+        "sha256": "8ff383c2278bd7cea6f8ca3c5078f45390337e5f2b291d747e234cea7c417a69"
+      },
+      "application-state/objects/0a0667f7038ffb50a75bea3998c34d1b9df8df239500d27c79412a14218115f0.txt": {
+        "bytes": 188,
+        "sha256": "0a0667f7038ffb50a75bea3998c34d1b9df8df239500d27c79412a14218115f0"
+      },
+      "application-state/objects/91174735674f639b4a7847c4cbe1aafa811f3e5dcec11cdcf31d584ff80bc490.txt": {
+        "bytes": 146,
+        "sha256": "91174735674f639b4a7847c4cbe1aafa811f3e5dcec11cdcf31d584ff80bc490"
+      },
+      "application-state/objects/b20ee8a12a7993cb824e9f8448b886ac9787be55a2e2d3f9967be5b900c1a9a6.txt": {
+        "bytes": 175,
+        "sha256": "b20ee8a12a7993cb824e9f8448b886ac9787be55a2e2d3f9967be5b900c1a9a6"
+      },
+      "application-state/objects/c78ccf3510b0d4563ca7ed20a833b38fd20c16e613fada2da5dc8ddd3d8822f8.txt": {
+        "bytes": 93,
+        "sha256": "c78ccf3510b0d4563ca7ed20a833b38fd20c16e613fada2da5dc8ddd3d8822f8"
+      }
+    }
+  },
+  "result": "PASS",
+  "elapsed_seconds": 398.71476370000164,
+  "model": "gpt-6.1-terra",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "corpus_documents_per_generation": 4,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

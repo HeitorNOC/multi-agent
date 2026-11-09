@@ -1,0 +1,9 @@
+{
+  "session": "session-919139542b",
+  "installation": "business-flow-ae14fb043a",
+  "reserved_calls": 23,
+  "completed_calls": 22,
+  "unknown_calls": 1,
+  "reason": "128-token embedding cap forced repeated extraction chunks. Graceful stop did not cancel in-flight staging; launcher tree was interrupted. Artifacts retained.",
+  "total_attempt_cap": 64
+}

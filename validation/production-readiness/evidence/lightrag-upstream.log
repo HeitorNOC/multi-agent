@@ -1,0 +1,7 @@
+..............................................................           [100%]
+===================== spaCy language models not installed =====================
+Missing model(s): en_core_web_sm, zh_core_web_sm
+smart_heading (docx) tests that need them were skipped.
+To run them, install the pinned models:
+    lightrag-download-cache --spacy-install
+62 passed in 5.77s

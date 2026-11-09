@@ -1,0 +1,16 @@
+{
+  "concurrentReplay": {
+    "result": "PASS",
+    "effects": 1
+  },
+  "stalePayload": "denied 409",
+  "forgedSignature": "denied 403",
+  "cancellation": {
+    "probe": "PASS: defect reproduced",
+    "requirement": "FAIL",
+    "effectAfterClientTimeout": true,
+    "totalEffects": 2,
+    "reason": "client AbortSignal closes HTTP wait; runtime has no cancellation/reconciliation endpoint"
+  },
+  "result": "PASS diagnostics; cancellation requirement FAIL"
+}

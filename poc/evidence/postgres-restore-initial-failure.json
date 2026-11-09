@@ -1,0 +1,15 @@
+{
+  "scope": "real embedded PostgreSQL, cold physical backup, same host/version; no secrets or storage backup validation",
+  "source": "C:\\Users\\PC\\multi-agent\\poc\\live-home-mGSSLg\\db",
+  "backup": "C:\\Users\\PC\\multi-agent\\poc\\restore-db-nuhfho",
+  "originalStop": {
+    "code": 1,
+    "output": "pg_ctl: could not send stop signal (PID: 29036): No such process\r\n"
+  },
+  "result": "FAIL",
+  "error": "AssertionError [ERR_ASSERTION]: original cluster must be stopped before cold copy",
+  "restoreStop": {
+    "code": 1,
+    "output": "pg_ctl: directory \"C:/Users/PC/multi-agent/poc/restore-db-nuhfho\" is not a database cluster directory\r\n"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$meta": {
+    "version": 1,
+    "updatedAt": "2026-11-03T15:47:52.954Z",
+    "source": "configure"
+  },
+  "database": {
+    "mode": "embedded-postgres",
+    "embeddedPostgresDataDir": "C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\db",
+    "embeddedPostgresPort": 54359,
+    "backup": {
+      "enabled": false,
+      "dir": "C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\backups"
+    }
+  },
+  "logging": {
+    "mode": "file",
+    "logDir": "C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\logs"
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 3201,
+    "serveUi": false,
+    "deploymentMode": "local_trusted",
+    "exposure": "private"
+  },
+  "telemetry": {
+    "enabled": false
+  },
+  "updates": {
+    "checkEnabled": false
+  },
+  "storage": {
+    "provider": "local_disk",
+    "localDisk": {
+      "baseDir": "C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\storage"
+    }
+  },
+  "secrets": {
+    "provider": "local_encrypted",
+    "localEncrypted": {
+      "keyFilePath": "C:\\Users\\PC\\multi-agent\\validation\\paperclip-recheck\\live-home-byVhcX\\secrets\\master.key"
+    }
+  }
+}

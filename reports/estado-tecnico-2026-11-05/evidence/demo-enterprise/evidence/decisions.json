@@ -1,0 +1,271 @@
+[
+  {
+    "job": "f21b2829-9513-4f5a-9c7c-02d15e443d0c",
+    "selected": [
+      "compliance_advisor",
+      "legal_director",
+      "security_analyst",
+      "technology_director"
+    ],
+    "finished": [
+      "compliance_advisor",
+      "legal_director",
+      "security_analyst",
+      "technology_director"
+    ],
+    "inferred": [
+      "compliance_advisor",
+      "legal_director",
+      "security_analyst",
+      "technology_director"
+    ],
+    "selection_matches_execution": true,
+    "review_accepted": true,
+    "candidate": {
+      "summary": "Priorizar a primeira avaliação conjunta de Segurança e Jurídico do INC-47 no AuroraCRM europeu. Às 16h45 de 05/11/2026, restavam 65 minutos do prazo interno fictício, com limite às 17h50 no fuso -03:00. A proposta original é parcialmente viável: o checklist pode ser realizado com base nos relatórios sintéticos preservados, mas a apuração de conteúdo, natureza dos registros e outros detalhes não disponíveis nesses relatórios está bloqueada pela falta de evidência. Esta é uma decisão de prioridade e um plano revisável, não uma aprovação de medidas.",
+      "facts": [
+        {
+          "key": "potential_records",
+          "value": 1200,
+          "unit": "contatos potencialmente envolvidos",
+          "label": "Estimativa potencial, não impacto confirmado",
+          "sources": [
+            "aurora-incident"
+          ]
+        },
+        {
+          "key": "confirmed_exfiltration",
+          "value": false,
+          "unit": "estado de confirmação",
+          "label": "Exfiltração não confirmada; isso não prova que não tenha ocorrido",
+          "sources": [
+            "aurora-incident"
+          ]
+        },
+        {
+          "key": "response_sla_minutes",
+          "value": 90,
+          "unit": "minutos após o alerta",
+          "label": "Prazo interno fictício para a primeira avaliação conjunta",
+          "sources": [
+            "aurora-response"
+          ]
+        },
+        {
+          "key": "minutes_elapsed",
+          "value": 25,
+          "unit": "minutos",
+          "label": "Tempo transcorrido entre o alerta às 16h20 e as 16h45",
+          "sources": [
+            "aurora-incident"
+          ]
+        },
+        {
+          "key": "minutes_remaining",
+          "value": 65,
+          "unit": "minutos",
+          "label": "Prazo restante às 16h45, até 17h50 no fuso -03:00",
+          "sources": [
+            "aurora-incident",
+            "aurora-response"
+          ]
+        }
+      ],
+      "risks": [
+        "Possível exposição de até 1.200 contatos; a extensão efetiva é desconhecida.",
+        "A conclusão da transferência e o acesso por terceiro não foram confirmados; a ausência de confirmação não prova que não ocorreram.",
+        "Os logs podem estar incompletos, e o volume registrado não comprova recepção por terceiro. Causa, origem, conteúdo e natureza dos registros envolvidos permanecem desconhecidos.",
+        "Não há prova de contenção completa.",
+        "A primeira avaliação conjunta pode ultrapassar o prazo interno das 17h50.",
+        "Os 6.000 itens da oportunidade Orion são distintos e não devem ser somados aos contatos potencialmente envolvidos."
+      ],
+      "conditions": [
+        "A avaliação requer a participação conjunta de Segurança e Jurídico; outras áreas só devem ser envolvidas diante de necessidade específica identificada.",
+        "A análise técnica está limitada aos relatórios sintéticos já preservados e às informações que eles permitam verificar. O conteúdo dos registros e detalhes ausentes não podem ser apurados com a evidência disponível.",
+        "Os horários e fontes foram informados nos relatórios das diretorias; os documentos subjacentes não foram fornecidos diretamente.",
+        "O prazo de 90 minutos é um SLA interno fictício, não uma obrigação legal genérica. Eventuais obrigações legais e contratuais dependem de apuração, sem conclusão legal real nesta decisão.",
+        "Não estão autorizados acesso à produção, SQL contra clientes, alteração de configurações, revogação de tokens, cópia de registros, contenção ou comunicação externa. Medidas dependem de processo e aprovação separados.",
+        "Não envolver recrutamento ou precificação sem necessidade específica nem transportar dados pessoais do incidente para campanha."
+      ],
+      "cited_sources": [
+        "aurora-incident",
+        "aurora-response",
+        "aurora-data-platform"
+      ],
+      "action": "No quadro local, priorizar o checklist conjunto para conclusão até 17h50. Segurança: revisar somente os relatórios sintéticos preservados; verificar, quando possível, horários, volume, destino lógico, estado da transferência e acessos associados; registrar lacunas, limites dos logs e ausência de prova de contenção completa. Jurídico: separar fatos confirmados de suspeitas e evidências ausentes; avaliar o impacto potencial e identificar contratos e eventuais obrigações conforme os fatos forem apurados; documentar incertezas, dependências e decisões pendentes. Revisar o plano se surgirem evidências adicionais e encaminhar possíveis medidas a processo separado, sem executá-las ou aprová-las agora.",
+      "requires_approval": true
+    }
+  },
+  {
+    "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+    "selected": [
+      "campaign_planner",
+      "compliance_advisor",
+      "controller",
+      "finance_director",
+      "legal_director",
+      "marketing_director",
+      "operations_director",
+      "supply_planner"
+    ],
+    "finished": [
+      "campaign_planner",
+      "compliance_advisor",
+      "controller",
+      "finance_director",
+      "legal_director",
+      "marketing_director",
+      "operations_director",
+      "supply_planner"
+    ],
+    "inferred": [
+      "campaign_planner",
+      "compliance_advisor",
+      "controller",
+      "finance_director",
+      "legal_director",
+      "marketing_director",
+      "operations_director",
+      "supply_planner"
+    ],
+    "selection_matches_execution": true,
+    "review_accepted": false,
+    "candidate": {
+      "summary": "A proposta original de Horizonte não é viável nas condições atuais e não está aprovada. O desconto de 8% produz margem de 26,24%, abaixo do mínimo vigente de 28,00%; a verba solicitada supera o caixa livre em R$ 50.000. Há 3.000 unidades livres para novas promessas, mas não é possível calcular a demanda conjunta ou sua insuficiência em unidades: os 5.000 pedidos projetados para Horizonte não informam unidades por pedido. Orion é uma oportunidade não assinada de 6.000 unidades, com entrega pretendida em 15/12/2026. O lote SUP-88 não está confirmado e sua possível chegada em 10/12 não cobre a abertura de novembro. Uma campanha reduzida no Sudeste poderá ser revista após as validações e aprovações indicadas.",
+      "facts": [
+        {
+          "key": "available_stock_units",
+          "value": 3000,
+          "unit": "unidades",
+          "label": "Saldo livre em 05/11/2026: 14.000 físicas, menos 9.000 reservadas e 2.000 bloqueadas sem sobreposição",
+          "sources": [
+            "aurora-inventory"
+          ]
+        },
+        {
+          "key": "combined_demand_units",
+          "value": false,
+          "unit": "disponibilidade do cálculo",
+          "label": "Desconhecida: Orion representa 6.000 unidades e Horizonte projeta 5.000 pedidos, sem quantidade de unidades por pedido; não é válido somá-los como unidades",
+          "sources": [
+            "aurora-contracts",
+            "aurora-marketing"
+          ]
+        },
+        {
+          "key": "shortfall_units",
+          "value": false,
+          "unit": "disponibilidade do cálculo",
+          "label": "Insuficiência conjunta desconhecida em unidades; Orion isoladamente excede o saldo livre em 3.000 unidades, se todo o saldo lhe for alocado",
+          "sources": [
+            "aurora-inventory",
+            "aurora-contracts",
+            "aurora-marketing"
+          ]
+        },
+        {
+          "key": "discount_margin_pct",
+          "value": 26.24,
+          "unit": "%",
+          "label": "Margem de contribuição ao preço proposto de R$ 386,40, após desconto de 8%",
+          "sources": [
+            "aurora-pricing",
+            "aurora-costs",
+            "aurora-marketing"
+          ]
+        },
+        {
+          "key": "minimum_margin_pct",
+          "value": 28.0,
+          "unit": "%",
+          "label": "Margem de contribuição mínima vigente sobre o preço líquido segundo PR-01 v2",
+          "sources": [
+            "aurora-pricing"
+          ]
+        },
+        {
+          "key": "cash_headroom_brl",
+          "value": 130000,
+          "unit": "R$",
+          "label": "Caixa livre para novos compromissos em 05/11/2026 às 16h45",
+          "sources": [
+            "aurora-treasury"
+          ]
+        },
+        {
+          "key": "requested_budget_brl",
+          "value": 180000,
+          "unit": "R$",
+          "label": "Verba solicitada para Horizonte",
+          "sources": [
+            "aurora-marketing"
+          ]
+        },
+        {
+          "key": "cash_gap_brl",
+          "value": 50000,
+          "unit": "R$",
+          "label": "Excesso da verba solicitada sobre o caixa livre informado, sem incluir o adiantamento de suprimento",
+          "sources": [
+            "aurora-treasury",
+            "aurora-marketing"
+          ]
+        },
+        {
+          "key": "inbound_confirmed",
+          "value": false,
+          "unit": "booleano",
+          "label": "SUP-88 não confirmado; depende de assinatura e adiantamento ainda não realizados",
+          "sources": [
+            "aurora-procurement"
+          ]
+        },
+        {
+          "key": "carbon_claim_supported",
+          "value": false,
+          "unit": "booleano",
+          "label": "Certificação válida e escopo verificados não constam da documentação disponível; isso não determina se o produto é ou não neutro em carbono",
+          "sources": [
+            "aurora-compliance"
+          ]
+        }
+      ],
+      "risks": [
+        "Horizonte e Orion disputam o saldo livre; as 9.000 unidades reservadas a contratos firmes devem ser preservadas e as 2.000 bloqueadas não são vendáveis.",
+        "Os 5.000 pedidos de Horizonte são projeção não validada, não vendas confirmadas. Não há base para calcular ROI, incremento causal ou probabilidade de conversão de Orion.",
+        "O preço proposto está bloqueado para revisão por descumprir a margem mínima. R$ 400,00 produziria margem de 28,75% e desconto de aproximadamente 4,76%, mas depende de aprovação comercial.",
+        "O teto contábil não é caixa livre. A verba de R$ 180.000 e o adiantamento de R$ 1.200.000 somariam R$ 1.380.000, ou R$ 1.250.000 acima do caixa livre informado; o faturamento potencial de Orion não é dinheiro disponível.",
+        "SUP-88 não é estoque disponível; sua chegada e disponibilidade efetiva são incertas. A entrega pretendida de Orion em 15/12 não está garantida, e a multa de 1,5% consta apenas de minuta proposta, sem obrigação existente.",
+        "Os trânsitos relatados após expedição são de dois dias úteis para o Sudeste e dez para o Chile; não demonstram prazo ponta a ponta. A capacidade incremental relatada de 1.500 unidades por dia depende de estoque e disponibilidade operacional.",
+        "A alegação de carbono neutro permanece bloqueada até certificação e escopo verificados. A promessa geral de entrega em sete dias também carece de comprovação e é incompatível com o trânsito relatado para o Chile.",
+        "O relato de possível exportação envolvendo até 1.200 contatos do AuroraCRM europeu não comprova transferência concluída, acesso de terceiros ou contenção completa; a fonte primária não foi apresentada para verificação independente."
+      ],
+      "conditions": [
+        "Estoque e Comercial devem reconfirmar o saldo vendável e decidir sua alocação entre Horizonte e Orion, preservando reservas e bloqueio de Qualidade. Converter a previsão da campanha em unidades e limitar qualquer fase inicial ao estoque e à capacidade comprovados.",
+        "Suprimentos e Tesouraria devem verificar condições, financiamento, confirmação, recebimento e liberação efetiva de SUP-88 ou de alternativa; não contar com esse lote para a abertura de novembro. Qualquer compromisso com Orion depende de suprimento, logística e condições comerciais confirmados.",
+        "Controladoria e Comercial devem revisar o preço conforme PR-01 v2 e obter aprovação comercial. R$ 400,00 é uma alternativa calculada, não aprovada; o mínimo calculado para a margem é R$ 395,84 por unidade.",
+        "Marketing e Tesouraria devem preparar o conteúdo e o orçamento exatos de uma campanha reduzida ou faseada, compatíveis com o caixa livre atualizado após os demais compromissos, e submetê-los às aprovações pertinentes.",
+        "Logística deve confirmar capacidade e prazo completo por destino, incluindo processamento, expedição, trânsito e eventual desembaraço. Priorizar o Sudeste; manter o Chile fora até comprovar prazo e capacidade. Retirar ou reformular a promessa geral de sete dias até sua validação.",
+        "Marketing, Conformidade e Jurídico devem retirar ou manter bloqueada a alegação de carbono neutro até verificar certificação válida e seu escopo e concluir a revisão da peça.",
+        "Definir medição de incremento e revisar demanda, conversão e despesas completas antes de avaliar retorno ou ampliar investimento. Se as condições não forem cumpridas, reduzir o escopo ou adiar a campanha.",
+        "Tratar INC-47 em fluxo próprio: Segurança e Jurídico devem verificar se houve avaliação conjunta e examinar logs, transferência e acessos. O prazo de 90 minutos, com término relatado às 17h50 de 05/11/2026 no fuso -03:00, é um SLA interno fictício, não uma conclusão sobre obrigação ou prazo legal real; não há prova de que a avaliação ocorreu.",
+        "Qualquer checklist em quadro local é apenas registro para revisão e não autoriza execução da campanha, contenção do incidente, comunicação ou notificação a terceiros. Essas medidas e novos compromissos exigem seus processos e aprovações próprios."
+      ],
+      "cited_sources": [
+        "aurora-inventory",
+        "aurora-contracts",
+        "aurora-marketing",
+        "aurora-pricing",
+        "aurora-costs",
+        "aurora-treasury",
+        "aurora-procurement",
+        "aurora-logistics",
+        "aurora-compliance",
+        "aurora-incident",
+        "aurora-response"
+      ],
+      "action": "Preparar para decisão humana uma alternativa revisável e condicionada para 15 a 30 de novembro, inicialmente restrita ao Sudeste, com preço, verba, volume e prazos comprovados; manter Orion em avaliação e o incidente em fluxo separado. Não aprovar nem executar campanha, compra, pagamento, promessa, contenção ou comunicação externa nesta avaliação.",
+      "requires_approval": true
+    }
+  }
+]

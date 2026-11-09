@@ -1,0 +1,499 @@
+{
+  "installation": "business-flow-9805f62363",
+  "checkpoints": [
+    {
+      "name": "native_extraction_vectors_graph_and_advice_through_typescript_langgraph"
+    },
+    {
+      "name": "stage_before_canonical_commit_crash_resumes_without_model_reingestion"
+    },
+    {
+      "name": "signed_bundle_witness_refuses_stale_and_modified_dumps_before_live_changes"
+    },
+    {
+      "name": "cold_joint_restore_vectors_graph_canonical_checkpoints_keys_and_revocation"
+    }
+  ],
+  "worker_calls": [
+    {
+      "job": "2e9d69e1-de41-4095-843c-c9490fa90173",
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 2, \"epoch\": 1, \"heartbeat_count\": 0}\n",
+      "stderr": ""
+    },
+    {
+      "job": "c3334404-e2fd-4388-939a-686e88f75fef",
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"next\": [], \"evidence_count\": 1, \"epoch\": 1, \"heartbeat_count\": 0}\n",
+      "stderr": ""
+    }
+  ],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "real native LightRAG/ONNX/PostgreSQL/Neo4j; deterministic LLM; no external model",
+  "postgres_image": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "publication_calls": [
+    {
+      "draft": "27abffdd-7e6f-488b-b908-be14cb6345a4",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"d4bda28fbe948b87755a5d6c83434efbd28ee67a748b6212e5afc777239cf77d\"}\n",
+      "stderr": ""
+    },
+    {
+      "draft": "e4f19f42-0eaf-4c71-a4c7-5fc63709258e",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"e907eb37f1a64a62febbd30ffb4507c6c840cc26b1dbdb0c4e013bf4d745c3da\"}\n",
+      "stderr": ""
+    },
+    {
+      "draft": "1f81a5b3-8de4-40ff-830f-4e013a76ca20",
+      "crash": true,
+      "exit_code": 79,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "draft": "1f81a5b3-8de4-40ff-830f-4e013a76ca20",
+      "crash": false,
+      "exit_code": 0,
+      "stdout": "{\"completed\": true, \"projection_id\": \"45b08710bcfaf3c7f35e10b2a94a0af7fff8ca6a073125f2bbd2d6b6a816274f\"}\n",
+      "stderr": ""
+    }
+  ],
+  "embedding_calls": [
+    {
+      "batch": 2,
+      "dimension": 384,
+      "max_wordpiece_tokens": 35,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 2,
+      "max_embedded_wordpiece_tokens": 35,
+      "seconds": 0.046433400000069014,
+      "input_hashes": [
+        "e5b8a419d60995a9d0d35a60872242f753861789508a4b5bc461d3e58090affa",
+        "2c06ad2676e89011701636d06a3ea9d62ccfcd632db4e7a8f461127aa9d2bb64"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 41,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 1,
+      "max_embedded_wordpiece_tokens": 41,
+      "seconds": 0.018495000000029904,
+      "input_hashes": [
+        "36a48ba56065ac4708466b1a7a93ded003a4969535f2d9ae92d01f40c0f1d07a"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 32,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 1,
+      "max_embedded_wordpiece_tokens": 32,
+      "seconds": 0.013344400000050882,
+      "input_hashes": [
+        "2662b13247793d791a892495feb4289d1cbb133927b80336fb5f93da10be8253"
+      ]
+    },
+    {
+      "batch": 2,
+      "dimension": 384,
+      "max_wordpiece_tokens": 53,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 2,
+      "max_embedded_wordpiece_tokens": 53,
+      "seconds": 0.04133159999992131,
+      "input_hashes": [
+        "82df1508f74dff37ccdf204bbe447f126966e48035f6fa7018743725602d2d0f",
+        "2c06ad2676e89011701636d06a3ea9d62ccfcd632db4e7a8f461127aa9d2bb64"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 48,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 1,
+      "max_embedded_wordpiece_tokens": 48,
+      "seconds": 0.022212999999965177,
+      "input_hashes": [
+        "a9c7ee0a9937085de1fe71f784880eb046a53862f8c40230f2da2039a29c86e7"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 59,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 1,
+      "max_embedded_wordpiece_tokens": 59,
+      "seconds": 0.023683000000119137,
+      "input_hashes": [
+        "89e695ac2271e01ac00cde2c4dc90a2fd8c44751c182f8acf97ee4e83683f77f"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 20,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 3,
+      "max_embedded_wordpiece_tokens": 20,
+      "seconds": 0.02320899999995163,
+      "input_hashes": [
+        "a38b69b8b0d223534875c399c879eb0eeeef378b29f021ba2c3536e38c02ba68",
+        "a8308e8e2e4b73307d860de2effdc675fa122f64c2095e7974d8ef804b9d3b70",
+        "995ff5c3e1b360df498b8c82aa08acb72a8d4911d2767dbe9b139867118bc200"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 25,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 3,
+      "max_embedded_wordpiece_tokens": 25,
+      "seconds": 0.03227689999994254,
+      "input_hashes": [
+        "6dd767ebcfce38b291f2a0e365cb834d82f7f6553b4b1e43ceb0767ae3b9c821",
+        "a8308e8e2e4b73307d860de2effdc675fa122f64c2095e7974d8ef804b9d3b70",
+        "995ff5c3e1b360df498b8c82aa08acb72a8d4911d2767dbe9b139867118bc200"
+      ]
+    },
+    {
+      "batch": 2,
+      "dimension": 384,
+      "max_wordpiece_tokens": 38,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 2,
+      "max_embedded_wordpiece_tokens": 38,
+      "seconds": 0.022217400000045018,
+      "input_hashes": [
+        "6356478ff2b08fbfd3091fc7be84481d5cf2fd49fceb10dcd7d8810815192ed2",
+        "2c06ad2676e89011701636d06a3ea9d62ccfcd632db4e7a8f461127aa9d2bb64"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 35,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 1,
+      "max_embedded_wordpiece_tokens": 35,
+      "seconds": 0.013567699999839533,
+      "input_hashes": [
+        "77906b0d042ccc9f7e954601f4e08d6fc1db3651b7abb4e8f95b27ff65a2b4a2"
+      ]
+    },
+    {
+      "batch": 1,
+      "dimension": 384,
+      "max_wordpiece_tokens": 44,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 1,
+      "max_embedded_wordpiece_tokens": 44,
+      "seconds": 0.01378090000002885,
+      "input_hashes": [
+        "f1694e25b0985978418921b2e77dcd843641c0857c281deb636861f022421882"
+      ]
+    },
+    {
+      "batch": 3,
+      "dimension": 384,
+      "max_wordpiece_tokens": 20,
+      "truncated_inputs": 0,
+      "pool_long_inputs": false,
+      "embedded_segments": 3,
+      "max_embedded_wordpiece_tokens": 20,
+      "seconds": 0.025074799999856623,
+      "input_hashes": [
+        "a38b69b8b0d223534875c399c879eb0eeeef378b29f021ba2c3536e38c02ba68",
+        "a8308e8e2e4b73307d860de2effdc675fa122f64c2095e7974d8ef804b9d3b70",
+        "995ff5c3e1b360df498b8c82aa08acb72a8d4911d2767dbe9b139867118bc200"
+      ]
+    }
+  ],
+  "cold_restore_new_postgres": {
+    "container": "business-flow-9805f62363-pg-restored-1634e7",
+    "volume": "business-flow-9805f62363-pg-restored-1634e7-data"
+  },
+  "restore_seconds": 53.851,
+  "responses": {
+    "original": {
+      "job": "2e9d69e1-de41-4095-843c-c9490fa90173",
+      "planHash": "8a0969ddd7d033df21e3b28c5c35722f7e33cd081a99f5dc5f592db7a5545669",
+      "strategy": "A3",
+      "evidence": [
+        {
+          "capability": "finance_review",
+          "snapshot": {
+            "found": true,
+            "id": "e4f19f42-0eaf-4c71-a4c7-5fc63709258e",
+            "source": "aquisicao",
+            "version": 1,
+            "valid_at": "2026-01-01T00:00:00Z",
+            "known_at": "2026-11-05T22:08:26.778Z",
+            "raw_sha": "d8a2ddd778f07f36f5841851f3ae6a08bb05514e005e31ada1ba056ac34b7f53",
+            "content_sha": "a9c7ee0a9937085de1fe71f784880eb046a53862f8c40230f2da2039a29c86e7",
+            "content": "A empresa ACME adota a Política de Aquisição. A Política de Aquisição limita compras da ACME a 1000 unidades monetárias por pedido. Código interno: SIGILO_FIXTURE_FINANCEIRO",
+            "kind": "approved_source_snapshot_not_extracted_fact",
+            "semantic": {
+              "answer": "A empresa ACME adota a Política de Aquisição. A Política de Aquisição limita compras da ACME a 1000 unidades monetárias por pedido. Código interno: SIGILO_FIXTURE_FINANCEIRO Fonte: aquisicao.",
+              "projection": {
+                "id": "e907eb37f1a64a62febbd30ffb4507c6c840cc26b1dbdb0c4e013bf4d745c3da",
+                "payload": {
+                  "installation": "business-flow-9805f62363",
+                  "draft": "e4f19f42-0eaf-4c71-a4c7-5fc63709258e",
+                  "source": "aquisicao",
+                  "version": 1,
+                  "domain": "financeiro",
+                  "valid_at": "2026-01-01T00:00:00Z",
+                  "raw_sha": "d8a2ddd778f07f36f5841851f3ae6a08bb05514e005e31ada1ba056ac34b7f53",
+                  "content_sha": "a9c7ee0a9937085de1fe71f784880eb046a53862f8c40230f2da2039a29c86e7",
+                  "reviewer": "board"
+                },
+                "inventory": {
+                  "tables": {
+                    "lightrag_doc_chunks": {
+                      "count": 1,
+                      "sha": "bf0cba36e8f89e93f63213b4b2a30aff2c37a4eda1a4177816e8072904a2d6b6"
+                    },
+                    "lightrag_doc_full": {
+                      "count": 1,
+                      "sha": "508e8beb3b95f4e1190a044e9719eca1424c89e06a9007df3728aeddb4a2b3ee"
+                    },
+                    "lightrag_doc_status": {
+                      "count": 1,
+                      "sha": "fdca12207e98f6732ba07caa6682fb2db7ff5534aaf95bf4f3e2a4a38b94fef5"
+                    },
+                    "lightrag_entity_chunks": {
+                      "count": 2,
+                      "sha": "63c0d29920b3989c94bd81c7935a5835da73fe411a7d7698a8c4763ed5d8c842"
+                    },
+                    "lightrag_full_entities": {
+                      "count": 1,
+                      "sha": "38f89bf91ff0b647c8b76110525350a7f2f9c2598adefde41ae5d81bf0f81def"
+                    },
+                    "lightrag_full_relations": {
+                      "count": 1,
+                      "sha": "7598b48dcfb0ae5a64aab1be431869ed0d68b33201e9963e9d3b9483b9c71e2b"
+                    },
+                    "lightrag_relation_chunks": {
+                      "count": 1,
+                      "sha": "101408422038803ce9b11f71c69f3b700fdb3b5087e0f1481e8c8ca754ee060a"
+                    },
+                    "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+                      "count": 1,
+                      "sha": "4c8d0ce5068e02680a5441c26ca11591f43a4b0b5ef1d24f77905542a189e422"
+                    },
+                    "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+                      "count": 2,
+                      "sha": "397cbe037ef37008ed72a8c6bd0540f8ab9e8a450c7d2ec6edf93be04be6fc22"
+                    },
+                    "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+                      "count": 1,
+                      "sha": "cff34138c949ef0e64d4dba3e1c7ef3f3d6a6be2e7226189fd23359cbda542a7"
+                    }
+                  },
+                  "nodes": 2,
+                  "edges": 1,
+                  "graph": "d5591384efc86e3d8a32f193798fb3ab04bc330b3c01b221721815570b67431b"
+                },
+                "inventory_sha": "b61bd66655012527e1bd781d0f121f9da90416866922e2bfd9c94596e275538b"
+              },
+              "native": true
+            }
+          }
+        },
+        {
+          "capability": "policy_lookup",
+          "snapshot": {
+            "found": true,
+            "id": "27abffdd-7e6f-488b-b908-be14cb6345a4",
+            "source": "politica-remoto",
+            "version": 1,
+            "valid_at": "2026-01-01T00:00:00Z",
+            "known_at": "2026-11-05T22:08:26.459Z",
+            "raw_sha": "5965083435ed9f9f150ef72cecffcba84e0e083686a16d7796a572b1219a5ff7",
+            "content_sha": "2662b13247793d791a892495feb4289d1cbb133927b80336fb5f93da10be8253",
+            "content": "A empresa ACME adota a Política Remoto. A Política Remoto autoriza os funcionários da ACME a trabalhar remotamente dois dias por semana.",
+            "kind": "approved_source_snapshot_not_extracted_fact",
+            "semantic": {
+              "answer": "A empresa ACME adota a Política Remoto. A Política Remoto autoriza os funcionários da ACME a trabalhar remotamente dois dias por semana. Fonte: politica-remoto.",
+              "projection": {
+                "id": "d4bda28fbe948b87755a5d6c83434efbd28ee67a748b6212e5afc777239cf77d",
+                "payload": {
+                  "installation": "business-flow-9805f62363",
+                  "draft": "27abffdd-7e6f-488b-b908-be14cb6345a4",
+                  "source": "politica-remoto",
+                  "version": 1,
+                  "domain": "publico",
+                  "valid_at": "2026-01-01T00:00:00Z",
+                  "raw_sha": "5965083435ed9f9f150ef72cecffcba84e0e083686a16d7796a572b1219a5ff7",
+                  "content_sha": "2662b13247793d791a892495feb4289d1cbb133927b80336fb5f93da10be8253",
+                  "reviewer": "board"
+                },
+                "inventory": {
+                  "tables": {
+                    "lightrag_doc_chunks": {
+                      "count": 1,
+                      "sha": "db7e0d35b65617072a7bff0b73db507ac3b33684065281a09fe79e4df3488d28"
+                    },
+                    "lightrag_doc_full": {
+                      "count": 1,
+                      "sha": "2209288dc192c956e1684a2227ace73eb09da5839d85a1042aafde95b0b03dd7"
+                    },
+                    "lightrag_doc_status": {
+                      "count": 1,
+                      "sha": "63d98cfef5529d2313d6520609c6248fea0c5e2ee02d2c7dbb820ae56ce4e0f4"
+                    },
+                    "lightrag_entity_chunks": {
+                      "count": 2,
+                      "sha": "2241b6a73e53d695a5326c8736d9660875d124d334dc09adef47e0fde8ba7ccb"
+                    },
+                    "lightrag_full_entities": {
+                      "count": 1,
+                      "sha": "5ccd6f0f5ef7764b26a8e312d3f4c51dcfbf5a5890b0f27298b4088fb6d20c78"
+                    },
+                    "lightrag_full_relations": {
+                      "count": 1,
+                      "sha": "599d51292bfb1b9e2e6e175be0b23e4ed06ab9d3eba43e0ea8a78cd05507849b"
+                    },
+                    "lightrag_relation_chunks": {
+                      "count": 1,
+                      "sha": "f3dac83adb65d672cf68c591aa84c3414f528284b86e62a2e68ca3e8ad30c5f4"
+                    },
+                    "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+                      "count": 1,
+                      "sha": "237f641a1686f64ba1605cc4696dc0f8fbddae64dec37ef608e1b9c4a0b4a1c1"
+                    },
+                    "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+                      "count": 2,
+                      "sha": "bd8fd3a09d8dc080de77d694487530fa5bb44cb72bd3ecb5193cab0a434c0d72"
+                    },
+                    "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+                      "count": 1,
+                      "sha": "22323e7723cf7875eca14fba9eeaf74c26866070703aacece204f41a0b65e63e"
+                    }
+                  },
+                  "nodes": 2,
+                  "edges": 1,
+                  "graph": "277c3a0b5aa7ab804435398af044e8d7f8d341ecee195808dc55e463d7145975"
+                },
+                "inventory_sha": "454ed63a6c3893a0504daf158617c1cbaa2f5298c3fc2e332aa6c640996141b5"
+              },
+              "native": true
+            }
+          }
+        }
+      ],
+      "receipt": null,
+      "kind": "native_knowledge_with_deterministic_coordination"
+    },
+    "current": {
+      "found": true,
+      "id": "1f81a5b3-8de4-40ff-830f-4e013a76ca20",
+      "source": "politica-remoto",
+      "version": 2,
+      "valid_at": "2026-02-01T00:00:00Z",
+      "known_at": "2026-11-05T22:10:14.746Z",
+      "raw_sha": "74bcf9c1443ede3cf8d3a6ae2b12469f4ca091eed6318cdf16cb1ccbd6294ca5",
+      "content_sha": "77906b0d042ccc9f7e954601f4e08d6fc1db3651b7abb4e8f95b27ff65a2b4a2",
+      "content": "A empresa ACME adota a Política Remoto versão 2. A Política Remoto versão 2 autoriza os funcionários da ACME a trabalhar remotamente três dias por semana.",
+      "kind": "approved_source_snapshot_not_extracted_fact",
+      "semantic": {
+        "answer": "A empresa ACME adota a Política Remoto versão 2. A Política Remoto versão 2 autoriza os funcionários da ACME a trabalhar remotamente três dias por semana. Fonte: politica-remoto.",
+        "projection": {
+          "id": "45b08710bcfaf3c7f35e10b2a94a0af7fff8ca6a073125f2bbd2d6b6a816274f",
+          "payload": {
+            "installation": "business-flow-9805f62363",
+            "draft": "1f81a5b3-8de4-40ff-830f-4e013a76ca20",
+            "source": "politica-remoto",
+            "version": 2,
+            "domain": "publico",
+            "valid_at": "2026-02-01T00:00:00Z",
+            "raw_sha": "74bcf9c1443ede3cf8d3a6ae2b12469f4ca091eed6318cdf16cb1ccbd6294ca5",
+            "content_sha": "77906b0d042ccc9f7e954601f4e08d6fc1db3651b7abb4e8f95b27ff65a2b4a2",
+            "reviewer": "board"
+          },
+          "inventory": {
+            "tables": {
+              "lightrag_doc_chunks": {
+                "count": 1,
+                "sha": "6ebaafc3f116051f9079c3f4ed3f74e9781034623589dc980e97e9da555414ae"
+              },
+              "lightrag_doc_full": {
+                "count": 1,
+                "sha": "890c9a5856fcfce1c1a4633cbd8183877a30d81e061712ee07b7a5ca96f1a549"
+              },
+              "lightrag_doc_status": {
+                "count": 1,
+                "sha": "5e363c28a4bad33296f45fc81c62b6bae36f3bf126d444b0d8cf8ae0c5976d8f"
+              },
+              "lightrag_entity_chunks": {
+                "count": 2,
+                "sha": "88a577593fb26df070bb15d005bd3bb216656cab975f780b85e967316a743a01"
+              },
+              "lightrag_full_entities": {
+                "count": 1,
+                "sha": "328d1904f0bcb78cc6f81ce2d1ac19fe1887fd1b878febeceb41b9cc67fac867"
+              },
+              "lightrag_full_relations": {
+                "count": 1,
+                "sha": "44b90c36017d4b7543c38d64347334bde3760bd7192a5d8fdc5ede807bad55fe"
+              },
+              "lightrag_relation_chunks": {
+                "count": 1,
+                "sha": "b6fc70d7cecc63434fe552589215081c50729812371611933c3d466f6933f3ea"
+              },
+              "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+                "count": 1,
+                "sha": "096822b1e2b09dcd97f11425c6a2521833c75eeb9ffbf5ade84f2ba60f9fb125"
+              },
+              "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+                "count": 2,
+                "sha": "400a88b877af3a8de0870660d0d876de46ac16f30e2e7f04ce169acdfa7d13e9"
+              },
+              "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+                "count": 1,
+                "sha": "e21bc0cfd7ea98f6914900aa80a621241be6a95df7596273998ab4a08592fb05"
+              }
+            },
+            "nodes": 2,
+            "edges": 1,
+            "graph": "615832df7c84d68521459802472205608d16d4bd7c9c2d2c8567297559801d6c"
+          },
+          "inventory_sha": "ae47d207ee611c66dd2fbf8a8d463e05f8cebda959334ef31196bf26499059d4"
+        },
+        "native": true
+      }
+    }
+  },
+  "result": "PASS_BOUNDED_NATIVE_BRAIN_RECOVERY",
+  "seconds": 231.2040340000001,
+  "disposable_resources_removed": true
+}

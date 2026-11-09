@@ -1,0 +1,452 @@
+{
+  "installation": "d8313d53c3",
+  "images": {
+    "postgres": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+    "neo4j": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+    "keycloak": "quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7"
+  },
+  "scenarios": [
+    {
+      "name": "metadata_only_validity_and_caller_cannot_override_backend"
+    },
+    {
+      "name": "source_approval_publication_and_decisions_advance_retained_authority"
+    },
+    {
+      "name": "coherent_old_backup_denied_for_missing_postbackup_operations",
+      "missing": 5
+    },
+    {
+      "name": "latest_complete_bundle_opens_and_exact_old_advice_needs_no_model"
+    },
+    {
+      "name": "unconfirmed_authority_intent_stays_fenced_after_restart_without_inference"
+    }
+  ],
+  "worker_calls": [],
+  "freshness_authority": {
+    "public_key": "9733f20be9056048d98581d799d62c2551a2632bb809aceefa573b4f8221bec2",
+    "location": "separate process/store retained outside bundle on same lab host"
+  },
+  "versions": {
+    "postgres": "PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "pgvector": "0.8.7",
+    "neo4j": "versions\n[\"5.26.32\"]",
+    "keycloak": "26.8.1"
+  },
+  "joint_bundle": {
+    "generation": "g2",
+    "files": {
+      "editorial.sqlite": {
+        "bytes": 28672,
+        "sha256": "8180773d895851f4a85268a8259f5f44bf97a451026008411a6bbe236ebf6aad"
+      },
+      "identity.dump": {
+        "bytes": 259831,
+        "sha256": "3529e9fc6c83b37f30ed1b1ed5cd81709f50d91f8fe71151dba0bdd4d4d0e657"
+      },
+      "keys.enc": {
+        "bytes": 193,
+        "sha256": "ac1ab4edc6b47a4f157feca93b1f94326f71c1a589f82cf2cf42ce16a500bd01"
+      },
+      "knowledge.dump": {
+        "bytes": 59023,
+        "sha256": "0bbc46a7363f7712ec5a1315371d2d8bb9d888c1847fc8780fa76e911be13f1c"
+      },
+      "neo4j.dump": {
+        "bytes": 20220,
+        "sha256": "9a71355db750e094a675ace20a22e0bb53f8121000bfe537d32ac966d313ee5b"
+      },
+      "pilot.dump": {
+        "bytes": 26195,
+        "sha256": "a2fe47a60a13fef3c3cbf3a24f5bc79190ec8f18a3ddc7d4210446f048cee85d"
+      },
+      "roles.sql": {
+        "bytes": 2074,
+        "sha256": "f7efbad92f9a611bc9b6abde5b3033f80d3ca25ccbff647291c8c3934a535f7a"
+      },
+      "vault/manual.md": {
+        "bytes": 203,
+        "sha256": "3dc21ecd63774c8849464ec2568fff733c040c5c9ff496d017179952e07b2847"
+      }
+    },
+    "inventory": {
+      "tables": {
+        "decisions": "4383bf8f5abe8968ad0879d276fc7d97c4b5cd4949c5b1690e82fce510b64549",
+        "decision_receipts": "4383bf8f5abe8968ad0879d276fc7d97c4b5cd4949c5b1690e82fce510b64549",
+        "decision_admissions": "c06ebdcf27101a4368e09da6931857c86db52d36d31a1bbb7cdfe346963d377a",
+        "request_context": "ccc1ddf32c41ae081cb1de86f11fd278f12df4059b0ee3bbed26792b31dad0bc",
+        "request_closures": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "request_replacements": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "projections": "d8c3a0e242743897b553d72d8cb90bd95b57285943e31474160ffa62878d9efb",
+        "sources": "282b309d1aff4a2d2bbb2a33d37de23082c4314266ecd0e440b6adf447b08167",
+        "principals": "694a72194e3971fdcc753454a37cc7c778f99b52772543ebcaaa815659f8446e",
+        "freshness_receipts": "8a5edbc747b04fc6b7495af2fe14cfbd3db88149688960126f2f8c10f508e128"
+      },
+      "knowledge": {
+        "lightrag_doc_chunks": {
+          "rows": 2,
+          "sha256": "a2f341ff886933ccb0893b46cb8b1438cae5fc203cbe6b722c4d2badcf1dc006"
+        },
+        "lightrag_doc_full": {
+          "rows": 2,
+          "sha256": "2151cd9644b950bfd5423da5b2a4a4211ce0f6525c3bfe2ae7bb8697023d2171"
+        },
+        "lightrag_doc_status": {
+          "rows": 2,
+          "sha256": "fbbe2c828adcadbc80b74a4b3b08998edf6e91f20e2440e7e912456bc599957c"
+        },
+        "lightrag_entity_chunks": {
+          "rows": 6,
+          "sha256": "646c500aa0c1eab48f858ef300622171e7c7d56ffb1c9971c8109f1605046ffe"
+        },
+        "lightrag_full_entities": {
+          "rows": 2,
+          "sha256": "7ec55728ad0269da63cc6419c39a9046c1a41fd619dc24acb8d70d9f434914cf"
+        },
+        "lightrag_full_relations": {
+          "rows": 2,
+          "sha256": "e749a1ac1bd6300c9a59ec014673def424da113d34403e97688863a258720a40"
+        },
+        "lightrag_llm_cache": {
+          "rows": 10,
+          "sha256": "5740947bc637d8854de7f0ba9b35c7d357935423a859cd86cd3bbb64b373971e"
+        },
+        "lightrag_relation_chunks": {
+          "rows": 2,
+          "sha256": "e9af990e1fcff12fdfd02d6cb0cc43c0138f16cbeb4a93a6f51fd6ec5a11c0cf"
+        },
+        "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+          "rows": 2,
+          "sha256": "99d3e8e569d7de0abd27425988bebf896bfeddc0e4ec801d5390aa5a78bc6068"
+        },
+        "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+          "rows": 6,
+          "sha256": "603180d65796b9c9aa52dfdd0379227fd7bee02669400abfa4fd202673c0431b"
+        },
+        "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+          "rows": 2,
+          "sha256": "109dba48bd30b0d463163f3b132529768920981dc88c0fcdf3c27331d490f24b"
+        }
+      },
+      "grants": [
+        [
+          "35dd87d0-cd22-414c-93c4-4a832720339c",
+          "aquisicao"
+        ],
+        [
+          "35dd87d0-cd22-414c-93c4-4a832720339c",
+          "politica-remoto"
+        ],
+        [
+          "3ef518e6-f097-45d5-bde0-530091e027fb",
+          "aquisicao"
+        ],
+        [
+          "3ef518e6-f097-45d5-bde0-530091e027fb",
+          "politica-remoto"
+        ],
+        [
+          "45a696fa-a2c4-435b-b4df-c30777a4fcb6",
+          "aquisicao"
+        ],
+        [
+          "45a696fa-a2c4-435b-b4df-c30777a4fcb6",
+          "politica-remoto"
+        ],
+        [
+          "46db9105-3d8a-4b39-9b32-ddbbb11bfd44",
+          "politica-remoto"
+        ]
+      ],
+      "editorial": "f4ba790a7a36225329c6e96534d5ad6d53271f7c4bb462f2bbded19e296913e3",
+      "neo4j": "655a5db7e4cf63d1747867db30613d46874c25b77c244610e81a2828029a35e9",
+      "neo4j_nodes": 6,
+      "neo4j_edges": 2
+    },
+    "keys": "AES-256-GCM; KEK retained in lab memory; not KMS qualification"
+  },
+  "bundle_generations": [
+    {
+      "generation": "g1",
+      "files": {
+        "editorial.sqlite": {
+          "bytes": 28672,
+          "sha256": "1fd9893cb1055c56864acdf95d4e9ba224a7e60bddc1e70936162753dabd88c5"
+        },
+        "identity.dump": {
+          "bytes": 259833,
+          "sha256": "b738232f5e3aacdb72fe150a6e4bd65485c15c89393c452f19bfad530d177190"
+        },
+        "keys.enc": {
+          "bytes": 193,
+          "sha256": "9645969db57b6488347e3d7074794b2325f42a5e8e415571e5ee9ade043baf7f"
+        },
+        "knowledge.dump": {
+          "bytes": 47167,
+          "sha256": "d6071b9aaf30bb6e57c828693b35a1835dea81147263c2228858770f010c2aa2"
+        },
+        "neo4j.dump": {
+          "bytes": 17905,
+          "sha256": "83629faf5b69e3bf68c53bfd26735d806829ee776dd4dd034d95478ea4a4003d"
+        },
+        "pilot.dump": {
+          "bytes": 23185,
+          "sha256": "d0a931155013a4a7334773c405a642e05899f9b3f82d408a1bb9cf4ba001a8b7"
+        },
+        "roles.sql": {
+          "bytes": 2074,
+          "sha256": "e1d827c9308b52d191e495da25df0e8fa77ca8682689b7d867b1d0c3bb45c436"
+        },
+        "vault/manual.md": {
+          "bytes": 201,
+          "sha256": "6620b8966b82ce502c925be7d5788c7c332a3810455c316b161d0b777768fd5c"
+        }
+      },
+      "inventory": {
+        "tables": {
+          "decisions": "e462a9200c0faa2b065816b2783890487a7a3a2e547c253b9950fd71d440ba53",
+          "decision_receipts": "e462a9200c0faa2b065816b2783890487a7a3a2e547c253b9950fd71d440ba53",
+          "decision_admissions": "068b50616d849bef2ac05c2879c1dc13cc68cfea3aa067910f3482c989778c12",
+          "request_context": "976091f5bf20e0721e18187da848fb8f765759ce3a9e5530009f840ac960c2e0",
+          "request_closures": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "request_replacements": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "projections": "3c20b4a59ed8ca08fa8dbbc290c8c23b15bdfcba8f93a4cf54d1f24f2ea7abe5",
+          "sources": "282b309d1aff4a2d2bbb2a33d37de23082c4314266ecd0e440b6adf447b08167",
+          "principals": "694a72194e3971fdcc753454a37cc7c778f99b52772543ebcaaa815659f8446e",
+          "freshness_receipts": "a35c48aa310b5db584e646c83dd2f0adec8f09ab0f673c4d4fcc7168e40bd93f"
+        },
+        "knowledge": {
+          "lightrag_doc_chunks": {
+            "rows": 1,
+            "sha256": "b51a3f612cd036bf2d219070eedd2b7f91d3c946f187d94a30d3afd67e67e3c3"
+          },
+          "lightrag_doc_full": {
+            "rows": 1,
+            "sha256": "1e10c787db992a58f3e495a06da58ab0ebc09298d3642742602cb56ee019a4bd"
+          },
+          "lightrag_doc_status": {
+            "rows": 1,
+            "sha256": "2202ac20eb5a2c58b8befad33b2dd2fd8e921f761fd02394e1b037cbc49105b8"
+          },
+          "lightrag_entity_chunks": {
+            "rows": 3,
+            "sha256": "2f6942971fbb41197c3f61ceec67402e481652a33e1811cf05bd4e524499f7fa"
+          },
+          "lightrag_full_entities": {
+            "rows": 1,
+            "sha256": "a440e3e903de5c9d6ba8cdbf7423804e725df512bc5ef307a17f5b36b2e13be3"
+          },
+          "lightrag_full_relations": {
+            "rows": 1,
+            "sha256": "827725931e8db8f155ed228fcf4557d553b3db567893431487695f51a150511c"
+          },
+          "lightrag_llm_cache": {
+            "rows": 3,
+            "sha256": "74c4feeebd2a9a815fc69ad9f4b08d05d0347fcbd170b2e6ab47d4f7a54cb9bd"
+          },
+          "lightrag_relation_chunks": {
+            "rows": 1,
+            "sha256": "1339195104ad570cdd575541095ff76dc5f31d81ee804024d270bd0d70656911"
+          },
+          "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+            "rows": 1,
+            "sha256": "4eb4de0a3968d79ca7ef61de4f9798fabb3155cf04db325cb443c51a2a9e3ad9"
+          },
+          "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+            "rows": 3,
+            "sha256": "1a5959a1397ef54da71728e0c7c902adeb8979c59d37f9380ac67003a7f9e388"
+          },
+          "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+            "rows": 1,
+            "sha256": "d67f1c76314da7ef446ac2ad9893127d189a3eb807210d404329ce19027dfe30"
+          }
+        },
+        "grants": [
+          [
+            "35dd87d0-cd22-414c-93c4-4a832720339c",
+            "aquisicao"
+          ],
+          [
+            "35dd87d0-cd22-414c-93c4-4a832720339c",
+            "politica-remoto"
+          ],
+          [
+            "3ef518e6-f097-45d5-bde0-530091e027fb",
+            "aquisicao"
+          ],
+          [
+            "3ef518e6-f097-45d5-bde0-530091e027fb",
+            "politica-remoto"
+          ],
+          [
+            "45a696fa-a2c4-435b-b4df-c30777a4fcb6",
+            "aquisicao"
+          ],
+          [
+            "45a696fa-a2c4-435b-b4df-c30777a4fcb6",
+            "politica-remoto"
+          ],
+          [
+            "46db9105-3d8a-4b39-9b32-ddbbb11bfd44",
+            "politica-remoto"
+          ]
+        ],
+        "editorial": "9894af3ef7c4a9e3b253950f963fb31aa7282a2fe98913b535fc35b5e912fb59",
+        "neo4j": "df886b01d2656ceb057911692588ec22c045ba6c0208ce34fef9509075d1869b",
+        "neo4j_nodes": 3,
+        "neo4j_edges": 1
+      },
+      "keys": "AES-256-GCM; KEK retained in lab memory; not KMS qualification"
+    },
+    {
+      "generation": "g2",
+      "files": {
+        "editorial.sqlite": {
+          "bytes": 28672,
+          "sha256": "8180773d895851f4a85268a8259f5f44bf97a451026008411a6bbe236ebf6aad"
+        },
+        "identity.dump": {
+          "bytes": 259831,
+          "sha256": "3529e9fc6c83b37f30ed1b1ed5cd81709f50d91f8fe71151dba0bdd4d4d0e657"
+        },
+        "keys.enc": {
+          "bytes": 193,
+          "sha256": "ac1ab4edc6b47a4f157feca93b1f94326f71c1a589f82cf2cf42ce16a500bd01"
+        },
+        "knowledge.dump": {
+          "bytes": 59023,
+          "sha256": "0bbc46a7363f7712ec5a1315371d2d8bb9d888c1847fc8780fa76e911be13f1c"
+        },
+        "neo4j.dump": {
+          "bytes": 20220,
+          "sha256": "9a71355db750e094a675ace20a22e0bb53f8121000bfe537d32ac966d313ee5b"
+        },
+        "pilot.dump": {
+          "bytes": 26195,
+          "sha256": "a2fe47a60a13fef3c3cbf3a24f5bc79190ec8f18a3ddc7d4210446f048cee85d"
+        },
+        "roles.sql": {
+          "bytes": 2074,
+          "sha256": "f7efbad92f9a611bc9b6abde5b3033f80d3ca25ccbff647291c8c3934a535f7a"
+        },
+        "vault/manual.md": {
+          "bytes": 203,
+          "sha256": "3dc21ecd63774c8849464ec2568fff733c040c5c9ff496d017179952e07b2847"
+        }
+      },
+      "inventory": {
+        "tables": {
+          "decisions": "4383bf8f5abe8968ad0879d276fc7d97c4b5cd4949c5b1690e82fce510b64549",
+          "decision_receipts": "4383bf8f5abe8968ad0879d276fc7d97c4b5cd4949c5b1690e82fce510b64549",
+          "decision_admissions": "c06ebdcf27101a4368e09da6931857c86db52d36d31a1bbb7cdfe346963d377a",
+          "request_context": "ccc1ddf32c41ae081cb1de86f11fd278f12df4059b0ee3bbed26792b31dad0bc",
+          "request_closures": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "request_replacements": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "projections": "d8c3a0e242743897b553d72d8cb90bd95b57285943e31474160ffa62878d9efb",
+          "sources": "282b309d1aff4a2d2bbb2a33d37de23082c4314266ecd0e440b6adf447b08167",
+          "principals": "694a72194e3971fdcc753454a37cc7c778f99b52772543ebcaaa815659f8446e",
+          "freshness_receipts": "8a5edbc747b04fc6b7495af2fe14cfbd3db88149688960126f2f8c10f508e128"
+        },
+        "knowledge": {
+          "lightrag_doc_chunks": {
+            "rows": 2,
+            "sha256": "a2f341ff886933ccb0893b46cb8b1438cae5fc203cbe6b722c4d2badcf1dc006"
+          },
+          "lightrag_doc_full": {
+            "rows": 2,
+            "sha256": "2151cd9644b950bfd5423da5b2a4a4211ce0f6525c3bfe2ae7bb8697023d2171"
+          },
+          "lightrag_doc_status": {
+            "rows": 2,
+            "sha256": "fbbe2c828adcadbc80b74a4b3b08998edf6e91f20e2440e7e912456bc599957c"
+          },
+          "lightrag_entity_chunks": {
+            "rows": 6,
+            "sha256": "646c500aa0c1eab48f858ef300622171e7c7d56ffb1c9971c8109f1605046ffe"
+          },
+          "lightrag_full_entities": {
+            "rows": 2,
+            "sha256": "7ec55728ad0269da63cc6419c39a9046c1a41fd619dc24acb8d70d9f434914cf"
+          },
+          "lightrag_full_relations": {
+            "rows": 2,
+            "sha256": "e749a1ac1bd6300c9a59ec014673def424da113d34403e97688863a258720a40"
+          },
+          "lightrag_llm_cache": {
+            "rows": 10,
+            "sha256": "5740947bc637d8854de7f0ba9b35c7d357935423a859cd86cd3bbb64b373971e"
+          },
+          "lightrag_relation_chunks": {
+            "rows": 2,
+            "sha256": "e9af990e1fcff12fdfd02d6cb0cc43c0138f16cbeb4a93a6f51fd6ec5a11c0cf"
+          },
+          "lightrag_vdb_chunks_minilm_multilingual_faf4aa4_384d": {
+            "rows": 2,
+            "sha256": "99d3e8e569d7de0abd27425988bebf896bfeddc0e4ec801d5390aa5a78bc6068"
+          },
+          "lightrag_vdb_entity_minilm_multilingual_faf4aa4_384d": {
+            "rows": 6,
+            "sha256": "603180d65796b9c9aa52dfdd0379227fd7bee02669400abfa4fd202673c0431b"
+          },
+          "lightrag_vdb_relation_minilm_multilingual_faf4aa4_384d": {
+            "rows": 2,
+            "sha256": "109dba48bd30b0d463163f3b132529768920981dc88c0fcdf3c27331d490f24b"
+          }
+        },
+        "grants": [
+          [
+            "35dd87d0-cd22-414c-93c4-4a832720339c",
+            "aquisicao"
+          ],
+          [
+            "35dd87d0-cd22-414c-93c4-4a832720339c",
+            "politica-remoto"
+          ],
+          [
+            "3ef518e6-f097-45d5-bde0-530091e027fb",
+            "aquisicao"
+          ],
+          [
+            "3ef518e6-f097-45d5-bde0-530091e027fb",
+            "politica-remoto"
+          ],
+          [
+            "45a696fa-a2c4-435b-b4df-c30777a4fcb6",
+            "aquisicao"
+          ],
+          [
+            "45a696fa-a2c4-435b-b4df-c30777a4fcb6",
+            "politica-remoto"
+          ],
+          [
+            "46db9105-3d8a-4b39-9b32-ddbbb11bfd44",
+            "politica-remoto"
+          ]
+        ],
+        "editorial": "f4ba790a7a36225329c6e96534d5ad6d53271f7c4bb462f2bbded19e296913e3",
+        "neo4j": "655a5db7e4cf63d1747867db30613d46874c25b77c244610e81a2828029a35e9",
+        "neo4j_nodes": 6,
+        "neo4j_edges": 2
+      },
+      "keys": "AES-256-GCM; KEK retained in lab memory; not KMS qualification"
+    }
+  ],
+  "result": "FAIL_SEMANTIC",
+  "execution_completed": true,
+  "temporal_passed": 1,
+  "temporal_total": 4,
+  "model_calls": 12,
+  "elapsed_seconds": 473.422318500001,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

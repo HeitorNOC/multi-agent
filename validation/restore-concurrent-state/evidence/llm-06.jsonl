@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a7e9-1bdf-7b72-b0db-96594416c911"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"aprovação de despesas extraordinárias\\\"],\\\"low_level_keywords\\\":[\\\"revisores distintos\\\",\\\"data de vigência: 2026-02-01\\\",\\\"corte de conhecimento: 2026-11-04\\\",\\\"politica-remoto@v1\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12690,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":76,"reasoning_output_tokens":0}}

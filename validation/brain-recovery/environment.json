@@ -1,0 +1,25 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "node": "v24.20.0",
+  "codex": "codex-cli 0.166.0-alpha.5.1",
+  "versions": {
+    "lightrag-hku": "1.5.8",
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "neo4j": "6.4.1",
+    "asyncpg": "0.32.0",
+    "numpy": "2.5.4",
+    "aiohttp": "3.14.5",
+    "cryptography": "50.0.2",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "vendor_sha": {
+    "lightrag": "aaebfe1bb8d55deb6a4304d357a3bf4c92fcd40a",
+    "langgraph": "3c916d750575b22c464790e9774494d810ccd322"
+  },
+  "postgres_image": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+  "neo4j_image": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0"
+}

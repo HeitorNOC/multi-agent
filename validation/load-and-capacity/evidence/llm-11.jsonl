@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a804-4d36-7f30-9864-9ae4a1ebffe9"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"teto diário de alimentação\\\",\\\"data de vigência\\\"],\\\"low_level_keywords\\\":[\\\"unidade Boreal\\\",\\\"2026-02-01T00:00:00+00:00\\\",\\\"2026-11-04T19:22:02.010335+00:00\\\",\\\"manual-boreal@v1\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12691,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":91,"reasoning_output_tokens":0}}

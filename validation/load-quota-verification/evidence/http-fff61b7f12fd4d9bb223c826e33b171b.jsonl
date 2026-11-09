@@ -1,0 +1,4 @@
+{"phase": "unspecified", "path": "/drafts", "method": "POST", "status": 200, "seconds": 0.25361819998943247, "queue_seconds": 0.0017565000161994249, "instance": "fff61b7f12fd4d9bb223c826e33b171b"}
+{"phase": "unspecified", "path": "/review", "method": "POST", "status": 200, "seconds": 0.2720285999821499, "queue_seconds": 0.0016853999986778945, "instance": "fff61b7f12fd4d9bb223c826e33b171b"}
+{"phase": "unspecified", "path": "/publish", "method": "POST", "status": 200, "seconds": 0.2655183000024408, "queue_seconds": 0.0018066999909933656, "instance": "fff61b7f12fd4d9bb223c826e33b171b"}
+{"phase": "unspecified", "path": "/advise", "method": "POST", "status": 200, "seconds": 0.19831010000780225, "queue_seconds": 0.0016856000002007931, "instance": "fff61b7f12fd4d9bb223c826e33b171b"}

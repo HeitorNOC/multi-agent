@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="2.209" timestamp="2026-11-03T12:19:23.855057-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.openagents.own_layer.test_api_bridge" name="test_own_layer_over_real_event_api" time="0.443" /></testsuite></testsuites>

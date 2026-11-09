@@ -1,0 +1,42 @@
+{
+  "name": "/platform-fit-sandbox-20261104",
+  "image": "sha256:750e1111426ef31a9217b81c98cccfb750f17b182af3221102e420afa9f0928e",
+  "configuredImage": "langgenius/dify-sandbox@sha256:750e1111426ef31a9217b81c98cccfb750f17b182af3221102e420afa9f0928e",
+  "user": "root",
+  "labels": {
+    "com.docker.dhi.chain-id": "sha256:7efbdde9cf436e03e485e5dc10f52441b687fab78304e3aed7955f762ff2f096",
+    "com.docker.dhi.compliance": "cis",
+    "com.docker.dhi.created": "2026-04-25T22:28:26Z",
+    "com.docker.dhi.date.end-of-life": "2030-10-31",
+    "com.docker.dhi.date.release": "2025-10-07",
+    "com.docker.dhi.definition": "image/python/debian-13/3.14-sfw-ent-dev",
+    "com.docker.dhi.distro": "debian-13",
+    "com.docker.dhi.entitlement": "public",
+    "com.docker.dhi.flavor": "sfw-ent",
+    "com.docker.dhi.name": "dhi/python",
+    "com.docker.dhi.package-manager": "apt",
+    "com.docker.dhi.shell": "bash",
+    "com.docker.dhi.title": "Python 3.14.x / Socket Firewall Enterprise (sfw-ent, dev)",
+    "com.docker.dhi.url": "https://dhi.io/catalog/python",
+    "com.docker.dhi.variant": "dev",
+    "com.docker.dhi.version": "3.14.4-debian13-sfw-ent-dev",
+    "qualification": "platform-fit-2026-11-04"
+  },
+  "memory": 536870912,
+  "nanoCpus": 1000000000,
+  "pidsLimit": 128,
+  "privileged": false,
+  "mounts": [],
+  "requestedPorts": {
+    "8194/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "18194"
+      }
+    ]
+  },
+  "actualPorts": {
+    "8194/tcp": []
+  },
+  "internalNetwork": true
+}

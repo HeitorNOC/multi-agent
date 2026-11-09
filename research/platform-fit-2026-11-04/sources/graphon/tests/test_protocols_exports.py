@@ -1,0 +1,184 @@
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
+import sys
+from textwrap import dedent
+
+from graphon import protocols
+from graphon.file.protocols import WorkflowFileRuntimeProtocol
+from graphon.graph.graph import NodeFactory
+from graphon.graph.validation import GraphValidationRule
+from graphon.http.protocols import HttpClientProtocol, HttpResponseProtocol
+from graphon.model_runtime.memory.prompt_message_memory import PromptMessageMemory
+from graphon.model_runtime.protocols.llm_runtime import LLMModelRuntime
+from graphon.model_runtime.protocols.moderation_runtime import (
+    ModerationModelRuntime,
+)
+from graphon.model_runtime.protocols.provider_runtime import ModelProviderRuntime
+from graphon.model_runtime.protocols.rerank_runtime import RerankModelRuntime
+from graphon.model_runtime.protocols.runtime import ModelRuntime
+from graphon.model_runtime.protocols.speech_to_text_runtime import (
+    SpeechToTextModelRuntime,
+)
+from graphon.model_runtime.protocols.text_embedding_runtime import (
+    TextEmbeddingModelRuntime,
+)
+from graphon.model_runtime.protocols.tts_runtime import TTSModelRuntime
+from graphon.nodes.code.code_node import CodeExecutorProtocol
+from graphon.nodes.llm.protocols import CredentialsProvider, ModelFactory
+from graphon.nodes.llm.runtime_protocols import (
+    LLMPollingCapableProtocol,
+    LLMProtocol,
+    PreparedLLMProtocol,
+    PromptMessageSerializerProtocol,
+    RetrieverAttachmentLoaderProtocol,
+)
+from graphon.nodes.protocols import (
+    FileManagerProtocol,
+    FileReferenceFactoryProtocol,
+    ToolFileManagerProtocol,
+)
+from graphon.nodes.runtime import ToolNodeRuntimeProtocol
+from graphon.protocols import CodeExecutorProtocol as PublicCodeExecutorProtocol
+from graphon.protocols import (
+    CredentialsProvider as PublicCredentialsProvider,
+)
+from graphon.protocols import (
+    FileManagerProtocol as PublicFileManagerProtocol,
+)
+from graphon.protocols import (
+    FileReferenceFactoryProtocol as PublicFileReferenceFactoryProtocol,
+)
+from graphon.protocols import GraphValidationRule as PublicGraphValidationRule
+from graphon.protocols import HttpClientProtocol as PublicHttpClientProtocol
+from graphon.protocols import HttpResponseProtocol as PublicHttpResponseProtocol
+from graphon.protocols import LLMModelRuntime as PublicLLMModelRuntime
+from graphon.protocols import (
+    LLMPollingCapableProtocol as PublicLLMPollingCapableProtocol,
+)
+from graphon.protocols import LLMProtocol as PublicLLMProtocol
+from graphon.protocols import ModelFactory as PublicModelFactory
+from graphon.protocols import ModelProviderRuntime as PublicModelProviderRuntime
+from graphon.protocols import ModelRuntime as PublicModelRuntime
+from graphon.protocols import ModerationModelRuntime as PublicModerationModelRuntime
+from graphon.protocols import NodeFactory as PublicNodeFactory
+from graphon.protocols import PreparedLLMProtocol as PublicPreparedLLMProtocol
+from graphon.protocols import PromptMessageMemory as PublicPromptMessageMemory
+from graphon.protocols import (
+    PromptMessageSerializerProtocol as PublicPromptMessageSerializerProtocol,
+)
+from graphon.protocols import (
+    ReadOnlyRuntimeState as PublicReadOnlyRuntimeState,
+)
+from graphon.protocols import ReadOnlyVariablePool as PublicReadOnlyVariablePool
+from graphon.protocols import RerankModelRuntime as PublicRerankModelRuntime
+from graphon.protocols import (
+    RetrieverAttachmentLoaderProtocol as PublicRetrieverAttachmentLoaderProtocol,
+)
+from graphon.protocols import (
+    SpeechToTextModelRuntime as PublicSpeechToTextModelRuntime,
+)
+from graphon.protocols import (
+    TextEmbeddingModelRuntime as PublicTextEmbeddingModelRuntime,
+)
+from graphon.protocols import ToolFileManagerProtocol as PublicToolFileManagerProtocol
+from graphon.protocols import ToolNodeRuntimeProtocol as PublicToolNodeRuntimeProtocol
+from graphon.protocols import TTSModelRuntime as PublicTTSModelRuntime
+from graphon.protocols import VariableLoader as PublicVariableLoader
+from graphon.protocols import (
+    WorkflowFileRuntimeProtocol as PublicWorkflowFileRuntimeProtocol,
+)
+from graphon.runtime.runtime_state_protocol import (
+    ReadOnlyRuntimeState,
+    ReadOnlyVariablePool,
+)
+from graphon.variable_loader import VariableLoader
+
+
+def test_public_protocol_import_leaves_node_registration_to_explicit_imports() -> None:
+    script = dedent(
+        """
+        from graphon.nodes.base.node import Node
+
+        registered = Node.get_node_type_classes_mapping()
+        import graphon.protocols
+
+        assert Node.get_node_type_classes_mapping() == registered
+
+        from graphon.nodes.code import CodeNode
+        from graphon.nodes.code.code_node import CodeNode as ImplementationCodeNode
+        from graphon.nodes.llm import LLMNode
+        from graphon.nodes.llm.node import LLMNode as ImplementationLLMNode
+
+        assert CodeNode is ImplementationCodeNode
+        assert LLMNode is ImplementationLLMNode
+        registered = Node.get_node_type_classes_mapping()
+        assert registered[CodeNode.node_type][CodeNode.version()] is CodeNode
+        assert registered[LLMNode.node_type][LLMNode.version()] is LLMNode
+        """
+    )
+    subprocess.run([sys.executable, "-c", script], check=True)  # ruff: ignore[subprocess-without-shell-equals-true]
+
+
+def test_public_protocol_exports_match_canonical_definitions() -> None:
+    assert PublicHttpClientProtocol is HttpClientProtocol
+    assert PublicHttpResponseProtocol is HttpResponseProtocol
+    assert PublicWorkflowFileRuntimeProtocol is WorkflowFileRuntimeProtocol
+    assert PublicNodeFactory is NodeFactory
+    assert PublicGraphValidationRule is GraphValidationRule
+    assert PublicModelProviderRuntime is ModelProviderRuntime
+    assert PublicLLMModelRuntime is LLMModelRuntime
+    assert PublicTextEmbeddingModelRuntime is TextEmbeddingModelRuntime
+    assert PublicRerankModelRuntime is RerankModelRuntime
+    assert PublicSpeechToTextModelRuntime is SpeechToTextModelRuntime
+    assert PublicModerationModelRuntime is ModerationModelRuntime
+    assert PublicTTSModelRuntime is TTSModelRuntime
+    assert PublicModelRuntime is ModelRuntime
+    assert PublicPromptMessageMemory is PromptMessageMemory
+    assert PublicCodeExecutorProtocol is CodeExecutorProtocol
+    assert PublicCredentialsProvider is CredentialsProvider
+    assert PublicModelFactory is ModelFactory
+    assert PublicLLMProtocol is LLMProtocol
+    assert PublicPreparedLLMProtocol is PreparedLLMProtocol
+    assert PublicLLMPollingCapableProtocol is LLMPollingCapableProtocol
+    assert PublicPromptMessageSerializerProtocol is PromptMessageSerializerProtocol
+    assert PublicRetrieverAttachmentLoaderProtocol is RetrieverAttachmentLoaderProtocol
+    assert PublicFileManagerProtocol is FileManagerProtocol
+    assert PublicToolFileManagerProtocol is ToolFileManagerProtocol
+    assert PublicFileReferenceFactoryProtocol is FileReferenceFactoryProtocol
+    assert PublicToolNodeRuntimeProtocol is ToolNodeRuntimeProtocol
+    assert PublicReadOnlyVariablePool is ReadOnlyVariablePool
+    assert PublicReadOnlyRuntimeState is ReadOnlyRuntimeState
+    assert PublicVariableLoader is VariableLoader
+
+
+def test_public_protocol_package_exports_are_stable() -> None:
+    assert protocols.__all__ == [
+        "CodeExecutorProtocol",
+        "CredentialsProvider",
+        "FileManagerProtocol",
+        "FileReferenceFactoryProtocol",
+        "GraphValidationRule",
+        "HttpClientProtocol",
+        "HttpResponseProtocol",
+        "LLMModelRuntime",
+        "LLMPollingCapableProtocol",
+        "LLMProtocol",
+        "ModelFactory",
+        "ModelProviderRuntime",
+        "ModelRuntime",
+        "ModerationModelRuntime",
+        "NodeFactory",
+        "PreparedLLMProtocol",
+        "PromptMessageMemory",
+        "PromptMessageSerializerProtocol",
+        "ReadOnlyRuntimeState",
+        "ReadOnlyVariablePool",
+        "RerankModelRuntime",
+        "RetrieverAttachmentLoaderProtocol",
+        "SpeechToTextModelRuntime",
+        "TTSModelRuntime",
+        "TextEmbeddingModelRuntime",
+        "ToolFileManagerProtocol",
+        "ToolNodeRuntimeProtocol",
+        "VariableLoader",
+        "WorkflowFileRuntimeProtocol",
+    ]

@@ -1,0 +1,15 @@
+{
+  "chunk-d211598d636365d292b2615ad59ae479": {
+    "content": "Company A: sales dropped 20 percent; campaign paused. SECRET_A",
+    "source_id": "source-A",
+    "tokens": 62,
+    "chunk_order_index": 0,
+    "full_doc_id": "doc-A",
+    "file_path": "synthetic-A.md",
+    "status": "processed",
+    "llm_cache_list": [],
+    "create_time": 1793720517,
+    "update_time": 1793720517,
+    "_id": "chunk-d211598d636365d292b2615ad59ae479"
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "note": "Capa, escopo e versões declaradas da análise."
+    },
+    {
+      "number": 2,
+      "note": "Sumário das seções iniciais e do ciclo de atendimento."
+    },
+    {
+      "number": 3,
+      "note": "Visão geral, fontes consultadas e legenda de confiança."
+    },
+    {
+      "number": 4,
+      "note": "Complemento da legenda: mapeamento anterior."
+    },
+    {
+      "number": 5,
+      "note": "Mapa de componentes e responsabilidades de workspace, BFF e serviços REST."
+    },
+    {
+      "number": 6,
+      "note": "Cache, mensageria, schedules, distribuição e exportação."
+    },
+    {
+      "number": 7,
+      "note": "Implementação, unificação e organização visual do workspace."
+    },
+    {
+      "number": 8,
+      "note": "Menu de funções e recursos do chat."
+    },
+    {
+      "number": 9,
+      "note": "Estados, identificadores e principais transições do atendimento."
+    },
+    {
+      "number": 10,
+      "note": "Transições e registro do histórico de status."
+    },
+    {
+      "number": 11,
+      "note": "Criação do atendimento e entrada na fila."
+    },
+    {
+      "number": 12,
+      "note": "Dia de atendimento e intervalos do atendente."
+    },
+    {
+      "number": 13,
+      "note": "Socket.IO, salas, eventos e consulta periódica da fila."
+    },
+    {
+      "number": 14,
+      "note": "Composição da fila, histórico de mensagens e links temporários."
+    },
+    {
+      "number": 15,
+      "note": "Contratos e efeitos de iniciar, transferir, pausar e finalizar."
+    },
+    {
+      "number": 16,
+      "note": "Mensagens de encerramento, cancelamento, cliente sem resposta e envio."
+    },
+    {
+      "number": 17,
+      "note": "Payload de envio e demais integrações do menu."
+    },
+    {
+      "number": 18,
+      "note": "Permissões de interface e limites da revisão de acesso no backend."
+    },
+    {
+      "number": 19,
+      "note": "Pipeline de distribuição automática e critérios de escolha."
+    },
+    {
+      "number": 20,
+      "note": "Capacidade, rodízio, novas tentativas e resultados da distribuição."
+    },
+    {
+      "number": 21,
+      "note": "Aviso de posição na fila e cancelamento por inatividade."
+    },
+    {
+      "number": 22,
+      "note": "Fluxo de telefonia, SIP e eventos de chamada."
+    },
+    {
+      "number": 23,
+      "note": "Persistência, caches, sessões e eventos de métricas."
+    },
+    {
+      "number": 24,
+      "note": "Riscos observados e divergência de tecnologias de persistência."
+    },
+    {
+      "number": 25,
+      "note": "Partes não lidas e hipóteses pendentes."
+    }
+  ],
+  "classification": "referência funcional",
+  "reason": "O documento descreve o comportamento e os contratos observados em versões específicas do código, com confirmações, inferências e lacunas explícitas. É uma referência para compreender o sistema existente, não uma especificação normativa de requisitos nem evidência de trabalho executado nesta tarefa.",
+  "findings": [
+    {
+      "pages": [
+        1,
+        3,
+        4
+      ],
+      "text": "A fonte relata leitura do front na branch dev e do backend em clone local e GitLab main, em novembro de 2026; distingue código confirmado, inferência e mapeamento anterior. Essas são afirmações da fonte, não verificações independentes desta análise."
+    },
+    {
+      "pages": [
+        5,
+        6,
+        7
+      ],
+      "text": "O workspace autenticado reúne abas de diferentes domínios. O contact-center-portal atua como BFF GraphQL e repassa accountID e userID extraídos do token ao núcleo REST contact-center, responsável por atendimentos, jornada do agente, configurações e persistência em Postgres. A API externa é uma fachada com autenticação própria; seus internos não foram lidos."
+    },
+    {
+      "pages": [
+        9,
+        10,
+        11
+      ],
+      "text": "A criação registra a transição IDLE para WAITING, cria cache, metadados e retrato das configurações, publica evento de CRM e, quando configurado, registra o atendimento para distribuição. Sessões de mensageria passam a HUMAN. Iniciar, pausar, transferir, finalizar e cancelar alteram o estado e registram histórico; o significado operacional do status 10 é inferido pelo nome."
+    },
+    {
+      "pages": [
+        12,
+        14
+      ],
+      "text": "A fila fica disponível com fluxo de atendimento aberto. Sem distribuição automática, a lista combina atendimentos iniciados pelo usuário com os disponíveis da conta; com distribuição, mostra os alocados ao usuário. Intervalos têm operações de iniciar, continuar e encerrar, com nomes de métodos do front trocados em relação às mutations chamadas."
+    },
+    {
+      "pages": [
+        13,
+        14,
+        16,
+        17
+      ],
+      "text": "O workspace usa Socket.IO e salas room:attendance:<sessionID>, com join e leave explícitos e recuperação após reconexão. Mensagens do atendente usam tatodesk.conversation_agent_to_client:utter com sessão, lista de mensagens, usuário, integração, canal e identificação do atendimento. A fila é consultada a cada 10 segundos; o histórico usa consultas específicas e arquivos privados recebem links temporários."
+    },
+    {
+      "pages": [
+        15,
+        16
+      ],
+      "text": "startAttendance recebe attendanceID e sessionID, valida e atribui o responsável; telefonia exige terminal. A transferência por usuário registra histórico e atualiza caches. Pausar remove a expiração da sessão; finalizar exige ACTIVE, verifica permissões e tabulação no front e retorna a sessão ao bot. O cancelamento aceita inclusive DONE no caso de uso descrito; o efeito final depende de quem cancelou e do estado anterior."
+    },
+    {
+      "pages": [
+        16,
+        17
+      ],
+      "text": "No encerramento, as opções de problema resolvido, avaliação e download são mutuamente exclusivas nessa ordem; o retrato do atendimento tem prioridade sobre a configuração da conta. Envio de arquivos e áudio passa por upload, e a interface apresenta mensagens de modo otimista."
+    },
+    {
+      "pages": [
+        18,
+        24
+      ],
+      "text": "As permissões de visualização, transferência, interferência e finalização são combinadas com estado e responsável no front. A fonte relata que os casos de uso principais examinados não repetem essas regras; a cobertura de autorização no backend deve ser validada antes de tratá-la como garantia de segurança."
+    },
+    {
+      "pages": [
+        19,
+        20
+      ],
+      "text": "A distribuição automática registra a demanda no Kafka, agenda processamento por conta, escolhe atendentes conforme ordem, capacidade e departamentos e chama startAttendance em nome do escolhido. Falhas de pré-condição geram error; outras retornam à espera com nova tentativa."
+    },
+    {
+      "pages": [
+        21,
+        22,
+        23
+      ],
+      "text": "O schedule de fila publica avisos por Kafka para atendimentos em espera há pelo menos cinco minutos. Outro cancela por prazo de 24 horas nos estados WAITING, ACTIVE e TRANSFERED, sem aviso ao cliente no código descrito. Telefonia usa sip.js e terminal SIP; dados e histórico ficam em Postgres, com cache de atendimento, cache de mensagens e eventos Kafka."
+    },
+    {
+      "pages": [
+        24
+      ],
+      "text": "A fonte aponta regra fixa para um userID no portal, domínio SIP de teste fixo, carga de polling e contagem por atendimento. Preserva a divergência de stack: contact-center usa Sequelize 6.6.5, enquanto serviços novos seguem o padrão TypeORM. A hipótese de bloqueio de depuração esquecido não é conclusão confirmada."
+    }
+  ],
+  "gaps": [
+    "Identificar os chamadores dos endpoints createAttendance*: chatbot ou workflow são hipóteses, não confirmação (p. 25).",
+    "Ler no backend finishAttendanceClientNotResponding, inclusive seu status resultante, e transferAttendanceToDepartment (pp. 16 e 25).",
+    "Revisar validate.startAttendance, demais validações e autorização efetiva no backend, inclusive possíveis controles fora dos casos de uso examinados (pp. 18, 24 e 25).",
+    "Ler servidor e infraestrutura de telefonia, internos do cache de atendimento, incluindo Redis e TTL, e contact-center-api além das rotas (pp. 5, 22 e 25).",
+    "Examinar dashboards, relatórios, configurações, exportação e fluxos dos workspaces presencial, ticket e QA (pp. 6 e 25).",
+    "Validar versões e comportamento em execução: a fonte combina front dev, backend local 3.5.4 e repositórios backend main, sem estabelecer equivalência com um ambiente implantado (pp. 1 e 3)."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "attempts": [
+    {
+      "result": "FAIL",
+      "installation": "business-flow-a0fdaf27d1",
+      "proofs_verified": 28,
+      "checkpoints": 0,
+      "model_calls_recorded": 4,
+      "model_reservations": 4,
+      "reservations_without_usage_record": [],
+      "tokens_observed": {
+        "input_tokens": 52557,
+        "cached_input_tokens": 11392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 565,
+        "reasoning_output_tokens": 0
+      },
+      "pending_operations": 0,
+      "budgets": {
+        "business": {
+          "cap": 64,
+          "reserved": 2
+        },
+        "model": {
+          "cap": 16,
+          "reserved": 4
+        }
+      },
+      "unexpected_tool_events": 0
+    },
+    {
+      "result": "FAIL",
+      "installation": "business-flow-11c2f56a66",
+      "proofs_verified": 50,
+      "checkpoints": 1,
+      "model_calls_recorded": 6,
+      "model_reservations": 6,
+      "reservations_without_usage_record": [],
+      "tokens_observed": {
+        "input_tokens": 76699,
+        "cached_input_tokens": 40960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 777,
+        "reasoning_output_tokens": 0
+      },
+      "pending_operations": 1,
+      "budgets": {
+        "business": {
+          "cap": 64,
+          "reserved": 2
+        },
+        "model": {
+          "cap": 16,
+          "reserved": 6
+        }
+      },
+      "unexpected_tool_events": 0
+    },
+    {
+      "result": "PASS_BOUNDED_NATIVE_BRAIN_RECOVERY",
+      "installation": "business-flow-dbf193ddac",
+      "proofs_verified": 108,
+      "checkpoints": 4,
+      "model_calls_recorded": 9,
+      "model_reservations": 9,
+      "reservations_without_usage_record": [],
+      "tokens_observed": {
+        "input_tokens": 117788,
+        "cached_input_tokens": 96640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1129,
+        "reasoning_output_tokens": 0
+      },
+      "pending_operations": 0,
+      "budgets": {
+        "business": {
+          "cap": 64,
+          "reserved": 3
+        },
+        "model": {
+          "cap": 16,
+          "reserved": 9
+        }
+      },
+      "unexpected_tool_events": 0
+    }
+  ],
+  "production_approved": false,
+  "monetary_cost_observed": false
+}

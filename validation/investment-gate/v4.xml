@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="4.106" timestamp="2026-11-05T00:29:01.858177-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.investment-gate.test_v4" name="test_v4_local_tool_boundary_and_encrypted_recovery" time="4.053" /></testsuite></testsuites>

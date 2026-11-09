@@ -1,0 +1,52 @@
+{
+  "captured_utc": "2026-11-04T20:08:28.439820+00:00",
+  "image": "langgenius/dify-sandbox@sha256:750e1111426ef31a9217b81c98cccfb750f17b182af3221102e420afa9f0928e",
+  "deployment": "dedicated Docker internal network; localhost port; no host mounts; resource limits",
+  "health": {
+    "status": null,
+    "transport_error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conex\u00e3o p\u00f4de ser feita porque a m\u00e1quina de destino as recusou ativamente', None, 10061, None))",
+    "seconds": 2.0469999999913853
+  },
+  "unauthenticated": {
+    "status": null,
+    "transport_error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conex\u00e3o p\u00f4de ser feita porque a m\u00e1quina de destino as recusou ativamente', None, 10061, None))",
+    "seconds": 2.047000000020489
+  },
+  "cases": {
+    "basic": {
+      "status": null,
+      "transport_error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conex\u00e3o p\u00f4de ser feita porque a m\u00e1quina de destino as recusou ativamente', None, 10061, None))",
+      "seconds": 2.0469999999913853
+    },
+    "service_canary": {
+      "status": null,
+      "transport_error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conex\u00e3o p\u00f4de ser feita porque a m\u00e1quina de destino as recusou ativamente', None, 10061, None))",
+      "seconds": 2.0309999999881256
+    },
+    "service_process_environment": {
+      "status": null,
+      "transport_error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conex\u00e3o p\u00f4de ser feita porque a m\u00e1quina de destino as recusou ativamente', None, 10061, None))",
+      "seconds": 2.047000000020489
+    },
+    "external_network": {
+      "status": null,
+      "transport_error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conex\u00e3o p\u00f4de ser feita porque a m\u00e1quina de destino as recusou ativamente', None, 10061, None))",
+      "seconds": 2.0309999999881256
+    },
+    "spawn_process": {
+      "status": null,
+      "transport_error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conex\u00e3o p\u00f4de ser feita porque a m\u00e1quina de destino as recusou ativamente', None, 10061, None))",
+      "seconds": 2.062999999994645
+    },
+    "worker_timeout": {
+      "status": null,
+      "transport_error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conex\u00e3o p\u00f4de ser feita porque a m\u00e1quina de destino as recusou ativamente', None, 10061, None))",
+      "seconds": 2.062000000005355
+    }
+  },
+  "post_timeout_health": {
+    "status": null,
+    "transport_error": "URLError(ConnectionRefusedError(10061, 'Nenhuma conex\u00e3o p\u00f4de ser feita porque a m\u00e1quina de destino as recusou ativamente', None, 10061, None))",
+    "seconds": 2.0320000000065193
+  }
+}

@@ -1,0 +1,49 @@
+0.2.15: Pulling from langgenius/dify-sandbox
+55543deb16a0: Pulling fs layer
+289f5afe29d7: Pulling fs layer
+279035b149a5: Pulling fs layer
+06a24138c284: Pulling fs layer
+a3d71fddc381: Pulling fs layer
+749ff22e9da6: Pulling fs layer
+ce04cdf57169: Pulling fs layer
+1a1be1733bde: Pulling fs layer
+18b3903b7b9d: Pulling fs layer
+b36eef2b94b8: Pulling fs layer
+eca489f0ca2f: Pulling fs layer
+d05796a90583: Pulling fs layer
+0ffb9ee134be: Pulling fs layer
+565173ed7597: Pulling fs layer
+5a68ab1624b5: Pulling fs layer
+55543deb16a0: Download complete
+55543deb16a0: Pull complete
+ce04cdf57169: Download complete
+06a24138c284: Download complete
+749ff22e9da6: Download complete
+a3d71fddc381: Download complete
+1a1be1733bde: Download complete
+289f5afe29d7: Download complete
+d05796a90583: Download complete
+0ffb9ee134be: Download complete
+b36eef2b94b8: Download complete
+eca489f0ca2f: Download complete
+5a68ab1624b5: Download complete
+289f5afe29d7: Pull complete
+565173ed7597: Download complete
+06a24138c284: Pull complete
+749ff22e9da6: Pull complete
+a3d71fddc381: Pull complete
+ce04cdf57169: Pull complete
+1a1be1733bde: Pull complete
+279035b149a5: Download complete
+18b3903b7b9d: Download complete
+18b3903b7b9d: Pull complete
+d05796a90583: Pull complete
+b36eef2b94b8: Pull complete
+eca489f0ca2f: Pull complete
+5a68ab1624b5: Pull complete
+0ffb9ee134be: Pull complete
+565173ed7597: Pull complete
+279035b149a5: Pull complete
+Digest: sha256:750e1111426ef31a9217b81c98cccfb750f17b182af3221102e420afa9f0928e
+Status: Downloaded newer image for langgenius/dify-sandbox:0.2.15
+docker.io/langgenius/dify-sandbox:0.2.15

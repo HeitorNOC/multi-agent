@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e1-7800-7520-a4bf-5b41a56ad8b9"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O comprovante de despesa da equipe Aurora deve ser enviado até **18h30 do dia útil seguinte**. Essa regra consta do manual vigente desde 1º de janeiro de 2026, portanto já estava em vigor na data consultada, 1º de fevereiro de 2026. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":14229,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":94,"reasoning_output_tokens":0}}

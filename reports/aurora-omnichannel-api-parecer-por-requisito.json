@@ -1,0 +1,591 @@
+{
+  "goal": "Analisar a diretiva executiva vinculada a esta tarefa. SHA-256 5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "status": "awaiting_approval",
+  "error": null,
+  "plan": {
+    "strategy": "A2",
+    "reason": "A missão inicial é uma análise e fundação de engenharia, com prioridade para arquitetura, integrações e confiabilidade do núcleo compartilhado.",
+    "teams": [
+      {
+        "lead": "technology_director",
+        "specialists": [
+          "tech_lead",
+          "backend_engineer"
+        ],
+        "reason": "A liderança técnica define os limites arquiteturais e o backend detalha contratos, integrações, estados e garantias de execução.",
+        "queries": [
+          "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+          "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+          "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+          "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+        ]
+      }
+    ],
+    "capabilities": [
+      "technology_director",
+      "tech_lead",
+      "backend_engineer"
+    ],
+    "not_selected": [
+      {
+        "id": "executive_director",
+        "reason": "A análise solicitada é predominantemente técnica."
+      },
+      {
+        "id": "project_manager",
+        "reason": "O sequenciamento inicial pode ser definido pela equipe técnica."
+      },
+      {
+        "id": "business_analyst",
+        "reason": "Dependências entre unidades não são o foco inicial."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "Não há decisão de investimento entre iniciativas."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "Campanhas e posicionamento estão fora do escopo."
+      },
+      {
+        "id": "content_specialist",
+        "reason": "Conteúdo de campanha não é necessário para a análise."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "Não há campanha a planejar."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "Não há mecânica promocional a avaliar."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Suprimentos e logística não compõem esta missão."
+      },
+      {
+        "id": "procurement_analyst",
+        "reason": "Não há cotação ou compra solicitada."
+      },
+      {
+        "id": "process_quality_analyst",
+        "reason": "A análise inicial concentra-se na arquitetura de software."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Não há planejamento de estoque."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Não há distribuição física a planejar."
+      },
+      {
+        "id": "finance_director",
+        "reason": "Não foi solicitada análise financeira."
+      },
+      {
+        "id": "financial_planning_analyst",
+        "reason": "Orçamento e projeções não são o foco da diretiva."
+      },
+      {
+        "id": "accounting_analyst",
+        "reason": "Não há fechamento contábil a analisar."
+      },
+      {
+        "id": "controller",
+        "reason": "Margem e caixa não são objeto da tarefa."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Não há necessidade de financiamento a avaliar."
+      },
+      {
+        "id": "people_director",
+        "reason": "Capacidade organizacional não é a missão inicial."
+      },
+      {
+        "id": "people_development_specialist",
+        "reason": "Não há programa de treinamento solicitado."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "A diretiva não demonstra demanda de contratação."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "Disponibilidade de equipes não é o foco da análise."
+      },
+      {
+        "id": "legal_director",
+        "reason": "A análise inicial prioriza a fundação técnica."
+      },
+      {
+        "id": "privacy_specialist",
+        "reason": "O isolamento técnico de dados será tratado pela equipe de engenharia."
+      },
+      {
+        "id": "risk_controls_analyst",
+        "reason": "Os riscos técnicos iniciais serão tratados na arquitetura."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "Não há campanha ou incidente a avaliar."
+      },
+      {
+        "id": "contract_analyst",
+        "reason": "Não há contratos comerciais a comparar."
+      },
+      {
+        "id": "frontend_engineer",
+        "reason": "A diretiva prioriza contratos e fluxos de backend."
+      },
+      {
+        "id": "qa_engineer",
+        "reason": "Os critérios de teste iniciais serão definidos pela equipe técnica selecionada."
+      },
+      {
+        "id": "platform_engineer",
+        "reason": "A operação será considerada na arquitetura antes da especialização de plataforma."
+      },
+      {
+        "id": "data_engineer",
+        "reason": "Pipelines analíticos de dados não são o foco inicial."
+      },
+      {
+        "id": "security_analyst",
+        "reason": "Seu foco catalogado é resposta a incidentes, não arquitetura preventiva."
+      },
+      {
+        "id": "data_analyst",
+        "reason": "Não há análise de contagens existente a realizar."
+      },
+      {
+        "id": "product_director",
+        "reason": "A diretiva já define o resultado e as prioridades iniciais."
+      },
+      {
+        "id": "product_manager",
+        "reason": "O backlog técnico inicial pode ser ordenado pela liderança de engenharia."
+      },
+      {
+        "id": "ux_designer",
+        "reason": "Pesquisa e prototipação de interface não são a primeira prioridade."
+      },
+      {
+        "id": "service_designer",
+        "reason": "Os fluxos de atendimento serão inicialmente definidos nos contratos técnicos."
+      },
+      {
+        "id": "sales_director",
+        "reason": "Vendas não fazem parte da missão inicial."
+      },
+      {
+        "id": "sales_operations_analyst",
+        "reason": "Não há pipeline comercial a analisar."
+      },
+      {
+        "id": "account_specialist",
+        "reason": "Não há proposta comercial a preparar."
+      },
+      {
+        "id": "customer_director",
+        "reason": "A integração de atendimento será inicialmente analisada pela engenharia."
+      },
+      {
+        "id": "support_specialist",
+        "reason": "Não há solicitações de suporte a triar."
+      },
+      {
+        "id": "customer_success_specialist",
+        "reason": "Adoção e retenção não são o foco inicial."
+      },
+      {
+        "id": "customer_experience_analyst",
+        "reason": "Não foram fornecidos dados de satisfação ou reclamações."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 6
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 6,
+    "max_calls": 24,
+    "input_tokens": 88441,
+    "cached_input_tokens": 68352,
+    "output_tokens": 2177,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    },
+    {
+      "source": "training-calendar",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "training-calendar",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "training-calendar.txt",
+      "sha256": "366c2f6da77c54ada89a52a3521f112aa11633749da560ad645bf03049d17210"
+    },
+    {
+      "source": "webchat-sandbox",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "webchat-sandbox",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "webchat-sandbox.txt",
+      "sha256": "b7ed48e69e4716596432686301b96f96879bfe5bf807a2b2f7eeeae8d69a1a6c"
+    },
+    {
+      "source": "mba-academic",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "mba-academic",
+      "area": "Validação",
+      "origin": "Controle sintético do laboratório",
+      "file": "mba-academic.txt",
+      "sha256": "91200ff7d105a64a4e65c08271ee9050290238cc61d5bc6ace12652052961111"
+    }
+  ],
+  "retrieval": "hybrid",
+  "facets": [],
+  "job_seconds": 63.55,
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "specialist_started",
+    "retrieval_completed",
+    "inference_requested",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "director_completed",
+    "synthesis",
+    "inference_requested",
+    "inference_completed",
+    "inference_requested",
+    "inference_completed",
+    "review_ready",
+    "checkpoint_saved",
+    "worker_stopped"
+  ],
+  "retrieval_observed": true,
+  "candidates": [
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "mba",
+      "page": 8,
+      "line": 14
+    },
+    {
+      "source": "webchat-sandbox",
+      "page": null,
+      "line": 1
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 44
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 60
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 67
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 19
+    },
+    {
+      "source": "mba",
+      "page": 3,
+      "line": 4
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 20
+    },
+    {
+      "source": "mba-academic",
+      "page": null,
+      "line": 1
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 63
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 49
+    },
+    {
+      "source": "contact",
+      "page": 11,
+      "line": 22
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    }
+  ],
+  "report": {
+    "status": "partial_evidence",
+    "summary": "Parte da pergunta tem evidência para revisão humana.",
+    "citations": [
+      {
+        "id": "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+        "source": "fluxo",
+        "version": 1,
+        "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1",
+        "line": 10,
+        "quote": "5.2 Origens e destinos Situação O que o sent-consumer faz Origem STANDBY_CUSTOMER (cliente falando enquanto Só arquiva a mensagem em whatsapp-storage, como outro app é o dono da conversa) mensagem do cliente.",
+        "pdf_page": 9
+      },
+      {
+        "id": "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454",
+        "source": "fluxo",
+        "version": 1,
+        "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1",
+        "line": 28,
+        "quote": "[mapeamento anterior] messaging-session-processin Processamento de Consome o tópico mp-session-processing.",
+        "pdf_page": 12
+      },
+      {
+        "id": "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+        "source": "contact",
+        "version": 1,
+        "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510",
+        "line": 44,
+        "quote": "O backend valida; se for telefonia, exige um terminal de telefonia vinculado ao usuário; se estava PAUSED, reativa a expiração da sessão; soma o tempo de espera; muda o status para ACTIVE e o responsável para o usuário; atualiza o cache; grava a mudança de status; cria o cache de mensagens do atendimento; e executa a ação de workflow \"iniciar atendimento\", se houver.",
+        "pdf_page": 15
+      },
+      {
+        "id": "de7d022faddd59b3127c65954480a878d23d2e8ba636f4f0d4cd97b1cc0d28e2",
+        "source": "contact",
+        "version": 1,
+        "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510",
+        "line": 49,
+        "quote": "No backend (usuário): se for telefonia, o destino precisa ter terminal; publica as métricas; grava o status TRANSFERED e um registro de transferência (usuário e departamento anteriores); troca o responsável; atualiza o cache; apaga o cache de mensagens; grava o tempo de trabalho do usuário anterior; executa a ação de workflow.",
+        "pdf_page": 15
+      }
+    ],
+    "manifest_sha256": "6a98bb759989b36aa1e945c1fb5b0bbee763ea10532cc71b0b5c4256e96bceff",
+    "requires_approval": true,
+    "unanswered": [
+      "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+    ],
+    "directive_sha256": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+    "requirements": [
+      "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+      "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+      "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+      "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+    ],
+    "requirement_assessments": [
+      {
+        "requirement": "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+        "status": "documented",
+        "note": "O sent-consumer arquiva em whatsapp-storage a mensagem de um cliente em STANDBY_CUSTOMER quando outro aplicativo é dono da conversa; messaging-session-processin consome o tópico mp-session-processing.",
+        "evidence_ids": [
+          "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+          "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+        ]
+      },
+      {
+        "requirement": "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+        "status": "documented",
+        "note": "O trecho identifica o consumo do tópico mp-session-processing, mas não especifica contratos Kafka detalhados nem contratos Socket.IO.",
+        "evidence_ids": [
+          "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+        ]
+      },
+      {
+        "requirement": "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+        "status": "documented",
+        "note": "Ao iniciar o atendimento, o backend muda o status para ACTIVE e, se estava PAUSED, reativa a expiração da sessão; na transferência, grava TRANSFERED e troca o responsável.",
+        "evidence_ids": [
+          "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+          "de7d022faddd59b3127c65954480a878d23d2e8ba636f4f0d4cd97b1cc0d28e2"
+        ]
+      },
+      {
+        "requirement": "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?",
+        "status": "unanswered",
+        "note": "Os trechos disponíveis não especificam garantias de idempotência ou recuperação para o processamento de mensagens.",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "admission_replay": {
+    "job_ids": [
+      "aaeb21dd-eae5-457d-9351-34a2da5cc931",
+      "aaeb21dd-eae5-457d-9351-34a2da5cc931",
+      "aaeb21dd-eae5-457d-9351-34a2da5cc931"
+    ],
+    "same_job": true,
+    "jobs_visible": 1,
+    "worker_starts": 1
+  },
+  "directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "retrieval_by_agent": [
+    {
+      "agent": "backend_engineer",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba",
+        "mba-academic",
+        "webchat-sandbox"
+      ]
+    },
+    {
+      "agent": "tech_lead",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba",
+        "mba-academic",
+        "webchat-sandbox"
+      ]
+    },
+    {
+      "agent": "technology_director",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba",
+        "mba-academic",
+        "webchat-sandbox"
+      ]
+    }
+  ],
+  "directive_dispatches": [
+    {
+      "pilot_directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+      "job": "aaeb21dd-eae5-457d-9351-34a2da5cc931",
+      "characters": 23385
+    }
+  ],
+  "diagnostics": [],
+  "model_call_metadata": [
+    {
+      "call": 1,
+      "seconds": 24.77449969999725,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "seconds": 6.428244000009727,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "seconds": 6.871906199987279,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "seconds": 6.1058108000142965,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "seconds": 6.303836799983401,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "seconds": 10.765908400004264,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    }
+  ]
+}

@@ -1,0 +1,700 @@
+{
+  "goal": "Analisar a diretiva executiva vinculada a esta tarefa. SHA-256 5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "status": "awaiting_approval",
+  "error": null,
+  "plan": {
+    "strategy": "A3",
+    "reason": "A análise requer arquitetura e integração de mensageria, além de validação independente de segurança e critérios de aceite.",
+    "teams": [
+      {
+        "lead": "technology_director",
+        "specialists": [
+          "tech_lead",
+          "backend_engineer"
+        ],
+        "reason": "Definir a arquitetura mínima, os contratos, os estados e a estratégia de integração e entrega incremental.",
+        "queries": [
+          "Quais responsabilidades e fluxos o documento de mensageria descreve?",
+          "Quais são os contratos documentados dos eventos Kafka?",
+          "Quais estados e transições de sessão estão documentados?",
+          "Quais mecanismos oficiais do MBA confirmam a transferência de controle?"
+        ]
+      },
+      {
+        "lead": "legal_director",
+        "specialists": [
+          "privacy_specialist",
+          "risk_controls_analyst"
+        ],
+        "reason": "Avaliar riscos, controles e tratamento de dados pessoais no histórico e nas integrações entre empresas.",
+        "queries": [
+          "Quais dados pessoais são previstos no histórico de conversas?",
+          "Quais regras documentadas definem a retenção dos eventos?",
+          "Quais controles documentados restringem o acesso aos dados entre empresas?",
+          "Quais evidências de auditoria são exigidas para o handoff?"
+        ]
+      },
+      {
+        "lead": "product_director",
+        "specialists": [
+          "product_manager"
+        ],
+        "reason": "Priorizar o fluxo vertical, os resultados esperados e as dependências do backlog.",
+        "queries": [
+          "Quais etapas compõem o primeiro fluxo vertical obrigatório?",
+          "Qual sequência de fases a diretiva estabelece para as integrações?",
+          "Qual comportamento demonstra a continuidade do histórico no handoff?"
+        ]
+      }
+    ],
+    "capabilities": [
+      "technology_director",
+      "tech_lead",
+      "backend_engineer",
+      "legal_director",
+      "privacy_specialist",
+      "risk_controls_analyst",
+      "product_director",
+      "product_manager"
+    ],
+    "not_selected": [
+      {
+        "id": "executive_director",
+        "reason": "A priorização executiva já está definida na diretiva."
+      },
+      {
+        "id": "project_manager",
+        "reason": "O backlog inicial pode ser estruturado pela frente de produto."
+      },
+      {
+        "id": "business_analyst",
+        "reason": "Dependências entre unidades não são o foco inicial."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "Não há decisão de investimento entre iniciativas."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "A tarefa não trata de campanha ou posicionamento."
+      },
+      {
+        "id": "content_specialist",
+        "reason": "Não há demanda de conteúdo de marca."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "Não há campanha a planejar."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "Não há mecânica promocional a avaliar."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Suprimentos e logística não integram o escopo inicial."
+      },
+      {
+        "id": "procurement_analyst",
+        "reason": "Não há cotação de fornecedores solicitada."
+      },
+      {
+        "id": "process_quality_analyst",
+        "reason": "A análise prioriza os fluxos técnicos da plataforma."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Não há planejamento de estoque."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Não há distribuição física a planejar."
+      },
+      {
+        "id": "finance_director",
+        "reason": "Não há análise financeira específica solicitada."
+      },
+      {
+        "id": "financial_planning_analyst",
+        "reason": "Não foram fornecidos orçamento ou cenários financeiros."
+      },
+      {
+        "id": "accounting_analyst",
+        "reason": "Não há fechamento contábil no escopo."
+      },
+      {
+        "id": "controller",
+        "reason": "Não há análise de margem ou caixa solicitada."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Não há necessidade de financiamento identificada."
+      },
+      {
+        "id": "people_director",
+        "reason": "Não há planejamento organizacional solicitado."
+      },
+      {
+        "id": "people_development_specialist",
+        "reason": "Não há trilha de desenvolvimento solicitada."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "Não há demanda demonstrada de contratação."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "Não há dados de capacidade de equipes a analisar."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "Campanhas e resposta a incidentes não são o foco da missão inicial."
+      },
+      {
+        "id": "contract_analyst",
+        "reason": "Não há contratos comerciais firmes fornecidos para análise."
+      },
+      {
+        "id": "frontend_engineer",
+        "reason": "A diretiva prioriza contratos e fluxos de backend."
+      },
+      {
+        "id": "qa_engineer",
+        "reason": "Os critérios de aceite podem orientar a análise técnica inicial."
+      },
+      {
+        "id": "platform_engineer",
+        "reason": "A arquitetura inicial pode definir requisitos operacionais antes da especialização de plataforma."
+      },
+      {
+        "id": "data_engineer",
+        "reason": "Não há pipeline analítico separado no escopo inicial."
+      },
+      {
+        "id": "security_analyst",
+        "reason": "Seu foco catalogado em incidentes e SLA não corresponde à missão inicial."
+      },
+      {
+        "id": "data_analyst",
+        "reason": "Não há contagens ou integração analítica a reconciliar."
+      },
+      {
+        "id": "ux_designer",
+        "reason": "A interface não é a primeira prioridade da diretiva."
+      },
+      {
+        "id": "service_designer",
+        "reason": "O fluxo técnico e o backlog inicial cobrem a integração com atendimento humano."
+      },
+      {
+        "id": "sales_director",
+        "reason": "Vendas e negociação não são objeto da tarefa."
+      },
+      {
+        "id": "sales_operations_analyst",
+        "reason": "Não há pipeline comercial a analisar."
+      },
+      {
+        "id": "account_specialist",
+        "reason": "Não há oportunidade comercial específica a qualificar."
+      },
+      {
+        "id": "customer_director",
+        "reason": "A experiência de atendimento está expressa nos requisitos da diretiva."
+      },
+      {
+        "id": "support_specialist",
+        "reason": "Não há solicitações reais de suporte para triagem."
+      },
+      {
+        "id": "customer_success_specialist",
+        "reason": "Não há carteira ou plano de retenção a analisar."
+      },
+      {
+        "id": "customer_experience_analyst",
+        "reason": "Não foram fornecidos dados de satisfação ou reclamações."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 11
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 11,
+    "max_calls": 24,
+    "input_tokens": 153739,
+    "cached_input_tokens": 54656,
+    "output_tokens": 2303,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+  "documents": [
+    {
+      "source": "fluxo",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Fluxo-de-Mensageria.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 10, 12",
+      "file": "fluxo.txt",
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1"
+    },
+    {
+      "source": "mba",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Resumo-Meta-Business-Agent-360dialog.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 3, 4, 8",
+      "file": "mba.txt",
+      "sha256": "556413d9a70eb96387d21c0a6d35b472ff1e152fc56e9371e989ac5230a1a7af"
+    },
+    {
+      "source": "contact",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "Contact-Center-e-Workspace.pdf",
+      "area": "Mensageria",
+      "origin": "Transcrição das páginas 9, 11, 13, 15, 16, 17",
+      "file": "contact.txt",
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510"
+    }
+  ],
+  "retrieval": "hybrid",
+  "facets": [],
+  "job_seconds": 83.19,
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "specialist_started",
+    "specialist_started",
+    "specialist_started",
+    "specialist_started",
+    "retrieval_completed",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_requested",
+    "retrieval_completed",
+    "inference_requested",
+    "retrieval_completed",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "director_completed",
+    "inference_completed",
+    "director_completed",
+    "inference_completed",
+    "director_completed",
+    "synthesis",
+    "inference_requested",
+    "inference_completed",
+    "inference_requested",
+    "inference_completed",
+    "review_ready",
+    "checkpoint_saved",
+    "worker_stopped"
+  ],
+  "retrieval_observed": true,
+  "candidates": [
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "fluxo",
+      "page": 10,
+      "line": 19
+    },
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 14
+    },
+    {
+      "source": "mba",
+      "page": 4,
+      "line": 6
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "fluxo",
+      "page": 9,
+      "line": 10
+    },
+    {
+      "source": "mba",
+      "page": 8,
+      "line": 14
+    },
+    {
+      "source": "contact",
+      "page": 16,
+      "line": 60
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 53
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "contact",
+      "page": 9,
+      "line": 1
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 53
+    },
+    {
+      "source": "contact",
+      "page": 17,
+      "line": 74
+    },
+    {
+      "source": "contact",
+      "page": 15,
+      "line": 40
+    },
+    {
+      "source": "fluxo",
+      "page": 12,
+      "line": 28
+    }
+  ],
+  "report": {
+    "status": "partial_evidence",
+    "summary": "Parte da pergunta tem evidência para revisão humana.",
+    "citations": [
+      {
+        "id": "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00",
+        "source": "fluxo",
+        "version": 1,
+        "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1",
+        "line": 28,
+        "quote": "Sessão e mensagem: quem é dono de quê Duas entidades acompanham toda conversa, e cada uma tem seu serviço.",
+        "pdf_page": 12
+      },
+      {
+        "id": "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e",
+        "source": "fluxo",
+        "version": 1,
+        "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1",
+        "line": 30,
+        "quote": "O handoff entre bot e humano muda o tipo da sessão no messaging-session (tipos ML_MODEL e HUMAN).",
+        "pdf_page": 12
+      },
+      {
+        "id": "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d",
+        "source": "contact",
+        "version": 1,
+        "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510",
+        "line": 14,
+        "quote": "4.2 Transições Principais transições de status WAITING (2) ACTIVE (3) DONE (5) CANCELLED TRANSFERED (6) PAUSED (11) (4, 7, 8, 9)",
+        "pdf_page": 9
+      }
+    ],
+    "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+    "requires_approval": true,
+    "unanswered": [
+      "Quais responsabilidades e fluxos o documento de mensageria descreve?",
+      "Quais são os contratos documentados dos eventos Kafka?",
+      "Quais estados e transições de sessão estão documentados?",
+      "Quais mecanismos oficiais do MBA confirmam a transferência de controle?",
+      "Quais dados pessoais são previstos no histórico de conversas?",
+      "Quais regras documentadas definem a retenção dos eventos?",
+      "Quais controles documentados restringem o acesso aos dados entre empresas?",
+      "Quais evidências de auditoria são exigidas para o handoff?",
+      "Quais etapas compõem o primeiro fluxo vertical obrigatório?",
+      "Qual sequência de fases a diretiva estabelece para as integrações?",
+      "Qual comportamento demonstra a continuidade do histórico no handoff?"
+    ],
+    "directive_sha256": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+    "requirements": [
+      "Quais responsabilidades e fluxos o documento de mensageria descreve?",
+      "Quais são os contratos documentados dos eventos Kafka?",
+      "Quais estados e transições de sessão estão documentados?",
+      "Quais mecanismos oficiais do MBA confirmam a transferência de controle?",
+      "Quais dados pessoais são previstos no histórico de conversas?",
+      "Quais regras documentadas definem a retenção dos eventos?",
+      "Quais controles documentados restringem o acesso aos dados entre empresas?",
+      "Quais evidências de auditoria são exigidas para o handoff?",
+      "Quais etapas compõem o primeiro fluxo vertical obrigatório?",
+      "Qual sequência de fases a diretiva estabelece para as integrações?",
+      "Qual comportamento demonstra a continuidade do histórico no handoff?"
+    ],
+    "requirement_assessments": [
+      {
+        "requirement": "Quais responsabilidades e fluxos o documento de mensageria descreve?",
+        "status": "partial",
+        "note": "O documento atribui sessão e mensagem a serviços distintos e descreve a mudança de tipo no handoff, mas não detalha todas as responsabilidades e fluxos.",
+        "evidence_ids": [
+          "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00",
+          "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e"
+        ]
+      },
+      {
+        "requirement": "Quais são os contratos documentados dos eventos Kafka?",
+        "status": "unanswered",
+        "note": "Os trechos não documentam contratos de eventos Kafka.",
+        "evidence_ids": []
+      },
+      {
+        "requirement": "Quais estados e transições de sessão estão documentados?",
+        "status": "partial",
+        "note": "O trecho lista estados e códigos de sessão, mas não esclarece os pares de origem e destino das transições.",
+        "evidence_ids": [
+          "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d"
+        ]
+      },
+      {
+        "requirement": "Quais mecanismos oficiais do MBA confirmam a transferência de controle?",
+        "status": "unanswered",
+        "note": "Os trechos não identificam mecanismos oficiais do MBA que confirmem a transferência de controle.",
+        "evidence_ids": []
+      },
+      {
+        "requirement": "Quais dados pessoais são previstos no histórico de conversas?",
+        "status": "unanswered",
+        "note": "Os trechos não especificam dados pessoais previstos no histórico de conversas.",
+        "evidence_ids": []
+      },
+      {
+        "requirement": "Quais regras documentadas definem a retenção dos eventos?",
+        "status": "unanswered",
+        "note": "Os trechos não documentam regras de retenção dos eventos.",
+        "evidence_ids": []
+      },
+      {
+        "requirement": "Quais controles documentados restringem o acesso aos dados entre empresas?",
+        "status": "unanswered",
+        "note": "Os trechos não documentam controles de acesso entre empresas.",
+        "evidence_ids": []
+      },
+      {
+        "requirement": "Quais evidências de auditoria são exigidas para o handoff?",
+        "status": "unanswered",
+        "note": "Os trechos não especificam evidências de auditoria exigidas para o handoff.",
+        "evidence_ids": []
+      },
+      {
+        "requirement": "Quais etapas compõem o primeiro fluxo vertical obrigatório?",
+        "status": "unanswered",
+        "note": "Os trechos não descrevem as etapas do primeiro fluxo vertical obrigatório.",
+        "evidence_ids": []
+      },
+      {
+        "requirement": "Qual sequência de fases a diretiva estabelece para as integrações?",
+        "status": "unanswered",
+        "note": "Os trechos não estabelecem uma sequência de fases para as integrações.",
+        "evidence_ids": []
+      },
+      {
+        "requirement": "Qual comportamento demonstra a continuidade do histórico no handoff?",
+        "status": "unanswered",
+        "note": "A mudança de tipo da sessão no handoff não demonstra a continuidade do histórico.",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "admission_replay": {
+    "job_ids": [
+      "4d6b2bc6-211e-4854-a47c-a725f4840935",
+      "4d6b2bc6-211e-4854-a47c-a725f4840935",
+      "4d6b2bc6-211e-4854-a47c-a725f4840935"
+    ],
+    "same_job": true,
+    "jobs_visible": 1,
+    "worker_starts": 1
+  },
+  "directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+  "retrieval_by_agent": [
+    {
+      "agent": "tech_lead",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    },
+    {
+      "agent": "product_manager",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    },
+    {
+      "agent": "backend_engineer",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    },
+    {
+      "agent": "privacy_specialist",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    },
+    {
+      "agent": "risk_controls_analyst",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    },
+    {
+      "agent": "product_director",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    },
+    {
+      "agent": "technology_director",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    },
+    {
+      "agent": "legal_director",
+      "sources": [
+        "contact",
+        "fluxo",
+        "mba"
+      ]
+    }
+  ],
+  "directive_dispatches": [
+    {
+      "pilot_directive": "5041049212091b23c0830aeb4542737ac186a15ec4002c18f5c65569ce3a1fcb",
+      "job": "4d6b2bc6-211e-4854-a47c-a725f4840935",
+      "characters": 23385
+    }
+  ],
+  "diagnostics": [],
+  "model_call_metadata": [
+    {
+      "call": 1,
+      "seconds": 24.245042900001863,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "seconds": 6.065037400025176,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "seconds": 6.185227200010559,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "seconds": 6.603491899993969,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "seconds": 3.9180228000041097,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "seconds": 3.314027700020233,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "seconds": 5.2546618999913335,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "seconds": 6.295290500012925,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 9,
+      "seconds": 3.6961059999885038,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 10,
+      "seconds": 5.525271300022723,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 11,
+      "seconds": 9.658594300010009,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    }
+  ]
+}

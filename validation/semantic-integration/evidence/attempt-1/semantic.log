@@ -1,0 +1,63 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+F
+================================== FAILURES ===================================
+__________________ test_native_semantic_path_and_restoration __________________
+
+    def test_native_semantic_path_and_restoration():
+        stack=Installation();started=time.perf_counter();answers=[]
+        def mark(name,**data):
+            stack.evidence['scenarios'].append({'name':name,**data});print('CHECKPOINT '+name,flush=True)
+            (HERE/'evidence/progress.json').write_text(json.dumps(stack.evidence['scenarios'],ensure_ascii=False,indent=2),encoding='utf-8')
+        def deny(fn,status=403):
+            with pytest.raises(Rejected) as e:fn()
+            assert e.value.status==status,str(e.value)
+        def authority(docs,sequence):
+            p=stack.state/'security-journal.jsonl';head=json.loads(p.read_text().splitlines()[-1])['signature'] if p.exists() else ''
+            stack.authority_state.write_text(json.dumps({'documents':docs,'sequence':sequence,'mode':'normal','security_head':head}),encoding='utf-8')
+        def query(text,generation=None,generate=True,mode='mix',actor='analista',domains=None):
+            p={'domains':domains or ['publico'],'query':text,'generate':generate,'mode':mode}
+            if generation:p['generation']=generation
+            return stack.call(actor,'/query',p)
+        def answer(case,response,pattern,expected_source=None):
+            assert 'SIGILO_' not in json.dumps(response),case
+            native=response['context'][0];text=native.get('llm_response',{}).get('content') or ''
+            assert re.search(pattern,text,re.I),{'case':case,'answer':text}
+            if expected_source:
+                assert expected_source in json.dumps(native['data']),{'case':case,'missing_native_source':expected_source}
+                assert re.search(r'\[\d+\]',text),{'case':case,'missing_citation':text}
+            answers.append({'case':case,'response':response})
+            (HERE/'evidence/answers.json').write_text(json.dumps(answers,ensure_ascii=False,indent=2),encoding='utf-8')
+        try:
+>           stack.start();authority(DOCS,1);mark('real_services_oidc_and_local_pretrained_embedding_ready')
+            ^^^^^^^^^^^^^
+
+validation\semantic-integration\test_semantic.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+validation\semantic-integration\harness.py:144: in start
+    self.sql("CREATE ROLE app_owner LOGIN NOSUPERUSER NOBYPASSRLS PASSWORD '"+self.secret+"';CREATE ROLE knowledge_owner LOGIN NOSUPERUSER NOBYPASSRLS PASSWORD '"+self.secret+"';CREATE ROLE identity_owner LOGIN NOSUPERUSER NOBYPASSRLS PASSWORD '"+self.secret+"';CREATE ROLE workflow_runtime LOGIN NOSUPERUSER NOBYPASSRLS PASSWORD '"+self.secret+"';CREATE DATABASE pilot OWNER app_owner;CREATE DATABASE knowledge OWNER knowledge_owner;CREATE DATABASE identity OWNER identity_owner;")
+validation\semantic-integration\harness.py:66: in sql
+    return self.d('exec','-i',self.pg_name,'psql','-XqAt','-v','ON_ERROR_STOP=1','-U','postgres','-d',database,input=q.encode()).stdout.decode().strip()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <harness.Installation object at 0x0000012FB067F950>
+input = b"CREATE ROLE app_owner LOGIN NOSUPERUSER NOBYPASSRLS PASSWORD '[ephemeral-test-credential-redacted]';CREA...E pilot OWNER app_owner;CREATE DATABASE knowledge OWNER knowledge_owner;CREATE DATABASE identity OWNER identity_owner;"
+check = True, timeout = 60
+args = ('exec', '-i', 'semantic-pilot-32560dfbcb-pg', 'psql', '-XqAt', '-v', ...)
+
+    def d(self,*args,input=None,check=True,timeout=60):
+        proc=subprocess.run(['docker',*args],input=input,capture_output=True,timeout=timeout)
+        if check and proc.returncode:
+            error=proc.stderr.decode(errors='replace')+proc.stdout.decode(errors='replace')
+            for value in [self.secret,self.admin,*self.clients.values()]:error=error.replace(value,'[redacted]')
+>           raise RuntimeError(error[-6000:])
+E           RuntimeError: psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+E           	Is the server running locally and accepting connections on that socket?
+
+validation\semantic-integration\harness.py:51: RuntimeError
+=========================== short test summary info ===========================
+FAILED validation/semantic-integration/test_semantic.py::test_native_semantic_path_and_restoration
+1 failed in 3.53s

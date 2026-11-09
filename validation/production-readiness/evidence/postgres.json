@@ -1,0 +1,173 @@
+{
+  "image": "postgres@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab",
+  "checks": [
+    {
+      "name": "create canonical/provenance/ACL/snapshot fixtures",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "sql_sha256": "360c4934acdb566e59520240fd77dc7b79f7f0522c5aee5d2822914e32e02f49"
+    },
+    {
+      "name": "RLS public role",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "1",
+      "stderr": "",
+      "sql_sha256": "db910170af9d5b6a99785c21ff3b5526ca41b25f9e53fc4e1dd50232f8b77dff"
+    },
+    {
+      "name": "RLS finance role",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "2",
+      "stderr": "",
+      "sql_sha256": "db910170af9d5b6a99785c21ff3b5526ca41b25f9e53fc4e1dd50232f8b77dff"
+    },
+    {
+      "name": "derived fact requires every source grant",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "0",
+      "stderr": "",
+      "sql_sha256": "0c52ea83feb62eb4410e64c0ecba4f754b5d6f2f0a2a9dc02cd74f0976e80742"
+    },
+    {
+      "name": "all provenance authorized",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "1",
+      "stderr": "",
+      "sql_sha256": "0c52ea83feb62eb4410e64c0ecba4f754b5d6f2f0a2a9dc02cd74f0976e80742"
+    },
+    {
+      "name": "table owner bypass positive control",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "2",
+      "stderr": "",
+      "sql_sha256": "3a1a7b299f91fad87cfb6e780f41028d7c8d255a000c803ba466af66d7600b70"
+    },
+    {
+      "name": "FORCE RLS owner no grant",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "0",
+      "stderr": "",
+      "sql_sha256": "3a1a7b299f91fad87cfb6e780f41028d7c8d255a000c803ba466af66d7600b70"
+    },
+    {
+      "name": "content hash mismatch denied",
+      "expected_success": false,
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "ERROR:  new row for relation \"source_versions\" violates check constraint \"source_versions_check1\"\nDETAIL:  Failing row contains (public, 1, tampered, \\xd34e1630cf05a59a7c1b0327bb9498a88f5598df592eca70dfc615d64984f9..., 2026-01-01 00:00:00+00, null).",
+      "sql_sha256": "9b4c5f60f0759b34f38a44a0203edf20ae8f787219e9e79d5e3e5f640bd20c66"
+    },
+    {
+      "name": "dangling provenance denied",
+      "expected_success": false,
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "ERROR:  insert or update on table \"fact_sources\" violates foreign key constraint \"fact_sources_source_id_version_fkey\"\nDETAIL:  Key (source_id, version)=(missing, 1) is not present in table \"source_versions\".",
+      "sql_sha256": "a20a37dfbcd2ee9594d92dd391e7f52d2985e66647931c720dff7c5061662f1a"
+    },
+    {
+      "name": "ingestor cannot mutate historical version",
+      "expected_success": false,
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "ERROR:  permission denied for table source_versions",
+      "sql_sha256": "a51b22375a0f1bd191b42785577dee7d9b77ca97e70c9ff3072d5a196a3cb402"
+    },
+    {
+      "name": "runtime cannot become other reader",
+      "expected_success": false,
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "ERROR:  permission denied to set role \"reader_finance\"",
+      "sql_sha256": "5367e31c3a17efbea8d0c13edb95adfe1b885788f1df066784c685806c3bfa1b"
+    },
+    {
+      "name": "revocation removes derived fact immediately on new query",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "0",
+      "stderr": "",
+      "sql_sha256": "0c52ea83feb62eb4410e64c0ecba4f754b5d6f2f0a2a9dc02cd74f0976e80742"
+    },
+    {
+      "name": "partial index generation cannot publish",
+      "expected_success": false,
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "ERROR:  Incomplete index generation\nCONTEXT:  PL/pgSQL function publish_snapshot(text) line 3 at RAISE",
+      "sql_sha256": "86cb0d1e2f1df42e5c9c9231bcf4ec722e5ed5b11778acba7bd6f0729977093f"
+    },
+    {
+      "name": "old complete snapshot remains",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "g1",
+      "stderr": "",
+      "sql_sha256": "ac6dc0ad717a823c197ab01946e2304087305b93f405c4ffd7e74d6b493d80ab"
+    },
+    {
+      "name": "unsafe GUC impersonation positive control",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "SECRET",
+      "stderr": "",
+      "sql_sha256": "36fcc056934b8e3145e9f3c8994245576f046bceed2bfa256411bf116eee6dc9"
+    },
+    {
+      "name": "WAL discards uncommitted transaction after SIGKILL",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "0",
+      "stderr": "",
+      "sql_sha256": "98e5e9e424b063609e091ad1b9bdae3f6e30e9c6f8064cfb12576cfb35b56c71"
+    },
+    {
+      "name": "committed canonical rows survive crash",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "2",
+      "stderr": "",
+      "sql_sha256": "db910170af9d5b6a99785c21ff3b5526ca41b25f9e53fc4e1dd50232f8b77dff"
+    },
+    {
+      "name": "logical restore retains data and RLS",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "1",
+      "stderr": "",
+      "sql_sha256": "db910170af9d5b6a99785c21ff3b5526ca41b25f9e53fc4e1dd50232f8b77dff"
+    },
+    {
+      "name": "logical restore retains active generation",
+      "expected_success": true,
+      "exit_code": 0,
+      "stdout": "g1",
+      "stderr": "",
+      "sql_sha256": "ac6dc0ad717a823c197ab01946e2304087305b93f405c4ffd7e74d6b493d80ab"
+    }
+  ],
+  "scope": "isolated local PostgreSQL canonical catalog fixture, not a full LightRAG PostgreSQL/graph deployment",
+  "version": "PostgreSQL 16.15 on x86_64-pc-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit",
+  "durability_settings": "on\non\non",
+  "concurrent_reservations": [
+    "",
+    "4"
+  ],
+  "logical_dump": {
+    "bytes": 14901,
+    "sha256": "f9d1464e8fe673fa19d493c0aba2e9596668ce9f765711e84b358a98689142c8",
+    "scope": "same isolated cluster; roles already exist; no PITR/key/object-store restore qualification"
+  },
+  "available_extensions": "",
+  "result": "PASS",
+  "container_removed": true,
+  "volume_removed": true
+}

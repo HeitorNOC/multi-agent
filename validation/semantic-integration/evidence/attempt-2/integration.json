@@ -1,0 +1,30 @@
+{
+  "installation": "7837edc452",
+  "images": {
+    "postgres": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+    "neo4j": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+    "keycloak": "quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7"
+  },
+  "scenarios": [
+    {
+      "name": "real_services_oidc_and_local_pretrained_embedding_ready"
+    }
+  ],
+  "worker_calls": [],
+  "versions": {
+    "postgres": "PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "pgvector": "0.8.7",
+    "neo4j": "versions\n[\"5.26.32\"]",
+    "keycloak": "26.8.1"
+  },
+  "result": "FAIL",
+  "error": "ERROR:  relation \"LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d\" does not exist\nLINE 1: SELECT vector_dims(content_vector),count(*) FROM \"LIGHTRAG_V...\n                                                         ^\n",
+  "elapsed_seconds": 147.80773860000772,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

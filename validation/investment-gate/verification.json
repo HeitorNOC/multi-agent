@@ -1,0 +1,257 @@
+{
+  "V1": {
+    "decision": "FAIL_CONTINUITY",
+    "cases": [
+      {
+        "installation": "business-flow-7bc74c70a0",
+        "result": "FAIL_UNKNOWN_GOVERNED_CLOSURE",
+        "stage": null,
+        "proofs": {
+          "signatures_verified": 32,
+          "pending_operations": 0,
+          "model_calls_with_usage": 0,
+          "model_reservations": 0,
+          "reservations_without_usage": 0,
+          "tokens": {}
+        }
+      },
+      {
+        "installation": "business-flow-9366d3f5b9",
+        "result": "FAIL_V1_OPERATIONAL_RECOVERY",
+        "stage": "after_business",
+        "proofs": {
+          "signatures_verified": 29,
+          "pending_operations": 1,
+          "model_calls_with_usage": 0,
+          "model_reservations": 0,
+          "reservations_without_usage": 0,
+          "tokens": {}
+        }
+      },
+      {
+        "installation": "business-flow-a9d7dea2d9",
+        "result": "PASS_AUTOMATIC_HEARTBEAT_BOUNDED",
+        "stage": null,
+        "proofs": {
+          "signatures_verified": 84,
+          "pending_operations": 0,
+          "model_calls_with_usage": 0,
+          "model_reservations": 0,
+          "reservations_without_usage": 0,
+          "tokens": {}
+        }
+      },
+      {
+        "installation": "business-flow-e0abd6f433",
+        "result": "FAIL_V1_OPERATIONAL_RECOVERY",
+        "stage": "before_local",
+        "proofs": {
+          "signatures_verified": 29,
+          "pending_operations": 1,
+          "model_calls_with_usage": 0,
+          "model_reservations": 0,
+          "reservations_without_usage": 0,
+          "tokens": {}
+        }
+      },
+      {
+        "installation": "business-flow-eced94a2fe",
+        "result": "FAIL_V1_OPERATIONAL_RECOVERY",
+        "stage": "after_receipt",
+        "proofs": {
+          "signatures_verified": 29,
+          "pending_operations": 1,
+          "model_calls_with_usage": 0,
+          "model_reservations": 0,
+          "reservations_without_usage": 0,
+          "tokens": {}
+        }
+      }
+    ],
+    "junit": {
+      "tests": 4,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    "unknown_junit": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "V2_V3": {
+    "execution_result": "FAIL_V2_V3_CRITERIA",
+    "proofs": {
+      "signatures_verified": 28,
+      "pending_operations": 0,
+      "model_calls_with_usage": 18,
+      "model_reservations": 18,
+      "reservations_without_usage": 0,
+      "tokens": {
+        "input_tokens": 231553,
+        "cached_input_tokens": 174592,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3631,
+        "reasoning_output_tokens": 0
+      }
+    },
+    "junit": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "V2_V3_initial_failed_execution": {
+    "result": "FAIL_EXECUTION",
+    "proofs": {
+      "signatures_verified": 21,
+      "pending_operations": 0,
+      "model_calls_with_usage": 13,
+      "model_reservations": 13,
+      "reservations_without_usage": 0,
+      "tokens": {
+        "input_tokens": 172689,
+        "cached_input_tokens": 104832,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2888,
+        "reasoning_output_tokens": 0
+      }
+    },
+    "junit": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "V2_V3_second_failed_execution": {
+    "result": "FAIL_V2_V3_CRITERIA",
+    "proofs": {
+      "signatures_verified": 28,
+      "pending_operations": 0,
+      "model_calls_with_usage": 18,
+      "model_reservations": 18,
+      "reservations_without_usage": 0,
+      "tokens": {
+        "input_tokens": 231437,
+        "cached_input_tokens": 179200,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 3346,
+        "reasoning_output_tokens": 39
+      }
+    },
+    "junit": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "V4": {
+    "decision": "CONDITIONAL_LOCAL_CONTROLS_ONLY",
+    "junit": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "commercial_api_tested": false,
+    "physical_off_host_recovery_tested": false
+  },
+  "regression": {
+    "junit": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "proofs": {
+      "signatures_verified": 198,
+      "pending_operations": 0,
+      "model_calls_with_usage": 0,
+      "model_reservations": 0,
+      "reservations_without_usage": 0,
+      "tokens": {}
+    }
+  },
+  "authority_units": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "grader_regressions": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "total_model_usage": {
+    "calls": 49,
+    "tokens": {
+      "input_tokens": 635679,
+      "cached_input_tokens": 458624,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 9865,
+      "reasoning_output_tokens": 39
+    },
+    "api_standard_price_scenario": {
+      "usd_with_reported_cache": 0.2493112,
+      "usd_if_no_input_cache": 0.685004
+    },
+    "billed_amount_observed": false
+  },
+  "final_run_categories": {
+    "knowledge": {
+      "calls": 12,
+      "tokens": {
+        "input_tokens": 158663,
+        "cached_input_tokens": 122240,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2537,
+        "reasoning_output_tokens": 0
+      },
+      "api_standard_price_scenario": {
+        "usd_with_reported_cache": 0.05522,
+        "usd_if_no_input_cache": 0.171348
+      }
+    },
+    "A1": {
+      "calls": 1,
+      "tokens": {
+        "input_tokens": 12420,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 156,
+        "reasoning_output_tokens": 0
+      },
+      "api_standard_price_scenario": {
+        "usd_with_reported_cache": 0.0132,
+        "usd_if_no_input_cache": 0.0132
+      }
+    },
+    "A3": {
+      "calls": 5,
+      "tokens": {
+        "input_tokens": 60470,
+        "cached_input_tokens": 52352,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 938,
+        "reasoning_output_tokens": 0
+      },
+      "api_standard_price_scenario": {
+        "usd_with_reported_cache": 0.015425600000000001,
+        "usd_if_no_input_cache": 0.06516
+      }
+    }
+  },
+  "final_run_api_standard_price_scenario": {
+    "usd_with_reported_cache": 0.0838456,
+    "usd_if_no_input_cache": 0.249708
+  },
+  "production_approved": false,
+  "broad_product_development_recommended": false
+}

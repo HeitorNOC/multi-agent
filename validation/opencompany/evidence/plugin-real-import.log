@@ -1,0 +1,949 @@
+2026-11-03 12:13:13 [debug    ] [cli_agent] registered provider 'codex' -> <class 'services.cli_agent.providers.openai_codex.OpenAICodexProvider'>
+Failed to import node plugin nodes.agent.claude_code_agent
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\agent\claude_code_agent\__init__.py", line 63, in <module>
+    from ._handlers import WS_HANDLERS as _CLAUDE_WS_HANDLERS  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\agent\claude_code_agent\_handlers.py", line 52, in <module>
+    from ._oauth import (
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\agent\claude_code_agent\_oauth.py", line 48, in <module>
+    from services.events.cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.android
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\android\__init__.py", line 23, in <module>
+    from ._events import broadcast_android_status  # noqa: F401 — re-export
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\android\_events.py", line 31, in <module>
+    from services.events.envelope import WorkflowEvent
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.browser
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\validation\opencompany\.venv\Lib\site-packages\sqlalchemy\util\concurrency.py", line 70, in _initialize
+    from greenlet import getcurrent
+ModuleNotFoundError: No module named 'greenlet'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\browser\__init__.py", line 30, in <module>
+    from services.workflow_storage.hooks import register_workflow_deleted_hook
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\workflow_storage\__init__.py", line 14, in <module>
+    from .handlers import WS_HANDLERS as _WORKFLOW_STORAGE_WS_HANDLERS
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\workflow_storage\handlers.py", line 17, in <module>
+    from core.container import container
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\container.py", line 20, in <module>
+    from core.database import Database
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\database.py", line 12, in <module>
+    from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+  File "C:\Users\PC\multi-agent\validation\opencompany\.venv\Lib\site-packages\sqlalchemy\ext\asyncio\__init__.py", line 28, in <module>
+    concurrency._concurrency_shim._initialize()
+  File "C:\Users\PC\multi-agent\validation\opencompany\.venv\Lib\site-packages\sqlalchemy\util\concurrency.py", line 79, in _initialize
+    raise ImportError(_ERROR_MESSAGE) from e
+ImportError: The SQLAlchemy asyncio module requires that the Python 'greenlet' library is installed.  In order to ensure this dependency is available, use the 'sqlalchemy[asyncio]' install target:  'pip install sqlalchemy[asyncio]'
+Failed to import node plugin nodes.chat.chat_reply
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\chat\chat_reply\__init__.py", line 37, in <module>
+    from services.approvals.contract import NO_REPLY
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\approvals\__init__.py", line 30, in <module>
+    from services.workflow_storage.hooks import register_workflow_deleted_hook as _register_workflow_deleted_hook
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\workflow_storage\__init__.py", line 14, in <module>
+    from .handlers import WS_HANDLERS as _WORKFLOW_STORAGE_WS_HANDLERS
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\workflow_storage\handlers.py", line 17, in <module>
+    from core.container import container
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\container.py", line 20, in <module>
+    from core.database import Database
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\database.py", line 84, in <module>
+    from models.auth import User  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\models\auth.py", line 7, in <module>
+    import bcrypt
+ModuleNotFoundError: No module named 'bcrypt'
+Failed to import node plugin nodes.cloudflare
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\cloudflare\__init__.py", line 21, in <module>
+    from ._handlers import WS_HANDLERS
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\cloudflare\_handlers.py", line 69, in <module>
+    from services.events import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.code
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\code\__init__.py", line 8, in <module>
+    from services._supervisor import register_supervisor
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.context
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\context\__init__.py", line 151, in <module>
+    from services.chat_thread import register_chat_cleared_listener  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\chat_thread.py", line 55, in <module>
+    from services.events.envelope import WorkflowEvent
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.discord
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\discord\__init__.py", line 14, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=anthropic
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=openai
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=gemini
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=openrouter
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=xai
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=deepseek
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=kimi
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=mistral
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=ollama
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=lmstudio
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=groq
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=cerebras
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=sarvam
+2026-11-03 12:13:15 [debug    ] registered provider            layer=LLM provider=openai_compatible
+Failed to import node plugin nodes.document.http_scraper
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\document\http_scraper\__init__.py", line 14, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+Failed to import node plugin nodes.dodo_payments
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\dodo_payments\__init__.py", line 18, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.email
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\email\__init__.py", line 11, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.gcloud
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\gcloud\__init__.py", line 20, in <module>
+    from ._handlers import WS_HANDLERS
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\gcloud\_handlers.py", line 48, in <module>
+    from services.events import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.github
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\github\__init__.py", line 18, in <module>
+    from ._handlers import WS_HANDLERS
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\github\_handlers.py", line 43, in <module>
+    from services.events import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.google
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\google\__init__.py", line 27, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.location
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\location\__init__.py", line 19, in <module>
+    from ._service import MapsService
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\location\_service.py", line 19, in <module>
+    import googlemaps
+ModuleNotFoundError: No module named 'googlemaps'
+Failed to import node plugin nodes.mcp
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\mcp\__init__.py", line 22, in <module>
+    from services.employees.apps import register_app_source
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\employees\__init__.py", line 17, in <module>
+    from services.approvals.listeners import register_approval_listener as _register_approval_listener
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\approvals\__init__.py", line 30, in <module>
+    from services.workflow_storage.hooks import register_workflow_deleted_hook as _register_workflow_deleted_hook
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\workflow_storage\__init__.py", line 14, in <module>
+    from .handlers import WS_HANDLERS as _WORKFLOW_STORAGE_WS_HANDLERS
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\workflow_storage\handlers.py", line 17, in <module>
+    from core.container import container
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\container.py", line 20, in <module>
+    from core.database import Database
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\database.py", line 84, in <module>
+    from models.auth import User  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\models\auth.py", line 7, in <module>
+    import bcrypt
+ModuleNotFoundError: No module named 'bcrypt'
+Failed to import node plugin nodes.microsoft
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\microsoft\__init__.py", line 24, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.scheduler.cron_scheduler
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\scheduler\cron_scheduler\__init__.py", line 34, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.skill.simple_memory
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\skill\simple_memory\__init__.py", line 8, in <module>
+    from nodes.tool.simple_memory import (
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\simple_memory\__init__.py", line 349, in <module>
+    from ._handlers import WS_HANDLERS  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\simple_memory\_handlers.py", line 26, in <module>
+    from ._events import dispatch_memory_updated
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\simple_memory\_events.py", line 17, in <module>
+    from services.events.envelope import WorkflowEvent
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+2026-11-03 12:13:16 [debug    ] registered provider            layer=text-to-speech provider=openai
+2026-11-03 12:13:16 [debug    ] registered provider            layer=speech-to-text provider=openai
+2026-11-03 12:13:16 [debug    ] registered provider            layer=speech-to-text provider=groq
+2026-11-03 12:13:16 [debug    ] registered provider            layer=text-to-speech provider=elevenlabs
+2026-11-03 12:13:16 [debug    ] registered provider            layer=speech-to-text provider=deepgram
+2026-11-03 12:13:16 [debug    ] registered provider            layer=text-to-speech provider=sarvam
+2026-11-03 12:13:16 [debug    ] registered provider            layer=speech-to-text provider=sarvam
+Failed to import node plugin nodes.stripe
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\stripe\__init__.py", line 13, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.telegram
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\telegram\__init__.py", line 37, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.tool.agent_builder
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\agent_builder\__init__.py", line 56, in <module>
+    from services import workflow_ops
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\workflow_ops.py", line 43, in <module>
+    from services.events.envelope import WorkflowEvent
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.tool.canvas
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\canvas\__init__.py", line 480, in <module>
+    from ._handlers import WS_HANDLERS  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\canvas\_handlers.py", line 22, in <module>
+    from ._events import dispatch_canvas_updated
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\canvas\_events.py", line 19, in <module>
+    from services.events.envelope import WorkflowEvent
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.tool.simple_memory
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\simple_memory\__init__.py", line 349, in <module>
+    from ._handlers import WS_HANDLERS  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\simple_memory\_handlers.py", line 26, in <module>
+    from ._events import dispatch_memory_updated
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\simple_memory\_events.py", line 17, in <module>
+    from services.events.envelope import WorkflowEvent
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.tool.write_todos
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\write_todos\__init__.py", line 140, in <module>
+    from ._handlers import WS_HANDLERS  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\write_todos\_handlers.py", line 22, in <module>
+    from ._events import dispatch_todos_updated
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\tool\write_todos\_events.py", line 24, in <module>
+    from services.events.envelope import WorkflowEvent
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+2026-11-03 12:13:16 [debug    ] registered provider            layer=translate provider=deepl
+2026-11-03 12:13:16 [debug    ] registered provider            layer=translate provider=sarvam
+2026-11-03 12:13:16 [debug    ] registered provider            layer=transliterate provider=sarvam
+2026-11-03 12:13:16 [debug    ] registered provider            layer=detect-language provider=sarvam
+2026-11-03 12:13:16 [debug    ] registered provider            layer=translate provider=openai
+2026-11-03 12:13:16 [debug    ] registered provider            layer=transliterate provider=openai
+2026-11-03 12:13:16 [debug    ] registered provider            layer=detect-language provider=openai
+Failed to import node plugin nodes.trigger.chat_trigger
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\trigger\chat_trigger\__init__.py", line 31, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.trigger.task_trigger
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\trigger\task_trigger\__init__.py", line 14, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.trigger.webhook_trigger
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\trigger\webhook_trigger\__init__.py", line 28, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.twitter
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\twitter\__init__.py", line 29, in <module>
+    from . import _router
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\twitter\_router.py", line 14, in <module>
+    from services.events.oauth_lifecycle import make_oauth_callback_router
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.vercel
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\vercel\__init__.py", line 16, in <module>
+    from ._handlers import WS_HANDLERS
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\vercel\_handlers.py", line 31, in <module>
+    from services.events import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.whatsapp
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\whatsapp\__init__.py", line 21, in <module>
+    from services._supervisor import register_supervisor
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.whatsapp_business
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\whatsapp_business\__init__.py", line 14, in <module>
+    from services.deployment.canary_registry import register_canary_trigger_type
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\__init__.py", line 13, in <module>
+    from .manager import DeploymentManager
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\deployment\manager.py", line 20, in <module>
+    from services.events.envelope import equivalent_event_types
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\__init__.py", line 18, in <module>
+    from .cli import run_cli_command
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\events\cli.py", line 18, in <module>
+    from services._supervisor.util import kill_tree
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\__init__.py", line 11, in <module>
+    from .base import BaseSupervisor, RestartPolicy
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\_supervisor\base.py", line 17, in <module>
+    from tenacity import AsyncRetrying, stop_after_attempt, wait_random_exponential
+ModuleNotFoundError: No module named 'tenacity'
+Failed to import node plugin nodes.workflow.approval_gate
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\__init__.py", line 104, in _discover
+    importlib.import_module(module_info.name)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\nodes\workflow\approval_gate\__init__.py", line 38, in <module>
+    from services.approvals import rules, store, waiter
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\approvals\__init__.py", line 30, in <module>
+    from services.workflow_storage.hooks import register_workflow_deleted_hook as _register_workflow_deleted_hook
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\workflow_storage\__init__.py", line 14, in <module>
+    from .handlers import WS_HANDLERS as _WORKFLOW_STORAGE_WS_HANDLERS
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\workflow_storage\handlers.py", line 17, in <module>
+    from core.container import container
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\container.py", line 20, in <module>
+    from core.database import Database
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\database.py", line 84, in <module>
+    from models.auth import User  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\models\auth.py", line 7, in <module>
+    import bcrypt
+ModuleNotFoundError: No module named 'bcrypt'
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\validation\opencompany\own_layer\plugin_probe.py", line 32, in <module>
+    asyncio.run(main())
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\validation\opencompany\own_layer\plugin_probe.py", line 28, in main
+    value=await node.execute('probe',{'company_id':'A','query':'sales'},ctx)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\plugin\base.py", line 618, in execute
+    from services.chat.stream import chat_run_id_of
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\chat\__init__.py", line 30, in <module>
+    from .handlers import WS_HANDLERS as _CHAT_WS_HANDLERS
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\services\chat\handlers.py", line 30, in <module>
+    from core.container import container
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\container.py", line 20, in <module>
+    from core.database import Database
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\core\database.py", line 84, in <module>
+    from models.auth import User  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\vendor\opencompany-zeenie\server\models\auth.py", line 7, in <module>
+    import bcrypt
+ModuleNotFoundError: No module named 'bcrypt'

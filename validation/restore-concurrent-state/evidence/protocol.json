@@ -1,0 +1,20 @@
+{
+  "provider": "gpt-6.1-terra",
+  "cap": 40,
+  "replicas": 2,
+  "backup": "drain accepted work, freeze all writers, cold snapshot all app processes",
+  "cases": [
+    "g1_stale_denied",
+    "g2_complete_restore",
+    "new_tables_tamper_denied",
+    "retained_counter_reset_denied",
+    "abandoned_reservation_not_refunded",
+    "eight_requests_after_restore"
+  ],
+  "private_faults": [
+    "pause_before_receipt",
+    "after_fresh_intent",
+    "after_receipt"
+  ],
+  "no_external_actions": true
+}

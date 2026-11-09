@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="101.442" timestamp="2026-11-04T21:39:39.532169-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.brain-recovery.test_brain" name="test_native_brain_release_and_joint_restore" time="100.963"><failure message="test_flow.Rejected: 503: {&quot;error&quot;:&quot;native brain refused operation&quot;}">url = 'http://127.0.0.1:64254'
+token = 'bf17be220a8b2e7c2f1430a7ebac9fc5bd181d9d61979d9a'
+payload = {'action': 'brain_open', 'request_id': '104a99d8-56fc-44b7-af14-8294702ee2cb'}
+
+    def request(url, token, payload):
+        req = Request(url+'/rpc',json.dumps(payload).encode(),{'content-type':'application/json','authorization':'Bearer '+token})
+        try:
+&gt;           with urlopen(req,timeout=15) as response:
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+validation\langgraph-business-flow\test_flow.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:215: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:521: in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:630: in http_response
+    response = self.parent.error(
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:559: in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;urllib.request.HTTPDefaultErrorHandler object at 0x0000020F45256F90&gt;
+req = &lt;urllib.request.Request object at 0x0000020F45257E00&gt;
+fp = &lt;http.client.HTTPResponse object at 0x0000020F45227700&gt;, code = 503
+msg = 'Service Unavailable'
+hdrs = &lt;http.client.HTTPMessage object at 0x0000020F45289160&gt;
+
+    def http_error_default(self, req, fp, code, msg, hdrs):
+&gt;       raise HTTPError(req.full_url, code, msg, hdrs, fp)
+E       urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:639: HTTPError
+
+The above exception was the direct cause of the following exception:
+
+    def test_native_brain_release_and_joint_restore():
+        lab=BrainLab();started=time.perf_counter()
+        def denied(fn,status):
+            with pytest.raises(Rejected) as error:fn()
+            assert error.value.status==status,str(error.value)
+        try:
+            lab.start()
+            denied(lambda:lab.new_signed(['policy_lookup'],execute=False,maxUnits=1),503)
+            # Missing projection is rejected before a retained intent/model admission.
+            # If a failed quote created no journal entry, bootstrap remains coherent.
+            assert lab.call('board','retained_status')['current']
+            with sqlite3.connect(lab.config['editorial']) as db:
+                drafts={s:d for s,d in db.execute('SELECT source,draft FROM canonical')}
+            for draft in drafts.values():lab.publish(draft)
+            first=lab.new_signed(execute=False,maxUnits=2);assert lab.run_worker(first['id'])['completed']
+            original=lab.call('owner','status',job=first['id'])['result']
+            by_source={e['snapshot']['source']:e['snapshot'] for e in original['evidence']}
+            assert 'dois' in by_source['politica-remoto']['semantic']['answer'].lower() or '2' in by_source['politica-remoto']['semantic']['answer']
+            assert '1000' in by_source['aquisicao']['semantic']['answer'].replace('.','').replace(',','')
+            assert all(s['semantic']['native'] for s in by_source.values())
+            assert all(s['semantic']['projection']['inventory']['nodes']&gt;0 and s['semantic']['projection']['inventory']['edges']&gt;0 for s in by_source.values())
+            lab.mark('native_extraction_vectors_graph_and_advice_through_typescript_langgraph')
+&gt;           old=lab.backup_brain('g0');lab.call('board','brain_open',request_id=str(uuid.uuid4()))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+validation\brain-recovery\test_brain.py:220: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+validation\langgraph-business-flow\test_flow.py:149: in call
+    return request(self.api,self.tokens[actor],{'action':action,**payload})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+url = 'http://127.0.0.1:64254'
+token = 'bf17be220a8b2e7c2f1430a7ebac9fc5bd181d9d61979d9a'
+payload = {'action': 'brain_open', 'request_id': '104a99d8-56fc-44b7-af14-8294702ee2cb'}
+
+    def request(url, token, payload):
+        req = Request(url+'/rpc',json.dumps(payload).encode(),{'content-type':'application/json','authorization':'Bearer '+token})
+        try:
+            with urlopen(req,timeout=15) as response:
+                return json.load(response)
+        except HTTPError as error:
+&gt;           raise Rejected(error.code,error.read().decode()) from error
+E           test_flow.Rejected: 503: {"error":"native brain refused operation"}
+
+validation\langgraph-business-flow\test_flow.py:42: Rejected</failure></testcase></testsuite></testsuites>

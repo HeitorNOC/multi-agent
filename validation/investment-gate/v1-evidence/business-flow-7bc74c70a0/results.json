@@ -1,0 +1,33 @@
+{
+  "installation": "business-flow-7bc74c70a0",
+  "checkpoints": [],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "result": "FAIL_UNKNOWN_GOVERNED_CLOSURE",
+  "recovery": {
+    "status": 503,
+    "reason": "503: {\"error\":\"recovery requires a single trailing pending operation\"}"
+  },
+  "inference_id": "business-flow-7bc74c70a0:inference:8d0be7232fc1686edad6d7203019d99315cf6ac06777f8d3bd661b7a1850971f",
+  "unknown_retries": 3,
+  "reads": 0,
+  "provider_executions": [
+    [
+      "business-flow-7bc74c70a0:inference:8d0be7232fc1686edad6d7203019d99315cf6ac06777f8d3bd661b7a1850971f",
+      "admitted",
+      1
+    ]
+  ],
+  "authority_current": true
+}

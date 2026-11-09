@@ -1,0 +1,15 @@
+requirement,evidence,scope,status,remaining
+dedicated_installation,evidence/integration.json,one synthetic installation,PASS_SMALL,concurrent installation isolation and large enterprise load
+single_workflow_owner,engine.py,native LangGraph PostgreSQL saver,PASS_SMALL,distributed concurrency and operations
+persistent_enterprise_brain,application.py,LightRAG PostgreSQL vector KV docstatus and Neo4j,PASS_SMALL,semantic quality temporal Graphiti and freshness
+identity_and_authority,test_installation.py,signed service identities and backend approval,PASS_SMALL,human SSO TLS rotation revocation
+source_acl_before_retrieval,test_installation.py,warm cache and mixed partition revocation,PASS_SMALL,concurrent distributed updates and finer partitions
+versioned_sources,test_installation.py,g1 g2 g3 and immutable API versions,PASS_SMALL,authenticity and upstream reconciliation
+joint_restore,test_installation.py,cold backup into empty volumes,PASS_SMALL,PITR failover upgrade and source freshness gate
+post_backup_revocation,test_installation.py,external HMAC journal replay,PASS_SMALL,durable independent protected journal and key recovery
+external_effect_reconciliation,evidence/provider-readonly-summary.json,one send one receipt with lost acknowledgement,PASS_SMALL,real provider contracts and retention
+costs,test_installation.py,synthetic units only,NOT_QUALIFIED,actual model tool retry billing reconciliation
+sandbox_and_egress,REPORT.md,trusted services only bridge localhost,NOT_QUALIFIED,untrusted execution and enforced egress MCP
+dynamic_teams_and_controller,REPORT.md,two fixed capabilities in harness,PARTIAL,full capability selection adaptation and permanent hiring approval
+jarvis_interface,REPORT.md,architectural requirement retained,NOT_IMPLEMENTED,functional React TypeScript Three.js
+enterprise_capacity,REPORT.md,eight sources small test,NOT_QUALIFIED,large company load queues backpressure and SLO

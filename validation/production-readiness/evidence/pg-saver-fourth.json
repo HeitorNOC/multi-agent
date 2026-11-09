@@ -1,0 +1,9 @@
+{
+  "image": "postgres@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab",
+  "scope": "native checkpoint and interrupt recovery only; no HA/failover/TLS/cross-client checkpoint ACL certified",
+  "result": "FAIL",
+  "error": "failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: O sistema n\u00e3o pode encontrar o arquivo especificado.\n",
+  "server_log": "failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: O sistema n\u00e3o pode encontrar o arquivo especificado.\n",
+  "container_removed": false,
+  "volume_removed": false
+}

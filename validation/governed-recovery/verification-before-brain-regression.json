@@ -1,0 +1,14 @@
+{
+  "integration_tests": 1,
+  "checkpoints": 9,
+  "python_authority_tests": 5,
+  "node_tests": 16,
+  "signed_regression": "PASS",
+  "authority_proofs_verified": 198,
+  "retained_recovery_votes_verified": 4,
+  "negative_bundle_preserved": true,
+  "pending_operations": 0,
+  "model_calls": 0,
+  "production_approved": false,
+  "local_links": "OK"
+}

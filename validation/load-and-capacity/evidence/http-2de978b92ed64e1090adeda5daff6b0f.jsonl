@@ -1,0 +1,5 @@
+{"phase": "baseline-history-after-quota", "path": "/decisions/a0f1e74c-e9a9-4f6a-8009-63190f5166e8", "method": "GET", "status": 503, "seconds": 0.030401500000152737, "queue_seconds": 0.011987000005319715, "instance": "2de978b92ed64e1090adeda5daff6b0f"}
+{"phase": "setup", "path": "/freshness/status", "method": "POST", "status": 200, "seconds": 0.009324000013293698, "queue_seconds": 0, "instance": "2de978b92ed64e1090adeda5daff6b0f"}
+{"phase": "setup", "path": "/freshness/inspect", "method": "POST", "status": 200, "seconds": 0.03010030000586994, "queue_seconds": 0.0016781999729573727, "instance": "2de978b92ed64e1090adeda5daff6b0f"}
+{"phase": "setup", "path": "/freshness/close-prepare", "method": "POST", "status": 200, "seconds": 0.03609059998416342, "queue_seconds": 0.0017030999879352748, "instance": "2de978b92ed64e1090adeda5daff6b0f"}
+{"phase": "setup", "path": "/freshness/close-confirm", "method": "POST", "status": 200, "seconds": 0.06270360000780784, "queue_seconds": 0.0016925999952945858, "instance": "2de978b92ed64e1090adeda5daff6b0f"}

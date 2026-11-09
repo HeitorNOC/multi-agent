@@ -1,0 +1,30 @@
+{
+  "repo": "campusx-official/langgraph-tutorials",
+  "sha": "d700de29b00e5f561e7e51ebb114ff195e0dece0",
+  "archived": false,
+  "license": null,
+  "tree_truncated": false,
+  "paths": [
+    "0_test_installation.ipynb",
+    "10_persistence.ipynb",
+    "11_tools.ipynb",
+    "12_mcp.py",
+    "13_rag.ipynb",
+    "14_hitl.ipynb",
+    "15_subgraph_shared.ipynb",
+    "15_subgraphs.ipynb",
+    "1_bmi_workflow.ipynb",
+    "2_simple_llm_workflow.ipynb",
+    "3_prompt_chaining.ipynb",
+    "4_batsman_workflow.ipynb",
+    "5_UPSC_essay_workflow.ipynb",
+    "6_quadratic_equation_workflow.ipynb",
+    "7_review_reply_workflow.ipynb",
+    "8_X_post_generator.ipynb",
+    "9_basic_chatbot.ipynb",
+    "chatbot_with_hitl.py",
+    "chatbot_without_hitl.py",
+    "intro-to-ml.pdf",
+    "requirements.txt"
+  ]
+}

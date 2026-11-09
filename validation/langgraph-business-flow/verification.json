@@ -1,0 +1,11 @@
+{
+  "integration_tests": 1,
+  "checkpoints": 9,
+  "node_tests": 12,
+  "typescript_strict": "PASS",
+  "model_calls": 0,
+  "original_two_api_failure_preserved": true,
+  "production_approved": false,
+  "local_links": "OK",
+  "captured_files": 33
+}

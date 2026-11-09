@@ -1,0 +1,132 @@
+{
+  "scope": "real embedded PostgreSQL, cold physical copy after process exit, same host/version, WAL recovery if needed; no secrets or storage backup validation",
+  "source": "C:\\Users\\PC\\multi-agent\\poc\\live-home-mGSSLg\\db",
+  "backup": "C:\\Users\\PC\\multi-agent\\poc\\restore-db-YcKuQf",
+  "originalStop": {
+    "code": 1,
+    "output": "pg_ctl: could not send stop signal (PID: 29036): No such process\r\n"
+  },
+  "stalePid": {
+    "pid": 29036,
+    "port": 54339,
+    "verifiedProcessAbsent": true,
+    "verifiedPortRefused": true
+  },
+  "restoreStart": {
+    "code": 0,
+    "output": "waiting for server to start....... done\r\nserver started\r\n"
+  },
+  "issue": {
+    "id": "a82311c6-f159-40d3-9160-cf733f2c4fb1",
+    "status": "done"
+  },
+  "run": {
+    "id": "7397218f-c102-4085-8b7e-7564c7b82036",
+    "status": "succeeded",
+    "usage_json": {
+      "model": "no-model",
+      "biller": "synthetic-fixture",
+      "costUsd": 0,
+      "provider": "synthetic-fixture",
+      "costStatus": "reported",
+      "billingType": "unknown",
+      "inputTokens": 0,
+      "ledgerScope": {
+        "issueId": "a82311c6-f159-40d3-9160-cf733f2c4fb1",
+        "projectId": null,
+        "billingCode": null
+      },
+      "usageSource": "per_run",
+      "costUsdExact": null,
+      "freshSession": true,
+      "outputTokens": 0,
+      "usageByModel": null,
+      "sessionReused": false,
+      "budgetDispatch": {
+        "admittedAt": "2026-11-03T04:37:06.319Z",
+        "handedOffAt": "2026-11-03T04:37:06.327Z",
+        "reservationId": "38f81b7c-7749-47d5-88dd-ba47079394d9",
+        "recoveryLeaseOwner": null
+      },
+      "budgetExposure": {
+        "sequence": 1,
+        "sourceId": "b323c517-7cbe-4661-ba00-371d8806177f",
+        "costCents": "0.0000000"
+      },
+      "rawInputTokens": 0,
+      "sessionRotated": false,
+      "configFreshness": {
+        "session": {
+          "reset": false,
+          "categories": [
+            "adapter",
+            "adapterConfig",
+            "agentRuntimeConfig",
+            "instructions",
+            "issueOverrides",
+            "workspaceConfig",
+            "environment",
+            "envBindings",
+            "secrets",
+            "runtimeSkills"
+          ],
+          "resetReasons": [],
+          "nextFingerprint": "v1:sha256:73418d575d0ffde79b18262a77b81b6711ae9151ff78be57f1a59d5f842640a8",
+          "changedCategories": [],
+          "taskSessionReused": false,
+          "fingerprintVersion": 1,
+          "taskSessionAvailable": false,
+          "storedFingerprintPresent": false
+        },
+        "version": 1,
+        "workspace": {
+          "action": "create",
+          "reasons": [],
+          "categories": [
+            "mode",
+            "projectWorkspace",
+            "strategy",
+            "repo",
+            "lifecycleCommands",
+            "runtimeServices",
+            "environment",
+            "realization"
+          ],
+          "reuseRequested": false,
+          "nextFingerprint": "v1:sha256:8fed5d04b3acf0f66235330502d31d26e6d12f6c00ae99601bf38325f2e2be90",
+          "workspaceReused": false,
+          "activeWorkspaceId": "cfa7516d-9b1d-478f-a298-1669596477e9",
+          "changedCategories": [],
+          "storedFingerprint": null,
+          "fingerprintVersion": 1,
+          "inferredFingerprint": null,
+          "previousWorkspaceId": null,
+          "configSnapshotRefreshed": false,
+          "storedFingerprintPresent": false
+        }
+      },
+      "rawOutputTokens": 0,
+      "cachedInputTokens": 0,
+      "pricingProvenance": {
+        "source": "provider_reported",
+        "version": "accounting-receipt/v1"
+      },
+      "providerRequestId": null,
+      "taskSessionReused": false,
+      "accountingReceiptId": "37a9cbd9-a8f3-4414-8277-8a865eff6212",
+      "cacheAdjustedCostUsd": 0,
+      "rawCachedInputTokens": 0,
+      "sessionRotationReason": null,
+      "accountingReceiptReady": true,
+      "rawInputIncludesCached": false,
+      "accountingReceiptSequence": 1,
+      "accountingReceiptSourceId": "b323c517-7cbe-4661-ba00-371d8806177f",
+      "accountingReceiptReceivedAt": "2026-11-03T04:37:06.508Z"
+    }
+  },
+  "result": "PASS",
+  "restoreStop": {
+    "code": 0,
+    "output": "waiting for server to shut down.... done\r\nserver stopped\r\n"
+  }
+}

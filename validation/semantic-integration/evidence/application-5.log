@@ -1,0 +1,242 @@
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: PostgreSQL, Retry config: attempts=10, backoff=3.0s, backoff_max=30.0s, pool_close_timeout=5.0s
+INFO: PostgreSQL, VECTOR extension enabled
+INFO: PostgreSQL, Connected to database at 127.0.0.1:60541/knowledge without SSL
+INFO: chunk_id column already exists in LIGHTRAG_LLM_CACHE table
+INFO: cache_type column already exists in LIGHTRAG_LLM_CACHE table
+INFO: queryparam column already exists in LIGHTRAG_LLM_CACHE table
+INFO: mode column does not exist in LIGHTRAG_LLM_CACHE table
+INFO: chunks_list column already exists in LIGHTRAG_DOC_STATUS table
+INFO: llm_cache_list column already exists in LIGHTRAG_DOC_CHUNKS table
+INFO: track_id column already exists in LIGHTRAG_DOC_STATUS table
+INFO: Index on track_id column already exists for LIGHTRAG_DOC_STATUS table
+INFO: metadata column already exists in LIGHTRAG_DOC_STATUS table
+INFO: error_msg column already exists in LIGHTRAG_DOC_STATUS table
+INFO: HNSW vector index idx_60a018b75b81_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_e7b623ae5c8a_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_c8dc6c405ffd_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [pilot_cd17069d81_g2_publico] Connected to neo4j at bolt://127.0.0.1:60542
+INFO: [pilot_cd17069d81_g2_publico] Ensured B-Tree index on entity_id for pilot_cd17069d81_g2_publico in neo4j
+INFO: [pilot_cd17069d81_g2_publico] No existing index 'entity_id_fulltext_idx_pilot_cd17069d81_g2_publico' found. Creating new index.
+INFO: [pilot_cd17069d81_g2_publico] Creating full-text index 'entity_id_fulltext_idx_pilot_cd17069d81_g2_publico' with Chinese tokenizer support.
+INFO: [pilot_cd17069d81_g2_publico] Successfully created full-text index 'entity_id_fulltext_idx_pilot_cd17069d81_g2_publico' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): politica-remoto:v2
+INFO: Extracting stage 1/1: politica-remoto@v2.md
+INFO: Processing d-id: politica-remoto:v2
+INFO: Chunking F(legacy): size=64, split_only=False, overlap=8, doc_id: politica-remoto:v2
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:30407ed0682a52f20ca341ba0c776de4
+INFO: Chunk 1 of 1 extracted 3 Ent + 2 Rel politica-remoto:v2-chunk-000
+INFO: Merging stage 1/1: politica-remoto@v2.md
+INFO: Phase 0: Writing recovery indexes for politica-remoto:v2: 3 candidate entities, 2 candidate relations
+INFO: Phase 1: Processing 3 entities from politica-remoto:v2 (async: 2)
+INFO: Phase 2: Processing 2 relations from politica-remoto:v2 (async: 2)
+INFO: Upserting relation VDB: `Política ACME Versão 2->Trabalho Remoto`
+INFO: Upserting relation VDB: `Política ACME Versão 1->Política ACME Versão 2`
+INFO: Phase 2 relation processing completed for politica-remoto:v2: edges=2 added_entities=0
+INFO: Completed merging: 3 entities, 0 extra entities, 2 relations
+INFO: [pilot_cd17069d81_g2_publico] entities flush: embedding 3 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_cd17069d81_g2_publico] relationships flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_cd17069d81_g2_publico] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: politica-remoto@v2.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Processing 1 document(s)
+INFO: Parsing (native): vendas-campanha:v1
+INFO: Extracting stage 1/1: vendas-campanha@v1.md
+INFO: Processing d-id: vendas-campanha:v1
+INFO: Chunking F(legacy): size=64, split_only=False, overlap=8, doc_id: vendas-campanha:v1
+INFO:  == LLM cache == saving: default:extract:fcac8bae233a7a33ea212ef454e45bd5
+INFO: Chunk 1 of 2 extracted 5 Ent + 5 Rel vendas-campanha:v1-chunk-000
+INFO:  == LLM cache == saving: default:extract:acf06e8bea1e58fe8094b1dd449c6f60
+INFO: Chunk 2 of 2 extracted 0 Ent + 0 Rel vendas-campanha:v1-chunk-001
+INFO: Merging stage 1/1: vendas-campanha@v1.md
+INFO: Phase 0: Writing recovery indexes for vendas-campanha:v1: 5 candidate entities, 5 candidate relations
+INFO: Phase 1: Processing 5 entities from vendas-campanha:v1 (async: 2)
+INFO: Phase 2: Processing 5 relations from vendas-campanha:v1 (async: 2)
+INFO: Upserting relation VDB: `ACME->Vendas De Janeiro De 2026`
+INFO: Upserting relation VDB: `ACME->Vendas De Fevereiro De 2026`
+INFO: Upserting relation VDB: `ACME->Queda Nas Vendas`
+INFO: Upserting relation VDB: `Campanha->Queda Nas Vendas`
+INFO: Upserting relation VDB: `Vendas De Fevereiro De 2026->Vendas De Janeiro De 2026`
+INFO: Phase 2 relation processing completed for vendas-campanha:v1: edges=5 added_entities=0
+INFO: Completed merging: 5 entities, 0 extra entities, 5 relations
+INFO: [pilot_cd17069d81_g2_publico] entities flush: embedding 5 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_cd17069d81_g2_publico] relationships flush: embedding 5 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_cd17069d81_g2_publico] chunks flush: embedding 2 vectors in 1 batch(es) (batch_num=10)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: vendas-campanha@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: Processing 1 document(s)
+INFO: Parsing (native): comentario-externo:v1
+INFO: Extracting stage 1/1: comentario-externo@v1.md
+INFO: Processing d-id: comentario-externo:v1
+INFO: Chunking F(legacy): size=64, split_only=False, overlap=8, doc_id: comentario-externo:v1
+INFO:  == LLM cache == saving: default:extract:675d8ee17e07a9d8fabeed3e51a9271b
+INFO: Chunk 1 of 1 extracted 1 Ent + 0 Rel comentario-externo:v1-chunk-000
+INFO: Merging stage 1/1: comentario-externo@v1.md
+INFO: Phase 0: Writing recovery indexes for comentario-externo:v1: 1 candidate entities, 0 candidate relations
+INFO: Phase 1: Processing 1 entities from comentario-externo:v1 (async: 2)
+INFO: Phase 2: Processing 0 relations from comentario-externo:v1 (async: 2)
+INFO: Completed merging: 1 entities, 0 extra entities, 0 relations
+INFO: [pilot_cd17069d81_g2_publico] entities flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_cd17069d81_g2_publico] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: comentario-externo@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='pilot_cd17069d81_g2_financeiro' while default workspace is set to 'pilot_cd17069d81_g2_publico'
+INFO: HNSW vector index idx_60a018b75b81_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_e7b623ae5c8a_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: HNSW vector index idx_c8dc6c405ffd_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+WARNING: PostgreSQL: workspace data in table 'LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d' is empty. Ensure it is caused by new workspace setup and not an unexpected embedding model change.
+INFO: [pilot_cd17069d81_g2_financeiro] Connected to neo4j at bolt://127.0.0.1:60542
+INFO: [pilot_cd17069d81_g2_financeiro] Ensured B-Tree index on entity_id for pilot_cd17069d81_g2_financeiro in neo4j
+INFO: [pilot_cd17069d81_g2_financeiro] No existing index 'entity_id_fulltext_idx_pilot_cd17069d81_g2_financeiro' found. Creating new index.
+INFO: [pilot_cd17069d81_g2_financeiro] Creating full-text index 'entity_id_fulltext_idx_pilot_cd17069d81_g2_financeiro' with Chinese tokenizer support.
+INFO: [pilot_cd17069d81_g2_financeiro] Successfully created full-text index 'entity_id_fulltext_idx_pilot_cd17069d81_g2_financeiro' with CJK analyzer.
+INFO: Processing 1 document(s)
+INFO: Parsing (native): aquisicao-reservada:v1
+INFO: Extracting stage 1/1: aquisicao-reservada@v1.md
+INFO: Processing d-id: aquisicao-reservada:v1
+INFO: Chunking F(legacy): size=64, split_only=False, overlap=8, doc_id: aquisicao-reservada:v1
+INFO: extract LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: default:extract:4d4e70209ed44585f314886a9f8c2080
+INFO: Chunk 1 of 1 extracted 4 Ent + 3 Rel aquisicao-reservada:v1-chunk-000
+INFO: Merging stage 1/1: aquisicao-reservada@v1.md
+INFO: Phase 0: Writing recovery indexes for aquisicao-reservada:v1: 4 candidate entities, 3 candidate relations
+INFO: Phase 1: Processing 4 entities from aquisicao-reservada:v1 (async: 2)
+INFO: Phase 2: Processing 3 relations from aquisicao-reservada:v1 (async: 2)
+INFO: Upserting relation VDB: `ACME->Estudo De Aquisição Sintética`
+INFO: Upserting relation VDB: `ACME->SIGILO_AQUISICAO_2026`
+INFO: Upserting relation VDB: `Estudo De Aquisição Sintética->R$ 9.700.000`
+INFO: Phase 2 relation processing completed for aquisicao-reservada:v1: edges=3 added_entities=0
+INFO: Completed merging: 4 entities, 0 extra entities, 3 relations
+INFO: [pilot_cd17069d81_g2_financeiro] entities flush: embedding 4 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_cd17069d81_g2_financeiro] relationships flush: embedding 3 vectors in 1 batch(es) (batch_num=10)
+INFO: [pilot_cd17069d81_g2_financeiro] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: In memory DB persist to disk
+INFO: Completed processing file 1/1: aquisicao-reservada@v1.md
+INFO: Enqueued document processing pipeline stopped
+INFO: keyword LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: mix:keywords:f61ea7214b10ebd57d7f4a4a66666a33
+INFO: Query nodes: ACME (top_k:8, cosine:0.25)
+INFO: Local query: 3 entities, 3 relations
+INFO: Query edges: vendas, política (top_k:8, cosine:0.25)
+INFO: Naive query: 1 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 3 entities, 3 relations, 1 vector chunks
+INFO: After truncation: 3 entities, 3 relations
+INFO: Selecting 1 from 1 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 3 relations
+INFO: Round-robin merged chunks: 2 -> 1 (deduplicated 1)
+INFO: Final context: 3 entities, 3 relations, 1 chunks
+INFO: Final chunks S+F/O: E3/1
+INFO: keyword LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: mix:keywords:f61ea7214b10ebd57d7f4a4a66666a33
+INFO: Query nodes: ACME (top_k:8, cosine:0.25)
+INFO: Local query: 7 entities, 7 relations
+INFO: Query edges: vendas, política (top_k:8, cosine:0.25)
+INFO: Global query: 6 entities, 3 relations
+INFO: Naive query: 2 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 8 entities, 7 relations, 2 vector chunks
+INFO: After truncation: 8 entities, 7 relations
+INFO: Selecting 2 from 2 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 7 relations
+INFO: Round-robin merged chunks: 4 -> 3 (deduplicated 1)
+INFO: Final context: 8 entities, 7 relations, 3 chunks
+INFO: Final chunks S+F/O: E5/1 C1/2 E3/2
+INFO:  == LLM cache == saving: mix:keywords:fd3cdf93240fde50d45bc3a548cbf32d
+INFO: Query nodes: ACME, versão 2, dias por semana (top_k:8, cosine:0.25)
+INFO: Local query: 7 entities, 7 relations
+INFO: Query edges: política de trabalho remoto (top_k:8, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 2 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 7 entities, 7 relations, 2 vector chunks
+INFO: After truncation: 7 entities, 7 relations
+INFO: Selecting 2 from 2 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 7 relations
+INFO: Round-robin merged chunks: 4 -> 2 (deduplicated 2)
+INFO: Final context: 7 entities, 7 relations, 2 chunks
+INFO: Final chunks S+F/O: E3/1 E4/2
+INFO: query LLM func: 1 new workers initialized (Timeouts: Func: 240s, Worker: 480s, Health Check: 495s)
+INFO:  == LLM cache == saving: mix:query:e7064abcc59560f250eed0de84f101b5
+INFO: PostgreSQL table: LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: PostgreSQL table: LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=1, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=1, timeout=240
+INFO:  - query: None/None, host=None, max_async=1, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=1, timeout=240
+INFO: Creating LightRAG instance with workspace='pilot_cd17069d81_g1_publico' while default workspace is set to 'pilot_cd17069d81_g2_publico'
+INFO: HNSW vector index idx_60a018b75b81_hnsw_cosine already exists on table LIGHTRAG_VDB_ENTITY_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_e7b623ae5c8a_hnsw_cosine already exists on table LIGHTRAG_VDB_RELATION_minilm_multilingual_faf4aa4_384d
+INFO: HNSW vector index idx_c8dc6c405ffd_hnsw_cosine already exists on table LIGHTRAG_VDB_CHUNKS_minilm_multilingual_faf4aa4_384d
+INFO: [pilot_cd17069d81_g1_publico] Connected to neo4j at bolt://127.0.0.1:60542
+INFO: [pilot_cd17069d81_g1_publico] Ensured B-Tree index on entity_id for pilot_cd17069d81_g1_publico in neo4j
+INFO: [pilot_cd17069d81_g1_publico] Found existing index 'entity_id_fulltext_idx_pilot_cd17069d81_g1_publico' with state: ONLINE
+INFO: [pilot_cd17069d81_g1_publico] Full-text index 'entity_id_fulltext_idx_pilot_cd17069d81_g1_publico' already exists and is online. Skipping recreation.
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: Query nodes: ACME, versão 1, dias por semana (top_k:8, cosine:0.25)
+INFO: Local query: 5 entities, 5 relations
+INFO: Query edges: política de trabalho remoto (top_k:8, cosine:0.25)
+INFO: Global query: 2 entities, 1 relations
+INFO: Naive query: 2 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 5 entities, 5 relations, 2 vector chunks
+INFO: After truncation: 5 entities, 5 relations
+INFO: Selecting 2 from 2 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 5 relations
+INFO: Round-robin merged chunks: 4 -> 2 (deduplicated 2)
+INFO: Final context: 5 entities, 5 relations, 2 chunks
+INFO: Final chunks S+F/O: E2/1 E3/2
+INFO:  == LLM cache == Query cache hit, using cached response as query result
+INFO:  == LLM cache == saving: mix:keywords:45f26d1798a21db6dad1e1e3f21ca00f
+INFO: Query nodes: queda de 20%, vendas de fevereiro (top_k:8, cosine:0.25)
+INFO: Local query: 5 entities, 5 relations
+INFO: Query edges: relação causal, pausa da campanha, queda das vendas (top_k:8, cosine:0.25)
+INFO: Global query: 8 entities, 5 relations
+INFO: Naive query: 1 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 8 entities, 7 relations, 1 vector chunks
+INFO: After truncation: 8 entities, 7 relations
+INFO: Selecting 2 from 2 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 7 relations
+INFO: Round-robin merged chunks: 3 -> 2 (deduplicated 1)
+INFO: Final context: 8 entities, 7 relations, 2 chunks
+INFO: Final chunks S+F/O: E5/1 E3/2
+INFO:  == LLM cache == saving: mix:query:0aa71c70f9595d1eac14148506a63641
+INFO:  == LLM cache == saving: mix:keywords:4ea1986345678131d0730962409b1c8e
+INFO: Query nodes: março de 2026 (top_k:8, cosine:0.25)
+INFO: Local query: 8 entities, 7 relations
+INFO: Query edges: meta de vendas, valor aprovado (top_k:8, cosine:0.25)
+INFO: Global query: 5 entities, 5 relations
+INFO: Naive query: 2 chunks (chunk_top_k:8 cosine:0.25)
+INFO: Raw search results: 8 entities, 7 relations, 2 vector chunks
+INFO: After truncation: 8 entities, 7 relations
+INFO: Selecting 2 from 2 entity-related chunks by vector similarity
+INFO: Find no additional relations-related chunks from 7 relations
+INFO: Round-robin merged chunks: 4 -> 2 (deduplicated 2)
+INFO: Final context: 8 entities, 7 relations, 2 chunks
+INFO: Final chunks S+F/O: E5/1 E3/2
+INFO:  == LLM cache == saving: mix:query:ef63e26bc2bac4f607a39d4d5b5c47e1

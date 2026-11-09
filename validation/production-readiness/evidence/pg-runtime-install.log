@@ -1,0 +1,64 @@
+Using CPython 3.12.14 interpreter at: poc\.venv\Scripts\python.exe
+Creating virtual environment at: validation/production-readiness/postgres-runtime
+Activate with: validation\production-readiness\postgres-runtime\Scripts\activate
+Using Python 3.12.14 environment at: validation\production-readiness\postgres-runtime
+Resolved 43 packages in 1.52s
+   Building langgraph-sdk @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/sdk-py
+   Building langgraph-checkpoint-postgres @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/checkpoint-postgres
+   Building langgraph-checkpoint @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/checkpoint
+   Building langgraph-prebuilt @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/prebuilt
+   Building langgraph @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/langgraph
+Downloading pydantic-core (2.1MiB)
+Downloading psycopg-binary (3.5MiB)
+      Built langgraph-sdk @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/sdk-py
+ Downloaded pydantic-core
+ Downloaded psycopg-binary
+      Built langgraph-checkpoint @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/checkpoint
+      Built langgraph-prebuilt @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/prebuilt
+      Built langgraph @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/langgraph
+      Built langgraph-checkpoint-postgres @ file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/checkpoint-postgres
+Prepared 23 packages in 1.50s
+Installed 43 packages in 538ms
+ + annotated-types==0.8.0
+ + anyio==4.16.0
+ + certifi==2026.10.23
+ + charset-normalizer==3.5.2
+ + distro==1.9.0
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpcore2==2.16.0
+ + httpx==0.28.1
+ + httpx2==2.16.0
+ + idna==3.20
+ + jsonpatch==1.41
+ + jsonpointer==3.8
+ + langchain-core==1.7.4
+ + langchain-protocol==0.0.20
+ + langgraph==1.2.19 (from file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/langgraph)
+ + langgraph-checkpoint==4.3.1 (from file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/checkpoint)
+ + langgraph-checkpoint-postgres==3.2.0 (from file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/checkpoint-postgres)
+ + langgraph-prebuilt==1.1.1 (from file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/prebuilt)
+ + langgraph-sdk==0.4.11 (from file:///C:/Users/PC/multi-agent/vendor/langgraph/libs/sdk-py)
+ + langsmith==0.14.17
+ + orjson==3.13.0
+ + ormsgpack==1.13.0
+ + packaging==26.3
+ + psycopg==3.3.7
+ + psycopg-binary==3.3.7
+ + psycopg-pool==3.3.3
+ + pydantic==2.14.2
+ + pydantic-core==2.50.2
+ + pyyaml==6.0.3
+ + requests==2.34.2
+ + requests-toolbelt==1.0.0
+ + sniffio==1.3.1
+ + tenacity==9.2.1
+ + truststore==0.10.5
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + tzdata==2026.6
+ + urllib3==2.8.0
+ + uuid-utils==0.19.0
+ + websockets==17.4
+ + xxhash==4.0.2
+ + zstandard==0.25.0

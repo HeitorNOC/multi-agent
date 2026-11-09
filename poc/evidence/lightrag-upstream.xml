@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="46" time="0.578" timestamp="2026-11-03T01:43:02.373967-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="tests.workspace.test_workspace_path_validation.TestValidWorkspaces" name="test_returns_input_unchanged[my_workspace]" time="0.017" /><testcase classname="tests.workspace.test_workspace_path_validation.TestValidWorkspaces" name="test_returns_input_unchanged[workspace-123]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestValidWorkspaces" name="test_returns_input_unchanged[MyWorkSpace]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestValidWorkspaces" name="test_returns_input_unchanged[12345]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestValidWorkspaces" name="test_returns_input_unchanged[_]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestValidWorkspaces" name="test_returns_input_unchanged[v1.0]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestValidWorkspaces" name="test_returns_input_unchanged[team.alpha]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestValidWorkspaces" name="test_returns_input_unchanged[a..b]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestValidWorkspaces" name="test_returns_input_unchanged[\u5de5\u4f5c\u533a_test]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestPathTraversalRejected" name="test_raises_value_error[..]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestPathTraversalRejected" name="test_raises_value_error[.]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestPathTraversalRejected" name="test_raises_value_error[../etc]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestPathTraversalRejected" name="test_raises_value_error[../../../etc/passwd]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestPathTraversalRejected" name="test_raises_value_error[foo/../../etc]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestPathTraversalRejected" name="test_raises_value_error[foo/bar]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestPathTraversalRejected" name="test_raises_value_error[/etc/passwd]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestPathTraversalRejected" name="test_raises_value_error[..\\..\\windows]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestPathTraversalRejected" name="test_raises_value_error[foo\\bar]" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestStorageRejectsTraversal" name="test_json_kv_storage_rejects_traversal" time="0.096" /><testcase classname="tests.workspace.test_workspace_path_validation.TestStorageRejectsTraversal" name="test_json_kv_storage_accepts_dotted_name" time="0.002" /><testcase classname="tests.workspace.test_workspace_path_validation.TestUploadPath" name="test_document_manager_rejects_traversal" time="0.012"><failure message="ModuleNotFoundError: No module named 'fastapi'">self = &lt;tests.workspace.test_workspace_path_validation.TestUploadPath object at 0x00000210486EE7B0&gt;
+tmp_path = WindowsPath('C:/Users/PC/AppData/Local/Temp/pytest-of-PC/pytest-2/test_document_manager_rejects_0')
+
+    def test_document_manager_rejects_traversal(self, tmp_path):
+&gt;       DocumentManager = _import_document_manager()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:101: in _import_document_manager
+    from lightrag.api.routers.document_routes import DocumentManager
+vendor\lightrag\lightrag\api\routers\__init__.py:12: in &lt;module&gt;
+    from .ollama_api import OllamaAPI
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   from fastapi import APIRouter, HTTPException, Request
+E   ModuleNotFoundError: No module named 'fastapi'
+
+vendor\lightrag\lightrag\api\routers\ollama_api.py:1: ModuleNotFoundError</failure></testcase><testcase classname="tests.workspace.test_workspace_path_validation.TestUploadPath" name="test_document_manager_creates_workspace_subdir" time="0.003"><failure message="ModuleNotFoundError: No module named 'fastapi'">self = &lt;tests.workspace.test_workspace_path_validation.TestUploadPath object at 0x00000210486EF470&gt;
+tmp_path = WindowsPath('C:/Users/PC/AppData/Local/Temp/pytest-of-PC/pytest-2/test_document_manager_creates_0')
+
+    def test_document_manager_creates_workspace_subdir(self, tmp_path):
+&gt;       DocumentManager = _import_document_manager()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:101: in _import_document_manager
+    from lightrag.api.routers.document_routes import DocumentManager
+vendor\lightrag\lightrag\api\routers\__init__.py:12: in &lt;module&gt;
+    from .ollama_api import OllamaAPI
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   from fastapi import APIRouter, HTTPException, Request
+E   ModuleNotFoundError: No module named 'fastapi'
+
+vendor\lightrag\lightrag\api\routers\ollama_api.py:1: ModuleNotFoundError</failure></testcase><testcase classname="tests.workspace.test_workspace_path_validation.TestUploadPath" name="test_document_manager_empty_workspace_uses_base_dir" time="0.003"><failure message="ModuleNotFoundError: No module named 'fastapi'">self = &lt;tests.workspace.test_workspace_path_validation.TestUploadPath object at 0x00000210486EE270&gt;
+tmp_path = WindowsPath('C:/Users/PC/AppData/Local/Temp/pytest-of-PC/pytest-2/test_document_manager_empty_wo0')
+
+    def test_document_manager_empty_workspace_uses_base_dir(self, tmp_path):
+&gt;       DocumentManager = _import_document_manager()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:101: in _import_document_manager
+    from lightrag.api.routers.document_routes import DocumentManager
+vendor\lightrag\lightrag\api\routers\__init__.py:12: in &lt;module&gt;
+    from .ollama_api import OllamaAPI
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   from fastapi import APIRouter, HTTPException, Request
+E   ModuleNotFoundError: No module named 'fastapi'
+
+vendor\lightrag\lightrag\api\routers\ollama_api.py:1: ModuleNotFoundError</failure></testcase><testcase classname="tests.workspace.test_workspace_path_validation.TestUploadPath" name="test_api_sanitizer_output_always_accepted" time="0.001" /><testcase classname="tests.workspace.test_workspace_path_validation.TestUploadPath" name="test_upload_dir_matches_storage_dir" time="0.003"><failure message="ModuleNotFoundError: No module named 'fastapi'">self = &lt;tests.workspace.test_workspace_path_validation.TestUploadPath object at 0x00000210486EDC10&gt;
+tmp_path = WindowsPath('C:/Users/PC/AppData/Local/Temp/pytest-of-PC/pytest-2/test_upload_dir_matches_storag0')
+
+    def test_upload_dir_matches_storage_dir(self, tmp_path):
+        """Files uploaded to &lt;input_dir&gt;/&lt;ws&gt;/ must be resolvable against
+        storage data in &lt;working_dir&gt;/&lt;ws&gt;/ — same subdirectory name."""
+&gt;       DocumentManager = _import_document_manager()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+vendor\lightrag\tests\workspace\test_workspace_path_validation.py:101: in _import_document_manager
+    from lightrag.api.routers.document_routes import DocumentManager
+vendor\lightrag\lightrag\api\routers\__init__.py:12: in &lt;module&gt;
+    from .ollama_api import OllamaAPI
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   from fastapi import APIRouter, HTTPException, Request
+E   ModuleNotFoundError: No module named 'fastapi'
+
+vendor\lightrag\lightrag\api\routers\ollama_api.py:1: ModuleNotFoundError</failure></testcase><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_alphanumeric_unchanged" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_alphanumeric_with_underscore" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_uppercase_preserved" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_numeric_only" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_spaces_preserved" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_hyphens_preserved" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_dots_preserved" time="0.000" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_mixed_special_chars_preserved" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_cypher_injection_backtick_escaped" time="0.000" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_cypher_injection_multiple_backticks" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_cypher_injection_curly_braces_preserved" time="0.000" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_cypher_injection_semicolon_preserved" time="0.000" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_cypher_injection_quotes_preserved" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_empty_string_fallback" time="0.000" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_whitespace_only_fallback" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_special_chars_only_preserved" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_leading_trailing_whitespace_stripped" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_unicode_characters_preserved" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_very_long_workspace" time="0.000" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_single_underscore" time="0.001" /><testcase classname="tests.workspace.test_workspace_sanitization.TestWorkspaceLabelSanitization" name="test_result_always_escapes_backticks" time="0.001" /></testsuite></testsuites>

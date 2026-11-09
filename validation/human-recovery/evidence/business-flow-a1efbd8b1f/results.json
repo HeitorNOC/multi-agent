@@ -1,0 +1,56 @@
+{
+  "installation": "business-flow-a1efbd8b1f",
+  "checkpoints": [],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "result": "PASS_HUMAN_RECOVERY_INTEGRATION",
+  "cases": 2,
+  "independent_sessions": 2,
+  "api_restarts": 2,
+  "lost_ack_reconciled": true,
+  "provider_executions": [
+    [
+      "business-flow-a1efbd8b1f:inference:67aff38d35d5eaf34335ffdd7ffabe5a32af9bc8c8b86509248f62746a332a67",
+      "complete",
+      1
+    ],
+    [
+      "business-flow-a1efbd8b1f:inference:f572e21b1fa9f5f5a62415c53a97eb2b1ead6592920eac68764b7c1a88e28a85",
+      "closed_unknown",
+      1
+    ]
+  ],
+  "history": [
+    {
+      "case_id": "business-flow-a1efbd8b1f:inference:67aff38d35d5eaf34335ffdd7ffabe5a32af9bc8c8b86509248f62746a332a67",
+      "operation_id": "business-flow-a1efbd8b1f:150f17b6c65b121f184b61725383f89e33daef976bab7dad03783a49423d6594",
+      "job_id": "5c6065d9-38b2-411c-9f5c-a602ffbc187a",
+      "outcome": "reconciled_read",
+      "reviewers": [
+        "board",
+        "reviewer2"
+      ]
+    },
+    {
+      "case_id": "business-flow-a1efbd8b1f:inference:f572e21b1fa9f5f5a62415c53a97eb2b1ead6592920eac68764b7c1a88e28a85",
+      "operation_id": "business-flow-a1efbd8b1f:close:3454131201d9849f975e44554ced9cb33efd51f83f52f9b4b752df24784033b9",
+      "job_id": "00e7f9be-7d4d-4d5f-81f8-34ee6d0020cb",
+      "outcome": "closed_unknown",
+      "reviewers": [
+        "board",
+        "reviewer2"
+      ]
+    }
+  ]
+}

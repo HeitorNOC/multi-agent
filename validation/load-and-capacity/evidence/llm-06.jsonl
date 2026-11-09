@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a803-9149-7803-af2f-d7c718eeef02"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"horário de entrega de comprovantes\\\"],\\\"low_level_keywords\\\":[\\\"Aurora\\\",\\\"2026-02-01\\\",\\\"manual-aurora@v1\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12689,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":56,"reasoning_output_tokens":0}}

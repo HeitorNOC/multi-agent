@@ -1,0 +1,216 @@
+{
+  "goal": "Qual é o prazo de reembolso para o cliente?",
+  "status": "awaiting_approval",
+  "error": null,
+  "plan": {
+    "strategy": "A2",
+    "reason": "A diretoria jurídica é a mais adequada para verificar o prazo de reembolso e as obrigações aplicáveis.",
+    "teams": [
+      {
+        "lead": "legal_director",
+        "specialists": [
+          "contract_analyst"
+        ],
+        "reason": "Analisar as obrigações contratuais que possam estabelecer o prazo de reembolso."
+      }
+    ],
+    "capabilities": [
+      "legal_director",
+      "contract_analyst"
+    ],
+    "not_selected": [
+      {
+        "id": "executive_director",
+        "reason": "Estratégia e portfólio não respondem ao prazo de reembolso."
+      },
+      {
+        "id": "business_analyst",
+        "reason": "Dependências entre unidades não estabelecem o prazo."
+      },
+      {
+        "id": "portfolio_analyst",
+        "reason": "Priorização de investimentos não estabelece o prazo."
+      },
+      {
+        "id": "marketing_director",
+        "reason": "Campanhas e posicionamento não são o foco da pergunta."
+      },
+      {
+        "id": "campaign_planner",
+        "reason": "O escopo de campanha não estabelece o prazo."
+      },
+      {
+        "id": "pricing_analyst",
+        "reason": "A mecânica de preços não estabelece o prazo de reembolso."
+      },
+      {
+        "id": "operations_director",
+        "reason": "Disponibilidade e logística não são o foco da pergunta."
+      },
+      {
+        "id": "supply_planner",
+        "reason": "Estoque e reservas não estabelecem o prazo."
+      },
+      {
+        "id": "logistics_analyst",
+        "reason": "Prazos de entrega não estabelecem o prazo de reembolso."
+      },
+      {
+        "id": "finance_director",
+        "reason": "Margem e caixa não estabelecem a obrigação de prazo."
+      },
+      {
+        "id": "controller",
+        "reason": "Margem e orçamento não estabelecem o prazo de reembolso."
+      },
+      {
+        "id": "treasury_analyst",
+        "reason": "Liquidez e financiamento não estabelecem o prazo devido ao cliente."
+      },
+      {
+        "id": "people_director",
+        "reason": "Capacidade organizacional não responde à pergunta."
+      },
+      {
+        "id": "recruitment_analyst",
+        "reason": "Admissões não respondem à pergunta."
+      },
+      {
+        "id": "workforce_analyst",
+        "reason": "Disponibilidade de equipes não estabelece o prazo."
+      },
+      {
+        "id": "compliance_advisor",
+        "reason": "Seu foco em alegações de campanha e incidentes não corresponde à pergunta."
+      },
+      {
+        "id": "technology_director",
+        "reason": "Sistemas e segurança de dados não são o foco da pergunta."
+      },
+      {
+        "id": "security_analyst",
+        "reason": "SLA de incidente de segurança não estabelece o prazo de reembolso."
+      },
+      {
+        "id": "data_analyst",
+        "reason": "Consistência de contagens e integração não estabelecem o prazo."
+      }
+    ],
+    "requires_approval": true,
+    "max_model_calls": 5
+  },
+  "model": "gpt-6.1-terra",
+  "usage": {
+    "calls": 5,
+    "max_calls": 24,
+    "input_tokens": 60347,
+    "cached_input_tokens": 40960,
+    "output_tokens": 756,
+    "money": "Uso Codex de bancada; valor monetário não medido."
+  },
+  "manifest_sha256": "61a3260d6d0faf0667066c24f38ae514106def83ad3f40951ab056d87a5fb3b1",
+  "documents": [
+    {
+      "source": "politica",
+      "version": 1,
+      "current": true,
+      "classification": "model-approved",
+      "title": "politica.txt",
+      "area": "Financeiro",
+      "origin": "Documento fictício de teste",
+      "file": "politica.txt",
+      "sha256": "c14720cbaa1c5bb12d79a542cfe217080f54259d66754f656a8e19fed1989148"
+    }
+  ],
+  "retrieval": "lexical",
+  "facets": [],
+  "event_kinds": [
+    "admission",
+    "job_queued",
+    "job_dequeued",
+    "worker_requested",
+    "worker_started",
+    "checkpoint_loaded",
+    "chief_of_staff",
+    "inference_requested",
+    "inference_completed",
+    "plan",
+    "specialist_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "specialist_completed",
+    "director_started",
+    "retrieval_completed",
+    "inference_requested",
+    "inference_completed",
+    "director_completed",
+    "synthesis",
+    "inference_requested",
+    "inference_completed",
+    "inference_requested",
+    "inference_completed",
+    "review_ready",
+    "checkpoint_saved",
+    "worker_stopped"
+  ],
+  "retrieval_observed": true,
+  "candidates": [
+    {
+      "source": "politica",
+      "page": 1,
+      "line": 1
+    }
+  ],
+  "report": {
+    "status": "supported_extracts",
+    "summary": "Trechos localizados para revisão humana.",
+    "citations": [
+      {
+        "id": "50e80921319121e0977300772c698abaecf8132a8796cab9c1229c67b4178ed7",
+        "source": "politica",
+        "version": 1,
+        "sha256": "c14720cbaa1c5bb12d79a542cfe217080f54259d66754f656a8e19fed1989148",
+        "line": 1,
+        "quote": "O prazo de reembolso para o cliente é de 45 dias úteis.",
+        "pdf_page": 1
+      }
+    ],
+    "manifest_sha256": "61a3260d6d0faf0667066c24f38ae514106def83ad3f40951ab056d87a5fb3b1",
+    "requires_approval": true,
+    "unanswered": []
+  },
+  "diagnostics": [],
+  "model_call_metadata": [
+    {
+      "call": 1,
+      "seconds": 13.657106300001033,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "seconds": 4.807869800002663,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "seconds": 4.5377146000100765,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "seconds": 5.215913700012607,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "seconds": 4.678218700006255,
+      "exit_code": 0,
+      "unexpected_tool_events": 0
+    }
+  ]
+}

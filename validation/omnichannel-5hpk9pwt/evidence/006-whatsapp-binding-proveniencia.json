@@ -1,0 +1,9 @@
+{
+  "scope": "Candidata histórica de laboratório. Nenhuma implantação externa foi identificada.",
+  "candidate_sha256": "c229fb1209d71993df3389ba5507c812122a31c8e3f618d757dbcf8dca8453c8",
+  "sql_sha256_lf": "438c43124693cdfeaee826356c351015dfdcca272af6aee5b002c2930a94f539",
+  "source": "decisions.jsonl, registros 110 e 139. O snapshot histórico foi reconstruído e seu SHA-256 coincide com o registro 139.",
+  "migration_name": "WhatsappBinding1760000000005",
+  "migration_timestamp": 1760000000005,
+  "migration_id": "Não registrado no log histórico. Requer reprodução local ou acesso à instalação alvo."
+}

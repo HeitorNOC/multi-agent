@@ -1,0 +1,16 @@
+{
+  "verified_signatures": 62,
+  "sealed_cut_present_in_transcript": true,
+  "job_transitions": {
+    "interrupted": "completed",
+    "awaiting_approval": "completed",
+    "running": "closed_unknown",
+    "queued": "awaiting_approval"
+  },
+  "effect_receipts_preserved": 1,
+  "effect_receipts_after_approval": 2,
+  "authority_model_slots": {
+    "closed_unknown": 1,
+    "completed": 12
+  }
+}

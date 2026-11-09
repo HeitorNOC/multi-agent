@@ -1,0 +1,118 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+CHECKPOINT isolated_postgres_and_typescript_canonical_ready
+CHECKPOINT simple_route_no_unnecessary_team_and_tenant_acl_denials
+CHECKPOINT exact_plan_approval_and_resume_without_authorization_denied
+CHECKPOINT dynamic_team_worker_crash_after_effect_before_checkpoint_recovered
+CHECKPOINT business_process_crash_after_provider_before_receipt_reconciled
+CHECKPOINT exclusive_job_lease_stale_fencing_and_payload_tamper_denied
+CHECKPOINT current_acl_blocks_approved_dispatch_and_historical_delivery
+F
+================================== FAILURES ===================================
+____________________ test_business_flow_and_crash_recovery ____________________
+
+    def test_business_flow_and_crash_recovery():
+        lab = Lab(); started = time.perf_counter()
+        def denied(fn,status):
+            with pytest.raises(Rejected) as error:
+                fn()
+            assert error.value.status == status,str(error.value)
+        try:
+            lab.start(); lab.mark('isolated_postgres_and_typescript_canonical_ready',versions=lab.evidence['versions'])
+            denied(lambda:request(lab.api,'forged',{'action':'state'}),401)
+            denied(lambda:lab.call('foreign','create',capabilities=['policy_lookup'],execute=False,maxUnits=1),403)
+            denied(lambda:lab.call('analyst','create',capabilities=['finance_review'],execute=False,maxUnits=1),403)
+            denied(lambda:lab.call('owner','create',capabilities=['unknown'],execute=False,maxUnits=1),400)
+            denied(lambda:lab.call('owner','create',capabilities=['policy_lookup'],execute=False,maxUnits=1,owner='board'),400)
+            small = lab.new(['policy_lookup'],execute=False,maxUnits=1)
+            assert small['plan']['strategy'] == 'A1'
+            result = lab.run_worker(small['id'])
+            assert result['completed'] and result['evidence_count'] == 1
+            lab.mark('simple_route_no_unnecessary_team_and_tenant_acl_denials')
+    
+            single_write = lab.new(['policy_lookup'],execute=True,maxUnits=3)
+            assert single_write['plan']['strategy'] == 'A2'
+            assert lab.run_worker(single_write['id'])['next'] == ['approval']
+            denied(lambda:lab.call('owner','approve',job=single_write['id'],hash=single_write['hash']),403)
+            denied(lambda:lab.call('board','approve',job=single_write['id'],hash='altered'),409)
+            # Resume signal alone must not authorize the effect.
+            lab.run_worker(single_write['id'],resume=True,expected=-1)
+            assert not lab.call('board','state')['effects']
+            lab.fence(single_write['id'])
+            lab.call('board','approve',job=single_write['id'],hash=single_write['hash'])
+            assert lab.run_worker(single_write['id'],resume=True)['completed']
+            lab.mark('exact_plan_approval_and_resume_without_authorization_denied')
+    
+            team = lab.new()
+            waiting = lab.run_worker(team['id'])
+            assert team['plan']['strategy'] == 'A3' and waiting['evidence_count'] == 2 and waiting['next'] == ['approval']
+            assert len(lab.call('board','state')['effects']) == 1
+            lab.call('board','approve',job=team['id'],hash=team['hash'])
+            assert lab.run_worker(team['id'],resume=True,crash=True,expected=73) == 73
+            lab.fence(team['id'])
+            assert lab.run_worker(team['id'],resume=True)['completed']
+            original = lab.call('owner','status',job=team['id'])['result']
+            assert original['receipt']['deliveries'] == 1
+            lab.mark('dynamic_team_worker_crash_after_effect_before_checkpoint_recovered',sources=len(original['evidence']))
+    
+            api_crash = lab.new()
+            assert lab.run_worker(api_crash['id'])['next'] == ['approval']
+            lab.call('board','approve',job=api_crash['id'],hash=api_crash['hash'])
+            lab.call('board','fault')
+            lab.run_worker(api_crash['id'],resume=True,expected=-1)
+            assert lab.business.wait(timeout=8) == 74
+            lab.start_business()
+            lab.fence(api_crash['id'])
+            assert lab.run_worker(api_crash['id'],resume=True)['completed']
+            assert lab.call('owner','status',job=team['id'])['result'] == original
+            lab.mark('business_process_crash_after_provider_before_receipt_reconciled',historical_result_unchanged=True)
+    
+            # Second OS process, same business ledger: no in-memory global mutex.
+            second_business,second_api = lab.service(['node',str(HERE/'business.ts')],lab.config)
+    
+            lease_job = lab.new(['policy_lookup'],execute=False,maxUnits=1)
+            first = lab.call('worker','claim',job=lease_job['id'],worker='manual-worker-1')
+            denied(lambda:request(second_api,lab.tokens['worker'],{'action':'claim','job':lease_job['id'],'worker':'manual-worker-2'}),409)
+            lab.fence(lease_job['id'])
+            second = lab.call('worker','claim',job=lease_job['id'],worker='manual-worker-2')
+            denied(lambda:lab.call('worker','read',job=lease_job['id'],worker='manual-worker-1',epoch=first['epoch'],capability='policy_lookup'),409)
+            denied(lambda:request(second_api,lab.tokens['worker'],{'action':'effect','job':lease_job['id'],'worker':'manual-worker-1','epoch':first['epoch']}),409)
+            denied(lambda:lab.call('worker','effect',job=lease_job['id'],worker='manual-worker-2',epoch=second['epoch'],target='unapproved'),400)
+            lab.call('worker','release',job=lease_job['id'],worker='manual-worker-2',epoch=second['epoch'])
+            assert lab.run_worker(lease_job['id'])['completed']
+            lab.mark('exclusive_job_lease_stale_fencing_and_payload_tamper_denied')
+    
+            revoked = lab.new()
+            lab.run_worker(revoked['id'])
+            lab.call('board','approve',job=revoked['id'],hash=revoked['hash'])
+            before = lab.call('board','state')
+            lab.call('board','revoke',principal='owner',source='aquisicao')
+            lab.run_worker(revoked['id'],resume=True,expected=-1)
+            denied(lambda:lab.call('owner','status',job=team['id']),403)
+            assert len(lab.call('board','state')['effects']) == len(before['effects'])
+            lab.mark('current_acl_blocks_approved_dispatch_and_historical_delivery')
+    
+            denied(lambda:lab.new(['policy_lookup'],execute=True,maxUnits=2),429)
+            baseline = lab.call('board','state')
+            accounted = sum(j['spent'] if j['state']=='completed' else j['reserved'] for j in baseline['jobs'])
+            expected = (64-accounted)//3
+            def admit(index):
+                try:
+                    api = lab.api if index%2 == 0 else second_api
+                    created = request(api,lab.tokens['owner'],{'action':'create','capabilities':['policy_lookup'],'execute':True,'maxUnits':3})
+                    return {'accepted':True,'id':created['id']}
+                except Rejected as error:
+                    return {'accepted':False,'status':error.status}
+            with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+                attempts = list(pool.map(admit,range(24)))
+            assert sum(x['accepted'] for x in attempts) == expected
+>           assert all(x['accepted'] or x['status']==429 for x in attempts)
+E           assert False
+E            +  where False = all(<generator object test_business_flow_and_crash_recovery.<locals>.<genexpr> at 0x000001ECC83EDBE0>)
+
+validation\langgraph-business-flow\test_flow.py:291: AssertionError
+=========================== short test summary info ===========================
+FAILED validation/langgraph-business-flow/test_flow.py::test_business_flow_and_crash_recovery
+1 failed in 24.52s

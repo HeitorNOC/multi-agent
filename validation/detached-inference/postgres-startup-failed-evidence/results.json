@@ -1,0 +1,13 @@
+{
+  "installation": "business-flow-d4f8bef19f",
+  "checkpoints": [],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "result": "FAIL",
+  "error": "RuntimeError('psql: error: connection to server on socket \"/var/run/postgresql/.s.PGSQL.5432\" failed: No such file or directory\\n\\tIs the server running locally and accepting connections on that socket?\\n')",
+  "seconds": 2.8953020999906585,
+  "disposable_resources_removed": true
+}

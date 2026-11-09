@@ -1,0 +1,39 @@
+2026-11-03 12:17:53 [debug    ] [cli_agent] registered provider 'codex' -> <class 'services.cli_agent.providers.openai_codex.OpenAICodexProvider'>
+2026-11-03 12:17:53 [debug    ] [cli_agent] registered provider 'claude' -> <class 'nodes.agent.claude_code_agent._provider.AnthropicClaudeProvider'>
+2026-11-03 12:17:53 [debug    ] [cli_agent] registered session pool 'claude' -> <function get_session_pool at 0x0000021D66B7E660>
+2026-11-03 12:17:53 [debug    ] [cli_agent] registered skill materialiser 'claude' -> <function materialise_skills at 0x0000021D66B7FE20>
+           container: core imports done
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=anthropic
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=openai
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=gemini
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=openrouter
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=xai
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=deepseek
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=kimi
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=mistral
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=ollama
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=lmstudio
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=groq
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=cerebras
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=sarvam
+2026-11-03 12:17:54 [debug    ] registered provider            layer=LLM provider=openai_compatible
+           container: AIService imported
+           container: WorkflowService imported
+           container: all service imports done
+           container: LLM registry populated + unifier imported
+2026-11-03 12:17:55 [debug    ] Loaded Google API config       version=2026.02
+2026-11-03 12:17:56 [debug    ] registered provider            layer=text-to-speech provider=openai
+2026-11-03 12:17:56 [debug    ] registered provider            layer=speech-to-text provider=openai
+2026-11-03 12:17:56 [debug    ] registered provider            layer=speech-to-text provider=groq
+2026-11-03 12:17:56 [debug    ] registered provider            layer=text-to-speech provider=elevenlabs
+2026-11-03 12:17:56 [debug    ] registered provider            layer=speech-to-text provider=deepgram
+2026-11-03 12:17:56 [debug    ] registered provider            layer=text-to-speech provider=sarvam
+2026-11-03 12:17:56 [debug    ] registered provider            layer=speech-to-text provider=sarvam
+2026-11-03 12:17:56 [debug    ] registered provider            layer=translate provider=deepl
+2026-11-03 12:17:56 [debug    ] registered provider            layer=translate provider=sarvam
+2026-11-03 12:17:56 [debug    ] registered provider            layer=transliterate provider=sarvam
+2026-11-03 12:17:56 [debug    ] registered provider            layer=detect-language provider=sarvam
+2026-11-03 12:17:56 [debug    ] registered provider            layer=translate provider=openai
+2026-11-03 12:17:56 [debug    ] registered provider            layer=transliterate provider=openai
+2026-11-03 12:17:56 [debug    ] registered provider            layer=detect-language provider=openai
+{"registered": true, "result": {"success": true, "result": {"source_id": "synthetic-sales-v1", "content": "Sales dropped 20 percent"}, "execution_time": 0.013, "timestamp": "2026-11-03T15:17:56.664703+00:00"}, "cross_company": {"success": false, "error": "company mismatch", "error_type": "PermissionDeniedError", "execution_time": 0.0, "timestamp": "2026-11-03T15:17:56.664703+00:00"}, "scope": "actual OpenCompany ActionNode execute and registry, explicit module import outside clone; no full app or Temporal worker qualified"}

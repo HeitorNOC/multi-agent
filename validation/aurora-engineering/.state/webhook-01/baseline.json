@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "passed": false,
+  "log": "\u2716 webhook deduplicates repeated deliveries and preserves tenant scope (72.06256ms)\n\u2139 tests 1\n\u2139 suites 0\n\u2139 pass 0\n\u2139 fail 1\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 135.687397\n\n\u2716 failing tests:\n\ntest at ../input/acceptance.cjs:9:1\n\u2716 webhook deduplicates repeated deliveries and preserves tenant scope (72.06256ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n  + actual - expected\n  \n    [\n  -   200,\n      202,\n  +   202\n    ]\n  \n      at TestContext.<anonymous> (/input/acceptance.cjs:37:12)\n      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n      at async Test.run (node:internal/test_runner/test:1404:7)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: [ 202, 202 ],\n    expected: [ 200, 202 ],\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n"
+}

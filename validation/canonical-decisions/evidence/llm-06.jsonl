@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a5f2-ec08-7cb3-8b7a-081a0b66cefd"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"Em **15 de março de 2026**, a política da ACME permitia **três dias de trabalho remoto por semana**. Essa regra entrou em vigor em 1º de março de 2026 e substituiu a permissão anterior de dois dias por semana. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v2.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12223,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":90,"reasoning_output_tokens":0}}

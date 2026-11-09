@@ -1,0 +1,18 @@
+✔ editing does not publish and editor cannot self-approve (30.6491ms)
+✔ review binds exact bytes and rejects changed content (24.8141ms)
+✔ publication requires approval and approved file must remain unchanged until preparation (40.3146ms)
+✔ approved publication receipt is signed and snapshot is immutable on replay (42.6919ms)
+✔ published source/version cannot be silently overwritten (57.5682ms)
+✔ frontmatter cannot change registered classification or authorize publication (12.2777ms)
+✔ restricted YAML profile rejects duplicates and vault traversal (7.0984ms)
+✔ public editor cannot import a financial note (17.1265ms)
+✔ invalid calendar dates are rejected before review or publication (15.7312ms)
+✔ immutable canonical snapshots select valid time and prior knowledge without rewriting graph facts (105.6903ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 509.4102

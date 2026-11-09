@@ -1,0 +1,69 @@
+{"url": "http://127.0.0.1:57734", "state": "C:\\Users\\PC\\multi-agent\\validation\\aurora-local-restart\\.state\\review-01\\test_operational_postgres_back0\\session-9209e16aaa"}
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 53056)
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\apps\aurora\ops\launcher.py", line 410, in do_POST
+    return send(call_model(lab, job, p["slot"], p["prompt"], AGENTS))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\apps\aurora\runtime\model_gateway.py", line 17, in call_model
+    return lab.native("model_slot_run", job=job["id"], slot=slot, prompt=prompt, limit=limit)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\apps\aurora\ops\local_engine.py", line 520, in native
+    with urlopen(
+         ^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 1373, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py", line 1348, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\client.py", line 1478, in getresponse
+    response.begin()
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\client.py", line 343, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\client.py", line 304, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] Foi forçado o cancelamento de uma conexão existente pelo host remoto
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\server.py", line 440, in handle
+    self.handle_one_request()
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\server.py", line 428, in handle_one_request
+    method()
+  File "C:\Users\PC\multi-agent\apps\aurora\ops\launcher.py", line 415, in do_POST
+    send(
+  File "C:\Users\PC\multi-agent\apps\aurora\ops\launcher.py", line 364, in send
+    self.end_headers()
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\server.py", line 542, in end_headers
+    self.flush_headers()
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\server.py", line 546, in flush_headers
+    self.wfile.write(b"".join(self._headers_buffer))
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionResetError: [WinError 10054] Foi forçado o cancelamento de uma conexão existente pelo host remoto
+----------------------------------------

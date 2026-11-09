@@ -1,0 +1,44 @@
+{
+  "result": "PASS",
+  "engine_result": {
+    "status": "completed",
+    "run_id": "joint-1",
+    "company_id": "A",
+    "engine_started": true,
+    "engine": "AgentScope TeamPipeline",
+    "model": "deterministic MockModel",
+    "selected_capabilities": [
+      "sales_analysis",
+      "campaign_analysis"
+    ],
+    "strategy": "A3 bounded team fixture",
+    "decision_reason": "task requires two authorized evidence domains; no external side effects",
+    "event_count": 32,
+    "event_types": [
+      "ModelCallEndEvent",
+      "ModelCallStartEvent",
+      "ReplyEndEvent",
+      "ReplyStartEvent",
+      "ToolResultEndEvent",
+      "ToolResultStartEvent",
+      "ToolResultTextDeltaEvent"
+    ],
+    "sources": [
+      {
+        "source_id": "sales-A",
+        "version": 1,
+        "company_id": "A"
+      },
+      {
+        "source_id": "campaign-A",
+        "version": 1,
+        "company_id": "A"
+      }
+    ]
+  },
+  "transport": "real OpenAgents FastAPI ASGI + SQLite upstream fixture",
+  "engine_transport": "real subprocess / isolated AgentScope venv / JSON IPC",
+  "published_events_after_replay": 1,
+  "invalid_token_status": 401,
+  "scope": "synthetic local contract proof; no production identity, paid model, full brain or external effects"
+}

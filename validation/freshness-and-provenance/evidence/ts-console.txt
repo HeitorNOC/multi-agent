@@ -1,0 +1,10 @@
+✔ vigência e publicação são distintas e não inferidas do conteúdo (0.8187ms)
+✔ conteúdo adulterado ou snapshot fora dos cortes é recusado (1.5147ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 118.6396

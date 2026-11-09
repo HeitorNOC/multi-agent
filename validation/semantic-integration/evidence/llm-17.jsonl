@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a4ae-9491-75a0-900f-0660de3f08d4"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"A política ACME versão 2 permite trabalhar remotamente **três dias por semana** desde 1º de março de 2026. [1]\\n\\nEla substitui a versão 1 da política. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v2.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13564,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":78,"reasoning_output_tokens":0}}

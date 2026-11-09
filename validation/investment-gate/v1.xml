@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="4" time="41.694" timestamp="2026-11-05T00:22:46.821974-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.investment-gate.test_v1" name="test_v1_read_commit_recovery_required[before_local-0]" time="9.830"><failure message="AssertionError: V1: read_commit has no qualified recovery procedure; restart/restore remain fenced&#10;assert (503 == 200)">stage = 'before_local', reads = 0
+
+    @pytest.mark.parametrize('stage,reads',[('before_local',0),('after_business',1),('after_receipt',1)])
+    def test_v1_read_commit_recovery_required(stage,reads):
+        lab=Lab()
+        try:
+            lab.start();job,p,row=lab.admission()
+            lab.control('inference_run',row['id'],input_json=row['input_json'])
+            lab.call('board','retained_fault',target='read_commit',stage=stage)
+            try:lab.call('worker','read_commit',**p)
+            except Exception:pass
+            lab.business.wait(timeout=5);code=lab.business.returncode
+            assert code=={'before_local':77,'after_business':82,'after_receipt':83}[stage]
+            assert lab.count_reads(job)==reads
+            lab.stop_businesses();lab.start_business()
+            status=lab.call('board','retained_status');proof=signed_request(lab.authority_client,action='proof')
+            assert not status['current'] and sum(r['receipt_sha'] is None for r in proof['operations'])==1
+            try:lab.call('board','recovery_inspect')
+            except Rejected as error:recovery={'status':error.status,'reason':str(error)}
+            else:recovery={'status':200}
+            # Restore the same pending generation into new PostgreSQL and app paths.
+            bundle=lab.backup('pending-'+stage);lab.activate(bundle,new_postgres=True)
+            after_restore=lab.call('board','retained_status')
+            assert not after_restore['current']
+            stats=lab.control('stats')['rows'];assert len(stats)==1 and stats[0][2]==1
+            lab.evidence.update(result='FAIL_V1_OPERATIONAL_RECOVERY',stage=stage,exit_code=code,reads=reads,
+                status=status,recovery=recovery,restored_status=after_restore,provider_executions=stats,
+                safety='fenced, no regenerated inference',criterion='qualified operational recovery after this crash')
+&gt;           assert recovery['status']==200 and after_restore['current'],'V1: read_commit has no qualified recovery procedure; restart/restore remain fenced'
+E           AssertionError: V1: read_commit has no qualified recovery procedure; restart/restore remain fenced
+E           assert (503 == 200)
+
+validation\investment-gate\test_v1.py:49: AssertionError</failure></testcase><testcase classname="validation.investment-gate.test_v1" name="test_v1_read_commit_recovery_required[after_business-1]" time="9.472"><failure message="AssertionError: V1: read_commit has no qualified recovery procedure; restart/restore remain fenced&#10;assert (503 == 200)">stage = 'after_business', reads = 1
+
+    @pytest.mark.parametrize('stage,reads',[('before_local',0),('after_business',1),('after_receipt',1)])
+    def test_v1_read_commit_recovery_required(stage,reads):
+        lab=Lab()
+        try:
+            lab.start();job,p,row=lab.admission()
+            lab.control('inference_run',row['id'],input_json=row['input_json'])
+            lab.call('board','retained_fault',target='read_commit',stage=stage)
+            try:lab.call('worker','read_commit',**p)
+            except Exception:pass
+            lab.business.wait(timeout=5);code=lab.business.returncode
+            assert code=={'before_local':77,'after_business':82,'after_receipt':83}[stage]
+            assert lab.count_reads(job)==reads
+            lab.stop_businesses();lab.start_business()
+            status=lab.call('board','retained_status');proof=signed_request(lab.authority_client,action='proof')
+            assert not status['current'] and sum(r['receipt_sha'] is None for r in proof['operations'])==1
+            try:lab.call('board','recovery_inspect')
+            except Rejected as error:recovery={'status':error.status,'reason':str(error)}
+            else:recovery={'status':200}
+            # Restore the same pending generation into new PostgreSQL and app paths.
+            bundle=lab.backup('pending-'+stage);lab.activate(bundle,new_postgres=True)
+            after_restore=lab.call('board','retained_status')
+            assert not after_restore['current']
+            stats=lab.control('stats')['rows'];assert len(stats)==1 and stats[0][2]==1
+            lab.evidence.update(result='FAIL_V1_OPERATIONAL_RECOVERY',stage=stage,exit_code=code,reads=reads,
+                status=status,recovery=recovery,restored_status=after_restore,provider_executions=stats,
+                safety='fenced, no regenerated inference',criterion='qualified operational recovery after this crash')
+&gt;           assert recovery['status']==200 and after_restore['current'],'V1: read_commit has no qualified recovery procedure; restart/restore remain fenced'
+E           AssertionError: V1: read_commit has no qualified recovery procedure; restart/restore remain fenced
+E           assert (503 == 200)
+
+validation\investment-gate\test_v1.py:49: AssertionError</failure></testcase><testcase classname="validation.investment-gate.test_v1" name="test_v1_read_commit_recovery_required[after_receipt-1]" time="9.497"><failure message="AssertionError: V1: read_commit has no qualified recovery procedure; restart/restore remain fenced&#10;assert (503 == 200)">stage = 'after_receipt', reads = 1
+
+    @pytest.mark.parametrize('stage,reads',[('before_local',0),('after_business',1),('after_receipt',1)])
+    def test_v1_read_commit_recovery_required(stage,reads):
+        lab=Lab()
+        try:
+            lab.start();job,p,row=lab.admission()
+            lab.control('inference_run',row['id'],input_json=row['input_json'])
+            lab.call('board','retained_fault',target='read_commit',stage=stage)
+            try:lab.call('worker','read_commit',**p)
+            except Exception:pass
+            lab.business.wait(timeout=5);code=lab.business.returncode
+            assert code=={'before_local':77,'after_business':82,'after_receipt':83}[stage]
+            assert lab.count_reads(job)==reads
+            lab.stop_businesses();lab.start_business()
+            status=lab.call('board','retained_status');proof=signed_request(lab.authority_client,action='proof')
+            assert not status['current'] and sum(r['receipt_sha'] is None for r in proof['operations'])==1
+            try:lab.call('board','recovery_inspect')
+            except Rejected as error:recovery={'status':error.status,'reason':str(error)}
+            else:recovery={'status':200}
+            # Restore the same pending generation into new PostgreSQL and app paths.
+            bundle=lab.backup('pending-'+stage);lab.activate(bundle,new_postgres=True)
+            after_restore=lab.call('board','retained_status')
+            assert not after_restore['current']
+            stats=lab.control('stats')['rows'];assert len(stats)==1 and stats[0][2]==1
+            lab.evidence.update(result='FAIL_V1_OPERATIONAL_RECOVERY',stage=stage,exit_code=code,reads=reads,
+                status=status,recovery=recovery,restored_status=after_restore,provider_executions=stats,
+                safety='fenced, no regenerated inference',criterion='qualified operational recovery after this crash')
+&gt;           assert recovery['status']==200 and after_restore['current'],'V1: read_commit has no qualified recovery procedure; restart/restore remain fenced'
+E           AssertionError: V1: read_commit has no qualified recovery procedure; restart/restore remain fenced
+E           assert (503 == 200)
+
+validation\investment-gate\test_v1.py:49: AssertionError</failure></testcase><testcase classname="validation.investment-gate.test_v1" name="test_v1_automatic_heartbeat_and_fencing" time="12.379" /></testsuite></testsuites>

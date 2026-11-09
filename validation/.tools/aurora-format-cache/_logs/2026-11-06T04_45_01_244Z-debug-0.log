@@ -1,0 +1,37 @@
+0 verbose cli C:\nvm4w\nodejs\node.exe C:\nvm4w\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.19.0
+2 info using node@v24.20.0
+3 silly config load:file:C:\Users\PC\AppData\Local\nvm\v24.20.0\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\PC\multi-agent\validation\.tools\aurora-format\.npmrc
+5 silly config load:file:C:\Users\PC\.npmrc
+6 silly config load:file:C:\Users\PC\multi-agent\validation\.tools\aurora-format\etc\npmrc
+7 verbose title npm install prettier@3.6.2
+8 verbose argv "install" "--prefix" "validation/.tools/aurora-format" "--cache" "validation/.tools/aurora-format-cache" "--no-audit" "--no-fund" "--save-exact" "prettier@3.6.2"
+9 verbose logfile logs-max:10 dir:C:\Users\PC\multi-agent\validation\.tools\aurora-format-cache\_logs\2026-11-06T04_45_01_244Z-
+10 verbose logfile C:\Users\PC\multi-agent\validation\.tools\aurora-format-cache\_logs\2026-11-06T04_45_01_244Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly install-scripts no package.json at prefix Could not read package.json: Error: ENOENT: no such file or directory, open 'C:\Users\PC\multi-agent\validation\.tools\aurora-format\package.json'
+13 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+14 silly idealTree buildDeps
+15 silly fetch manifest prettier@3.6.2
+16 silly packumentCache full:https://registry.npmjs.org/prettier cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/npm 175ms
+18 http fetch GET 200 https://registry.npmjs.org/prettier 258ms (cache miss)
+19 silly packumentCache full:https://registry.npmjs.org/prettier set size:undefined disposed:false
+20 silly placeDep ROOT prettier@3.6.2 OK for:  want: 3.6.2
+21 silly reify moves {}
+22 http cache prettier@https://registry.npmjs.org/prettier/-/prettier-3.6.2.tgz 0ms (cache hit)
+23 silly tarball no local data for prettier@https://registry.npmjs.org/prettier/-/prettier-3.6.2.tgz. Extracting by manifest.
+24 http fetch GET 200 https://registry.npmjs.org/prettier/-/prettier-3.6.2.tgz 262ms (cache miss)
+25 silly ADD node_modules/prettier
+26 verbose cwd C:\Users\PC\multi-agent
+27 verbose os Windows_NT 10.0.26300
+28 verbose node v24.20.0
+29 verbose npm  v11.19.0
+30 notice
+30 notice New major version of npm available! 11.19.0 -> 12.2.2
+30 notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+30 notice To update run: npm install -g npm@12.2.2
+30 notice  { force: true, Symbol(proc-log.meta): true }
+31 verbose exit 0
+32 info ok

@@ -1,0 +1,281 @@
+[
+  {
+    "name": "january_after_march_update",
+    "expected_days": 2,
+    "observed_days": [
+      2,
+      3
+    ],
+    "pass": false,
+    "response": {
+      "facts": [
+        {
+          "uuid": "0bccc2ae-11b9-4ca9-9482-88c7b599c747",
+          "group_id": "t_0238a6a5ad_publico",
+          "source_node_uuid": "3bb56795-a211-493d-b0cb-aa327fa248fb",
+          "target_node_uuid": "b29d7acb-60d6-4a52-9287-273cfafeb3bd",
+          "created_at": "2026-11-04T09:06:09.592861Z",
+          "name": "REMOTE_POLICY",
+          "fact": "A ACME concedia dois dias de trabalho remoto por semana pela política PoliticaRemotaACME até a substituição por três dias em 1 de março de 2026.",
+          "fact_embedding": null,
+          "episodes": [
+            "f51f5548-6f27-4641-a4f8-6069b426be66"
+          ],
+          "expired_at": "2026-11-04T09:06:25.801691Z",
+          "valid_at": "2026-01-01T00:00:00Z",
+          "invalid_at": "2026-03-01T00:00:00Z",
+          "reference_time": "2026-03-01T00:00:00Z",
+          "attributes": {
+            "dias_remotos": 3
+          }
+        },
+        {
+          "uuid": "9756e169-3dc8-4793-a9b0-963180cdcdcc",
+          "group_id": "t_0238a6a5ad_publico",
+          "source_node_uuid": "3bb56795-a211-493d-b0cb-aa327fa248fb",
+          "target_node_uuid": "b29d7acb-60d6-4a52-9287-273cfafeb3bd",
+          "created_at": "2026-11-04T09:05:49.007598Z",
+          "name": "REMOTE_POLICY",
+          "fact": "A política PoliticaRemotaACME da ACME concede dois dias de trabalho remoto por semana desde 1 de janeiro de 2026.",
+          "fact_embedding": null,
+          "episodes": [
+            "bb6d54ef-6395-402e-a200-65d18cb7dcec"
+          ],
+          "expired_at": "2026-11-04T09:06:25.801691Z",
+          "valid_at": "2026-01-01T00:00:00Z",
+          "invalid_at": "2026-03-01T00:00:00Z",
+          "reference_time": "2026-01-01T00:00:00Z",
+          "attributes": {
+            "dias_remotos": 2
+          }
+        }
+      ],
+      "as_of": "2026-01-15T00:00:00Z",
+      "known_at": null
+    }
+  },
+  {
+    "name": "february_before_retroactive_correction",
+    "expected_days": 2,
+    "observed_days": [
+      2,
+      3
+    ],
+    "pass": false,
+    "response": {
+      "facts": [
+        {
+          "uuid": "0bccc2ae-11b9-4ca9-9482-88c7b599c747",
+          "group_id": "t_0238a6a5ad_publico",
+          "source_node_uuid": "3bb56795-a211-493d-b0cb-aa327fa248fb",
+          "target_node_uuid": "b29d7acb-60d6-4a52-9287-273cfafeb3bd",
+          "created_at": "2026-11-04T09:06:09.592861Z",
+          "name": "REMOTE_POLICY",
+          "fact": "A ACME concedia dois dias de trabalho remoto por semana pela política PoliticaRemotaACME até a substituição por três dias em 1 de março de 2026.",
+          "fact_embedding": null,
+          "episodes": [
+            "f51f5548-6f27-4641-a4f8-6069b426be66"
+          ],
+          "expired_at": "2026-11-04T09:06:25.801691Z",
+          "valid_at": "2026-01-01T00:00:00Z",
+          "invalid_at": "2026-03-01T00:00:00Z",
+          "reference_time": "2026-03-01T00:00:00Z",
+          "attributes": {
+            "dias_remotos": 3
+          }
+        },
+        {
+          "uuid": "9756e169-3dc8-4793-a9b0-963180cdcdcc",
+          "group_id": "t_0238a6a5ad_publico",
+          "source_node_uuid": "3bb56795-a211-493d-b0cb-aa327fa248fb",
+          "target_node_uuid": "b29d7acb-60d6-4a52-9287-273cfafeb3bd",
+          "created_at": "2026-11-04T09:05:49.007598Z",
+          "name": "REMOTE_POLICY",
+          "fact": "A política PoliticaRemotaACME da ACME concede dois dias de trabalho remoto por semana desde 1 de janeiro de 2026.",
+          "fact_embedding": null,
+          "episodes": [
+            "bb6d54ef-6395-402e-a200-65d18cb7dcec"
+          ],
+          "expired_at": "2026-11-04T09:06:25.801691Z",
+          "valid_at": "2026-01-01T00:00:00Z",
+          "invalid_at": "2026-03-01T00:00:00Z",
+          "reference_time": "2026-01-01T00:00:00Z",
+          "attributes": {
+            "dias_remotos": 2
+          }
+        }
+      ],
+      "as_of": "2026-02-15T00:00:00Z",
+      "known_at": null
+    }
+  },
+  {
+    "name": "march_after_update",
+    "expected_days": 3,
+    "observed_days": [
+      3
+    ],
+    "pass": true,
+    "response": {
+      "facts": [
+        {
+          "uuid": "1ae9ac03-5bb4-429a-9e8d-76648b7bf6e2",
+          "group_id": "t_0238a6a5ad_publico",
+          "source_node_uuid": "3bb56795-a211-493d-b0cb-aa327fa248fb",
+          "target_node_uuid": "b29d7acb-60d6-4a52-9287-273cfafeb3bd",
+          "created_at": "2026-11-04T09:06:09.592861Z",
+          "name": "REMOTE_POLICY",
+          "fact": "Desde 1 de março de 2026, a ACME concede três dias de trabalho remoto por semana pela política PoliticaRemotaACME, em substituição aos dois dias anteriores.",
+          "fact_embedding": null,
+          "episodes": [
+            "f51f5548-6f27-4641-a4f8-6069b426be66"
+          ],
+          "expired_at": null,
+          "valid_at": "2026-03-01T00:00:00Z",
+          "invalid_at": null,
+          "reference_time": "2026-03-01T00:00:00Z",
+          "attributes": {
+            "dias_remotos": 3
+          }
+        }
+      ],
+      "as_of": "2026-03-15T00:00:00Z",
+      "known_at": null
+    }
+  },
+  {
+    "name": "january_after_backdated_correction",
+    "expected_days": 2,
+    "observed_days": [
+      2,
+      3
+    ],
+    "pass": false,
+    "response": {
+      "facts": [
+        {
+          "uuid": "0bccc2ae-11b9-4ca9-9482-88c7b599c747",
+          "group_id": "t_0238a6a5ad_publico",
+          "source_node_uuid": "3bb56795-a211-493d-b0cb-aa327fa248fb",
+          "target_node_uuid": "b29d7acb-60d6-4a52-9287-273cfafeb3bd",
+          "created_at": "2026-11-04T09:06:09.592861Z",
+          "name": "REMOTE_POLICY",
+          "fact": "A ACME concedia dois dias de trabalho remoto por semana pela política PoliticaRemotaACME até a substituição por três dias em 1 de março de 2026.",
+          "fact_embedding": null,
+          "episodes": [
+            "f51f5548-6f27-4641-a4f8-6069b426be66"
+          ],
+          "expired_at": "2026-11-04T09:06:25.801691Z",
+          "valid_at": "2026-01-01T00:00:00Z",
+          "invalid_at": "2026-02-01T00:00:00Z",
+          "reference_time": "2026-03-01T00:00:00Z",
+          "attributes": {
+            "dias_remotos": 3
+          }
+        },
+        {
+          "uuid": "9756e169-3dc8-4793-a9b0-963180cdcdcc",
+          "group_id": "t_0238a6a5ad_publico",
+          "source_node_uuid": "3bb56795-a211-493d-b0cb-aa327fa248fb",
+          "target_node_uuid": "b29d7acb-60d6-4a52-9287-273cfafeb3bd",
+          "created_at": "2026-11-04T09:05:49.007598Z",
+          "name": "REMOTE_POLICY",
+          "fact": "A política PoliticaRemotaACME da ACME concede dois dias de trabalho remoto por semana desde 1 de janeiro de 2026.",
+          "fact_embedding": null,
+          "episodes": [
+            "bb6d54ef-6395-402e-a200-65d18cb7dcec"
+          ],
+          "expired_at": "2026-11-04T09:06:25.801691Z",
+          "valid_at": "2026-01-01T00:00:00Z",
+          "invalid_at": "2026-02-01T00:00:00Z",
+          "reference_time": "2026-01-01T00:00:00Z",
+          "attributes": {
+            "dias_remotos": 2
+          }
+        }
+      ],
+      "as_of": "2026-01-15T00:00:00Z",
+      "known_at": null
+    }
+  },
+  {
+    "name": "february_after_backdated_correction",
+    "expected_days": 1,
+    "observed_days": [
+      1
+    ],
+    "pass": true,
+    "response": {
+      "facts": [
+        {
+          "uuid": "985045ad-f9d9-47b4-bbf9-b105dd0e2e75",
+          "group_id": "t_0238a6a5ad_publico",
+          "source_node_uuid": "3bb56795-a211-493d-b0cb-aa327fa248fb",
+          "target_node_uuid": "b29d7acb-60d6-4a52-9287-273cfafeb3bd",
+          "created_at": "2026-11-04T09:06:40.593758Z",
+          "name": "REMOTE_POLICY",
+          "fact": "Uma retificação aprovada e recebida posteriormente esclareceu que a ACME concedia, na PoliticaRemotaACME, apenas um dia de trabalho remoto por semana, e não dois, entre 1 de fevereiro e 1 de março de 2026.",
+          "fact_embedding": null,
+          "episodes": [
+            "b423c2a1-7aab-4723-8a8f-eb02950a779b"
+          ],
+          "expired_at": "2026-11-04T09:07:02.236224Z",
+          "valid_at": "2026-02-01T00:00:00Z",
+          "invalid_at": "2026-03-01T00:00:00Z",
+          "reference_time": "2026-02-01T00:00:00Z",
+          "attributes": {
+            "dias_remotos": 1
+          }
+        }
+      ],
+      "as_of": "2026-02-15T00:00:00Z",
+      "known_at": null
+    }
+  },
+  {
+    "name": "march_unchanged_by_backdated_correction",
+    "expected_days": 3,
+    "observed_days": [
+      3
+    ],
+    "pass": true,
+    "response": {
+      "facts": [
+        {
+          "uuid": "1ae9ac03-5bb4-429a-9e8d-76648b7bf6e2",
+          "group_id": "t_0238a6a5ad_publico",
+          "source_node_uuid": "3bb56795-a211-493d-b0cb-aa327fa248fb",
+          "target_node_uuid": "b29d7acb-60d6-4a52-9287-273cfafeb3bd",
+          "created_at": "2026-11-04T09:06:09.592861Z",
+          "name": "REMOTE_POLICY",
+          "fact": "Desde 1 de março de 2026, a ACME concede três dias de trabalho remoto por semana pela política PoliticaRemotaACME, em substituição aos dois dias anteriores.",
+          "fact_embedding": null,
+          "episodes": [
+            "f51f5548-6f27-4641-a4f8-6069b426be66",
+            "b423c2a1-7aab-4723-8a8f-eb02950a779b"
+          ],
+          "expired_at": null,
+          "valid_at": "2026-03-01T00:00:00Z",
+          "invalid_at": null,
+          "reference_time": "2026-03-01T00:00:00Z",
+          "attributes": {
+            "dias_remotos": 3
+          }
+        }
+      ],
+      "as_of": "2026-03-15T00:00:00Z",
+      "known_at": null
+    }
+  },
+  {
+    "name": "what_was_known_before_correction_about_february",
+    "expected_days": 2,
+    "observed_days": [],
+    "pass": false,
+    "response": {
+      "facts": [],
+      "as_of": "2026-02-15T00:00:00Z",
+      "known_at": "2026-11-04T09:06:26.588356+00:00"
+    }
+  }
+]

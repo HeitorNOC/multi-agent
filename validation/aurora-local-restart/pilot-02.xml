@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="60.109" timestamp="2026-11-06T12:28:51.225164-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.aurora-local-restart.test_pilot" name="test_manifest_rejects_paths_outside_scope_and_changed_bytes" time="0.013" /><testcase classname="validation.aurora-local-restart.test_pilot" name="test_pilot_open_task_access_minimization_and_citations" time="59.728"><failure message="ConnectionResetError: [WinError 10054] Foi forçado o cancelamento de uma conexão existente pelo host remoto">tmp_path = WindowsPath('C:/Users/PC/multi-agent/validation/aurora-local-restart/.state/pilot-02/test_pilot_open_task_access_mi0')
+
+    def test_provider_privacy_mode_keeps_usage_without_content(tmp_path, monkeypatch):
+        from types import SimpleNamespace
+    
+        from apps.aurora.runtime.services import codex_provider
+    
+        completed = [
+            {"type": "item.completed", "item": {"type": "agent_message", "text": '{"text":"trecho-sintetico"}'}},
+            {"type": "turn.completed", "usage": {"input_tokens": 10, "output_tokens": 2}},
+        ]
+        monkeypatch.setattr(codex_provider.shutil, "which", lambda _: "fake-codex")
+        monkeypatch.setattr(
+            codex_provider.subprocess, "run",
+            lambda *args, **kwargs: SimpleNamespace(
+                returncode=0, stdout="\n".join(map(json.dumps, completed)), stderr="stderr-sintetico"
+            ),
+        )
+        provider = codex_provider.CodexProvider({
+            "model_budget": str(tmp_path / "unused"),
+            "evidence": str(tmp_path),
+            "model_cwd": str(tmp_path),
+            "instance": "fixture",
+            "retain_model_content": False,
+        })
+        assert provider.run("pergunta-sintetica", "", [], {"id": "test", "number": 1}) == "trecho-sintetico"
+        assert [p.name for p in tmp_path.iterdir()] == ["model-calls.jsonl"]
+        data = (tmp_path / "model-calls.jsonl").read_text(encoding="utf-8")
+        assert all(marker not in data for marker in ("trecho-sintetico", "pergunta-sintetica", "stderr-sintetico"))
+        assert json.loads(data)["usage"] == [{"input_tokens": 10, "output_tokens": 2}]
+    
+    
+    def test_pilot_open_task_access_minimization_and_citations(tmp_path):
+        manifest = make_manifest(tmp_path)
+        with (tmp_path / "launcher.log").open("w", encoding="utf-8") as log:
+            launcher = subprocess.Popen(
+                [PYTHON, str(HERE / "pilot_fixture.py"), "--pilot-manifest", str(manifest),
+                 "--pilot-user", "operador-teste", "--pilot-viewer", "consulta-teste"],
+                cwd=ROOT, stdout=log, stderr=log, env={**os.environ, "AURORA_TEST_MANIFEST": str(manifest)},
+            )
+    
+            def api_address():
+                if launcher.poll() is not None:
+                    raise AssertionError("Launcher saiu antes da prontidão")
+                for line in (tmp_path / "launcher.log").read_text(encoding="utf-8").splitlines():
+                    if line.startswith('{"url":'):
+                        return json.loads(line)["url"]
+                return None
+    
+            try:
+                url = wait_for(api_address)
+    
+                def call(path, body=None, cookie=None, key=None):
+                    request = Request(
+                        url + path, None if body is None else json.dumps(body).encode(),
+                        {"Content-Type": "application/json", **({"Cookie": cookie} if cookie else {}),
+                         **({"Idempotency-Key": key} if key else {})},
+                    )
+                    try:
+                        response = urlopen(request, timeout=5)
+                    except HTTPError as error:
+                        response = error
+                    with response:
+                        return response.status, json.load(response), response.headers
+    
+                def login(id, password):
+                    status, _, headers = call("/api/pilot/login", {"id": id, "password": password})
+                    assert status == 200
+                    cookie = headers["Set-Cookie"]
+                    assert "HttpOnly" in cookie and "SameSite=Strict" in cookie
+                    return cookie.split(";", 1)[0]
+    
+                assert call("/api/state")[0] == 401
+                assert call("/api/jobs", {"goal": "Qual é o prazo de reembolso?"})[0] == 401
+                operator = login("operador-teste", OPERATOR_PASSWORD)
+                viewer = login("consulta-teste", VIEWER_PASSWORD)
+                wait_for(lambda: call("/api/state", cookie=operator)[1]["runtime"]["phase"] == "ready")
+                status = call("/api/state", cookie=viewer)[1]
+                assert status["actor"]["role"] == "viewer"
+                assert not any("content" in row for row in status["runtime"]["sources"] + status["runtime"]["history"])
+                assert call("/api/jobs", {"goal": "Qual é o prazo de reembolso?"}, viewer)[0] == 403
+    
+                def submit(goal):
+                    status, result, _ = call("/api/jobs", {"goal": goal}, operator, uuid4().hex)
+                    assert status == 202
+                    return result["id"]
+    
+                def find(id, status):
+                    jobs = call("/api/state", cookie=operator)[1]["jobs"]
+                    return next((job for job in jobs if job["id"] == id and job["status"] == status), None)
+    
+                supported = submit("Qual é o prazo de reembolso?")
+                job = wait_for(lambda: find(supported, "awaiting_approval"))
+                review = job["review"]
+                evidence = review["report"]["citations"]
+                assert [(p["source"], p["version"], p["line"], p["quote"]) for p in evidence] == [
+&gt;                   ("reembolso", 2, 1, "O prazo do reembolso é de 15 dias úteis.")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                ]
+
+validation\aurora-local-restart\test_pilot.py:147: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+validation\aurora-local-restart\test_pilot.py:80: in call
+    assert json.loads(data)["usage"] == [{"input_tokens": 10, "output_tokens": 2}]
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:215: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:515: in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:532: in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:1373: in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:1348: in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\client.py:1478: in getresponse
+    response.begin()
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\client.py:343: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\client.py:304: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;socket.SocketIO object at 0x0000019FA0EC0FD0&gt;
+b = &lt;memory at 0x0000019FA0D8E2C0&gt;
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        while True:
+            try:
+&gt;               return self._sock.recv_into(b)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+E               ConnectionResetError: [WinError 10054] Foi forçado o cancelamento de uma conexão existente pelo host remoto
+
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socket.py:720: ConnectionResetError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,70 @@
+{
+  "captured_utc": "2026-11-04T20:10:43.953811+00:00",
+  "image": "langgenius/dify-sandbox@sha256:750e1111426ef31a9217b81c98cccfb750f17b182af3221102e420afa9f0928e",
+  "deployment": "dedicated Docker internal network; localhost port; no host mounts; resource limits",
+  "health": {
+    "status": 200,
+    "body": "ok",
+    "seconds": 0.016578806986217387
+  },
+  "unauthenticated": {
+    "status": 401,
+    "body": "",
+    "seconds": 0.0008676840079715475
+  },
+  "cases": {
+    "finite_cpu": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "",
+          "stdout": "CPU_STARTED\n4999950000\n"
+        }
+      },
+      "seconds": 0.059762072007288225
+    },
+    "sleep_timeout": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "error: operation not permitted\n",
+          "stdout": "SLEEP_STARTED\n"
+        }
+      },
+      "seconds": 0.07876977800333407
+    },
+    "loop_timeout": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "error: operation not permitted\n",
+          "stdout": "LOOP_STARTED\n"
+        }
+      },
+      "seconds": 0.07057347400404979
+    },
+    "basic_after_failures": {
+      "status": 200,
+      "body": {
+        "code": 0,
+        "message": "success",
+        "data": {
+          "error": "",
+          "stdout": "BASIC_AFTER_FAILURES_OK\n"
+        }
+      },
+      "seconds": 0.060031853994587436
+    }
+  },
+  "post_timeout_health": {
+    "status": 200,
+    "body": "ok",
+    "seconds": 0.0006869549979455769
+  }
+}

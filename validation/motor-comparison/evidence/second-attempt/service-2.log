@@ -1,0 +1,71 @@
+INFO: [A] Loaded graph from C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-11\motor-comparison0\knowledge\A\A\graph_chunk_entity_relation.graphml with 0 nodes, 0 edges
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=4, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=4, timeout=240
+INFO:  - query: None/None, host=None, max_async=4, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=4, timeout=240
+INFO: [A] Process 19936 KV load full_docs with 0 records
+INFO: [A] Process 19936 KV load text_chunks with 1 records
+INFO: [A] Process 19936 KV load full_entities with 0 records
+INFO: [A] Process 19936 KV load full_relations with 0 records
+INFO: [A] Process 19936 KV load entity_chunks with 0 records
+INFO: [A] Process 19936 KV load relation_chunks with 0 records
+INFO:nano-vectordb:Load (0, 4) data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\AppData\\Local\\Temp\\pytest-of-PC\\pytest-11\\motor-comparison0\\knowledge\\A\\A\\vdb_entities.json'} 0 data
+INFO:nano-vectordb:Load (0, 4) data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\AppData\\Local\\Temp\\pytest-of-PC\\pytest-11\\motor-comparison0\\knowledge\\A\\A\\vdb_relationships.json'} 0 data
+INFO:nano-vectordb:Load (1, 4) data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\AppData\\Local\\Temp\\pytest-of-PC\\pytest-11\\motor-comparison0\\knowledge\\A\\A\\vdb_chunks.json'} 1 data
+INFO: [A] Process 19936 KV load llm_response_cache with 0 records
+INFO: [A] Process 19936 doc status load doc_status with 0 records
+INFO: [A] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: [A] Writing graph with 0 nodes, 0 edges
+INFO: In memory DB persist to disk
+INFO: [B] Loaded graph from C:\Users\PC\AppData\Local\Temp\pytest-of-PC\pytest-11\motor-comparison0\knowledge\B\B\graph_chunk_entity_relation.graphml with 0 nodes, 0 edges
+INFO: Role LLM Configuration (initialized):
+INFO:  - extract: None/None, host=None, max_async=4, timeout=240
+INFO:  - keyword: None/None, host=None, max_async=4, timeout=240
+INFO:  - query: None/None, host=None, max_async=4, timeout=240
+INFO:  - vlm: None/None, host=None, max_async=4, timeout=240
+INFO: Creating LightRAG instance with workspace='B' while default workspace is set to 'A'
+INFO: [B] Process 19936 KV load full_docs with 0 records
+INFO: [B] Process 19936 KV load text_chunks with 1 records
+INFO: [B] Process 19936 KV load full_entities with 0 records
+INFO: [B] Process 19936 KV load full_relations with 0 records
+INFO: [B] Process 19936 KV load entity_chunks with 0 records
+INFO: [B] Process 19936 KV load relation_chunks with 0 records
+INFO:nano-vectordb:Load (0, 4) data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\AppData\\Local\\Temp\\pytest-of-PC\\pytest-11\\motor-comparison0\\knowledge\\B\\B\\vdb_entities.json'} 0 data
+INFO:nano-vectordb:Load (0, 4) data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\AppData\\Local\\Temp\\pytest-of-PC\\pytest-11\\motor-comparison0\\knowledge\\B\\B\\vdb_relationships.json'} 0 data
+INFO:nano-vectordb:Load (1, 4) data
+INFO:nano-vectordb:Init {'embedding_dim': 4, 'metric': 'cosine', 'storage_file': 'C:\\Users\\PC\\AppData\\Local\\Temp\\pytest-of-PC\\pytest-11\\motor-comparison0\\knowledge\\B\\B\\vdb_chunks.json'} 1 data
+INFO: [B] Process 19936 KV load llm_response_cache with 0 records
+INFO: [B] Process 19936 doc status load doc_status with 0 records
+INFO: [B] chunks flush: embedding 1 vectors in 1 batch(es) (batch_num=10)
+INFO: Embedding func: 8 new workers initialized (Timeouts: Func: 30s, Worker: 60s, Health Check: 75s)
+INFO: [B] Writing graph with 0 nodes, 0 edges
+INFO: In memory DB persist to disk
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:52 -0300] "POST /begin HTTP/1.1" 200 2807 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:52 -0300] "POST /effect HTTP/1.1" 200 3400 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:52 -0300] "GET /status HTTP/1.1" 200 3400 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:52 -0300] "GET /status HTTP/1.1" 200 3400 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:52 -0300] "GET /status HTTP/1.1" 200 3400 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:52 -0300] "POST /create HTTP/1.1" 200 290 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:53 -0300] "POST /begin HTTP/1.1" 200 861 "-" "Python-urllib/3.12"
+INFO: Naive query: 1 chunks (chunk_top_k:4 cosine:-1.0)
+INFO: Final context: 1 chunks
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:55 -0300] "POST /knowledge HTTP/1.1" 200 514 "-" "Python-urllib/3.12"
+INFO: Naive query: 1 chunks (chunk_top_k:4 cosine:-1.0)
+INFO: Final context: 1 chunks
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:55 -0300] "POST /knowledge HTTP/1.1" 200 517 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:55 -0300] "POST /analysis HTTP/1.1" 200 2524 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:55 -0300] "GET /status HTTP/1.1" 200 2524 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:55 -0300] "GET /status HTTP/1.1" 200 2524 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:55 -0300] "POST /approve HTTP/1.1" 200 196 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:55 -0300] "POST /begin HTTP/1.1" 200 2750 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:57 -0300] "POST /effect HTTP/1.1" 503 241 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:57 -0300] "GET /status HTTP/1.1" 200 2814 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:58 -0300] "GET /status HTTP/1.1" 200 2814 "-" "Python-urllib/3.12"
+INFO:aiohttp.access:127.0.0.1 [03/Nov/2026:13:14:58 -0300] "POST /cancel HTTP/1.1" 403 272 "-" "Python-urllib/3.12"

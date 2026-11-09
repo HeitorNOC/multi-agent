@@ -1,0 +1,17 @@
+[WARN] The "pnpm" field in package.json is no longer read by pnpm. The following keys were ignored: "pnpm.patchedDependencies", "pnpm.overrides". See https://pnpm.io/settings for the new home of each setting.
+Scope: all 36 workspace projects
+? Verifying lockfile against supply-chain policies (1611 entries)...
+
+   ╭────────────────────────────────────────────────────────────────────────╮
+   │                                                                        │
+   │                  Update available! 11.25.0 → 12.16.1.                  │
+   │                  Changelog: https://pnpm.io/v/12.16.1                  │
+   │   To update, run: Invoke-WebRequest https://get.pnpm.io/install.ps1    │
+   │                 -UseBasicParsing | Invoke-Expression                   │
+   │                                                                        │
+   ╰────────────────────────────────────────────────────────────────────────╯
+
+✓ Lockfile passes supply-chain policies (1611 entries in 18.3s)
+[ERR_PNPM_LOCKFILE_CONFIG_MISMATCH] Cannot proceed with the frozen installation. The current "patchedDependencies" configuration doesn't match the value found in the lockfile
+
+Update your lockfile using "pnpm install --no-frozen-lockfile"

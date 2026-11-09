@@ -1,0 +1,40 @@
+{
+  "cases": [
+    [
+      "meal",
+      "Qual é o teto diário de reembolso de alimentação da equipe Aurora, sem confundir com transporte?",
+      "240|duzentos e quarenta"
+    ],
+    [
+      "deadline",
+      "Qual o horário limite para enviar o comprovante de despesa da equipe Aurora?",
+      "18[:h]30|dezoito.*trinta"
+    ],
+    [
+      "review",
+      "Quantos revisores distintos precisam aprovar despesas extraordinárias da equipe Aurora?",
+      "dois|\\b2\\b"
+    ],
+    [
+      "unknown",
+      "Qual é o limite de diárias de hotel da equipe Aurora?",
+      "não (?:há|consta|existe|foi|está|é)|sem informa|ausência|não.*informad"
+    ]
+  ],
+  "corpus": "Manual sintético de despesas da equipe Aurora, vigente desde 1 de janeiro de 2026.\nAlimentação: o teto diário de reembolso da equipe Aurora é R$ 240 por pessoa. Valores acima do teto não são reembolsáveis.\nTransporte: o teto diário é R$ 85 por pessoa. Esse valor não é o teto de alimentação.\nPrazo: os comprovantes de despesa da equipe Aurora devem ser enviados até 18:30 no dia útil seguinte. O prazo de 17:00 pertence apenas à equipe Boreal.\nAprovação: despesas extraordinárias da equipe Aurora exigem dois revisores distintos. O solicitante não pode atuar como revisor da própria despesa.\nContraste: a equipe Boreal tem teto de alimentação de R$ 190 e exige três revisores para despesas extraordinárias; suas regras não se aplicam à equipe Aurora.\nHospedagem: este manual não define limite de diárias de hotel para nenhuma equipe. Consulte o departamento responsável; não deduza valores de alimentação ou transporte.\nCancelamento: o envio de uma solicitação não executa pagamentos. Estes dados são sintéticos e não autorizam ações externas.\n",
+  "modes": [
+    "mix",
+    "naive"
+  ],
+  "generation_models": [
+    "gpt-6.1-terra",
+    "gpt-6.1-sol"
+  ],
+  "call_cap": 40,
+  "concurrent_identical_requests": 8,
+  "faults": [
+    "after_admission",
+    "after_receipt"
+  ],
+  "scope": "one application process; synthetic corpus; fixed-prompt Sol comparison, no full factorial; no statistical accuracy claim"
+}

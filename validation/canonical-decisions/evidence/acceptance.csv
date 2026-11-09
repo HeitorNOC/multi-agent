@@ -1,0 +1,6 @@
+case,expected_version,expected_days,selected_version,answer_value,citation,native_source,no_other_version_in_native_context,no_private_canary
+february_known_before_correction,1,2,True,True,True,True,True,True
+march_known_before_correction,2,3,True,True,True,True,True,True
+february_known_after_correction,3,1,True,True,True,True,True,True
+march_unchanged_after_correction,2,3,True,True,True,True,True,True
+january_after_correction,1,2,True,True,True,True,True,True

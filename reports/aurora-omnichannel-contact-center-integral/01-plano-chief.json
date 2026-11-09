@@ -1,0 +1,63 @@
+{
+  "sha256": "f2cc07a7f78fd1f8f3210eef90d445d1847f2c6b223290e45e43f11d3e5fa2ff",
+  "batches": {
+    "L1": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "L2": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "L3": [
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "L4": [
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "L5": [
+      21,
+      22,
+      23,
+      24,
+      25
+    ]
+  },
+  "assignments": {
+    "L1": {
+      "agent": "backend_engineer",
+      "focus": "Aprovado: revisar o handoff entre bot e atendimento humano, incluindo estados, roteamento e transferência de contexto."
+    },
+    "L2": {
+      "agent": "backend_engineer_2",
+      "focus": "Aprovado: revisar o histórico de conversas e sua disponibilidade para os agentes no Omnichannel."
+    },
+    "L3": {
+      "agent": "backend_engineer",
+      "focus": "Aprovado: revisar o envio de respostas pelo canal original e o tratamento de falhas de entrega."
+    },
+    "L4": {
+      "agent": "backend_engineer_2",
+      "focus": "Aprovado: revisar o encerramento do atendimento e o retorno ao bot, incluindo transições e contexto."
+    },
+    "L5": {
+      "agent": "backend_engineer",
+      "focus": "Aprovado: revisar segurança, contratos de integração e testes para os fluxos contemplados."
+    }
+  },
+  "acceptance": "Descrito: os cinco lotes e os temas de revisão foram informados. Inferido: a integração exige continuidade de contexto e coordenação de estados entre os componentes. Proposto: documentar contratos e critérios de aceite por fluxo, com testes de sucesso, falha e segurança. Pendente de verificação: implementação e cobertura no código, comportamento em ambiente real e capacidades ou restrições dos provedores. Nenhum PDF foi fornecido como evidência nesta solicitação."
+}

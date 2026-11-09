@@ -1,0 +1,72 @@
+{
+  "name": "@opencompany/agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./prompts": {
+      "types": "./src/prompts/index.ts",
+      "default": "./src/prompts/index.ts"
+    },
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./src/*.ts"
+    },
+    "./integrations/slack-channel": "./src/integrations/slack-channel.ts",
+    "./integrations/imessage": "./src/integrations/imessage.ts",
+    "./integration-resource-options": {
+      "types": "./src/integration-resource-options.ts",
+      "default": "./src/integration-resource-options.ts"
+    },
+    "./workflows": {
+      "types": "./src/workflows.ts",
+      "default": "./src/workflows.ts"
+    },
+    "./integrations/whatsapp": "./src/integrations/whatsapp.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit --project tsconfig.json",
+    "test": "vitest run",
+    "bench": "bun --env-file=../../.env.local evals/index.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/mcp": "^2.0.44",
+    "@ai-sdk/openai": "^4.0.58",
+    "@browserbasehq/sdk": "^2.19.1",
+    "@modelcontextprotocol/sdk": "1.31.0",
+    "@opencompany/agent-runtime": "workspace:*",
+    "@opencompany/analytics": "workspace:*",
+    "@opencompany/billing": "workspace:*",
+    "@opencompany/browser-tools": "workspace:*",
+    "@opencompany/core": "workspace:*",
+    "@opencompany/crypto": "workspace:*",
+    "@opencompany/db": "workspace:*",
+    "@opencompany/file-extract": "workspace:*",
+    "@opencompany/observability": "workspace:*",
+    "@opencompany/protocol": "workspace:*",
+    "@opencompany/telemetry": "workspace:*",
+    "@opencompany/wiki": "workspace:*",
+    "@vercel/blob": "^2.8.0",
+    "@vercel/sandbox": "^3.2.1",
+    "ai": "^7.0.106",
+    "ajv": "8.20.0",
+    "convex": "1.45.0",
+    "drizzle-orm": "^0.45.2",
+    "jose": "^6.2.11",
+    "mcp-handler": "^1.1.0",
+    "mdast-util-from-markdown": "^2.0.3",
+    "mdast-util-gfm": "^3.1.0",
+    "micromark-extension-gfm": "^3.0.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/mdast": "^4.0.0",
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.11"
+  }
+}

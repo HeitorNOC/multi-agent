@@ -1,0 +1,4 @@
+{"batch": 2, "dimension": 384, "max_wordpiece_tokens": 8, "truncated_inputs": 0, "seconds": 0.007970599981490523, "input_hashes": ["a8308e8e2e4b73307d860de2effdc675fa122f64c2095e7974d8ef804b9d3b70", "e52b1eea6b4e0937cb51a2ceeac065370dfc58f4ccf4f01fd4542976332807a2"]}
+{"batch": 1, "dimension": 384, "max_wordpiece_tokens": 36, "truncated_inputs": 0, "seconds": 0.013117599999532104, "input_hashes": ["3eafafef3aa7147b3d54371f45372f68eea5c3371eef32aa220c0288684ab2f2"]}
+{"batch": 1, "dimension": 384, "max_wordpiece_tokens": 36, "truncated_inputs": 0, "seconds": 0.012779199983924627, "input_hashes": ["3eafafef3aa7147b3d54371f45372f68eea5c3371eef32aa220c0288684ab2f2"]}
+{"batch": 2, "dimension": 384, "max_wordpiece_tokens": 8, "truncated_inputs": 0, "seconds": 0.009746299998369068, "input_hashes": ["a8308e8e2e4b73307d860de2effdc675fa122f64c2095e7974d8ef804b9d3b70", "e52b1eea6b4e0937cb51a2ceeac065370dfc58f4ccf4f01fd4542976332807a2"]}

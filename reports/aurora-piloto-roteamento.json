@@ -1,0 +1,3781 @@
+{
+  "manifest_sha256": "6aae821c602a187b2116d97be0991a5a9292f944fceba383d85c7bf912ce47bd",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "reranker": {
+    "repository": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "revision": "173760f",
+    "files": {
+      "model_quint8_avx2.onnx": "6c2513767fb63d008a4377bef7a7a3555433d9436342bb53e35a3a72ffc52d4b",
+      "tokenizer.json": "3a56def25aa40facc030ea8b0b87f3688e4b3c39eb8b45d5702b3a1300fe2a20"
+    },
+    "onnxruntime": "1.31.1",
+    "startup_ms": 969.15
+  },
+  "cases": [
+    {
+      "id": "handoff",
+      "queries": [
+        "Qual estado indica que um atendente iniciou o atendimento?",
+        "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+        "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "handoff",
+      "seconds": 4.265,
+      "expected": 3,
+      "baseline_found": [
+        1,
+        3
+      ],
+      "in_envelope": [
+        1,
+        2,
+        3
+      ],
+      "verified_found": [
+        1,
+        2,
+        3
+      ],
+      "candidates": [
+        [
+          "contact",
+          9,
+          5
+        ],
+        [
+          "fluxo",
+          12,
+          30
+        ],
+        [
+          "fluxo",
+          10,
+          15
+        ],
+        [
+          "contact",
+          9,
+          3
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "fluxo",
+          10,
+          13
+        ],
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "fluxo",
+          10,
+          22
+        ],
+        [
+          "contact",
+          15,
+          41
+        ],
+        [
+          "contact",
+          11,
+          26
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "contact",
+          15,
+          52
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          7
+        ],
+        [
+          "contact",
+          13,
+          33
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          17,
+          74
+        ],
+        [
+          "contact",
+          11,
+          23
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          16,
+          68
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "contact",
+            9,
+            5
+          ]
+        ],
+        [
+          [
+            "contact",
+            11,
+            26
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "per_fact": [
+        {
+          "query": "Qual estado indica que um atendente iniciou o atendimento?",
+          "in_candidates": [
+            1
+          ],
+          "verified": [
+            1
+          ]
+        },
+        {
+          "query": "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+          "in_candidates": [
+            2
+          ],
+          "verified": [
+            2
+          ]
+        },
+        {
+          "query": "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?",
+          "in_candidates": [
+            3
+          ],
+          "verified": [
+            3
+          ]
+        }
+      ],
+      "followup": {
+        "queries": [],
+        "facts": [
+          {
+            "fact": "O estado ACTIVE indica que um atendente iniciou o atendimento.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          },
+          {
+            "fact": "Quando o atendimento vem de um aplicativo de mensageria, a sessão passa a ser do tipo HUMAN.",
+            "status": "covered",
+            "citations": [
+              "2"
+            ],
+            "query": null
+          },
+          {
+            "fact": "No WhatsApp, o sinal control_passed gera um evento com origem MESSAGING_HANDOVER, identificando a passagem de controle.",
+            "status": "covered",
+            "citations": [
+              "3"
+            ],
+            "query": null
+          }
+        ],
+        "error": null,
+        "seconds": 6.467,
+        "in_followup_envelope": [],
+        "verified_combined": [
+          1,
+          2,
+          3
+        ],
+        "accepted_distractors": [],
+        "candidates": [],
+        "slots": [],
+        "combined": [
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "contact",
+            11,
+            26
+          ],
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "contact",
+          "page": 9,
+          "line": 5,
+          "quote": "Contact-Center-e-Workspace.pdf | 3 ACTIVE Um atendente iniciou o atendimento."
+        },
+        {
+          "source": "contact",
+          "page": 11,
+          "line": 26,
+          "quote": "Contact-Center-e-Workspace.pdf | Se o atendimento veio de um aplicativo de mensageria, chama updateAppSessionToHuman: a sessão de mensagens passa a ser do tipo HUMAN."
+        },
+        {
+          "source": "fluxo",
+          "page": 10,
+          "line": 15,
+          "quote": "Fluxo-de-Mensageria.pdf | control_passed: vira um evento com origem MESSAGING_HANDOVER."
+        }
+      ]
+    },
+    {
+      "id": "limit",
+      "queries": [
+        "Quantas chamadas por segundo o Contact Center aceita na operação startAttendance para a mesma conta?"
+      ],
+      "error": null,
+      "plan_error": "ValueError",
+      "route": "general",
+      "seconds": 3.44,
+      "expected": 0,
+      "baseline_found": [],
+      "in_envelope": [],
+      "verified_found": [],
+      "candidates": [
+        [
+          "contact",
+          16,
+          63
+        ],
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "contact",
+          9,
+          11
+        ],
+        [
+          "contact",
+          16,
+          65
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          16,
+          62
+        ],
+        [
+          "contact",
+          11,
+          21
+        ],
+        [
+          "contact",
+          11,
+          18
+        ],
+        [
+          "contact",
+          11,
+          19
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          17,
+          71
+        ],
+        [
+          "contact",
+          15,
+          45
+        ],
+        [
+          "contact",
+          9,
+          12
+        ],
+        [
+          "fluxo",
+          10,
+          17
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "fluxo",
+          9,
+          6
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "contact",
+          13,
+          39
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          9,
+          9
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          13,
+          33
+        ]
+      ],
+      "slots": [
+        []
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [
+          "Qual é o limite de chamadas por segundo da operação startAttendance por conta no Contact Center?"
+        ],
+        "facts": [
+          {
+            "fact": "Limite de chamadas por segundo aceitas pela operação startAttendance para a mesma conta no Contact Center.",
+            "status": "search",
+            "citations": [],
+            "query": "Qual é o limite de chamadas por segundo da operação startAttendance por conta no Contact Center?"
+          }
+        ],
+        "error": null,
+        "seconds": 9.905,
+        "in_followup_envelope": [],
+        "verified_combined": [],
+        "accepted_distractors": [],
+        "candidates": [
+          [
+            "contact",
+            15,
+            43
+          ],
+          [
+            "contact",
+            16,
+            66
+          ],
+          [
+            "contact",
+            17,
+            71
+          ],
+          [
+            "contact",
+            15,
+            52
+          ],
+          [
+            "contact",
+            11,
+            21
+          ],
+          [
+            "contact",
+            11,
+            19
+          ],
+          [
+            "contact",
+            11,
+            18
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "contact",
+            15,
+            40
+          ],
+          [
+            "contact",
+            15,
+            45
+          ],
+          [
+            "contact",
+            9,
+            12
+          ],
+          [
+            "contact",
+            11,
+            20
+          ],
+          [
+            "contact",
+            13,
+            36
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "fluxo",
+            9,
+            6
+          ],
+          [
+            "contact",
+            15,
+            40
+          ],
+          [
+            "contact",
+            13,
+            33
+          ],
+          [
+            "contact",
+            9,
+            11
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "contact",
+            13,
+            39
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "contact",
+            9,
+            9
+          ],
+          [
+            "contact",
+            16,
+            62
+          ]
+        ],
+        "slots": [
+          []
+        ],
+        "combined": []
+      },
+      "parecer": []
+    },
+    {
+      "id": "handoff-original",
+      "queries": [
+        "Qual estado indica que um atendente iniciou o atendimento?",
+        "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+        "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "handoff",
+      "seconds": 3.972,
+      "expected": 3,
+      "baseline_found": [
+        1,
+        3
+      ],
+      "in_envelope": [
+        1,
+        2,
+        3
+      ],
+      "verified_found": [
+        1,
+        2,
+        3
+      ],
+      "candidates": [
+        [
+          "contact",
+          9,
+          5
+        ],
+        [
+          "fluxo",
+          12,
+          30
+        ],
+        [
+          "fluxo",
+          10,
+          15
+        ],
+        [
+          "contact",
+          9,
+          3
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "fluxo",
+          10,
+          13
+        ],
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "fluxo",
+          10,
+          22
+        ],
+        [
+          "contact",
+          15,
+          41
+        ],
+        [
+          "contact",
+          11,
+          26
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "contact",
+          15,
+          52
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          7
+        ],
+        [
+          "contact",
+          13,
+          33
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          17,
+          74
+        ],
+        [
+          "contact",
+          11,
+          23
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          16,
+          68
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "contact",
+            9,
+            5
+          ]
+        ],
+        [
+          [
+            "contact",
+            11,
+            26
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "per_fact": [
+        {
+          "query": "Qual estado indica que um atendente iniciou o atendimento?",
+          "in_candidates": [
+            1
+          ],
+          "verified": [
+            1
+          ]
+        },
+        {
+          "query": "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+          "in_candidates": [
+            2
+          ],
+          "verified": [
+            2
+          ]
+        },
+        {
+          "query": "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?",
+          "in_candidates": [
+            3
+          ],
+          "verified": [
+            3
+          ]
+        }
+      ],
+      "followup": {
+        "queries": [],
+        "facts": [
+          {
+            "fact": "O estado ACTIVE indica que um atendente iniciou o atendimento.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          },
+          {
+            "fact": "Ao abrir um atendimento digital originado de um aplicativo de mensageria, a sessão de mensagens passa a ser do tipo HUMAN.",
+            "status": "covered",
+            "citations": [
+              "2"
+            ],
+            "query": null
+          },
+          {
+            "fact": "O evento control_passed é registrado com origem MESSAGING_HANDOVER e representa a passagem de controle.",
+            "status": "covered",
+            "citations": [
+              "3"
+            ],
+            "query": null
+          },
+          {
+            "fact": "A garantia de que o MBA e o atendente não respondem ao mesmo tempo depende de teste de execução.",
+            "status": "execution",
+            "citations": [],
+            "query": null
+          }
+        ],
+        "error": null,
+        "seconds": 6.698,
+        "in_followup_envelope": [],
+        "verified_combined": [
+          1,
+          2,
+          3
+        ],
+        "accepted_distractors": [],
+        "candidates": [],
+        "slots": [],
+        "combined": [
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "contact",
+            11,
+            26
+          ],
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "contact",
+          "page": 9,
+          "line": 5,
+          "quote": "Contact-Center-e-Workspace.pdf | 3 ACTIVE Um atendente iniciou o atendimento."
+        },
+        {
+          "source": "contact",
+          "page": 11,
+          "line": 26,
+          "quote": "Contact-Center-e-Workspace.pdf | Se o atendimento veio de um aplicativo de mensageria, chama updateAppSessionToHuman: a sessão de mensagens passa a ser do tipo HUMAN."
+        },
+        {
+          "source": "fluxo",
+          "page": 10,
+          "line": 15,
+          "quote": "Fluxo-de-Mensageria.pdf | control_passed: vira um evento com origem MESSAGING_HANDOVER."
+        }
+      ]
+    },
+    {
+      "id": "csv-control",
+      "queries": [
+        "O que deve ser conferido na retomada de fila no laboratório azul?",
+        "Quem aprova a retomada de fila no laboratório azul?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "general",
+      "seconds": 3.855,
+      "expected": 2,
+      "baseline_found": [
+        1,
+        2
+      ],
+      "in_envelope": [
+        1,
+        2
+      ],
+      "verified_found": [
+        1,
+        2
+      ],
+      "candidates": [
+        [
+          "rehearsal-csv",
+          null,
+          2
+        ],
+        [
+          "blank-approver",
+          null,
+          2
+        ],
+        [
+          "rehearsal-note",
+          null,
+          1
+        ],
+        [
+          "contact",
+          15,
+          50
+        ],
+        [
+          "contact",
+          15,
+          56
+        ],
+        [
+          "contact",
+          9,
+          8
+        ],
+        [
+          "contact",
+          9,
+          7
+        ],
+        [
+          "training-calendar",
+          null,
+          1
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          15,
+          42
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "contact",
+          13,
+          29
+        ],
+        [
+          "contact",
+          9,
+          9
+        ],
+        [
+          "contact",
+          15,
+          44
+        ],
+        [
+          "contact",
+          15,
+          48
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          15,
+          49
+        ],
+        [
+          "rehearsal-csv",
+          null,
+          1
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "contact",
+          9,
+          13
+        ],
+        [
+          "contact",
+          11,
+          26
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ]
+        ],
+        [
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [],
+        "facts": [
+          {
+            "fact": "Na retomada de fila no laboratório azul, deve-se revalidar a versão da fila.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          },
+          {
+            "fact": "A Equipe Delta aprova a retomada de fila no laboratório azul.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          }
+        ],
+        "error": null,
+        "seconds": 4.86,
+        "in_followup_envelope": [],
+        "verified_combined": [
+          1,
+          2
+        ],
+        "accepted_distractors": [],
+        "candidates": [],
+        "slots": [],
+        "combined": [
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "rehearsal-csv",
+          "page": null,
+          "line": 2,
+          "quote": "Exportação CSV do teste de continuidade | ambiente: laboratorio-azul | cenario: retomada de fila | controle: revalidar a versão da fila | aprovador: Equipe Delta"
+        }
+      ]
+    },
+    {
+      "id": "blank-approver",
+      "queries": [
+        "O que deve ser conferido na retomada de fila no laboratório violeta?",
+        "Quem aprova a retomada de fila no laboratório violeta?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "general",
+      "seconds": 4.016,
+      "expected": 1,
+      "baseline_found": [
+        1
+      ],
+      "in_envelope": [
+        1
+      ],
+      "verified_found": [
+        1
+      ],
+      "candidates": [
+        [
+          "blank-approver",
+          null,
+          2
+        ],
+        [
+          "rehearsal-note",
+          null,
+          1
+        ],
+        [
+          "rehearsal-csv",
+          null,
+          2
+        ],
+        [
+          "contact",
+          15,
+          50
+        ],
+        [
+          "contact",
+          9,
+          7
+        ],
+        [
+          "contact",
+          9,
+          8
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "contact",
+          11,
+          15
+        ],
+        [
+          "training-calendar",
+          null,
+          1
+        ],
+        [
+          "contact",
+          16,
+          60
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "contact",
+          9,
+          9
+        ],
+        [
+          "contact",
+          13,
+          29
+        ],
+        [
+          "contact",
+          15,
+          44
+        ],
+        [
+          "contact",
+          15,
+          48
+        ],
+        [
+          "contact",
+          11,
+          26
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          15,
+          49
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "contact",
+          9,
+          13
+        ],
+        [
+          "contact",
+          15,
+          57
+        ],
+        [
+          "contact",
+          16,
+          63
+        ],
+        [
+          "fluxo",
+          9,
+          1
+        ],
+        [
+          "fluxo",
+          9,
+          3
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "blank-approver",
+            null,
+            2
+          ]
+        ],
+        []
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [
+          "Quem é o aprovador responsável pela retomada de fila no laboratório violeta?"
+        ],
+        "facts": [
+          {
+            "fact": "Antes da retomada de fila no laboratório violeta, deve-se revalidar a versão da fila.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          },
+          {
+            "fact": "Identificar quem aprova a retomada de fila no laboratório violeta.",
+            "status": "search",
+            "citations": [],
+            "query": "Quem é o aprovador responsável pela retomada de fila no laboratório violeta?"
+          }
+        ],
+        "error": null,
+        "seconds": 9.252,
+        "in_followup_envelope": [
+          1
+        ],
+        "verified_combined": [
+          1
+        ],
+        "accepted_distractors": [],
+        "candidates": [
+          [
+            "blank-approver",
+            null,
+            2
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            2
+          ],
+          [
+            "rehearsal-note",
+            null,
+            1
+          ],
+          [
+            "blank-approver",
+            null,
+            1
+          ],
+          [
+            "contact",
+            9,
+            7
+          ],
+          [
+            "rehearsal-csv",
+            null,
+            1
+          ],
+          [
+            "contact",
+            15,
+            50
+          ],
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "contact",
+            9,
+            8
+          ],
+          [
+            "contact",
+            15,
+            41
+          ],
+          [
+            "contact",
+            16,
+            60
+          ],
+          [
+            "contact",
+            15,
+            48
+          ],
+          [
+            "contact",
+            15,
+            59
+          ],
+          [
+            "fluxo",
+            12,
+            28
+          ],
+          [
+            "contact",
+            13,
+            29
+          ],
+          [
+            "contact",
+            15,
+            44
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "contact",
+            11,
+            15
+          ],
+          [
+            "contact",
+            15,
+            49
+          ],
+          [
+            "contact",
+            9,
+            13
+          ],
+          [
+            "contact",
+            15,
+            49
+          ],
+          [
+            "contact",
+            15,
+            44
+          ],
+          [
+            "contact",
+            16,
+            63
+          ]
+        ],
+        "slots": [
+          []
+        ],
+        "combined": [
+          [
+            "blank-approver",
+            null,
+            2
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "blank-approver",
+          "page": null,
+          "line": 2,
+          "quote": "Exportação CSV do laboratório violeta | aprovador: [vazio] | controle: revalidar a versão da fila; antes da retomada | cenario: retomada de fila | ambiente: laboratorio-violeta"
+        }
+      ]
+    },
+    {
+      "id": "handoff-new",
+      "queries": [
+        "Qual estado indica que um atendente iniciou o atendimento?",
+        "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+        "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "handoff",
+      "seconds": 4.622,
+      "expected": 3,
+      "baseline_found": [
+        1,
+        3
+      ],
+      "in_envelope": [
+        1,
+        2,
+        3
+      ],
+      "verified_found": [
+        1,
+        2,
+        3
+      ],
+      "candidates": [
+        [
+          "contact",
+          9,
+          5
+        ],
+        [
+          "fluxo",
+          12,
+          30
+        ],
+        [
+          "fluxo",
+          10,
+          15
+        ],
+        [
+          "contact",
+          9,
+          3
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "fluxo",
+          10,
+          13
+        ],
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "fluxo",
+          10,
+          22
+        ],
+        [
+          "contact",
+          15,
+          41
+        ],
+        [
+          "contact",
+          11,
+          26
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "contact",
+          15,
+          52
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          7
+        ],
+        [
+          "contact",
+          13,
+          33
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          17,
+          74
+        ],
+        [
+          "contact",
+          11,
+          23
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          16,
+          68
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "contact",
+            9,
+            5
+          ]
+        ],
+        [
+          [
+            "contact",
+            11,
+            26
+          ],
+          [
+            "fluxo",
+            12,
+            30
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "per_fact": [
+        {
+          "query": "Qual estado indica que um atendente iniciou o atendimento?",
+          "in_candidates": [
+            1
+          ],
+          "verified": [
+            1
+          ]
+        },
+        {
+          "query": "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+          "in_candidates": [
+            2
+          ],
+          "verified": [
+            2
+          ]
+        },
+        {
+          "query": "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?",
+          "in_candidates": [
+            3
+          ],
+          "verified": [
+            3
+          ]
+        }
+      ],
+      "followup": {
+        "queries": [],
+        "facts": [
+          {
+            "fact": "O handoff entre bot e humano muda o tipo da sessão no messaging-session de ML_MODEL para HUMAN.",
+            "status": "covered",
+            "citations": [
+              "2",
+              "4"
+            ],
+            "query": null
+          },
+          {
+            "fact": "O evento control_passed é registrado com origem MESSAGING_HANDOVER e permite identificar a passagem de controle.",
+            "status": "covered",
+            "citations": [
+              "3"
+            ],
+            "query": null
+          },
+          {
+            "fact": "O estado ACTIVE indica que um atendente iniciou o atendimento.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          }
+        ],
+        "error": null,
+        "seconds": 6.147,
+        "in_followup_envelope": [],
+        "verified_combined": [
+          1,
+          2,
+          3
+        ],
+        "accepted_distractors": [],
+        "candidates": [],
+        "slots": [],
+        "combined": [
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "contact",
+            11,
+            26
+          ],
+          [
+            "fluxo",
+            10,
+            15
+          ],
+          [
+            "fluxo",
+            12,
+            30
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "contact",
+          "page": 9,
+          "line": 5,
+          "quote": "Contact-Center-e-Workspace.pdf | 3 ACTIVE Um atendente iniciou o atendimento."
+        },
+        {
+          "source": "contact",
+          "page": 11,
+          "line": 26,
+          "quote": "Contact-Center-e-Workspace.pdf | Se o atendimento veio de um aplicativo de mensageria, chama updateAppSessionToHuman: a sessão de mensagens passa a ser do tipo HUMAN."
+        },
+        {
+          "source": "fluxo",
+          "page": 10,
+          "line": 15,
+          "quote": "Fluxo-de-Mensageria.pdf | control_passed: vira um evento com origem MESSAGING_HANDOVER."
+        },
+        {
+          "source": "fluxo",
+          "page": 12,
+          "line": 30,
+          "quote": "Fluxo-de-Mensageria.pdf | O handoff entre bot e humano muda o tipo da sessão no messaging-session (tipos ML_MODEL e HUMAN)."
+        }
+      ]
+    },
+    {
+      "id": "persistence",
+      "queries": [
+        "Onde rastrear o conteúdo recebido intacto na entrada de WhatsApp?",
+        "Onde consultar o registro transformado usado para reconstruir a conversa de WhatsApp?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "general",
+      "seconds": 4.033,
+      "expected": 2,
+      "baseline_found": [
+        1,
+        2
+      ],
+      "in_envelope": [
+        1,
+        2
+      ],
+      "verified_found": [
+        1,
+        2
+      ],
+      "candidates": [
+        [
+          "fluxo",
+          10,
+          20
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "fluxo",
+          10,
+          19
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "fluxo",
+          9,
+          9
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          1
+        ],
+        [
+          "fluxo",
+          10,
+          11
+        ],
+        [
+          "fluxo",
+          10,
+          21
+        ],
+        [
+          "fluxo",
+          9,
+          5
+        ],
+        [
+          "fluxo",
+          10,
+          22
+        ],
+        [
+          "fluxo",
+          10,
+          13
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "fluxo",
+          9,
+          1
+        ],
+        [
+          "contact",
+          17,
+          74
+        ],
+        [
+          "fluxo",
+          9,
+          6
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          17,
+          73
+        ],
+        [
+          "contact",
+          17,
+          72
+        ],
+        [
+          "fluxo",
+          10,
+          19
+        ],
+        [
+          "contact",
+          9,
+          3
+        ],
+        [
+          "contact",
+          11,
+          25
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "fluxo",
+            10,
+            19
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            20
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [],
+        "facts": [
+          {
+            "fact": "O conteúdo recebido intacto é rastreado no Register, que grava o payload cru em WhatsappMessage para mensagens e status, WhatsappMessageUnknown para tipos desconhecidos ou WhatsappMessageError para payload inválido ou exceção.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          },
+          {
+            "fact": "O registro transformado usado para reconstruir a conversa é consultado na tabela de histórico StorageWhatsappMessageModel, onde o Storage insere a mensagem normalizada.",
+            "status": "covered",
+            "citations": [
+              "2"
+            ],
+            "query": null
+          }
+        ],
+        "error": null,
+        "seconds": 7.526,
+        "in_followup_envelope": [],
+        "verified_combined": [
+          1,
+          2
+        ],
+        "accepted_distractors": [],
+        "candidates": [],
+        "slots": [],
+        "combined": [
+          [
+            "fluxo",
+            10,
+            19
+          ],
+          [
+            "fluxo",
+            10,
+            20
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "fluxo",
+          "page": 10,
+          "line": 19,
+          "quote": "Fluxo-de-Mensageria.pdf | Register: grava o payload cru em WhatsappMessage (mensagens e status), WhatsappMessageUnknown (tipo desconhecido) ou WhatsappMessageError (payload inválido ou exceção)."
+        },
+        {
+          "source": "fluxo",
+          "page": 10,
+          "line": 20,
+          "quote": "Fluxo-de-Mensageria.pdf | Storage: recebe a mensagem já normalizada e faz um INSERT na tabela de histórico (StorageWhatsappMessageModel)."
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "queries": [
+        "Como testar o agente da Meta com um grupo restrito de contatos?",
+        "Como disponibilizar o agente da Meta para toda a base de contatos após o teste?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "general",
+      "seconds": 3.779,
+      "expected": 2,
+      "baseline_found": [],
+      "in_envelope": [
+        2
+      ],
+      "verified_found": [
+        2
+      ],
+      "candidates": [
+        [
+          "mba",
+          4,
+          9
+        ],
+        [
+          "mba",
+          3,
+          4
+        ],
+        [
+          "mba",
+          3,
+          1
+        ],
+        [
+          "mba",
+          4,
+          7
+        ],
+        [
+          "mba",
+          8,
+          13
+        ],
+        [
+          "mba",
+          4,
+          8
+        ],
+        [
+          "mba",
+          8,
+          13
+        ],
+        [
+          "mba",
+          4,
+          11
+        ],
+        [
+          "fluxo",
+          10,
+          26
+        ],
+        [
+          "contact",
+          16,
+          64
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          11,
+          22
+        ],
+        [
+          "contact",
+          16,
+          63
+        ],
+        [
+          "mba",
+          3,
+          2
+        ],
+        [
+          "contact",
+          11,
+          27
+        ],
+        [
+          "contact",
+          15,
+          40
+        ],
+        [
+          "contact",
+          11,
+          16
+        ],
+        [
+          "webchat-sandbox",
+          null,
+          1
+        ],
+        [
+          "contact",
+          11,
+          18
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "contact",
+          13,
+          36
+        ],
+        [
+          "mba-academic",
+          null,
+          1
+        ]
+      ],
+      "slots": [
+        [],
+        [
+          [
+            "mba",
+            4,
+            11
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "followup": {
+        "queries": [
+          "Como configurar o agente da Meta para que apenas um grupo restrito de contatos participe do teste?"
+        ],
+        "facts": [
+          {
+            "fact": "Testar o agente da Meta com um grupo restrito de contatos.",
+            "status": "search",
+            "citations": [],
+            "query": "Como configurar o agente da Meta para que apenas um grupo restrito de contatos participe do teste?"
+          },
+          {
+            "fact": "Após o teste, disponibilizar o agente a todos os clientes.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          }
+        ],
+        "error": null,
+        "seconds": 9.734,
+        "in_followup_envelope": [
+          2
+        ],
+        "verified_combined": [
+          2
+        ],
+        "accepted_distractors": [],
+        "candidates": [
+          [
+            "mba",
+            4,
+            8
+          ],
+          [
+            "mba",
+            4,
+            9
+          ],
+          [
+            "mba",
+            4,
+            7
+          ],
+          [
+            "mba",
+            3,
+            1
+          ],
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "mba",
+            4,
+            11
+          ],
+          [
+            "contact",
+            11,
+            22
+          ],
+          [
+            "mba",
+            8,
+            13
+          ],
+          [
+            "contact",
+            11,
+            27
+          ],
+          [
+            "training-markdown",
+            null,
+            3
+          ],
+          [
+            "contact",
+            16,
+            62
+          ],
+          [
+            "contact",
+            16,
+            63
+          ],
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "contact",
+            17,
+            71
+          ],
+          [
+            "webchat-sandbox",
+            null,
+            1
+          ],
+          [
+            "fluxo",
+            10,
+            26
+          ],
+          [
+            "contact",
+            16,
+            64
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ],
+          [
+            "fluxo",
+            9,
+            10
+          ]
+        ],
+        "slots": [
+          []
+        ],
+        "combined": [
+          [
+            "mba",
+            4,
+            11
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "mba",
+          "page": 4,
+          "line": 11,
+          "quote": "Resumo-Meta-Business-Agent-360dialog.pdf | 6 Liberar para todos Abrir o agente a todos os clientes."
+        }
+      ]
+    },
+    {
+      "id": "handoff",
+      "queries": [
+        "Qual estado indica que um atendente iniciou o atendimento?",
+        "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+        "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "handoff",
+      "seconds": 4.139,
+      "expected": 3,
+      "baseline_found": [
+        1,
+        3
+      ],
+      "in_envelope": [
+        1,
+        2,
+        3
+      ],
+      "verified_found": [
+        1,
+        2,
+        3
+      ],
+      "candidates": [
+        [
+          "contact",
+          9,
+          5
+        ],
+        [
+          "fluxo",
+          12,
+          30
+        ],
+        [
+          "fluxo",
+          10,
+          15
+        ],
+        [
+          "contact",
+          9,
+          3
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "fluxo",
+          10,
+          13
+        ],
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "fluxo",
+          10,
+          22
+        ],
+        [
+          "contact",
+          15,
+          41
+        ],
+        [
+          "contact",
+          11,
+          26
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "contact",
+          15,
+          52
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          7
+        ],
+        [
+          "contact",
+          13,
+          33
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          17,
+          74
+        ],
+        [
+          "contact",
+          11,
+          23
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          16,
+          68
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "contact",
+            9,
+            5
+          ]
+        ],
+        [
+          [
+            "contact",
+            11,
+            26
+          ],
+          [
+            "fluxo",
+            12,
+            30
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "per_fact": [
+        {
+          "query": "Qual estado indica que um atendente iniciou o atendimento?",
+          "in_candidates": [
+            1
+          ],
+          "verified": [
+            1
+          ]
+        },
+        {
+          "query": "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+          "in_candidates": [
+            2
+          ],
+          "verified": [
+            2
+          ]
+        },
+        {
+          "query": "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?",
+          "in_candidates": [
+            3
+          ],
+          "verified": [
+            3
+          ]
+        }
+      ],
+      "followup": {
+        "queries": [],
+        "facts": [
+          {
+            "fact": "O estado ACTIVE indica que um atendente iniciou o atendimento.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          },
+          {
+            "fact": "Quando o atendimento vem de um aplicativo de mensageria, a sessão passa ao tipo HUMAN ao ser transferida para o humano.",
+            "status": "covered",
+            "citations": [
+              "2",
+              "4"
+            ],
+            "query": null
+          },
+          {
+            "fact": "O sinal control_passed gera um evento com origem MESSAGING_HANDOVER e indica a troca de controle.",
+            "status": "covered",
+            "citations": [
+              "3"
+            ],
+            "query": null
+          }
+        ],
+        "error": null,
+        "seconds": 6.426,
+        "in_followup_envelope": [],
+        "verified_combined": [
+          1,
+          2,
+          3
+        ],
+        "accepted_distractors": [],
+        "candidates": [],
+        "slots": [],
+        "combined": [
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "contact",
+            11,
+            26
+          ],
+          [
+            "fluxo",
+            10,
+            15
+          ],
+          [
+            "fluxo",
+            12,
+            30
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "contact",
+          "page": 9,
+          "line": 5,
+          "quote": "Contact-Center-e-Workspace.pdf | 3 ACTIVE Um atendente iniciou o atendimento."
+        },
+        {
+          "source": "contact",
+          "page": 11,
+          "line": 26,
+          "quote": "Contact-Center-e-Workspace.pdf | Se o atendimento veio de um aplicativo de mensageria, chama updateAppSessionToHuman: a sessão de mensagens passa a ser do tipo HUMAN."
+        },
+        {
+          "source": "fluxo",
+          "page": 10,
+          "line": 15,
+          "quote": "Fluxo-de-Mensageria.pdf | control_passed: vira um evento com origem MESSAGING_HANDOVER."
+        },
+        {
+          "source": "fluxo",
+          "page": 12,
+          "line": 30,
+          "quote": "Fluxo-de-Mensageria.pdf | O handoff entre bot e humano muda o tipo da sessão no messaging-session (tipos ML_MODEL e HUMAN)."
+        }
+      ]
+    },
+    {
+      "id": "handoff-original",
+      "queries": [
+        "Qual estado indica que um atendente iniciou o atendimento?",
+        "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+        "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "handoff",
+      "seconds": 4.101,
+      "expected": 3,
+      "baseline_found": [
+        1,
+        3
+      ],
+      "in_envelope": [
+        1,
+        2,
+        3
+      ],
+      "verified_found": [
+        1,
+        2,
+        3
+      ],
+      "candidates": [
+        [
+          "contact",
+          9,
+          5
+        ],
+        [
+          "fluxo",
+          12,
+          30
+        ],
+        [
+          "fluxo",
+          10,
+          15
+        ],
+        [
+          "contact",
+          9,
+          3
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "fluxo",
+          10,
+          13
+        ],
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "fluxo",
+          10,
+          22
+        ],
+        [
+          "contact",
+          15,
+          41
+        ],
+        [
+          "contact",
+          11,
+          26
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "contact",
+          15,
+          52
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          7
+        ],
+        [
+          "contact",
+          13,
+          33
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          17,
+          74
+        ],
+        [
+          "contact",
+          11,
+          23
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          16,
+          68
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "contact",
+            9,
+            5
+          ]
+        ],
+        [
+          [
+            "contact",
+            11,
+            26
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "per_fact": [
+        {
+          "query": "Qual estado indica que um atendente iniciou o atendimento?",
+          "in_candidates": [
+            1
+          ],
+          "verified": [
+            1
+          ]
+        },
+        {
+          "query": "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+          "in_candidates": [
+            2
+          ],
+          "verified": [
+            2
+          ]
+        },
+        {
+          "query": "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?",
+          "in_candidates": [
+            3
+          ],
+          "verified": [
+            3
+          ]
+        }
+      ],
+      "followup": {
+        "queries": [],
+        "facts": [
+          {
+            "fact": "O atendimento está no estado ACTIVE, indicando que um atendente iniciou o atendimento.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          },
+          {
+            "fact": "Quando um atendimento de aplicativo de mensageria é aberto, a sessão de mensagens passa ao tipo HUMAN.",
+            "status": "covered",
+            "citations": [
+              "2"
+            ],
+            "query": null
+          },
+          {
+            "fact": "A transferência de controle é representada pelo evento control_passed, com origem MESSAGING_HANDOVER.",
+            "status": "covered",
+            "citations": [
+              "3"
+            ],
+            "query": null
+          },
+          {
+            "fact": "Garantir que o MBA e o atendente não respondam ao mesmo tempo depende de teste de execução.",
+            "status": "execution",
+            "citations": [],
+            "query": null
+          }
+        ],
+        "error": null,
+        "seconds": 6.873,
+        "in_followup_envelope": [],
+        "verified_combined": [
+          1,
+          2,
+          3
+        ],
+        "accepted_distractors": [],
+        "candidates": [],
+        "slots": [],
+        "combined": [
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "contact",
+            11,
+            26
+          ],
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "contact",
+          "page": 9,
+          "line": 5,
+          "quote": "Contact-Center-e-Workspace.pdf | 3 ACTIVE Um atendente iniciou o atendimento."
+        },
+        {
+          "source": "contact",
+          "page": 11,
+          "line": 26,
+          "quote": "Contact-Center-e-Workspace.pdf | Se o atendimento veio de um aplicativo de mensageria, chama updateAppSessionToHuman: a sessão de mensagens passa a ser do tipo HUMAN."
+        },
+        {
+          "source": "fluxo",
+          "page": 10,
+          "line": 15,
+          "quote": "Fluxo-de-Mensageria.pdf | control_passed: vira um evento com origem MESSAGING_HANDOVER."
+        }
+      ]
+    },
+    {
+      "id": "handoff-new",
+      "queries": [
+        "Qual estado indica que um atendente iniciou o atendimento?",
+        "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+        "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?"
+      ],
+      "error": null,
+      "plan_error": null,
+      "route": "handoff",
+      "seconds": 4.567,
+      "expected": 3,
+      "baseline_found": [
+        1,
+        3
+      ],
+      "in_envelope": [
+        1,
+        2,
+        3
+      ],
+      "verified_found": [
+        1,
+        2,
+        3
+      ],
+      "candidates": [
+        [
+          "contact",
+          9,
+          5
+        ],
+        [
+          "fluxo",
+          12,
+          30
+        ],
+        [
+          "fluxo",
+          10,
+          15
+        ],
+        [
+          "contact",
+          9,
+          3
+        ],
+        [
+          "contact",
+          15,
+          59
+        ],
+        [
+          "fluxo",
+          10,
+          13
+        ],
+        [
+          "contact",
+          15,
+          43
+        ],
+        [
+          "fluxo",
+          12,
+          28
+        ],
+        [
+          "fluxo",
+          10,
+          22
+        ],
+        [
+          "contact",
+          15,
+          41
+        ],
+        [
+          "contact",
+          11,
+          26
+        ],
+        [
+          "fluxo",
+          10,
+          27
+        ],
+        [
+          "contact",
+          15,
+          52
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          7
+        ],
+        [
+          "contact",
+          13,
+          33
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          17,
+          74
+        ],
+        [
+          "contact",
+          11,
+          23
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "contact",
+          16,
+          68
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ],
+        [
+          "fluxo",
+          9,
+          10
+        ]
+      ],
+      "slots": [
+        [
+          [
+            "contact",
+            9,
+            5
+          ]
+        ],
+        [
+          [
+            "contact",
+            11,
+            26
+          ],
+          [
+            "fluxo",
+            12,
+            30
+          ]
+        ],
+        [
+          [
+            "fluxo",
+            10,
+            15
+          ]
+        ]
+      ],
+      "accepted_distractors": [],
+      "per_fact": [
+        {
+          "query": "Qual estado indica que um atendente iniciou o atendimento?",
+          "in_candidates": [
+            1
+          ],
+          "verified": [
+            1
+          ]
+        },
+        {
+          "query": "O que muda no tipo da sessão de mensageria quando é aberto um atendimento digital?",
+          "in_candidates": [
+            2
+          ],
+          "verified": [
+            2
+          ]
+        },
+        {
+          "query": "Qual evento do WhatsApp representa a transferência de controle em vez de mensagem recebida?",
+          "in_candidates": [
+            3
+          ],
+          "verified": [
+            3
+          ]
+        }
+      ],
+      "followup": {
+        "queries": [],
+        "facts": [
+          {
+            "fact": "Para reconstruir a passagem, consulte o tipo da sessão no messaging-session: o handoff entre bot e humano muda o tipo de ML_MODEL para HUMAN.",
+            "status": "covered",
+            "citations": [
+              "4"
+            ],
+            "query": null
+          },
+          {
+            "fact": "Ao abrir um atendimento digital vindo de um aplicativo de mensageria, a sessão de mensagens passa a ser do tipo HUMAN.",
+            "status": "covered",
+            "citations": [
+              "2"
+            ],
+            "query": null
+          },
+          {
+            "fact": "Consulte o evento control_passed, que gera um evento com origem MESSAGING_HANDOVER, para identificar a passagem de controle.",
+            "status": "covered",
+            "citations": [
+              "3"
+            ],
+            "query": null
+          },
+          {
+            "fact": "Para confirmar que um atendente iniciou o atendimento, consulte o estado ACTIVE do atendimento.",
+            "status": "covered",
+            "citations": [
+              "1"
+            ],
+            "query": null
+          }
+        ],
+        "error": null,
+        "seconds": 7.134,
+        "in_followup_envelope": [],
+        "verified_combined": [
+          1,
+          2,
+          3
+        ],
+        "accepted_distractors": [],
+        "candidates": [],
+        "slots": [],
+        "combined": [
+          [
+            "contact",
+            9,
+            5
+          ],
+          [
+            "contact",
+            11,
+            26
+          ],
+          [
+            "fluxo",
+            10,
+            15
+          ],
+          [
+            "fluxo",
+            12,
+            30
+          ]
+        ]
+      },
+      "parecer": [
+        {
+          "source": "contact",
+          "page": 9,
+          "line": 5,
+          "quote": "Contact-Center-e-Workspace.pdf | 3 ACTIVE Um atendente iniciou o atendimento."
+        },
+        {
+          "source": "contact",
+          "page": 11,
+          "line": 26,
+          "quote": "Contact-Center-e-Workspace.pdf | Se o atendimento veio de um aplicativo de mensageria, chama updateAppSessionToHuman: a sessão de mensagens passa a ser do tipo HUMAN."
+        },
+        {
+          "source": "fluxo",
+          "page": 10,
+          "line": 15,
+          "quote": "Fluxo-de-Mensageria.pdf | control_passed: vira um evento com origem MESSAGING_HANDOVER."
+        },
+        {
+          "source": "fluxo",
+          "page": 12,
+          "line": 30,
+          "quote": "Fluxo-de-Mensageria.pdf | O handoff entre bot e humano muda o tipo da sessão no messaging-session (tipos ML_MODEL e HUMAN)."
+        }
+      ]
+    }
+  ],
+  "model_calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "d04fdbf66ba8618df6e8f75fd2f638833c48217ecec1afa9fdf43d1cdf8fb912",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.9266961999819614,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11340,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "c7e67b90242b09a53bcfc4901d430f8a2c11c4764d6bf418da33f983aa055c19",
+      "reservation_id": "handoff",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.257478899991838,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13452,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 31,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "8ea7c95b7bf93ac2448ebbb4023332c8d02e484fb2b5b27b0454205a9ae0a393",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 6.459536499984097,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12430,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 145,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0a0ad5f186bfa9a2c408e8140ebb74f477671e91bd584ac7350f5db195838fbe",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.831147199991392,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12113,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 43,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "73af3a09042051c2c89e6d95f23ae539a0dee83e279d8fe4c803ad92cb14f556",
+      "reservation_id": "limit",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.4311433999973815,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12658,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "048509f790b2f280910b4b67651956ca80f53d41732ddca3808c748e27a06c92",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 5.168779200001154,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12266,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 75,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 9,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "44b3d2038c92c11d74d57ecda5682c5e0eb8a80dc1a2dc96d397cd4966760f9f",
+      "reservation_id": "followup-verify",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.9409177000052296,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13382,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 11,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "3429155448a6ef3bf8b8b4a10e8a5394f3dc12a5dc7086058bf46262b7340a8e",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.323421099979896,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12123,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 12,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "c5147a7a8d7b5543f6d425daefdf4cd67cb83aa9343cbe6f3e2cbc1c514e6070",
+      "reservation_id": "handoff-original",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.9630000999895856,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13445,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 31,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 13,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "221ca9e61e87facaa0f796777663df45a3f8590aaf252c0d88bde0b9c987d363",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 6.689369300001999,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11633,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 184,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 16,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "17f7e752493f4f97028b3acee1844f388cd22a22ca6a6d8bca05fceed94dc10a",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.2106249000062235,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12115,
+          "cached_input_tokens": 11904,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 53,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 17,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "3a50eea10c8cfdea2f7943fbb9217d85cde5606f78d4295d5e21b35d94225170",
+      "reservation_id": "csv-control",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.846525600005407,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13150,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 27,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 18,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "2367c90d532047438ea4fdf4602ad5d2562a3f98a5f0c80f4400c050a48632e5",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.851276400004281,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12330,
+          "cached_input_tokens": 12032,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 97,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 21,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "1f48bb313a904bfc7c0f3875e576579e7bd9153a93f69cece98fa812c84fa5c7",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 8.053295299992897,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11326,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 55,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 22,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "86ba7af692c9931d0f5dde0b94180edfd519b5408ee820522e45907213880335",
+      "reservation_id": "blank-approver",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.007411099999445,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12364,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 25,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 23,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "4f2bb856a09348b775be58d31e956106c5583fe388b7254dcacc64065c4570db",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 5.1029545000055805,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12339,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 111,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 24,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "7d5c090bfbc18964aaad35d760e5519b650d3f39a5e8cb1c64ab510cdf6007a4",
+      "reservation_id": "followup-verify",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.633796500012977,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13225,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 26,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "d7c5079fb1f3c46a46997688339f89ece728cb151d2faa9d95a75080b79fd277",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.5327756999759004,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11338,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 27,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "e23273efbddb95f425b8835312c04fd11bfc884045a168bc5fbc5bc350fe71fd",
+      "reservation_id": "handoff-new",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.613327699975343,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13450,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 33,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 28,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0e20477057f2ebcddc862e5ba8ae69d980503762c968ee9681eb6d9840d9e00b",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 6.138294700009283,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12473,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 142,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 31,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "6c1c1ef620988304992066011c0cba959b32e8caf34fbf610db5c1045018fbf5",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.1407254000077955,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12129,
+          "cached_input_tokens": 11904,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 56,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 32,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "4fc575dcff7596a92dab7aa4eaf96e0aae063d8257176528f970ae6582d9598f",
+      "reservation_id": "persistence",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.025131799979135,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13339,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 27,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 33,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "ad81c5fe99a6b9ba6508a2b960921b86dddad1311991d1c7e482d2f10060ea50",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 7.518365800002357,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11606,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 139,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 36,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "02aae83ccdf80423a438c14915d962803953e5962ed0348841a883d946e4e0f2",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 5.175719499995466,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12117,
+          "cached_input_tokens": 11904,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 57,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 37,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "04ef9298229d06aee132150e90adf7ca4f160b62d7b39538c0855da21d8f2cdb",
+      "reservation_id": "release",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.7710475000203587,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13476,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 24,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 38,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "e1458314a10347766884de6b5cf792457655878016f4531df659908f5444e960",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.99596329999622,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12322,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 105,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 39,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "c1184f2856eb4f7a9326c09ec215e92d0d04193f07377e3e9c627b973650f39c",
+      "reservation_id": "followup-verify",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.0383844999887515,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13276,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 41,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "d04fdbf66ba8618df6e8f75fd2f638833c48217ecec1afa9fdf43d1cdf8fb912",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.139562399999704,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11340,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 42,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "c7e67b90242b09a53bcfc4901d430f8a2c11c4764d6bf418da33f983aa055c19",
+      "reservation_id": "handoff",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.1300014999869745,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13452,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 33,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 43,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "40386feecc2dae572e2347701ff823e6113b8b4a292206e62f96af6119e38115",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 6.417657000012696,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12475,
+          "cached_input_tokens": 12288,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 147,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 46,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "3429155448a6ef3bf8b8b4a10e8a5394f3dc12a5dc7086058bf46262b7340a8e",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 3.4289405000163242,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12123,
+          "cached_input_tokens": 11904,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 47,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "c5147a7a8d7b5543f6d425daefdf4cd67cb83aa9343cbe6f3e2cbc1c514e6070",
+      "reservation_id": "handoff-original",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.093086899985792,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13445,
+          "cached_input_tokens": 13312,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 31,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 48,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "221ca9e61e87facaa0f796777663df45a3f8590aaf252c0d88bde0b9c987d363",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 6.865133999992395,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12423,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 182,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 51,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "d7c5079fb1f3c46a46997688339f89ece728cb151d2faa9d95a75080b79fd277",
+      "reservation_id": "route",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.923311299993657,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12128,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 23,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 52,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "e23273efbddb95f425b8835312c04fd11bfc884045a168bc5fbc5bc350fe71fd",
+      "reservation_id": "handoff-new",
+      "instance": "scope-verifier-eval",
+      "seconds": 4.558551699999953,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 13450,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 33,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 53,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0e20477057f2ebcddc862e5ba8ae69d980503762c968ee9681eb6d9840d9e00b",
+      "reservation_id": "followup-plan",
+      "instance": "scope-verifier-eval",
+      "seconds": 7.125580699997954,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12473,
+          "cached_input_tokens": 12032,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 207,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e3-2d07-7332-a2db-82784c14da0b"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"A equipe **Boreal** usa o teto de alimentação de **R$ 190**. [1]\\n\\nA fonte consultada é o arquivo `politica-remoto@v1.md`, vigente desde 1º de janeiro de 2026, portanto aplicável à data de 1º de fevereiro de 2026. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12331,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":104,"reasoning_output_tokens":0}}

@@ -1,0 +1,7 @@
+Stopping verified audit Node process 30812 on port 3199
+pg_ctl: could not send stop signal (PID: 26560): No such process
+No listener on audit port 3199
+No listener on audit port 3200
+No listener on audit port 54329
+No listener on audit port 54339
+No listener on audit port 54349

@@ -1,0 +1,46 @@
+{
+  "installation": "business-flow-e0abd6f433",
+  "checkpoints": [],
+  "worker_calls": [],
+  "model_calls": 0,
+  "production_approved": false,
+  "scope": "controlled slow inference, real TypeScript/SQLite/Ed25519/LangGraph/PostgreSQL; no semantic model",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "versions": {
+    "langgraph": "1.2.19",
+    "langgraph-checkpoint": "4.3.1",
+    "langgraph-checkpoint-postgres": "3.2.0",
+    "psycopg": "3.3.7",
+    "pytest": "9.2.0"
+  },
+  "source_sha": "3c916d750575b22c464790e9774494d810ccd322",
+  "cold_restore_new_postgres": {
+    "container": "business-flow-e0abd6f433-pg-restored-4e103f",
+    "volume": "business-flow-e0abd6f433-pg-restored-4e103f-data"
+  },
+  "result": "FAIL_V1_OPERATIONAL_RECOVERY",
+  "stage": "before_local",
+  "exit_code": 77,
+  "reads": 0,
+  "status": {
+    "current": false,
+    "reason": "retained history ahead of local backup or operation pending"
+  },
+  "recovery": {
+    "status": 503,
+    "reason": "503: {\"error\":\"operation has no qualified recovery procedure\"}"
+  },
+  "restored_status": {
+    "current": false,
+    "reason": "retained history ahead of local backup or operation pending"
+  },
+  "provider_executions": [
+    [
+      "business-flow-e0abd6f433:inference:a2f031fe4b40957e2b52fd7d5d62c27a9abeef72076ae4a46d84030c7d71ca06",
+      "complete",
+      1
+    ]
+  ],
+  "safety": "fenced, no regenerated inference",
+  "criterion": "qualified operational recovery after this crash"
+}

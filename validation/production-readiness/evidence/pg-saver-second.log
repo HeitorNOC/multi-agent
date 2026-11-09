@@ -1,0 +1,20 @@
+{"result": "FAIL"}
+Traceback (most recent call last):
+  File "C:\Users\PC\multi-agent\validation\production-readiness\pg_saver_probe.py", line 68, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "C:\Users\PC\multi-agent\validation\production-readiness\pg_saver_probe.py", line 56, in main
+    second=worker(True);assert second['values']['completed'] and second['next']==[]
+           ^^^^^^^^^^^^
+  File "C:\Users\PC\multi-agent\validation\production-readiness\pg_saver_probe.py", line 50, in worker
+    proc=subprocess.run([str(HERE/'postgres-runtime/Scripts/python.exe'),'-X','utf8',str(HERE/'pg_saver_worker.py')],input=json.dumps({'dsn':dsn,'run':'installation-A:fixture-run','resume':resume}),text=True,capture_output=True,timeout=30,env={**os.environ,'LANGSMITH_TRACING':'false','LANGCHAIN_TRACING_V2':'false'})
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 1630, in _communicate
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['C:\\Users\\PC\\multi-agent\\validation\\production-readiness\\postgres-runtime\\Scripts\\python.exe', '-X', 'utf8', 'C:\\Users\\PC\\multi-agent\\validation\\production-readiness\\pg_saver_worker.py']' timed out after 30 seconds

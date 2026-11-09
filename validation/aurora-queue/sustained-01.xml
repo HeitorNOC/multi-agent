@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="138.718" timestamp="2026-11-06T01:22:40.034920-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.aurora-queue.test_sustained" name="test_two_workers_sustained" time="137.174"><failure message="AssertionError: assert (48 == 48 and {'02a46e60-82...37deacf', ...} == {'02a46e60-82...d0460e4', ...}&#10; +  where 48 = len({'02a46e60-8291-4b6b-87cc-d8d3713d4282', '0343c8ac-7a75-45e7-8704-102219d723f9', '1949a29b-e2ba-4376-9889-74191eb74f8b...1d8f-5be0-46be-932b-4ae1cda3909f', '28fe0d55-ca34-4098-a624-b513b71737ad', '2bcb2dce-8d91-451c-8042-ceaa237deacf', ...})&#10;  &#10;  Extra items in the left set:&#10;  '54387cfa-3310-4270-b1fb-2f96f109704c'&#10;  '207e1d8f-5be0-46be-932b-4ae1cda3909f'&#10;[+5 more lines; full report in element text]">validation\aurora-queue\test_sustained.py:110: in test_two_workers_sustained
+    assert len(accepted)==outcomes[202] and accepted==completed and not pending
+E   AssertionError: assert (48 == 48 and {'02a46e60-82...37deacf', ...} == {'02a46e60-82...d0460e4', ...}
+E    +  where 48 = len({'02a46e60-8291-4b6b-87cc-d8d3713d4282', '0343c8ac-7a75-45e7-8704-102219d723f9', '1949a29b-e2ba-4376-9889-74191eb74f8b...1d8f-5be0-46be-932b-4ae1cda3909f', '28fe0d55-ca34-4098-a624-b513b71737ad', '2bcb2dce-8d91-451c-8042-ceaa237deacf', ...})
+E     
+E     Extra items in the left set:
+E     '54387cfa-3310-4270-b1fb-2f96f109704c'
+E     '207e1d8f-5be0-46be-932b-4ae1cda3909f'
+E     'ca7e220c-8e37-4a16-8c8f-013eb53ed1a6'
+E     'c1bb4142-8774-4777-8d07-c442441d833a'
+E     'a836c0b5-57c5-4204-ae38-86d8c5280c00'...
+E     
+E     ...Full output truncated, use '-vv' to show)</failure></testcase></testsuite></testsuites>

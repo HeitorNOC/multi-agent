@@ -1,0 +1,10 @@
+{
+  "release_a8": true,
+  "recovery": "Bloqueio funcional fechado para a fatia local: envios unknown ou in_flight há pelo menos 60 segundos podem ser listados e reconciliados manualmente com evidência, responsável e correlação, sem novo despacho. O teste cobre queda após reserva, isolamento e reconciliação idempotente com recibo simulado.",
+  "history": "Bloqueio funcional fechado: o histórico expõe o estado de envio e o identificador do provedor quando disponível. A migração vincula registros legados inequívocos e marca vínculos ambíguos como untracked; os testes cobrem esses casos e estados queued, accepted e unknown.",
+  "limitations": [
+    "A evidência de recuperação e os recibos são simulados; a queda testada ocorreu antes da chamada ao canal.",
+    "A reconciliação é manual por casos de uso TypeScript e depende de evidência externa; consulta automática ao provedor e interface operacional ficam para etapas posteriores.",
+    "Aceite do canal não comprova entrega ao destinatário; integrações e comportamento de provedores reais não foram demonstrados."
+  ]
+}

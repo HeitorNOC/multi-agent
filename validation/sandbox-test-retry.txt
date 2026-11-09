@@ -1,0 +1,1 @@
+Stopped only verified pytest commands captured in process-diagnostic.json; rerun outside sandbox to diagnose access restrictions.

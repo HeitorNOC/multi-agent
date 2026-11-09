@@ -1,0 +1,12 @@
+✔ TypeScript accepts a real Python signature with Unicode and integer-valued floats (26.6948ms)
+✔ tampered payload is rejected (2.3022ms)
+✔ tampered canonical bytes or operations cannot be substituted (0.8491ms)
+✔ nonce, installation and expiry are enforced (0.8045ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 270.8572

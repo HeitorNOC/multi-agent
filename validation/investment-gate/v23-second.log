@@ -1,0 +1,67 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+F
+================================== FAILURES ===================================
+____________________ test_v2_v3_native_knowledge_and_team _____________________
+
+    def test_v2_v3_native_knowledge_and_team():
+        lab=Lab();start=time.perf_counter();failures=[]
+        try:
+            lab.start();lab.evidence['resources']={'host_logical_cpus':os.cpu_count(),'docker_cpus':lab.docker('info','--format','{{json .NCPU}}').stdout.decode().strip(),
+                'docker_memory_bytes':lab.docker('info','--format','{{json .MemTotal}}').stdout.decode().strip()}
+            lab.stage_all();checks=[]
+            for source,version,question,expected in [('remote-policy',1,'How many days weekly does the remote policy allow? Cite source.','two'),('remote-policy',2,'How many days weekly does the remote policy allow? Cite source.','three'),('sales-february',1,'What was February revenue? Cite source.','8000')]:
+                answer=lab.query(source,question,version);normalized=answer.lower().replace(',','').replace('.','')
+                checks.append({'source':source,'version':version,'answer':answer,'pass':expected in normalized and source in answer})
+            answer=lab.query('inventory','Who is ACME CEO? If absent explicitly say the documents do not establish this. Cite source if applicable.')
+            checks.append({'source':'inventory','question':'absent CEO','answer':answer,'pass':any(x in answer.lower() for x in ['not','unknown','no information','n�o'])})
+            lab.evidence['semantic_checks']=checks
+            for item in checks:
+                if not item['pass']:failures.append('semantic:'+item['source']+':'+str(item.get('version','absent')))
+            before=signed_request(lab.authority_client,action='proof')['budgets']['model']['reserved']
+            public=lab.identity([d['source'] for d in DOCS if d['source']!='finance'])
+            assert not lab.policy('source',public,source='finance')['allowed']
+            assert signed_request(lab.authority_client,action='proof')['budgets']['model']['reserved']==before
+            levels=[]
+            for concurrency in [1,4,8]:
+                def context(_):
+                    tick=time.perf_counter();value=lab.query('remote-policy','remote work days',2,True)
+                    return {'seconds':time.perf_counter()-tick,'pass':'three' in value.lower() and 'FIN-ACME-742' not in value}
+                with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as pool:rows=list(pool.map(context,range(16)))
+                times=[r['seconds'] for r in rows];level={'concurrency':concurrency,'requests':16,'p50':percentile(times,.5),'p95':percentile(times,.95),'correct_contexts':sum(r['pass'] for r in rows)};levels.append(level)
+                if level['p95']>2 or level['correct_contexts']!=16:failures.append('context_load:'+str(concurrency))
+            assert signed_request(lab.authority_client,action='proof')['budgets']['model']['reserved']==before
+            lab.evidence['context_load']=levels
+            lab.evidence['vector_load']=asyncio.run(vector_load(lab))
+            if lab.evidence['vector_load']['exact_self_retrieval']!=32:failures.append('vector_self_retrieval')
+            tick=time.perf_counter();baseline=lab.llm('You are one analyst with all authorized evidence. '+GOAL+' '+SCHEMA+' Evidence: '+json.dumps(DOCS))
+            lab.evidence['baseline']={'result':baseline,'grade':grade(baseline),'seconds':time.perf_counter()-tick}
+            coordinated=asyncio.run(team(lab));coordinated['grade']=grade(coordinated['result']);lab.evidence['coordinated']=coordinated
+            for name,value in [('A1',grade(baseline)),('A3',coordinated['grade'])]:
+                if not all(value.values()):failures.append(name+':answer_quality')
+            # Negative policy probes: signed grants, expiry, token tamper, scope and effects.
+            fake=lab.identity();fake['payload_json']=fake['payload_json'].replace('fixture-executive','attacker')
+            policy_checks={'tampered_identity':not lab.policy('source',fake,source='finance')['allowed'],
+                'expired_identity':not lab.policy('source',lab.identity(expires=-1),source='finance')['allowed'],
+                'unauthorized_source':not lab.policy('source',public,source='finance')['allowed'],
+                'unapproved_effect':not lab.policy('effect',recipient='fake@example.test',payload='update CRM')['allowed'],
+                'over_budget':not lab.policy('plan',plan={**coordinated['trace'][0]['proposal'],'budget_units':999})['allowed']}
+            lab.evidence['policy_checks']=policy_checks
+            if not all(policy_checks.values()):failures.append('policy')
+            count=signed_request(lab.authority_client,action='proof')['budgets']['model']['reserved']
+            lab.native('evaluation_delete',id=lab.projections[('inventory',1)])
+            with pytest.raises(HTTPError) as deleted:lab.query('inventory','stockouts',1,True)
+            assert deleted.value.code==409
+            assert signed_request(lab.authority_client,action='proof')['budgets']['model']['reserved']==count
+            lab.evidence['deletion']={'native_document_deleted':True,'stale_certificate_query_status':409,'new_model_calls':0}
+            lab.evidence.update(result='PASS_SMALL_V2_V3' if not failures else 'FAIL_V2_V3_CRITERIA',failures=failures)
+>           assert not failures,failures
+E           AssertionError: ['A3:answer_quality']
+E           assert not ['A3:answer_quality']
+
+validation\investment-gate\test_v23.py:183: AssertionError
+=========================== short test summary info ===========================
+FAILED validation/investment-gate/test_v23.py::test_v2_v3_native_knowledge_and_team
+1 failed in 191.18s (0:03:11)

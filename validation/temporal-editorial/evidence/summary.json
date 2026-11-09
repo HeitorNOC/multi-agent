@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-04",
+  "editorial_tests": 10,
+  "editorial_typecheck": "PASS_STRICT",
+  "native_temporal_terra": {
+    "passed": 3,
+    "total": 7,
+    "pytest": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "1",
+      "skipped": "0",
+      "tests": "1",
+      "time": "218.465",
+      "timestamp": "2026-11-04T06:03:41.715683-03:00",
+      "hostname": "DESKTOP-BRCHPFP"
+    }
+  },
+  "native_temporal_sol": {
+    "passed": 6,
+    "total": 7,
+    "pytest": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "1",
+      "skipped": "0",
+      "tests": "1",
+      "time": "232.236",
+      "timestamp": "2026-11-04T06:09:52.613086-03:00",
+      "hostname": "DESKTOP-BRCHPFP"
+    }
+  },
+  "publication_failure_window": {
+    "result": "PASS",
+    "pytest": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "1",
+      "time": "123.882",
+      "timestamp": "2026-11-04T06:21:05.311015-03:00",
+      "hostname": "DESKTOP-BRCHPFP"
+    }
+  },
+  "model_usage": {
+    "terra": {
+      "calls": 17,
+      "models": [
+        "gpt-6.1-terra"
+      ],
+      "usage": {
+        "input_tokens": 230857,
+        "cached_input_tokens": 93312,
+        "output_tokens": 1193,
+        "reasoning_output_tokens": 25
+      }
+    },
+    "sol": {
+      "calls": 15,
+      "models": [
+        "gpt-6.1-sol"
+      ],
+      "usage": {
+        "input_tokens": 205398,
+        "cached_input_tokens": 29952,
+        "output_tokens": 1194,
+        "reasoning_output_tokens": 166
+      }
+    },
+    "publication": {
+      "calls": 3,
+      "models": [
+        "gpt-6.1-sol"
+      ],
+      "usage": {
+        "input_tokens": 40648,
+        "cached_input_tokens": 0,
+        "output_tokens": 194,
+        "reasoning_output_tokens": 0
+      }
+    }
+  },
+  "total_calls": 35,
+  "monetary_cost": null,
+  "embedding_vectors_calculated": 85,
+  "truncated_embedding_inputs": 0,
+  "production_approved": false,
+  "obsidian_ui_tested": false,
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+}

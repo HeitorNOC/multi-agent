@@ -1,0 +1,6 @@
+{"phase": "native-naive", "path": "/advise", "method": "POST", "status": 200, "seconds": 6.147654300002614, "queue_seconds": 0.0018389999750070274, "instance": "ea32d3477e1c45c6a47ec596a96dbd43"}
+{"phase": "native-naive", "path": "/advise", "method": "POST", "status": 200, "seconds": 5.686038800020469, "queue_seconds": 0.001787300017895177, "instance": "ea32d3477e1c45c6a47ec596a96dbd43"}
+{"phase": "native-naive", "path": "/advise", "method": "POST", "status": 200, "seconds": 5.668991800019285, "queue_seconds": 0.001662499998928979, "instance": "ea32d3477e1c45c6a47ec596a96dbd43"}
+{"phase": "native-naive", "path": "/advise", "method": "POST", "status": 200, "seconds": 5.223537300014868, "queue_seconds": 0.0017698000010568649, "instance": "ea32d3477e1c45c6a47ec596a96dbd43"}
+{"phase": "native-naive", "path": "/advise", "method": "POST", "status": 200, "seconds": 6.457335399987642, "queue_seconds": 0.0017607999907340854, "instance": "ea32d3477e1c45c6a47ec596a96dbd43"}
+{"phase": "native-naive", "path": "/advise", "method": "POST", "status": 200, "seconds": 5.950689600023907, "queue_seconds": 0.0016924999945331365, "instance": "ea32d3477e1c45c6a47ec596a96dbd43"}

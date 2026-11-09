@@ -1,0 +1,54 @@
+{
+  "installation": "f558e464a5",
+  "images": {
+    "postgres": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+    "neo4j": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+    "keycloak": "quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7"
+  },
+  "scenarios": [
+    {
+      "name": "native_graph_written_but_uncommitted_release_fenced"
+    },
+    {
+      "name": "restart_keeps_gate_closed"
+    },
+    {
+      "name": "reconciliation_uses_original_approved_snapshot_without_new_model_calls"
+    },
+    {
+      "name": "canonical_api_excludes_unapproved_edits_and_prior_knowledge"
+    },
+    {
+      "name": "one_publication_one_episode_identity"
+    }
+  ],
+  "worker_calls": [],
+  "versions": {
+    "postgres": "PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "pgvector": "0.8.7",
+    "neo4j": "versions\n[\"5.26.32\"]",
+    "keycloak": "26.8.1"
+  },
+  "result": "PASS",
+  "execution_completed": true,
+  "elapsed_seconds": 120.67092939998838,
+  "canonical_response": {
+    "found": true,
+    "id": "19e0d321-3f2e-42e0-a3a9-d0ed5d1df4c6",
+    "source": "politica-remoto",
+    "version": 1,
+    "valid_at": "2026-01-01T00:00:00Z",
+    "known_at": "2026-11-04T09:23:05.409Z",
+    "raw_sha": "760141a352b1587f8b582a162488a65c7d1acf931306f23268fde61fa5f27701",
+    "content_sha": "ae209af12bb5507d461e835cb717845d33a6141689ed1f06ffec7590cd2e5528",
+    "content": "Desde 1 de janeiro de 2026, a ACME concede na política PoliticaRemotaACME dois dias de trabalho remoto por semana.",
+    "kind": "approved_source_snapshot_not_extracted_fact"
+  },
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

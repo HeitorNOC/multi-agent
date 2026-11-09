@@ -1,0 +1,259 @@
+{
+  "input_sha256": "1f4b13ccfcc5464a8e7b4cb1020f62b4f25e387370ec35b952bdf372cdf3d23c",
+  "questions": [
+    "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+    "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+    "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+    "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+  ],
+  "mapping": {
+    "E1": "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+    "E2": "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454",
+    "E3": "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+    "E4": "de7d022faddd59b3127c65954480a878d23d2e8ba636f4f0d4cd97b1cc0d28e2"
+  },
+  "runs": [
+    {
+      "trial": 1,
+      "mode": "previous",
+      "gaps": [
+        "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+      ],
+      "assessments": [
+        {
+          "requirement": "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+          "status": "documented",
+          "note": "O sent-consumer arquiva mensagens de clientes em whatsapp-storage quando outro aplicativo é dono da conversa, e o componente de processamento de sessão consome o tópico mp-session-processing.",
+          "evidence_ids": [
+            "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+          "status": "documented",
+          "note": "Os trechos especificam o consumo do tópico Kafka mp-session-processing; não apresentam contrato Socket.IO.",
+          "evidence_ids": [
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+          "status": "documented",
+          "note": "O backend muda uma sessão PAUSED para ACTIVE ao iniciar o atendimento e registra o status TRANSFERED em uma transferência.",
+          "evidence_ids": [
+            "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+            "de7d022faddd59b3127c65954480a878d23d2e8ba636f4f0d4cd97b1cc0d28e2"
+          ]
+        },
+        {
+          "requirement": "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?",
+          "status": "unanswered",
+          "note": "Os trechos não especificam garantias de idempotência ou recuperação para o processamento de mensagens.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "trial": 1,
+      "mode": "updated",
+      "gaps": [
+        "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+        "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+        "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+        "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+      ],
+      "assessments": [
+        {
+          "requirement": "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+          "status": "partial",
+          "note": "Os trechos atribuem ao sent-consumer o arquivamento de mensagens em whatsapp-storage na situação indicada e ao messaging-session-processing o consumo de mp-session-processing, mas não descrevem integralmente as responsabilidades e os fluxos dos componentes de referência.",
+          "evidence_ids": [
+            "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+          "status": "partial",
+          "note": "O tópico Kafka mp-session-processing é citado como consumido pelo messaging-session-processing, mas seus demais detalhes contratuais e os contratos Socket.IO não são apresentados.",
+          "evidence_ids": [
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+          "status": "unanswered",
+          "note": "Os trechos descrevem mudanças internas de status no backend, mas não documentam estados ou transições de controle de conversa pelo provedor.",
+          "evidence_ids": []
+        },
+        {
+          "requirement": "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?",
+          "status": "unanswered",
+          "note": "Os trechos não estabelecem garantias de idempotência ou recuperação para o processamento de mensagens.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "mode": "previous",
+      "gaps": [
+        "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+      ],
+      "assessments": [
+        {
+          "requirement": "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+          "status": "documented",
+          "note": "O sent-consumer arquiva no whatsapp-storage mensagens do cliente recebidas em STANDBY_CUSTOMER quando outro aplicativo é dono da conversa; o messaging-session-processin consome o tópico mp-session-processing.",
+          "evidence_ids": [
+            "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+          "status": "documented",
+          "note": "O documento identifica o tópico Kafka mp-session-processing como consumido por messaging-session-processin; os trechos não especificam contrato Socket.IO.",
+          "evidence_ids": [
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+          "status": "documented",
+          "note": "Na retomada de PAUSED, o backend reativa a expiração e muda o status para ACTIVE; na transferência, grava TRANSFERED e troca o responsável.",
+          "evidence_ids": [
+            "83634134317e594692d833673793fc891d45494622a91a61a53083f469658c84",
+            "de7d022faddd59b3127c65954480a878d23d2e8ba636f4f0d4cd97b1cc0d28e2"
+          ]
+        },
+        {
+          "requirement": "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?",
+          "status": "unanswered",
+          "note": "Os trechos não estabelecem garantias de idempotência nem requisitos de recuperação para o processamento de mensagens.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "mode": "updated",
+      "gaps": [
+        "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+        "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+        "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+        "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?"
+      ],
+      "assessments": [
+        {
+          "requirement": "Quais responsabilidades e fluxos o documento de mensageria atribui aos componentes de referência?",
+          "status": "partial",
+          "note": "O documento informa que o sent-consumer arquiva mensagens do cliente em whatsapp-storage durante STANDBY_CUSTOMER e que messaging-session-processin consome mp-session-processing; os demais componentes e fluxos não estão descritos nos trechos.",
+          "evidence_ids": [
+            "eb14660204559f22b506a462fcb64526ed5f9cf3f529f76c7e1a7acb36c959ce",
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais contratos Kafka e Socket.IO são especificados nos documentos disponíveis?",
+          "status": "partial",
+          "note": "Há referência ao consumo do tópico Kafka mp-session-processing, mas faltam seu contrato completo e os contratos Socket.IO.",
+          "evidence_ids": [
+            "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454"
+          ]
+        },
+        {
+          "requirement": "Quais estados e transições de controle de conversa são documentados pelo provedor?",
+          "status": "unanswered",
+          "note": "Os trechos descrevem alterações internas de status, mas não documentam estados ou transições de controle de conversa pelo provedor.",
+          "evidence_ids": []
+        },
+        {
+          "requirement": "Quais garantias de idempotência e recuperação são exigidas para o processamento de mensagens?",
+          "status": "unanswered",
+          "note": "Os trechos não especificam garantias de idempotência ou recuperação para o processamento de mensagens.",
+          "evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "4fd4b030ee032f905abea7db7e8375ee149c85fc29e64d57c7a34121b98c2a62",
+      "reservation_id": "previous",
+      "instance": "fixed-review-short-ids",
+      "seconds": 6.855775500007439,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12541,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 201,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "94515d1875095d529b3a161b5934c12341693ac8c633b8449efbf4f1782bafe2",
+      "reservation_id": "updated",
+      "instance": "fixed-review-short-ids",
+      "seconds": 7.180735800007824,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12626,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 223,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "4fd4b030ee032f905abea7db7e8375ee149c85fc29e64d57c7a34121b98c2a62",
+      "reservation_id": "previous",
+      "instance": "fixed-review-short-ids",
+      "seconds": 7.291818500001682,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11751,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 227,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "94515d1875095d529b3a161b5934c12341693ac8c633b8449efbf4f1782bafe2",
+      "reservation_id": "updated",
+      "instance": "fixed-review-short-ids",
+      "seconds": 6.722013599995989,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11836,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 211,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+gate,status,evidence,remaining
+Native_extraction,PASS_SMALL_INTEGRATED,evidence/native-graph.json,representative corpus parsers ambiguous entities trust tiers and extraction failure recovery
+Real_embeddings,PASS_SMALL_INTEGRATED,evidence/embedding-calls.jsonl,large corpus retrieval recall chunk tuning and encoder selection
+Server_persistence,PASS_SMALL_INTEGRATED,evidence/progress.json,scale migration PITR failover and backup key disaster
+Native_generation_and_citations,PASS_SMALL_INTEGRATED,evidence/answers.json,independent representative ground truth citation support scoring and repetitions
+Authorization_before_retrieval,PASS_SMALL_INTEGRATED,evidence/integration.json,concurrent revocation distributed fencing and enterprise IdP policy lifecycle
+Current_vs_historical_generation,PASS_VERSIONED_SNAPSHOT,evidence/answers.json,real connector watermark completeness and bitemporal contradiction handling
+Graphiti_temporal,NOT_QUALIFIED_HERE,REPORT.md,real temporal episodes contradictions actual LLM database and authorized as-of queries
+Real_money_cost,NOT_MEASURED,evidence/summary.json,provider attributable charge and total infrastructure operational cost
+Enterprise_release,NO_GO_THIS_BUILD,REPORT.md,full product authority dynamic teams JARVIS plus deployment security operational and scale gates

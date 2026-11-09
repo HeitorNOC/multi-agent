@@ -1,0 +1,119 @@
+{
+  "lead": "technology_director",
+  "assignment": {
+    "specialists": [
+      "tech_lead",
+      "backend_engineer",
+      "qa_engineer"
+    ],
+    "queries": [
+      "Fluxo de mensageria: sessões, eventos, Kafka e Contact Center",
+      "Meta Business Agent e 360dialog: capacidades oficiais, standby e transferência de controle",
+      "Padrões obrigatórios de código, arquitetura e segurança",
+      "Testes de mensageria: idempotência, concorrência, recuperação e isolamento"
+    ],
+    "deliverable": "Análise arquitetural e plano técnico com evidências e incertezas, contratos, estados, decisões e backlog priorizado; definição e implementação incremental de um fluxo vertical compartilhado, executável e testável, distinguindo mocks de integrações reais."
+  },
+  "search": [
+    {
+      "query": "Fluxo de mensageria: sessões, eventos, Kafka e Contact Center",
+      "sources": [
+        "portal",
+        "contact",
+        "portal",
+        "portal",
+        "contact",
+        "fluxo"
+      ]
+    },
+    {
+      "query": "Meta Business Agent e 360dialog: capacidades oficiais, standby e transferência de controle",
+      "sources": [
+        "mba-frontend",
+        "mba",
+        "mba-frontend",
+        "mba",
+        "mba",
+        "portal"
+      ]
+    },
+    {
+      "query": "Padrões obrigatórios de código, arquitetura e segurança",
+      "sources": [
+        "backend",
+        "fluxo",
+        "backend",
+        "backend",
+        "rehearsal-csv",
+        "mba"
+      ]
+    },
+    {
+      "query": "Testes de mensageria: idempotência, concorrência, recuperação e isolamento",
+      "sources": [
+        "mba",
+        "fluxo",
+        "portal",
+        "mba",
+        "mba",
+        "contact"
+      ]
+    }
+  ],
+  "report": {
+    "analysis_md": "## Referência e requisitos\n\nA diretiva exige um núcleo compartilhado, entrega vertical incremental, isolamento entre empresas, histórico auditável e handoff seguro. Os trechos fornecidos descrevem sessão e mensagem como entidades distintas no sistema de referência [e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00], consulta a configurações de Contact Center [576c7eef53cc133e92bc09376b7ce279843e45b3115a803acc55b405a382ec02] e um estado finalizado pelo atendente [b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b]. São referências, não componentes existentes no novo projeto.\n\nO resumo apresentado descreve o MBA como agente para WhatsApp [6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba], menciona ativação e configuração [e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387; a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407] e relata possíveis erros intermitentes [fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012]. Esses trechos não confirmam as capacidades atuais das APIs oficiais.\n\n## Proposta técnica\n\nComeçar com uma aplicação modular em Node.js e TypeScript, PostgreSQL e Prisma, Kafka e Socket.IO conforme a diretiva. Separar por interfaces os módulos de ingestão, conversas e sessões, roteamento e handoff, histórico, saída, integrações e observabilidade. Adaptadores de WhatsApp, Webchat, IA e Contact Center dependem do núcleo, sem incorporar nele regras específicas do provedor. Separação em processos independentes exige decisão documentada baseada em escala, falhas e custo operacional. Não usar NestJS ou FastAPI.\n\nNo fluxo de entrada, autenticar e validar a origem, identificar a empresa e a integração, conservar o evento original, normalizar, deduplicar, persistir e encaminhar pela conversa. Na saída, validar a autorização e o controle vigente, persistir a intenção, enviar pelo adaptador e registrar resultado e eventos de entrega. Propor outbox transacional e consumidores idempotentes, com chave de partição por empresa e conversa, retentativas limitadas e tratamento visível de falhas. A entrega externa pode ter resultado incerto; reconciliação e mecanismos suportados pelo provedor são necessários para evitar reenvios indevidos.\n\nModelar separadamente estado de atendimento e controle externo: sessão aberta, em fila, atendimento humano ativo e encerrada; controle externo desconhecido, IA, transferência para humano pendente, humano e retorno à IA pendente. Transições usam versão para concorrência, persistência e auditoria. Uma chamada iniciada não confirma a transferência; se não houver confirmação confiável, manter estado pendente ou inconsistente e impedir respostas concorrentes até reconciliação. Preservar o histórico observado e identificar sua eventual incompletude.\n\nDados iniciais: empresa, integração e referência protegida a credenciais; cliente e identidades de canal vinculadas somente com evidência confiável; conversa, sessão, participantes, mensagens normalizadas e payloads originais; eventos de controle e auditoria; registros de idempotência e outbox. Todas as consultas e operações devem aplicar escopo de empresa e autorização. Definir retenção e acesso aos payloads e arquivos.\n\nContrato Kafka proposto, versionado: eventId, eventType, occurredAt, tenantId, integrationId, conversationId, sessionId, correlationId, causationId e payload; incluir referência segura ao original. Contrato Socket.IO proposto: conexão autenticada e autorizada por empresa e conversa; eventos de envio, recebimento, confirmação e estado, com identificador de mensagem do cliente e cursor para recuperação após reconexão. Detalhes de ordenação, autorização e compatibilidade serão formalizados antes da implementação.\n\nO Webchat usará interface própria de provedor de IA; operações de negócio compartilhadas terão autenticação e autorização próprias. A disponibilidade de conectores e os detalhes de integração do MBA permanecem hipóteses até validação oficial. Para WhatsApp sob controle do MBA, a proposta é observar e registrar eventos disponíveis sem responder em paralelo.\n\n## Entrega e verificação\n\n1. Tech lead: estudar integralmente os documentos e registrar decisões, limites e lacunas; backend e QA participam da definição dos contratos e critérios de aceite.\n2. Backend e QA: construir primeiro um fluxo vertical com adaptadores de teste: receber, validar, identificar empresa e sessão, persistir, rotear, gerar resposta simulada, enviar, persistir resultado, consultar histórico e correlacionar eventos. Testes reproduzíveis devem distinguir simulação de integração real.\n3. Validar documentação oficial e ambiente do provedor; evoluir WhatsApp e MBA, depois Webchat independente, Contact Center e ferramentas compartilhadas, respeitando dependências.\n4. Verificar duplicidade, concorrência, mensagens fora de ordem, falha e recuperação de consumidores, isolamento entre empresas, reconexão e estados intermediários de handoff. Registrar separadamente testes locais e evidências de integração real.\n\nNenhuma implementação ou integração real é afirmada nesta análise.",
+    "evidence_ids": [
+      "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00",
+      "576c7eef53cc133e92bc09376b7ce279843e45b3115a803acc55b405a382ec02",
+      "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+      "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba",
+      "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387",
+      "a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407",
+      "fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012"
+    ],
+    "pending": [
+      "Ler integralmente os documentos de fluxo, MBA e padrões de código, arquitetura e segurança; os trechos fornecidos são insuficientes para confirmar todos os requisitos documentais.",
+      "Validar nas fontes oficiais atuais da Meta e da 360dialog elegibilidade, ativação, autenticação, eventos de standby e respostas, handoff e retorno, histórico, conectores, limites e cobrança.",
+      "Definir mecanismos de confirmação e reconciliação de controle conforme os eventos e consultas efetivamente suportados pelo provedor.",
+      "Detalhar contratos, esquema, retenção, controles de segurança, critérios de aceite e decisões arquiteturais com base nos documentos completos.",
+      "Implementar e testar o fluxo vertical e as integrações incrementais; nenhuma execução de código ou validação real foi realizada aqui."
+    ]
+  },
+  "citations": {
+    "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00": {
+      "source": "fluxo",
+      "page": 12,
+      "quote": "Sessão e mensagem: quem é dono de quê Duas entidades acompanham toda conversa, e cada uma tem seu serviço."
+    },
+    "576c7eef53cc133e92bc09376b7ce279843e45b3115a803acc55b405a382ec02": {
+      "source": "contact",
+      "page": 11,
+      "quote": "Lê as configurações do contact center da conta (as personalizadas, ou as padrão se não houver)."
+    },
+    "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b": {
+      "source": "contact",
+      "page": 9,
+      "quote": "5 DONE Finalizado pelo atendente."
+    },
+    "6cb9234e4989b580cd5c9b8bc6948db0850c52208abe349a9dcae1b9b5f447ba": {
+      "source": "mba",
+      "page": 3,
+      "quote": "O que é o Meta Business Agent O Meta Business Agent (MBA) é o agente de IA corporativo da Meta que conversa com os clientes no WhatsApp com a voz da marca."
+    },
+    "e330f5b77ecb445a6be915f13c4ed2b0f954d23d9babfc2d63abdef92530e387": {
+      "source": "mba",
+      "page": 4,
+      "quote": "2 Ativar e aceitar os termos Aceitar os Termos de IA da Meta Business no Business Manager, adicionar um método de pagamento válido e integrar o número."
+    },
+    "a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407": {
+      "source": "mba",
+      "page": 4,
+      "quote": "3 Configurar o agente Definir o conhecimento (informações do negócio, FAQs, arquivos, sites), o comportamento (skills), as políticas de transferência e de acompanhamento, e os conectores para ações."
+    },
+    "fd4a77e97c5e94de5448b677d0dbb4254d5ede70c1070be2c1e95c20d6787012": {
+      "source": "mba",
+      "page": 8,
+      "quote": "Instabilidade: qualquer endpoint do agente pode retornar erros 4XX ou 500 de forma intermitente, sem causa aparente."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="0.198" timestamp="2026-11-04T15:20:44.293278-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.concurrent-reconciliation.test_editorial_acl" name="test_current_grant_required_even_for_published_replay[False]" time="0.002" /><testcase classname="validation.concurrent-reconciliation.test_editorial_acl" name="test_current_grant_required_even_for_published_replay[True]" time="0.001"><failure message="Failed: DID NOT RAISE PermissionError">published = True
+
+    @pytest.mark.parametrize('published',[False,True])
+    def test_current_grant_required_even_for_published_replay(published):
+        s=Subject(False,published)
+&gt;       with pytest.raises(PermissionError):asyncio.run(s._business_dispatch(Request(actor={'id':'board','role':'board'})))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+validation\concurrent-reconciliation\test_editorial_acl.py:37: Failed</failure></testcase><testcase classname="validation.concurrent-reconciliation.test_editorial_acl" name="test_authorized_published_replay_checks_grant_without_new_publication" time="0.001"><failure message="assert (0 == 1)&#10; +  where 0 = &lt;test_editorial_acl.Subject object at 0x000001BD139E2630&gt;.checks">def test_authorized_published_replay_checks_grant_without_new_publication():
+        s=Subject(True)
+        assert asyncio.run(s._business_dispatch(Request(actor={'id':'board','role':'board'})))=={'id':'draft','state':'published'}
+&gt;       assert s.checks==1 and s.commits==1
+E       assert (0 == 1)
+E        +  where 0 = &lt;test_editorial_acl.Subject object at 0x000001BD139E2630&gt;.checks
+
+validation\concurrent-reconciliation\test_editorial_acl.py:42: AssertionError</failure></testcase></testsuite></testsuites>

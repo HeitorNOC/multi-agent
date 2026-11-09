@@ -1,0 +1,1475 @@
+{
+  "scenarios": [
+    {
+      "scenario": "campaign",
+      "job": "52f79404-51c9-4660-8e2d-c11ec9479ac6",
+      "status": "failed",
+      "plan": {
+        "strategy": "A3",
+        "reason": "A avaliação exige quatro times para cobrir campanha, suprimento e logística, margem e caixa, e riscos contratuais e da alegação ambiental. Como o limite de oito agentes permite apenas um especialista por diretor, a seleção prioriza a cobertura mínima; cada diretor coordenará seu especialista e responderá pelo restante de seu domínio. A evidência fornecida não contém valores ou prazos que permitam concluir pela viabilidade em novembro. O lançamento deve ficar condicionado à confirmação conjunta da oportunidade Orion, disponibilidade de estoque e suprimento, margem e caixa suficientes, cumprimento dos prazos regionais e comprovação da alegação carbono neutro. Sem essas confirmações, a recomendação é adiar ou reformular a campanha.",
+        "teams": [
+          {
+            "lead": "marketing_director",
+            "specialists": [
+              "campaign_planner"
+            ],
+            "reason": "Definir escopo, público, demanda incremental e limites da campanha; a diretora avaliará também a mecânica de desconto vigente em conjunto com Finanças."
+          },
+          {
+            "lead": "operations_director",
+            "specialists": [
+              "supply_planner"
+            ],
+            "reason": "Conciliar estoque livre, reservas, demanda conjunta de Horizonte e Orion e eventual lote não confirmado; o diretor verificará capacidade e prazos regionais antes de qualquer compromisso de lançamento."
+          },
+          {
+            "lead": "finance_director",
+            "specialists": [
+              "controller"
+            ],
+            "reason": "Avaliar o efeito do desconto sobre a margem e a suficiência do caixa livre para a campanha e compromissos existentes; a diretora tratará eventuais necessidades de liquidez."
+          },
+          {
+            "lead": "legal_director",
+            "specialists": [
+              "compliance_advisor"
+            ],
+            "reason": "Examinar o suporte para a alegação carbono neutro e as condições de uso na campanha; o diretor avaliará também o estágio e as obrigações da oportunidade Orion. Sem comprovação suficiente, a alegação não deve ser usada."
+          }
+        ],
+        "capabilities": [
+          "marketing_director",
+          "campaign_planner",
+          "operations_director",
+          "supply_planner",
+          "finance_director",
+          "controller",
+          "legal_director",
+          "compliance_advisor"
+        ],
+        "not_selected": [
+          {
+            "id": "executive_director",
+            "reason": "A coordenação da decisão cabe ao Chief of Staff no pedido, sem necessidade de uma diretoria executiva adicional."
+          },
+          {
+            "id": "business_analyst",
+            "reason": "As dependências essenciais podem ser consolidadas pelo Chief of Staff com os quatro times selecionados."
+          },
+          {
+            "id": "portfolio_analyst",
+            "reason": "Não há pedido de priorização ampla de investimentos ou portfólio."
+          },
+          {
+            "id": "pricing_analyst",
+            "reason": "A diretora de marketing e a controladoria cobrem a consistência do desconto e seu efeito financeiro dentro do limite de agentes."
+          },
+          {
+            "id": "logistics_analyst",
+            "reason": "O diretor de operações verificará capacidade e prazos regionais; a seleção prioriza a conciliação de estoque e demanda pelo especialista de suprimentos."
+          },
+          {
+            "id": "treasury_analyst",
+            "reason": "A controladoria avaliará caixa livre e insuficiência orçamentária, com a diretora financeira responsável por liquidez e eventual financiamento."
+          },
+          {
+            "id": "people_director",
+            "reason": "Não há evidência de demanda específica de pessoas ou capacidade organizacional que justifique o time."
+          },
+          {
+            "id": "recruitment_analyst",
+            "reason": "Não foi demonstrada necessidade de admissões."
+          },
+          {
+            "id": "workforce_analyst",
+            "reason": "Não foi demonstrada uma restrição de equipe ou treinamento que exija especialista próprio."
+          },
+          {
+            "id": "contract_analyst",
+            "reason": "O diretor jurídico avaliará o estágio contratual de Orion; a especialista selecionada prioriza a alegação ambiental."
+          },
+          {
+            "id": "technology_director",
+            "reason": "O pedido não apresenta questão de sistemas ou segurança necessária à decisão da campanha."
+          },
+          {
+            "id": "security_analyst",
+            "reason": "Não há incidente de segurança no escopo informado."
+          },
+          {
+            "id": "data_analyst",
+            "reason": "Não foi apresentada inconsistência de contagens ou necessidade de integração de sistemas."
+          }
+        ],
+        "requires_approval": true,
+        "max_model_calls": 10
+      },
+      "report": null,
+      "seconds": 21.968561200017575,
+      "events": [
+        {
+          "seq": 1,
+          "at": "2026-11-05T13:36:40.575Z",
+          "node": "admission",
+          "detail": {
+            "goal": "Avalie se o Grupo Aurora pode lançar a campanha Horizonte em novembro, considerando a oportunidade Orion, estoque e suprimento, desconto e margem vigente, caixa disponível, prazos regionais e a alegação carbono neutro. Proponha um plano condicionado, sem executar ações externas."
+          }
+        },
+        {
+          "seq": 2,
+          "at": "2026-11-05T13:36:40.586Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 16536
+          }
+        },
+        {
+          "seq": 3,
+          "at": "2026-11-05T13:36:41.522Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [],
+            "process": 6360,
+            "has_state": false
+          }
+        },
+        {
+          "seq": 4,
+          "at": "2026-11-05T13:36:41.550Z",
+          "node": "chief_of_staff",
+          "detail": {
+            "message": "Escolhendo uma equipe a partir do catálogo completo de 21 agentes."
+          }
+        },
+        {
+          "seq": 5,
+          "at": "2026-11-05T13:36:59.684Z",
+          "node": "plan",
+          "detail": {
+            "strategy": "A3",
+            "reason": "A avaliação exige quatro times para cobrir campanha, suprimento e logística, margem e caixa, e riscos contratuais e da alegação ambiental. Como o limite de oito agentes permite apenas um especialista por diretor, a seleção prioriza a cobertura mínima; cada diretor coordenará seu especialista e responderá pelo restante de seu domínio. A evidência fornecida não contém valores ou prazos que permitam concluir pela viabilidade em novembro. O lançamento deve ficar condicionado à confirmação conjunta da oportunidade Orion, disponibilidade de estoque e suprimento, margem e caixa suficientes, cumprimento dos prazos regionais e comprovação da alegação carbono neutro. Sem essas confirmações, a recomendação é adiar ou reformular a campanha.",
+            "teams": [
+              {
+                "lead": "marketing_director",
+                "specialists": [
+                  "campaign_planner"
+                ],
+                "reason": "Definir escopo, público, demanda incremental e limites da campanha; a diretora avaliará também a mecânica de desconto vigente em conjunto com Finanças."
+              },
+              {
+                "lead": "operations_director",
+                "specialists": [
+                  "supply_planner"
+                ],
+                "reason": "Conciliar estoque livre, reservas, demanda conjunta de Horizonte e Orion e eventual lote não confirmado; o diretor verificará capacidade e prazos regionais antes de qualquer compromisso de lançamento."
+              },
+              {
+                "lead": "finance_director",
+                "specialists": [
+                  "controller"
+                ],
+                "reason": "Avaliar o efeito do desconto sobre a margem e a suficiência do caixa livre para a campanha e compromissos existentes; a diretora tratará eventuais necessidades de liquidez."
+              },
+              {
+                "lead": "legal_director",
+                "specialists": [
+                  "compliance_advisor"
+                ],
+                "reason": "Examinar o suporte para a alegação carbono neutro e as condições de uso na campanha; o diretor avaliará também o estágio e as obrigações da oportunidade Orion. Sem comprovação suficiente, a alegação não deve ser usada."
+              }
+            ],
+            "capabilities": [
+              "marketing_director",
+              "campaign_planner",
+              "operations_director",
+              "supply_planner",
+              "finance_director",
+              "controller",
+              "legal_director",
+              "compliance_advisor"
+            ],
+            "not_selected": [
+              {
+                "id": "executive_director",
+                "reason": "A coordenação da decisão cabe ao Chief of Staff no pedido, sem necessidade de uma diretoria executiva adicional."
+              },
+              {
+                "id": "business_analyst",
+                "reason": "As dependências essenciais podem ser consolidadas pelo Chief of Staff com os quatro times selecionados."
+              },
+              {
+                "id": "portfolio_analyst",
+                "reason": "Não há pedido de priorização ampla de investimentos ou portfólio."
+              },
+              {
+                "id": "pricing_analyst",
+                "reason": "A diretora de marketing e a controladoria cobrem a consistência do desconto e seu efeito financeiro dentro do limite de agentes."
+              },
+              {
+                "id": "logistics_analyst",
+                "reason": "O diretor de operações verificará capacidade e prazos regionais; a seleção prioriza a conciliação de estoque e demanda pelo especialista de suprimentos."
+              },
+              {
+                "id": "treasury_analyst",
+                "reason": "A controladoria avaliará caixa livre e insuficiência orçamentária, com a diretora financeira responsável por liquidez e eventual financiamento."
+              },
+              {
+                "id": "people_director",
+                "reason": "Não há evidência de demanda específica de pessoas ou capacidade organizacional que justifique o time."
+              },
+              {
+                "id": "recruitment_analyst",
+                "reason": "Não foi demonstrada necessidade de admissões."
+              },
+              {
+                "id": "workforce_analyst",
+                "reason": "Não foi demonstrada uma restrição de equipe ou treinamento que exija especialista próprio."
+              },
+              {
+                "id": "contract_analyst",
+                "reason": "O diretor jurídico avaliará o estágio contratual de Orion; a especialista selecionada prioriza a alegação ambiental."
+              },
+              {
+                "id": "technology_director",
+                "reason": "O pedido não apresenta questão de sistemas ou segurança necessária à decisão da campanha."
+              },
+              {
+                "id": "security_analyst",
+                "reason": "Não há incidente de segurança no escopo informado."
+              },
+              {
+                "id": "data_analyst",
+                "reason": "Não foi apresentada inconsistência de contagens ou necessidade de integração de sistemas."
+              }
+            ],
+            "requires_approval": true,
+            "max_model_calls": 10
+          }
+        },
+        {
+          "seq": 6,
+          "at": "2026-11-05T13:36:59.717Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "campaign_planner",
+            "parent": "marketing_director"
+          }
+        },
+        {
+          "seq": 7,
+          "at": "2026-11-05T13:36:59.720Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "supply_planner",
+            "parent": "operations_director"
+          }
+        },
+        {
+          "seq": 8,
+          "at": "2026-11-05T13:36:59.723Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "controller",
+            "parent": "finance_director"
+          }
+        },
+        {
+          "seq": 9,
+          "at": "2026-11-05T13:36:59.725Z",
+          "node": "specialist_started",
+          "detail": {
+            "capability": "compliance_advisor",
+            "parent": "legal_director"
+          }
+        },
+        {
+          "seq": 10,
+          "at": "2026-11-05T13:37:27.949Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "supply_planner",
+            "parent": "operations_director",
+            "sources": [
+              "aurora-inventory",
+              "aurora-sales",
+              "aurora-procurement"
+            ],
+            "output": {
+              "agent": "Planejadora de suprimentos",
+              "facts": [
+                {
+                  "claim": "Saldo físico do SKU-AURA em 05/11/2026",
+                  "value": 14000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Reservas para contratos firmes anteriores",
+                  "value": 9000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Estoque bloqueado pela Qualidade, sem sobreposição com as reservas",
+                  "value": 2000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Demanda incremental da oportunidade Orion, ainda não assinada",
+                  "value": 6000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Valor potencial de Orion, sem representar faturamento",
+                  "value": 2520000,
+                  "unit": "reais",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Entrega pretendida para Orion, condicionada à confirmação de suprimento",
+                  "value": "15/12/2026",
+                  "unit": "data",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Demanda incremental proposta para Horizonte em novembro",
+                  "value": 5000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Abertura prevista da campanha Horizonte",
+                  "value": "15/11/2026",
+                  "unit": "data",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Lote SUP-88 não confirmado, condicionado a adiantamento e assinatura ainda não realizados",
+                  "value": 12000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Adiantamento solicitado para SUP-88",
+                  "value": 1200000,
+                  "unit": "reais",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Possível chegada do lote SUP-88",
+                  "value": "10/12/2026",
+                  "unit": "data",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Há proposta alternativa aprovada de outro fornecedor",
+                  "value": false,
+                  "unit": "booleano",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "14.000 unidades físicas − 9.000 unidades reservadas − 2.000 unidades bloqueadas",
+                  "result": "3.000 unidades livres para novas promessas",
+                  "source_ids": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "expression": "6.000 unidades Orion + 5.000 unidades Horizonte",
+                  "result": "11.000 unidades de demanda incremental conjunta",
+                  "source_ids": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "expression": "11.000 unidades de demanda conjunta − 3.000 unidades livres",
+                  "result": "Insuficiência atual de 8.000 unidades",
+                  "source_ids": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "expression": "5.000 unidades Horizonte − 3.000 unidades livres, se todo o saldo livre for destinado à campanha",
+                  "result": "Insuficiência de 2.000 unidades para Horizonte isoladamente; nenhuma unidade livre restaria para Orion",
+                  "source_ids": [
+                    "aurora-inventory",
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "expression": "6.000 unidades Orion × R$ 420 por unidade",
+                  "result": "R$ 2.520.000 de valor potencial, não faturado",
+                  "source_ids": [
+                    "aurora-sales"
+                  ]
+                }
+              ],
+              "risks": [
+                "O estoque livre atual não atende integralmente nem Horizonte isoladamente, nem a demanda conjunta; alocá-lo à campanha reduz a disponibilidade para Orion.",
+                "O lote SUP-88 não é estoque físico nem entrada confirmada e sua possível chegada em dezembro é posterior à abertura da campanha.",
+                "A entrega pretendida para Orion em 15/12 depende de suprimento confirmado e de capacidade logística ainda não demonstrada.",
+                "As 9.000 unidades reservadas a contratos firmes e as 2.000 bloqueadas pela Qualidade não podem ser tratadas como disponibilidade para novas promessas.",
+                "Sem informações sobre desconto, margem e caixa, não é possível avaliar a viabilidade econômica ou financeira; um eventual teto de orçamento não demonstra disponibilidade de caixa.",
+                "Sem evidência fornecida para a alegação de carbono neutro, seu uso na campanha não está fundamentado."
+              ],
+              "unknowns": [
+                "Caixa disponível, demais compromissos financeiros e eventual teto orçamentário aplicável.",
+                "Política vigente de descontos e margem, existência e conteúdo de eventual política revogada, e condições econômicas da campanha.",
+                "Prazos regionais, capacidade logística e ocupação de armazenagem.",
+                "Confirmação, condições definitivas e disponibilidade efetiva do lote SUP-88, inclusive após eventual recebimento.",
+                "Evidências e escopo que sustentem a alegação de carbono neutro.",
+                "Probabilidade de conversão de Orion, elasticidade de preço e efeito de desconto sobre vendas.",
+                "Qualquer evidência de suspeita ou confirmação de exfiltração: as fontes fornecidas não tratam do tema."
+              ],
+              "recommendation": "Não recomendar o lançamento integral de Horizonte em 15/11 nas condições atuais. Planejar, como opção condicionada, uma campanha faseada ou com escopo renegociado, limitada ao estoque efetivamente livre e à alocação decidida entre Horizonte e Orion, preservando reservas e bloqueio de Qualidade. Avaliar suprimento adicional sem contar o lote SUP-88 antes de sua confirmação e disponibilidade efetiva; mesmo confirmado, sua chegada possível em 10/12 não cobre imediatamente a abertura de novembro. Antes de assumir volumes, preços ou prazos, verificar caixa e compromissos, política vigente de desconto e margem, capacidade logística e prazos por região. Não prometer a entrega Orion até confirmar suprimento e logística, nem tratar a oportunidade como perdida. Condicionar qualquer alegação de carbono neutro à comprovação adequada. Trata-se apenas de assessoramento, sem executar compras, pagamentos ou outras ações externas."
+            }
+          }
+        },
+        {
+          "seq": 11,
+          "at": "2026-11-05T13:37:27.955Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "operations_director",
+            "children": [
+              "supply_planner"
+            ]
+          }
+        },
+        {
+          "seq": 12,
+          "at": "2026-11-05T13:37:52.171Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "compliance_advisor",
+            "parent": "legal_director",
+            "sources": [
+              "aurora-compliance",
+              "aurora-response",
+              "aurora-incident"
+            ],
+            "output": {
+              "agent": "Assessora de conformidade, capacidade Alegações da campanha e governança de resposta a incidente",
+              "facts": [
+                {
+                  "claim": "O checklist interno COM-12 exige certificação e escopo verificados pela empresa para alegar que o SKU-AURA é carbono neutro; a documentação disponível não contém certificação válida para o produto.",
+                  "value": false,
+                  "unit": "certificação válida disponível",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "A peça Horizonte deve retirar a alegação de carbono neutro ou permanecer bloqueada até a apresentação de evidência e revisão.",
+                  "value": "retirar a alegação ou manter a peça bloqueada",
+                  "unit": "condição interna",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "As promessas de entrega devem refletir aurora-logistics e explicitar região e condições; a campanha não deve ser publicada automaticamente.",
+                  "value": "revisão necessária",
+                  "unit": "condição interna",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "Em 05/11/2026, às 16h20, um alerta identificou uma exportação suspeita envolvendo potencialmente contatos do AuroraCRM europeu.",
+                  "value": 1200,
+                  "unit": "contatos potencialmente envolvidos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "A conclusão da transferência e o acesso de terceiros não foram confirmados; o caso permanece como suspeita em investigação.",
+                  "value": "suspeita em investigação",
+                  "unit": "classificação",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O responsável de plantão preservou os relatórios disponíveis, mas não há prova de contenção completa.",
+                  "value": "preservação registrada; contenção completa não comprovada",
+                  "unit": "estado da resposta",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O RESP-09 determina a primeira avaliação conjunta de Segurança e Jurídico em até 90 minutos após o alerta; trata-se de SLA interno fictício.",
+                  "value": 90,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "16h45 − 16h20 = 25 minutos transcorridos; 90 − 25 = 65 minutos restantes; 16h20 + 90 minutos = 17h50, no mesmo fuso −03:00",
+                  "result": "No instante de avaliação de 05/11/2026, restavam 65 minutos para a primeira avaliação conjunta.",
+                  "source_ids": [
+                    "aurora-incident",
+                    "aurora-response"
+                  ]
+                }
+              ],
+              "risks": [
+                "Publicar a alegação de carbono neutro sem certificação e escopo verificados contraria o COM-12.",
+                "Prometer entrega sem os prazos e condições regionais verificados pode criar compromissos que a operação não consiga cumprir.",
+                "Assumir que estoque físico está integralmente livre ou que a oportunidade Orion já é compromisso pode superestimar a capacidade disponível.",
+                "Confundir teto de orçamento com caixa disponível, ou aplicar política de desconto e margem revogada, pode comprometer a viabilidade financeira.",
+                "Tratar a suspeita de exportação como vazamento confirmado ou presumir contenção completa excede a evidência disponível."
+              ],
+              "unknowns": [
+                "Detalhes da oportunidade Orion, inclusive seu estágio e eventual compromisso assumido.",
+                "Saldo físico, reservas, saldo livre, demanda prevista e condições de suprimento.",
+                "Política vigente e eventual política revogada de desconto e margem, com seus respectivos valores.",
+                "Caixa disponível, teto de orçamento e custos previstos da campanha.",
+                "Prazos e condições por região em aurora-logistics; essa fonte é referenciada, mas seu conteúdo não foi fornecido.",
+                "Certificação válida e escopo verificado para a alegação do SKU-AURA; sua ausência na documentação disponível não determina se o produto é ou não neutro em carbono.",
+                "Estado efetivo da transferência, acesso de terceiros, causa, extensão e relações em aurora-data-platform, cujo conteúdo não foi fornecido.",
+                "Se a primeira avaliação conjunta de Segurança e Jurídico ocorreu e quais aprovações de campanha estão pendentes."
+              ],
+              "recommendation": "Não há base suficiente para autorizar o lançamento em novembro. Preparar uma decisão condicionada, sem publicação automática: retirar a alegação de carbono neutro da peça ou mantê-la bloqueada até obter evidência e revisão; verificar em aurora-logistics os prazos e condições de cada região; confirmar o estágio de Orion e calcular o saldo livre a partir do estoque físico e das reservas aplicáveis, confrontando-o com a demanda e o suprimento; validar desconto e margem pela política vigente e comparar os desembolsos previstos tanto com o teto de orçamento quanto com o caixa disponível. Registrar pendências jurídicas e aprovações necessárias sem presumir sua concessão. Em paralelo, tratar o INC-47 pelo RESP-09: verificar prioritariamente logs, estado da transferência e acessos, distinguindo fatos, hipóteses, extensão potencial e evidências faltantes; assegurar a avaliação conjunta de Segurança e Jurídico no prazo interno indicado. Não transportar dados pessoais do incidente para a campanha. Revogação de acesso, bloqueio de sistemas, comunicação e notificação externa dependem de processo e aprovação separados; nenhuma ação externa é executada ou autorizada por esta recomendação."
+            }
+          }
+        },
+        {
+          "seq": 13,
+          "at": "2026-11-05T13:37:52.178Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "legal_director",
+            "children": [
+              "compliance_advisor"
+            ]
+          }
+        },
+        {
+          "seq": 14,
+          "at": "2026-11-05T13:38:21.962Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "controller",
+            "parent": "finance_director",
+            "sources": [
+              "aurora-costs",
+              "aurora-pricing",
+              "aurora-treasury",
+              "aurora-marketing"
+            ],
+            "output": {
+              "agent": "Controladoria",
+              "facts": [
+                {
+                  "claim": "Período proposto para Horizonte e mercado prioritário",
+                  "value": "15 a 30 de novembro de 2026; Sudeste brasileiro; Chile opcional",
+                  "unit": "período e região",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Custo variável unitário consolidado do SKU-AURA",
+                  "value": 285,
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-costs"
+                  ]
+                },
+                {
+                  "claim": "Preço de lista e preço líquido proposto",
+                  "value": "420,00 e 386,40",
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-costs",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Política PR-01 v2 vigente desde 01/11/2026",
+                  "value": "Margem mínima de 28% sobre o preço líquido e desconto máximo adicional de 8%; a versão 1, com mínimo de 20%, foi revogada",
+                  "unit": "política",
+                  "sources": [
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "claim": "Preço alternativo em revisão, sem aprovação comercial presumida",
+                  "value": 400,
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-costs",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "claim": "Caixa bancário, garantias vinculadas e compromissos operacionais aprovados em 05/11/2026 às 16h45",
+                  "value": "660.000; 250.000; 280.000, respectivamente",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Teto contábil de Horizonte e desembolso imediato solicitado",
+                  "value": "200.000 e 180.000, respectivamente",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Orion ainda não assinou nem pagou e disputa o saldo liberado com a campanha",
+                  "value": true,
+                  "unit": "situação",
+                  "sources": [
+                    "aurora-treasury",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Adiantamento exigido para confirmar o lote de suprimento; pagamento não autorizado",
+                  "value": 1200000,
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Projeção interna de pedidos adicionais, ainda não validada",
+                  "value": 5000,
+                  "unit": "pedidos",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "A peça preliminar alega carbono neutro e entrega em sete dias para Brasil e Chile; ambas as alegações requerem validação",
+                  "value": true,
+                  "unit": "situação",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "Margem sobre preço = (preço líquido − custo variável unitário) / preço líquido. Para R$ 386,40: (386,40 − 285,00) / 386,40 × 100",
+                  "result": "26,24%; contribuição unitária de R$ 101,40; abaixo do mínimo de 28%, portanto bloqueado para revisão",
+                  "source_ids": [
+                    "aurora-costs",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "expression": "Para R$ 400,00: (400,00 − 285,00) / 400,00 × 100",
+                  "result": "28,75%; contribuição unitária de R$ 115,00; atende à margem mínima, sujeito à aprovação comercial",
+                  "source_ids": [
+                    "aurora-costs",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "expression": "Preço mínimo que atende à margem: 285,00 / (1 − 0,28)",
+                  "result": "R$ 395,84 por unidade, arredondado para cima ao centavo; desconto de aproximadamente 5,75% sobre R$ 420,00",
+                  "source_ids": [
+                    "aurora-costs",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "expression": "Caixa livre = 660.000 − 250.000 − 280.000",
+                  "result": "R$ 130.000 para novos compromissos",
+                  "source_ids": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "expression": "Insuficiência de caixa para a campanha = 180.000 − 130.000",
+                  "result": "R$ 50.000; o pedido está R$ 20.000 abaixo do teto contábil, mas não cabe no caixa livre",
+                  "source_ids": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "expression": "Necessidade conjunta imediata hipotética para campanha e adiantamento do lote = 180.000 + 1.200.000 − 130.000",
+                  "result": "Insuficiência de R$ 1.250.000, sem presumir autorização para qualquer pagamento",
+                  "source_ids": [
+                    "aurora-treasury"
+                  ]
+                }
+              ],
+              "risks": [
+                "A campanha como proposta combina preço bloqueado pela política vigente com desembolso superior ao caixa livre.",
+                "Horizonte e Orion disputam o mesmo saldo liberado; promessas simultâneas podem exceder a disponibilidade real.",
+                "O lote de suprimento depende de adiantamento não autorizado e não deve ser tratado como confirmado.",
+                "A promessa de sete dias para Brasil e Chile e a alegação carbono neutro ainda não estão validadas.",
+                "A projeção de 5.000 pedidos não comprova demanda incremental nem retorno financeiro."
+              ],
+              "unknowns": [
+                "Quantidade física em estoque, reservas, saldo efetivamente livre e eventual alocação para Orion ou Horizonte; as fontes de estoque e vendas mencionadas não foram fornecidas.",
+                "Condições, probabilidade e data de assinatura ou recebimento de Orion; oportunidade não é compromisso nem caixa disponível.",
+                "Prazos logísticos comprovados por região, disponibilidade de suprimento e data de confirmação do lote.",
+                "Evidências e escopo que sustentem a alegação carbono neutro.",
+                "Taxas de conversão, despesas completas, incremento causal e demais dados para estimar ROI ou lucro total.",
+                "Não há evidência fornecida de suspeita ou confirmação de exfiltração; nenhuma deve ser inferida."
+              ],
+              "recommendation": "Não lançar Horizonte na configuração proposta. Preparar nova proposta condicionada: usar preço que cumpra a PR-01 v2, como R$ 400,00 sujeito à aprovação comercial; revisar e obter aprovação do conteúdo exato de eventual redução ou faseamento do gasto, limitado ao caixa livre efetivamente disponível após os demais compromissos; conciliar estoque físico, reservas e saldo livre antes de alocar unidades entre Orion e campanha; confirmar suprimento e financiamento antes de contar com o lote. Priorizar o Sudeste conforme o briefing e incluir o Chile somente após validar disponibilidade e prazos regionais. Retirar ou reformular as alegações de carbono neutro e entrega em sete dias até haver comprovação. Atualizar caixa e compromissos antes de qualquer decisão; não contar faturamento potencial de Orion como dinheiro disponível. Estas medidas são apenas assessoramento e não autorizam execução ou pagamentos."
+            }
+          }
+        },
+        {
+          "seq": 15,
+          "at": "2026-11-05T13:38:21.969Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "finance_director",
+            "children": [
+              "controller"
+            ]
+          }
+        },
+        {
+          "seq": 16,
+          "at": "2026-11-05T13:38:50.549Z",
+          "node": "specialist_completed",
+          "detail": {
+            "capability": "campaign_planner",
+            "parent": "marketing_director",
+            "sources": [
+              "aurora-marketing",
+              "aurora-sales",
+              "aurora-logistics"
+            ],
+            "output": {
+              "agent": "Planejador de campanhas",
+              "facts": [
+                {
+                  "claim": "Campanha Horizonte proposta para o SKU-AURA de 15 a 30 de novembro, com prioridade para o Sudeste brasileiro e extensão opcional ao Chile",
+                  "value": "proposta",
+                  "unit": "status",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Verba solicitada pelo Marketing",
+                  "value": 180000,
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Projeção interna não validada de pedidos adicionais para a campanha",
+                  "value": 5000,
+                  "unit": "pedidos",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Preço de lista e desconto propostos",
+                  "value": "R$ 420 por unidade e 8%",
+                  "unit": "R$/unidade e percentual",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Orion avalia pedido incremental não assinado, condicionado à confirmação de suprimento, com entrega pretendida em 15/12/2026",
+                  "value": 6000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Preço proposto para Orion",
+                  "value": 420,
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Reservas existentes para outros contratos firmes, que não incluem o pedido incremental Orion",
+                  "value": 9000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Capacidade incremental de separação, condicionada à existência de estoque vendável",
+                  "value": 1500,
+                  "unit": "unidades/dia",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "Trânsito padrão após expedição",
+                  "value": "Sudeste: 2 dias úteis; Chile: 10 dias úteis, sem promessa de desembaraço acelerado",
+                  "unit": "dias úteis",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "Alegações preliminares de carbono neutro e entrega em sete dias ainda precisam de validação",
+                  "value": false,
+                  "unit": "validação concluída",
+                  "sources": [
+                    "aurora-marketing",
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "O teto contábil do trimestre não equivale a dinheiro livre",
+                  "value": false,
+                  "unit": "equivalência",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                }
+              ],
+              "calculations": [
+                {
+                  "expression": "R$ 420/unidade × (1 − 8%)",
+                  "result": "R$ 386,40/unidade, preço proposto para a campanha",
+                  "source_ids": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "expression": "6.000 unidades × R$ 420/unidade",
+                  "result": "R$ 2.520.000 de receita potencial Orion, ainda não contratada nem faturada",
+                  "source_ids": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "expression": "6.000 unidades Orion + até 5.000 unidades da campanha, se cada pedido adicional corresponder a uma unidade",
+                  "result": "Até 11.000 unidades de demanda incremental distinta; a quantidade por pedido da campanha não foi informada",
+                  "source_ids": [
+                    "aurora-sales",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "expression": "5.000 unidades ÷ 1.500 unidades/dia",
+                  "result": "Cerca de 3,33 dias de capacidade de separação, ou pelo menos 4 dias com capacidade diária integral, se cada pedido tiver uma unidade e houver estoque vendável; não inclui trânsito",
+                  "source_ids": [
+                    "aurora-marketing",
+                    "aurora-logistics"
+                  ]
+                }
+              ],
+              "risks": [
+                "Campanha e Orion disputam o mesmo saldo liberado; usar reservas de terceiros ou reter pedidos firmes para favorecer Horizonte não é autorizado.",
+                "A projeção de 5.000 pedidos não está validada e não há prova de incremento causal, ROI confiável ou evidência de que o desconto aumentará vendas.",
+                "O desconto pode afetar a margem, mas custo e regra vigente não foram fornecidos no conteúdo recuperado.",
+                "A promessa geral de entrega em sete dias não está comprovada para o Chile; mesmo no Sudeste, o trânsito informado começa somente após a expedição.",
+                "A alegação de carbono neutro não está validada e não deve ser publicada até haver comprovação."
+              ],
+              "unknowns": [
+                "Estoque físico, saldo livre vendável, condições e data do lote de suprimento; as 9.000 unidades reservadas não permitem calcular o saldo livre.",
+                "Caixa disponível e possibilidade de financiar os R$ 180.000; o teto contábil não comprova disponibilidade de caixa.",
+                "Custo unitário, margem resultante e regra de margem vigente de aurora-pricing v2; não há conteúdo suficiente para comparar uma política vigente com uma revogada.",
+                "Probabilidade de conversão e assinatura de Orion, quantidade média por pedido da campanha, elasticidade de preço e capacidade logística efetivamente disponível nas datas relevantes.",
+                "Tempo de processamento antes da expedição, desembaraço no Chile e eventual restrição de escala; janelas extraordinárias e equipe adicional não foram aprovadas.",
+                "Evidência que sustente a alegação de carbono neutro.",
+                "Não há evidência fornecida de suspeita ou confirmação de exfiltração."
+              ],
+              "recommendation": "Não aprovar o lançamento integral nas condições atuais. Preparar um lançamento condicionado de 15 a 30 de novembro, priorizando o Sudeste e limitando a demanda ao estoque livre comprovado e à capacidade disponível, sem consumir as 9.000 unidades reservadas. Antes de autorizar, confirmar saldo físico e livre, suprimento e alocação entre campanha e a oportunidade Orion; obter custo e regra de margem vigente para validar preço e desconto; confirmar caixa para a verba e validar os prazos completos por destino. Tratar Orion como oportunidade não assinada, preservando sua entrega pretendida apenas se houver suprimento confirmado. Retirar carbono neutro e a promessa geral de sete dias das peças até validação; manter o Chile fora do lançamento até comprovar prazo e capacidade. Validar a projeção de demanda e medir incremento antes de ampliar o investimento. Caso alguma condição não seja atendida, reduzir escopo ou adiar a campanha. Nenhuma ação externa é autorizada por esta recomendação."
+            }
+          }
+        },
+        {
+          "seq": 17,
+          "at": "2026-11-05T13:38:50.556Z",
+          "node": "director_started",
+          "detail": {
+            "capability": "marketing_director",
+            "children": [
+              "campaign_planner"
+            ]
+          }
+        },
+        {
+          "seq": 18,
+          "at": "2026-11-05T13:39:17.835Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "operations_director",
+            "children": [
+              "supply_planner"
+            ],
+            "output": {
+              "agent": "Diretor de operações",
+              "facts": [
+                {
+                  "claim": "Estoque físico do SKU-AURA em 05/11/2026",
+                  "value": 14000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Reservas para contratos firmes anteriores",
+                  "value": 9000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Estoque bloqueado pela Qualidade, sem sobreposição com as reservas",
+                  "value": 2000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Saldo disponível para novas promessas: 14.000 menos 9.000 reservadas e 2.000 bloqueadas",
+                  "value": 3000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Demanda incremental conjunta: 6.000 de Orion e 5.000 de Horizonte",
+                  "value": 11000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Insuficiência diante da demanda conjunta",
+                  "value": 8000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Insuficiência de Horizonte isoladamente, caso receba todo o saldo livre",
+                  "value": 2000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-inventory"
+                  ]
+                },
+                {
+                  "claim": "Lote SUP-88 não confirmado, condicionado a adiantamento e assinatura ainda não realizados",
+                  "value": 12000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Adiantamento solicitado para SUP-88",
+                  "value": 1200000,
+                  "unit": "reais",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Possível chegada de SUP-88, posterior à abertura prevista de Horizonte em 15/11/2026",
+                  "value": "10/12/2026",
+                  "unit": "data",
+                  "sources": [
+                    "aurora-procurement"
+                  ]
+                },
+                {
+                  "claim": "Capacidade incremental de separação, condicionada a estoque vendável",
+                  "value": 1500,
+                  "unit": "unidades por dia",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "Trânsito padrão após expedição para o Sudeste brasileiro",
+                  "value": 2,
+                  "unit": "dias úteis",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "Trânsito após expedição para o Chile, sem promessa de desembaraço acelerado",
+                  "value": 10,
+                  "unit": "dias úteis",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                }
+              ],
+              "risks": [
+                "O saldo livre não atende Horizonte integralmente nem a demanda conjunta; destiná-lo à campanha reduz a disponibilidade para Orion.",
+                "SUP-88 não é estoque disponível nem entrada confirmada; sua possível chegada em dezembro não cobre imediatamente a abertura de novembro. Não há proposta alternativa aprovada de outro fornecedor.",
+                "A capacidade de separação não cria estoque nem reduz automaticamente os prazos de trânsito. Janelas extraordinárias e equipe adicional não foram aprovadas, e a ocupação de armazenagem não foi informada.",
+                "A promessa publicitária de sete dias para todos os destinos não está comprovada para o Chile.",
+                "Não há evidência fornecida sobre desconto e margem vigentes, caixa disponível ou demais compromissos financeiros; a viabilidade econômica e financeira permanece indeterminada.",
+                "Não há prova fornecida para sustentar a alegação de carbono neutro.",
+                "A entrega pretendida de Orion em 15/12, informada pela especialista, depende de suprimento e logística confirmados; não há base para tratá-la como garantida ou a oportunidade como perdida."
+              ],
+              "conditions": [
+                "Com Comercial, decidir a alocação do saldo efetivamente livre entre Orion e Horizonte e dimensionar eventual fase inicial da campanha dentro desse limite, preservando as reservas firmes e o bloqueio de Qualidade.",
+                "Com Suprimentos, verificar alternativas e condições de SUP-88; considerar unidades adicionais apenas após confirmação, recebimento e disponibilidade efetiva, sem pressupor cobertura para novembro.",
+                "Com Tesouraria e áreas responsáveis por contratos, verificar caixa e compromissos antes de avaliar o adiantamento; um teto orçamentário, se houver, não comprova caixa disponível.",
+                "Com Comercial e Finanças, verificar a política vigente de descontos e margem e validar a economia do escopo proposto antes de definir preços.",
+                "Com Logística e a área de pessoal, validar capacidade, escalas, armazenagem e prazos por destino, incluindo separação, expedição e trânsito; não usar a promessa de sete dias para o Chile sem comprovação.",
+                "Com a área responsável pela alegação ambiental, obter e validar evidência adequada e seu escopo antes de usar a expressão carbono neutro.",
+                "Confirmar suprimento e viabilidade logística antes de assumir qualquer prazo de entrega para Orion ou Horizonte."
+              ],
+              "recommendation": "Não recomendar o lançamento integral de Horizonte em novembro nas condições atuais. Preparar uma opção faseada ou com escopo renegociado, limitada ao estoque livre efetivamente alocado e condicionada às validações de suprimento, finanças, logística e alegação ambiental. Manter Orion em avaliação, sem presumir sua perda. Esta é uma recomendação condicionada; nenhuma compra, pagamento, contratação, promessa ou outra ação externa é aprovada ou executada.",
+              "disagreements": [
+                "A especialista indicou que não havia informações sobre prazos regionais e capacidade logística; a evidência própria de aurora-logistics informa capacidade de 1.500 unidades por dia e trânsitos de dois dias úteis para o Sudeste e dez para o Chile, embora permaneçam dependências de escala e estoque.",
+                "A especialista citou aurora-sales para o valor potencial de Orion, o caráter não assinado e a data pretendida de entrega. Esses pontos constam apenas de seu retorno, sem documento próprio de aurora-sales entre as evidências fornecidas; por isso não foram tratados como fatos verificados."
+              ]
+            }
+          }
+        },
+        {
+          "seq": 19,
+          "at": "2026-11-05T13:39:44.268Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "legal_director",
+            "children": [
+              "compliance_advisor"
+            ],
+            "output": {
+              "agent": "Diretor jurídico — Contratos, conformidade e resposta",
+              "facts": [
+                {
+                  "claim": "As 9.000 unidades reservadas pertencem a contratos firmes e não podem ser transferidas ao Horizonte por decisão de agente.",
+                  "value": 9000,
+                  "unit": "unidades reservadas",
+                  "sources": [
+                    "aurora-contracts"
+                  ]
+                },
+                {
+                  "claim": "Orion é uma negociação de 6.000 unidades com entrega pretendida em 15/12/2026; não há assinatura, reserva ou pagamento. A multa de 1,5% por atraso consta de minuta proposta e permanece sujeita a negociação, sem constituir obrigação existente.",
+                  "value": 6000,
+                  "unit": "unidades em negociação",
+                  "sources": [
+                    "aurora-contracts"
+                  ]
+                },
+                {
+                  "claim": "O COM-12 exige certificação e escopo verificados para a alegação de carbono neutro do SKU-AURA. A documentação disponível não contém certificação válida; isso não demonstra que o produto seja ou não neutro em carbono.",
+                  "value": "certificação válida não encontrada na documentação disponível",
+                  "unit": "estado da evidência",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "As promessas de entrega devem refletir os prazos e condições por região, mas o conteúdo de aurora-logistics não foi fornecido.",
+                  "value": "prazos e condições regionais não verificados",
+                  "unit": "estado da evidência",
+                  "sources": [
+                    "aurora-compliance"
+                  ]
+                },
+                {
+                  "claim": "O retorno da especialista relata alerta às 16h20 de 05/11/2026 sobre possível exportação envolvendo até 1.200 contatos do AuroraCRM europeu; conclusão da transferência, acesso de terceiros e contenção completa não foram comprovados. O conteúdo primário de aurora-incident não foi fornecido para verificação independente.",
+                  "value": 1200,
+                  "unit": "contatos potencialmente envolvidos",
+                  "sources": [
+                    "aurora-incident"
+                  ]
+                },
+                {
+                  "claim": "O RESP-09 prevê primeira avaliação conjunta de Segurança e Jurídico em até 90 minutos do alerta, como SLA interno fictício. Segundo os horários informados pela especialista, o prazo terminaria às 17h50 de 05/11/2026, no fuso -03:00; não há prova de que a avaliação ocorreu.",
+                  "value": 90,
+                  "unit": "minutos",
+                  "sources": [
+                    "aurora-response",
+                    "aurora-incident"
+                  ]
+                }
+              ],
+              "risks": [
+                "Lançar ou prometer volumes sem confirmar saldo livre, demanda e suprimento pode comprometer contratos firmes e a capacidade de atendimento.",
+                "Tratar Orion como contrato firmado ou a multa proposta como obrigação existente distorce a posição contratual.",
+                "Aplicar desconto ou margem sem validar a política vigente, ou confundir teto orçamentário com caixa disponível, impede avaliar a viabilidade financeira.",
+                "Divulgar a alegação de carbono neutro sem certificação e escopo verificados contraria o COM-12; promessas regionais não verificadas podem criar compromissos inexequíveis.",
+                "Tratar a suspeita de exportação como vazamento confirmado ou presumir contenção completa excede a evidência disponível."
+              ],
+              "conditions": [
+                "Estoque e Suprimentos devem confirmar estoque físico, reservas aplicáveis, saldo livre, demanda prevista e disponibilidade e prazos de reposição, preservando as 9.000 unidades dos contratos firmes; reavaliar a capacidade antes de qualquer promessa.",
+                "Comercial e Contratos devem separar compromissos firmes, oportunidade Orion e projeções, negociar eventuais condições e submeter conteúdo, destinatário e condições de qualquer novo compromisso à aprovação humana.",
+                "Comercial e Finanças devem confirmar desconto e margem pela política vigente, apurar custos e desembolsos previstos e compará-los com o teto orçamentário e com o caixa efetivamente disponível. Os valores necessários não foram fornecidos.",
+                "Logística deve fornecer prazos e condições por região para revisão das promessas de entrega.",
+                "Conformidade e Jurídico devem revisar a peça: retirar a alegação de carbono neutro ou mantê-la bloqueada até apresentação de evidência de certificação e escopo e conclusão da revisão. Registrar as demais pendências e aprovações sem presumir sua concessão; não publicar automaticamente.",
+                "Segurança e Jurídico devem verificar se a avaliação conjunta do INC-47 ocorreu no prazo interno e priorizar a análise de logs, estado da transferência e acessos, distinguindo observações, hipóteses, extensão potencial e evidências faltantes. Consultar os dados pertinentes de aurora-incident e aurora-data-platform; não transportar dados pessoais do incidente para a campanha.",
+                "Revogação de acesso, bloqueio de sistemas, comunicações e notificações externas dependem de processo e aprovação separados."
+              ],
+              "recommendation": "Não há base para autorizar o lançamento do Horizonte em novembro. Preparar uma decisão condicionada à confirmação das premissas comerciais, operacionais e financeiras, à revisão jurídica e de conformidade e às aprovações humanas pertinentes. Tratar o INC-47 em fluxo próprio, sem usar o prazo da campanha. Nenhuma ação externa ou novo compromisso é aprovado ou executado nesta avaliação.",
+              "disagreements": [
+                "A especialista registrou como desconhecidos os detalhes e o estágio de Orion; aurora-contracts esclarece que se trata de negociação de 6.000 unidades, sem assinatura, reserva ou pagamento, e informa o prazo pretendido e a multa proposta. Permanecem desconhecidas as demais condições e a viabilidade de atendimento.",
+                "O cálculo de 65 minutos restantes da especialista depende do instante de avaliação informado, 16h45 de 05/11/2026; não deve ser apresentado como tempo restante atual. Os horários e a contagem de contatos são relatos da especialista cuja fonte primária não foi fornecida."
+              ]
+            }
+          }
+        },
+        {
+          "seq": 20,
+          "at": "2026-11-05T13:40:14.777Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "finance_director",
+            "children": [
+              "controller"
+            ],
+            "output": {
+              "agent": "Diretora financeira",
+              "facts": [
+                {
+                  "claim": "Campanha proposta",
+                  "value": "15 a 30 de novembro de 2026, com prioridade para o Sudeste brasileiro e Chile opcional",
+                  "unit": "período e região",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Custo variável unitário e preço de lista do SKU-AURA",
+                  "value": "285,00 e 420,00, respectivamente",
+                  "unit": "R$/unidade",
+                  "sources": [
+                    "aurora-costs"
+                  ]
+                },
+                {
+                  "claim": "Política vigente desde 01/11/2026",
+                  "value": "A PR-01 v2 exige margem de contribuição mínima de 28% sobre o preço líquido e limita o desconto adicional a 8%; a versão com mínimo de 20% foi revogada",
+                  "unit": "política",
+                  "sources": [
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "claim": "Preço proposto de R$ 386,40",
+                  "value": "Desconto de 8% sobre a lista; contribuição unitária de R$ 101,40 e margem de 26,24%. Está abaixo do mínimo e bloqueado para revisão",
+                  "unit": "R$/unidade e percentual",
+                  "sources": [
+                    "aurora-pricing",
+                    "aurora-costs",
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Preço alternativo de R$ 400,00",
+                  "value": "Contribuição unitária de R$ 115,00, margem de 28,75% e desconto de aproximadamente 4,76% sobre a lista. Atende aos limites de margem e desconto, mas carece de aprovação comercial",
+                  "unit": "R$/unidade e percentual",
+                  "sources": [
+                    "aurora-pricing",
+                    "aurora-costs"
+                  ]
+                },
+                {
+                  "claim": "Preço mínimo calculado para atender à margem",
+                  "value": "R$ 395,84 por unidade, arredondado para cima ao centavo, correspondente a desconto aproximado de 5,75% sobre a lista",
+                  "unit": "R$/unidade e percentual",
+                  "sources": [
+                    "aurora-pricing",
+                    "aurora-costs"
+                  ]
+                },
+                {
+                  "claim": "Posição de caixa em 05/11/2026 às 16h45",
+                  "value": "Dos R$ 660.000 bancários, R$ 250.000 estão vinculados a garantias e R$ 280.000 cobrem compromissos operacionais aprovados; restam R$ 130.000 livres para novos compromissos",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Desembolso imediato de Horizonte",
+                  "value": "R$ 180.000 solicitados, dentro do teto contábil de R$ 200.000, mas R$ 50.000 acima do caixa livre informado",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Orion",
+                  "value": "A conta ainda não assinou nem pagou; seu faturamento potencial não constitui caixa disponível",
+                  "unit": "situação",
+                  "sources": [
+                    "aurora-treasury",
+                    "aurora-pricing"
+                  ]
+                },
+                {
+                  "claim": "Lote de suprimento",
+                  "value": "O fornecedor exige adiantamento de R$ 1.200.000 para confirmação; o pagamento não está autorizado. Campanha e adiantamento somariam R$ 1.380.000, excedendo o caixa livre em R$ 1.250.000",
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-treasury"
+                  ]
+                },
+                {
+                  "claim": "Projeção de demanda",
+                  "value": "5.000 pedidos adicionais são uma projeção interna ainda não validada, não pedidos confirmados",
+                  "unit": "pedidos",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Peça preliminar",
+                  "value": "Alega carbono neutro e entrega em sete dias para Brasil e Chile; ambas as alegações requerem validação",
+                  "unit": "situação",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                }
+              ],
+              "risks": [
+                "A proposta atual combina preço abaixo da margem mínima com desembolso superior ao caixa livre; o teto contábil não garante liquidez.",
+                "Orion e Horizonte podem disputar estoque e caixa, sem que haja evidência suficiente para assumir disponibilidade para ambos.",
+                "O lote não está confirmado e depende de adiantamento não autorizado e de financiamento ainda indisponível.",
+                "Não foram fornecidas quantidades físicas em estoque, reservas ou saldo livre, nem comprovação de prazos por região ou da alegação de carbono neutro.",
+                "A projeção de 5.000 pedidos não comprova demanda incremental. Faltam taxas de conversão e despesas completas para concluir ROI ou lucro total."
+              ],
+              "conditions": [
+                "Controladoria e Comercial devem revisar o preço e obter aprovação comercial para uma proposta que cumpra a PR-01 v2; R$ 400,00 é uma alternativa calculada, ainda não aprovada.",
+                "Marketing e Tesouraria devem preparar e submeter à aprovação uma proposta com conteúdo exato para eventual redução ou faseamento do gasto, compatível com o caixa livre atualizado após os demais compromissos. Não há aporte, crédito aprovado ou antecipação de recebíveis disponível na posição informada.",
+                "Estoque e Comercial devem conciliar contagem física, reservas e saldo efetivamente livre e definir a alocação entre Orion e Horizonte antes de assumir capacidade de atendimento.",
+                "Suprimentos e Tesouraria devem confirmar condições, prazo e financiamento do lote antes de considerá-lo disponível; o adiantamento permanece sem autorização.",
+                "Logística e Comercial devem comprovar disponibilidade e prazos por região. Priorizar o Sudeste e condicionar eventual inclusão do Chile à validação; retirar ou reformular a promessa de sete dias até haver prova.",
+                "Marketing e a área responsável pela comprovação ambiental devem retirar ou reformular a alegação de carbono neutro até que seu escopo e evidências sejam validados.",
+                "Atualizar a posição de Orion, o caixa e os compromissos antes da decisão. Assinatura ou faturamento potencial não devem ser tratados como dinheiro disponível; confirmar eventual recebimento efetivo.",
+                "Obter dados de conversão, despesas completas e incremento causal para avaliar o retorno econômico antes de atribuir ROI ou lucro à campanha."
+              ],
+              "recommendation": "Não lançar Horizonte em novembro na configuração proposta. Preparar uma alternativa condicionada ao cumprimento da margem, aprovação comercial do preço e do conteúdo exato da campanha revisada, disponibilidade financeira efetiva, conciliação e alocação de estoque, suprimento confirmado e validação das promessas regionais e ambientais. A eventual decisão de lançamento depende dessas verificações e aprovações; esta avaliação não autoriza gastos, pagamentos ou execução.",
+              "disagreements": []
+            }
+          }
+        },
+        {
+          "seq": 21,
+          "at": "2026-11-05T13:40:38.064Z",
+          "node": "director_completed",
+          "detail": {
+            "capability": "marketing_director",
+            "children": [
+              "campaign_planner"
+            ],
+            "output": {
+              "agent": "Diretora de marketing",
+              "facts": [
+                {
+                  "claim": "Horizonte propõe campanha do SKU-AURA de 15 a 30 de novembro, com prioridade para o Sudeste e extensão opcional ao Chile.",
+                  "value": "proposta",
+                  "unit": "status",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Verba solicitada para a campanha.",
+                  "value": 180000,
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Projeção interna de pedidos adicionais, ainda não validada.",
+                  "value": 5000,
+                  "unit": "pedidos",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Preço de lista e desconto propostos, resultando em R$ 386,40 por unidade.",
+                  "value": "R$ 420 por unidade; desconto de 8%",
+                  "unit": "preço e percentual",
+                  "sources": [
+                    "aurora-marketing"
+                  ]
+                },
+                {
+                  "claim": "Orion avalia pedido incremental não assinado, condicionado à confirmação de suprimento, com entrega pretendida em 15/12/2026.",
+                  "value": 6000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Valor potencial do pedido Orion a R$ 420 por unidade; não contratado nem faturado.",
+                  "value": 2520000,
+                  "unit": "R$",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "Unidades reservadas para outros contratos firmes, sem incluir o pedido incremental Orion.",
+                  "value": 9000,
+                  "unit": "unidades",
+                  "sources": [
+                    "aurora-sales"
+                  ]
+                },
+                {
+                  "claim": "O especialista informa capacidade incremental de separação, condicionada à existência de estoque vendável.",
+                  "value": 1500,
+                  "unit": "unidades por dia",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                },
+                {
+                  "claim": "O especialista informa trânsito padrão após expedição de dois dias úteis para o Sudeste e dez dias úteis para o Chile, sem promessa de desembaraço acelerado.",
+                  "value": "Sudeste: 2; Chile: 10",
+                  "unit": "dias úteis",
+                  "sources": [
+                    "aurora-logistics"
+                  ]
+                }
+              ],
+              "risks": [
+                "Campanha e Orion disputam o mesmo saldo liberado; as 9.000 unidades reservadas pertencem a outros compromissos e não podem ser usadas para Orion.",
+                "Os 5.000 pedidos projetados e as 6.000 unidades de Orion representam demandas distintas; a quantidade por pedido da campanha não foi informada, e nenhuma das demandas está confirmada como venda.",
+                "Não há estimativa confiável de ROI, prova de incremento causal, probabilidade de conversão de Orion nem evidência de que o desconto aumentará as vendas.",
+                "Custo unitário, regra de margem vigente e caixa disponível não foram apresentados em conteúdo suficiente para validar o desconto ou financiar a verba; o teto contábil não equivale a dinheiro livre.",
+                "A promessa geral de entrega em sete dias carece de validação ponta a ponta; o trânsito informado para o Chile é de dez dias úteis após a expedição.",
+                "A alegação carbono neutro carece de comprovação e não deve constar das peças até ser validada."
+              ],
+              "conditions": [
+                "Estoque, Compras e Comercial devem confirmar saldo físico e livre vendável, quantidade e data do suprimento, além da alocação entre Horizonte e Orion, preservando as reservas de terceiros.",
+                "Custos e Pricing devem fornecer o custo unitário e a regra vigente de aurora-pricing v2 e verificar a margem ao preço de R$ 386,40 antes de qualquer decisão sobre desconto.",
+                "Tesouraria deve confirmar caixa disponível para a verba proposta e seus desembolsos; o teto contábil isoladamente não é suficiente.",
+                "Logística deve validar capacidade disponível e prazo completo por destino, incluindo processamento, expedição, trânsito e desembaraço aplicável; manter o Chile fora do lançamento até comprovar prazo e capacidade.",
+                "A área responsável deve comprovar e validar a alegação carbono neutro antes de seu eventual uso; retirar também a promessa geral de sete dias enquanto não estiver comprovada.",
+                "Marketing e Comercial devem revisar a previsão de demanda, definir limite compatível com estoque e capacidade e estabelecer medição de incremento antes de ampliar investimento.",
+                "Se as condições não forem atendidas, reduzir o escopo ou adiar a campanha; eventual compromisso com Orion depende de confirmação de suprimento e das condições comerciais aplicáveis."
+              ],
+              "recommendation": "Não aprovar o lançamento integral nas condições atuais. Preparar uma proposta condicionada para 15 a 30 de novembro, priorizando o Sudeste e limitando a demanda ao estoque livre e à capacidade comprovados, após as validações das áreas responsáveis. Tratar Orion como oportunidade ainda não assinada. Nenhuma ação externa é autorizada por esta avaliação.",
+              "disagreements": [
+                "Não há discordância material com a recomendação do especialista. Os dados de aurora-logistics foram apresentados no retorno do especialista, mas o documento de origem não foi fornecido para verificação independente; devem ser confirmados antes da decisão."
+              ]
+            }
+          }
+        },
+        {
+          "seq": 22,
+          "at": "2026-11-05T13:40:38.093Z",
+          "node": "synthesis",
+          "detail": {
+            "departments": 4
+          }
+        },
+        {
+          "seq": 23,
+          "at": "2026-11-05T13:40:38.194Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 16536,
+            "exit_code": 1
+          }
+        },
+        {
+          "seq": 24,
+          "at": "2026-11-05T13:41:53.577Z",
+          "node": "worker_started",
+          "detail": {
+            "pid": 24864
+          }
+        },
+        {
+          "seq": 25,
+          "at": "2026-11-05T13:41:54.519Z",
+          "node": "checkpoint_loaded",
+          "detail": {
+            "next": [
+              "synthesis"
+            ],
+            "process": 30500,
+            "has_state": true
+          }
+        },
+        {
+          "seq": 26,
+          "at": "2026-11-05T13:41:54.550Z",
+          "node": "synthesis",
+          "detail": {
+            "departments": 4
+          }
+        },
+        {
+          "seq": 27,
+          "at": "2026-11-05T13:42:31.257Z",
+          "node": "worker_stopped",
+          "detail": {
+            "pid": 24864,
+            "exit_code": 1
+          }
+        }
+      ]
+    }
+  ],
+  "production_approved": false,
+  "business_v1_requalified": false,
+  "result": "FAIL",
+  "error": "AssertionError('Worker falhou; veja o registro local. Não há sucesso presumido.')",
+  "seconds": 22.00629619997926
+}

@@ -1,0 +1,14 @@
+{
+  "outcome": {
+    "kind": "closed_unknown_intent",
+    "seq": 6,
+    "operation_id": "94fc7c3f-0256-5924-b83f-95b5b887aba5",
+    "request_id": "b81e7581-0098-43e5-b47b-ce445012b773",
+    "reason": "Intenção sem recibo durável após interrupção; encerrar como desconhecido, sem sucesso ou reexecução.",
+    "prepared_by": "35807392-7b45-4dba-9623-85cf2f9f5a75",
+    "confirmed_by": "7b62383a-5b30-47bb-b0a2-e90fc0d018f5",
+    "original_outcome": "unknown_not_reexecuted"
+  },
+  "matches": true,
+  "recovering": false
+}

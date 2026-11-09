@@ -1,0 +1,151 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+CHECKPOINT cold_backup_of_real_stack
+CHECKPOINT external_commit_without_ack_recorded
+CHECKPOINT consistent_old_generation_cannot_open_recovery
+CHECKPOINT unavailable_forged_expired_replayed_incomplete_and_wrong_security_head_fail_closed
+CHECKPOINT upstream_reconciliation_republishes_current_policy_and_preserves_revocation
+CHECKPOINT historical_runs_lookup_only_existing_receipt_and_no_send_for_missing_receipt
+CHECKPOINT new_decision_uses_current_generation_native_workflow
+CHECKPOINT later_authority_sequence_change_closes_gate_again
+F
+================================== FAILURES ===================================
+______________ test_freshness_recovery_security_and_bounded_load ______________
+
+    def code_flow():
+        verifier=secrets.token_urlsafe(40);challenge=base64.urlsafe_b64encode(hashlib.sha256(verifier.encode()).digest()).decode().rstrip('=')
+        state=secrets.token_urlsafe(24);nonce=secrets.token_urlsafe(24)
+        params={'client_id':'human-pilot','redirect_uri':redirect,'response_type':'code','scope':'openid','state':state,'nonce':nonce,'code_challenge':challenge,'code_challenge_method':'S256'}
+        opener=build_opener(HTTPCookieProcessor(CookieJar()),Capture())
+        with opener.open(stack.issuer+'/protocol/openid-connect/auth?'+urlencode(params),timeout=15) as r:html=r.read().decode()
+        form=Form();form.feed(html);assert form.action
+>       try:opener.open(Request(form.action,urlencode({'username':'synthetic-human','password':password,'credentialId':''}).encode()),timeout=15);raise AssertionError('login did not return code')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+validation\decision-qualification\human_oidc.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:521: in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:630: in http_response
+    response = self.parent.error(
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:559: in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <urllib.request.HTTPDefaultErrorHandler object at 0x0000028A67023F20>
+req = <urllib.request.Request object at 0x0000028A66FBCE00>
+fp = <http.client.HTTPResponse object at 0x0000028A68497DF0>, code = 400
+msg = 'Bad Request'
+hdrs = <http.client.HTTPMessage object at 0x0000028A684D0140>
+
+    def http_error_default(self, req, fp, code, msg, hdrs):
+>       raise HTTPError(req.full_url, code, msg, hdrs, fp)
+E       urllib.error.HTTPError: HTTP Error 400: Bad Request
+
+..\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\urllib\request.py:639: HTTPError
+
+During handling of the above exception, another exception occurred:
+
+    def test_freshness_recovery_security_and_bounded_load():
+        stack=Installation();started=time.perf_counter();corpus=json.loads((HERE/'corpus/manifest.json').read_text(encoding='utf-8'))['generations']
+        def mark(name,**data):
+            stack.evidence['scenarios'].append({'name':name,**data});print('CHECKPOINT '+name,flush=True)
+        def deny(fn,status):
+            with pytest.raises(Rejected) as e:fn()
+            assert e.value.status==status,str(e.value)
+        def authority(docs,sequence=2,mode='normal',head=None):
+            journal=stack.state/'security-journal.jsonl'
+            if head is None:head=json.loads(journal.read_text().splitlines()[-1])['signature'] if journal.exists() else ''
+            stack.authority_state.write_text(json.dumps({'documents':docs,'sequence':sequence,'mode':mode,'security_head':head}),encoding='utf-8')
+        try:
+            stack.start();authority(corpus['g1'],1)
+            stack.call('aprovador','/admin/publish',{'generation':'g1','documents':corpus['g1']})
+            job=stack.call('analista','/runs',{'intent':'external-before-restore','domains':['publico']});run=job['id']
+            stack.engine(run);plan=stack.call('analista','/runs/'+run+'/plan',{})
+            # Second old run has no receipt: recovery must never emit it later.
+            absent=stack.call('analista','/runs',{'intent':'never-executed','domains':['publico']})['id']
+            stack.backup();mark('cold_backup_of_real_stack')
+            stack.call('aprovador','/runs/'+run+'/approve',{'plan':plan['plan']})
+            stack.provider_rpc({'action':'fault'});stack.engine(run,resume=True,expected=1)
+            receipt=stack.provider_rpc({'action':'lookup','key':stack.id+':external-before-restore:email-v1','digest':plan['payload'],'run':run})
+            assert receipt['found'];mark('external_commit_without_ack_recorded')
+            finance=next(p['id'] for p in stack.principals if p['name']=='financeiro')
+            stack.call('aprovador','/admin/revoke',{'source':'aquisicao-reservada','principal':finance})
+            authority(corpus['g2']);stack.restore()
+            for path,payload in [('/query',{'domains':['publico'],'query':'política'}),('/runs',{'intent':'blocked','domains':['publico']}),('/runs/'+run+'/effect',{})]:
+                deny(lambda:stack.call('analista',path,payload),503)
+            deny(lambda:stack.call('aprovador','/admin/recover',{}),503)
+            assert stack.call('aprovador','/admin/state',{})['recovering']
+            mark('consistent_old_generation_cannot_open_recovery')
+            for mode in ['unavailable','bad-signature','expired','replay','incomplete']:
+                authority(corpus['g2'],mode=mode)
+                deny(lambda:stack.call('aprovador','/admin/recover',{}),503)
+                assert stack.call('aprovador','/admin/state',{})['recovering']
+            authority(corpus['g2'],head='missing-security-event')
+            deny(lambda:stack.call('aprovador','/admin/recover',{}),503)
+            mark('unavailable_forged_expired_replayed_incomplete_and_wrong_security_head_fail_closed',negative_cases=6)
+            authority(corpus['g2'])
+            deny(lambda:stack.call('analista','/admin/publish',{'generation':'g2','documents':corpus['g2']}),403)
+            stack.call('aprovador','/admin/publish',{'generation':'g2','documents':corpus['g2']})
+            recovered=stack.call('aprovador','/admin/recover',{})
+            assert recovered['generation']=='g2' and recovered['verified_sequence']==2
+            deny(lambda:stack.call('financeiro','/query',{'domains':['financeiro'],'query':'aquisição'}),403)
+            response=stack.call('analista','/query',{'domains':['publico'],'query':'política'})
+            assert next(x['version'] for x in response['sources'] if x['id']=='politica-remoto')==2
+            historical=stack.call('analista','/query',{'generation':'g1','domains':['publico'],'query':'ACME política vendas campanha'})
+            (HERE/'evidence/model-context.json').write_text(json.dumps({'current':response,'historical':historical},ensure_ascii=False,indent=2),encoding='utf-8')
+            mark('upstream_reconciliation_republishes_current_policy_and_preserves_revocation')
+            deny(lambda:stack.call('aprovador','/runs/'+run+'/approve',{'plan':plan['plan']}),403)
+            deny(lambda:stack.call('executor','/runs/'+run+'/effect',{}),403)
+            deny(lambda:stack.call('executor','/runs/'+run+'/reconcile',{}),403)
+            denied_receipt=stack.call('aprovador','/runs/'+run+'/reconcile',{})
+            assert denied_receipt['result']['receipt']==receipt['receipt'] and denied_receipt['held']==0
+            deny(lambda:stack.call('aprovador','/runs/'+absent+'/reconcile',{}),409)
+            stack.call('aprovador','/runs/'+run+'/reconcile',{})
+            mark('historical_runs_lookup_only_existing_receipt_and_no_send_for_missing_receipt')
+            # Complete a fresh generation run through the same native workflow.
+            fresh=stack.call('analista','/runs',{'intent':'new-current-decision','domains':['publico']})['id']
+            stack.engine(fresh);p=stack.call('analista','/runs/'+fresh+'/plan',{})
+            stack.call('aprovador','/runs/'+fresh+'/approve',{'plan':p['plan']});stack.engine(fresh,resume=True)
+            assert stack.call('analista','/runs/'+fresh)['state']=='completed'
+            mark('new_decision_uses_current_generation_native_workflow')
+            authority(corpus['g2'],3)
+            deny(lambda:stack.call('analista','/query',{'domains':['publico'],'query':'política'}),503)
+            assert stack.call('aprovador','/admin/state',{})['recovering']
+            stack.call('aprovador','/admin/recover',{})
+            mark('later_authority_sequence_change_closes_gate_again')
+            from human_oidc import run as human_flow
+>           human=human_flow(stack);stack.evidence['human_oidc']=human
+                  ^^^^^^^^^^^^^^^^^
+
+validation\decision-qualification\test_decision.py:75: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+validation\decision-qualification\human_oidc.py:53: in run
+    code,verifier,nonce=code_flow()
+                        ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def code_flow():
+        verifier=secrets.token_urlsafe(40);challenge=base64.urlsafe_b64encode(hashlib.sha256(verifier.encode()).digest()).decode().rstrip('=')
+        state=secrets.token_urlsafe(24);nonce=secrets.token_urlsafe(24)
+        params={'client_id':'human-pilot','redirect_uri':redirect,'response_type':'code','scope':'openid','state':state,'nonce':nonce,'code_challenge':challenge,'code_challenge_method':'S256'}
+        opener=build_opener(HTTPCookieProcessor(CookieJar()),Capture())
+        with opener.open(stack.issuer+'/protocol/openid-connect/auth?'+urlencode(params),timeout=15) as r:html=r.read().decode()
+        form=Form();form.feed(html);assert form.action
+        try:opener.open(Request(form.action,urlencode({'username':'synthetic-human','password':password,'credentialId':''}).encode()),timeout=15);raise AssertionError('login did not return code')
+        except HTTPError as e:
+>           assert e.code==302
+                   ^^^^^^^^^^^
+E           AssertionError
+
+validation\decision-qualification\human_oidc.py:48: AssertionError
+=========================== short test summary info ===========================
+FAILED validation/decision-qualification/test_decision.py::test_freshness_recovery_security_and_bounded_load
+1 failed in 302.90s (0:05:02)

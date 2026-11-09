@@ -1,0 +1,12 @@
+gate,status,evidence,remaining
+Optional_Obsidian_vault,READY_FORMAT_ONLY,Vault/00-Leia-me.md,actual Obsidian UI and operational editor compatibility
+Editorial_review_hash_and_versioning,PASS_COMPONENT_10_TESTS,evidence/editorial-tests.log,real human reviewer product UI delegated source authority and concurrency
+TypeScript_check,PASS_STRICT,evidence/editorial-types.log,full product integration and release pipeline
+Native_Graphiti_Terra,FAIL_3_OF_7,evidence/terra/temporal-checks.json,structured fact consistency and knowledge history
+Native_Graphiti_Sol,PARTIAL_6_OF_7,evidence/sol/temporal-checks.json,arbitrary prior-knowledge reconstruction not qualified
+Canonical_source_asof,PASS_COMPONENT_AND_ONE_SOURCE_API,evidence/editorial-tests.log,representative sources complex validity intervals cross-source resolution and PostgreSQL product integration
+Publication_failure_window,PASS_SMALL_E2E,evidence/integration.json,multiple writers ingestion-uncertain recovery and joint backup restore of the new ledger
+Authorization_and_restart,PASS_SMALL_E2E,evidence/sol/integration.json,enterprise identity federation TLS JWKS and source policy lifecycle
+LightRAG_Graphiti_cohabitation,NOT_TESTED,DECISION.md,one source release reconciled across both projections
+Model_cost,REAL_TOKENS_ONLY,evidence/summary.json,attributable billing and operational infrastructure cost
+Enterprise_product_release,NO_GO,DECISION.md,full organization adaptive controller teams hiring JARVIS security and production operations

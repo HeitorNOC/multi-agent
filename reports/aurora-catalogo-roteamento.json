@@ -1,0 +1,138 @@
+{
+  "catalog_size": 47,
+  "results": [
+    {
+      "id": "engineering",
+      "goal": "Planeje a implementação de um endpoint backend para receber webhooks de mensagens e impedir processamento duplicado. Inclua arquitetura, divisão técnica e revisão de código. Escolha a equipe mínima para preparar a mudança, sem execução externa.",
+      "expected": [
+        "backend_engineer",
+        "tech_lead",
+        "technology_director"
+      ],
+      "selected": [
+        "technology_director",
+        "tech_lead",
+        "backend_engineer"
+      ],
+      "teams": [
+        {
+          "lead": "technology_director",
+          "specialists": [
+            "tech_lead",
+            "backend_engineer"
+          ],
+          "reason": "A diretora coordena o trabalho; o Tech Lead define a arquitetura, divide as tarefas e planeja a revisão; o engenheiro backend detalha o endpoint, a persistência e a idempotência. O plano deve prever validação da origem e do payload, chave única por evento, gravação atômica antes da confirmação, processamento assíncrono com tentativas seguras e testes de concorrência, duplicidade e falhas."
+        }
+      ],
+      "excluded": 44,
+      "matches_expected": true
+    },
+    {
+      "id": "customer",
+      "goal": "Prepare o plano de atendimento para triagem e escalonamento de chamados recorrentes de clientes. Diferencie suporte inicial de gestão do relacionamento. Escolha a equipe mínima, sem contactar ninguém.",
+      "expected": [
+        "customer_director",
+        "support_specialist"
+      ],
+      "selected": [
+        "customer_director",
+        "support_specialist",
+        "customer_success_specialist"
+      ],
+      "teams": [
+        {
+          "lead": "customer_director",
+          "specialists": [
+            "support_specialist",
+            "customer_success_specialist"
+          ],
+          "reason": "A diretora coordena o atendimento e define critérios de prioridade e níveis de serviço. O especialista em atendimento registra e categoriza os chamados, faz o diagnóstico inicial, resolve o que estiver em seu alcance e escalona os demais conforme impacto, urgência e prazo. O especialista em sucesso do cliente acompanha contas com recorrência, adoção e risco de saída, articulando planos de relacionamento e acompanhando sua evolução."
+        }
+      ],
+      "excluded": 44,
+      "matches_expected": true
+    },
+    {
+      "id": "finance",
+      "goal": "Prepare uma análise de orçamento e projeções para comparar dois cenários de investimento ao longo do próximo trimestre. Escolha a equipe mínima, sem aprovar gastos.",
+      "expected": [
+        "finance_director",
+        "financial_planning_analyst"
+      ],
+      "selected": [
+        "finance_director",
+        "financial_planning_analyst"
+      ],
+      "teams": [
+        {
+          "lead": "finance_director",
+          "specialists": [
+            "financial_planning_analyst"
+          ],
+          "reason": "A diretora financeira coordena a análise de orçamento e projeções; o analista de planejamento financeiro modela e compara os cenários, suas premissas e desvios."
+        }
+      ],
+      "excluded": 45,
+      "matches_expected": true
+    }
+  ],
+  "calls": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "0299cbd9605465a8334a28f31ffedb92c3a8fe4d115dcd4fef95007555909eb1",
+      "reservation_id": "engineering",
+      "instance": "catalog-routing",
+      "seconds": 22.191862499996205,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 14320,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1052,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "96b1914d689b5caf15618916e16a23f70cb720c78b9dfaa3f9482ffbebe444f6",
+      "reservation_id": "customer",
+      "instance": "catalog-routing",
+      "seconds": 24.18405260000145,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 15103,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 1161,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "e2612b9405c0e33ae87842f9eb17a8e5608d28b16e942b0d15d7539a923ae0e9",
+      "reservation_id": "finance",
+      "instance": "catalog-routing",
+      "seconds": 21.19303900000523,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 15097,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 989,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "junit": {
+    "signed-final.xml": 1,
+    "budget-final.xml": 3,
+    "baseline-regression.xml": 1
+  },
+  "signed_checkpoints": 10,
+  "node_tests": 16,
+  "typescript_strict": "PASS",
+  "authority_proofs_verified": 143,
+  "nonce_and_recorded_request_time_checked": true,
+  "final_pending_intent_preserved": true,
+  "model_calls": 0,
+  "production_approved": false,
+  "local_links": "OK"
+}

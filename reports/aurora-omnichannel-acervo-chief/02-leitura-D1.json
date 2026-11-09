@@ -1,0 +1,166 @@
+{
+  "pages": [
+    {
+      "number": 1,
+      "note": "Apresenta o escopo: documentação do front-end baseada na leitura do automation-ui em 06/11/2026; serviços do Portal não foram examinados."
+    },
+    {
+      "number": 2,
+      "note": "Sumário e visão geral da base de conhecimento como CRUD de sete tipos, com CRUD adicional de ferramentas de conectores."
+    },
+    {
+      "number": 3,
+      "note": "Localização da tela, autenticação da página, uso do Portal GraphQL e descrição dos sete tipos de conteúdo."
+    },
+    {
+      "number": 4,
+      "note": "Fluxo de navegação e disponibilidade das ações conforme o status de onboarding do aplicativo."
+    },
+    {
+      "number": 5,
+      "note": "Geração e decodificação do token da URL, tratamento de token inválido e navegação de volta."
+    },
+    {
+      "number": 6,
+      "note": "Estrutura dos arquivos e padrão View, ViewController, ViewType e ViewEvent; componentes compartilhados entre tipos."
+    },
+    {
+      "number": 7,
+      "note": "Carregamento das contagens dos cartões, abertura das listas e atualização após fechamento do painel."
+    },
+    {
+      "number": 8,
+      "note": "Ações e colunas por tipo, divergência no acesso ao upload de arquivos e início da tabela de status."
+    },
+    {
+      "number": 9,
+      "note": "Continuação da tabela de status de skills de UI."
+    },
+    {
+      "number": 10,
+      "note": "Campos e operações de informações do negócio, FAQ, arquivos, sites, skills e início de conectores."
+    },
+    {
+      "number": 11,
+      "note": "Autenticação e mTLS de conectores, ferramentas e parâmetros, autenticação de usuário e skills de UI."
+    },
+    {
+      "number": 12,
+      "note": "Controller GraphQL, tratamento de erros e nomes das consultas e mutations por tipo."
+    },
+    {
+      "number": 13,
+      "note": "Eventos de abertura e atualização de painéis e modais."
+    },
+    {
+      "number": 14,
+      "note": "Validações de formulário executadas antes das chamadas ao Portal."
+    },
+    {
+      "number": 15,
+      "note": "Correspondência com conceitos da 360dialog e localização separada de configurações do agente e allowlist."
+    },
+    {
+      "number": 16,
+      "note": "Lacunas conhecidas: upload oculto, acesso às ferramentas, concentração de lógica, dependência do token e comportamento dos serviços e segredos não investigado."
+    }
+  ],
+  "classification": "referência funcional",
+  "reason": "O documento descreve o comportamento e a implementação observados no front-end existente, úteis para relacionar contratos e fluxos ao trabalho de backend. Não estabelece, por si só, requisitos aprovados para o projeto nem comprova as regras dos serviços. O padrão View/Controller/Type/Event e a stack Next.js/GraphQL são características documentadas dessa implementação, sem evidência de que devam substituir outra stack do projeto.",
+  "findings": [
+    {
+      "pages": [
+        1,
+        3,
+        16
+      ],
+      "text": "Escopo e trabalho executado na fonte: o documento relata leitura do código do tatodesk-ui/automation-ui em 06/11/2026. Os serviços e suas regras não foram abertos; portanto, as descrições de backend são inferências a partir do cliente, não verificação do servidor."
+    },
+    {
+      "pages": [
+        2,
+        3,
+        10,
+        11
+      ],
+      "text": "Referência funcional: há sete tipos de conteúdo: informações do negócio, FAQ, arquivos, sites, skills, conectores e skills de UI. Informações do negócio têm um registro por app; conectores possuem ferramentas próprias."
+    },
+    {
+      "pages": [
+        4,
+        5,
+        7
+      ],
+      "text": "Comportamento observado: o acesso à base aparece para onboarding completed. Um token cifrado na URL contém appIntegrationID, appName e urlImage; sem token ou appIntegrationID, a tela informa erro. As contagens são obtidas em paralelo pelas listagens."
+    },
+    {
+      "pages": [
+        3,
+        6,
+        12,
+        13
+      ],
+      "text": "Stack e integração observadas: página Next.js autenticada, componentes organizados em View/Controller/Type/Event e comunicação por eventos locais; os dados passam pelo Portal GraphQL, não por REST direto. O controller retorna dados e errors. Esses detalhes são referência da fonte, não imposição de stack ao projeto."
+    },
+    {
+      "pages": [
+        8,
+        10,
+        12,
+        16
+      ],
+      "text": "Divergência funcional a esclarecer: o modal e a mutation suportam upload de arquivos, com formatos especificados e limite de 100 MB, mas a lista não mostra o botão Novo; a tela documentada permite listar e excluir. A causa e a intenção não foram confirmadas."
+    },
+    {
+      "pages": [
+        8,
+        9,
+        10,
+        14
+      ],
+      "text": "Regras de formulário observadas, candidatas a requisitos apenas após confirmação: pergunta e resposta de FAQ obrigatórias; URL válida para sites; instruções de skill obrigatórias; restrições de nomes; e validações de arquivo. Status de rastreamento e de skills de UI são exibidos na interface."
+    },
+    {
+      "pages": [
+        10,
+        11,
+        14
+      ],
+      "text": "Referência de integração: conectores suportam HTTP ou MCP, vários tipos de autenticação, atualização separada de credenciais OAuth e certificado mTLS. Ferramentas descrevem método, path, parâmetros, preenchimento fixo ou por macros e possível autenticação do usuário. A fonte documenta validações do cliente, sem demonstrar sua aplicação no servidor."
+    },
+    {
+      "pages": [
+        11,
+        14
+      ],
+      "text": "Skills de UI representam componentes interativos do WhatsApp; Flow exige ID, e título e instrução seguem validações do formulário."
+    },
+    {
+      "pages": [
+        12
+      ],
+      "text": "Referência de contrato: as operações GraphQL têm nomenclatura inconsistente entre tipos, incluindo MBAFaqs, mbaKnowledgeFiles e listMBAUISkills; seus nomes devem ser consultados no controller em vez de presumidos."
+    },
+    {
+      "pages": [
+        15
+      ],
+      "text": "Contexto: a fonte relaciona conhecimento, skills e conectores à organização da documentação 360dialog. Handoff, follow-up, rollout e allowlist ficam em outras áreas; sua implementação não é detalhada aqui."
+    },
+    {
+      "pages": [
+        8,
+        16
+      ],
+      "text": "Hipótese explícita da fonte: a ausência do botão de upload pode ser intencional, por exemplo por limitação da Meta, ou uma regressão; nenhuma dessas explicações foi confirmada."
+    }
+  ],
+  "gaps": [
+    "Não foram fornecidos requisitos ou stack do projeto de destino para avaliar compatibilidade ou decidir quais comportamentos devem ser adotados.",
+    "As regras, autorização, validações e comportamento efetivo dos serviços por trás do Portal não foram examinados.",
+    "Confirmar se o botão de upload de arquivos deve existir e como o fluxo é disponibilizado.",
+    "Verificar como o Portal armazena e devolve Client Secret, chave mTLS e outras credenciais.",
+    "Confirmar contratos GraphQL, tratamento de erros e limites no servidor com a implementação ou documentação correspondente.",
+    "A relação com a documentação 360dialog é relatada pela fonte; a documentação externa não foi fornecida para conferência independente."
+  ]
+}

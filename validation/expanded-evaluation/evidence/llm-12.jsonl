@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a6e1-c902-75f0-92c8-90fafee45403"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"limite de diárias de hotel\\\",\\\"política de trabalho remoto\\\"],\\\"low_level_keywords\\\":[\\\"equipe Aurora\\\",\\\"2026-02-01\\\",\\\"politica-remoto@v1\\\"]}\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12694,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":63,"reasoning_output_tokens":0}}

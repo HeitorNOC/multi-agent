@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "sources_preserved": 16,
+  "restart_to_ready_seconds": 42.172,
+  "new_extraction_calls": 0,
+  "same_installation": true,
+  "same_resources": false,
+  "queued_job_kept_id": true,
+  "unknown_required_review": true,
+  "effect_receipt_reused": true,
+  "jobs": 4,
+  "controlled_dispatches_before": 5,
+  "controlled_dispatches_after": 8,
+  "paid_model_calls": 0,
+  "backup_seconds": 2.594,
+  "restore_postgres_seconds": 5.063,
+  "postgres_replaced": true,
+  "tampered_backup_refused": true,
+  "newer_state_refused": true,
+  "late_admissions_reported": 1
+}

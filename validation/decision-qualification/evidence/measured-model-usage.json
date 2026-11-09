@@ -1,0 +1,11 @@
+{
+  "calls": 2,
+  "usage": {
+    "input_tokens": 28952,
+    "cached_input_tokens": 0,
+    "output_tokens": 470,
+    "reasoning_output_tokens": 0
+  },
+  "monetary_cost": null,
+  "scope": "probe plus one seven-case benchmark; excludes the coordinating chat and all other system usage"
+}

@@ -1,0 +1,7 @@
+{
+  "fixture_only": true,
+  "documents": 8,
+  "corpus_sha256": "3aceb283d0ada4efe30ee16f2878539ff12739bda0609aa50ce263357146568e",
+  "secrets_blocked": true,
+  "model_calls": 0
+}

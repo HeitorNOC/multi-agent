@@ -1,0 +1,12 @@
+[
+  {
+    "operation": "UPDATE decision_receipts SET record_json='tamper';",
+    "exit_code": 3,
+    "message": "ERROR:  permission denied for table decision_receipts"
+  },
+  {
+    "operation": "DELETE FROM decision_receipts;",
+    "exit_code": 3,
+    "message": "ERROR:  permission denied for table decision_receipts"
+  }
+]

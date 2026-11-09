@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "scope": "simulated local cold restore; authority survives independently",
+  "postgres_image": "postgres@sha256:f3bd19c606e442c3d7bdfa8002e03fe260a1023351e0ea4598032022b68dd6e3",
+  "backup_seconds": 0.279,
+  "restore_and_validation_seconds": 4.658,
+  "total_seconds": 11.592,
+  "manifest": {
+    "model-slots.sqlite": "dee56621b942f52bba561f746bec24e18564340ec0d05089a4e8224871e043b0",
+    "runtime.dump": "acb45d147e3d85f69b853c0d236f2a46ef282737dac04fa84ccdce91690523d1"
+  },
+  "source_postgres_stopped": true,
+  "new_volume": true,
+  "checkpoint_resumed": true,
+  "known_receipt_replayed": true,
+  "unknown_preserved": true,
+  "post_snapshot_receipt_fenced": true,
+  "reservations": 3,
+  "synthetic_provider_dispatches_after_restore": 0,
+  "paid_model_calls": 0,
+  "rpo_measured": false,
+  "rto_sla_qualified": false
+}

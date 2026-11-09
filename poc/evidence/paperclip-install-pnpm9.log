@@ -1,0 +1,101 @@
+npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+Scope: all 36 workspace projects
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +1343
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 1343, reused 0, downloaded 17, added 0
+Progress: resolved 1343, reused 0, downloaded 40, added 39
+Progress: resolved 1343, reused 0, downloaded 54, added 51
+Progress: resolved 1343, reused 0, downloaded 78, added 75
+Progress: resolved 1343, reused 0, downloaded 130, added 127
+Progress: resolved 1343, reused 0, downloaded 181, added 181
+Progress: resolved 1343, reused 0, downloaded 208, added 211
+Progress: resolved 1343, reused 0, downloaded 247, added 252
+Progress: resolved 1343, reused 0, downloaded 277, added 280
+Progress: resolved 1343, reused 0, downloaded 354, added 355
+Progress: resolved 1343, reused 0, downloaded 396, added 403
+Progress: resolved 1343, reused 0, downloaded 422, added 429
+Progress: resolved 1343, reused 0, downloaded 446, added 450
+Progress: resolved 1343, reused 0, downloaded 469, added 475
+Progress: resolved 1343, reused 0, downloaded 478, added 485
+Progress: resolved 1343, reused 0, downloaded 484, added 489
+Progress: resolved 1343, reused 0, downloaded 491, added 498
+Progress: resolved 1343, reused 0, downloaded 511, added 518
+Progress: resolved 1343, reused 0, downloaded 540, added 547
+Progress: resolved 1343, reused 0, downloaded 578, added 585
+Progress: resolved 1343, reused 0, downloaded 588, added 597
+Progress: resolved 1343, reused 0, downloaded 607, added 617
+Progress: resolved 1343, reused 0, downloaded 629, added 638
+Progress: resolved 1343, reused 0, downloaded 649, added 658
+Progress: resolved 1343, reused 0, downloaded 687, added 694
+Progress: resolved 1343, reused 0, downloaded 712, added 721
+Progress: resolved 1343, reused 0, downloaded 735, added 738
+Progress: resolved 1343, reused 0, downloaded 766, added 774
+Progress: resolved 1343, reused 0, downloaded 807, added 814
+Progress: resolved 1343, reused 0, downloaded 825, added 833
+Progress: resolved 1343, reused 0, downloaded 840, added 848
+Progress: resolved 1343, reused 0, downloaded 849, added 857
+Progress: resolved 1343, reused 0, downloaded 870, added 875
+Progress: resolved 1343, reused 0, downloaded 894, added 903
+Progress: resolved 1343, reused 0, downloaded 926, added 934
+Progress: resolved 1343, reused 0, downloaded 935, added 944
+Progress: resolved 1343, reused 0, downloaded 944, added 952
+Progress: resolved 1343, reused 0, downloaded 958, added 965
+Progress: resolved 1343, reused 0, downloaded 974, added 980
+Progress: resolved 1343, reused 0, downloaded 988, added 996
+Progress: resolved 1343, reused 0, downloaded 1006, added 1011
+Progress: resolved 1343, reused 0, downloaded 1056, added 1064
+Progress: resolved 1343, reused 0, downloaded 1072, added 1080
+Progress: resolved 1343, reused 0, downloaded 1096, added 1106
+Progress: resolved 1343, reused 0, downloaded 1105, added 1111
+Progress: resolved 1343, reused 0, downloaded 1127, added 1132
+Progress: resolved 1343, reused 0, downloaded 1155, added 1159
+Progress: resolved 1343, reused 0, downloaded 1196, added 1200
+Progress: resolved 1343, reused 0, downloaded 1240, added 1249
+Progress: resolved 1343, reused 0, downloaded 1270, added 1278
+Progress: resolved 1343, reused 0, downloaded 1291, added 1301
+Progress: resolved 1343, reused 0, downloaded 1307, added 1316
+Progress: resolved 1343, reused 0, downloaded 1324, added 1334
+Progress: resolved 1343, reused 0, downloaded 1326, added 1335
+Progress: resolved 1343, reused 0, downloaded 1329, added 1337
+Progress: resolved 1343, reused 0, downloaded 1329, added 1338
+Progress: resolved 1343, reused 0, downloaded 1329, added 1339
+Progress: resolved 1343, reused 0, downloaded 1331, added 1340
+Progress: resolved 1343, reused 0, downloaded 1332, added 1341
+Progress: resolved 1343, reused 0, downloaded 1332, added 1342
+Progress: resolved 1343, reused 0, downloaded 1333, added 1342
+Progress: resolved 1343, reused 0, downloaded 1333, added 1343, done
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\create-paperclip-plugin\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\examples\plugin-authoring-smoke-example\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\examples\plugin-file-browser-example\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\examples\plugin-hello-world-example\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\examples\plugin-kitchen-sink-example\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\paperclip-plugin-fake-sandbox\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\plugin-llm-wiki\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\plugin-workspace-diff\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\ui\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\server\node_modules\.bin\paperclip-runner-eval-session. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\paperclip-runner\dist\cli\eval-session.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\server\node_modules\.bin\paperclip-runner-codex-proxy. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\paperclip-runner\dist\cli\codex-app-server-unix-proxy.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\server\node_modules\.bin\paperclip-runner-opencode-proxy. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\paperclip-runner\dist\cli\opencode-app-server-proxy.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\server\node_modules\.bin\paperclip-runner-acpx-sidecar. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\paperclip-runner\dist\cli\acpx-runtime-sidecar.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\server\node_modules\.bin\paperclip-runner-copilot-metadata-probe. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\paperclip-runner\dist\cli\copilot-metadata-probe.js.EXE'
+ WARN  Failed to create bin at C:\Users\PC\multi-agent\vendor\paperclip\server\node_modules\.bin\paperclip-plugin-dev-server. ENOENT: no such file or directory, stat 'C:\Users\PC\multi-agent\vendor\paperclip\packages\plugins\sdk\dist\dev-cli.js.EXE'
+
+devDependencies:
++ @playwright/test 1.62.1
++ agentmail 0.5.31
++ cross-env 10.1.0
++ esbuild 0.28.2
++ oxc-parser 0.127.0
++ turbo 2.11.10
++ typescript 7.0.2
++ vitest 5.0.3
++ yaml 2.9.1
+
+Done in 1m 8s
+npm notice
+npm notice New major version of npm available! 11.19.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

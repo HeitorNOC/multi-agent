@@ -1,0 +1,33 @@
+{
+  "configured_arrival_seconds": 90,
+  "attempts": 96,
+  "admission_outcomes": {
+    "202": 48,
+    "429": 48
+  },
+  "approval_outcomes": {
+    "202": 41,
+    "429": 108
+  },
+  "accepted": 48,
+  "completed": 37,
+  "elapsed_to_drain_seconds": 88.672,
+  "peak_workers": 2,
+  "peak_waiting": 8,
+  "wait_p50_seconds": 7.284,
+  "wait_p95_seconds": 12.16,
+  "delivery_p50_seconds": 19.564,
+  "delivery_p95_seconds": 26.669,
+  "state_poll_p95_seconds": 0.047,
+  "effects": 37,
+  "slots_per_completed_job": {
+    "4": 37
+  },
+  "reservations": 167,
+  "controlled_dispatches": 167,
+  "published_sources": 4,
+  "paid_model_calls": 0,
+  "pending_at_end": 8,
+  "postgres_image": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+  "scope": "one host, real stores, synthetic incident and controlled model"
+}

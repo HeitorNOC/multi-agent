@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a70d-6980-7c62-b71b-724a13ba2bf2"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"A proposta sintética **SIGILO_AQUISICAO_2026** tem valor de **R$ 9.700.000**. [1]\\n\\nA fonte não informa a data de vigência desse valor; portanto, não é possível confirmar que ele se aplica em 1º de fevereiro de 2026. [1]\\n\\n### References\\n\\n* [1] aquisicao@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12125,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":102,"reasoning_output_tokens":0}}

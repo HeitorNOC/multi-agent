@@ -1,0 +1,16 @@
+{
+  "installation": "business-flow-e39ce24286",
+  "scope": "development-only; separate identities, not enterprise SSO",
+  "accounts": [
+    {
+      "id": "board",
+      "label": "Revisor local 1",
+      "credential": "fb2d82376893bdee214fec9b4626ff724c8d95b0b9cafcac1458eac91b84db97"
+    },
+    {
+      "id": "reviewer2",
+      "label": "Revisor local 2",
+      "credential": "6a5aa66ce9edc881d6c3b70ccbb83bfe4de154c472534bc507e3ad6d01b6567e"
+    }
+  ]
+}

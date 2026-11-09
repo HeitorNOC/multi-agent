@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a7c5-f627-7a33-b676-3499e2a4f268"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O teto diário de alimentação é **R$ 240**. [1]\\n\\nA versão selecionada está em vigor desde **1º de janeiro de 2026**, abrangendo a data consultada de 1º de fevereiro de 2026. Sua publicação ocorreu em 4 de novembro de 2026. Não há informação sobre o fim da vigência.\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":12390,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":107,"reasoning_output_tokens":0}}

@@ -1,0 +1,30 @@
+{
+  "decision": "Prosseguir com a fatia local SQLite para handoff, resposta simulada e retorno ao bot, sem assumir que ela representa os contratos ou as garantias do Contact Center real. Delegar a verificação dos contratos quando houver acesso aos repositórios e ao ambiente de integração.",
+  "assignments": [
+    {
+      "agent": "backend_engineer",
+      "task": "Revisar e completar a fatia local de handoff e resposta simulada, mantendo separados o estado do atendimento e o controle da sessão. Documentar os vínculos e as hipóteses locais de conta, integração, sessão, atendimento e mensagens.",
+      "acceptance": "Fluxos locais de transferência e resposta reproduzíveis, com transições e identificadores observáveis; emissão ou publicação não apresentada como entrega confirmada; hipóteses e diferenças em relação ao sistema real documentadas."
+    },
+    {
+      "agent": "backend_engineer_2",
+      "task": "Implementar na fatia local o retorno ao bot, definindo o gatilho, as transições separadas de atendimento e controle da sessão e o comportamento de falha e repetição. Preparar um roteiro para conferir, quando houver acesso, os contratos reais de GraphQL, REST, Socket.IO e Kafka, identidade, autorização, payloads, erros e compatibilidade.",
+      "acceptance": "Retorno local reproduzível com estado final verificável e falhas observáveis, sem criar estados contraditórios nos cenários locais definidos; roteiro identifica fontes, responsáveis e pontos a validar, sem afirmar compatibilidade real."
+    },
+    {
+      "agent": "qa_engineer",
+      "task": "Preparar e executar, após as alterações locais, testes da transferência para humano, resposta simulada e retorno ao bot, incluindo falha, repetição, concorrência e verificação independente do estado do atendimento e do controle da sessão. Registrar limites da simulação e preparar cenários de integração e segurança para quando houver acesso.",
+      "acceptance": "Resultados locais rastreáveis aos critérios de aceite, com estados e mensagens observados, falhas e limitações registrados; cenários dependentes de serviços reais identificados separadamente."
+    }
+  ],
+  "blocked": [
+    {
+      "task": "Validar contratos e implementação reais, chamadores, autorização de backend, histórico e retenção, caches, tópicos, tratamento de falhas e todos os caminhos de encerramento.",
+      "blocker": "Repositórios dos serviços não encontrados no workspace."
+    },
+    {
+      "task": "Validar integração de ponta a ponta, entrega e capacidades dos provedores, isolamento de acesso, reconexão, concorrência, schedules, desempenho e infraestrutura SIP.",
+      "blocker": "Ambiente real de integração e acesso aos provedores ou à infraestrutura não confirmados."
+    }
+  ]
+}

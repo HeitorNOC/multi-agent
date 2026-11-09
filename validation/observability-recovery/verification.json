@@ -1,0 +1,190 @@
+{
+  "suites": {
+    "recovery-final.xml": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 131.571
+    },
+    "regressions.xml": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 43.374
+    },
+    "telemetry-final.xml": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.238
+    }
+  },
+  "node_tests": 30,
+  "strict": true,
+  "recovery_attempts": [
+    {
+      "installation": "business-flow-0c15771e80",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 76
+    },
+    {
+      "installation": "business-flow-0ea86db86a",
+      "result": "PASS_UNKNOWN_GOVERNED_CLOSURE",
+      "signature_count": 82
+    },
+    {
+      "installation": "business-flow-11a2b37e4a",
+      "result": "PASS_ACTIVE_AND_KNOWN_CLOSE_REJECTED",
+      "signature_count": 23
+    },
+    {
+      "installation": "business-flow-2340da68d1",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 76
+    },
+    {
+      "installation": "business-flow-29dc780fd6",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 74
+    },
+    {
+      "installation": "business-flow-2c60b1f713",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 76
+    },
+    {
+      "installation": "business-flow-2f07838ac7",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 76
+    },
+    {
+      "installation": "business-flow-315d3a337d",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 76
+    },
+    {
+      "installation": "business-flow-3d177e84f3",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 74
+    },
+    {
+      "installation": "business-flow-4fb7df9e15",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 76
+    },
+    {
+      "installation": "business-flow-5784b7dab4",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 69
+    },
+    {
+      "installation": "business-flow-5865b3fffa",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 69
+    },
+    {
+      "installation": "business-flow-6dcd8eaf8b",
+      "result": "PASS_UNKNOWN_GOVERNED_CLOSURE",
+      "signature_count": 82
+    },
+    {
+      "installation": "business-flow-77f6638a4b",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 76
+    },
+    {
+      "installation": "business-flow-7bee1a1731",
+      "result": "PASS_ACTIVE_AND_KNOWN_CLOSE_REJECTED",
+      "signature_count": 23
+    },
+    {
+      "installation": "business-flow-818d616d0a",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 76
+    },
+    {
+      "installation": "business-flow-8b5e1f4ad9",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 74
+    },
+    {
+      "installation": "business-flow-9f702d8057",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 76
+    },
+    {
+      "installation": "business-flow-a1aa642c67",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 74
+    },
+    {
+      "installation": "business-flow-a3458ab094",
+      "result": "PASS_UNKNOWN_GOVERNED_CLOSURE",
+      "signature_count": 89
+    },
+    {
+      "installation": "business-flow-a3fa5617d6",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 74
+    },
+    {
+      "installation": "business-flow-a87da6019a",
+      "result": "PASS_UNKNOWN_GOVERNED_CLOSURE",
+      "signature_count": 91
+    },
+    {
+      "installation": "business-flow-b313664efd",
+      "result": "PASS_UNKNOWN_GOVERNED_CLOSURE",
+      "signature_count": 91
+    },
+    {
+      "installation": "business-flow-c8e78ee883",
+      "result": "PASS_UNKNOWN_GOVERNED_CLOSURE",
+      "signature_count": 89
+    },
+    {
+      "installation": "business-flow-d97c1721f0",
+      "result": "PASS_UNKNOWN_GOVERNED_CLOSURE",
+      "signature_count": 89
+    },
+    {
+      "installation": "business-flow-e303513238",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 69
+    },
+    {
+      "installation": "business-flow-e514e508aa",
+      "result": "FAIL",
+      "signature_count": 12
+    },
+    {
+      "installation": "business-flow-e836dc5e6b",
+      "result": "PASS_READ_COMMIT_RECOVERY",
+      "signature_count": 74
+    },
+    {
+      "installation": "business-flow-e86756f0b7",
+      "result": "PASS_UNKNOWN_GOVERNED_CLOSURE",
+      "signature_count": 82
+    },
+    {
+      "installation": "business-flow-f1b53e0956",
+      "result": "FAIL",
+      "signature_count": 59
+    }
+  ],
+  "native": {
+    "result": "PASS_BOUNDED_TWO_SCENARIOS",
+    "calls": 33,
+    "reserved": 33,
+    "historical_aurora_reserved": 55,
+    "aggregate_aurora_reserved": 88,
+    "verified_authority_signatures": 38,
+    "exact_handoffs": 12
+  },
+  "production_approved": false,
+  "new_qualification_does_not_rewrite_historical_failures": true
+}

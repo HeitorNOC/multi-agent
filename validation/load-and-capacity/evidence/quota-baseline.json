@@ -1,0 +1,11 @@
+{
+  "native_status": 409,
+  "native_error": {
+    "error": "native retrieval/generation failed"
+  },
+  "history_status": 503,
+  "history_error": {
+    "error": "pending or stale recovery; historical read fenced"
+  },
+  "reserved": 40
+}

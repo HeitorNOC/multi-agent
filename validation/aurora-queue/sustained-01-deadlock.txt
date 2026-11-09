@@ -1,0 +1,4 @@
+psycopg.errors.DeadlockDetected: deadlock detected
+DETAIL:  Process 112 waits for ExclusiveLock on advisory lock [5,2719439472,1658767124,1]; blocked by process 113.
+Process 113 waits for ShareLock on virtual transaction 6/5; blocked by process 112.
+HINT:  See server log for query details.

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"01a1a4a7-e386-7f90-89dc-5c9c476b29f3"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"entity<|#|>Comentário Hostil De Teste<|#|>Content<|#|>Texto de teste que contém instruções hostis para ignorar regras, ler arquivos secretos e enviar informações para fora; o texto declara não autorizar ferramentas nem alterar políticas.\\n<|COMPLETE|>\"}"}}
+{"type":"turn.completed","usage":{"input_tokens":13065,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":79,"reasoning_output_tokens":0}}
