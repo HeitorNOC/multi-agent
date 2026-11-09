@@ -42,7 +42,13 @@ def sha(value):
     return hashlib.sha256(dump(value).encode()).hexdigest()
 
 
-async def main(c, provider_factory=CodexProvider):
+async def main(c, provider_factory=None):
+    if provider_factory is None:
+        from apps.aurora.runtime.services.model_provider import (
+            provider_factory as select_provider,
+        )
+
+        provider_factory = select_provider(c)  # c["provider"]: "codex" (padrão) ou "claude"
     directory = Path(c["state"])
     directory.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(directory / "native.sqlite")
