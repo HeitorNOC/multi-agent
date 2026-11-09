@@ -18,7 +18,11 @@ import type {
   QueueEntry,
 } from "./ledger/journey-ledger.ts";
 import { openJourneyLedger } from "./ledger/open-ledger.ts";
-import { RuleBasedChiefOfStaff } from "./conversation/chief-of-staff.ts";
+import {
+  normalize,
+  RuleBasedChiefOfStaff,
+  type ConversationOffer,
+} from "./conversation/chief-of-staff.ts";
 import {
   ConversationError,
   ConversationService,
@@ -600,22 +604,53 @@ async function admitJob(
   return { status: 201, body: { id } };
 }
 
-/** Meta do trabalho que a conversa pode abrir; `null` quando este perfil não abre por conversa. */
-function conversationGoal(): string | null {
-  if (config.recoveryOnly) return null;
-  const goal = policy.chooseGoal ? policy.chooseGoal({}, config.pilotDirective) : GOAL;
-  if (goal === policy.QUE_EXECUTION_GOAL || policy.repositoryReview) return null;
-  return goal;
+/**
+ * Trabalhos que a conversa pode abrir. Vêm do catálogo de cenários da política (Aurora) ou,
+ * na demonstração, do único pedido disponível. Ficam de fora os que exigem fluxo próprio:
+ * importação de entrega de repositório e execução que exige o repositório configurado.
+ * O piloto com tarefa livre não abre trabalhos pela conversa (o texto iria direto ao modelo).
+ */
+type ConversationTarget = ConversationOffer & { goal: string };
+function conversationTargets(): ConversationTarget[] {
+  if (config.recoveryOnly || pilotAccess) return [];
+  const scenarios: any[] | undefined = policy.CATALOG?.scenarios;
+  if (!scenarios)
+    return [
+      {
+        id: "default",
+        title: "Análise de vendas e estoque",
+        goal: GOAL,
+        keywords: ["vendas", "estoque", "acao comercial", "proposta comercial"],
+      },
+    ];
+  return scenarios
+    .filter((s) => s.id !== "engineering_que_review")
+    .filter((s) => s.goal !== policy.QUE_EXECUTION_GOAL || config.engineeringRepository)
+    .map((s) => ({
+      id: String(s.id),
+      title: String(s.title),
+      goal: String(s.goal),
+      // Termos do título e da etiqueta do cenário, sem palavras curtas demais para distinguir.
+      keywords: [
+        ...new Set(
+          normalize(`${s.title} ${s.label ?? ""}`)
+            .split(/[^a-z0-9]+/)
+            .filter((w) => w.length >= 4),
+        ),
+      ],
+    }));
 }
+const targets = conversationTargets();
 
 const conversations = new ConversationService({
   ledger,
-  chief: new RuleBasedChiefOfStaff(conversationGoal() ?? "nenhum trabalho por conversa neste perfil."),
-  async openJob(onAdmitted): Promise<Admission> {
-    const goal = conversationGoal();
-    if (!goal) return { opened: false, reason: "este perfil não abre trabalhos pela conversa" };
+  chief: new RuleBasedChiefOfStaff(),
+  offers: targets.map(({ id, title, keywords }) => ({ id, title, keywords })),
+  async openJob(offerId, onAdmitted): Promise<Admission> {
+    const target = targets.find((t) => t.id === offerId);
+    if (!target) return { opened: false, reason: "este trabalho não está disponível" };
     try {
-      const result = await admitJob(goal, { onAdmitted });
+      const result = await admitJob(target.goal, { onAdmitted });
       if (result.status >= 400)
         return { opened: false, reason: String(result.body.error ?? "admissão recusada") };
       return { opened: true };

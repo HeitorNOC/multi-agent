@@ -10,7 +10,7 @@ import type { JourneyStore } from "../ledger/journey-ledger.ts";
 import { RuleBasedChiefOfStaff } from "./chief-of-staff.ts";
 import { ConversationError, ConversationService, type Admission } from "./conversation-service.ts";
 
-const OFFER = "analisar vendas e estoque.";
+const OFFERS = [{ id: "vendas", title: "Análise de vendas e estoque", keywords: ["vendas", "estoque", "acao comercial"] }];
 type Mode = "open" | "refuse" | "fail-after-admission" | "fail-before-admission";
 
 const cleanups: (() => Promise<void>)[] = [];
@@ -26,7 +26,7 @@ function setup(initial: Mode = "open") {
     rmSync(stateDir, { recursive: true, force: true });
   });
   const state = { mode: initial, opened: 0 };
-  const openJob = async (onAdmitted: (tx: JourneyStore, id: string) => Promise<void>): Promise<Admission> => {
+  const openJob = async (_offer: string, onAdmitted: (tx: JourneyStore, id: string) => Promise<void>): Promise<Admission> => {
     if (state.mode === "refuse") return { opened: false, reason: "a fila está cheia" };
     if (state.mode === "fail-before-admission") throw new Error("runtime indisponível");
     await ledger.transaction(async (tx) => {
@@ -38,18 +38,42 @@ function setup(initial: Mode = "open") {
     if (state.mode === "fail-after-admission") throw new Error("worker não iniciou");
     return { opened: true };
   };
-  const service = new ConversationService({ ledger, chief: new RuleBasedChiefOfStaff(OFFER), openJob });
+  const service = new ConversationService({ ledger, chief: new RuleBasedChiefOfStaff(), offers: OFFERS, openJob });
   return { ledger, service, state };
 }
 
 const jobCount = async (ledger: SqliteJourneyLedger) => (await ledger.listJobIds()).length;
 
 describe("Chief of Staff por regras", () => {
-  const chief = new RuleBasedChiefOfStaff(OFFER);
-  const turn = (text: string, lastJob: { id: string; status: "queued" } | null = null) => ({ text, history: [], lastJob });
+  const chief = new RuleBasedChiefOfStaff();
+  const turn = (text: string, lastJob: { id: string; status: "queued" } | null = null, offers = OFFERS) => ({ text, history: [], lastJob, offers });
+  const catalog = [
+    { id: "campaign", title: "Campanha Horizonte", keywords: ["campanha", "horizonte", "marketing", "juridico"] },
+    { id: "incident", title: "Incidente no CRM", keywords: ["incidente", "crm", "tecnologia", "juridico"] },
+  ];
+
+  test("com vários trabalhos, escolhe o que mais combina com o pedido", async () => {
+    assert.deepEqual(await chief.decide(turn("avalie a campanha Horizonte", null, catalog)), {
+      kind: "open_job",
+      offerId: "campaign",
+      text: 'Entendido. Abri um trabalho de "Campanha Horizonte". Vou planejar com os especialistas e aviso aqui quando houver um parecer para você aprovar.',
+    });
+    assert.equal(((await chief.decide(turn("priorize o incidente no CRM", null, catalog))) as any).offerId, "incident");
+  });
+
+  test("empate pergunta qual; pedido vago lista o que está disponível", async () => {
+    assert.match((await chief.decide(turn("o jurídico precisa avaliar", null, catalog))).text, /mais de um trabalho: "Campanha Horizonte" ou "Incidente no CRM"/);
+    assert.match((await chief.decide(turn("faça uma análise", null, catalog))).text, /consigo abrir: "Campanha Horizonte" ou "Incidente no CRM"/);
+  });
+
+  test("sem trabalhos oferecidos, não abre nada e diz por quê", async () => {
+    const d = await chief.decide(turn("analise as vendas", null, []));
+    assert.equal(d.kind, "reply");
+    assert.match(d.text, /não abro trabalhos pela conversa/);
+  });
 
   test("pedido de trabalho dentro do escopo abre trabalho", async () => {
-    for (const text of ["Analise as VENDAS de fevereiro", "quero um relatório de estoque", "proponha uma ação comercial"])
+    for (const text of ["Analise as VENDAS de fevereiro", "quero um relatório de estoque", "proponha uma ação comercial", "faça uma análise"])
       assert.equal((await chief.decide(turn(text))).kind, "open_job", text);
   });
 
@@ -62,7 +86,7 @@ describe("Chief of Staff por regras", () => {
   test("fora do escopo explica o que está disponível em vez de inventar", async () => {
     const d = await chief.decide(turn("marque uma reunião com o fornecedor"));
     assert.equal(d.kind, "reply");
-    assert.match(d.text, /Nesta instalação eu consigo/);
+    assert.match(d.text, /Nesta instalação eu consigo abrir: Análise de vendas e estoque/);
   });
 });
 
@@ -176,7 +200,8 @@ describe("serviço de conversas", () => {
     const clock = () => `2026-03-01T00:00:${String(++t).padStart(2, "0")}.000Z`;
     const svc = new ConversationService({
       ledger,
-      chief: new RuleBasedChiefOfStaff(OFFER),
+      chief: new RuleBasedChiefOfStaff(),
+      offers: OFFERS,
       openJob: async () => ({ opened: false, reason: "-" }),
       now: clock,
     });

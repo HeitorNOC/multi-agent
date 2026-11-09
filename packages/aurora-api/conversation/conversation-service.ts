@@ -18,7 +18,7 @@ import type {
   JourneyLedger,
   JourneyStore,
 } from "../ledger/journey-ledger.ts";
-import type { ChiefOfStaff } from "./chief-of-staff.ts";
+import type { ChiefOfStaff, ConversationOffer } from "./chief-of-staff.ts";
 
 export class ConversationError extends Error {
   readonly status: number;
@@ -35,11 +35,13 @@ export type Admission = { opened: true } | { opened: false; reason: string };
 export interface ConversationDeps {
   ledger: JourneyLedger;
   chief: ChiefOfStaff;
+  /** Trabalhos que a conversa pode abrir nesta instalação. */
+  offers: ConversationOffer[];
   /**
-   * Abre um trabalho. `onAdmitted` roda dentro da transação que cria o trabalho; se ele lançar,
-   * o trabalho não é criado. Recusas esperadas (fila cheia etc.) voltam como `opened: false`.
+   * Abre o trabalho `offerId`. `onAdmitted` roda dentro da transação que cria o trabalho; se
+   * lançar, o trabalho não é criado. Recusas esperadas (fila cheia etc.) voltam como `opened: false`.
    */
-  openJob(onAdmitted: (tx: JourneyStore, jobId: string) => Promise<void>): Promise<Admission>;
+  openJob(offerId: string, onAdmitted: (tx: JourneyStore, jobId: string) => Promise<void>): Promise<Admission>;
   now?: () => string;
 }
 
@@ -84,12 +86,14 @@ function onlyFields(body: unknown, allowed: string[]): asserts body is Record<st
 export class ConversationService {
   private readonly ledger: JourneyLedger;
   private readonly chief: ChiefOfStaff;
+  private readonly offers: ConversationOffer[];
   private readonly openJob: ConversationDeps["openJob"];
   private readonly now: () => string;
 
   constructor(deps: ConversationDeps) {
     this.ledger = deps.ledger;
     this.chief = deps.chief;
+    this.offers = deps.offers;
     this.openJob = deps.openJob;
     this.now = deps.now ?? (() => new Date().toISOString());
   }
@@ -181,12 +185,15 @@ export class ConversationService {
       text: question.text,
       history,
       lastJob: await this.lastJob(history),
+      offers: this.offers,
     });
     if (decision.kind === "reply") return this.reply(conversation, question.seq, decision.text);
+    // Defesa contra uma implementação que invente um trabalho fora do catálogo.
+    requireThat(this.offers.some((o) => o.id === decision.offerId), 500, "Chief of Staff escolheu um trabalho indisponível");
 
     let admission: Admission;
     try {
-      admission = await this.openJob(async (tx, jobId) => {
+      admission = await this.openJob(decision.offerId, async (tx, jobId) => {
         await this.requireUnanswered(tx, conversation, question.seq);
         await this.appendReply(tx, conversation, question.seq, decision.text, jobId);
       });

@@ -2,6 +2,7 @@
 // Roda sobre SQLite ou, com AURORA_TEST_LEDGER=postgres, sobre PostgreSQL.
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
+import { pathToFileURL, fileURLToPath } from "node:url";
 import { dropTestSchemas, fakeBackend, newStateDir, startApi, waitFor, type Api } from "./harness.ts";
 
 let backend: Awaited<ReturnType<typeof fakeBackend>>;
@@ -15,9 +16,9 @@ after(async () => {
   await dropTestSchemas();
 });
 
-async function start(opts: { workerMode?: string; queueCapacity?: number; state?: string } = {}) {
+async function start(opts: { workerMode?: string; queueCapacity?: number; state?: string; extraConfig?: Record<string, unknown> } = {}) {
   const state = opts.state ?? newStateDir();
-  const api = await startApi({ state, backend: backend.url, workerMode: opts.workerMode ?? "journey", queueCapacity: opts.queueCapacity });
+  const api = await startApi({ state, backend: backend.url, workerMode: opts.workerMode ?? "journey", queueCapacity: opts.queueCapacity, extraConfig: opts.extraConfig });
   running.push(api);
   return { api, state };
 }
@@ -103,4 +104,27 @@ test("rotas e validações: conversa inexistente, texto vazio e rota desconhecid
   assert.equal((await say(api, id, "   ")).status, 400);
   assert.equal((await api.post("/api/conversations", { title: "" })).status, 400);
   assert.equal((await api.get(`/api/conversations/${id}/outra`)).status, 404);
+});
+
+test("com a política do Aurora, o Chief of Staff escolhe entre os cenários do catálogo", async () => {
+  const policyModule = pathToFileURL(fileURLToPath(new URL("../../../apps/aurora/domain/policy.ts", import.meta.url))).href;
+  const { api } = await start({ workerMode: "hang", extraConfig: { policyModule } });
+  const id = await newConversation(api);
+
+  const campaign = await say(api, id, "Avalie a campanha Horizonte para novembro");
+  assert.match(campaign.body.reply.text, /Abri um trabalho de "Campanha Horizonte"/);
+  const incident = await say(api, id, "Priorize o incidente no CRM");
+  assert.match(incident.body.reply.text, /Abri um trabalho de "Incidente no CRM"/);
+
+  const { CATALOG } = await import(policyModule);
+  const goals = Object.fromEntries(CATALOG.scenarios.map((s: any) => [s.id, s.goal]));
+  const byId = Object.fromEntries((await jobs(api)).map((j) => [j.id, j.goal]));
+  assert.equal(byId[campaign.body.reply.job.id], goals.campaign);
+  assert.equal(byId[incident.body.reply.job.id], goals.incident);
+
+  // A revisão de entrega de repositório tem fluxo próprio e não é oferecida pela conversa.
+  const vague = await say(api, id, "o que você consegue fazer?");
+  assert.doesNotMatch(vague.body.reply.text, /Revisar entrega do que/);
+  assert.doesNotMatch(vague.body.reply.text, /Executar nova tarefa no que/, "sem repositório configurado, não é oferecida");
+  assert.equal((await jobs(api)).length, 2);
 });
