@@ -9,8 +9,8 @@ Decisões vigentes: provedor local via CLI oficial (Codex ou Claude Code) autent
 | # | Épico | Situação hoje | Depende de |
 |---|---|---|---|
 | E0 | Fundação: repositório, CI, contrato de provedor | **Feito** neste ciclo (parcial: falta migrar o ledger, ver E1) | — |
-| E1 | Ledger em PostgreSQL (P13) | SQLite de fixture | E0 |
-| E2 | Conversa com o Chief of Staff | Sem tela própria | E1 |
+| E1 | Ledger em PostgreSQL (P13) | **Feito** para o ledger da jornada (ver [E1_LEDGER_POSTGRES](E1_LEDGER_POSTGRES.md)); `aurora-business` congelado ([decisão](E1_AURORA_BUSINESS.md)) | E0 |
+| E2 | Conversa com o Chief of Staff | **Feito** (versão por regras; ver abaixo) | E1 |
 | E3 | Cérebro: upload, consulta com citação | Motor e grafo prontos; falta UI de ingestão | E1 |
 | E4 | Agentes: ativar do catálogo e criar o seu | Catálogo de 21 agentes | E1 |
 | E5 | Entregas: artefato, revisão, aceite | Relatório de decisão e aprovação exata | E2, E4 |
@@ -24,6 +24,8 @@ Decisões vigentes: provedor local via CLI oficial (Codex ou Claude Code) autent
 **E1 — Ledger PostgreSQL.** Migrations versionadas para jobs, events, effects, job_queue e job_admissions. A suíte atual de recuperação passa sem mudar de comportamento (sem efeito duplicado, unknown nunca vira sucesso). Rollback documentado.
 
 **E2 — Conversa.** O gestor envia uma intenção; o Chief of Staff responde ou abre um trabalho. A resposta mostra se virou trabalho, quem recebeu e o estado. Histórico persistente por empresa e usuário.
+
+  *Entregue (09/11/2026):* porta do ledger com conversas e mensagens (SQLite e PostgreSQL), `ConversationService`, interface `ChiefOfStaff` com implementação determinística por regras que escolhe entre os cenários da política, rotas `/api/conversations` e painel React. Abrir o trabalho e gravar a resposta acontecem na mesma transação; reenvio com `client_message_id` não duplica; recusas da admissão são explicadas. Pendente: Chief of Staff com modelo (via `ModelProvider` local), identidade corporativa (hoje operador local ou usuário do piloto) e aviso ativo quando o parecer fica pronto (hoje a conversa mostra o estado ao ser relida).
 
 **E3 — Cérebro.** Upload de arquivo com tipo, dono, versão, data e permissão. Consulta devolve a resposta com citação clicável até a fonte original. Duas fontes conflitantes resultam em abstenção ou apontam a vigente. Revogar uma fonte a retira das respostas seguintes.
 

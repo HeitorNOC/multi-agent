@@ -10,19 +10,9 @@ import { OperationsOverview } from "./OperationsOverview.tsx";
 import { PilotEvidence, PilotSignIn, type PilotReport } from "./PilotPanel.tsx";
 import { DecisionReport, type Report } from "./DecisionReport.tsx";
 import RecoveryCenter from "./RecoveryCenter.tsx";
+import { ConversationPanel } from "./ConversationPanel.tsx";
+import { statusText } from "./job-status.ts";
 import "./recovery.css";
-const statusText: Record<string, string> = {
-  queued: "Na fila",
-  running: "Em execução",
-  awaiting_approval: "Aguardando sua decisão",
-  completed: "Concluído",
-  failed: "Falha preservada",
-  recovery_required: "Revisão de inferência pendente",
-  closed_unknown: "Encerrado sem resultado confirmado",
-  interrupted: "Interrompido",
-  rejected: "Rejeitado",
-  created: "Admitido",
-};
 async function request(path: string, body?: unknown, key?: string) {
   const r = await fetch(
     path,
@@ -354,6 +344,12 @@ function App() {
             }
             agentName={(id) => meta(id)?.title}
             onOpen={openWork}
+          />
+        )}
+        {runtime && (
+          <ConversationPanel
+            readOnly={!operator}
+            onOpenJob={(id) => openWork(id, "job")}
           />
         )}
         {operator && <RecoveryCenter />}
