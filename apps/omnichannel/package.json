@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "test": "npm run build && node --test --test-concurrency=1 dist/test/vertical.test.js dist/test/whatsapp.test.js",
     "test:kafka": "npm run build && node --test dist/test/kafka.test.js"
   },

@@ -1,0 +1,17 @@
+{
+  "name": "multi-agent-platform",
+  "private": true,
+  "description": "Plataforma empresarial multiagente (Aurora). Atalhos para verificar os subprojetos.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "install:all": "npm --prefix apps/aurora ci && npm --prefix apps/omnichannel ci",
+    "typecheck": "npm run typecheck:aurora && npm run typecheck:omnichannel",
+    "typecheck:aurora": "npm --prefix apps/aurora run typecheck",
+    "typecheck:omnichannel": "npm --prefix apps/omnichannel run typecheck",
+    "test:omnichannel": "npm --prefix apps/omnichannel test",
+    "check:python": "python -m compileall -q apps/aurora/runtime apps/aurora/ops",
+    "verify": "npm run typecheck && npm run check:python"
+  }
+}
