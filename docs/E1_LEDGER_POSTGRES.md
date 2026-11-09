@@ -92,7 +92,7 @@ Há ainda estados SQLite do lado Python (`native.py`, `local_engine.py`).
 
 ## Próximos passos
 
-1. **`aurora-business`** (business, brain, editorial) para a mesma porta ou uma porta própria. `retained` continua em armazenamento separado (ver decisões acima).
+1. **`aurora-business`**: levantado em [E1_AURORA_BUSINESS.md](E1_AURORA_BUSINESS.md). É uma camada de qualificação sem testes executáveis no repositório; a recomendação é não portar 1:1 e construir as entidades do produto sobre a porta do ledger. Decisão de escopo pendente. `retained` continua em armazenamento separado.
 2. ~~Migrar dados existentes~~ **feito** (ver acima). Pendente: migrar também os estados que ficam fora do `journey.sqlite` quando entrarem na porta.
 3. **Reexecutar as bancadas de recuperação** (P01, P07) contra o PostgreSQL, incluindo backup e restauração do banco, antes de declarar o E1 concluído.
 4. **Carga e concorrência real**: dois processos disputando o lock, pool sob carga e latência por operação. O contrato prova correção, não desempenho.
