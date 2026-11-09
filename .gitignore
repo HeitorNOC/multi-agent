@@ -1,0 +1,29 @@
+# Ambientes e dependências
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.pyc
+.tools/
+
+# Estado de execução local
+.state/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.db
+
+# Build
+apps/*/dist/
+
+# Segredos
+.env
+.env.*
+*.pem
+*.key
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

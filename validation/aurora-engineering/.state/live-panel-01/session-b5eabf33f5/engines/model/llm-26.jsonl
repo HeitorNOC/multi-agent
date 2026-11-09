@@ -1,4 +1,0 @@
-{"type":"thread.started","thread_id":"01a1b419-e223-7e72-a42f-2d201c0bee58"}
-{"type":"turn.started"}
-{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"design\\\":\\\"Acrescentar ao final do spec um teste it chamado 'rejects a provider event for a different requested charge', sem modificar o teste existente nem adicionar imports. Criar mocks locais com vi.fn(), incluindo runSystem observável e verifyWebhook resolvendo um evento fictício cujo chargeId seja diferente do chargeId informado a execute. Instanciar o serviço com esses mocks e chamar execute com dados fictícios válidos. Verificar que a promessa rejeita com um erro que contém code: 'PAYMENT_CHARGE_NOT_FOUND' e que runSystem não foi chamado. Alterar apenas o spec.\\\"}\"}"}}
-{"type":"turn.completed","usage":{"input_tokens":13166,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":139,"reasoning_output_tokens":0}}

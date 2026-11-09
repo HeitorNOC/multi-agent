@@ -1,8 +1,0 @@
-[
-  {"id":"handoff","goal":"Antes de o humano responder pelo WhatsApp, como sabemos se ele já assumiu o atendimento e que sinal separa a troca de controle do mero recebimento de uma mensagem?","evidence":[["contact",null,"ACTIVE Um atendente iniciou o atendimento"],["contact",26,"passa a ser do tipo HUMAN"],["fluxo",15,"control_passed"]]},
-  {"id":"persistence","goal":"Para uma auditoria da entrada de WhatsApp, onde rastrear o conteúdo recebido intacto e em qual ponto consultar o registro transformado usado para reconstruir a conversa?","evidence":[["fluxo",19,"grava o payload cru"],["fluxo",20,"mensagem já normalizada e faz um INSERT na tabela de histórico"]]},
-  {"id":"release","goal":"Como testar o agente da Meta com um grupo restrito de contatos e depois disponibilizar para a base inteira?","evidence":[["mba",10,"Liberar primeiro para um conjunto pequeno de números"],["mba",11,"Abrir o agente a todos os clientes"]]},
-  {"id":"frontend","goal":"Quais botões aparecem para administrar o conhecimento do agente da Meta quando o onboarding foi concluído?","evidence":[["mba-frontend",2,"completed Concluído Base de conhecimento"]]},
-  {"id":"limit","goal":"Quantas chamadas por segundo o Contact Center aceita na operação startAttendance para a mesma conta?","evidence":[]},
-  {"id":"price","goal":"Qual valor em reais a 360dialog cobra por número habilitado para o agente da Meta a cada mês?","evidence":[]}
-]

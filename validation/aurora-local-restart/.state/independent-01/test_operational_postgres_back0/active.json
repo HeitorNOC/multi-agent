@@ -1,7 +1,0 @@
-{
-  "url": "http://127.0.0.1:53116",
-  "backend": "http://127.0.0.1:53115",
-  "token": "5d64edb097db19cd88ef6bb1e6b9d501e77410f6cafdc41f462eecc9ac0a0a89",
-  "state": "C:\\Users\\PC\\multi-agent\\validation\\aurora-local-restart\\.state\\independent-01\\test_operational_postgres_back0\\session-5fba90d869",
-  "launcher_pid": 26408
-}

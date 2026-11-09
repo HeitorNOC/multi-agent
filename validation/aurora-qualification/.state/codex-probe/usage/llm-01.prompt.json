@@ -1,5 +1,0 @@
-{
-  "system_prompt": "Use apenas o enunciado sintético. Responda em JSON. Não use ferramentas.",
-  "history_messages": [],
-  "user_prompt": "Cenário fictício. O depósito de teste tem 7 caixas. Retorne apenas {\"caixas\":7}."
-}
