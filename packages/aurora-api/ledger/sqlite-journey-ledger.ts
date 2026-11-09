@@ -105,7 +105,9 @@ export class SqliteJourneyCore {
 
   // Trabalhos ---------------------------------------------------------------
   getJob(id: string): JobRecord | undefined {
-    return this.db.prepare("SELECT * FROM jobs WHERE id=?").get(id) as JobRecord | undefined;
+    const r = this.db.prepare("SELECT * FROM jobs WHERE id=?").get(id) as Row | undefined;
+    // `node:sqlite` devolve objetos sem protótipo; copiar mantém o mesmo formato do PostgreSQL.
+    return r && ({ ...r } as unknown as JobRecord);
   }
   listJobIds(): string[] {
     return this.rows("SELECT id FROM jobs ORDER BY created DESC,rowid DESC").map((r) => String(r.id));

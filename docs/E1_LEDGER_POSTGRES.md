@@ -11,6 +11,7 @@ Status (09/11/2026): **o servidor sobe e funciona sobre PostgreSQL.** A porta `J
 | Contrato executável | `ledger/journey-ledger.contract.ts` | 35 testes, roda nos dois adaptadores |
 | Caracterização HTTP | `packages/aurora-api/test/` | 24 testes, rodam sobre SQLite e sobre PostgreSQL |
 | Central de recuperação | `recovery.ts` | migrada para a porta (assíncrona) |
+| Migração de dados SQLite → PostgreSQL | `ledger/sqlite-to-postgres.ts`, `migrate-cli.ts` | pronta; verificada por hash e ponta a ponta |
 | Trava do agendador | adaptadores | SQLite: `scheduler-owner.sqlite`; PostgreSQL: advisory lock de sessão |
 
 **Escolher o armazenamento** (configuração da instalação, lida pelo servidor):
@@ -20,6 +21,20 @@ Status (09/11/2026): **o servidor sobe e funciona sobre PostgreSQL.** A porta `J
 ```
 
 Sem `ledger`, o servidor usa SQLite no diretório de estado, como antes.
+
+**Migrar uma instalação existente de SQLite para PostgreSQL:**
+
+1. Pare o servidor da instalação (a CLI recusa se a origem estiver em uso).
+2. Simule primeiro; nada é gravado:
+
+```bash
+node packages/aurora-api/ledger/migrate-cli.ts --state <diretorio-de-estado> --url postgres://... --installation <id> [--schema <nome>] --dry-run
+```
+
+3. Repita sem `--dry-run`. A cópia roda numa transação e só confirma depois de conferir contagem e hash do conteúdo de cada tabela e a ordem de listagem dos trabalhos.
+4. Acrescente `ledger` à configuração e inicie o servidor.
+
+A origem nunca é alterada, então voltar atrás é remover `ledger` da configuração. O destino precisa estar vazio; a CLI não sobrescreve dados. Bancos antigos, sem as colunas de identidade dos eventos, recebem as mesmas identidades legadas que o servidor atribui ao abri-los. O `--installation` precisa ser o mesmo da configuração (ele entra na identidade legada e na trava do agendador).
 
 **Rodar os testes:**
 
@@ -78,7 +93,7 @@ Há ainda estados SQLite do lado Python (`native.py`, `local_engine.py`).
 ## Próximos passos
 
 1. **`aurora-business`** (business, brain, editorial) para a mesma porta ou uma porta própria. `retained` continua em armazenamento separado (ver decisões acima).
-2. **Migrar dados existentes** de uma instalação SQLite para PostgreSQL (ferramenta de exportação/importação com verificação de contagem e hashes). Hoje só instalações novas podem começar em PostgreSQL.
+2. ~~Migrar dados existentes~~ **feito** (ver acima). Pendente: migrar também os estados que ficam fora do `journey.sqlite` quando entrarem na porta.
 3. **Reexecutar as bancadas de recuperação** (P01, P07) contra o PostgreSQL, incluindo backup e restauração do banco, antes de declarar o E1 concluído.
 4. **Carga e concorrência real**: dois processos disputando o lock, pool sob carga e latência por operação. O contrato prova correção, não desempenho.
 5. Backup operacional do PostgreSQL local (hoje o procedimento cobre SQLite e volumes de LightRAG).

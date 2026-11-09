@@ -46,6 +46,11 @@ function lockKey(name: string): number {
   return parseInt(createHash("sha256").update(name).digest("hex").slice(0, 12), 16);
 }
 
+/** Chave da trava de agendador de uma instalação; a migração de dados a usa para excluir servidores. */
+export function schedulerLockKey(installation: string, schema?: string): number {
+  return lockKey(`scheduler:${installation}:${schema ?? ""}`);
+}
+
 export interface PostgresLedgerOptions {
   connectionString: string;
   /** Esquema dedicado (útil para isolar testes). Omitido: usa o esquema padrão do usuário. */
@@ -396,7 +401,7 @@ export class PostgresJourneyLedger implements JourneyLedger {
     let scheduler: { client: PoolClient; key: number } | undefined;
     try {
       if (options.schedulerLock) {
-        const key = lockKey(`scheduler:${options.installation}:${schema ?? ""}`);
+        const key = schedulerLockKey(options.installation, schema);
         const client = await pool.connect();
         const { rows } = await client.query("SELECT pg_try_advisory_lock($1) AS acquired", [key]);
         if (!rows[0].acquired) {
