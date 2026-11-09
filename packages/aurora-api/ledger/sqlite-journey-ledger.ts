@@ -32,6 +32,11 @@ import {
   type ConversationMessage,
   type ConversationSummary,
   type NewConversationMessage,
+  type IndexableKnowledge,
+  type KnowledgeSource,
+  type KnowledgeVersion,
+  type KnowledgeVersionInfo,
+  type NewKnowledgeVersion,
   type QueueKind,
   type ReceiptRecord,
   type RecoveryCommand,
@@ -75,6 +80,8 @@ const SCHEMA = `
   CREATE TABLE IF NOT EXISTS job_admissions(key TEXT PRIMARY KEY,job TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS conversations(id TEXT PRIMARY KEY,actor TEXT NOT NULL,title TEXT NOT NULL,created TEXT NOT NULL,updated TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS conversation_messages(seq INTEGER PRIMARY KEY AUTOINCREMENT,conversation TEXT NOT NULL,role TEXT NOT NULL,text TEXT NOT NULL,job TEXT,client_id TEXT,reply_to INTEGER,created TEXT NOT NULL,UNIQUE(conversation,client_id));
+  CREATE TABLE IF NOT EXISTS knowledge_sources(id TEXT PRIMARY KEY,title TEXT NOT NULL,owner TEXT NOT NULL,readers TEXT NOT NULL,supersedes TEXT,created TEXT NOT NULL,revoked TEXT,revoked_by TEXT,latest_version INTEGER NOT NULL DEFAULT 0);
+  CREATE TABLE IF NOT EXISTS knowledge_versions(source TEXT NOT NULL,version INTEGER NOT NULL,media_type TEXT NOT NULL,filename TEXT NOT NULL,content_sha TEXT NOT NULL,bytes BLOB NOT NULL,text TEXT NOT NULL,valid_from TEXT NOT NULL,uploaded_by TEXT NOT NULL,created TEXT NOT NULL,PRIMARY KEY(source,version));
   CREATE TABLE IF NOT EXISTS recovery_sessions(hash TEXT PRIMARY KEY,actor TEXT,auth_sha TEXT,expires INTEGER);
   CREATE TABLE IF NOT EXISTS recovery_commands(id TEXT PRIMARY KEY,actor TEXT,input_sha TEXT,body TEXT,action TEXT,case_id TEXT,operation_id TEXT,evidence_sha TEXT,status TEXT,result TEXT,updated TEXT);`;
 
@@ -312,6 +319,84 @@ export class SqliteJourneyCore {
     );
   }
 
+  // Cérebro ----------------------------------------------------------------
+  createKnowledgeSource(s: { id: string; title: string; owner: string; readers: string[]; supersedes: string | null; created: string }): void {
+    this.db
+      .prepare("INSERT INTO knowledge_sources(id,title,owner,readers,supersedes,created) VALUES(?,?,?,?,?,?)")
+      .run(s.id, s.title, s.owner, JSON.stringify(s.readers), s.supersedes, s.created);
+  }
+  getKnowledgeSource(id: string): KnowledgeSource | undefined {
+    const r = this.db.prepare("SELECT * FROM knowledge_sources WHERE id=?").get(id) as Row | undefined;
+    return r && this.toSource(r);
+  }
+  listKnowledgeSources(): KnowledgeSource[] {
+    return this.rows("SELECT * FROM knowledge_sources ORDER BY created DESC, rowid DESC").map((r) => this.toSource(r));
+  }
+  addKnowledgeVersion(v: NewKnowledgeVersion): void {
+    const bumped = this.db
+      .prepare("UPDATE knowledge_sources SET latest_version=? WHERE id=? AND latest_version=?")
+      .run(v.version, v.source, v.version - 1);
+    if (!Number(bumped.changes)) throw new LedgerUsageError("Versão fora de sequência ou fonte inexistente");
+    this.db
+      .prepare("INSERT INTO knowledge_versions VALUES(?,?,?,?,?,?,?,?,?,?)")
+      .run(v.source, v.version, v.mediaType, v.filename, v.contentSha, v.bytes, v.text, v.validFrom, v.uploadedBy, v.created);
+  }
+  getKnowledgeVersion(source: string, version: number): KnowledgeVersion | undefined {
+    const r = this.db.prepare("SELECT * FROM knowledge_versions WHERE source=? AND version=?").get(source, version) as Row | undefined;
+    return r && { ...this.toVersionInfo(r), bytes: new Uint8Array(r.bytes as Uint8Array), text: String(r.text) };
+  }
+  listKnowledgeVersions(source: string): KnowledgeVersionInfo[] {
+    return this.rows(
+      "SELECT source,version,media_type,filename,content_sha,valid_from,uploaded_by,created,length(bytes) AS size_bytes FROM knowledge_versions WHERE source=? ORDER BY version DESC",
+      source,
+    ).map((r) => this.toVersionInfo(r));
+  }
+  revokeKnowledgeSource(id: string, actor: string, at: string): boolean {
+    return Number(this.db.prepare("UPDATE knowledge_sources SET revoked=?,revoked_by=? WHERE id=? AND revoked IS NULL").run(at, actor, id).changes) > 0;
+  }
+  listIndexableKnowledge(): IndexableKnowledge[] {
+    return this.rows(
+      `SELECT s.id,s.title,s.readers,s.owner,s.supersedes,v.version,v.valid_from,v.text
+       FROM knowledge_sources s JOIN knowledge_versions v ON v.source=s.id
+       WHERE s.revoked IS NULL ORDER BY s.id, v.version`,
+    ).map((r) => ({
+      source: String(r.id),
+      title: String(r.title),
+      readers: JSON.parse(String(r.readers)),
+      owner: String(r.owner),
+      supersedes: r.supersedes === null ? null : String(r.supersedes),
+      version: Number(r.version),
+      validFrom: String(r.valid_from),
+      text: String(r.text),
+    }));
+  }
+  private toSource(r: Row): KnowledgeSource {
+    return {
+      id: String(r.id),
+      title: String(r.title),
+      owner: String(r.owner),
+      readers: JSON.parse(String(r.readers)),
+      supersedes: r.supersedes === null ? null : String(r.supersedes),
+      created: String(r.created),
+      revoked: r.revoked === null ? null : String(r.revoked),
+      revokedBy: r.revoked_by === null ? null : String(r.revoked_by),
+      latestVersion: Number(r.latest_version),
+    };
+  }
+  private toVersionInfo(r: Row): KnowledgeVersionInfo {
+    return {
+      source: String(r.source),
+      version: Number(r.version),
+      mediaType: String(r.media_type),
+      filename: String(r.filename),
+      contentSha: String(r.content_sha),
+      validFrom: String(r.valid_from),
+      uploadedBy: String(r.uploaded_by),
+      created: String(r.created),
+      sizeBytes: r.size_bytes !== undefined ? Number(r.size_bytes) : (r.bytes as Uint8Array).length,
+    };
+  }
+
   // Central de recuperação ------------------------------------------------
   createRecoverySession(s: RecoverySession): void {
     this.db.prepare("INSERT INTO recovery_sessions VALUES(?,?,?,?)").run(s.hash, s.actor, s.authSha, s.expires);
@@ -426,6 +511,14 @@ class SqliteJourneyStore implements JourneyStore {
   async findConversationMessageByClientId(conversation: string, clientId: string) { return this.core.findConversationMessageByClientId(conversation, clientId); }
   async findConversationReply(conversation: string, replyTo: number) { return this.core.findConversationReply(conversation, replyTo); }
   async listConversationMessages(conversation: string, page?: { afterSeq?: number; limit?: number }) { return this.core.listConversationMessages(conversation, page); }
+  async createKnowledgeSource(s: { id: string; title: string; owner: string; readers: string[]; supersedes: string | null; created: string }) { this.core.createKnowledgeSource(s); }
+  async getKnowledgeSource(id: string) { return this.core.getKnowledgeSource(id); }
+  async listKnowledgeSources() { return this.core.listKnowledgeSources(); }
+  async addKnowledgeVersion(v: NewKnowledgeVersion) { this.core.addKnowledgeVersion(v); }
+  async getKnowledgeVersion(source: string, version: number) { return this.core.getKnowledgeVersion(source, version); }
+  async listKnowledgeVersions(source: string) { return this.core.listKnowledgeVersions(source); }
+  async revokeKnowledgeSource(id: string, actor: string, at: string) { return this.core.revokeKnowledgeSource(id, actor, at); }
+  async listIndexableKnowledge() { return this.core.listIndexableKnowledge(); }
   async createRecoverySession(s: RecoverySession) { this.core.createRecoverySession(s); }
   async findRecoverySession(hash: string) { return this.core.findRecoverySession(hash); }
   async deleteRecoverySession(hash: string) { this.core.deleteRecoverySession(hash); }
@@ -495,6 +588,14 @@ export class SqliteJourneyLedger implements JourneyLedger {
   findConversationMessageByClientId = (conversation: string, clientId: string) => this.run((st) => st.findConversationMessageByClientId(conversation, clientId));
   findConversationReply = (conversation: string, replyTo: number) => this.run((st) => st.findConversationReply(conversation, replyTo));
   listConversationMessages = (conversation: string, page?: { afterSeq?: number; limit?: number }) => this.run((st) => st.listConversationMessages(conversation, page));
+  createKnowledgeSource = (s: { id: string; title: string; owner: string; readers: string[]; supersedes: string | null; created: string }) => this.run((st) => st.createKnowledgeSource(s));
+  getKnowledgeSource = (id: string) => this.run((st) => st.getKnowledgeSource(id));
+  listKnowledgeSources = () => this.run((st) => st.listKnowledgeSources());
+  addKnowledgeVersion = (v: NewKnowledgeVersion) => this.run((st) => st.addKnowledgeVersion(v));
+  getKnowledgeVersion = (source: string, version: number) => this.run((st) => st.getKnowledgeVersion(source, version));
+  listKnowledgeVersions = (source: string) => this.run((st) => st.listKnowledgeVersions(source));
+  revokeKnowledgeSource = (id: string, actor: string, at: string) => this.run((st) => st.revokeKnowledgeSource(id, actor, at));
+  listIndexableKnowledge = () => this.run((st) => st.listIndexableKnowledge());
   createRecoverySession = (s: RecoverySession) => this.run((st) => st.createRecoverySession(s));
   findRecoverySession = (hash: string) => this.run((st) => st.findRecoverySession(hash));
   deleteRecoverySession = (hash: string) => this.run((st) => st.deleteRecoverySession(hash));

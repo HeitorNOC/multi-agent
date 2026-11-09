@@ -16,6 +16,7 @@ import {
   type ChiefOfStaff,
   type ChiefTurn,
 } from "./chief-of-staff.ts";
+import { CallLimiter } from "./call-limiter.ts";
 import { ModelCallError, type ModelClient } from "./model-cli.ts";
 
 const MAX_REPLY = 1200;
@@ -59,48 +60,41 @@ export class ModelChiefOfStaff implements ChiefOfStaff {
   private readonly client: ModelClient;
   private readonly fallback: ChiefOfStaff;
   private readonly timeoutMs: number;
-  private readonly maxConcurrent: number;
-  private readonly maxWaiting: number;
-  private active = 0;
-  private readonly waiting: (() => void)[] = [];
+  private readonly limiter: CallLimiter;
 
   constructor(options: ModelChiefOptions) {
     this.client = options.client;
     this.fallback = options.fallback;
     this.timeoutMs = options.timeoutMs ?? 90_000;
-    this.maxConcurrent = options.maxConcurrent ?? 1;
-    this.maxWaiting = options.maxWaiting ?? 4;
+    this.limiter = new CallLimiter(options.maxConcurrent ?? 1, options.maxWaiting ?? 4);
   }
 
   async decide(turn: ChiefTurn): Promise<ChiefDecision> {
     // Sem trabalhos oferecidos não há o que o modelo escolher; a explicação é fixa.
     if (!turn.offers.length) return this.useFallback(turn, "no_offers");
-    if (this.active >= this.maxConcurrent && this.waiting.length >= this.maxWaiting)
-      return this.useFallback(turn, "model_busy");
-
-    await this.acquire();
     try {
-      const completion = await this.client.complete({
-        system: SYSTEM,
-        prompt: this.prompt(turn),
-        schema: DECISION_SCHEMA,
-        timeoutMs: this.timeoutMs,
-      });
-      const decision = this.validate(completion.json, turn);
+      const result = await this.limiter.tryRun(() =>
+        this.client.complete({
+          system: SYSTEM,
+          prompt: this.prompt(turn),
+          schema: DECISION_SCHEMA,
+          timeoutMs: this.timeoutMs,
+        }),
+      );
+      if (result.busy) return this.useFallback(turn, "model_busy");
+      const decision = this.validate(result.value.json, turn);
       return {
         ...decision,
         trace: {
           engine: "model",
           provider: this.client.provider,
           model: this.client.model,
-          seconds: Math.round(completion.seconds * 1000) / 1000,
-          usage: completion.usage,
+          seconds: Math.round(result.value.seconds * 1000) / 1000,
+          usage: result.value.usage,
         },
       };
     } catch (error) {
       return this.useFallback(turn, error instanceof ModelCallError ? error.code : "invalid_decision");
-    } finally {
-      this.release();
     }
   }
 
@@ -144,23 +138,5 @@ export class ModelChiefOfStaff implements ChiefOfStaff {
   private async useFallback(turn: ChiefTurn, reason: string): Promise<ChiefDecision> {
     const decision = await this.fallback.decide(turn);
     return { ...decision, trace: { ...decision.trace, engine: "rules", fallback: reason } };
-  }
-
-  private acquire(): Promise<void> {
-    if (this.active < this.maxConcurrent) {
-      this.active++;
-      return Promise.resolve();
-    }
-    return new Promise((resolve) =>
-      this.waiting.push(() => {
-        this.active++;
-        resolve();
-      }),
-    );
-  }
-
-  private release() {
-    this.active--;
-    this.waiting.shift()?.();
   }
 }

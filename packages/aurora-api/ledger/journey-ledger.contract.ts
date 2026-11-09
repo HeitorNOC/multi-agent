@@ -362,6 +362,89 @@ export function describeJourneyLedgerContract(name: string, options: ContractOpt
       });
     });
 
+    describe("Cérebro: fontes e versões", () => {
+      const source = (id: string, over: Partial<{ owner: string; readers: string[]; supersedes: string | null; created: string; title: string }> = {}) => ({
+        id,
+        title: over.title ?? `Fonte ${id}`,
+        owner: over.owner ?? "ana",
+        readers: over.readers ?? ["*"],
+        supersedes: over.supersedes ?? null,
+        created: over.created ?? at(1),
+      });
+      const bytesOf = (text: string) => new TextEncoder().encode(text);
+      const version = (sourceId: string, n: number, text: string, over: Partial<{ validFrom: string }> = {}) => ({
+        source: sourceId,
+        version: n,
+        mediaType: "text/markdown",
+        filename: `${sourceId}-v${n}.md`,
+        contentSha: "s".repeat(64),
+        bytes: bytesOf(text),
+        text,
+        validFrom: over.validFrom ?? at(2),
+        uploadedBy: "ana",
+        created: at(3),
+      });
+
+      test("cria a fonte, grava versões em sequência e devolve o original byte a byte", async () => {
+        const l = await ledger();
+        await l.createKnowledgeSource(source("politica", { readers: ["ana", "bia"] }));
+        const fresh = await l.getKnowledgeSource("politica");
+        assert.deepEqual(
+          [fresh?.owner, fresh?.readers, fresh?.latestVersion, fresh?.revoked, fresh?.supersedes],
+          ["ana", ["ana", "bia"], 0, null, null],
+        );
+        await l.addKnowledgeVersion(version("politica", 1, "primeira"));
+        await l.addKnowledgeVersion(version("politica", 2, "segunda"));
+        assert.equal((await l.getKnowledgeSource("politica"))?.latestVersion, 2);
+        const v1 = await l.getKnowledgeVersion("politica", 1);
+        assert.equal(new TextDecoder().decode(v1!.bytes), "primeira");
+        assert.equal(v1?.text, "primeira");
+        assert.equal(v1?.sizeBytes, 8);
+        assert.deepEqual((await l.listKnowledgeVersions("politica")).map((v) => [v.version, v.sizeBytes]), [[2, 7], [1, 8]]);
+        assert.equal(await l.getKnowledgeVersion("politica", 9), undefined);
+      });
+
+      test("bytes arbitrários (não UTF-8) são preservados", async () => {
+        const l = await ledger();
+        await l.createKnowledgeSource(source("bin"));
+        const raw = new Uint8Array([0, 255, 128, 10, 13, 0, 1]);
+        await l.addKnowledgeVersion({ ...version("bin", 1, ""), bytes: raw });
+        assert.deepEqual([...(await l.getKnowledgeVersion("bin", 1))!.bytes], [...raw]);
+      });
+
+      test("versão fora de sequência ou de fonte inexistente é recusada sem gravar nada", async () => {
+        const l = await ledger();
+        await l.createKnowledgeSource(source("p"));
+        await assert.rejects(l.addKnowledgeVersion(version("p", 2, "pulou a 1")), LedgerUsageError);
+        await assert.rejects(l.addKnowledgeVersion(version("nada", 1, "x")), LedgerUsageError);
+        await l.addKnowledgeVersion(version("p", 1, "ok"));
+        await assert.rejects(l.addKnowledgeVersion(version("p", 1, "repetida")), LedgerUsageError);
+        assert.deepEqual((await l.listKnowledgeVersions("p")).map((v) => v.version), [1]);
+      });
+
+      test("lista as fontes da mais recente para a mais antiga", async () => {
+        const l = await ledger();
+        await l.createKnowledgeSource(source("a", { created: at(1) }));
+        await l.createKnowledgeSource(source("b", { created: at(2) }));
+        assert.deepEqual((await l.listKnowledgeSources()).map((s) => s.id), ["b", "a"]);
+      });
+
+      test("revogar é idempotente e tira a fonte do que é indexável", async () => {
+        const l = await ledger();
+        await l.createKnowledgeSource(source("a"));
+        await l.createKnowledgeSource(source("b", { supersedes: "a" }));
+        await l.addKnowledgeVersion(version("a", 1, "texto a"));
+        await l.addKnowledgeVersion(version("b", 1, "texto b"));
+        assert.deepEqual((await l.listIndexableKnowledge()).map((k) => [k.source, k.version, k.supersedes]), [["a", 1, null], ["b", 1, "a"]]);
+        assert.equal(await l.revokeKnowledgeSource("a", "ana", at(9)), true);
+        assert.equal(await l.revokeKnowledgeSource("a", "ana", at(10)), false);
+        assert.equal(await l.revokeKnowledgeSource("nada", "ana", at(10)), false);
+        const revoked = await l.getKnowledgeSource("a");
+        assert.deepEqual([revoked?.revoked, revoked?.revokedBy], [at(9), "ana"]);
+        assert.deepEqual((await l.listIndexableKnowledge()).map((k) => k.source), ["b"]);
+      });
+    });
+
     describe("central de recuperação", () => {
       test("sessão: cria, encontra pelo hash do token e apaga", async () => {
         const l = await ledger();

@@ -33,6 +33,11 @@ import {
   type ConversationMessage,
   type ConversationSummary,
   type NewConversationMessage,
+  type IndexableKnowledge,
+  type KnowledgeSource,
+  type KnowledgeVersion,
+  type KnowledgeVersionInfo,
+  type NewKnowledgeVersion,
   type QueueKind,
   type ReceiptRecord,
   type RecoveryCommand,
@@ -343,6 +348,98 @@ class PostgresJourneyStore implements JourneyStore {
     );
   }
 
+  // Cérebro ----------------------------------------------------------------
+  async createKnowledgeSource(s: { id: string; title: string; owner: string; readers: string[]; supersedes: string | null; created: string }): Promise<void> {
+    await this.db.query("INSERT INTO knowledge_sources(id,title,owner,readers,supersedes,created) VALUES($1,$2,$3,$4,$5,$6)", [
+      s.id,
+      s.title,
+      s.owner,
+      JSON.stringify(s.readers),
+      s.supersedes,
+      s.created,
+    ]);
+  }
+  async getKnowledgeSource(id: string): Promise<KnowledgeSource | undefined> {
+    const { rows } = await this.db.query("SELECT * FROM knowledge_sources WHERE id=$1", [id]);
+    return rows[0] && this.toSource(rows[0]);
+  }
+  async listKnowledgeSources(): Promise<KnowledgeSource[]> {
+    const { rows } = await this.db.query("SELECT * FROM knowledge_sources ORDER BY created DESC, ordinal DESC");
+    return rows.map((r) => this.toSource(r));
+  }
+  async addKnowledgeVersion(v: NewKnowledgeVersion): Promise<void> {
+    const bumped = await this.db.query(
+      "UPDATE knowledge_sources SET latest_version=$1 WHERE id=$2 AND latest_version=$3",
+      [v.version, v.source, v.version - 1],
+    );
+    if (!bumped.rowCount) throw new LedgerUsageError("Versão fora de sequência ou fonte inexistente");
+    await this.db.query(
+      `INSERT INTO knowledge_versions(source,version,media_type,filename,content_sha,bytes,text,valid_from,uploaded_by,created)
+       VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
+      [v.source, v.version, v.mediaType, v.filename, v.contentSha, Buffer.from(v.bytes), v.text, v.validFrom, v.uploadedBy, v.created],
+    );
+  }
+  async getKnowledgeVersion(source: string, version: number): Promise<KnowledgeVersion | undefined> {
+    const { rows } = await this.db.query("SELECT * FROM knowledge_versions WHERE source=$1 AND version=$2", [source, version]);
+    const r = rows[0];
+    return r && { ...this.toVersionInfo(r), bytes: new Uint8Array(r.bytes as Buffer), text: String(r.text) };
+  }
+  async listKnowledgeVersions(source: string): Promise<KnowledgeVersionInfo[]> {
+    const { rows } = await this.db.query(
+      `SELECT source,version,media_type,filename,content_sha,valid_from,uploaded_by,created,octet_length(bytes) AS size_bytes
+       FROM knowledge_versions WHERE source=$1 ORDER BY version DESC`,
+      [source],
+    );
+    return rows.map((r) => this.toVersionInfo(r));
+  }
+  async revokeKnowledgeSource(id: string, actor: string, at: string): Promise<boolean> {
+    const r = await this.db.query("UPDATE knowledge_sources SET revoked=$1,revoked_by=$2 WHERE id=$3 AND revoked IS NULL", [at, actor, id]);
+    return (r.rowCount ?? 0) > 0;
+  }
+  async listIndexableKnowledge(): Promise<IndexableKnowledge[]> {
+    const { rows } = await this.db.query(
+      `SELECT s.id,s.title,s.readers,s.owner,s.supersedes,v.version,v.valid_from,v.text
+       FROM knowledge_sources s JOIN knowledge_versions v ON v.source=s.id
+       WHERE s.revoked IS NULL ORDER BY s.id, v.version`,
+    );
+    return rows.map((r) => ({
+      source: String(r.id),
+      title: String(r.title),
+      readers: JSON.parse(String(r.readers)),
+      owner: String(r.owner),
+      supersedes: r.supersedes === null ? null : String(r.supersedes),
+      version: Number(r.version),
+      validFrom: String(r.valid_from),
+      text: String(r.text),
+    }));
+  }
+  private toSource(r: Row): KnowledgeSource {
+    return {
+      id: String(r.id),
+      title: String(r.title),
+      owner: String(r.owner),
+      readers: JSON.parse(String(r.readers)),
+      supersedes: r.supersedes === null ? null : String(r.supersedes),
+      created: String(r.created),
+      revoked: r.revoked === null ? null : String(r.revoked),
+      revokedBy: r.revoked_by === null ? null : String(r.revoked_by),
+      latestVersion: Number(r.latest_version),
+    };
+  }
+  private toVersionInfo(r: Row): KnowledgeVersionInfo {
+    return {
+      source: String(r.source),
+      version: Number(r.version),
+      mediaType: String(r.media_type),
+      filename: String(r.filename),
+      contentSha: String(r.content_sha),
+      validFrom: String(r.valid_from),
+      uploadedBy: String(r.uploaded_by),
+      created: String(r.created),
+      sizeBytes: r.size_bytes !== undefined ? Number(r.size_bytes) : (r.bytes as Buffer).length,
+    };
+  }
+
   // Central de recuperação ------------------------------------------------
   async createRecoverySession(s: RecoverySession): Promise<void> {
     await this.db.query("INSERT INTO recovery_sessions(hash,actor,auth_sha,expires) VALUES($1,$2,$3,$4)", [
@@ -541,6 +638,14 @@ export class PostgresJourneyLedger implements JourneyLedger {
   findConversationMessageByClientId = (conversation: string, clientId: string) => this.run((st) => st.findConversationMessageByClientId(conversation, clientId));
   findConversationReply = (conversation: string, replyTo: number) => this.run((st) => st.findConversationReply(conversation, replyTo));
   listConversationMessages = (conversation: string, page?: { afterSeq?: number; limit?: number }) => this.run((st) => st.listConversationMessages(conversation, page));
+  createKnowledgeSource = (s: { id: string; title: string; owner: string; readers: string[]; supersedes: string | null; created: string }) => this.run((st) => st.createKnowledgeSource(s));
+  getKnowledgeSource = (id: string) => this.run((st) => st.getKnowledgeSource(id));
+  listKnowledgeSources = () => this.run((st) => st.listKnowledgeSources());
+  addKnowledgeVersion = (v: NewKnowledgeVersion) => this.run((st) => st.addKnowledgeVersion(v));
+  getKnowledgeVersion = (source: string, version: number) => this.run((st) => st.getKnowledgeVersion(source, version));
+  listKnowledgeVersions = (source: string) => this.run((st) => st.listKnowledgeVersions(source));
+  revokeKnowledgeSource = (id: string, actor: string, at: string) => this.run((st) => st.revokeKnowledgeSource(id, actor, at));
+  listIndexableKnowledge = () => this.run((st) => st.listIndexableKnowledge());
   createRecoverySession = (s: RecoverySession) => this.run((st) => st.createRecoverySession(s));
   findRecoverySession = (hash: string) => this.run((st) => st.findRecoverySession(hash));
   deleteRecoverySession = (hash: string) => this.run((st) => st.deleteRecoverySession(hash));

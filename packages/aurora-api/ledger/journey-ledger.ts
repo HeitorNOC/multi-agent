@@ -188,6 +188,58 @@ export interface ConversationMessage {
   created: string;
 }
 
+/** Fonte de conhecimento do Cérebro. O conteúdo fica nas versões; a fonte guarda dono e acesso. */
+export interface KnowledgeSource {
+  id: string;
+  title: string;
+  /** Quem enviou a fonte; só ele publica versões novas ou revoga. */
+  owner: string;
+  /** Quem pode ler e consultar: identidades ou "*" para todos da instalação. O dono sempre lê. */
+  readers: string[];
+  /** Fonte que esta substitui; a substituída deixa de ser vigente enquanto esta valer. */
+  supersedes: string | null;
+  created: string;
+  revoked: string | null;
+  revokedBy: string | null;
+  /** Maior versão enviada (não necessariamente a vigente, que depende de `validFrom`). */
+  latestVersion: number;
+}
+
+export interface KnowledgeVersionInfo {
+  source: string;
+  version: number;
+  mediaType: string;
+  filename: string;
+  contentSha: string;
+  /** A partir de quando esta versão vale. */
+  validFrom: string;
+  uploadedBy: string;
+  created: string;
+  sizeBytes: number;
+}
+
+export interface KnowledgeVersion extends KnowledgeVersionInfo {
+  /** Arquivo original, exatamente como enviado. */
+  bytes: Uint8Array;
+  /** Texto extraído, usado para busca e citação. */
+  text: string;
+}
+
+/** Dados para gravar uma versão; o tamanho é calculado pelo armazenamento. */
+export type NewKnowledgeVersion = Omit<KnowledgeVersion, "sizeBytes">;
+
+/** Versões de fontes não revogadas, com o texto, para montar o índice de busca. */
+export interface IndexableKnowledge {
+  source: string;
+  title: string;
+  readers: string[];
+  owner: string;
+  supersedes: string | null;
+  version: number;
+  validFrom: string;
+  text: string;
+}
+
 /** Operações disponíveis tanto fora quanto dentro de uma transação. */
 export interface JourneyStore {
   // Trabalhos
@@ -251,6 +303,30 @@ export interface JourneyStore {
   findConversationReply(conversation: string, replyTo: number): Promise<ConversationMessage | undefined>;
   /** Em ordem de envio. `afterSeq` e `limit` permitem paginar. */
   listConversationMessages(conversation: string, page?: { afterSeq?: number; limit?: number }): Promise<ConversationMessage[]>;
+
+  // Cérebro: fontes de conhecimento
+  createKnowledgeSource(source: {
+    id: string;
+    title: string;
+    owner: string;
+    readers: string[];
+    supersedes: string | null;
+    created: string;
+  }): Promise<void>;
+  getKnowledgeSource(id: string): Promise<KnowledgeSource | undefined>;
+  /** Todas as fontes, inclusive revogadas; o filtro de acesso fica no serviço. Mais recentes primeiro. */
+  listKnowledgeSources(): Promise<KnowledgeSource[]>;
+  /**
+   * Grava uma versão nova. `version` precisa ser `latestVersion + 1` da fonte; caso contrário
+   * lança `LedgerUsageError` (protege contra dois envios concorrentes da mesma versão).
+   */
+  addKnowledgeVersion(version: NewKnowledgeVersion): Promise<void>;
+  getKnowledgeVersion(source: string, version: number): Promise<KnowledgeVersion | undefined>;
+  /** Metadados das versões, da mais nova para a mais antiga, sem conteúdo. */
+  listKnowledgeVersions(source: string): Promise<KnowledgeVersionInfo[]>;
+  /** `true` se revogou agora; `false` se já estava revogada ou não existe. */
+  revokeKnowledgeSource(id: string, actor: string, at: string): Promise<boolean>;
+  listIndexableKnowledge(): Promise<IndexableKnowledge[]>;
 
   // Central de recuperação humana
   createRecoverySession(session: RecoverySession): Promise<void>;
