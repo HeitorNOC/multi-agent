@@ -17,7 +17,9 @@ CREATE TABLE IF NOT EXISTS jobs (
   approval TEXT,
   receipt  TEXT,
   error    TEXT,
-  created  TEXT
+  created  TEXT,
+  -- Ordem de insercao (equivale ao rowid do SQLite); desempata trabalhos criados no mesmo instante.
+  ordinal  BIGSERIAL
 );
 
 -- event_id, payload_sha e recorded_at sao acrescentadas em runtime pela classe Events no SQLite;

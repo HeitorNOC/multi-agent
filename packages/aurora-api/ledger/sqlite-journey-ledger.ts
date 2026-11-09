@@ -16,6 +16,7 @@ import { DatabaseSync } from "node:sqlite";
 import { Events } from "../telemetry.ts";
 import {
   LedgerUsageError,
+  patchedColumns,
   type AppendedEvent,
   type EventRecord,
   type JobGuard,
@@ -51,9 +52,6 @@ const SCHEMA = `
 const DESTINATION_SCHEMA = `
   CREATE TABLE IF NOT EXISTS pilot_destination_revocations(scope TEXT PRIMARY KEY, acknowledged INTEGER NOT NULL DEFAULT 0);
   CREATE TABLE IF NOT EXISTS pilot_destination_intents(job TEXT PRIMARY KEY, intent TEXT NOT NULL);`;
-
-/** Colunas que `updateJob` aceita. A lista fixa impede que um nome de campo vire SQL. */
-const PATCHABLE = ["status", "plan", "review", "approval", "receipt", "error"] as const;
 
 type Row = Record<string, unknown>;
 
@@ -104,8 +102,7 @@ export class SqliteJourneyCore {
       .run(job.id, job.goal, job.status, job.review ?? null, job.created);
   }
   updateJob(id: string, patch: JobPatch, guard?: JobGuard): boolean {
-    const columns = PATCHABLE.filter((c) => patch[c] !== undefined);
-    if (!columns.length) throw new LedgerUsageError("updateJob requer ao menos um campo");
+    const columns = patchedColumns(patch);
     const values = columns.map((c) => patch[c] ?? null);
     let sql = `UPDATE jobs SET ${columns.map((c) => `${c}=?`).join(",")} WHERE id=?`;
     const params: (string | null)[] = [...values, id];

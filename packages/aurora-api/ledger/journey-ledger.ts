@@ -63,6 +63,19 @@ export interface JobPatch {
   error?: string | null;
 }
 
+const PATCHABLE = ["status", "plan", "review", "approval", "receipt", "error"] as const;
+export type PatchableField = (typeof PATCHABLE)[number];
+
+/**
+ * Campos de `patch` que devem ser gravados, em ordem estável. A lista fixa impede que um
+ * nome de campo vire SQL. Lança `LedgerUsageError` se não houver nenhum.
+ */
+export function patchedColumns(patch: JobPatch): PatchableField[] {
+  const columns = PATCHABLE.filter((c) => patch[c] !== undefined);
+  if (!columns.length) throw new LedgerUsageError("updateJob requer ao menos um campo");
+  return columns;
+}
+
 export interface JobGuard {
   /** A alteração só ocorre se o status atual estiver neste conjunto. */
   statusIn: readonly JobStatus[];

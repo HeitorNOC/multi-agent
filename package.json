@@ -6,7 +6,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "install:all": "npm --prefix apps/aurora ci && npm --prefix apps/omnichannel ci",
+    "install:all": "npm --prefix apps/aurora ci && npm --prefix apps/omnichannel ci && npm --prefix packages/aurora-api ci",
     "typecheck": "npm run typecheck:aurora && npm run typecheck:omnichannel",
     "typecheck:aurora": "npm --prefix apps/aurora run typecheck",
     "typecheck:omnichannel": "npm --prefix apps/omnichannel run typecheck",

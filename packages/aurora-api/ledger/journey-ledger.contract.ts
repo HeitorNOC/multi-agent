@@ -77,6 +77,14 @@ export function describeJourneyLedgerContract(name: string, options: ContractOpt
         assert.equal(await l.updateJob("inexistente", { status: "failed" }), false);
       });
 
+      test("trabalhos criados no mesmo instante saem do último inserido para o primeiro", async () => {
+        const l = await ledger();
+        const created = at(5);
+        for (const id of ["x", "y", "z"]) await l.insertJob(job(id, { created, goal: "mesma" }));
+        assert.deepEqual(await l.listJobIds(), ["z", "y", "x"]);
+        assert.equal((await l.latestJobForGoal("mesma"))?.id, "z");
+      });
+
       test("updateJob sem campos é erro de uso", async () => {
         const l = await ledger();
         await l.insertJob(job("a"));
@@ -276,7 +284,7 @@ export function describeJourneyLedgerContract(name: string, options: ContractOpt
         });
       });
 
-      test("leituras de fora esperam a transação e nunca veem estado parcial", async () => {
+      test("leituras de fora nunca veem estado parcial de uma transação em andamento", async () => {
         const l = await ledger();
         let release!: () => void;
         const gate = new Promise<void>((r) => (release = r));
@@ -285,11 +293,15 @@ export function describeJourneyLedgerContract(name: string, options: ContractOpt
           await gate;
           await tx.updateJob("a", { status: "running" });
         });
-        const reading = l.getJob("a"); // pedida enquanto a transação está aberta
+        const during = l.getJob("a"); // pedida enquanto a transação está aberta
         await new Promise((r) => setTimeout(r, 30));
         release();
         await writing;
-        assert.equal((await reading)?.status, "running", "só enxerga o estado confirmado");
+        // Cada adaptador pode esperar a transação ou devolver o estado já confirmado, mas
+        // nunca o estado intermediário ("created") nem uma escrita ainda não confirmada.
+        const seen = await during;
+        assert.ok(seen === undefined || seen.status === "running", `estado parcial visto: ${seen?.status}`);
+        assert.equal((await l.getJob("a"))?.status, "running", "depois do commit tudo é visível");
       });
 
       test("transações concorrentes são serializadas, sem intercalar", async () => {
