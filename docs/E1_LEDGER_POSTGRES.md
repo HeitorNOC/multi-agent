@@ -37,6 +37,13 @@ Há ainda estados SQLite do lado Python (`native.py`, `local_engine.py`).
 - **`retained.ts` fica fora do banco de backup.** Os recibos retidos e a autoridade existem para sobreviver à restauração do estado principal (o arquivo se chama `retained-outside-backup`). Colocá-los no mesmo PostgreSQL desfaria a propriedade qualificada (R14). Devem permanecer em instância, banco ou arquivo separado, com backup distinto.
 - **Perfil local simples:** como a instalação é de uma máquina, o PostgreSQL roda local (container ou serviço). O SQLite continua como fallback de desenvolvimento enquanto a porta existir.
 
+## Ambiente de verificação (validado em 09/11/2026)
+
+- Node 24 sem trocar o padrão da máquina: `export PATH="/c/Users/consenso/AppData/Local/nvm/v24.19.0:$PATH"`. `node:sqlite` funciona e `npm run verify` passa.
+- PostgreSQL descartável: `docker run -d --name aurora-pg-dev -e POSTGRES_PASSWORD=dev -e POSTGRES_DB=aurora_dev -p 127.0.0.1:55432:5432 postgres:16`.
+- A migration 001 foi aplicada duas vezes sem erro (idempotente) e criou as 11 tabelas.
+- A suíte do `omnichannel` passou 5/5 contra esse Postgres (`OMNICHANNEL_TEST_DATABASE_URL=postgres://postgres:dev@127.0.0.1:55432/omni_test`).
+
 ## Próximos passos
 
 1. Preparar o ambiente: Node 24 e PostgreSQL (Docker) para rodar a suíte.
