@@ -64,6 +64,9 @@ describe("migração SQLite → PostgreSQL", { skip: url ? false : "defina AUROR
       id: "11111111-1111-1111-1111-111111111111", actor: "rev-1", inputSha: "i".repeat(64), body: '{"x":1}', action: "recovery_propose",
       caseId: "caso-0001", operationId: `${INSTALLATION}:op-1`, evidenceSha: "e".repeat(64), status: "completed", result: '{"ok":1}', updated: created,
     });
+    await l.createConversation({ id: "conv-1", actor: "ana", title: "Comercial", created });
+    const question = await l.appendConversationMessage({ conversation: "conv-1", role: "user", text: "analise as vendas", clientId: "envio-000001", created });
+    await l.appendConversationMessage({ conversation: "conv-1", role: "chief", text: "Abri um trabalho.", job: "j2", replyTo: question.seq, created });
     await l.close();
     return stateDir;
   }
@@ -76,7 +79,7 @@ describe("migração SQLite → PostgreSQL", { skip: url ? false : "defina AUROR
     assert.equal(report.jobOrderVerified, true);
     assert.deepEqual(
       Object.fromEntries(report.tables.map((t) => [t.table, t.rows])),
-      { jobs: 3, events: 3, effects: 1, pilot_reference_revocations: 1, job_queue: 2, job_admissions: 1, pilot_destination_revocations: 2, pilot_destination_intents: 1, recovery_sessions: 1, recovery_commands: 1 },
+      { jobs: 3, events: 3, effects: 1, pilot_reference_revocations: 1, job_queue: 2, job_admissions: 1, pilot_destination_revocations: 2, pilot_destination_intents: 1, conversations: 1, conversation_messages: 2, recovery_sessions: 1, recovery_commands: 1 },
     );
 
     const source = new SqliteJourneyLedger({ stateDir, installation: INSTALLATION, destinationJournal: true, schedulerLock: false });
@@ -98,6 +101,8 @@ describe("migração SQLite → PostgreSQL", { skip: url ? false : "defina AUROR
         await target.getRecoveryCommand("11111111-1111-1111-1111-111111111111"),
         await source.getRecoveryCommand("11111111-1111-1111-1111-111111111111"),
       );
+      assert.deepEqual(await target.listConversationsForActor("ana"), await source.listConversationsForActor("ana"));
+      assert.deepEqual(await target.listConversationMessages("conv-1"), await source.listConversationMessages("conv-1"));
       // As sequências continuam depois do maior valor copiado.
       const next = await target.enqueue({ job: "j1", kind: "new", crash: false, queuedAt: "2026-02-02T00:00:00.000Z" });
       assert.equal(next.seq, 3);
@@ -105,6 +110,8 @@ describe("migração SQLite → PostgreSQL", { skip: url ? false : "defina AUROR
       const events = await target.listEvents("j1");
       assert.equal(events.at(-1)?.seq, 4, `evento novo deve ter seq 4, teve ${events.at(-1)?.seq}`);
       assert.equal(appended.replayed, false);
+      const nextMessage = await target.appendConversationMessage({ conversation: "conv-1", role: "user", text: "e agora?", created: "2026-02-02T00:00:00.000Z" });
+      assert.equal(nextMessage.seq, 3);
     } finally {
       await source.close();
       await target.close();
