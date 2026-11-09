@@ -12,7 +12,7 @@
     "typecheck:omnichannel": "npm --prefix apps/omnichannel run typecheck",
     "test:omnichannel": "npm --prefix apps/omnichannel test",
     "check:python": "python -m compileall -q apps/aurora/runtime apps/aurora/ops",
-    "test:api": "node --test --test-concurrency=1 packages/aurora-api/test/ledger.characterization.test.ts",
+    "test:api": "node --test --test-concurrency=1 \"packages/aurora-api/**/*.test.ts\"",
     "test:python": "python -m unittest apps.aurora.tests.test_model_provider",
     "verify": "npm run typecheck && npm run check:python && npm run test:python"
   }

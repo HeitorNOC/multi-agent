@@ -32,6 +32,8 @@ export class RecoveryAPI {
   bridge: (p: any) => Promise<any>;
   event: (job: string, node: string, detail: any) => any;
   cookie: string;
+  /** Chamado antes de abrir uma transação própria; lança se o ledger já tiver uma aberta. */
+  beforeTransaction: () => void;
   inFlight = new Map<string, { input: string; promise: Promise<any> }>();
   constructor(
     db: DatabaseSync,
@@ -39,8 +41,10 @@ export class RecoveryAPI {
     reviewers: Reviewer[],
     bridge: (p: any) => Promise<any>,
     event: (job: string, node: string, detail: any) => any,
+    beforeTransaction: () => void = () => {},
   ) {
     this.db = db;
+    this.beforeTransaction = beforeTransaction;
     this.installation = installation;
     this.reviewers = reviewers;
     this.bridge = bridge;
@@ -70,6 +74,7 @@ export class RecoveryAPI {
     });
   }
   tx<T>(fn: () => T) {
+    this.beforeTransaction();
     this.db.exec("BEGIN IMMEDIATE");
     try {
       const out = fn();

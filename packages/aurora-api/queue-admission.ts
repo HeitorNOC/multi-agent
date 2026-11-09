@@ -1,6 +1,6 @@
-import type { DatabaseSync } from "node:sqlite";
+import type { JourneyStore, QueueKind } from "./ledger/journey-ledger.ts";
 
-export type QueueKind = "new" | "resume";
+export type { QueueKind };
 
 export function queueLimits(capacity?: number, reserve?: number) {
   const queueCapacity = capacity ?? 0;
@@ -31,31 +31,25 @@ export class QueueError extends Error {
   }
 }
 
-export function queueAdmission(
-  db: DatabaseSync,
-  limits: ReturnType<typeof queueLimits>,
-) {
+/**
+ * Regra de admissão da fila: capacidade total e vagas reservadas para retomadas.
+ * Lê a profundidade pela porta do ledger; para decidir e enfileirar de forma atômica,
+ * chame `requireQueueSpace` com o `tx` da mesma transação que fará o `enqueue`.
+ */
+export function queueAdmission(limits: ReturnType<typeof queueLimits>) {
   const { queueCapacity, resumeReserve, newCapacity } = limits;
-  const queueCount = () =>
-    Number(
-      (db.prepare("SELECT count(*) AS n FROM job_queue").get() as { n: number })
-        .n,
-    );
-  const newQueueCount = () =>
-    Number(
-      (
-        db
-          .prepare("SELECT count(*) AS n FROM job_queue WHERE kind='new'")
-          .get() as { n: number }
-      ).n,
-    );
-  function requireQueueSpace(kind: QueueKind) {
-    if (queueCount() >= queueCapacity)
+
+  async function requireQueueSpace(
+    store: Pick<JourneyStore, "queueDepth">,
+    kind: QueueKind,
+  ): Promise<void> {
+    const { total, newRequests } = await store.queueDepth();
+    if (total >= queueCapacity)
       throw new QueueError(
         "Fila cheia. Tente novamente quando houver vaga.",
         429,
       );
-    if (kind === "new" && resumeReserve && newQueueCount() >= newCapacity) {
+    if (kind === "new" && resumeReserve && newRequests >= newCapacity) {
       throw new QueueError(
         "Fila de novos pedidos cheia. Há vagas reservadas para aprovações e retomadas.",
         429,
@@ -63,5 +57,5 @@ export function queueAdmission(
     }
   }
 
-  return { queueCount, newQueueCount, requireQueueSpace };
+  return { requireQueueSpace };
 }

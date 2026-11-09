@@ -1,6 +1,19 @@
 # E1 — Ledger em PostgreSQL: levantamento e plano
 
-Status: levantamento e migration inicial prontos; **nenhuma linha de `server.ts` foi migrada**. Motivo abaixo.
+Status (09/11/2026): a **porta `JourneyLedger` existe e o `server.ts` já a usa** com o adaptador SQLite. O adaptador PostgreSQL ainda não foi escrito.
+
+| Peça | Arquivo | Situação |
+|---|---|---|
+| Porta (interfaces de domínio) | `packages/aurora-api/ledger/journey-ledger.ts` | pronta |
+| Adaptador SQLite | `ledger/sqlite-journey-ledger.ts` | pronto, com mutex e detecção de uso indevido dentro de transação |
+| Contrato executável (28 testes) | `ledger/journey-ledger.contract.ts` | pronto; qualquer adaptador deve passar |
+| Caracterização via HTTP (14 testes) | `packages/aurora-api/test/` | passam no servidor original **e** no migrado |
+| Migration PostgreSQL | `migrations/001_journey_ledger.sql` | validada duas vezes (idempotente) |
+| Adaptador PostgreSQL | — | **pendente** |
+
+Fora da porta por enquanto: a central de recuperação (`recovery.ts`, acesso síncrono temporário via `legacySynchronousAccess`), a trava do agendador (`scheduler-owner.sqlite`) e os bancos de `aurora-business`.
+
+Histórico do levantamento, ainda válido para as próximas fases:
 
 ## O que existe hoje (levantado no código)
 
@@ -46,9 +59,10 @@ Há ainda estados SQLite do lado Python (`native.py`, `local_engine.py`).
 
 ## Próximos passos
 
-1. Preparar o ambiente: Node 24 e PostgreSQL (Docker) para rodar a suíte.
-2. Escrever testes de caracterização do journey ledger sobre o SQLite atual (fila, admissão, efeito único, retomada, revogação).
-3. Extrair a porta assíncrona e a implementação SQLite; os testes continuam passando.
-4. Implementar a versão PostgreSQL com a migration 001 e rodar o mesmo teste de contrato.
-5. Repetir para recovery, business e brain/editorial.
-6. Reexecutar as bancadas de recuperação existentes (P01, P07) contra o Postgres antes de declarar o E1 concluído.
+1. **Adaptador PostgreSQL** (`ledger/postgres-journey-ledger.ts`) que passe pelo mesmo contrato: transação com `pg_advisory_xact_lock`, `BIGSERIAL` para `seq`, `ON CONFLICT DO NOTHING` nas revogações, índice parcial para a regra de um trabalho ativo.
+2. **Trava do agendador** com `pg_try_advisory_lock` de sessão, no lugar do `scheduler-owner.sqlite`.
+3. **Migrar a central de recuperação** para a porta e remover `legacySynchronousAccess`.
+4. Repetir para `aurora-business` (business, brain, editorial). `retained` continua em armazenamento separado (ver decisões acima).
+5. Reexecutar as bancadas de recuperação (P01, P07) contra o PostgreSQL antes de declarar o E1 concluído.
+
+Limitação conhecida da fase atual: enquanto a recuperação usar acesso síncrono, ela falha com erro explícito (em vez de abrir transação aninhada) se coincidir com uma transação assíncrona do ledger. É raro, mas existe até o passo 3.

@@ -20,12 +20,17 @@ CREATE TABLE IF NOT EXISTS jobs (
   created  TEXT
 );
 
+-- event_id, payload_sha e recorded_at sao acrescentadas em runtime pela classe Events no SQLite;
+-- aqui ja nascem no esquema. event_id unico garante a idempotencia da trilha.
 CREATE TABLE IF NOT EXISTS events (
-  seq    BIGSERIAL PRIMARY KEY,
-  job    TEXT,
-  at     TEXT,
-  node   TEXT,
-  detail TEXT
+  seq          BIGSERIAL PRIMARY KEY,
+  job          TEXT,
+  at           TEXT,
+  node         TEXT,
+  detail       TEXT,
+  event_id     TEXT NOT NULL UNIQUE,
+  payload_sha  TEXT NOT NULL,
+  recorded_at  TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS events_job_idx ON events (job);
 
