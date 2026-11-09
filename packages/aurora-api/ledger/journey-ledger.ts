@@ -147,6 +147,47 @@ export interface RecoveryCommand {
 
 export type RecoveryCommandSummary = Omit<RecoveryCommand, "inputSha" | "body" | "result">;
 
+export type ConversationRole = "user" | "chief";
+
+/** Conversa de um usuário com o Chief of Staff. A instalação (empresa) é o próprio banco. */
+export interface Conversation {
+  id: string;
+  /** Identidade do usuário dono da conversa; só ele a enxerga. */
+  actor: string;
+  title: string;
+  created: string;
+  /** Instante da última mensagem; ordena a lista. */
+  updated: string;
+}
+
+export interface ConversationSummary extends Conversation {
+  messageCount: number;
+}
+
+export interface NewConversationMessage {
+  conversation: string;
+  role: ConversationRole;
+  text: string;
+  /** Trabalho aberto a partir desta mensagem (resposta do Chief of Staff). */
+  job?: string | null;
+  /** Chave do cliente para repetir um envio sem duplicar; única por conversa. */
+  clientId?: string | null;
+  /** `seq` da mensagem do usuário a que esta responde. */
+  replyTo?: number | null;
+  created: string;
+}
+
+export interface ConversationMessage {
+  seq: number;
+  conversation: string;
+  role: ConversationRole;
+  text: string;
+  job: string | null;
+  clientId: string | null;
+  replyTo: number | null;
+  created: string;
+}
+
 /** Operações disponíveis tanto fora quanto dentro de uma transação. */
 export interface JourneyStore {
   // Trabalhos
@@ -194,6 +235,22 @@ export interface JourneyStore {
   recordDestinationIntent(job: string, intent: string): Promise<void>;
   /** Há revogação sem confirmação ou intenção sem efeito registrado. */
   hasPendingDestinationWork(): Promise<boolean>;
+
+  // Conversa com o Chief of Staff
+  createConversation(conversation: { id: string; actor: string; title: string; created: string }): Promise<void>;
+  getConversation(id: string): Promise<Conversation | undefined>;
+  /** Do mais recente para o mais antigo. */
+  listConversationsForActor(actor: string): Promise<ConversationSummary[]>;
+  /**
+   * Acrescenta uma mensagem e atualiza `updated` da conversa. Lança `LedgerUsageError` se a
+   * conversa não existe e falha se `clientId` já foi usado na mesma conversa.
+   */
+  appendConversationMessage(message: NewConversationMessage): Promise<ConversationMessage>;
+  findConversationMessageByClientId(conversation: string, clientId: string): Promise<ConversationMessage | undefined>;
+  /** A resposta do Chief of Staff a uma mensagem do usuário, se já existir. */
+  findConversationReply(conversation: string, replyTo: number): Promise<ConversationMessage | undefined>;
+  /** Em ordem de envio. `afterSeq` e `limit` permitem paginar. */
+  listConversationMessages(conversation: string, page?: { afterSeq?: number; limit?: number }): Promise<ConversationMessage[]>;
 
   // Central de recuperação humana
   createRecoverySession(session: RecoverySession): Promise<void>;

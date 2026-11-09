@@ -28,6 +28,10 @@ import {
   type NewJob,
   type QueueDepth,
   type QueueEntry,
+  type Conversation,
+  type ConversationMessage,
+  type ConversationSummary,
+  type NewConversationMessage,
   type QueueKind,
   type ReceiptRecord,
   type RecoveryCommand,
@@ -69,6 +73,8 @@ const SCHEMA = `
   CREATE TABLE IF NOT EXISTS pilot_reference_revocations(reference_version TEXT PRIMARY KEY);
   CREATE TABLE IF NOT EXISTS job_queue(seq INTEGER PRIMARY KEY AUTOINCREMENT,job TEXT UNIQUE NOT NULL,kind TEXT NOT NULL,crash INTEGER NOT NULL,queued_at TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS job_admissions(key TEXT PRIMARY KEY,job TEXT NOT NULL);
+  CREATE TABLE IF NOT EXISTS conversations(id TEXT PRIMARY KEY,actor TEXT NOT NULL,title TEXT NOT NULL,created TEXT NOT NULL,updated TEXT NOT NULL);
+  CREATE TABLE IF NOT EXISTS conversation_messages(seq INTEGER PRIMARY KEY AUTOINCREMENT,conversation TEXT NOT NULL,role TEXT NOT NULL,text TEXT NOT NULL,job TEXT,client_id TEXT,reply_to INTEGER,created TEXT NOT NULL,UNIQUE(conversation,client_id));
   CREATE TABLE IF NOT EXISTS recovery_sessions(hash TEXT PRIMARY KEY,actor TEXT,auth_sha TEXT,expires INTEGER);
   CREATE TABLE IF NOT EXISTS recovery_commands(id TEXT PRIMARY KEY,actor TEXT,input_sha TEXT,body TEXT,action TEXT,case_id TEXT,operation_id TEXT,evidence_sha TEXT,status TEXT,result TEXT,updated TEXT);`;
 
@@ -235,6 +241,77 @@ export class SqliteJourneyCore {
     );
   }
 
+  // Conversa ---------------------------------------------------------------
+  createConversation(c: { id: string; actor: string; title: string; created: string }): void {
+    this.db
+      .prepare("INSERT INTO conversations(id,actor,title,created,updated) VALUES(?,?,?,?,?)")
+      .run(c.id, c.actor, c.title, c.created, c.created);
+  }
+  getConversation(id: string): Conversation | undefined {
+    const r = this.db.prepare("SELECT id,actor,title,created,updated FROM conversations WHERE id=?").get(id) as Row | undefined;
+    return r && this.toConversation(r);
+  }
+  listConversationsForActor(actor: string): ConversationSummary[] {
+    return this.rows(
+      `SELECT c.id,c.actor,c.title,c.created,c.updated,
+              (SELECT count(*) FROM conversation_messages m WHERE m.conversation=c.id) AS message_count
+       FROM conversations c WHERE c.actor=? ORDER BY c.updated DESC, c.rowid DESC`,
+      actor,
+    ).map((r) => ({ ...this.toConversation(r), messageCount: Number(r.message_count) }));
+  }
+  appendConversationMessage(m: NewConversationMessage): ConversationMessage {
+    const touched = this.db.prepare("UPDATE conversations SET updated=? WHERE id=?").run(m.created, m.conversation);
+    if (!Number(touched.changes)) throw new LedgerUsageError("Conversa inexistente");
+    const res = this.db
+      .prepare("INSERT INTO conversation_messages(conversation,role,text,job,client_id,reply_to,created) VALUES(?,?,?,?,?,?,?)")
+      .run(m.conversation, m.role, m.text, m.job ?? null, m.clientId ?? null, m.replyTo ?? null, m.created);
+    return {
+      seq: Number(res.lastInsertRowid),
+      conversation: m.conversation,
+      role: m.role,
+      text: m.text,
+      job: m.job ?? null,
+      clientId: m.clientId ?? null,
+      replyTo: m.replyTo ?? null,
+      created: m.created,
+    };
+  }
+  findConversationMessageByClientId(conversation: string, clientId: string): ConversationMessage | undefined {
+    return this.toMessage(
+      this.db.prepare("SELECT * FROM conversation_messages WHERE conversation=? AND client_id=?").get(conversation, clientId) as Row | undefined,
+    );
+  }
+  findConversationReply(conversation: string, replyTo: number): ConversationMessage | undefined {
+    return this.toMessage(
+      this.db
+        .prepare("SELECT * FROM conversation_messages WHERE conversation=? AND reply_to=? AND role='chief' ORDER BY seq LIMIT 1")
+        .get(conversation, replyTo) as Row | undefined,
+    );
+  }
+  listConversationMessages(conversation: string, page: { afterSeq?: number; limit?: number } = {}): ConversationMessage[] {
+    const rows = this.db
+      .prepare("SELECT * FROM conversation_messages WHERE conversation=? AND seq>? ORDER BY seq LIMIT ?")
+      .all(conversation, page.afterSeq ?? 0, page.limit ?? 500) as Row[];
+    return rows.map((r) => this.toMessage(r)!);
+  }
+  private toConversation(r: Row): Conversation {
+    return { id: String(r.id), actor: String(r.actor), title: String(r.title), created: String(r.created), updated: String(r.updated) };
+  }
+  private toMessage(r: Row | undefined): ConversationMessage | undefined {
+    return (
+      r && {
+        seq: Number(r.seq),
+        conversation: String(r.conversation),
+        role: r.role as ConversationMessage["role"],
+        text: String(r.text),
+        job: r.job === null ? null : String(r.job),
+        clientId: r.client_id === null ? null : String(r.client_id),
+        replyTo: r.reply_to === null ? null : Number(r.reply_to),
+        created: String(r.created),
+      }
+    );
+  }
+
   // Central de recuperação ------------------------------------------------
   createRecoverySession(s: RecoverySession): void {
     this.db.prepare("INSERT INTO recovery_sessions VALUES(?,?,?,?)").run(s.hash, s.actor, s.authSha, s.expires);
@@ -342,6 +419,13 @@ class SqliteJourneyStore implements JourneyStore {
   async getDestinationIntent(job: string) { return this.core.getDestinationIntent(job); }
   async recordDestinationIntent(job: string, intent: string) { this.core.recordDestinationIntent(job, intent); }
   async hasPendingDestinationWork() { return this.core.hasPendingDestinationWork(); }
+  async createConversation(c: { id: string; actor: string; title: string; created: string }) { this.core.createConversation(c); }
+  async getConversation(id: string) { return this.core.getConversation(id); }
+  async listConversationsForActor(actor: string) { return this.core.listConversationsForActor(actor); }
+  async appendConversationMessage(m: NewConversationMessage) { return this.core.appendConversationMessage(m); }
+  async findConversationMessageByClientId(conversation: string, clientId: string) { return this.core.findConversationMessageByClientId(conversation, clientId); }
+  async findConversationReply(conversation: string, replyTo: number) { return this.core.findConversationReply(conversation, replyTo); }
+  async listConversationMessages(conversation: string, page?: { afterSeq?: number; limit?: number }) { return this.core.listConversationMessages(conversation, page); }
   async createRecoverySession(s: RecoverySession) { this.core.createRecoverySession(s); }
   async findRecoverySession(hash: string) { return this.core.findRecoverySession(hash); }
   async deleteRecoverySession(hash: string) { this.core.deleteRecoverySession(hash); }
@@ -404,6 +488,13 @@ export class SqliteJourneyLedger implements JourneyLedger {
   recordDestinationIntent = (job: string, intent: string) => this.run((s) => s.recordDestinationIntent(job, intent));
   hasPendingDestinationWork = () => this.run((s) => s.hasPendingDestinationWork());
 
+  createConversation = (c: { id: string; actor: string; title: string; created: string }) => this.run((st) => st.createConversation(c));
+  getConversation = (id: string) => this.run((st) => st.getConversation(id));
+  listConversationsForActor = (actor: string) => this.run((st) => st.listConversationsForActor(actor));
+  appendConversationMessage = (m: NewConversationMessage) => this.run((st) => st.appendConversationMessage(m));
+  findConversationMessageByClientId = (conversation: string, clientId: string) => this.run((st) => st.findConversationMessageByClientId(conversation, clientId));
+  findConversationReply = (conversation: string, replyTo: number) => this.run((st) => st.findConversationReply(conversation, replyTo));
+  listConversationMessages = (conversation: string, page?: { afterSeq?: number; limit?: number }) => this.run((st) => st.listConversationMessages(conversation, page));
   createRecoverySession = (s: RecoverySession) => this.run((st) => st.createRecoverySession(s));
   findRecoverySession = (hash: string) => this.run((st) => st.findRecoverySession(hash));
   deleteRecoverySession = (hash: string) => this.run((st) => st.deleteRecoverySession(hash));

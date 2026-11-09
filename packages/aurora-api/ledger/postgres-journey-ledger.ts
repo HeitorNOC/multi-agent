@@ -29,6 +29,10 @@ import {
   type NewJob,
   type QueueDepth,
   type QueueEntry,
+  type Conversation,
+  type ConversationMessage,
+  type ConversationSummary,
+  type NewConversationMessage,
   type QueueKind,
   type ReceiptRecord,
   type RecoveryCommand,
@@ -262,6 +266,83 @@ class PostgresJourneyStore implements JourneyStore {
     return (rowCount ?? 0) > 0;
   }
 
+  // Conversa ---------------------------------------------------------------
+  async createConversation(c: { id: string; actor: string; title: string; created: string }): Promise<void> {
+    await this.db.query("INSERT INTO conversations(id,actor,title,created,updated) VALUES($1,$2,$3,$4,$4)", [
+      c.id,
+      c.actor,
+      c.title,
+      c.created,
+    ]);
+  }
+  async getConversation(id: string): Promise<Conversation | undefined> {
+    const { rows } = await this.db.query("SELECT id,actor,title,created,updated FROM conversations WHERE id=$1", [id]);
+    return rows[0] && this.toConversation(rows[0]);
+  }
+  async listConversationsForActor(actor: string): Promise<ConversationSummary[]> {
+    const { rows } = await this.db.query(
+      `SELECT c.id,c.actor,c.title,c.created,c.updated,
+              (SELECT count(*) FROM conversation_messages m WHERE m.conversation=c.id) AS message_count
+       FROM conversations c WHERE c.actor=$1 ORDER BY c.updated DESC, c.ordinal DESC`,
+      [actor],
+    );
+    return rows.map((r) => ({ ...this.toConversation(r), messageCount: Number(r.message_count) }));
+  }
+  async appendConversationMessage(m: NewConversationMessage): Promise<ConversationMessage> {
+    const touched = await this.db.query("UPDATE conversations SET updated=$1 WHERE id=$2", [m.created, m.conversation]);
+    if (!touched.rowCount) throw new LedgerUsageError("Conversa inexistente");
+    const { rows } = await this.db.query(
+      `INSERT INTO conversation_messages(conversation,role,text,job,client_id,reply_to,created)
+       VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING seq`,
+      [m.conversation, m.role, m.text, m.job ?? null, m.clientId ?? null, m.replyTo ?? null, m.created],
+    );
+    return {
+      seq: Number(rows[0].seq),
+      conversation: m.conversation,
+      role: m.role,
+      text: m.text,
+      job: m.job ?? null,
+      clientId: m.clientId ?? null,
+      replyTo: m.replyTo ?? null,
+      created: m.created,
+    };
+  }
+  async findConversationMessageByClientId(conversation: string, clientId: string): Promise<ConversationMessage | undefined> {
+    const { rows } = await this.db.query("SELECT * FROM conversation_messages WHERE conversation=$1 AND client_id=$2", [conversation, clientId]);
+    return this.toMessage(rows[0]);
+  }
+  async findConversationReply(conversation: string, replyTo: number): Promise<ConversationMessage | undefined> {
+    const { rows } = await this.db.query(
+      "SELECT * FROM conversation_messages WHERE conversation=$1 AND reply_to=$2 AND role='chief' ORDER BY seq LIMIT 1",
+      [conversation, replyTo],
+    );
+    return this.toMessage(rows[0]);
+  }
+  async listConversationMessages(conversation: string, page: { afterSeq?: number; limit?: number } = {}): Promise<ConversationMessage[]> {
+    const { rows } = await this.db.query(
+      "SELECT * FROM conversation_messages WHERE conversation=$1 AND seq>$2 ORDER BY seq LIMIT $3",
+      [conversation, page.afterSeq ?? 0, page.limit ?? 500],
+    );
+    return rows.map((r) => this.toMessage(r)!);
+  }
+  private toConversation(r: Row): Conversation {
+    return { id: String(r.id), actor: String(r.actor), title: String(r.title), created: String(r.created), updated: String(r.updated) };
+  }
+  private toMessage(r: Row | undefined): ConversationMessage | undefined {
+    return (
+      r && {
+        seq: Number(r.seq),
+        conversation: String(r.conversation),
+        role: r.role as ConversationMessage["role"],
+        text: String(r.text),
+        job: r.job === null ? null : String(r.job),
+        clientId: r.client_id === null ? null : String(r.client_id),
+        replyTo: r.reply_to === null ? null : Number(r.reply_to),
+        created: String(r.created),
+      }
+    );
+  }
+
   // Central de recuperação ------------------------------------------------
   async createRecoverySession(s: RecoverySession): Promise<void> {
     await this.db.query("INSERT INTO recovery_sessions(hash,actor,auth_sha,expires) VALUES($1,$2,$3,$4)", [
@@ -453,6 +534,13 @@ export class PostgresJourneyLedger implements JourneyLedger {
   recordDestinationIntent = (job: string, intent: string) => this.run((s) => s.recordDestinationIntent(job, intent));
   hasPendingDestinationWork = () => this.run((s) => s.hasPendingDestinationWork());
 
+  createConversation = (c: { id: string; actor: string; title: string; created: string }) => this.run((st) => st.createConversation(c));
+  getConversation = (id: string) => this.run((st) => st.getConversation(id));
+  listConversationsForActor = (actor: string) => this.run((st) => st.listConversationsForActor(actor));
+  appendConversationMessage = (m: NewConversationMessage) => this.run((st) => st.appendConversationMessage(m));
+  findConversationMessageByClientId = (conversation: string, clientId: string) => this.run((st) => st.findConversationMessageByClientId(conversation, clientId));
+  findConversationReply = (conversation: string, replyTo: number) => this.run((st) => st.findConversationReply(conversation, replyTo));
+  listConversationMessages = (conversation: string, page?: { afterSeq?: number; limit?: number }) => this.run((st) => st.listConversationMessages(conversation, page));
   createRecoverySession = (s: RecoverySession) => this.run((st) => st.createRecoverySession(s));
   findRecoverySession = (hash: string) => this.run((st) => st.findRecoverySession(hash));
   deleteRecoverySession = (hash: string) => this.run((st) => st.deleteRecoverySession(hash));

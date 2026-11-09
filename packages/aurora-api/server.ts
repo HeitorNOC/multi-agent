@@ -18,6 +18,12 @@ import type {
   QueueEntry,
 } from "./ledger/journey-ledger.ts";
 import { openJourneyLedger } from "./ledger/open-ledger.ts";
+import { RuleBasedChiefOfStaff } from "./conversation/chief-of-staff.ts";
+import {
+  ConversationError,
+  ConversationService,
+  type Admission,
+} from "./conversation/conversation-service.ts";
 import { RecoveryAPI, RecoveryError } from "./recovery.ts";
 import { monitorPerformance } from "./performance.ts";
 import { PilotAccess } from "./pilot-access.ts";
@@ -520,6 +526,108 @@ async function destinationEffect(
   return effect(id, hash, receipt);
 }
 
+const ADMISSION_KEY = /^[a-zA-Z0-9_-]{16,100}$/;
+type AdmissionHook = (tx: JourneyStore, jobId: string) => Promise<void>;
+
+/**
+ * Admite um trabalho novo pela fila durável (ou inicia direto, sem fila). É o único caminho
+ * de criação de trabalhos: usado pela rota /api/jobs e pela conversa com o Chief of Staff.
+ * `onAdmitted` roda dentro da transação que cria o trabalho; se lançar, nada é criado.
+ */
+async function admitJob(
+  goal: string,
+  options: { idempotencyKey?: string; onAdmitted?: AdmissionHook } = {},
+): Promise<{ status: number; body: Record<string, unknown> }> {
+  const { idempotencyKey: key, onAdmitted } = options;
+  if (queueCapacity) {
+    if (key !== undefined && !ADMISSION_KEY.test(key))
+      throw new QueueError("Chave de admissão inválida", 400);
+    const accepted = await ledger.transaction(async (tx) => {
+      const priorJob = key ? await tx.findAdmittedJob(key) : undefined;
+      if (priorJob) {
+        const existing = await loadJob(tx, priorJob);
+        if (existing.goal !== goal)
+          throw new QueueError("Chave já vinculada a outro pedido", 409);
+        return { id: priorJob, status: existing.status, replayed: true };
+      }
+      await requireQueueSpace(tx, "new");
+      const id = randomUUID();
+      await tx.insertJob({
+        id,
+        goal,
+        status: "queued",
+        created: new Date().toISOString(),
+      });
+      if (key) await tx.recordAdmission(key, id);
+      await record(tx, id, "admission", { goal });
+      await enqueue(tx, id, "new");
+      if (onAdmitted) await onAdmitted(tx, id);
+      return { id, status: "queued", replayed: false };
+    });
+    void pump();
+    return { status: 202, body: accepted };
+  }
+  const status = await backend("status");
+  if (status.phase !== "ready")
+    return { status: 409, body: { error: "Conhecimento ainda está sendo preparado" } };
+  if (active.size) throw Error("Aguarde o trabalho em execução");
+  const id = randomUUID();
+  await ledger.transaction(async (tx) => {
+    await tx.insertJob({
+      id,
+      goal,
+      status: "created",
+      created: new Date().toISOString(),
+    });
+    await record(tx, id, "admission", { goal });
+    if (onAdmitted) await onAdmitted(tx, id);
+  });
+  try {
+    await startWorker(id);
+  } catch (error) {
+    await ledger.transaction(async (tx) => {
+      await tx.updateJob(id, {
+        status: "failed",
+        error:
+          "Runtime indisponível na admissão; retome quando estiver disponível",
+      });
+      await record(tx, id, "admission_failed", {
+        code: "runtime_unavailable",
+      });
+    });
+    throw error;
+  }
+  return { status: 201, body: { id } };
+}
+
+/** Meta do trabalho que a conversa pode abrir; `null` quando este perfil não abre por conversa. */
+function conversationGoal(): string | null {
+  if (config.recoveryOnly) return null;
+  const goal = policy.chooseGoal ? policy.chooseGoal({}, config.pilotDirective) : GOAL;
+  if (goal === policy.QUE_EXECUTION_GOAL || policy.repositoryReview) return null;
+  return goal;
+}
+
+const conversations = new ConversationService({
+  ledger,
+  chief: new RuleBasedChiefOfStaff(conversationGoal() ?? "nenhum trabalho por conversa neste perfil."),
+  async openJob(onAdmitted): Promise<Admission> {
+    const goal = conversationGoal();
+    if (!goal) return { opened: false, reason: "este perfil não abre trabalhos pela conversa" };
+    try {
+      const result = await admitJob(goal, { onAdmitted });
+      if (result.status >= 400)
+        return { opened: false, reason: String(result.body.error ?? "admissão recusada") };
+      return { opened: true };
+    } catch (error) {
+      // Recusas esperadas da admissão viram explicação na conversa; o resto é falha real.
+      if (error instanceof QueueError && error.status < 500)
+        return { opened: false, reason: error.message.replace(/\.$/, "").toLowerCase() };
+      throw error;
+    }
+  },
+});
+
 const server = http.createServer(async (req, res) => {
   res.setHeader("Cache-Control", "no-store");
   res.setHeader("X-Content-Type-Options", "nosniff");
@@ -886,6 +994,24 @@ const server = http.createServer(async (req, res) => {
       await loadJob(ledger, traceMatch[1]);
       return send(await ledger.trace(traceMatch[1]));
     }
+    if (path === "/api/conversations" || path.startsWith("/api/conversations/")) {
+      if (config.recoveryOnly)
+        throw Error("Este perfil oferece somente a central de recuperação operacional");
+      // Sem identidade corporativa ainda (E4/P04): o operador local ou o usuário do piloto.
+      const actor = pilotActor?.id ?? "operador-local-demo";
+      const conversationMatch = path.match(/^\/api\/conversations\/([\w-]+)(\/messages)?$/);
+      if (path === "/api/conversations" && req.method === "GET")
+        return send(await conversations.list(actor));
+      if (path === "/api/conversations" && req.method === "POST")
+        return send(await conversations.create(actor, body), 201);
+      if (conversationMatch && !conversationMatch[2] && req.method === "GET")
+        return send(await conversations.read(actor, conversationMatch[1]));
+      if (conversationMatch && conversationMatch[2] && req.method === "POST") {
+        const result = await conversations.send(actor, conversationMatch[1], body);
+        return send(result.body, result.status);
+      }
+      return send({ error: "Rota de conversa não encontrada" }, 404);
+    }
     if (req.method === "POST" && path === "/api/jobs") {
       if (config.recoveryOnly)
         throw Error(
@@ -925,68 +1051,11 @@ const server = http.createServer(async (req, res) => {
         });
         return send(accepted, accepted.replayed ? 200 : 201);
       }
-      if (queueCapacity) {
-        const key = req.headers["idempotency-key"];
-        if (
-          key !== undefined &&
-          (typeof key !== "string" || !/^[a-zA-Z0-9_-]{16,100}$/.test(key))
-        )
-          throw new QueueError("Chave de admissão inválida", 400);
-        const accepted = await ledger.transaction(async (tx) => {
-          const priorJob = key ? await tx.findAdmittedJob(key as string) : undefined;
-          if (priorJob) {
-            const existing = await loadJob(tx, priorJob);
-            if (existing.goal !== goal)
-              throw new QueueError("Chave já vinculada a outro pedido", 409);
-            return { id: priorJob, status: existing.status, replayed: true };
-          }
-          await requireQueueSpace(tx, "new");
-          const id = randomUUID();
-          await tx.insertJob({
-            id,
-            goal,
-            status: "queued",
-            created: new Date().toISOString(),
-          });
-          if (key) await tx.recordAdmission(key as string, id);
-          await record(tx, id, "admission", { goal });
-          await enqueue(tx, id, "new");
-          return { id, status: "queued", replayed: false };
-        });
-        send(accepted, 202);
-        void pump();
-        return;
-      }
-      const status = await backend("status");
-      if (status.phase !== "ready")
-        return send({ error: "Conhecimento ainda está sendo preparado" }, 409);
-      if (active.size) throw Error("Aguarde o trabalho em execução");
-      const id = randomUUID();
-      await ledger.transaction(async (tx) => {
-        await tx.insertJob({
-          id,
-          goal,
-          status: "created",
-          created: new Date().toISOString(),
-        });
-        await record(tx, id, "admission", { goal });
-      });
-      try {
-        await startWorker(id);
-      } catch (error) {
-        await ledger.transaction(async (tx) => {
-          await tx.updateJob(id, {
-            status: "failed",
-            error:
-              "Runtime indisponível na admissão; retome quando estiver disponível",
-          });
-          await record(tx, id, "admission_failed", {
-            code: "runtime_unavailable",
-          });
-        });
-        throw error;
-      }
-      return send({ id }, 201);
+      const key = req.headers["idempotency-key"];
+      if (queueCapacity && key !== undefined && typeof key !== "string")
+        throw new QueueError("Chave de admissão inválida", 400);
+      const admitted = await admitJob(goal, { idempotencyKey: key as string | undefined });
+      return send(admitted.body, admitted.status);
     }
     const match = path.match(
       /^\/api\/jobs\/([\w-]+)\/(approve|reject|resume)$/,
@@ -1104,7 +1173,9 @@ const server = http.createServer(async (req, res) => {
     send({ error: "Rota não encontrada" }, 404);
   } catch (error) {
     const status =
-      error instanceof RecoveryError || error instanceof QueueError
+      error instanceof RecoveryError ||
+      error instanceof QueueError ||
+      error instanceof ConversationError
         ? error.status
         : 409;
     if (status === 429) res.setHeader("Retry-After", "2");

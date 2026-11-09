@@ -84,6 +84,8 @@ const TABLES: TableSpec[] = [
   { name: "job_admissions", columns: ["key", "job"], key: ["key"], readOrder: "key" },
   { name: "pilot_destination_revocations", columns: ["scope", "acknowledged"], key: ["scope"], readOrder: "scope", optional: true },
   { name: "pilot_destination_intents", columns: ["job", "intent"], key: ["job"], readOrder: "job", optional: true },
+  { name: "conversations", columns: ["id", "actor", "title", "created", "updated"], key: ["id"], readOrder: "rowid", optional: true },
+  { name: "conversation_messages", columns: ["seq", "conversation", "role", "text", "job", "client_id", "reply_to", "created"], key: ["seq"], readOrder: "seq", sequence: "seq", optional: true },
   { name: "recovery_sessions", columns: ["hash", "actor", "auth_sha", "expires"], key: ["hash"], readOrder: "hash", optional: true },
   { name: "recovery_commands", columns: ["id", "actor", "input_sha", "body", "action", "case_id", "operation_id", "evidence_sha", "status", "result", "updated"], key: ["id"], readOrder: "id", optional: true },
 ];

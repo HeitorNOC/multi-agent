@@ -269,6 +269,99 @@ export function describeJourneyLedgerContract(name: string, options: ContractOpt
       });
     });
 
+    describe("conversa com o Chief of Staff", () => {
+      const conv = (id: string, over: { actor?: string; created?: string; title?: string } = {}) => ({
+        id,
+        actor: over.actor ?? "ana",
+        title: over.title ?? "Vendas",
+        created: over.created ?? at(1),
+      });
+      const msg = (conversation: string, over: Partial<{ role: "user" | "chief"; text: string; clientId: string; replyTo: number; job: string; created: string }> = {}) => ({
+        conversation,
+        role: over.role ?? ("user" as const),
+        text: over.text ?? "olá",
+        clientId: over.clientId,
+        replyTo: over.replyTo,
+        job: over.job,
+        created: over.created ?? at(2),
+      });
+
+      test("cria, lê e só lista as conversas do próprio usuário, da mais recente para a mais antiga", async () => {
+        const l = await ledger();
+        await l.createConversation(conv("c1", { created: at(1) }));
+        await l.createConversation(conv("c2", { created: at(2) }));
+        await l.createConversation(conv("c3", { actor: "bia", created: at(3) }));
+        assert.deepEqual(await l.getConversation("c1"), { id: "c1", actor: "ana", title: "Vendas", created: at(1), updated: at(1) });
+        assert.equal(await l.getConversation("nada"), undefined);
+        assert.deepEqual((await l.listConversationsForActor("ana")).map((c) => c.id), ["c2", "c1"]);
+        assert.deepEqual((await l.listConversationsForActor("bia")).map((c) => c.id), ["c3"]);
+        assert.equal((await l.listConversationsForActor("ninguem")).length, 0);
+      });
+
+      test("mensagens mantêm a ordem, atualizam a conversa e a contagem", async () => {
+        const l = await ledger();
+        await l.createConversation(conv("c1", { created: at(1) }));
+        await l.createConversation(conv("c2", { created: at(2) }));
+        const first = await l.appendConversationMessage(msg("c1", { text: "primeira", created: at(5) }));
+        const second = await l.appendConversationMessage(msg("c1", { role: "chief", text: "segunda", replyTo: first.seq, job: "j1", created: at(6) }));
+        assert.ok(first.seq < second.seq);
+        assert.deepEqual([second.role, second.replyTo, second.job], ["chief", first.seq, "j1"]);
+        assert.deepEqual((await l.listConversationMessages("c1")).map((m) => m.text), ["primeira", "segunda"]);
+        const list = await l.listConversationsForActor("ana");
+        assert.deepEqual(list.map((c) => [c.id, c.messageCount, c.updated]), [["c1", 2, at(6)], ["c2", 0, at(2)]], "a conversa com mensagem nova sobe");
+      });
+
+      test("paginação por afterSeq e limit", async () => {
+        const l = await ledger();
+        await l.createConversation(conv("c1"));
+        const seqs: number[] = [];
+        for (const t of ["a", "b", "c", "d"]) seqs.push((await l.appendConversationMessage(msg("c1", { text: t }))).seq);
+        assert.deepEqual((await l.listConversationMessages("c1", { afterSeq: seqs[1] })).map((m) => m.text), ["c", "d"]);
+        assert.deepEqual((await l.listConversationMessages("c1", { limit: 2 })).map((m) => m.text), ["a", "b"]);
+      });
+
+      test("clientId repetido na mesma conversa é recusado; em outra conversa é aceito", async () => {
+        const l = await ledger();
+        await l.createConversation(conv("c1"));
+        await l.createConversation(conv("c2"));
+        await l.appendConversationMessage(msg("c1", { clientId: "cli-0001" }));
+        assert.equal((await l.findConversationMessageByClientId("c1", "cli-0001"))?.clientId, "cli-0001");
+        assert.equal(await l.findConversationMessageByClientId("c2", "cli-0001"), undefined);
+        await assert.rejects(l.appendConversationMessage(msg("c1", { clientId: "cli-0001" })));
+        await l.appendConversationMessage(msg("c2", { clientId: "cli-0001" }));
+        await l.appendConversationMessage(msg("c1"));
+        await l.appendConversationMessage(msg("c1"));
+      });
+
+      test("encontra a resposta do Chief of Staff a uma mensagem", async () => {
+        const l = await ledger();
+        await l.createConversation(conv("c1"));
+        const question = await l.appendConversationMessage(msg("c1"));
+        assert.equal(await l.findConversationReply("c1", question.seq), undefined);
+        const answer = await l.appendConversationMessage(msg("c1", { role: "chief", replyTo: question.seq, text: "feito" }));
+        assert.equal((await l.findConversationReply("c1", question.seq))?.seq, answer.seq);
+      });
+
+      test("mensagem em conversa inexistente é erro de uso e nada é gravado", async () => {
+        const l = await ledger();
+        await assert.rejects(l.appendConversationMessage(msg("nada")), LedgerUsageError);
+        assert.deepEqual(await l.listConversationMessages("nada"), []);
+      });
+
+      test("na mesma transação, a conversa e o trabalho ficam ou somem juntos", async () => {
+        const l = await ledger();
+        await assert.rejects(
+          l.transaction(async (tx) => {
+            await tx.createConversation(conv("c1"));
+            await tx.appendConversationMessage(msg("c1"));
+            throw new Error("falha");
+          }),
+        );
+        assert.equal(await l.getConversation("c1"), undefined);
+        assert.deepEqual(await l.listConversationMessages("c1"), []);
+      });
+    });
+
     describe("central de recuperação", () => {
       test("sessão: cria, encontra pelo hash do token e apaga", async () => {
         const l = await ledger();
