@@ -1,19 +1,7 @@
 /** Human command gateway. Uses the existing recovery authority; never schedules agents. */
 import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
-import type { DatabaseSync } from "node:sqlite";
-const canonical = (x: any): string =>
-  Array.isArray(x)
-    ? "[" + x.map(canonical).join(",") + "]"
-    : x !== null && typeof x === "object"
-      ? "{" +
-        Object.keys(x)
-          .sort()
-          .map((k) => JSON.stringify(k) + ":" + canonical(x[k]))
-          .join(",") +
-        "}"
-      : JSON.stringify(x);
-const hash = (x: any) =>
-  createHash("sha256").update(canonical(x)).digest("hex");
+import type { JourneyLedger } from "./ledger/journey-ledger.ts";
+import { sha as hash } from "./ledger/event-codec.ts";
 export class RecoveryError extends Error {
   status: number;
   constructor(status: number, message: string) {
@@ -21,70 +9,65 @@ export class RecoveryError extends Error {
     this.status = status;
   }
 }
-const requireThat = (ok: any, status: number, message: string) => {
+/** Lança `RecoveryError` se `ok` for falso; ao retornar, o compilador sabe que `ok` é verdadeiro. */
+function requireThat(ok: unknown, status: number, message: string): asserts ok {
   if (!ok) throw new RecoveryError(status, message);
-};
+}
 type Reviewer = { id: string; label: string; credential: string };
 export class RecoveryAPI {
-  db: DatabaseSync;
+  private readonly ledger: JourneyLedger;
   installation: string;
   reviewers: Reviewer[];
   bridge: (p: any) => Promise<any>;
-  event: (job: string, node: string, detail: any) => any;
   cookie: string;
-  /** Chamado antes de abrir uma transação própria; lança se o ledger já tiver uma aberta. */
-  beforeTransaction: () => void;
   inFlight = new Map<string, { input: string; promise: Promise<any> }>();
-  constructor(
-    db: DatabaseSync,
+
+  private constructor(
+    ledger: JourneyLedger,
     installation: string,
     reviewers: Reviewer[],
     bridge: (p: any) => Promise<any>,
-    event: (job: string, node: string, detail: any) => any,
-    beforeTransaction: () => void = () => {},
   ) {
-    this.db = db;
-    this.beforeTransaction = beforeTransaction;
+    this.ledger = ledger;
     this.installation = installation;
     this.reviewers = reviewers;
     this.bridge = bridge;
-    this.event = event;
     this.cookie = "recovery_" + hash(installation).slice(0, 12);
     requireThat(
       new Set(reviewers.map((x) => x.id)).size === reviewers.length,
       500,
       "Identidades de revisão repetidas",
     );
-    db.exec(`CREATE TABLE IF NOT EXISTS recovery_sessions(hash TEXT PRIMARY KEY,actor TEXT,auth_sha TEXT,expires INTEGER);
-   CREATE TABLE IF NOT EXISTS recovery_commands(id TEXT PRIMARY KEY,actor TEXT,input_sha TEXT,body TEXT,action TEXT,case_id TEXT,operation_id TEXT,evidence_sha TEXT,status TEXT,result TEXT,updated TEXT);`);
-    this.tx(() => {
-      for (const row of db
-        .prepare(
-          "SELECT id,case_id FROM recovery_commands WHERE status='dispatching'",
-        )
-        .all() as any[]) {
-        db.prepare(
-          "UPDATE recovery_commands SET status='unknown',updated=? WHERE id=?",
-        ).run(new Date().toISOString(), row.id);
-        event("recovery:" + row.case_id, "recovery_delivery_unknown", {
-          request_id: row.id,
-          reason: "api_restart",
-        });
+  }
+
+  /**
+   * Cria a central e concilia o que uma queda anterior deixou: todo envio que estava em
+   * andamento passa a "unknown", porque não se sabe se o protocolo o recebeu.
+   */
+  static async create(
+    ledger: JourneyLedger,
+    installation: string,
+    reviewers: Reviewer[],
+    bridge: (p: any) => Promise<any>,
+  ) {
+    const api = new RecoveryAPI(ledger, installation, reviewers, bridge);
+    await ledger.transaction(async (tx) => {
+      for (const command of await tx.listDispatchingRecoveryCommands()) {
+        await tx.updateRecoveryCommandStatus(
+          command.id,
+          "unknown",
+          new Date().toISOString(),
+        );
+        await tx.appendEvent(
+          "recovery:" + command.caseId,
+          "recovery_delivery_unknown",
+          { request_id: command.id, reason: "api_restart" },
+        );
       }
     });
+    return api;
   }
-  tx<T>(fn: () => T) {
-    this.beforeTransaction();
-    this.db.exec("BEGIN IMMEDIATE");
-    try {
-      const out = fn();
-      this.db.exec("COMMIT");
-      return out;
-    } catch (error) {
-      this.db.exec("ROLLBACK");
-      throw error;
-    }
-  }
+
   fields(body: any, allowed: string[]) {
     requireThat(
       body &&
@@ -95,23 +78,21 @@ export class RecoveryAPI {
       "Campo de recuperação não permitido",
     );
   }
-  actor(headers: any) {
+  async actor(headers: any) {
     const value = String(headers.cookie || "")
       .split(";")
       .map((x) => x.trim())
       .find((x) => x.startsWith(this.cookie + "="))
       ?.slice(this.cookie.length + 1);
-    const session =
-      value &&
-      (this.db
-        .prepare("SELECT * FROM recovery_sessions WHERE hash=?")
-        .get(hash(value)) as any);
+    const session = value
+      ? await this.ledger.findRecoverySession(hash(value))
+      : undefined;
     const reviewer =
       session && this.reviewers.find((x) => x.id === session.actor);
     requireThat(
       reviewer &&
         session.expires > Date.now() &&
-        session.auth_sha === hash(reviewer),
+        session.authSha === hash(reviewer),
       401,
       "Entre com uma credencial local de revisão",
     );
@@ -222,11 +203,9 @@ export class RecoveryAPI {
         "Informe uma justificativa de 20 a 500 caracteres",
       );
     const input = hash({ actor: actor.id, action, body }),
-      prior = this.db
-        .prepare("SELECT * FROM recovery_commands WHERE id=?")
-        .get(body.request_id) as any;
+      prior = await this.ledger.getRecoveryCommand(body.request_id);
     requireThat(
-      !prior || (prior.actor === actor.id && prior.input_sha === input),
+      !prior || (prior.actor === actor.id && prior.inputSha === input),
       409,
       "Envio já vinculado a outro conteúdo ou revisor",
     );
@@ -246,7 +225,7 @@ export class RecoveryAPI {
             request_id,
             status: "completed",
             replayed: true,
-            result: JSON.parse(prior.result),
+            result: JSON.parse(prior.result!),
           };
       }
       const response = await this.protocol(actor, command);
@@ -257,32 +236,24 @@ export class RecoveryAPI {
         result: this.result(response),
       };
     }
-    this.tx(() => {
+    await this.ledger.transaction(async (tx) => {
+      const now = new Date().toISOString();
       if (!prior)
-        this.db
-          .prepare(
-            "INSERT INTO recovery_commands VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-          )
-          .run(
-            request_id,
-            actor.id,
-            input,
-            JSON.stringify(body),
-            action,
-            body.case_id,
-            body.operation_id,
-            body.evidence_sha,
-            "dispatching",
-            null,
-            new Date().toISOString(),
-          );
-      else
-        this.db
-          .prepare(
-            "UPDATE recovery_commands SET status='dispatching',updated=? WHERE id=?",
-          )
-          .run(new Date().toISOString(), request_id);
-      this.event("recovery:" + body.case_id, "recovery_command_started", {
+        await tx.insertRecoveryCommand({
+          id: request_id,
+          actor: actor.id,
+          inputSha: input,
+          body: JSON.stringify(body),
+          action,
+          caseId: body.case_id,
+          operationId: body.operation_id,
+          evidenceSha: body.evidence_sha,
+          status: "dispatching",
+          result: null,
+          updated: now,
+        });
+      else await tx.updateRecoveryCommandStatus(request_id, "dispatching", now);
+      await tx.appendEvent("recovery:" + body.case_id, "recovery_command_started", {
         request_id,
         actor: actor.id,
         action,
@@ -291,13 +262,14 @@ export class RecoveryAPI {
     });
     try {
       const result = this.result(await this.protocol(actor, command));
-      this.tx(() => {
-        this.db
-          .prepare(
-            "UPDATE recovery_commands SET status='completed',result=?,updated=? WHERE id=?",
-          )
-          .run(JSON.stringify(result), new Date().toISOString(), request_id);
-        this.event("recovery:" + body.case_id, "recovery_command_completed", {
+      await this.ledger.transaction(async (tx) => {
+        await tx.updateRecoveryCommandStatus(
+          request_id,
+          "completed",
+          new Date().toISOString(),
+          JSON.stringify(result),
+        );
+        await tx.appendEvent("recovery:" + body.case_id, "recovery_command_completed", {
           request_id,
           actor: actor.id,
           action,
@@ -306,15 +278,13 @@ export class RecoveryAPI {
       return { request_id, status: "completed", result };
     } catch (error) {
       const unknown = !(error instanceof RecoveryError) || error.status >= 500;
-      this.tx(() => {
-        this.db
-          .prepare("UPDATE recovery_commands SET status=?,updated=? WHERE id=?")
-          .run(
-            unknown ? "unknown" : "rejected",
-            new Date().toISOString(),
-            request_id,
-          );
-        this.event(
+      await this.ledger.transaction(async (tx) => {
+        await tx.updateRecoveryCommandStatus(
+          request_id,
+          unknown ? "unknown" : "rejected",
+          new Date().toISOString(),
+        );
+        await tx.appendEvent(
           "recovery:" + body.case_id,
           unknown ? "recovery_delivery_unknown" : "recovery_command_rejected",
           { request_id, actor: actor.id, action },
@@ -338,7 +308,7 @@ export class RecoveryAPI {
       if (!this.reviewers.length)
         return reply({ enabled: false, authenticated: false });
       try {
-        const actor = this.actor(headers);
+        const actor = await this.actor(headers);
         return reply({
           enabled: true,
           authenticated: true,
@@ -370,9 +340,12 @@ export class RecoveryAPI {
       );
       requireThat(reviewer, 401, "Credencial local inválida");
       const token = randomBytes(32).toString("hex");
-      this.db
-        .prepare("INSERT INTO recovery_sessions VALUES(?,?,?,?)")
-        .run(hash(token), reviewer!.id, hash(reviewer), Date.now() + 3600000);
+      await this.ledger.createRecoverySession({
+        hash: hash(token),
+        actor: reviewer!.id,
+        authSha: hash(reviewer),
+        expires: Date.now() + 3600000,
+      });
       return reply(
         {
           authenticated: true,
@@ -387,16 +360,16 @@ export class RecoveryAPI {
           "; HttpOnly; SameSite=Strict; Path=/api/recovery; Max-Age=3600",
       );
     }
-    const actor = this.actor(headers);
+    const actor = await this.actor(headers);
     if (path === "/api/recovery/logout" && method === "POST") {
       this.fields(body, []);
       const cookie = String(headers.cookie || "")
         .split(";")
         .map((x) => x.trim())
         .find((x) => x.startsWith(this.cookie + "="))!;
-      this.db
-        .prepare("DELETE FROM recovery_sessions WHERE hash=?")
-        .run(hash(cookie.slice(this.cookie.length + 1)));
+      await this.ledger.deleteRecoverySession(
+        hash(cookie.slice(this.cookie.length + 1)),
+      );
       return reply(
         { authenticated: false },
         200,
@@ -412,13 +385,17 @@ export class RecoveryAPI {
           [...scope.cases, ...scope.history].map((x: any) => x.case_id),
         );
       return reply({
-        commands: (
-          this.db
-            .prepare(
-              "SELECT id,action,case_id,operation_id,evidence_sha,status,updated FROM recovery_commands WHERE actor=? ORDER BY updated DESC",
-            )
-            .all(actor.id) as any[]
-        ).filter((row) => visible.has(row.case_id)),
+        commands: (await this.ledger.listRecoveryCommandsForActor(actor.id))
+          .filter((row) => visible.has(row.caseId))
+          .map((row) => ({
+            id: row.id,
+            action: row.action,
+            case_id: row.caseId,
+            operation_id: row.operationId,
+            evidence_sha: row.evidenceSha,
+            status: row.status,
+            updated: row.updated,
+          })),
       });
     }
     if (path === "/api/recovery/inspect" && method === "POST") {
@@ -437,9 +414,10 @@ export class RecoveryAPI {
       return reply(await this.command(actor, body, "recovery_confirm"));
     if (path === "/api/recovery/retry" && method === "POST") {
       this.fields(body, ["request_id"]);
-      const prior = this.db
-        .prepare("SELECT * FROM recovery_commands WHERE id=? AND actor=?")
-        .get(body.request_id, actor.id) as any;
+      const prior = await this.ledger.getRecoveryCommandForActor(
+        body.request_id,
+        actor.id,
+      );
       requireThat(prior, 404, "Envio não encontrado para este revisor");
       return reply(
         await this.command(actor, JSON.parse(prior.body), prior.action),

@@ -117,6 +117,36 @@ export interface ReceiptRecord {
   receipt: string;
 }
 
+export type RecoveryCommandStatus = "dispatching" | "completed" | "unknown" | "rejected";
+
+/** Sessão de um revisor da central de recuperação. `hash` é o do token; o token nunca é gravado. */
+export interface RecoverySession {
+  hash: string;
+  actor: string;
+  /** Hash da identidade do revisor no momento do login; mudar a credencial invalida a sessão. */
+  authSha: string;
+  /** Epoch em milissegundos. */
+  expires: number;
+}
+
+export interface RecoveryCommand {
+  id: string;
+  actor: string;
+  inputSha: string;
+  /** Corpo original do envio, como JSON em texto. */
+  body: string;
+  action: string;
+  caseId: string;
+  operationId: string;
+  evidenceSha: string;
+  status: RecoveryCommandStatus;
+  /** Resultado como JSON em texto; só existe depois de `completed`. */
+  result: string | null;
+  updated: string;
+}
+
+export type RecoveryCommandSummary = Omit<RecoveryCommand, "inputSha" | "body" | "result">;
+
 /** Operações disponíveis tanto fora quanto dentro de uma transação. */
 export interface JourneyStore {
   // Trabalhos
@@ -164,6 +194,26 @@ export interface JourneyStore {
   recordDestinationIntent(job: string, intent: string): Promise<void>;
   /** Há revogação sem confirmação ou intenção sem efeito registrado. */
   hasPendingDestinationWork(): Promise<boolean>;
+
+  // Central de recuperação humana
+  createRecoverySession(session: RecoverySession): Promise<void>;
+  findRecoverySession(hash: string): Promise<RecoverySession | undefined>;
+  deleteRecoverySession(hash: string): Promise<void>;
+  getRecoveryCommand(id: string): Promise<RecoveryCommand | undefined>;
+  /** O comando só é devolvido se pertencer ao revisor informado. */
+  getRecoveryCommandForActor(id: string, actor: string): Promise<RecoveryCommand | undefined>;
+  insertRecoveryCommand(command: RecoveryCommand): Promise<void>;
+  /** Muda o estado; `result` só é gravado se informado. */
+  updateRecoveryCommandStatus(
+    id: string,
+    status: RecoveryCommandStatus,
+    updated: string,
+    result?: string,
+  ): Promise<void>;
+  /** Comandos que estavam sendo enviados quando o processo caiu. */
+  listDispatchingRecoveryCommands(): Promise<{ id: string; caseId: string }[]>;
+  /** Do mais recente para o mais antigo. */
+  listRecoveryCommandsForActor(actor: string): Promise<RecoveryCommandSummary[]>;
 }
 
 export interface JourneyLedger extends JourneyStore {

@@ -3,6 +3,7 @@
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
 import {
+  dropTestSchemas,
   fakeBackend,
   newStateDir,
   startApi,
@@ -19,6 +20,7 @@ before(async () => {
 after(async () => {
   await Promise.all(running.map((a) => a.stop("SIGKILL")));
   await backend.close();
+  await dropTestSchemas();
 });
 async function api(opts: Parameters<typeof startApi>[0]) {
   const a = await startApi(opts);

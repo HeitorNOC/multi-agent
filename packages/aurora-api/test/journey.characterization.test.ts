@@ -2,7 +2,7 @@
 // Usa só a API HTTP; vale igualmente para qualquer armazenamento do ledger.
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
-import { fakeBackend, newStateDir, startApi, waitFor, job, type Api } from "./harness.ts";
+import { dropTestSchemas, fakeBackend, newStateDir, startApi, waitFor, job, type Api } from "./harness.ts";
 
 let backend: Awaited<ReturnType<typeof fakeBackend>>;
 const running: Api[] = [];
@@ -12,6 +12,7 @@ before(async () => {
 after(async () => {
   await Promise.all(running.map((a) => a.stop("SIGKILL")));
   await backend.close();
+  await dropTestSchemas();
 });
 
 async function reviewedJob() {

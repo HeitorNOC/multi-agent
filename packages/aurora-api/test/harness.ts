@@ -1,48 +1,86 @@
 import { spawn, type ChildProcess } from "node:child_process";
 import http from "node:http";
+import { createHash, randomBytes } from "node:crypto";
 import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import pg from "pg";
 
 const serverPath = fileURLToPath(new URL("../server.ts", import.meta.url));
 const workerPath = fileURLToPath(new URL("./fake-worker.ts", import.meta.url));
 
+export type BackendHandler = (body: any) => unknown | Promise<unknown>;
+
+/**
+ * Runtime falso. `handlers` pode ser alterado durante o teste para simular a ponte de
+ * recuperação. Um handler pode devolver `{ __status: 500 }` para simular falha HTTP, ou
+ * uma promessa que nunca resolve para simular um protocolo que não responde.
+ */
 export async function fakeBackend() {
+  const handlers: Record<string, BackendHandler> = {
+    status: () => ({ phase: "ready" }),
+    model_job_status: () => ({ status: "resumable" }),
+  };
   const server = http.createServer((req, res) => {
-    let body = "";
-    req.on("data", (c) => (body += c));
-    req.on("end", () => {
-      const { action } = JSON.parse(body || "{}");
-      const reply: Record<string, unknown> =
-        action === "status"
-          ? { phase: "ready" }
-          : action === "model_job_status"
-            ? { status: "resumable" }
-            : {};
-      res.writeHead(200, { "content-type": "application/json" });
-      res.end(JSON.stringify(reply));
+    let raw = "";
+    req.on("data", (c) => (raw += c));
+    req.on("end", async () => {
+      const body = JSON.parse(raw || "{}");
+      const reply: any = (await handlers[body.action]?.(body)) ?? {};
+      const { __status, ...payload } = reply;
+      res.writeHead(__status ?? 200, { "content-type": "application/json" });
+      res.end(JSON.stringify(payload));
     });
   });
   await new Promise<void>((r) => server.listen(0, "127.0.0.1", () => r()));
   const port = (server.address() as { port: number }).port;
   return {
     url: `http://127.0.0.1:${port}`,
-    close: () => new Promise<void>((r) => server.close(() => r())),
+    handlers,
+    close: () => {
+      server.closeAllConnections();
+      return new Promise<void>((r) => server.close(() => r()));
+    },
   };
+}
+
+/**
+ * Com AURORA_TEST_LEDGER=postgres, as APIs sobem sobre PostgreSQL (AURORA_TEST_POSTGRES_URL).
+ * Cada diretório de estado ganha um esquema próprio, estável entre reinícios da mesma API.
+ */
+const RUN_ID = randomBytes(3).toString("hex");
+const postgresUrl = process.env.AURORA_TEST_LEDGER === "postgres" ? process.env.AURORA_TEST_POSTGRES_URL : undefined;
+export const ledgerDriver = postgresUrl ? "PostgreSQL" : "SQLite";
+function ledgerConfig(state: string) {
+  if (!postgresUrl) return {};
+  const schema = `h_${RUN_ID}_${createHash("sha256").update(state).digest("hex").slice(0, 10)}`;
+  return { ledger: { driver: "postgres", connectionString: postgresUrl, schema } };
+}
+/** Remove os esquemas criados por esta execução; chame no `after` de cada arquivo de teste. */
+export async function dropTestSchemas() {
+  if (!postgresUrl) return;
+  const admin = new pg.Pool({ connectionString: postgresUrl, max: 1 });
+  try {
+    const { rows } = await admin.query("SELECT schema_name FROM information_schema.schemata WHERE schema_name LIKE $1", [`h\\_${RUN_ID}\\_%`]);
+    for (const r of rows) await admin.query(`DROP SCHEMA ${r.schema_name} CASCADE`);
+  } finally {
+    await admin.end();
+  }
 }
 
 export const newStateDir = () => mkdtempSync(join(tmpdir(), "aurora-ledger-"));
 
+export type ApiResponse = { status: number; body: any; headers: Headers };
 export type Api = {
   url: string;
   child: ChildProcess;
-  get: (path: string) => Promise<{ status: number; body: any }>;
+  get: (path: string, headers?: Record<string, string>) => Promise<ApiResponse>;
   post: (
     path: string,
     body?: unknown,
     headers?: Record<string, string>,
-  ) => Promise<{ status: number; body: any }>;
+  ) => Promise<ApiResponse>;
   stop: (signal?: NodeJS.Signals) => Promise<void>;
 };
 
@@ -52,6 +90,8 @@ export async function startApi(opts: {
   workerMode: string;
   queueCapacity?: number;
   resumeReserve?: number;
+  /** Campos extras da configuração, por exemplo `recoveryReviewers`. */
+  extraConfig?: Record<string, unknown>;
 }): Promise<Api> {
   const child = spawn(process.execPath, [serverPath], {
     env: { ...process.env, WORKER_MODE: opts.workerMode },
@@ -71,6 +111,8 @@ export async function startApi(opts: {
       queueCapacity: opts.queueCapacity ?? 4,
       resumeReserve: opts.resumeReserve ?? 0,
       installation: "test-install",
+      ...ledgerConfig(opts.state),
+      ...opts.extraConfig,
     }),
   );
   const url: string = await new Promise((resolve, reject) => {
@@ -91,12 +133,16 @@ export async function startApi(opts: {
       headers: { "content-type": "application/json", ...headers },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
-    return { status: res.status, body: await res.json().catch(() => null) };
+    return {
+      status: res.status,
+      body: await res.json().catch(() => null),
+      headers: res.headers,
+    };
   }
   return {
     url,
     child,
-    get: (p) => call("GET", p),
+    get: (p, h) => call("GET", p, undefined, h),
     post: (p, b = {}, h) => call("POST", p, b, h),
     stop: (signal = "SIGTERM") =>
       new Promise((r) => {

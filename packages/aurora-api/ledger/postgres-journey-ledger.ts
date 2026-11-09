@@ -31,11 +31,20 @@ import {
   type QueueEntry,
   type QueueKind,
   type ReceiptRecord,
+  type RecoveryCommand,
+  type RecoveryCommandStatus,
+  type RecoveryCommandSummary,
+  type RecoverySession,
 } from "./journey-ledger.ts";
 import { applyMigrations } from "./postgres-migrate.ts";
 
 const MIGRATIONS_DIR = fileURLToPath(new URL("../migrations/", import.meta.url));
 const SCHEMA_NAME = /^[a-z_][a-z0-9_]{0,62}$/;
+
+/** Chave estável de advisory lock a partir de um nome; cabe em 48 bits, portanto em int8. */
+function lockKey(name: string): number {
+  return parseInt(createHash("sha256").update(name).digest("hex").slice(0, 12), 16);
+}
 
 export interface PostgresLedgerOptions {
   connectionString: string;
@@ -45,6 +54,11 @@ export interface PostgresLedgerOptions {
   destinationJournal: boolean;
   /** Máximo de conexões do pool. */
   poolSize?: number;
+  /**
+   * Garante um único agendador por instalação com um advisory lock de sessão, mantido por
+   * uma conexão dedicada até `close()`. Se o processo morrer, o servidor libera a trava.
+   */
+  schedulerLock: boolean;
 }
 
 type Db = Pick<Pool, "query">;
@@ -243,6 +257,93 @@ class PostgresJourneyStore implements JourneyStore {
     return (rowCount ?? 0) > 0;
   }
 
+  // Central de recuperação ------------------------------------------------
+  async createRecoverySession(s: RecoverySession): Promise<void> {
+    await this.db.query("INSERT INTO recovery_sessions(hash,actor,auth_sha,expires) VALUES($1,$2,$3,$4)", [
+      s.hash,
+      s.actor,
+      s.authSha,
+      s.expires,
+    ]);
+  }
+  async findRecoverySession(hash: string): Promise<RecoverySession | undefined> {
+    const { rows } = await this.db.query("SELECT hash,actor,auth_sha,expires FROM recovery_sessions WHERE hash=$1", [hash]);
+    const r = rows[0] as Row | undefined;
+    return r && { hash: String(r.hash), actor: String(r.actor), authSha: String(r.auth_sha), expires: Number(r.expires) };
+  }
+  async deleteRecoverySession(hash: string): Promise<void> {
+    await this.db.query("DELETE FROM recovery_sessions WHERE hash=$1", [hash]);
+  }
+  async getRecoveryCommand(id: string): Promise<RecoveryCommand | undefined> {
+    const { rows } = await this.db.query("SELECT * FROM recovery_commands WHERE id=$1", [id]);
+    return this.toCommand(rows[0]);
+  }
+  async getRecoveryCommandForActor(id: string, actor: string): Promise<RecoveryCommand | undefined> {
+    const { rows } = await this.db.query("SELECT * FROM recovery_commands WHERE id=$1 AND actor=$2", [id, actor]);
+    return this.toCommand(rows[0]);
+  }
+  async insertRecoveryCommand(c: RecoveryCommand): Promise<void> {
+    await this.db.query(
+      `INSERT INTO recovery_commands(id,actor,input_sha,body,action,case_id,operation_id,evidence_sha,status,result,updated)
+       VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
+      [c.id, c.actor, c.inputSha, c.body, c.action, c.caseId, c.operationId, c.evidenceSha, c.status, c.result, c.updated],
+    );
+  }
+  async updateRecoveryCommandStatus(
+    id: string,
+    status: RecoveryCommandStatus,
+    updated: string,
+    result?: string,
+  ): Promise<void> {
+    if (result === undefined)
+      await this.db.query("UPDATE recovery_commands SET status=$1,updated=$2 WHERE id=$3", [status, updated, id]);
+    else
+      await this.db.query("UPDATE recovery_commands SET status=$1,result=$2,updated=$3 WHERE id=$4", [
+        status,
+        result,
+        updated,
+        id,
+      ]);
+  }
+  async listDispatchingRecoveryCommands(): Promise<{ id: string; caseId: string }[]> {
+    const { rows } = await this.db.query("SELECT id,case_id FROM recovery_commands WHERE status='dispatching'");
+    return rows.map((r) => ({ id: String(r.id), caseId: String(r.case_id) }));
+  }
+  async listRecoveryCommandsForActor(actor: string): Promise<RecoveryCommandSummary[]> {
+    const { rows } = await this.db.query(
+      `SELECT id,actor,action,case_id,operation_id,evidence_sha,status,updated
+       FROM recovery_commands WHERE actor=$1 ORDER BY updated DESC`,
+      [actor],
+    );
+    return rows.map((r) => ({
+      id: String(r.id),
+      actor: String(r.actor),
+      action: String(r.action),
+      caseId: String(r.case_id),
+      operationId: String(r.operation_id),
+      evidenceSha: String(r.evidence_sha),
+      status: r.status as RecoveryCommandStatus,
+      updated: String(r.updated),
+    }));
+  }
+  private toCommand(r: Row | undefined): RecoveryCommand | undefined {
+    return (
+      r && {
+        id: String(r.id),
+        actor: String(r.actor),
+        inputSha: String(r.input_sha),
+        body: String(r.body),
+        action: String(r.action),
+        caseId: String(r.case_id),
+        operationId: String(r.operation_id),
+        evidenceSha: String(r.evidence_sha),
+        status: r.status as RecoveryCommandStatus,
+        result: r.result === null ? null : String(r.result),
+        updated: String(r.updated),
+      }
+    );
+  }
+
   private requireDestinationJournal() {
     if (!this.destinationJournal) throw new LedgerUsageError("O diário de destino não está habilitado");
   }
@@ -257,14 +358,22 @@ export class PostgresJourneyLedger implements JourneyLedger {
   /** Marca o contexto assíncrono que já está dentro de uma transação. */
   private readonly inTransaction = new AsyncLocalStorage<true>();
   private tail: Promise<unknown> = Promise.resolve();
+  private readonly schedulerClient: PoolClient | undefined;
+  private readonly schedulerKey: number | undefined;
 
-  private constructor(pool: Pool, options: PostgresLedgerOptions) {
+  private constructor(
+    pool: Pool,
+    options: PostgresLedgerOptions,
+    scheduler?: { client: PoolClient; key: number },
+  ) {
+    this.schedulerClient = scheduler?.client;
+    this.schedulerKey = scheduler?.key;
     this.pool = pool;
     this.installation = options.installation;
     this.destinationJournal = options.destinationJournal;
     this.store = new PostgresJourneyStore(pool, options.installation, options.destinationJournal);
     // Uma chave estável por instalação; cabe em 48 bits, portanto em int8.
-    this.lockKey = parseInt(createHash("sha256").update("journey:" + options.installation).digest("hex").slice(0, 12), 16);
+    this.lockKey = lockKey("journey:" + options.installation);
   }
 
   /** Abre o pool, garante o esquema e confere a consistência do diário de destino. */
@@ -284,7 +393,18 @@ export class PostgresJourneyLedger implements JourneyLedger {
       max: options.poolSize ?? 5,
       ...(schema ? { options: `-c search_path=${schema}` } : {}),
     });
+    let scheduler: { client: PoolClient; key: number } | undefined;
     try {
+      if (options.schedulerLock) {
+        const key = lockKey(`scheduler:${options.installation}:${schema ?? ""}`);
+        const client = await pool.connect();
+        const { rows } = await client.query("SELECT pg_try_advisory_lock($1) AS acquired", [key]);
+        if (!rows[0].acquired) {
+          client.release();
+          throw new LedgerUsageError("Já existe um agendador ativo para esta instalação");
+        }
+        scheduler = { client, key };
+      }
       await applyMigrations(pool, MIGRATIONS_DIR);
       if (!options.destinationJournal) {
         const { rowCount } = await pool.query("SELECT 1 FROM pilot_destination_intents LIMIT 1");
@@ -292,10 +412,14 @@ export class PostgresJourneyLedger implements JourneyLedger {
           throw new Error("Esta sessão possui um diário de destino e requer sua configuração");
       }
     } catch (error) {
+      if (scheduler) {
+        await scheduler.client.query("SELECT pg_advisory_unlock($1)", [scheduler.key]).catch(() => {});
+        scheduler.client.release();
+      }
       await pool.end();
       throw error;
     }
-    return new PostgresJourneyLedger(pool, options);
+    return new PostgresJourneyLedger(pool, options, scheduler);
   }
 
   getJob = (id: string) => this.run((s) => s.getJob(id));
@@ -324,6 +448,16 @@ export class PostgresJourneyLedger implements JourneyLedger {
   recordDestinationIntent = (job: string, intent: string) => this.run((s) => s.recordDestinationIntent(job, intent));
   hasPendingDestinationWork = () => this.run((s) => s.hasPendingDestinationWork());
 
+  createRecoverySession = (s: RecoverySession) => this.run((st) => st.createRecoverySession(s));
+  findRecoverySession = (hash: string) => this.run((st) => st.findRecoverySession(hash));
+  deleteRecoverySession = (hash: string) => this.run((st) => st.deleteRecoverySession(hash));
+  getRecoveryCommand = (id: string) => this.run((st) => st.getRecoveryCommand(id));
+  getRecoveryCommandForActor = (id: string, actor: string) => this.run((st) => st.getRecoveryCommandForActor(id, actor));
+  insertRecoveryCommand = (c: RecoveryCommand) => this.run((st) => st.insertRecoveryCommand(c));
+  updateRecoveryCommandStatus = (id: string, status: RecoveryCommandStatus, updated: string, result?: string) => this.run((st) => st.updateRecoveryCommandStatus(id, status, updated, result));
+  listDispatchingRecoveryCommands = () => this.run((st) => st.listDispatchingRecoveryCommands());
+  listRecoveryCommandsForActor = (actor: string) => this.run((st) => st.listRecoveryCommandsForActor(actor));
+
   /** Mesmo nome do índice do SQLite, para as instalações poderem trocar de adaptador. */
   async setSingleActiveJob(enabled: boolean): Promise<void> {
     this.assertOutsideTransaction();
@@ -343,6 +477,10 @@ export class PostgresJourneyLedger implements JourneyLedger {
 
   async close(): Promise<void> {
     await this.tail;
+    if (this.schedulerClient) {
+      await this.schedulerClient.query("SELECT pg_advisory_unlock($1)", [this.schedulerKey]).catch(() => {});
+      this.schedulerClient.release();
+    }
     await this.pool.end();
   }
 

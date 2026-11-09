@@ -4,7 +4,6 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import { randomUUID, timingSafeEqual } from "node:crypto";
-import { DatabaseSync } from "node:sqlite";
 import * as miniPolicy from "./demo-policy.ts";
 import {
   queueAdmission,
@@ -18,7 +17,7 @@ import type {
   JourneyStore,
   QueueEntry,
 } from "./ledger/journey-ledger.ts";
-import { SqliteJourneyLedger } from "./ledger/sqlite-journey-ledger.ts";
+import { openJourneyLedger } from "./ledger/open-ledger.ts";
 import { RecoveryAPI, RecoveryError } from "./recovery.ts";
 import { monitorPerformance } from "./performance.ts";
 import { PilotAccess } from "./pilot-access.ts";
@@ -59,18 +58,16 @@ if (
 ) {
   throw Error("Dois workers exigem fila durável e slots governados");
 }
-// One scheduler per local state directory, including during API restart.
-const owner = new DatabaseSync(join(config.state, "scheduler-owner.sqlite"), {
-  timeout: 0,
-});
-owner.exec("BEGIN EXCLUSIVE");
-process.once("exit", () => owner.close());
 const installation = config.installation || "local-demo";
 // Todo o estado durável da jornada passa pelo ledger; este arquivo não conhece o armazenamento.
-const ledger = new SqliteJourneyLedger({
+// `config.ledger` escolhe o armazenamento (SQLite local por padrão, ou PostgreSQL). A trava
+// de agendador garante um único agendador por instalação, inclusive durante um reinício.
+const ledger = await openJourneyLedger({
+  driver: config.ledger,
   stateDir: config.state,
   installation,
   destinationJournal: destination !== null,
+  schedulerLock: true,
 });
 const { requireQueueSpace } = queueAdmission(limits);
 if (!queueCapacity && (await ledger.queueDepth()).total)
@@ -126,10 +123,8 @@ async function enqueue(
     queued_at: queuedAt,
   });
 }
-// A central de recuperação ainda usa acesso síncrono ao SQLite; migra para a porta depois.
-const legacy = ledger.legacySynchronousAccess();
-const recovery = new RecoveryAPI(
-  legacy.core.db,
+const recovery = await RecoveryAPI.create(
+  ledger,
   installation,
   config.recoveryReviewers || [],
   async (payload) => {
@@ -159,8 +154,6 @@ const recovery = new RecoveryAPI(
     }
     return reply;
   },
-  (job, node, detail) => legacy.core.appendEvent(job, node, detail),
-  legacy.assertNoOpenTransaction,
 );
 async function snapshot(store: JourneyStore, id: string) {
   const r = await loadJob(store, id);
@@ -1128,5 +1121,5 @@ if (queueCapacity) setInterval(() => void pump(), 1000).unref();
 process.on("SIGTERM", () => {
   stopping = true;
   for (const { child } of active.values()) child.kill();
-  server.close();
+  server.close(() => void ledger.close());
 });

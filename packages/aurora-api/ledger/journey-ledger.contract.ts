@@ -7,16 +7,19 @@
  */
 import { describe, test, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import { LedgerUsageError, type JourneyLedger, type NewJob } from "./journey-ledger.ts";
+import { LedgerUsageError, type JourneyLedger, type NewJob, type RecoveryCommand } from "./journey-ledger.ts";
 
 export interface LedgerHarness {
   ledger: JourneyLedger;
+  /** Abre outro ledger sobre o MESMO armazenamento, como faria um segundo processo. */
+  reopen(opts: { schedulerLock: boolean }): Promise<JourneyLedger>;
+  /** Fecha tudo o que foi aberto e apaga o armazenamento. */
   cleanup(): Promise<void>;
 }
 
 export interface ContractOptions {
   /** Abre um ledger novo e vazio, com o diário de destino habilitado ou não. */
-  create(opts: { destinationJournal: boolean }): Promise<LedgerHarness>;
+  create(opts: { destinationJournal: boolean; schedulerLock?: boolean }): Promise<LedgerHarness>;
 }
 
 const job = (id: string, over: Partial<NewJob> = {}): NewJob => ({
@@ -24,6 +27,20 @@ const job = (id: string, over: Partial<NewJob> = {}): NewJob => ({
   goal: "meta",
   status: "created",
   created: new Date().toISOString(),
+  ...over,
+});
+const command = (id: string, over: Partial<RecoveryCommand> = {}): RecoveryCommand => ({
+  id,
+  actor: "rev-1",
+  inputSha: "i".repeat(64),
+  body: '{"case_id":"caso-0001"}',
+  action: "recovery_propose",
+  caseId: "caso-0001",
+  operationId: "inst:op-1",
+  evidenceSha: "e".repeat(64),
+  status: "dispatching",
+  result: null,
+  updated: "2026-01-01T00:00:00.000Z",
   ...over,
 });
 const at = (n: number) => `2026-01-01T00:00:${String(n).padStart(2, "0")}.000Z`;
@@ -34,6 +51,11 @@ export function describeJourneyLedgerContract(name: string, options: ContractOpt
     afterEach(async () => {
       for (const h of open.splice(0)) await h.cleanup();
     });
+    async function harness(opts: { destinationJournal?: boolean; schedulerLock?: boolean } = {}) {
+      const h = await options.create({ destinationJournal: opts.destinationJournal ?? false, schedulerLock: opts.schedulerLock });
+      open.push(h);
+      return h;
+    }
     async function ledger(destinationJournal = false) {
       const h = await options.create({ destinationJournal });
       open.push(h);
@@ -244,6 +266,72 @@ export function describeJourneyLedgerContract(name: string, options: ContractOpt
         assert.equal(await l.hasPendingDestinationWork(), true);
         await l.recordEffect("a", "h", "{}");
         assert.equal(await l.hasPendingDestinationWork(), false);
+      });
+    });
+
+    describe("central de recuperação", () => {
+      test("sessão: cria, encontra pelo hash do token e apaga", async () => {
+        const l = await ledger();
+        const session = { hash: "h".repeat(64), actor: "rev-1", authSha: "a".repeat(64), expires: Date.now() + 3600000 };
+        assert.equal(await l.findRecoverySession(session.hash), undefined);
+        await l.createRecoverySession(session);
+        assert.deepEqual(await l.findRecoverySession(session.hash), session);
+        await l.deleteRecoverySession(session.hash);
+        assert.equal(await l.findRecoverySession(session.hash), undefined);
+      });
+
+      test("comando: grava, lê, só entrega ao revisor dono e atualiza o estado", async () => {
+        const l = await ledger();
+        await l.insertRecoveryCommand(command("c1"));
+        assert.equal((await l.getRecoveryCommand("c1"))?.status, "dispatching");
+        assert.equal(await l.getRecoveryCommandForActor("c1", "outro"), undefined);
+        assert.equal((await l.getRecoveryCommandForActor("c1", "rev-1"))?.caseId, "caso-0001");
+        await l.updateRecoveryCommandStatus("c1", "completed", "2026-01-01T00:00:05.000Z", '{"ok":true}');
+        const done = await l.getRecoveryCommand("c1");
+        assert.deepEqual([done?.status, done?.result, done?.updated], ["completed", '{"ok":true}', "2026-01-01T00:00:05.000Z"]);
+        await l.updateRecoveryCommandStatus("c1", "unknown", "2026-01-01T00:00:09.000Z");
+        assert.equal((await l.getRecoveryCommand("c1"))?.result, '{"ok":true}', "sem result, o resultado anterior fica");
+      });
+
+      test("id de comando é único", async () => {
+        const l = await ledger();
+        await l.insertRecoveryCommand(command("c1"));
+        await assert.rejects(l.insertRecoveryCommand(command("c1")));
+      });
+
+      test("lista os comandos em envio e os do revisor, do mais recente ao mais antigo", async () => {
+        const l = await ledger();
+        await l.insertRecoveryCommand(command("c1", { updated: "2026-01-01T00:00:01.000Z" }));
+        await l.insertRecoveryCommand(command("c2", { updated: "2026-01-01T00:00:03.000Z", status: "completed" }));
+        await l.insertRecoveryCommand(command("c3", { updated: "2026-01-01T00:00:02.000Z", actor: "rev-2" }));
+        assert.deepEqual(await l.listDispatchingRecoveryCommands(), [{ id: "c1", caseId: "caso-0001" }, { id: "c3", caseId: "caso-0001" }]);
+        assert.deepEqual((await l.listRecoveryCommandsForActor("rev-1")).map((c) => c.id), ["c2", "c1"]);
+        assert.equal((await l.listRecoveryCommandsForActor("ninguem")).length, 0);
+      });
+
+      test("comando e evento na mesma transação ficam ou somem juntos", async () => {
+        const l = await ledger();
+        await assert.rejects(
+          l.transaction(async (tx) => {
+            await tx.insertRecoveryCommand(command("c1"));
+            await tx.appendEvent("recovery:caso-0001", "recovery_command_started", {});
+            throw new Error("falha");
+          }),
+        );
+        assert.equal(await l.getRecoveryCommand("c1"), undefined);
+        assert.equal((await l.listEvents("recovery:caso-0001")).length, 0);
+      });
+    });
+
+    describe("agendador único", () => {
+      test("só um ledger por instalação toma a trava; ao fechar, outro pode tomá-la", async () => {
+        const h = await harness({ schedulerLock: true });
+        await assert.rejects(h.reopen({ schedulerLock: true }), LedgerUsageError);
+        const reader = await h.reopen({ schedulerLock: false });
+        assert.deepEqual(await reader.listJobIds(), [], "quem não pede a trava continua podendo ler");
+        await h.ledger.close();
+        const next = await h.reopen({ schedulerLock: true });
+        assert.ok(next, "a trava foi liberada");
       });
     });
 

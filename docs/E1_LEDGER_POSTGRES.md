@@ -1,17 +1,35 @@
 # E1 — Ledger em PostgreSQL: levantamento e plano
 
-Status (09/11/2026): a **porta `JourneyLedger` existe, o `server.ts` a usa com o adaptador SQLite e há um adaptador PostgreSQL que passa no mesmo contrato**. O servidor ainda não consegue subir sobre PostgreSQL, porque a central de recuperação depende do SQLite (ver passos).
+Status (09/11/2026): **o servidor sobe e funciona sobre PostgreSQL.** A porta `JourneyLedger` cobre jornada, eventos, fila, admissão, efeitos, revogações, destino do piloto e a central de recuperação, com adaptadores SQLite e PostgreSQL que passam no mesmo contrato (35 testes cada). As 24 provas HTTP do servidor real passam nos dois armazenamentos.
 
 | Peça | Arquivo | Situação |
 |---|---|---|
 | Porta (interfaces de domínio) | `packages/aurora-api/ledger/journey-ledger.ts` | pronta |
-| Adaptador SQLite | `ledger/sqlite-journey-ledger.ts` | pronto, com mutex e detecção de uso indevido dentro de transação |
-| Contrato executável (28 testes) | `ledger/journey-ledger.contract.ts` | pronto; qualquer adaptador deve passar |
-| Caracterização via HTTP (14 testes) | `packages/aurora-api/test/` | passam no servidor original **e** no migrado |
-| Migration PostgreSQL | `migrations/001_journey_ledger.sql` | validada duas vezes (idempotente) |
-| Adaptador PostgreSQL | `ledger/postgres-journey-ledger.ts`, `postgres-migrate.ts` | **pronto**; passa nos mesmos 29 testes do contrato |
+| Adaptador SQLite | `ledger/sqlite-journey-ledger.ts` | pronto (mutex, trava de agendador) |
+| Adaptador PostgreSQL | `ledger/postgres-journey-ledger.ts`, `postgres-migrate.ts` | pronto (advisory locks, migrations) |
+| Escolha do driver | `ledger/open-ledger.ts` | pronta; `config.ledger` |
+| Contrato executável | `ledger/journey-ledger.contract.ts` | 35 testes, roda nos dois adaptadores |
+| Caracterização HTTP | `packages/aurora-api/test/` | 24 testes, rodam sobre SQLite e sobre PostgreSQL |
+| Central de recuperação | `recovery.ts` | migrada para a porta (assíncrona) |
+| Trava do agendador | adaptadores | SQLite: `scheduler-owner.sqlite`; PostgreSQL: advisory lock de sessão |
 
-Fora da porta por enquanto: a central de recuperação (`recovery.ts`, acesso síncrono temporário via `legacySynchronousAccess`), a trava do agendador (`scheduler-owner.sqlite`) e os bancos de `aurora-business`.
+**Escolher o armazenamento** (configuração da instalação, lida pelo servidor):
+
+```json
+{ "ledger": { "driver": "postgres", "connectionString": "postgres://...", "schema": "opcional" } }
+```
+
+Sem `ledger`, o servidor usa SQLite no diretório de estado, como antes.
+
+**Rodar os testes:**
+
+```bash
+npm run test:api                                   # SQLite (o do PostgreSQL é ignorado)
+AURORA_TEST_POSTGRES_URL=postgres://postgres:dev@127.0.0.1:55432/aurora_dev npm run test:api
+AURORA_TEST_LEDGER=postgres AURORA_TEST_POSTGRES_URL=... npm run test:api   # servidor inteiro sobre PostgreSQL
+```
+
+Ainda fora da porta: os bancos de `aurora-business` e os `retained` (que devem permanecer separados), o outbox de telemetria e os estados Python.
 
 Histórico do levantamento, ainda válido para as próximas fases:
 
@@ -59,10 +77,8 @@ Há ainda estados SQLite do lado Python (`native.py`, `local_engine.py`).
 
 ## Próximos passos
 
-1. ~~Adaptador PostgreSQL~~ **feito.** Para rodar o contrato nele: `AURORA_TEST_POSTGRES_URL=postgres://postgres:dev@127.0.0.1:55432/aurora_dev npm run test:api`. Sem a variável, o teste é ignorado.
-2. **Trava do agendador** com `pg_try_advisory_lock` de sessão, no lugar do `scheduler-owner.sqlite`.
-3. **Migrar a central de recuperação** para a porta e remover `legacySynchronousAccess`.
-4. Repetir para `aurora-business` (business, brain, editorial). `retained` continua em armazenamento separado (ver decisões acima).
-5. Reexecutar as bancadas de recuperação (P01, P07) contra o PostgreSQL antes de declarar o E1 concluído.
-
-Limitação conhecida da fase atual: enquanto a recuperação usar acesso síncrono, ela falha com erro explícito (em vez de abrir transação aninhada) se coincidir com uma transação assíncrona do ledger. É raro, mas existe até o passo 3.
+1. **`aurora-business`** (business, brain, editorial) para a mesma porta ou uma porta própria. `retained` continua em armazenamento separado (ver decisões acima).
+2. **Migrar dados existentes** de uma instalação SQLite para PostgreSQL (ferramenta de exportação/importação com verificação de contagem e hashes). Hoje só instalações novas podem começar em PostgreSQL.
+3. **Reexecutar as bancadas de recuperação** (P01, P07) contra o PostgreSQL, incluindo backup e restauração do banco, antes de declarar o E1 concluído.
+4. **Carga e concorrência real**: dois processos disputando o lock, pool sob carga e latência por operação. O contrato prova correção, não desempenho.
+5. Backup operacional do PostgreSQL local (hoje o procedimento cobre SQLite e volumes de LightRAG).
