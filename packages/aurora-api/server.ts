@@ -29,6 +29,8 @@ import { ClaudeCliClient, CodexCliClient, type ModelClient } from "./conversatio
 import { ModelChiefOfStaff } from "./conversation/model-chief-of-staff.ts";
 import { ExtractiveAnswerer, ModelAnswerer, type KnowledgeAnswerer } from "./knowledge/answerer.ts";
 import { KnowledgeError, KnowledgeService } from "./knowledge/knowledge-service.ts";
+import { loadSpecialists } from "./open-work/catalog.ts";
+import { OpenWorkError, OpenWorkGateway } from "./open-work/gateway.ts";
 import {
   ConversationError,
   ConversationService,
@@ -338,6 +340,9 @@ async function startWorker(id: string, crash = false, queued?: QueueEntry) {
         pid: child.pid,
         exit_code: code,
       });
+      // O portão do trabalho aberto pode ter detectado uma inferência sem recibo durante a
+      // execução; essa decisão vale mais que o código de saída do worker.
+      if ((await loadJob(tx, id)).status === "recovery_required") return;
       if (spawnError) {
         await tx.updateJob(id, {
           status: "failed",
@@ -619,6 +624,8 @@ async function admitJob(
 type ConversationTarget = ConversationOffer & { goal: string };
 function conversationTargets(): ConversationTarget[] {
   if (config.recoveryOnly || pilotAccess) return [];
+  if (policy.openWork)
+    return [{ id: "open", title: "Trabalho com os especialistas", goal: "", keywords: [] }];
   const scenarios: any[] | undefined = policy.CATALOG?.scenarios;
   if (!scenarios)
     return [
@@ -696,6 +703,22 @@ const knowledge = new KnowledgeService({
   answerer: buildAnswerer(),
   maxBytes: config.knowledge?.maxBytes,
 });
+
+/**
+ * Trabalho aberto (política com `openWork`): o worker LangGraph consulta o Cérebro e o modelo
+ * só por este portão. `config.work` configura o modelo: { "provider": "claude" | "codex",
+ * "model"?, "timeoutMs"?, "command"? }. Sem ele, os passos de modelo respondem 503.
+ */
+const openWork = policy.openWork
+  ? new OpenWorkGateway({
+      ledger,
+      knowledge,
+      client: config.work?.provider ? modelClient(config.work, "config.work") : null,
+      limiter: modelLimiter,
+      catalog: loadSpecialists(),
+      timeoutMs: config.work?.timeoutMs,
+    })
+  : null;
 /** Envio de arquivo vai em base64 dentro do JSON; só essas rotas aceitam corpo grande. */
 const KNOWLEDGE_UPLOAD_LIMIT = Math.ceil(((config.knowledge?.maxBytes ?? 5_000_000) * 4) / 3) + 20_000;
 
@@ -718,11 +741,20 @@ const conversations = new ConversationService({
   ledger,
   chief: buildChief(),
   offers: targets.map(({ id, title, keywords }) => ({ id, title, keywords })),
-  async openJob(offerId, onAdmitted): Promise<Admission> {
+  async openJob(offerId, onAdmitted, request): Promise<Admission> {
     const target = targets.find((t) => t.id === offerId);
     if (!target) return { opened: false, reason: "este trabalho não está disponível" };
+    let goal = target.goal;
+    if (policy.openWork) {
+      // No trabalho aberto, o pedido é o próprio texto do gestor, validado pela política.
+      try {
+        goal = policy.chooseGoal({ goal: request.text });
+      } catch (error) {
+        return { opened: false, reason: (error as Error).message.toLowerCase() };
+      }
+    }
     try {
-      const result = await admitJob(target.goal, { onAdmitted });
+      const result = await admitJob(goal, { onAdmitted });
       if (result.status >= 400)
         return { opened: false, reason: String(result.body.error ?? "admissão recusada") };
       return { opened: true };
@@ -956,6 +988,11 @@ const server = http.createServer(async (req, res) => {
           return send({ error: "Executor de inferência não está ativo" }, 403);
         return send(await snapshot(ledger, id));
       }
+      if (path === "/internal/knowledge/retrieve" || path === "/internal/model") {
+        if (!openWork) return send({ error: "Trabalho aberto não habilitado neste perfil" }, 404);
+        if (path === "/internal/knowledge/retrieve") return send(await openWork.retrieve(id, body.agent));
+        return send(await openWork.run(id, body.slot, { labels: body.labels }));
+      }
       if (path === "/internal/event")
         return send(await record(ledger, id, body.node, body.detail, body.event_id));
       if (path === "/internal/plan") {
@@ -990,7 +1027,13 @@ const server = http.createServer(async (req, res) => {
                 selection: body.report,
               })
             : body.report;
-          review = reviewable(id, report, (await loadJob(ledger, id)).goal);
+          review = reviewable(
+            id,
+            report,
+            (await loadJob(ledger, id)).goal,
+            // O trabalho aberto confere cada citação contra os trechos entregues a este trabalho.
+            openWork ? { retrieved: new Set((await openWork.retrievedLabels(id)).keys()) } : undefined,
+          );
           if (
             pilotAccess &&
             config.pilotRefundReference &&
@@ -1307,7 +1350,8 @@ const server = http.createServer(async (req, res) => {
       error instanceof RecoveryError ||
       error instanceof QueueError ||
       error instanceof ConversationError ||
-      error instanceof KnowledgeError
+      error instanceof KnowledgeError ||
+      error instanceof OpenWorkError
         ? error.status
         : 409;
     if (status === 429) res.setHeader("Retry-After", "2");

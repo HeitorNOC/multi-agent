@@ -30,3 +30,4 @@ Thumbs.db
 
 # Saída de testes
 packages/aurora-api/test/.fake-cli-report.json
+packages/aurora-api/test/.open-calls-*.log

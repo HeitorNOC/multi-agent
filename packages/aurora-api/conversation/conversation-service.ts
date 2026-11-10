@@ -41,7 +41,11 @@ export interface ConversationDeps {
    * Abre o trabalho `offerId`. `onAdmitted` roda dentro da transação que cria o trabalho; se
    * lançar, o trabalho não é criado. Recusas esperadas (fila cheia etc.) voltam como `opened: false`.
    */
-  openJob(offerId: string, onAdmitted: (tx: JourneyStore, jobId: string) => Promise<void>): Promise<Admission>;
+  openJob(
+    offerId: string,
+    onAdmitted: (tx: JourneyStore, jobId: string) => Promise<void>,
+    request: { text: string },
+  ): Promise<Admission>;
   now?: () => string;
 }
 
@@ -207,7 +211,7 @@ export class ConversationService {
       admission = await this.openJob(decision.offerId, async (tx, jobId) => {
         await this.requireUnanswered(tx, conversation, question.seq);
         await this.appendReply(tx, conversation, question.seq, decision.text, jobId, { ...trace, offer_id: decision.offerId });
-      });
+      }, { text: question.text });
     } catch (error) {
       if (error instanceof AlreadyAnswered) return error.reply;
       // O trabalho pode ter sido criado e respondido antes da falha (por exemplo, o worker

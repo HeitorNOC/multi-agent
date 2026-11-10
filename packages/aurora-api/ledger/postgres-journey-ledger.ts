@@ -457,6 +457,10 @@ class PostgresJourneyStore implements JourneyStore {
     );
     return (r.rowCount ?? 0) > 0;
   }
+  async releaseInference(job: string, slot: string): Promise<boolean> {
+    const r = await this.db.query("DELETE FROM inference_receipts WHERE job=$1 AND slot=$2 AND state='reserved'", [job, slot]);
+    return (r.rowCount ?? 0) > 0;
+  }
   async getInference(job: string, slot: string): Promise<InferenceRecord | undefined> {
     const { rows } = await this.db.query("SELECT * FROM inference_receipts WHERE job=$1 AND slot=$2", [job, slot]);
     return rows[0] && this.toInference(rows[0]);
@@ -686,6 +690,7 @@ export class PostgresJourneyLedger implements JourneyLedger {
   listIndexableKnowledge = () => this.run((st) => st.listIndexableKnowledge());
   reserveInference = (e: { job: string; slot: string; inputSha: string; created: string }) => this.run((st) => st.reserveInference(e));
   completeInference = (job: string, slot: string, output: string, usage: string, at: string) => this.run((st) => st.completeInference(job, slot, output, usage, at));
+  releaseInference = (job: string, slot: string) => this.run((st) => st.releaseInference(job, slot));
   getInference = (job: string, slot: string) => this.run((st) => st.getInference(job, slot));
   listInferences = (job: string) => this.run((st) => st.listInferences(job));
   createRecoverySession = (s: RecoverySession) => this.run((st) => st.createRecoverySession(s));

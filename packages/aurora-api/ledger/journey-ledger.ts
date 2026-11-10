@@ -356,6 +356,12 @@ export interface JourneyStore {
   }>;
   /** Grava o recibo de uma reserva pendente; `false` se não havia reserva pendente. */
   completeInference(job: string, slot: string, output: string, usage: string, at: string): Promise<boolean>;
+  /**
+   * Desfaz uma reserva pendente quando a chamada falhou SABIDAMENTE (a CLI terminou com erro ou
+   * a saída foi recusada), permitindo nova tentativa. `false` se não havia reserva pendente.
+   * Nunca use para uma reserva cuja chamada pode ter acontecido: essa é desconhecida.
+   */
+  releaseInference(job: string, slot: string): Promise<boolean>;
   getInference(job: string, slot: string): Promise<InferenceRecord | undefined>;
   /** Em ordem de reserva. */
   listInferences(job: string): Promise<InferenceRecord[]>;

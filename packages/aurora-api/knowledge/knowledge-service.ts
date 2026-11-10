@@ -195,28 +195,7 @@ export class KnowledgeService {
       400,
       `Pergunta deve ter de 1 a ${MAX_QUESTION} caracteres`,
     );
-    const { index, passages } = await this.index();
-    const wanted = index.queryTerms(question);
-    // Com 3 termos ou mais, exige pelo menos 2 no mesmo trecho; com menos, 1 basta.
-    const needed = wanted.length >= 3 ? 2 : 1;
-    const hits = index
-      .search(question, {
-        limit: PASSAGES * 3,
-        allow: (id) => {
-          const p = passages.get(id);
-          return !!p && canRead(p, actor);
-        },
-      })
-      .filter((h) => h.matched.length >= needed)
-      // Trechos secundários só entram se forem comparáveis ao melhor; termos genéricos em comum
-      // ("acima", "reais") não bastam para virar citação.
-      .filter((h, _, all) => h.score >= all[0].score * RELATIVE_SCORE)
-      .slice(0, PASSAGES);
-
-    const found: Passage[] = hits.map((h, i) => {
-      const { readers: _r, owner: _o, ...p } = passages.get(h.id)!;
-      return { ...p, n: i + 1, matched: h.matched, score: Math.round(h.score * 1000) / 1000 };
-    });
+    const { wanted, found } = await this.search(question, (p) => canRead(p, actor), PASSAGES);
     let result;
     let trace: AnswerTrace;
     if (!wanted.length) {
@@ -251,6 +230,67 @@ export class KnowledgeService {
       })),
       decision: { engine: trace.engine, ...(trace.provider ? { provider: trace.provider } : {}), ...(trace.fallback ? { fallback: trace.fallback } : {}) },
     };
+  }
+
+  /**
+   * Trechos para os agentes de um trabalho. Sem identidade corporativa ainda, os agentes só leem
+   * fontes abertas a toda a instalação (leitores `"*"`); fontes restritas nunca chegam a eles.
+   * Aplica os mesmos filtros da consulta: revogação, vigência, substituição e evidência mínima.
+   */
+  async retrieveForAgents(query: string, limit = PASSAGES) {
+    requireThat(typeof query === "string" && query.trim() && query.length <= 4000, 400, "Consulta inválida");
+    const { found } = await this.search(query, (p) => p.readers.includes("*"), limit);
+    return found.map((p) => ({
+      id: p.id,
+      source: p.source,
+      title: p.title,
+      version: p.version,
+      validFrom: p.validFrom,
+      text: p.text,
+      url: `/api/knowledge/sources/${p.source}/versions/${p.version}/original`,
+    }));
+  }
+
+  /** Um trecho vigente e aberto a toda a instalação, pelo id; `undefined` se deixou de valer. */
+  async passageForAgents(id: string) {
+    const { passages } = await this.index();
+    const p = passages.get(id);
+    if (!p || !p.readers.includes("*")) return undefined;
+    return {
+      id: p.id,
+      source: p.source,
+      title: p.title,
+      version: p.version,
+      validFrom: p.validFrom,
+      text: p.text,
+      url: `/api/knowledge/sources/${p.source}/versions/${p.version}/original`,
+    };
+  }
+
+  /** Busca com evidência mínima e corte relativo; `allow` decide quem pode ver cada trecho. */
+  private async search(question: string, allow: (p: IndexedMeta) => boolean, limit: number) {
+    const { index, passages } = await this.index();
+    const wanted = index.queryTerms(question);
+    // Com 3 termos ou mais, exige pelo menos 2 no mesmo trecho; com menos, 1 basta.
+    const needed = wanted.length >= 3 ? 2 : 1;
+    const hits = index
+      .search(question, {
+        limit: limit * 3,
+        allow: (id) => {
+          const p = passages.get(id);
+          return !!p && allow(p);
+        },
+      })
+      .filter((h) => h.matched.length >= needed)
+      // Trechos secundários só entram se forem comparáveis ao melhor; termos genéricos em comum
+      // ("acima", "reais") não bastam para virar citação.
+      .filter((h, _, all) => h.score >= all[0].score * RELATIVE_SCORE)
+      .slice(0, limit);
+    const found: Passage[] = hits.map((h, i) => {
+      const { readers: _r, owner: _o, ...p } = passages.get(h.id)!;
+      return { ...p, n: i + 1, matched: h.matched, score: Math.round(h.score * 1000) / 1000 };
+    });
+    return { wanted, found };
   }
 
   /**

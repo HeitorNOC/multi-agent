@@ -468,6 +468,17 @@ export function describeJourneyLedgerContract(name: string, options: ContractOpt
         assert.deepEqual([done?.state, done?.output, done?.usage, done?.updated], ["completed", '{"ok":1}', '{"tokens":3}', at(2)]);
       });
 
+      test("liberar desfaz só reserva pendente; depois dela, é possível reservar de novo", async () => {
+        const l = await ledger();
+        await reserve(l, "plan");
+        assert.equal(await l.releaseInference("j1", "plan"), true);
+        assert.equal(await l.getInference("j1", "plan"), undefined);
+        assert.equal((await reserve(l, "plan")).created, true);
+        await l.completeInference("j1", "plan", "{}", "{}", at(2));
+        assert.equal(await l.releaseInference("j1", "plan"), false, "recibo completo nunca é apagado");
+        assert.equal((await l.getInference("j1", "plan"))?.state, "completed");
+      });
+
       test("lista na ordem de reserva", async () => {
         const l = await ledger();
         await reserve(l, "plan");

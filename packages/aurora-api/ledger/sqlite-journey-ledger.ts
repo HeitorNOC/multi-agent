@@ -415,6 +415,9 @@ export class SqliteJourneyCore {
       ) > 0
     );
   }
+  releaseInference(job: string, slot: string): boolean {
+    return Number(this.db.prepare("DELETE FROM inference_receipts WHERE job=? AND slot=? AND state='reserved'").run(job, slot).changes) > 0;
+  }
   getInference(job: string, slot: string): InferenceRecord | undefined {
     const r = this.db.prepare("SELECT * FROM inference_receipts WHERE job=? AND slot=?").get(job, slot) as Row | undefined;
     return r && this.toInference(r);
@@ -559,6 +562,7 @@ class SqliteJourneyStore implements JourneyStore {
   async listIndexableKnowledge() { return this.core.listIndexableKnowledge(); }
   async reserveInference(e: { job: string; slot: string; inputSha: string; created: string }) { return this.core.reserveInference(e); }
   async completeInference(job: string, slot: string, output: string, usage: string, at: string) { return this.core.completeInference(job, slot, output, usage, at); }
+  async releaseInference(job: string, slot: string) { return this.core.releaseInference(job, slot); }
   async getInference(job: string, slot: string) { return this.core.getInference(job, slot); }
   async listInferences(job: string) { return this.core.listInferences(job); }
   async createRecoverySession(s: RecoverySession) { this.core.createRecoverySession(s); }
@@ -640,6 +644,7 @@ export class SqliteJourneyLedger implements JourneyLedger {
   listIndexableKnowledge = () => this.run((st) => st.listIndexableKnowledge());
   reserveInference = (e: { job: string; slot: string; inputSha: string; created: string }) => this.run((st) => st.reserveInference(e));
   completeInference = (job: string, slot: string, output: string, usage: string, at: string) => this.run((st) => st.completeInference(job, slot, output, usage, at));
+  releaseInference = (job: string, slot: string) => this.run((st) => st.releaseInference(job, slot));
   getInference = (job: string, slot: string) => this.run((st) => st.getInference(job, slot));
   listInferences = (job: string) => this.run((st) => st.listInferences(job));
   createRecoverySession = (s: RecoverySession) => this.run((st) => st.createRecoverySession(s));
