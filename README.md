@@ -17,7 +17,8 @@ apps/api/        API (Node 24 + TypeScript, Fastify, Zod) — SQLite ou PostgreS
   src/config.ts      configuração AURORA_* validada
   src/shared/        ids com marca, erros, relógio, JSON canônico
   src/platform/      banco, trilha de eventos, HTTP, modelo, workers
-  src/modules/       jobs · knowledge · open-work · conversations · recovery
+  src/modules/       jobs · knowledge · open-work · conversations · recovery · agents ·
+                     deliverables · routines · integrations · overview
   src/tools/         migração de dados da v1
 apps/web/        interface (Vite + React + Tailwind + shadcn/ui), servida pela API
   src/app/           layout com sidebar, rotas, tema
@@ -65,6 +66,7 @@ Sem nenhuma variável, a API usa SQLite em `apps/api/data/aurora.db`, deixa os t
 | `AURORA_CHIEF_ENGINE` | `rules` ou `model` (o Chief of Staff na conversa) |
 | `AURORA_KNOWLEDGE_ANSWERER` | `extractive` ou `model` (as respostas do Cérebro) |
 | `AURORA_QUEUE_CAPACITY`, `AURORA_RESUME_RESERVE`, `AURORA_MAX_WORKERS` | capacidade da fila |
+| `AURORA_TIMEZONE` | fuso das rotinas e do painel (IANA); padrão: o do computador |
 
 A lista completa e os padrões estão em [apps/api/src/config.ts](apps/api/src/config.ts).
 
@@ -85,4 +87,13 @@ cenários de ponta a ponta com o worker Python real.
 - Cada chamada ao modelo tem recibo. Uma chamada sem recibo depois de uma queda nunca é repetida
   sozinha: o trabalho vai para a central de recuperação e uma pessoa decide, com justificativa.
 - Os agentes só leem fontes abertas a toda a empresa, vigentes e não substituídas. Toda citação
-  precisa ter sido entregue ao trabalho.
+  precisa ter sido entregue ao trabalho. O Chief of Staff só escala agentes contratados.
+- O efeito aprovado gera a entrega na mesma transação do recibo; só a versão aceita sai da empresa.
+- Cada horário de uma rotina vira no máximo um trabalho, mesmo depois de reiniciar.
+- Integrações agem só com a permissão dada; o que não foi autorizado é recusado e registrado.
+
+## Áreas
+
+Command Center, Conversa, Trabalhos, Entregas, Rotinas, Cérebro, Agentes (catálogo e time),
+Organograma, Integrações, Governança (central de recuperação), Configurações e o assistente
+"Montar sua empresa". O andamento e os próximos passos estão em [docs/REPLANEJAMENTO_V2.md](docs/REPLANEJAMENTO_V2.md).

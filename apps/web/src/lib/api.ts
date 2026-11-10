@@ -435,3 +435,30 @@ export const integrationsApi = {
   importFile: (id: string, file: string) => post<{ source: { id: string; title: string } }>(`/api/integrations/${id}/import`, { file }),
   exportDeliverable: (id: string, deliverableId: string, version: number) => post<{ file: string }>(`/api/integrations/${id}/export`, { deliverable_id: deliverableId, version }),
 };
+
+// ── Command Center ───────────────────────────────────────────────────────────
+
+export interface Overview {
+  generated_at: string;
+  time_zone: string;
+  days: number;
+  kpis: { waiting_you: number; in_progress: number; attention: number; delivered: number };
+  jobs: Record<string, number>;
+  deliverables: Record<string, number>;
+  company: { team: number; sources: number; connections: number };
+  decide: {
+    approvals: { id: string; title: string; at: string }[];
+    reviews: { id: string; title: string; at: string; version: number }[];
+    recovery: { id: string; title: string; at: string }[];
+  };
+  routines: { next: { id: string; name: string; next_run_at: string }[]; gave_up: number };
+  usage: {
+    days: { date: string; calls: number; input_tokens: number; output_tokens: number }[];
+    by_area: Record<"work" | "chief" | "knowledge", { calls: number; tokens: number; fallbacks: number }>;
+    providers: string[];
+    problems: { code: string; count: number; last_at: string }[];
+  };
+  activity: { stream: string; kind: string; at: string; detail: Record<string, unknown> }[];
+}
+
+export const overviewApi = { get: () => get<Overview>("/api/overview") };

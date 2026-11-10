@@ -77,6 +77,8 @@ export const EVENT_LABEL: Record<string, string> = {
   routine_fired: "Rotina disparou",
   routine_refused: "Rotina recusada",
   connection_created: "Conexão criada",
+  knowledge_source_created: "Fonte nova no Cérebro",
+  agent_hired: "Agente contratado",
   connection_updated: "Permissões ajustadas",
   connection_disconnected: "Desconectada",
   connection_reconnected: "Reconectada",
