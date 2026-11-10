@@ -4,13 +4,15 @@ import { AlertTriangle, CheckCircle2, Clock, Loader2, type LucideIcon } from "lu
 import { Link } from "react-router";
 import { EmptyState, ErrorNotice, LoadingRows, PageHeader } from "@/components/common";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { jobsApi, type Job } from "@/lib/api";
+import { Button } from "@/components/ui/button";
+import { companyApi, jobsApi, type Job } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { JobStatusBadge } from "../jobs/job-status";
 import { NewJobForm } from "../jobs/new-job-form";
 
 export function CommandCenterPage() {
   const jobs = useQuery({ queryKey: ["jobs"], queryFn: jobsApi.list, refetchInterval: 4000 });
+  const setup = useQuery({ queryKey: ["setup"], queryFn: companyApi.setup });
   const list = jobs.data?.jobs ?? [];
   const by = (pred: (j: Job) => boolean) => list.filter(pred);
   const waiting = by((j) => j.status === "awaiting_approval");
@@ -22,6 +24,20 @@ export function CommandCenterPage() {
     <div className="space-y-6">
       <PageHeader title="Command Center" description="O que precisa da sua decisão e o que a equipe está fazendo." />
       <ErrorNotice error={jobs.error} title="Não foi possível carregar os trabalhos" />
+      {setup.data && !setup.data.completed_at && (
+        <div className="flex flex-col gap-3 rounded-xl border border-sky-500/40 bg-sky-500/10 p-4 sm:flex-row sm:items-center">
+          <div className="min-w-0 flex-1">
+            <p className="font-medium">Monte sua empresa</p>
+            <p className="text-sm text-muted-foreground">
+              Descreva a empresa, envie os primeiros documentos ao Cérebro e escolha o time.{" "}
+              {setup.data.team === 0 && "Sem time, o Chief of Staff ainda não abre trabalhos."}
+            </p>
+          </div>
+          <Button asChild>
+            <Link to="/montar">Começar</Link>
+          </Button>
+        </div>
+      )}
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat icon={Clock} label="Aguardando você" value={waiting.length} to="/trabalhos" tone="text-warning" />
         <Stat icon={Loader2} label="Em andamento" value={moving.length} to="/trabalhos" tone="text-sky-500" />

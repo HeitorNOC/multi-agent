@@ -6,11 +6,13 @@ import { EmptyState, ErrorNotice, LoadingRows, ToneBadge } from "@/components/co
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { jobsApi, type Job } from "@/lib/api";
-import { agentLabel, EVENT_LABEL, formatDateTime, shortId } from "@/lib/format";
+import { EVENT_LABEL, formatDateTime, shortId } from "@/lib/format";
 import { isMoving, JobStatusBadge } from "./job-status";
 import { ReportView } from "./report-view";
+import { useAgentNames } from "../agents/agent-bits";
 
 export function JobDetailPage() {
+  const agentName = useAgentNames();
   const { id = "" } = useParams();
   const job = useQuery({
     queryKey: ["job", id],
@@ -71,7 +73,7 @@ export function JobDetailPage() {
                   <ul className="flex flex-wrap gap-2">
                     {j.plan.agents.map((a) => (
                       <li key={a} className="rounded-md bg-muted px-2 py-1 text-xs">
-                        {agentLabel(a)}
+                        {agentName(a)}
                       </li>
                     ))}
                   </ul>

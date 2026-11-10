@@ -6,7 +6,11 @@ import { ConversationPage } from "@/features/conversation/conversation-page";
 import { GovernancePage } from "@/features/governance/governance-page";
 import { JobDetailPage } from "@/features/jobs/job-detail-page";
 import { JobsPage } from "@/features/jobs/jobs-page";
+import { AgentsPage } from "@/features/agents/agents-page";
 import { KnowledgePage } from "@/features/knowledge/knowledge-page";
+import { OrganogramPage } from "@/features/organogram/organogram-page";
+import { SettingsPage } from "@/features/settings/settings-page";
+import { SetupPage } from "@/features/setup/setup-page";
 import { AppLayout } from "./layout";
 
 function NotFound() {
@@ -30,6 +34,10 @@ export const router = createBrowserRouter([
       { path: "trabalhos/:id", element: <JobDetailPage /> },
       { path: "cerebro", element: <KnowledgePage /> },
       { path: "governanca", element: <GovernancePage /> },
+      { path: "agentes", element: <AgentsPage /> },
+      { path: "organograma", element: <OrganogramPage /> },
+      { path: "configuracoes", element: <SettingsPage /> },
+      { path: "montar", element: <SetupPage /> },
       ...Object.keys(UPCOMING).map((area) => ({ path: area, element: <ComingSoon area={area} /> })),
       { path: "*", element: <NotFound /> },
     ],

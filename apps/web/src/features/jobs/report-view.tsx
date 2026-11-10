@@ -2,9 +2,11 @@
 import { ExternalLink, FileText } from "lucide-react";
 import { ToneBadge } from "@/components/common";
 import type { OpenReport } from "@/lib/api";
-import { agentLabel, formatDate } from "@/lib/format";
+import { formatDate } from "@/lib/format";
+import { useAgentNames } from "../agents/agent-bits";
 
 export function ReportView({ report }: { report: OpenReport }) {
+  const agentName = useAgentNames();
   const byLabel = new Map(report.citations.map((c, i) => [c.label, { ...c, n: i + 1 }]));
   const refs = (labels: string[]) =>
     labels
@@ -35,7 +37,7 @@ export function ReportView({ report }: { report: OpenReport }) {
           <ul className="space-y-2">
             {report.findings.map((f, i) => (
               <li key={i} className="rounded-lg border p-3 text-sm">
-                <span className="mb-1 block text-xs text-muted-foreground">{agentLabel(f.agent)}</span>
+                <span className="mb-1 block text-xs text-muted-foreground">{agentName(f.agent)}</span>
                 {f.claim}
                 {refs(f.citations)}
               </li>

@@ -209,3 +209,98 @@ export function fileToBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
+
+// ── Agentes e empresa ────────────────────────────────────────────────────────
+
+export interface AgentTemplate {
+  id: string;
+  name: string;
+  title: string;
+  area: string;
+  tagline: string;
+  focus: string;
+  skills: string[];
+  in_team: boolean;
+}
+
+export interface CatalogArea {
+  id: string;
+  title: string;
+  templates: AgentTemplate[];
+  in_team: number;
+}
+
+export interface Agent {
+  id: string;
+  template_id: string | null;
+  name: string;
+  title: string;
+  area: string;
+  tagline: string;
+  focus: string;
+  skills: string[];
+  instructions: string;
+  reports_to: string | null;
+  hired_at: string;
+}
+
+export interface OrgNode {
+  id: string;
+  name: string;
+  title: string;
+  area: string;
+  reports: OrgNode[];
+}
+
+export interface NewAgent {
+  name: string;
+  title: string;
+  area: string;
+  focus: string;
+  tagline?: string;
+  skills?: string[];
+  instructions?: string;
+}
+
+export interface Organization {
+  name: string;
+  sector: string;
+  objectives: string;
+  policies: string;
+  setup_completed_at: string | null;
+}
+
+export interface SetupStatus {
+  steps: { company: boolean; knowledge: boolean; team: boolean };
+  sources: number;
+  team: number;
+  completed_at: string | null;
+}
+
+export interface Settings {
+  model: { provider: "none" | "claude" | "codex"; name: string | null; ready: boolean };
+  chief_engine: "rules" | "model";
+  knowledge_answerer: "extractive" | "model";
+  knowledge_max_bytes: number;
+  database: "sqlite" | "postgres";
+  worker: { configured: boolean; checkpoints: boolean };
+  queue: { capacity: number; resumeReserve: number; maxWorkers: number };
+}
+
+export const agentsApi = {
+  catalog: () => get<{ areas: CatalogArea[] }>("/api/agents/catalog"),
+  team: () => get<{ agents: Agent[] }>("/api/agents"),
+  organogram: () => get<{ company: string | null; top: { name: string; title: string }; chief: { name: string; title: string; reports: OrgNode[] }; areas: { id: string; title: string }[] }>("/api/agents/organogram"),
+  hire: (templateId: string) => post<Agent>("/api/agents/hire", { template_id: templateId }),
+  create: (input: NewAgent) => post<Agent>("/api/agents", input),
+  change: (id: string, changes: Partial<Omit<NewAgent, "area">> & { reports_to?: string | null }) => post<Agent>(`/api/agents/${id}`, changes),
+  remove: (id: string) => post<{ replayed: boolean }>(`/api/agents/${id}/remove`),
+};
+
+export const companyApi = {
+  get: () => get<Organization>("/api/organization"),
+  save: (input: { name: string; sector?: string; objectives?: string; policies?: string }) => post<Organization>("/api/organization", input),
+  setup: () => get<SetupStatus>("/api/setup"),
+  completeSetup: () => post<SetupStatus>("/api/setup/complete"),
+  settings: () => get<Settings>("/api/settings"),
+};

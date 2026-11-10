@@ -10,9 +10,10 @@ import { EmptyState, ErrorNotice, LoadingRows } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { conversationsApi, newKey, type Message } from "@/lib/api";
-import { agentLabel, relativeTime, shortId } from "@/lib/format";
+import { relativeTime, shortId } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { JobStatusBadge } from "../jobs/job-status";
+import { useAgentNames } from "../agents/agent-bits";
 
 export function ConversationPage() {
   const { id } = useParams();
@@ -147,6 +148,7 @@ function Thread({ id }: { id: string }) {
 }
 
 function Bubble({ message }: { message: Message }) {
+  const agentName = useAgentNames();
   const mine = message.role === "user";
   return (
     <div className={cn("flex gap-2", mine && "justify-end")}>
@@ -163,7 +165,7 @@ function Bubble({ message }: { message: Message }) {
               <span className="text-xs text-muted-foreground">Trabalho #{shortId(message.job.id)}</span>
               <JobStatusBadge status={message.job.status} />
             </div>
-            {message.job.agents && <p className="mt-2 text-xs">{message.job.agents.map(agentLabel).join(" · ")}</p>}
+            {message.job.agents && <p className="mt-2 text-xs">{message.job.agents.map(agentName).join(" · ")}</p>}
           </Link>
         )}
         {message.decision?.fallback && <p className="text-[11px] text-muted-foreground">Decidido por regras ({message.decision.fallback})</p>}

@@ -56,8 +56,8 @@ const GROUPS: { label: string; areas: Area[] }[] = [
     label: "Empresa",
     areas: [
       { to: "/cerebro", label: "Cérebro", icon: BrainCircuit },
-      { to: "/agentes", label: "Agentes", icon: Users, soon: true },
-      { to: "/organograma", label: "Organograma", icon: Network, soon: true },
+      { to: "/agentes", label: "Agentes", icon: Users },
+      { to: "/organograma", label: "Organograma", icon: Network },
       { to: "/integracoes", label: "Integrações", icon: Blocks, soon: true },
     ],
   },
@@ -65,7 +65,7 @@ const GROUPS: { label: string; areas: Area[] }[] = [
     label: "Administração",
     areas: [
       { to: "/governanca", label: "Governança", icon: ShieldCheck, badge: "recovery" },
-      { to: "/configuracoes", label: "Configurações", icon: Settings, soon: true },
+      { to: "/configuracoes", label: "Configurações", icon: Settings },
     ],
   },
 ];

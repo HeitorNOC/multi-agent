@@ -132,6 +132,12 @@ Cada fase termina com testes passando e verificação na interface.
 
 Depois: identidade corporativa, provedor remoto (API), Loja e áreas de marketing.
 
+### Andamento (10/11/2026)
+
+- **F0 — concluída.** Jobs, Cérebro, trabalho aberto, conversa, recuperação nativa e migração de dados da v1, nos dois bancos; v1 congelada em `legacy/`. Os testes HTTP de caracterização da v1 não rodam literalmente contra a v2 (o formato das rotas mudou de propósito); os mesmos cenários foram portados.
+- **F1 — concluída.** Interface com sidebar, tema e as áreas Command Center, Conversa, Trabalhos, Cérebro e Governança, servida pela API; conferida no navegador em desktop e celular.
+- **F2 — concluída.** Catálogo de 37 personas em 10 áreas, contratar, criar meu agente, orientações, organograma, empresa, assistente "Montar sua empresa" e Configurações. O Chief of Staff só escala o time contratado. Fica para depois: a "Estação" (conversa direta com um agente) e permissões por agente além das fontes abertas a todos.
+
 ## 8. Decisões para você confirmar
 
 | Decisão | Recomendação | Alternativa |
