@@ -39,12 +39,17 @@ import { knowledgeStore } from "./modules/knowledge/infrastructure/sql-knowledge
 import { recoveryHttp } from "./modules/recovery/http/routes.ts";
 import { OpenWorkGateway } from "./modules/open-work/application/gateway.ts";
 import { openWorkPolicy } from "./modules/open-work/application/open-policy.ts";
-import type { CatalogAgent } from "./modules/open-work/domain/catalog.ts";
+import { agentsHttp } from "./modules/agents/http/routes.ts";
+import { teamDirectory, type AgentsDeps } from "./modules/agents/application/agents.ts";
+import type { TemplateCatalog } from "./modules/agents/domain/template.ts";
+import { agentsStore } from "./modules/agents/infrastructure/sql-agents.ts";
+import type { HttpModule } from "./platform/http/app.ts";
 import { openWorkHttp } from "./modules/open-work/http/routes.ts";
 
 export interface ServerParts {
   /** Especialistas do trabalho aberto. */
-  catalog: readonly CatalogAgent[];
+  /** Personas prontas do catálogo de agentes. */
+  templates: TemplateCatalog;
   /** Cliente do modelo; `null` sem modelo configurado. */
   model: ModelClient | null;
   /** Troca a política de trabalho (testes); padrão: trabalho aberto. */
@@ -85,6 +90,16 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     maxBytes: config.knowledge.maxBytes,
   };
 
+  // Empresa e time: o Chief of Staff só escala quem foi contratado.
+  const agentsUow = new UnitOfWork(db, agentsStore(clock));
+  const agents: AgentsDeps = {
+    uow: agentsUow,
+    catalog: parts.templates,
+    clock,
+    countSources: async () => (await knowledgeUow.read.sources.list()).filter((s) => !s.revokedAt).length,
+  };
+  const team = teamDirectory(agentsUow);
+
   // Trabalhos
   let url = "";
   let jobs!: JobsDeps;
@@ -101,7 +116,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
   });
   jobs = {
     uow: new UnitOfWork(db, jobsStore(clock)),
-    policy: parts.policy ?? openWorkPolicy(parts.catalog),
+    policy: parts.policy ?? openWorkPolicy(team),
     limits: queueLimits(config.queue),
     clock,
     workers: supervisor,
@@ -110,7 +125,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
   await reconcileOnRestart(jobs);
 
   // Trabalho aberto
-  const gateway = new OpenWorkGateway({ jobs, search, client: parts.model, limiter, catalog: parts.catalog, clock, timeoutMs: config.model.timeoutMs });
+  const gateway = new OpenWorkGateway({ jobs, search, client: parts.model, limiter, team, clock, timeoutMs: config.model.timeoutMs });
 
   // Conversa
   const rules = new RuleBasedChiefOfStaff();
@@ -131,6 +146,8 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       openWorkHttp(gateway, supervisor),
       conversationsHttp(conversations, { onJobOpened: () => void scheduler.wake() }),
       recoveryHttp(jobs, { wake: () => void scheduler.wake() }),
+      agentsHttp(agents),
+      settingsHttp(config, parts.model !== null),
       ...(config.webDir ? [staticWeb(config.webDir)] : []),
     ],
   });
@@ -150,6 +167,21 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       await app.close();
       await db.close();
     },
+  };
+}
+
+/** Configuração em vigor, só leitura e sem segredos (a tela de Configurações mostra). */
+function settingsHttp(config: Config, modelReady: boolean): HttpModule {
+  return (app) => {
+    app.get("/api/settings", async () => ({
+      model: { provider: config.model.provider, name: config.model.name ?? null, ready: modelReady },
+      chief_engine: config.chief.engine,
+      knowledge_answerer: config.knowledge.answerer,
+      knowledge_max_bytes: config.knowledge.maxBytes,
+      database: config.database.dialect,
+      worker: { configured: !!config.worker.command, checkpoints: !!config.worker.checkpointDsn },
+      queue: config.queue,
+    }));
   };
 }
 

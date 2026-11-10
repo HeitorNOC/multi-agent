@@ -9,11 +9,11 @@ import { fileURLToPath } from "node:url";
 import { ConfigError, loadConfig, type Config } from "./config.ts";
 import { ClaudeCliClient, CodexCliClient } from "./platform/model/cli-clients.ts";
 import type { ModelClient } from "./platform/model/model-client.ts";
-import { loadSpecialists } from "./modules/open-work/domain/catalog.ts";
+import { loadTemplates } from "./modules/agents/domain/template.ts";
 import { startServer } from "./server.ts";
 
-/** Especialistas padrão do trabalho aberto (o módulo de agentes passa a fornecê-los na F2). */
-const DEFAULT_CATALOG = fileURLToPath(new URL("../data/specialists.json", import.meta.url));
+/** Personas prontas que acompanham o produto. */
+const DEFAULT_TEMPLATES = fileURLToPath(new URL("../data/agent-templates.json", import.meta.url));
 
 function modelClient(model: Config["model"]): ModelClient | null {
   const options = { model: model.name, command: model.command };
@@ -25,7 +25,7 @@ function modelClient(model: Config["model"]): ModelClient | null {
 async function main() {
   const config = loadConfig();
   const server = await startServer(config, {
-    catalog: loadSpecialists(config.catalogPath ?? DEFAULT_CATALOG),
+    templates: loadTemplates(config.templatesPath ?? DEFAULT_TEMPLATES),
     model: modelClient(config.model),
   });
   console.log(JSON.stringify({ ready: true, url: server.url }));

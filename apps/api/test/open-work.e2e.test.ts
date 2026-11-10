@@ -11,7 +11,7 @@ import { after, before, test } from "node:test";
 import pg from "pg";
 import { loadConfig } from "../src/config.ts";
 import { ClaudeCliClient } from "../src/platform/model/cli-clients.ts";
-import type { CatalogAgent } from "../src/modules/open-work/domain/catalog.ts";
+import { loadTemplates } from "../src/modules/agents/domain/template.ts";
 import { startServer, type RunningServer } from "../src/server.ts";
 
 const url = process.env.AURORA_TEST_POSTGRES_URL;
@@ -20,7 +20,8 @@ const worker = fileURLToPath(new URL("../../runtime/open_worker.py", import.meta
 const fakeModel = fileURLToPath(new URL("./fixtures/fake-open-model.ts", import.meta.url));
 const skip = !url ? "defina AURORA_TEST_POSTGRES_URL" : !existsSync(python) ? "Python com LangGraph não encontrado" : false;
 
-const CATALOG: CatalogAgent[] = [
+/** Agentes contratados pela API no início de cada cenário (personas do catálogo real). */
+const CATALOG = [
   { id: "procurement_analyst", title: "Analista de compras", focus: "compras fornecedores cotações", domain: "compras" },
   { id: "financial_planning_analyst", title: "Analista financeiro", focus: "orçamento aprovação diretor financeiro", domain: "finanças" },
 ];
@@ -64,7 +65,7 @@ async function start(mode = `ok:${AGENTS}`) {
     AURORA_CHECKPOINT_DSN: checkpointDsn,
   });
   const server = await startServer(config, {
-    catalog: CATALOG,
+    templates: loadTemplates(fileURLToPath(new URL("../data/agent-templates.json", import.meta.url))),
     model: new ClaudeCliClient({ command: [process.execPath, fakeModel, mode, calls] }),
   });
   running.push(server);
@@ -72,6 +73,7 @@ async function start(mode = `ok:${AGENTS}`) {
     const res = await fetch(server.url + path, body ? { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) } : {});
     return { status: res.status, body: await res.json() };
   };
+  for (const agent of CATALOG) assert.equal((await call("/api/agents/hire", { template_id: agent.id })).status, 201);
   const upload = (title: string, text: string, readers?: string[]) =>
     call("/api/knowledge/sources", { title, filename: "f.md", media_type: "text/markdown", content_base64: Buffer.from(text).toString("base64"), ...(readers ? { readers } : {}) });
   const modelCalls = () => readFileSync(calls, "utf8").split("\n").filter(Boolean);
@@ -189,8 +191,6 @@ async function spawnApi(env: Record<string, string>) {
 }
 
 test("API cai no meio de uma chamada ao modelo: não repete sozinha; a central autoriza e o trabalho segue", { skip, timeout: 300_000 }, async () => {
-  const catalogPath = join(dir, "catalog.json");
-  writeFileSync(catalogPath, JSON.stringify({ agents: CATALOG.map((a) => ({ ...a, kind: "specialist" })) }));
   const calls = join(dir, "calls-crash.log");
   writeFileSync(calls, "");
   const modelCalls = () => readFileSync(calls, "utf8").split("\n").filter(Boolean);
@@ -198,12 +198,12 @@ test("API cai no meio de uma chamada ao modelo: não repete sozinha; a central a
     AURORA_SQLITE_PATH: join(dir, "aurora-crash.db"),
     AURORA_WORKER_COMMAND: JSON.stringify([python, "-I", worker]),
     AURORA_CHECKPOINT_DSN: checkpointDsn,
-    AURORA_CATALOG_PATH: catalogPath,
     AURORA_MODEL_PROVIDER: "claude",
     AURORA_MODEL_COMMAND: JSON.stringify([process.execPath, fakeModel, mode, calls]),
   });
 
   const first = await spawnApi(env(`hang-specialist:${AGENTS}`));
+  for (const agent of CATALOG) await first.call("/api/agents/hire", { template_id: agent.id });
   await first.call("/api/knowledge/sources", { title: "Compras", filename: "f.md", media_type: "text/markdown", content_base64: Buffer.from(POLICY).toString("base64") });
   const id = (await first.call("/api/jobs", { goal: GOAL })).body.id;
   for (let i = 0; i < 300 && !modelCalls().includes("specialist"); i++) await new Promise((r) => setTimeout(r, 200));

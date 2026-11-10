@@ -45,8 +45,8 @@ const schema = z
     AURORA_KNOWLEDGE_MAX_BYTES: integer(1, 50_000_000, 5_000_000),
     /** Pasta da interface construída; `none` desliga. Padrão: apps/web/dist. */
     AURORA_WEB_DIR: z.string().min(1).optional(),
-    /** Catálogo de especialistas do trabalho aberto. */
-    AURORA_CATALOG_PATH: z.string().min(1).optional(),
+    /** Catálogo de personas prontas (padrão: apps/api/data/agent-templates.json). */
+    AURORA_AGENT_TEMPLATES: z.string().min(1).optional(),
   })
   .refine((env) => env.AURORA_RESUME_RESERVE < env.AURORA_QUEUE_CAPACITY, {
     message: "AURORA_RESUME_RESERVE deve ser menor que AURORA_QUEUE_CAPACITY",
@@ -63,7 +63,7 @@ export interface Config {
   model: { provider: "none" | "claude" | "codex"; name: string | undefined; command: string[] | undefined; timeoutMs: number };
   knowledge: { answerer: "extractive" | "model"; maxBytes: number };
   chief: { engine: "rules" | "model" };
-  catalogPath: string | undefined;
+  templatesPath: string | undefined;
   webDir: string | undefined;
 }
 
@@ -90,7 +90,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     model: { provider: e.AURORA_MODEL_PROVIDER, name: e.AURORA_MODEL_NAME, command: e.AURORA_MODEL_COMMAND, timeoutMs: e.AURORA_MODEL_TIMEOUT_MS },
     knowledge: { answerer: e.AURORA_KNOWLEDGE_ANSWERER, maxBytes: e.AURORA_KNOWLEDGE_MAX_BYTES },
     chief: { engine: e.AURORA_CHIEF_ENGINE },
-    catalogPath: e.AURORA_CATALOG_PATH,
+    templatesPath: e.AURORA_AGENT_TEMPLATES,
     webDir: e.AURORA_WEB_DIR === "none" ? undefined : (e.AURORA_WEB_DIR ?? DEFAULT_WEB_DIR),
   };
 }

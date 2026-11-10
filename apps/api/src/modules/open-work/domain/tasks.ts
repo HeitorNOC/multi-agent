@@ -92,13 +92,18 @@ Responda apenas com o JSON pedido.`,
   };
 }
 
+/** Orientações da empresa para o papel; as regras de evidência abaixo continuam valendo acima delas. */
+const roleNotes = (agent: CatalogAgent) =>
+  agent.instructions?.trim() ? `
+Orientações da empresa para o seu papel (as regras abaixo prevalecem): ${agent.instructions.trim().slice(0, 1500)}` : "";
+
 const fragmentData = (fragments: Fragment[]) =>
   fragments.map((f) => ({ rotulo: f.label, fonte: f.title, versao: f.version, vigente_desde: localDate(f.validFrom), texto: f.text }));
 
 export function specialistTask(goal: string, agent: CatalogAgent, fragments: Fragment[], now: string): TaskSpec<SpecialistOutput> {
   const allowed = new Set(fragments.map((f) => f.label));
   return {
-    system: `Você é ${agent.title}, especialista em: ${agent.focus}.
+    system: `Você é ${agent.title}, especialista em: ${agent.focus}.${roleNotes(agent)}
 Analise o pedido usando SOMENTE os trechos fornecidos das fontes da empresa.
 Cada achado é uma afirmação objetiva e lista em "citations" os rótulos dos trechos que a sustentam.
 Não invente números, datas, nomes ou causas. Se os trechos não bastarem, deixe "findings" vazio e explique em "unknowns" o que falta.

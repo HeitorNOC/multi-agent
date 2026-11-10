@@ -20,7 +20,7 @@ export interface AdmitJobInput {
 }
 
 export async function admitJob(deps: JobsDeps, input: AdmitJobInput): Promise<{ job: Job; replayed: boolean }> {
-  const goal = deps.policy.goal(input.request);
+  const goal = await deps.policy.goal(input.request);
   return deps.uow.run(async (store, tx) => {
     if (input.key) {
       const prior = await store.admissions.get(input.key);

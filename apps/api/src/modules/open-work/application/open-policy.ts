@@ -5,7 +5,7 @@
 import { ensure, invalid } from "../../../shared/errors.ts";
 import type { Json } from "../../../shared/json.ts";
 import type { WorkPolicy } from "../../jobs/application/policy.ts";
-import type { CatalogAgent } from "../domain/catalog.ts";
+import type { TeamDirectory } from "../domain/catalog.ts";
 
 export const MAX_AGENTS = 3;
 
@@ -23,22 +23,23 @@ interface Finding {
   citations: string[];
 }
 
-export function openWorkPolicy(catalog: readonly CatalogAgent[]): WorkPolicy {
-  const specialists = new Set(catalog.map((a) => a.id));
+export function openWorkPolicy(team: TeamDirectory): WorkPolicy {
   return {
     id: "open-work",
 
-    goal(request) {
+    async goal(request) {
       const goal = (request as { goal?: unknown } | null)?.goal;
       demand(isText(goal, 10, 2000), "invalid_goal", "Descreva o pedido em 10 a 2000 caracteres");
+      demand((await team.members()).length > 0, "team_empty", "Monte seu time em Agentes antes de pedir um trabalho");
       return (goal as string).trim();
     },
 
-    plan(proposal) {
+    async plan(proposal) {
+      const specialists = new Set((await team.members()).map((a) => a.id));
       const p = (proposal ?? {}) as { agents?: unknown; reason?: unknown };
       const agents = Array.isArray(p.agents) ? [...new Set(p.agents)] : [];
       demand(agents.length >= 1 && agents.length <= MAX_AGENTS, "invalid_plan", `O plano precisa de 1 a ${MAX_AGENTS} especialistas`);
-      demand(agents.every((a) => typeof a === "string" && specialists.has(a)), "agent_not_in_catalog", "Especialista fora do catálogo");
+      demand(agents.every((a) => typeof a === "string" && specialists.has(a)), "agent_not_in_team", "Especialista fora do time da empresa");
       demand(isText(p.reason, 10, 800), "invalid_plan", "Motivo do plano ausente");
       return {
         strategy: "open",

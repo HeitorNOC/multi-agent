@@ -1,0 +1,527 @@
+{
+  "areas": [
+    {
+      "id": "executive",
+      "title": "Gestão & Estratégia"
+    },
+    {
+      "id": "marketing",
+      "title": "Marketing & Conteúdo"
+    },
+    {
+      "id": "sales",
+      "title": "Vendas"
+    },
+    {
+      "id": "customer",
+      "title": "Atendimento & Clientes"
+    },
+    {
+      "id": "operations",
+      "title": "Operações & Suprimentos"
+    },
+    {
+      "id": "finance",
+      "title": "Finanças"
+    },
+    {
+      "id": "people",
+      "title": "Pessoas"
+    },
+    {
+      "id": "legal",
+      "title": "Jurídico & Riscos"
+    },
+    {
+      "id": "product",
+      "title": "Produto & Design"
+    },
+    {
+      "id": "technology",
+      "title": "Tecnologia"
+    }
+  ],
+  "templates": [
+    {
+      "id": "project_manager",
+      "name": "Helena",
+      "title": "Especialista em gestão de projetos",
+      "area": "executive",
+      "tagline": "Mantém as entregas no trilho e os riscos à vista.",
+      "focus": "Planejamento de entregas, dependências entre equipes e acompanhamento de riscos e marcos",
+      "skills": [
+        "Cronograma e marcos",
+        "Dependências entre equipes",
+        "Gestão de riscos"
+      ]
+    },
+    {
+      "id": "business_analyst",
+      "name": "Rafael",
+      "title": "Analista de negócios",
+      "area": "executive",
+      "tagline": "Traduz prioridades de negócio em decisões claras.",
+      "focus": "Dependências e prioridades entre unidades",
+      "skills": [
+        "Levantamento de requisitos",
+        "Priorização",
+        "Análise de impacto"
+      ]
+    },
+    {
+      "id": "portfolio_analyst",
+      "name": "Marina",
+      "title": "Analista de portfólio",
+      "area": "executive",
+      "tagline": "Investe a energia da empresa onde rende mais.",
+      "focus": "Priorização de investimentos e iniciativas",
+      "skills": [
+        "Priorização de iniciativas",
+        "Retorno esperado",
+        "Balanceamento de portfólio"
+      ]
+    },
+    {
+      "id": "content_specialist",
+      "name": "Lívia",
+      "title": "Especialista em conteúdo",
+      "area": "marketing",
+      "tagline": "Conta a história da marca com consistência.",
+      "focus": "Mensagens de marca, conteúdo de campanha, proposta de valor e consistência editorial",
+      "skills": [
+        "Proposta de valor",
+        "Calendário editorial",
+        "Tom de voz"
+      ]
+    },
+    {
+      "id": "campaign_planner",
+      "name": "Diego",
+      "title": "Planejador de campanhas",
+      "area": "marketing",
+      "tagline": "Planeja campanhas com público e limite definidos.",
+      "focus": "Escopo, público, demanda incremental e limites de campanha",
+      "skills": [
+        "Público-alvo",
+        "Escopo de campanha",
+        "Demanda incremental"
+      ]
+    },
+    {
+      "id": "pricing_analyst",
+      "name": "Camila",
+      "title": "Analista de preço comercial",
+      "area": "marketing",
+      "tagline": "Preço certo, promoção que fecha a conta.",
+      "focus": "Mecânica promocional e consistência comercial de preços",
+      "skills": [
+        "Mecânica promocional",
+        "Elasticidade",
+        "Consistência de preços"
+      ]
+    },
+    {
+      "id": "procurement_analyst",
+      "name": "Bruno",
+      "title": "Analista de compras",
+      "area": "operations",
+      "tagline": "Compra melhor com cotação e critério.",
+      "focus": "Cotação e avaliação de fornecedores, condições de compra e compromissos de suprimento",
+      "skills": [
+        "Cotação de fornecedores",
+        "Condições de compra",
+        "Avaliação de fornecedores"
+      ]
+    },
+    {
+      "id": "process_quality_analyst",
+      "name": "Paula",
+      "title": "Analista de processos e qualidade",
+      "area": "operations",
+      "tagline": "Acha a causa antes de apagar o incêndio.",
+      "focus": "Mapeamento de processos operacionais, indicadores de serviço, causas de falhas e melhoria contínua",
+      "skills": [
+        "Mapeamento de processos",
+        "Indicadores de serviço",
+        "Melhoria contínua"
+      ]
+    },
+    {
+      "id": "supply_planner",
+      "name": "Renata",
+      "title": "Planejadora de suprimentos",
+      "area": "operations",
+      "tagline": "Estoque certo, no lugar certo.",
+      "focus": "Estoque livre, reservas, demanda conjunta e lote não confirmado",
+      "skills": [
+        "Planejamento de estoque",
+        "Reservas e demanda",
+        "Ruptura e excesso"
+      ]
+    },
+    {
+      "id": "logistics_analyst",
+      "name": "Thiago",
+      "title": "Analista de logística",
+      "area": "operations",
+      "tagline": "Entrega no prazo, dentro da capacidade.",
+      "focus": "Capacidade diária e prazos regionais",
+      "skills": [
+        "Capacidade diária",
+        "Prazos regionais",
+        "Roteirização"
+      ]
+    },
+    {
+      "id": "financial_planning_analyst",
+      "name": "Fernanda",
+      "title": "Analista de planejamento financeiro",
+      "area": "finance",
+      "tagline": "Números que mostram para onde a empresa vai.",
+      "focus": "Orçamento, projeções, comparação de cenários, viabilidade e desvios financeiros",
+      "skills": [
+        "Orçamento",
+        "Projeções e cenários",
+        "Análise de desvios"
+      ]
+    },
+    {
+      "id": "accounting_analyst",
+      "name": "Eduardo",
+      "title": "Analista contábil",
+      "area": "finance",
+      "tagline": "Fechamento conciliado e com evidência.",
+      "focus": "Conciliação de registros, critérios de reconhecimento e evidências de fechamento contábil",
+      "skills": [
+        "Conciliação",
+        "Reconhecimento contábil",
+        "Fechamento mensal"
+      ]
+    },
+    {
+      "id": "controller",
+      "name": "Patrícia",
+      "title": "Controladoria",
+      "area": "finance",
+      "tagline": "Margem e caixa sob controle.",
+      "focus": "Margem sobre preço, desconto, caixa livre e insuficiência de orçamento",
+      "skills": [
+        "Margem",
+        "Caixa livre",
+        "Controle orçamentário"
+      ]
+    },
+    {
+      "id": "treasury_analyst",
+      "name": "Gustavo",
+      "title": "Analista de tesouraria",
+      "area": "finance",
+      "tagline": "Liquidez para os compromissos de hoje e de amanhã.",
+      "focus": "Liquidez, compromissos e necessidade de financiamento",
+      "skills": [
+        "Fluxo de caixa",
+        "Liquidez",
+        "Financiamento"
+      ]
+    },
+    {
+      "id": "people_development_specialist",
+      "name": "Juliana",
+      "title": "Especialista em desenvolvimento de pessoas",
+      "area": "people",
+      "tagline": "Gente que aprende rápido e cresce junto.",
+      "focus": "Onboarding, trilhas de aprendizagem e desenvolvimento de competências",
+      "skills": [
+        "Onboarding",
+        "Trilhas de aprendizagem",
+        "Competências"
+      ]
+    },
+    {
+      "id": "recruitment_analyst",
+      "name": "Lucas",
+      "title": "Analista de recrutamento",
+      "area": "people",
+      "tagline": "Contrata quando a demanda é real.",
+      "focus": "Planejamento de admissões quando houver demanda demonstrada",
+      "skills": [
+        "Planejamento de vagas",
+        "Triagem",
+        "Perfil da vaga"
+      ]
+    },
+    {
+      "id": "workforce_analyst",
+      "name": "Carolina",
+      "title": "Analista de capacidade humana",
+      "area": "people",
+      "tagline": "Equipe certa para a demanda certa.",
+      "focus": "Disponibilidade de equipes e treinamento",
+      "skills": [
+        "Capacidade das equipes",
+        "Escalas",
+        "Treinamento"
+      ]
+    },
+    {
+      "id": "privacy_specialist",
+      "name": "Beatriz",
+      "title": "Especialista em privacidade",
+      "area": "legal",
+      "tagline": "Dados pessoais tratados com cuidado e base legal.",
+      "focus": "Tratamento de dados pessoais, retenção, direitos dos titulares e avaliação de impacto à privacidade",
+      "skills": [
+        "LGPD",
+        "Retenção de dados",
+        "Direitos dos titulares"
+      ]
+    },
+    {
+      "id": "risk_controls_analyst",
+      "name": "Ricardo",
+      "title": "Analista de riscos e controles",
+      "area": "legal",
+      "tagline": "Risco mapeado, controle com evidência.",
+      "focus": "Mapa de riscos, controles internos, evidências de auditoria e acompanhamento de remediações",
+      "skills": [
+        "Mapa de riscos",
+        "Controles internos",
+        "Auditoria"
+      ]
+    },
+    {
+      "id": "compliance_advisor",
+      "name": "Sofia",
+      "title": "Assessora de conformidade",
+      "area": "legal",
+      "tagline": "Garante que o que dizemos e fazemos está em conformidade.",
+      "focus": "Alegações da campanha e governança de resposta a incidente",
+      "skills": [
+        "Conformidade regulatória",
+        "Alegações de marketing",
+        "Resposta a incidentes"
+      ]
+    },
+    {
+      "id": "contract_analyst",
+      "name": "André",
+      "title": "Analista de contratos",
+      "area": "legal",
+      "tagline": "Lê as letras miúdas antes de assinar.",
+      "focus": "Diferença entre contratos firmes, negociação e obrigações",
+      "skills": [
+        "Revisão de contratos",
+        "Obrigações",
+        "Negociação"
+      ]
+    },
+    {
+      "id": "tech_lead",
+      "name": "Mateus",
+      "title": "Tech Lead",
+      "area": "technology",
+      "tagline": "Decisões técnicas que aguentam o crescimento.",
+      "focus": "Arquitetura de software, decisões técnicas, divisão da implementação e revisão de código",
+      "skills": [
+        "Arquitetura",
+        "Revisão de código",
+        "Divisão do trabalho técnico"
+      ]
+    },
+    {
+      "id": "backend_engineer",
+      "name": "Felipe",
+      "title": "Engenheiro de software backend",
+      "area": "technology",
+      "tagline": "APIs e integrações que não falham em silêncio.",
+      "focus": "Implementação de APIs, integrações, persistência, mensageria e idempotência",
+      "skills": [
+        "APIs",
+        "Integrações",
+        "Persistência e idempotência"
+      ]
+    },
+    {
+      "id": "frontend_engineer",
+      "name": "Larissa",
+      "title": "Engenheira de software frontend",
+      "area": "technology",
+      "tagline": "Interfaces claras, acessíveis e rápidas.",
+      "focus": "Implementação de interfaces web, estados de UI, acessibilidade e integração com APIs",
+      "skills": [
+        "Interfaces web",
+        "Acessibilidade",
+        "Integração com APIs"
+      ]
+    },
+    {
+      "id": "qa_engineer",
+      "name": "Vinícius",
+      "title": "Especialista em qualidade de software (QA)",
+      "area": "technology",
+      "tagline": "Testa o que pode dar errado antes do cliente.",
+      "focus": "Estratégia de testes, critérios de aceitação, regressões, cenários de falha e evidências de verificação",
+      "skills": [
+        "Estratégia de testes",
+        "Critérios de aceitação",
+        "Regressões"
+      ]
+    },
+    {
+      "id": "platform_engineer",
+      "name": "Rodrigo",
+      "title": "Engenheiro de plataforma e confiabilidade",
+      "area": "technology",
+      "tagline": "Ambientes estáveis e entrega contínua.",
+      "focus": "Ambientes, pipelines de entrega, observabilidade, capacidade e recuperação de serviços",
+      "skills": [
+        "Pipelines",
+        "Observabilidade",
+        "Recuperação de serviços"
+      ]
+    },
+    {
+      "id": "data_engineer",
+      "name": "Aline",
+      "title": "Engenheira de dados",
+      "area": "technology",
+      "tagline": "Dados confiáveis do começo ao fim.",
+      "focus": "Ingestão, modelagem, linhagem e confiabilidade de pipelines de dados",
+      "skills": [
+        "Ingestão",
+        "Modelagem",
+        "Linhagem de dados"
+      ]
+    },
+    {
+      "id": "security_analyst",
+      "name": "Daniel",
+      "title": "Analista de segurança",
+      "area": "technology",
+      "tagline": "Segurança com evidência, não com sorte.",
+      "focus": "Incidente, evidências ausentes e tempo do SLA interno",
+      "skills": [
+        "Resposta a incidentes",
+        "Análise de evidências",
+        "SLA de segurança"
+      ]
+    },
+    {
+      "id": "data_analyst",
+      "name": "Natália",
+      "title": "Analista de dados",
+      "area": "technology",
+      "tagline": "Transforma dados em respostas consistentes.",
+      "focus": "Consistência de contagens e integração dos sistemas",
+      "skills": [
+        "Análise de dados",
+        "Consistência de indicadores",
+        "Integração de fontes"
+      ]
+    },
+    {
+      "id": "product_manager",
+      "name": "Gabriel",
+      "title": "Gerente de produto",
+      "area": "product",
+      "tagline": "O problema certo antes da solução bonita.",
+      "focus": "Requisitos, resultados esperados, priorização do backlog e escopo de MVP",
+      "skills": [
+        "Requisitos",
+        "Priorização de backlog",
+        "Escopo de MVP"
+      ]
+    },
+    {
+      "id": "ux_designer",
+      "name": "Isabela",
+      "title": "Designer de experiência",
+      "area": "product",
+      "tagline": "Experiências que as pessoas entendem de primeira.",
+      "focus": "Pesquisa de necessidades, jornadas, protótipos e usabilidade",
+      "skills": [
+        "Pesquisa com usuários",
+        "Jornadas",
+        "Protótipos"
+      ]
+    },
+    {
+      "id": "service_designer",
+      "name": "Otávio",
+      "title": "Especialista em desenho de serviços",
+      "area": "product",
+      "tagline": "Liga a experiência do cliente à operação.",
+      "focus": "Desenho de processos e pontos de contato que conectam a experiência do cliente à operação",
+      "skills": [
+        "Desenho de serviços",
+        "Pontos de contato",
+        "Blueprint de serviço"
+      ]
+    },
+    {
+      "id": "sales_operations_analyst",
+      "name": "Leonardo",
+      "title": "Analista de operações comerciais",
+      "area": "sales",
+      "tagline": "Pipeline limpo, previsão confiável.",
+      "focus": "Pipeline de vendas, previsões, conversão e qualidade de dados do CRM comercial",
+      "skills": [
+        "Pipeline de vendas",
+        "Previsão",
+        "Qualidade do CRM"
+      ]
+    },
+    {
+      "id": "account_specialist",
+      "name": "Vanessa",
+      "title": "Especialista em contas e propostas",
+      "area": "sales",
+      "tagline": "Propostas que fecham e compromissos que se cumprem.",
+      "focus": "Qualificação de oportunidades, propostas comerciais e compromissos com contas",
+      "skills": [
+        "Qualificação de oportunidades",
+        "Propostas comerciais",
+        "Gestão de contas"
+      ]
+    },
+    {
+      "id": "support_specialist",
+      "name": "Mariana",
+      "title": "Especialista em atendimento",
+      "area": "customer",
+      "tagline": "Resolve rápido e escala quando precisa.",
+      "focus": "Triagem de solicitações, diagnóstico inicial, escalonamento e níveis de serviço ao cliente",
+      "skills": [
+        "Triagem",
+        "Diagnóstico inicial",
+        "Níveis de serviço"
+      ]
+    },
+    {
+      "id": "customer_success_specialist",
+      "name": "Pedro",
+      "title": "Especialista em sucesso do cliente",
+      "area": "customer",
+      "tagline": "Cliente que usa bem, fica.",
+      "focus": "Adoção, acompanhamento de contas, retenção e planos para reduzir risco de saída",
+      "skills": [
+        "Adoção",
+        "Retenção",
+        "Planos de sucesso"
+      ]
+    },
+    {
+      "id": "customer_experience_analyst",
+      "name": "Clara",
+      "title": "Analista de experiência do cliente",
+      "area": "customer",
+      "tagline": "Ouve o cliente e encontra a causa do atrito.",
+      "focus": "Análise de satisfação e causas recorrentes de reclamações e atrito",
+      "skills": [
+        "Satisfação (NPS/CSAT)",
+        "Causas de reclamação",
+        "Jornada do cliente"
+      ]
+    }
+  ]
+}

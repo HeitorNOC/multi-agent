@@ -1,20 +1,22 @@
 /**
- * Especialistas que o Chief of Staff pode escalar num trabalho aberto. Hoje vêm de um catálogo
- * JSON; o módulo de agentes (F2) passa a fornecer os agentes instalados na empresa, com a mesma forma.
+ * Quem o Chief of Staff pode escalar num trabalho aberto: os agentes do time da empresa. O módulo
+ * de agentes implementa `TeamDirectory`; o trabalho aberto só conhece esta forma.
  */
-import { readFileSync } from "node:fs";
-
 export interface CatalogAgent {
+  /** Identificador estável, usado no plano e no passo `specialist:<id>`. */
   readonly id: string;
+  /** Como o agente se apresenta (por exemplo, "Bruno, Analista de compras"). */
   readonly title: string;
   readonly focus: string;
   readonly domain: string;
+  /** Orientações que a empresa deu a este agente. */
+  readonly instructions?: string;
 }
 
-/** Lê os especialistas de um catálogo no formato `{ agents: [{ id, kind, title, focus, domain }] }`. */
-export function loadSpecialists(path: string | URL): CatalogAgent[] {
-  const catalog = JSON.parse(readFileSync(path, "utf8")) as { agents?: Record<string, unknown>[] };
-  return (catalog.agents ?? [])
-    .filter((a) => a.kind === "specialist")
-    .map((a) => ({ id: String(a.id), title: String(a.title), focus: String(a.focus), domain: String(a.domain) }));
+export interface TeamDirectory {
+  /** Agentes ativos do time, na ordem de contratação. */
+  members(): Promise<CatalogAgent[]>;
 }
+
+/** Time fixo (testes e ferramentas). */
+export const staticTeam = (agents: readonly CatalogAgent[]): TeamDirectory => ({ members: async () => [...agents] });

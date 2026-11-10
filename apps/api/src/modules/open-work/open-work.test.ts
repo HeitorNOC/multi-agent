@@ -22,7 +22,7 @@ import { Bm25Index } from "../knowledge/infrastructure/bm25-index.ts";
 import { knowledgeStore } from "../knowledge/infrastructure/sql-knowledge.ts";
 import { OpenWorkGateway } from "./application/gateway.ts";
 import { openWorkPolicy } from "./application/open-policy.ts";
-import type { CatalogAgent } from "./domain/catalog.ts";
+import { staticTeam, type CatalogAgent } from "./domain/catalog.ts";
 
 const CATALOG: CatalogAgent[] = [
   { id: "procurement_analyst", title: "Analista de compras", focus: "compras fornecedores cotações", domain: "compras" },
@@ -63,21 +63,22 @@ afterEach(async () => {
 });
 
 describe("política do trabalho aberto", () => {
-  const policy = openWorkPolicy(CATALOG);
-  const c = (fn: () => unknown) => {
+  const policy = openWorkPolicy(staticTeam(CATALOG));
+  const c = async (fn: () => unknown) => {
     try {
-      fn();
+      await fn();
       return "ok";
     } catch (e) {
       return e instanceof AppError ? e.code : String(e);
     }
   };
-  test("pedido, plano e parecer seguem o contrato", () => {
-    assert.equal(c(() => policy.goal({ goal: "curto" })), "invalid_goal");
-    assert.equal(policy.goal({ goal: `  ${GOAL}  ` }), GOAL);
-    assert.equal(c(() => policy.plan({ agents: ["intruso"], reason: "motivo suficiente" }, null as never)), "agent_not_in_catalog");
-    assert.equal(c(() => policy.plan({ agents: [], reason: "motivo suficiente" }, null as never)), "invalid_plan");
-    const plan = policy.plan({ agents: ["procurement_analyst", "procurement_analyst"], reason: "motivo suficiente" }, null as never);
+  test("pedido, plano e parecer seguem o contrato", async () => {
+    assert.equal(await c(() => policy.goal({ goal: "curto" })), "invalid_goal");
+    assert.equal(await policy.goal({ goal: `  ${GOAL}  ` }), GOAL);
+    assert.equal(await c(() => openWorkPolicy(staticTeam([])).goal({ goal: GOAL })), "team_empty", "sem time, nenhum pedido entra");
+    assert.equal(await c(() => policy.plan({ agents: ["intruso"], reason: "motivo suficiente" }, null as never)), "agent_not_in_team");
+    assert.equal(await c(() => policy.plan({ agents: [], reason: "motivo suficiente" }, null as never)), "invalid_plan");
+    const plan = await policy.plan({ agents: ["procurement_analyst", "procurement_analyst"], reason: "motivo suficiente" }, null as never);
     assert.deepEqual([(plan as { agents: string[] }).agents, policy.modelCallLimit(plan)], [["procurement_analyst"], 3]);
     const report = {
       kind: "open",
@@ -87,10 +88,10 @@ describe("política do trabalho aberto", () => {
       citations: [{ label: "f-aaaaaaaa", source: "x", version: 1 }],
       findings: [{ claim: "c", agent: "procurement_analyst", citations: ["f-aaaaaaaa"] }],
     };
-    assert.equal(c(() => policy.review(null as never, report, { retrievedLabels: new Set() })), "unknown_citation");
+    assert.equal(await c(() => policy.review(null as never, report, { retrievedLabels: new Set() })), "unknown_citation");
     const ok = policy.review(null as never, report, { retrievedLabels: new Set(["f-aaaaaaaa"]) });
     assert.deepEqual(ok.payload, { operation: "deliver-open-report", recipient: "gestor", content: "r" });
-    assert.equal(c(() => policy.review(null as never, { ...report, findings: [] }, { retrievedLabels: new Set(["f-aaaaaaaa"]) })), "invalid_report");
+    assert.equal(await c(() => policy.review(null as never, { ...report, findings: [] }, { retrievedLabels: new Set(["f-aaaaaaaa"]) })), "invalid_report");
   });
 });
 
@@ -102,7 +103,7 @@ for (const dialect of dialects) {
       const clock = manualClock("2026-03-01T12:00:00.000Z");
       const jobs: JobsDeps = {
         uow: new UnitOfWork(d.db, jobsStore(clock)),
-        policy: openWorkPolicy(CATALOG),
+        policy: openWorkPolicy(staticTeam(CATALOG)),
         limits: queueLimits({ capacity: 4 }),
         clock,
         workers: { isActive: () => false, count: () => 0 },
@@ -111,7 +112,7 @@ for (const dialect of dialects) {
       const search = new KnowledgeSearch(kuow, clock, (p) => new Bm25Index(p));
       const knowledge = { uow: kuow, clock, search, answerer: new ExtractiveAnswerer(), maxBytes: 100_000 };
       const model = new FakeModel();
-      const gateway = new OpenWorkGateway({ jobs, search, client: model, limiter: new CallLimiter(1, 4), catalog: CATALOG, clock });
+      const gateway = new OpenWorkGateway({ jobs, search, client: model, limiter: new CallLimiter(1, 4), team: staticTeam(CATALOG), clock });
       const md = (title: string, text: string, readers?: string[]) =>
         uploadSource(knowledge, ActorId.parse("ana"), { title, filename: "f.md", mediaType: "text/markdown", contentBase64: Buffer.from(text).toString("base64"), readers });
       async function started() {

@@ -25,7 +25,7 @@ import { loadJob } from "../../jobs/application/load-job.ts";
 import { retrievedFragments } from "../../jobs/application/worker-reports.ts";
 import * as transitions from "../../jobs/domain/transitions.ts";
 import type { KnowledgeSearch } from "../../knowledge/application/knowledge-search.ts";
-import type { CatalogAgent } from "../domain/catalog.ts";
+import type { CatalogAgent, TeamDirectory } from "../domain/catalog.ts";
 import { planTask, specialistTask, synthesisTask, TaskOutputError, type Fragment, type SpecialistOutput, type TaskSpec } from "../domain/tasks.ts";
 
 export interface OpenWorkDeps {
@@ -34,7 +34,8 @@ export interface OpenWorkDeps {
   /** `null` quando a instalação não configurou modelo. */
   client: ModelClient | null;
   limiter: CallLimiter;
-  catalog: readonly CatalogAgent[];
+  /** O time da empresa: só esses agentes podem ser escalados. */
+  team: TeamDirectory;
   clock: Clock;
   timeoutMs?: number;
 }
@@ -54,18 +55,23 @@ interface OpenPlan {
 
 export class OpenWorkGateway {
   private readonly deps: OpenWorkDeps;
-  private readonly catalog: Map<string, CatalogAgent>;
 
   constructor(deps: OpenWorkDeps) {
     this.deps = deps;
-    this.catalog = new Map(deps.catalog.map((a) => [a.id, a]));
+  }
+
+  /** Um agente do plano que ainda está no time; quem saiu do time não trabalha mais. */
+  private async member(agentId: string): Promise<CatalogAgent> {
+    const agent = (await this.deps.team.members()).find((a) => a.id === agentId);
+    ensure(agent, () => conflict("agent_not_in_team", "Este especialista não está mais no time"));
+    return agent;
   }
 
   /** Trechos do Cérebro para um especialista do plano; o que foi entregue fica na trilha do trabalho. */
   async retrieve(jobId: JobId, agentId: string) {
     const { goal, plan } = await this.job(jobId);
     ensure(plan?.agents.includes(agentId), () => conflict("agent_not_in_plan", "Especialista fora do plano"));
-    const agent = this.catalog.get(agentId)!;
+    const agent = await this.member(agentId);
     const passages = await this.deps.search.forAgents(`${goal}\n${agent.focus}`, FRAGMENTS_PER_AGENT);
     const fragments = passages.map((p) => ({ ...p, label: labelOf(p.id) }));
     await this.deps.jobs.uow.run((s) =>
@@ -143,7 +149,11 @@ export class OpenWorkGateway {
 
   /** Monta a tarefa a partir do banco; o worker só indica o passo e, no especialista, os rótulos. */
   private async spec(jobId: JobId, { goal, plan }: { goal: string; plan: OpenPlan | null }, slot: string, input: { labels?: readonly string[] }): Promise<TaskSpec<unknown>> {
-    if (slot === "plan") return planTask(goal, [...this.catalog.values()]);
+    if (slot === "plan") {
+      const members = await this.deps.team.members();
+      ensure(members.length, () => conflict("team_empty", "Monte seu time em Agentes antes de pedir um trabalho"));
+      return planTask(goal, members);
+    }
     ensure(plan, () => conflict("plan_missing", "Plano ausente"));
     const now = this.deps.clock.now();
     if (slot === "synthesis") {
@@ -160,7 +170,7 @@ export class OpenWorkGateway {
     ensure(plan.agents.includes(agentId), () => conflict("agent_not_in_plan", "Especialista fora do plano"));
     const labels = input.labels ?? [];
     ensure(labels.length <= FRAGMENTS_PER_AGENT && labels.every((l) => LABEL.test(l)), () => invalid("invalid_labels", "Rótulos inválidos"));
-    return specialistTask(goal, this.catalog.get(agentId)!, await this.fragments(jobId, labels), now);
+    return specialistTask(goal, await this.member(agentId), await this.fragments(jobId, labels), now);
   }
 
   /** Resolve rótulos entregues a este trabalho; recusa rótulo estranho ou trecho que deixou de valer. */

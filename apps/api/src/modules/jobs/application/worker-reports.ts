@@ -23,7 +23,7 @@ export async function recordPlan(deps: JobsDeps, jobId: JobId, proposal: Json): 
   const job = await loadJob(deps.uow.read.jobs, jobId);
   let plan: Json;
   try {
-    plan = deps.policy.plan(proposal, job);
+    plan = await deps.policy.plan(proposal, job);
   } catch (error) {
     return recordRejection(deps.uow.read.events, jobId, "plan_rejected", error);
   }

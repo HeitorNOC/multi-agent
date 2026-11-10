@@ -16,9 +16,9 @@ export interface ReviewContext {
 export interface WorkPolicy {
   readonly id: string;
   /** Valida o pedido do gestor e devolve a meta do trabalho. Lança `invalid` se recusar. */
-  goal(request: Json): string;
+  goal(request: Json): string | Promise<string>;
   /** Valida a proposta de plano do worker e devolve o plano normalizado. */
-  plan(proposal: Json, job: Job): Json;
+  plan(proposal: Json, job: Job): Json | Promise<Json>;
   /** Valida o relatório do worker e devolve o relatório normalizado e o efeito proposto. */
   review(job: Job, report: Json, context: ReviewContext): { report: Json; payload: EffectPayload };
   /** Máximo de chamadas ao modelo permitido pelo plano. */
