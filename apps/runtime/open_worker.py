@@ -147,24 +147,41 @@ def build(api: Api, crash_after_effect: bool):
     return graph
 
 
+def paused_for_approval(state) -> bool:
+    return bool(state.next) and any(task.interrupts for task in state.tasks)
+
+
 async def main(config):
     api = Api(config)
     async with AsyncPostgresSaver.from_conn_string(config["dsn"]) as saver:
         await saver.setup()
         graph = build(api, bool(config.get("crash_after_effect"))).compile(checkpointer=saver)
         thread = {"configurable": {"thread_id": "open:" + config["job"]}}
+
+        async def run(value):
+            # Checkpoint gravado antes do próximo passo começar: uma queda no meio de um passo
+            # nunca deixa salvo um estado anterior ao passo que já terminou.
+            await graph.ainvoke(value, thread, durability="sync")
+
         state = await graph.aget_state(thread)
-        if state.next and any(task.interrupts for task in state.tasks):
+        if paused_for_approval(state):
             job = await api.call("snapshot")
             if not job.get("approved"):
                 print(json.dumps({"completed": False}), flush=True)
                 return
-            await graph.ainvoke(Command(resume=job["review"]["hash"]), thread)
+            await run(Command(resume=job["review"]["hash"]))
         elif state.next:
-            await graph.ainvoke(None, thread)  # retomada depois de uma queda
+            await run(None)  # retomada depois de uma queda
         elif not state.values:
-            await graph.ainvoke({}, thread)
+            await run({})
+        # Um checkpoint antigo (de antes desta correção, ou de uma queda) pode refazer a etapa de
+        # aprovação: se o parecer exato já foi aprovado, segue com ele em vez de pedir de novo.
         final = await graph.aget_state(thread)
+        if paused_for_approval(final):
+            job = await api.call("snapshot")
+            if job.get("approved") and job.get("review"):
+                await run(Command(resume=job["review"]["hash"]))
+                final = await graph.aget_state(thread)
         print(json.dumps({"completed": bool(final.values.get("receipt")), "next": list(final.next)}), flush=True)
 
 
