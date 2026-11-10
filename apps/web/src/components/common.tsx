@@ -1,10 +1,10 @@
 /** Peças pequenas usadas por todas as áreas: selo de estado, cabeçalho, vazio e erro. */
 import type { ReactNode } from "react";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, WifiOff } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ApiError } from "@/lib/api";
+import { ApiError, OFFLINE } from "@/lib/api";
 import type { Tone } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -46,6 +46,14 @@ export function EmptyState({ icon, title, children }: { icon?: ReactNode; title:
 export function ErrorNotice({ error, title = "Não foi possível concluir" }: { error: unknown; title?: string }) {
   if (!error) return null;
   const message = error instanceof ApiError || error instanceof Error ? error.message : "Erro inesperado";
+  if (error instanceof ApiError && error.code === OFFLINE)
+    return (
+      <Alert>
+        <WifiOff />
+        <AlertTitle>Sem conexão com o Aurora</AlertTitle>
+        <AlertDescription>{message}</AlertDescription>
+      </Alert>
+    );
   return (
     <Alert variant="destructive">
       <AlertCircle />

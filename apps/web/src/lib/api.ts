@@ -13,12 +13,24 @@ export class ApiError extends Error {
   }
 }
 
+/** Código da falha de conexão com a API (status 0). */
+export const OFFLINE = "offline";
+
+/** Vale tentar de novo: sem conexão ou falha do servidor; erros do pedido (4xx) não. */
+export const isRetryable = (error: unknown) => !(error instanceof ApiError) || error.status === 0 || error.status >= 500;
+
 async function request<T>(method: "GET" | "POST", path: string, body?: unknown, headers: Record<string, string> = {}): Promise<T> {
-  const response = await fetch(path, {
-    method,
-    headers: body === undefined ? headers : { "content-type": "application/json", ...headers },
-    body: body === undefined ? undefined : JSON.stringify(body),
-  });
+  let response: Response;
+  try {
+    response = await fetch(path, {
+      method,
+      headers: body === undefined ? headers : { "content-type": "application/json", ...headers },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+  } catch {
+    // A API não respondeu (parada, reiniciando ou rede fora): não é um erro do pedido.
+    throw new ApiError(0, OFFLINE, "A API não respondeu. Os dados mostrados são os últimos carregados; a tela tenta de novo sozinha.");
+  }
   const data = (await response.json().catch(() => ({}))) as { error?: string; code?: string };
   if (!response.ok) throw new ApiError(response.status, data.code ?? "unknown", data.error ?? `Falha (${response.status})`);
   return data as T;
