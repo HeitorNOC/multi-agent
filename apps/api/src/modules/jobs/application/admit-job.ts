@@ -8,7 +8,7 @@ import { JobId, type AdmissionKey } from "../../../shared/ids.ts";
 import type { Json } from "../../../shared/json.ts";
 import { stream } from "../../../platform/events/event-log.ts";
 import { newJob, type Job } from "../domain/job.ts";
-import type { JobsStore } from "../infrastructure/jobs-store.ts";
+import type { Transaction } from "../../../platform/database/unit-of-work.ts";
 import type { JobsDeps } from "./deps.ts";
 import { requireQueueSpace } from "./queue-limits.ts";
 
@@ -16,12 +16,12 @@ export interface AdmitJobInput {
   request: Json;
   key?: AdmissionKey;
   /** Executado na mesma transação da admissão (por exemplo, a resposta da conversa). */
-  onAdmitted?: (store: JobsStore, job: Job) => Promise<void>;
+  onAdmitted?: (job: Job, tx: Transaction) => Promise<void>;
 }
 
 export async function admitJob(deps: JobsDeps, input: AdmitJobInput): Promise<{ job: Job; replayed: boolean }> {
   const goal = deps.policy.goal(input.request);
-  return deps.uow.run(async (store) => {
+  return deps.uow.run(async (store, tx) => {
     if (input.key) {
       const prior = await store.admissions.get(input.key);
       if (prior) {
@@ -36,7 +36,7 @@ export async function admitJob(deps: JobsDeps, input: AdmitJobInput): Promise<{ 
     const entry = await store.queue.add({ jobId: job.id, kind: "new", crashAfterEffect: false, queuedAt: deps.clock.now() });
     await store.events.append(stream.job(job.id), { kind: "admission", detail: { goal } });
     await store.events.append(stream.job(job.id), { kind: "job_queued", detail: { position: entry.seq, kind: "new" } });
-    if (input.onAdmitted) await input.onAdmitted(store, job);
+    if (input.onAdmitted) await input.onAdmitted(job, tx);
     return { job, replayed: false };
   });
 }

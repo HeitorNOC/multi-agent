@@ -17,6 +17,11 @@ import { createHttpApp } from "./platform/http/app.ts";
 import { CallLimiter } from "./platform/model/call-limiter.ts";
 import type { ModelClient } from "./platform/model/model-client.ts";
 import { WorkerSupervisor } from "./platform/workers/supervisor.ts";
+import { conversationsHttp } from "./modules/conversations/http/routes.ts";
+import { jobOpener } from "./modules/conversations/application/job-opener.ts";
+import { ModelChiefOfStaff } from "./modules/conversations/application/model-chief-of-staff.ts";
+import { RuleBasedChiefOfStaff } from "./modules/conversations/domain/chief-of-staff.ts";
+import { conversationStore } from "./modules/conversations/infrastructure/sql-conversations.ts";
 import type { JobsDeps } from "./modules/jobs/application/deps.ts";
 import type { WorkPolicy } from "./modules/jobs/application/policy.ts";
 import { queueLimits } from "./modules/jobs/application/queue-limits.ts";
@@ -51,6 +56,8 @@ export interface RunningServer {
 }
 
 const LOCAL_OPERATOR = ActorId.parse("operador-local");
+/** No trabalho aberto, a conversa abre um único tipo de trabalho: o pedido é o texto do gestor. */
+const OPEN_WORK_OFFER = { id: "open", title: "Trabalho com os especialistas", keywords: [] };
 /** Corpo das rotas de envio do Cérebro: o arquivo em base64 (≈ 4/3 do tamanho) e os campos. */
 const uploadLimit = (maxBytes: number) => Math.ceil(maxBytes * 1.4) + 10_000;
 
@@ -103,6 +110,16 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
   // Trabalho aberto
   const gateway = new OpenWorkGateway({ jobs, search, client: parts.model, limiter, catalog: parts.catalog, clock, timeoutMs: config.model.timeoutMs });
 
+  // Conversa
+  const rules = new RuleBasedChiefOfStaff();
+  const conversations = {
+    uow: new UnitOfWork(db, conversationStore(clock)),
+    chief: config.chief.engine === "model" && parts.model ? new ModelChiefOfStaff({ client: parts.model, fallback: rules, limiter }) : rules,
+    offers: [OPEN_WORK_OFFER],
+    jobs: jobOpener(jobs),
+    clock,
+  };
+
   const app = await createHttpApp({
     origin: () => url,
     actor: () => LOCAL_OPERATOR,
@@ -110,6 +127,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       jobsHttp({ jobs, wake: () => void scheduler.wake(), workerAccess: supervisor }),
       knowledgeHttp(knowledge, { uploadLimit: uploadLimit(config.knowledge.maxBytes) }),
       openWorkHttp(gateway, supervisor),
+      conversationsHttp(conversations, { onJobOpened: () => void scheduler.wake() }),
     ],
   });
   await app.listen({ host: "127.0.0.1", port: config.port });

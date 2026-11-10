@@ -147,3 +147,17 @@ test("citação inventada pelo modelo é recusada: o trabalho falha sem parecer"
   assert.equal(failed.review, null);
   assert.ok(failed.events.some((e) => e.kind === "inference_failed" && e.detail.code === "unknown_citation"));
 });
+
+test("a conversa abre o trabalho aberto com o texto do gestor como pedido", { skip, timeout: 180_000 }, async () => {
+  const { call, upload } = await start();
+  await upload("Compras", POLICY);
+  const conversation = (await call("/api/conversations", {})).body.id;
+  const sent = await call(`/api/conversations/${conversation}/messages`, { text: `Faça uma análise: ${GOAL}` });
+  assert.equal(sent.status, 201);
+  assert.ok(sent.body.reply.job, "a resposta abriu um trabalho");
+  const ready = await until(call, sent.body.reply.job.id, "awaiting_approval");
+  assert.equal((ready as unknown as { goal: string }).goal, `Faça uma análise: ${GOAL}`);
+  const read = (await call(`/api/conversations/${conversation}`)).body;
+  assert.equal(read.messages[1].job.status, "awaiting_approval");
+  assert.deepEqual(read.messages[1].job.agents, CATALOG.map((a) => a.id));
+});

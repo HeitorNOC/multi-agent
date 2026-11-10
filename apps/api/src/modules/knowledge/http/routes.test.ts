@@ -49,7 +49,7 @@ test("enviar, perguntar e abrir o original pela citação", async () => {
   const answer = (await call({ method: "POST", url: "/api/knowledge/query", payload: { question: "prazo de reembolso de despesas de viagem" } })).json();
   assert.equal(answer.abstained, false);
   const original = await call({ method: "GET", url: answer.citations[0].url });
-  assert.deepEqual([original.statusCode, original.body, original.headers["content-type"]], [200, TEXT, "text/markdown"]);
+  assert.deepEqual([original.statusCode, original.body, original.headers["content-type"]], [200, TEXT, "text/plain; charset=utf-8"]);
   assert.equal((await call({ method: "GET", url: "/api/knowledge/sources" })).json().sources.length, 1);
 });
 

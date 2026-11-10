@@ -37,6 +37,8 @@ const schema = z
     AURORA_MODEL_TIMEOUT_MS: integer(1_000, 600_000, 180_000),
     /** Quem redige as respostas do Cérebro: trechos extraídos ou o modelo (com volta ao extrativo). */
     AURORA_KNOWLEDGE_ANSWERER: z.enum(["extractive", "model"]).default("extractive"),
+    /** Como o Chief of Staff decide na conversa: regras ou o modelo (com volta às regras). */
+    AURORA_CHIEF_ENGINE: z.enum(["rules", "model"]).default("rules"),
     AURORA_KNOWLEDGE_MAX_BYTES: integer(1, 50_000_000, 5_000_000),
     /** Catálogo de especialistas do trabalho aberto. */
     AURORA_CATALOG_PATH: z.string().min(1).optional(),
@@ -55,6 +57,7 @@ export interface Config {
   worker: { command: readonly string[] | undefined; cwd: string | undefined; checkpointDsn: string | undefined };
   model: { provider: "none" | "claude" | "codex"; name: string | undefined; timeoutMs: number };
   knowledge: { answerer: "extractive" | "model"; maxBytes: number };
+  chief: { engine: "rules" | "model" };
   catalogPath: string | undefined;
 }
 
@@ -78,6 +81,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     worker: { command: e.AURORA_WORKER_COMMAND, cwd: e.AURORA_WORKER_CWD, checkpointDsn: e.AURORA_CHECKPOINT_DSN },
     model: { provider: e.AURORA_MODEL_PROVIDER, name: e.AURORA_MODEL_NAME, timeoutMs: e.AURORA_MODEL_TIMEOUT_MS },
     knowledge: { answerer: e.AURORA_KNOWLEDGE_ANSWERER, maxBytes: e.AURORA_KNOWLEDGE_MAX_BYTES },
+    chief: { engine: e.AURORA_CHIEF_ENGINE },
     catalogPath: e.AURORA_CATALOG_PATH,
   };
 }
