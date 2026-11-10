@@ -74,4 +74,6 @@ export const EVENT_LABEL: Record<string, string> = {
   deliverable_revised: "Nova versão entregue",
   deliverable_accepted: "Entrega aceita",
   deliverable_changes_requested: "Ajustes pedidos",
+  routine_fired: "Rotina disparou",
+  routine_refused: "Rotina recusada",
 };

@@ -49,7 +49,7 @@ const GROUPS: { label: string; areas: Area[] }[] = [
       { to: "/conversa", label: "Conversa", icon: MessagesSquare },
       { to: "/trabalhos", label: "Trabalhos", icon: Briefcase, badge: "approvals" },
       { to: "/entregas", label: "Entregas", icon: PackageCheck, badge: "deliverables" },
-      { to: "/rotinas", label: "Rotinas", icon: CalendarClock, soon: true },
+      { to: "/rotinas", label: "Rotinas", icon: CalendarClock },
     ],
   },
   {

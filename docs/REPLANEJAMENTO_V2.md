@@ -138,6 +138,7 @@ Depois: identidade corporativa, provedor remoto (API), Loja e áreas de marketin
 - **F1 — concluída.** Interface com sidebar, tema e as áreas Command Center, Conversa, Trabalhos, Cérebro e Governança, servida pela API; conferida no navegador em desktop e celular.
 - **F2 — concluída.** Catálogo de 37 personas em 10 áreas, contratar, criar meu agente, orientações, organograma, empresa, assistente "Montar sua empresa" e Configurações. O Chief of Staff só escala o time contratado. Fica para depois: a "Estação" (conversa direta com um agente) e permissões por agente além das fontes abertas a todos.
 - **F3 — concluída.** O efeito aprovado gera a entrega na mesma transação do recibo (sem entrega, sem efeito). O gestor aceita a versão exata ou pede ajustes; o trabalho de revisão é admitido junto com a mudança da entrega e, aprovado, vira a próxima versão. Histórico por entrega e exportação em Markdown. Fica para depois: entregas de outros formatos (planilhas, documentos) e envio para destinos externos, que dependem das integrações (F5).
+- **F4 — concluída.** Rotinas diárias (com dias da semana) ou por intervalo, no fuso da instalação (`AURORA_TIMEZONE`, com horário de verão). Cada horário vira no máximo um trabalho: a execução é gravada na mesma transação da admissão, com chave única por rotina e horário; depois de uma parada só o horário vencido mais recente dispara. Recusas viram novas tentativas com espera crescente até desistir. Conferido com a API real: disparo pela agenda e reinício sem duplicar.
 
 ## 8. Decisões para você confirmar
 

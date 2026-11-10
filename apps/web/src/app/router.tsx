@@ -11,6 +11,7 @@ import { DeliverablePage } from "@/features/deliverables/deliverable-page";
 import { DeliverablesPage } from "@/features/deliverables/deliverables-page";
 import { KnowledgePage } from "@/features/knowledge/knowledge-page";
 import { OrganogramPage } from "@/features/organogram/organogram-page";
+import { RoutinesPage } from "@/features/routines/routines-page";
 import { SettingsPage } from "@/features/settings/settings-page";
 import { SetupPage } from "@/features/setup/setup-page";
 import { AppLayout } from "./layout";
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
       { path: "governanca", element: <GovernancePage /> },
       { path: "entregas", element: <DeliverablesPage /> },
       { path: "entregas/:id", element: <DeliverablePage /> },
+      { path: "rotinas", element: <RoutinesPage /> },
       { path: "agentes", element: <AgentsPage /> },
       { path: "organograma", element: <OrganogramPage /> },
       { path: "configuracoes", element: <SettingsPage /> },

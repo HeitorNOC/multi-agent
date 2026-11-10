@@ -347,3 +347,49 @@ export const deliverablesApi = {
     post<DeliverableDetail & { reopened_job: string }>(`/api/deliverables/${id}/request-changes`, { version, feedback }),
   markdownUrl: (id: string, version: number) => `/api/deliverables/${id}/versions/${version}/markdown`,
 };
+
+// ── Rotinas ──────────────────────────────────────────────────────────────────
+
+export type Schedule = { kind: "daily"; time: string; weekdays?: number[] } | { kind: "interval"; minutes: number };
+
+export interface RoutineRun {
+  slot: string;
+  trigger: "schedule" | "manual";
+  status: "admitted" | "retrying" | "gave_up";
+  job_id: string | null;
+  job_status: JobStatus | null;
+  attempts: number;
+  next_attempt_at: string | null;
+  last_error: string | null;
+  missed: number;
+  created_at: string;
+}
+
+export interface Routine {
+  id: string;
+  name: string;
+  goal: string;
+  schedule: Schedule;
+  schedule_label: string;
+  enabled: boolean;
+  next_run_at: string | null;
+  upcoming: string[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface RoutineInput {
+  name: string;
+  goal: string;
+  schedule: Schedule;
+  enabled?: boolean;
+}
+
+export const routinesApi = {
+  list: () => get<{ time_zone: string; routines: (Routine & { last_run: RoutineRun | null })[] }>("/api/routines"),
+  get: (id: string) => get<Routine & { time_zone: string; runs: RoutineRun[] }>(`/api/routines/${id}`),
+  create: (input: RoutineInput) => post<Routine>("/api/routines", input),
+  change: (id: string, input: Partial<RoutineInput>) => post<Routine>(`/api/routines/${id}`, input),
+  archive: (id: string) => post<{ archived: boolean }>(`/api/routines/${id}/archive`),
+  runNow: (id: string) => post<RoutineRun>(`/api/routines/${id}/run-now`),
+};
