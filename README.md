@@ -19,6 +19,10 @@ apps/api/        API (Node 24 + TypeScript, Fastify, Zod) — SQLite ou PostgreS
   src/platform/      banco, trilha de eventos, HTTP, modelo, workers
   src/modules/       jobs · knowledge · open-work · conversations · recovery
   src/tools/         migração de dados da v1
+apps/web/        interface (Vite + React + Tailwind + shadcn/ui), servida pela API
+  src/app/           layout com sidebar, rotas, tema
+  src/features/      uma pasta por área do menu
+  src/lib/           cliente da API e formatação
 apps/runtime/    worker Python (LangGraph com checkpoints em PostgreSQL)
 docs/            plano da v2
 legacy/          v1 congelada (bancada Aurora, investigação, evidências)
@@ -38,8 +42,16 @@ npm run setup:runtime
 ```
 
 ```bash
+npm run build
+```
+
+```bash
 npm start
 ```
+
+A interface fica em `http://localhost:<porta>` (a API imprime o endereço ao subir; fixe com
+`AURORA_PORT`). Para desenvolver a interface com recarga automática, suba a API com
+`AURORA_PORT=4100` e rode `npm run dev:web`.
 
 Sem nenhuma variável, a API usa SQLite em `apps/api/data/aurora.db`, deixa os trabalhos na fila
 (sem worker) e responde o Cérebro de forma extrativa (sem modelo). Para o fluxo completo:

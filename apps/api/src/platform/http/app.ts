@@ -52,17 +52,29 @@ export async function createHttpApp(options: HttpOptions): Promise<FastifyInstan
 
   app.addHook("onRequest", async (req, reply) => {
     reply.headers(SECURITY_HEADERS);
+    // A API escuta em loopback: aceita `127.0.0.1` e `localhost` na mesma porta, nada mais
+    // (protege contra DNS rebinding e contra outro site usando o navegador do gestor).
     const origin = new URL(options.origin());
-    if (req.headers.host !== origin.host) throw forbidden("invalid_host", "Host inválido");
-    if (req.method !== "GET" && req.headers.origin && req.headers.origin !== origin.origin)
+    const local = new URL(origin.href);
+    local.hostname = "localhost";
+    if (req.headers.host !== origin.host && req.headers.host !== local.host) throw forbidden("invalid_host", "Host inválido");
+    if (req.method !== "GET" && req.headers.origin && req.headers.origin !== origin.origin && req.headers.origin !== local.origin)
       throw forbidden("invalid_origin", "Origem inválida");
   });
 
   // Só JSON. Qualquer outro tipo de corpo é recusado pelo Fastify com 415.
   app.removeAllContentTypeParsers();
-  app.addContentTypeParser("application/json", { parseAs: "string" }, (_req, body, done) => {
+  // UTF-8 estrito: texto em outra codificação é recusado, em vez de gravado com caracteres trocados.
+  const utf8 = new TextDecoder("utf-8", { fatal: true });
+  app.addContentTypeParser("application/json", { parseAs: "buffer" }, (_req, body, done) => {
+    let text: string;
     try {
-      done(null, body === "" ? {} : JSON.parse(body as string));
+      text = utf8.decode(body as Buffer);
+    } catch {
+      return done(invalid("invalid_encoding", "O corpo do pedido precisa estar em UTF-8"), undefined);
+    }
+    try {
+      done(null, text === "" ? {} : JSON.parse(text));
     } catch {
       done(invalid("invalid_json", "JSON inválido"), undefined);
     }

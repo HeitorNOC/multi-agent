@@ -32,3 +32,6 @@ Thumbs.db
 # Saída de testes
 legacy/packages/aurora-api/test/.fake-cli-report.json
 legacy/packages/aurora-api/test/.open-calls-*.log
+
+# Configuração local do Claude Code
+.claude/launch.json

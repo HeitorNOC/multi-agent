@@ -14,6 +14,7 @@ import { PostgresDatabase } from "./platform/database/postgres.ts";
 import { SqliteDatabase } from "./platform/database/sqlite.ts";
 import { UnitOfWork } from "./platform/database/unit-of-work.ts";
 import { createHttpApp } from "./platform/http/app.ts";
+import { staticWeb } from "./platform/http/static-web.ts";
 import { CallLimiter } from "./platform/model/call-limiter.ts";
 import type { ModelClient } from "./platform/model/model-client.ts";
 import { WorkerSupervisor } from "./platform/workers/supervisor.ts";
@@ -130,6 +131,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       openWorkHttp(gateway, supervisor),
       conversationsHttp(conversations, { onJobOpened: () => void scheduler.wake() }),
       recoveryHttp(jobs, { wake: () => void scheduler.wake() }),
+      ...(config.webDir ? [staticWeb(config.webDir)] : []),
     ],
   });
   await app.listen({ host: "127.0.0.1", port: config.port });

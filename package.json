@@ -6,11 +6,13 @@
     "node": ">=24"
   },
   "scripts": {
-    "install:all": "npm --prefix apps/api ci",
+    "install:all": "npm --prefix apps/api ci && npm --prefix apps/web ci",
     "setup:runtime": "python -m venv apps/runtime/.venv && apps/runtime/.venv/Scripts/python -m pip install -r apps/runtime/requirements.txt",
+    "build": "npm --prefix apps/web run build",
     "start": "npm --prefix apps/api start",
-    "typecheck": "npm --prefix apps/api run typecheck",
+    "dev:web": "npm --prefix apps/web run dev",
+    "typecheck": "npm --prefix apps/api run typecheck && npm --prefix apps/web run typecheck",
     "test": "npm --prefix apps/api test",
-    "verify": "npm run typecheck && npm test"
+    "verify": "npm run typecheck && npm test && npm run build"
   }
 }

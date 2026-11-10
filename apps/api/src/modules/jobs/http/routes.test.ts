@@ -117,6 +117,7 @@ for (const dialect of dialects) {
         [{ method: "GET", url: "/api/nada" }, 404, "route_not_found"],
         [{ method: "POST", url: "/api/jobs", payload: "goal=x", headers: { "content-type": "text/plain" } }, 415, "json_required"],
         [{ method: "POST", url: "/api/jobs", payload: "{", headers: { "content-type": "application/json" } }, 400, "invalid_json"],
+        [{ method: "POST", url: "/api/jobs", payload: Buffer.from('{"goal":"Política"}', "latin1"), headers: { "content-type": "application/json" } }, 400, "invalid_encoding"],
         [{ method: "POST", url: "/api/jobs", payload: { goal: "x".repeat(30_000) } }, 413, "body_too_large"],
       ];
       for (const [opts, status, code] of cases) {
@@ -134,6 +135,10 @@ for (const dialect of dialects) {
       assert.deepEqual([badHost.statusCode, badHost.json().code], [403, "invalid_host"]);
       const badOrigin = await call({ method: "POST", url: "/api/jobs", payload: { goal: "pedido" }, headers: { origin: "http://evil.example" } });
       assert.deepEqual([badOrigin.statusCode, badOrigin.json().code], [403, "invalid_origin"]);
+      const local = await call({ method: "GET", url: "/api/jobs", headers: { host: "localhost:4100" } });
+      assert.equal(local.statusCode, 200, "localhost na mesma porta é a mesma máquina");
+      const otherPort = await call({ method: "GET", url: "/api/jobs", headers: { host: "localhost:9999" } });
+      assert.equal(otherPort.statusCode, 403);
       const ok = await call({ method: "POST", url: "/api/jobs", payload: { goal: "pedido" }, headers: { origin: ORIGIN } });
       assert.equal(ok.statusCode, 201);
       assert.equal(ok.headers["cache-control"], "no-store");

@@ -2,6 +2,7 @@
  * Configuração da API, lida uma vez do ambiente e validada. O resto do código recebe um
  * `Config` tipado e nunca lê `process.env`.
  */
+import { fileURLToPath } from "node:url";
 import { z } from "zod";
 
 const integer = (min: number, max: number, fallback: number) => z.coerce.number().int().min(min).max(max).default(fallback);
@@ -42,6 +43,8 @@ const schema = z
     /** Como o Chief of Staff decide na conversa: regras ou o modelo (com volta às regras). */
     AURORA_CHIEF_ENGINE: z.enum(["rules", "model"]).default("rules"),
     AURORA_KNOWLEDGE_MAX_BYTES: integer(1, 50_000_000, 5_000_000),
+    /** Pasta da interface construída; `none` desliga. Padrão: apps/web/dist. */
+    AURORA_WEB_DIR: z.string().min(1).optional(),
     /** Catálogo de especialistas do trabalho aberto. */
     AURORA_CATALOG_PATH: z.string().min(1).optional(),
   })
@@ -61,7 +64,10 @@ export interface Config {
   knowledge: { answerer: "extractive" | "model"; maxBytes: number };
   chief: { engine: "rules" | "model" };
   catalogPath: string | undefined;
+  webDir: string | undefined;
 }
+
+const DEFAULT_WEB_DIR = fileURLToPath(new URL("../../web/dist", import.meta.url));
 
 export class ConfigError extends Error {
   override name = "ConfigError";
@@ -85,5 +91,6 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     knowledge: { answerer: e.AURORA_KNOWLEDGE_ANSWERER, maxBytes: e.AURORA_KNOWLEDGE_MAX_BYTES },
     chief: { engine: e.AURORA_CHIEF_ENGINE },
     catalogPath: e.AURORA_CATALOG_PATH,
+    webDir: e.AURORA_WEB_DIR === "none" ? undefined : (e.AURORA_WEB_DIR ?? DEFAULT_WEB_DIR),
   };
 }
