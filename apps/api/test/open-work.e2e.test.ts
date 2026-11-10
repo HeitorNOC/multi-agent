@@ -161,3 +161,73 @@ test("a conversa abre o trabalho aberto com o texto do gestor como pedido", { sk
   assert.equal(read.messages[1].job.status, "awaiting_approval");
   assert.deepEqual(read.messages[1].job.agents, CATALOG.map((a) => a.id));
 });
+
+/** A API num processo próprio (`main.ts`), para poder derrubá-la de verdade. */
+async function spawnApi(env: Record<string, string>) {
+  const { spawn } = await import("node:child_process");
+  const child = spawn(process.execPath, [fileURLToPath(new URL("../src/main.ts", import.meta.url))], {
+    env: { ...process.env, ...env },
+    stdio: ["ignore", "pipe", "pipe"],
+    windowsHide: true,
+  });
+  child.stderr.resume();
+  const base = await new Promise<string>((resolve, reject) => {
+    let out = "";
+    child.stdout.on("data", (c) => {
+      out += c;
+      const m = out.match(/"url":"([^"]+)"/);
+      if (m) resolve(m[1]!);
+    });
+    child.on("exit", (code) => reject(new Error(`API saiu com ${code}`)));
+  });
+  const call = async (path: string, body?: object) => {
+    const res = await fetch(base + path, body ? { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) } : {});
+    return { status: res.status, body: await res.json() };
+  };
+  const exited = new Promise<void>((r) => child.on("exit", () => r()));
+  return { call, kill: async () => (child.kill("SIGKILL"), exited), stop: async () => (child.kill(), exited) };
+}
+
+test("API cai no meio de uma chamada ao modelo: não repete sozinha; a central autoriza e o trabalho segue", { skip, timeout: 300_000 }, async () => {
+  const catalogPath = join(dir, "catalog.json");
+  writeFileSync(catalogPath, JSON.stringify({ agents: CATALOG.map((a) => ({ ...a, kind: "specialist" })) }));
+  const calls = join(dir, "calls-crash.log");
+  writeFileSync(calls, "");
+  const modelCalls = () => readFileSync(calls, "utf8").split("\n").filter(Boolean);
+  const env = (mode: string) => ({
+    AURORA_SQLITE_PATH: join(dir, "aurora-crash.db"),
+    AURORA_WORKER_COMMAND: JSON.stringify([python, "-I", worker]),
+    AURORA_CHECKPOINT_DSN: checkpointDsn,
+    AURORA_CATALOG_PATH: catalogPath,
+    AURORA_MODEL_PROVIDER: "claude",
+    AURORA_MODEL_COMMAND: JSON.stringify([process.execPath, fakeModel, mode, calls]),
+  });
+
+  const first = await spawnApi(env(`hang-specialist:${AGENTS}`));
+  await first.call("/api/knowledge/sources", { title: "Compras", filename: "f.md", media_type: "text/markdown", content_base64: Buffer.from(POLICY).toString("base64") });
+  const id = (await first.call("/api/jobs", { goal: GOAL })).body.id;
+  for (let i = 0; i < 300 && !modelCalls().includes("specialist"); i++) await new Promise((r) => setTimeout(r, 200));
+  assert.ok(modelCalls().includes("specialist"), "chamada de especialista em andamento");
+  await first.kill();
+
+  const api = await spawnApi(env(`ok:${AGENTS}`));
+  try {
+    assert.equal((await api.call(`/api/jobs/${id}`)).body.status, "interrupted");
+    assert.equal((await api.call(`/api/jobs/${id}/resume`, {})).status, 202);
+    const blocked = await until(api.call, id, "recovery_required");
+    assert.ok(blocked.events.some((e) => e.kind === "inference_unknown"));
+    assert.deepEqual(modelCalls(), ["plan", "specialist"], "o plano veio do recibo; o especialista sem recibo não foi repetido");
+    assert.equal((await api.call(`/api/jobs/${id}/resume`, {})).body.code, "recovery_review_required");
+
+    const { cases } = (await api.call("/api/recovery/cases")).body;
+    const steps = cases.find((c: { job: { id: string } }) => c.job.id === id).pending_steps.map((s: { slot: string }) => s.slot);
+    assert.deepEqual(steps, [`specialist:${CATALOG[0]!.id}`]);
+    const retry = await api.call(`/api/recovery/jobs/${id}/retry`, { reason: "Conferi no provedor que a chamada não foi concluída.", steps });
+    assert.equal(retry.status, 202);
+    const ready = await until(api.call, id, "awaiting_approval");
+    assert.ok(ready.events.some((e) => e.kind === "recovery_retry_authorized"));
+    assert.deepEqual(modelCalls().slice(2).sort(), ["specialist", "specialist", "synthesis"], "só o passo autorizado e os seguintes foram chamados");
+  } finally {
+    await api.stop();
+  }
+});

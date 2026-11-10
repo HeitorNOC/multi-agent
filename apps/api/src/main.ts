@@ -15,8 +15,9 @@ import { startServer } from "./server.ts";
 const DEFAULT_CATALOG = fileURLToPath(new URL("../../../demo-enterprise/catalog.json", import.meta.url));
 
 function modelClient(model: Config["model"]): ModelClient | null {
-  if (model.provider === "claude") return new ClaudeCliClient({ model: model.name });
-  if (model.provider === "codex") return new CodexCliClient({ model: model.name });
+  const options = { model: model.name, command: model.command };
+  if (model.provider === "claude") return new ClaudeCliClient(options);
+  if (model.provider === "codex") return new CodexCliClient(options);
   return null;
 }
 

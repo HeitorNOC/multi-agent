@@ -8,7 +8,8 @@ import type { Job, JobStatus, Review } from "./job.ts";
 
 /** De onde cada estado pode ser alcançado. Qualquer outra mudança é recusada. */
 const ALLOWED_FROM: Record<JobStatus, readonly JobStatus[]> = {
-  queued: ["awaiting_approval", "interrupted", "failed"],
+  // Da revisão humana (`recovery_required`), só depois que alguém autoriza repetir o que ficou sem recibo.
+  queued: ["awaiting_approval", "interrupted", "failed", "recovery_required"],
   running: ["queued"],
   awaiting_approval: ["running"],
   completed: ["running"],

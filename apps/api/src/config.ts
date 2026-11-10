@@ -6,6 +6,16 @@ import { z } from "zod";
 
 const integer = (min: number, max: number, fallback: number) => z.coerce.number().int().min(min).max(max).default(fallback);
 
+/** Comando como lista JSON: `["python", "runtime/worker.py"]`. */
+const jsonCommand = z.string().transform((text, ctx) => {
+  try {
+    return z.array(z.string().min(1)).min(1).parse(JSON.parse(text));
+  } catch {
+    ctx.addIssue({ code: "custom", message: "deve ser uma lista JSON de textos" });
+    return z.NEVER;
+  }
+});
+
 const schema = z
   .object({
     AURORA_PORT: integer(0, 65_535, 0),
@@ -17,23 +27,15 @@ const schema = z
     AURORA_RESUME_RESERVE: integer(0, 999, 2),
     AURORA_MAX_WORKERS: integer(1, 8, 1),
     /** Comando do worker como lista JSON: `["python", "runtime/worker.py"]`. */
-    AURORA_WORKER_COMMAND: z
-      .string()
-      .transform((text, ctx) => {
-        try {
-          return z.array(z.string().min(1)).min(1).parse(JSON.parse(text));
-        } catch {
-          ctx.addIssue({ code: "custom", message: "deve ser uma lista JSON de textos" });
-          return z.NEVER;
-        }
-      })
-      .optional(),
+    AURORA_WORKER_COMMAND: jsonCommand.optional(),
     AURORA_WORKER_CWD: z.string().optional(),
     /** Conexão PostgreSQL dos checkpoints do LangGraph, entregue ao worker. */
     AURORA_CHECKPOINT_DSN: z.string().startsWith("postgres").optional(),
     /** CLI oficial já autenticada no computador da empresa; `none` desliga o modelo. */
     AURORA_MODEL_PROVIDER: z.enum(["none", "claude", "codex"]).default("none"),
     AURORA_MODEL_NAME: z.string().min(1).max(100).optional(),
+    /** Troca o executável da CLI (lista JSON). Configuração local confiável; usada em testes. */
+    AURORA_MODEL_COMMAND: jsonCommand.optional(),
     AURORA_MODEL_TIMEOUT_MS: integer(1_000, 600_000, 180_000),
     /** Quem redige as respostas do Cérebro: trechos extraídos ou o modelo (com volta ao extrativo). */
     AURORA_KNOWLEDGE_ANSWERER: z.enum(["extractive", "model"]).default("extractive"),
@@ -55,7 +57,7 @@ export interface Config {
   database: DatabaseConfig;
   queue: { capacity: number; resumeReserve: number; maxWorkers: number };
   worker: { command: readonly string[] | undefined; cwd: string | undefined; checkpointDsn: string | undefined };
-  model: { provider: "none" | "claude" | "codex"; name: string | undefined; timeoutMs: number };
+  model: { provider: "none" | "claude" | "codex"; name: string | undefined; command: string[] | undefined; timeoutMs: number };
   knowledge: { answerer: "extractive" | "model"; maxBytes: number };
   chief: { engine: "rules" | "model" };
   catalogPath: string | undefined;
@@ -79,7 +81,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       : { dialect: "sqlite", path: e.AURORA_SQLITE_PATH },
     queue: { capacity: e.AURORA_QUEUE_CAPACITY, resumeReserve: e.AURORA_RESUME_RESERVE, maxWorkers: e.AURORA_MAX_WORKERS },
     worker: { command: e.AURORA_WORKER_COMMAND, cwd: e.AURORA_WORKER_CWD, checkpointDsn: e.AURORA_CHECKPOINT_DSN },
-    model: { provider: e.AURORA_MODEL_PROVIDER, name: e.AURORA_MODEL_NAME, timeoutMs: e.AURORA_MODEL_TIMEOUT_MS },
+    model: { provider: e.AURORA_MODEL_PROVIDER, name: e.AURORA_MODEL_NAME, command: e.AURORA_MODEL_COMMAND, timeoutMs: e.AURORA_MODEL_TIMEOUT_MS },
     knowledge: { answerer: e.AURORA_KNOWLEDGE_ANSWERER, maxBytes: e.AURORA_KNOWLEDGE_MAX_BYTES },
     chief: { engine: e.AURORA_CHIEF_ENGINE },
     catalogPath: e.AURORA_CATALOG_PATH,

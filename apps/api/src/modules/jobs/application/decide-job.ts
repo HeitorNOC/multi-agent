@@ -56,6 +56,8 @@ export async function resumeJob(deps: JobsDeps, input: { jobId: JobId; actor: Ac
   return deps.uow.run(async (store) => {
     const job = await loadJob(store.jobs, input.jobId);
     if (job.status === "queued") return { job, replayed: true };
+    // Resultado desconhecido só volta à fila pela central de recuperação, com justificativa.
+    ensure(job.status !== "recovery_required", () => conflict("recovery_review_required", "Este trabalho precisa de revisão na central de recuperação"));
     await store.events.append(stream.job(job.id), { kind: "resume_requested", detail: { actor: input.actor, from: job.status } });
     return { job: await enqueueResume(deps, store, job), replayed: false };
   });

@@ -35,6 +35,7 @@ import type { KnowledgeDeps } from "./modules/knowledge/application/sources.ts";
 import { knowledgeHttp } from "./modules/knowledge/http/routes.ts";
 import { Bm25Index } from "./modules/knowledge/infrastructure/bm25-index.ts";
 import { knowledgeStore } from "./modules/knowledge/infrastructure/sql-knowledge.ts";
+import { recoveryHttp } from "./modules/recovery/http/routes.ts";
 import { OpenWorkGateway } from "./modules/open-work/application/gateway.ts";
 import { openWorkPolicy } from "./modules/open-work/application/open-policy.ts";
 import type { CatalogAgent } from "./modules/open-work/domain/catalog.ts";
@@ -128,6 +129,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       knowledgeHttp(knowledge, { uploadLimit: uploadLimit(config.knowledge.maxBytes) }),
       openWorkHttp(gateway, supervisor),
       conversationsHttp(conversations, { onJobOpened: () => void scheduler.wake() }),
+      recoveryHttp(jobs, { wake: () => void scheduler.wake() }),
     ],
   });
   await app.listen({ host: "127.0.0.1", port: config.port });
