@@ -32,7 +32,6 @@ const MAX_TITLE = 200;
 const MAX_QUESTION = 1000;
 const MAX_READERS = 200;
 const PASSAGES = 5;
-const INDEX_TTL_MS = 60_000;
 const BASE64 = /^[A-Za-z0-9+/]*={0,2}$/;
 
 function requireThat(ok: unknown, status: number, message: string): asserts ok {
@@ -47,6 +46,9 @@ function onlyFields(body: unknown, allowed: string[]): asserts body is Record<st
 }
 const canRead = (s: { owner: string; readers: string[] }, actor: string) =>
   s.owner === actor || s.readers.includes("*") || s.readers.includes(actor);
+
+/** O que o índice sabe de cada trecho, inclusive quem pode lê-lo. */
+type IndexedMeta = Omit<Passage, "n" | "matched" | "score"> & { readers: string[]; owner: string };
 
 interface Current extends IndexableKnowledge {
   supersededBy: string | null;
@@ -71,8 +73,12 @@ export class KnowledgeService {
   private readonly now: () => string;
   private readonly maxBytes: number;
   private readonly buildIndex: (passages: { id: string; text: string }[]) => KnowledgeIndex;
+  /** Muda a cada envio, versão ou revogação feitos por este serviço. */
   private generation = 0;
-  private cache: { key: string; built: number; index: KnowledgeIndex; passages: Map<string, Omit<Passage, "n" | "matched" | "score"> & { readers: string[]; owner: string }> } | null = null;
+  /** Versões lidas do ledger na geração atual (só relidas quando algo muda). */
+  private items: { generation: number; list: IndexableKnowledge[] } | null = null;
+  /** Índice das versões vigentes; a chave é o próprio conjunto vigente, que depende da data. */
+  private cache: { key: string; index: KnowledgeIndex; passages: Map<string, IndexedMeta> } | null = null;
 
   constructor(deps: KnowledgeDeps) {
     this.ledger = deps.ledger;
@@ -242,12 +248,18 @@ export class KnowledgeService {
     };
   }
 
-  /** Índice dos trechos vigentes; reconstruído quando algo muda ou a cada minuto (vigência por data). */
+  /**
+   * Índice dos trechos vigentes. A chave é o conjunto `fonte@versão` vigente no instante da
+   * consulta: uma versão com vigência futura entra exatamente na data, sem depender de expiração
+   * por tempo, e nada é reconstruído enquanto o conjunto não muda.
+   */
   private async index() {
-    const key = String(this.generation);
-    if (this.cache && this.cache.key === key && Date.now() - this.cache.built < INDEX_TTL_MS) return this.cache;
-    const current = currentKnowledge(await this.ledger.listIndexableKnowledge(), this.now()).filter((c) => !c.supersededBy);
-    const passages = new Map<string, Omit<Passage, "n" | "matched" | "score"> & { readers: string[]; owner: string }>();
+    if (!this.items || this.items.generation !== this.generation)
+      this.items = { generation: this.generation, list: await this.ledger.listIndexableKnowledge() };
+    const current = currentKnowledge(this.items.list, this.now()).filter((c) => !c.supersededBy);
+    const key = current.map((c) => `${c.source}@${c.version}:${c.readers.join(",")}`).sort().join("|");
+    if (this.cache && this.cache.key === key) return this.cache;
+    const passages = new Map<string, IndexedMeta>();
     for (const item of current)
       for (const piece of chunk(item.text)) {
         const id = `${item.source}@${item.version}#${piece.ordinal}`;
@@ -263,7 +275,7 @@ export class KnowledgeService {
         });
       }
     const index = this.buildIndex([...passages.values()].map((p) => ({ id: p.id, text: `${p.title}\n${p.text}` })));
-    this.cache = { key, built: Date.now(), index, passages };
+    this.cache = { key, index, passages };
     return this.cache;
   }
 
