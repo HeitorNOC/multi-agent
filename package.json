@@ -1,19 +1,16 @@
 {
-  "name": "multi-agent-platform",
+  "name": "aurora",
   "private": true,
-  "description": "Plataforma empresarial multiagente (Aurora). Atalhos para verificar os subprojetos.",
+  "description": "Plataforma empresarial multiagente: Chief of Staff, especialistas, Cérebro e aprovação humana.",
   "engines": {
     "node": ">=24"
   },
   "scripts": {
-    "install:all": "npm --prefix apps/aurora ci && npm --prefix apps/omnichannel ci && npm --prefix packages/aurora-api ci",
-    "typecheck": "npm run typecheck:aurora && npm run typecheck:omnichannel",
-    "typecheck:aurora": "npm --prefix apps/aurora run typecheck",
-    "typecheck:omnichannel": "npm --prefix apps/omnichannel run typecheck",
-    "test:omnichannel": "npm --prefix apps/omnichannel test",
-    "check:python": "python -m compileall -q apps/aurora/runtime apps/aurora/ops",
-    "test:api": "node --test --test-concurrency=1 \"packages/aurora-api/**/*.test.ts\"",
-    "test:python": "python -m unittest apps.aurora.tests.test_model_provider",
-    "verify": "npm run typecheck && npm run check:python && npm run test:python"
+    "install:all": "npm --prefix apps/api ci",
+    "setup:runtime": "python -m venv apps/runtime/.venv && apps/runtime/.venv/Scripts/python -m pip install -r apps/runtime/requirements.txt",
+    "start": "npm --prefix apps/api start",
+    "typecheck": "npm --prefix apps/api run typecheck",
+    "test": "npm --prefix apps/api test",
+    "verify": "npm run typecheck && npm test"
   }
 }

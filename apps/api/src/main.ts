@@ -12,7 +12,8 @@ import type { ModelClient } from "./platform/model/model-client.ts";
 import { loadSpecialists } from "./modules/open-work/domain/catalog.ts";
 import { startServer } from "./server.ts";
 
-const DEFAULT_CATALOG = fileURLToPath(new URL("../../../demo-enterprise/catalog.json", import.meta.url));
+/** Especialistas padrão do trabalho aberto (o módulo de agentes passa a fornecê-los na F2). */
+const DEFAULT_CATALOG = fileURLToPath(new URL("../data/specialists.json", import.meta.url));
 
 function modelClient(model: Config["model"]): ModelClient | null {
   const options = { model: model.name, command: model.command };

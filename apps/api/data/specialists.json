@@ -1,0 +1,263 @@
+{
+  "agents": [
+    {
+      "id": "project_manager",
+      "kind": "specialist",
+      "title": "Especialista em gestão de projetos",
+      "focus": "Planejamento de entregas, dependências entre equipes e acompanhamento de riscos e marcos",
+      "domain": "executive"
+    },
+    {
+      "id": "business_analyst",
+      "kind": "specialist",
+      "title": "Analista de negócios",
+      "focus": "Dependências e prioridades entre unidades",
+      "domain": "executive"
+    },
+    {
+      "id": "portfolio_analyst",
+      "kind": "specialist",
+      "title": "Analista de portfólio",
+      "focus": "Priorização de investimentos e iniciativas",
+      "domain": "executive"
+    },
+    {
+      "id": "content_specialist",
+      "kind": "specialist",
+      "title": "Especialista em conteúdo",
+      "focus": "Mensagens de marca, conteúdo de campanha, proposta de valor e consistência editorial",
+      "domain": "marketing"
+    },
+    {
+      "id": "campaign_planner",
+      "kind": "specialist",
+      "title": "Planejador de campanhas",
+      "focus": "Escopo, público, demanda incremental e limites de campanha",
+      "domain": "marketing"
+    },
+    {
+      "id": "pricing_analyst",
+      "kind": "specialist",
+      "title": "Analista de preço comercial",
+      "focus": "Mecânica promocional e consistência comercial de preços",
+      "domain": "marketing"
+    },
+    {
+      "id": "procurement_analyst",
+      "kind": "specialist",
+      "title": "Analista de compras",
+      "focus": "Cotação e avaliação de fornecedores, condições de compra e compromissos de suprimento",
+      "domain": "operations"
+    },
+    {
+      "id": "process_quality_analyst",
+      "kind": "specialist",
+      "title": "Analista de processos e qualidade",
+      "focus": "Mapeamento de processos operacionais, indicadores de serviço, causas de falhas e melhoria contínua",
+      "domain": "operations"
+    },
+    {
+      "id": "supply_planner",
+      "kind": "specialist",
+      "title": "Planejadora de suprimentos",
+      "focus": "Estoque livre, reservas, demanda conjunta e lote não confirmado",
+      "domain": "operations"
+    },
+    {
+      "id": "logistics_analyst",
+      "kind": "specialist",
+      "title": "Analista de logística",
+      "focus": "Capacidade diária e prazos regionais",
+      "domain": "operations"
+    },
+    {
+      "id": "financial_planning_analyst",
+      "kind": "specialist",
+      "title": "Analista de planejamento financeiro",
+      "focus": "Orçamento, projeções, comparação de cenários, viabilidade e desvios financeiros",
+      "domain": "finance"
+    },
+    {
+      "id": "accounting_analyst",
+      "kind": "specialist",
+      "title": "Analista contábil",
+      "focus": "Conciliação de registros, critérios de reconhecimento e evidências de fechamento contábil",
+      "domain": "finance"
+    },
+    {
+      "id": "controller",
+      "kind": "specialist",
+      "title": "Controladoria",
+      "focus": "Margem sobre preço, desconto, caixa livre e insuficiência de orçamento",
+      "domain": "finance"
+    },
+    {
+      "id": "treasury_analyst",
+      "kind": "specialist",
+      "title": "Analista de tesouraria",
+      "focus": "Liquidez, compromissos e necessidade de financiamento",
+      "domain": "finance"
+    },
+    {
+      "id": "people_development_specialist",
+      "kind": "specialist",
+      "title": "Especialista em desenvolvimento de pessoas",
+      "focus": "Onboarding, trilhas de aprendizagem e desenvolvimento de competências",
+      "domain": "people"
+    },
+    {
+      "id": "recruitment_analyst",
+      "kind": "specialist",
+      "title": "Analista de recrutamento",
+      "focus": "Planejamento de admissões quando houver demanda demonstrada",
+      "domain": "people"
+    },
+    {
+      "id": "workforce_analyst",
+      "kind": "specialist",
+      "title": "Analista de capacidade humana",
+      "focus": "Disponibilidade de equipes e treinamento",
+      "domain": "people"
+    },
+    {
+      "id": "privacy_specialist",
+      "kind": "specialist",
+      "title": "Especialista em privacidade",
+      "focus": "Tratamento de dados pessoais, retenção, direitos dos titulares e avaliação de impacto à privacidade",
+      "domain": "legal"
+    },
+    {
+      "id": "risk_controls_analyst",
+      "kind": "specialist",
+      "title": "Analista de riscos e controles",
+      "focus": "Mapa de riscos, controles internos, evidências de auditoria e acompanhamento de remediações",
+      "domain": "legal"
+    },
+    {
+      "id": "compliance_advisor",
+      "kind": "specialist",
+      "title": "Assessora de conformidade",
+      "focus": "Alegações da campanha e governança de resposta a incidente",
+      "domain": "legal"
+    },
+    {
+      "id": "contract_analyst",
+      "kind": "specialist",
+      "title": "Analista de contratos",
+      "focus": "Diferença entre contratos firmes, negociação e obrigações",
+      "domain": "legal"
+    },
+    {
+      "id": "tech_lead",
+      "kind": "specialist",
+      "title": "Tech Lead",
+      "focus": "Arquitetura de software, decisões técnicas, divisão da implementação e revisão de código",
+      "domain": "technology"
+    },
+    {
+      "id": "backend_engineer",
+      "kind": "specialist",
+      "title": "Engenheiro de software backend",
+      "focus": "Implementação de APIs, integrações, persistência, mensageria e idempotência",
+      "domain": "technology"
+    },
+    {
+      "id": "frontend_engineer",
+      "kind": "specialist",
+      "title": "Engenheira de software frontend",
+      "focus": "Implementação de interfaces web, estados de UI, acessibilidade e integração com APIs",
+      "domain": "technology"
+    },
+    {
+      "id": "qa_engineer",
+      "kind": "specialist",
+      "title": "Especialista em qualidade de software (QA)",
+      "focus": "Estratégia de testes, critérios de aceitação, regressões, cenários de falha e evidências de verificação",
+      "domain": "technology"
+    },
+    {
+      "id": "platform_engineer",
+      "kind": "specialist",
+      "title": "Engenheiro de plataforma e confiabilidade",
+      "focus": "Ambientes, pipelines de entrega, observabilidade, capacidade e recuperação de serviços",
+      "domain": "technology"
+    },
+    {
+      "id": "data_engineer",
+      "kind": "specialist",
+      "title": "Engenheira de dados",
+      "focus": "Ingestão, modelagem, linhagem e confiabilidade de pipelines de dados",
+      "domain": "technology"
+    },
+    {
+      "id": "security_analyst",
+      "kind": "specialist",
+      "title": "Analista de segurança",
+      "focus": "Incidente, evidências ausentes e tempo do SLA interno",
+      "domain": "technology"
+    },
+    {
+      "id": "data_analyst",
+      "kind": "specialist",
+      "title": "Analista de dados",
+      "focus": "Consistência de contagens e integração dos sistemas",
+      "domain": "technology"
+    },
+    {
+      "id": "product_manager",
+      "kind": "specialist",
+      "title": "Gerente de produto",
+      "focus": "Requisitos, resultados esperados, priorização do backlog e escopo de MVP",
+      "domain": "product"
+    },
+    {
+      "id": "ux_designer",
+      "kind": "specialist",
+      "title": "Designer de experiência",
+      "focus": "Pesquisa de necessidades, jornadas, protótipos e usabilidade",
+      "domain": "product"
+    },
+    {
+      "id": "service_designer",
+      "kind": "specialist",
+      "title": "Especialista em desenho de serviços",
+      "focus": "Desenho de processos e pontos de contato que conectam a experiência do cliente à operação",
+      "domain": "product"
+    },
+    {
+      "id": "sales_operations_analyst",
+      "kind": "specialist",
+      "title": "Analista de operações comerciais",
+      "focus": "Pipeline de vendas, previsões, conversão e qualidade de dados do CRM comercial",
+      "domain": "sales"
+    },
+    {
+      "id": "account_specialist",
+      "kind": "specialist",
+      "title": "Especialista em contas e propostas",
+      "focus": "Qualificação de oportunidades, propostas comerciais e compromissos com contas",
+      "domain": "sales"
+    },
+    {
+      "id": "support_specialist",
+      "kind": "specialist",
+      "title": "Especialista em atendimento",
+      "focus": "Triagem de solicitações, diagnóstico inicial, escalonamento e níveis de serviço ao cliente",
+      "domain": "customer"
+    },
+    {
+      "id": "customer_success_specialist",
+      "kind": "specialist",
+      "title": "Especialista em sucesso do cliente",
+      "focus": "Adoção, acompanhamento de contas, retenção e planos para reduzir risco de saída",
+      "domain": "customer"
+    },
+    {
+      "id": "customer_experience_analyst",
+      "kind": "specialist",
+      "title": "Analista de experiência do cliente",
+      "focus": "Análise de satisfação e causas recorrentes de reclamações e atrito",
+      "domain": "customer"
+    }
+  ]
+}

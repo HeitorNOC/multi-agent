@@ -15,6 +15,7 @@ __pycache__/
 
 # Build
 apps/*/dist/
+legacy/apps/*/dist/
 
 # Segredos
 .env
@@ -29,5 +30,5 @@ Thumbs.db
 .vscode/
 
 # Saída de testes
-packages/aurora-api/test/.fake-cli-report.json
-packages/aurora-api/test/.open-calls-*.log
+legacy/packages/aurora-api/test/.fake-cli-report.json
+legacy/packages/aurora-api/test/.open-calls-*.log
