@@ -11,7 +11,7 @@ Decisões vigentes: provedor local via CLI oficial (Codex ou Claude Code) autent
 | E0 | Fundação: repositório, CI, contrato de provedor | **Feito** neste ciclo (parcial: falta migrar o ledger, ver E1) | — |
 | E1 | Ledger em PostgreSQL (P13) | **Feito** para o ledger da jornada (ver [E1_LEDGER_POSTGRES](E1_LEDGER_POSTGRES.md)); `aurora-business` congelado ([decisão](E1_AURORA_BUSINESS.md)) | E0 |
 | E2 | Conversa com o Chief of Staff | **Feito** (versão por regras; ver abaixo) | E1 |
-| E3 | Cérebro: upload, consulta com citação | Motor e grafo prontos; falta UI de ingestão | E1 |
+| E3 | Cérebro: upload, consulta com citação | **Feito** com busca lexical ([E3_CEREBRO](E3_CEREBRO.md)); busca semântica pendente | E1 |
 | E4 | Agentes: ativar do catálogo e criar o seu | Catálogo de 21 agentes | E1 |
 | E5 | Entregas: artefato, revisão, aceite | Relatório de decisão e aprovação exata | E2, E4 |
 | E6 | Rotinas agendadas | **Ausente** | E4, E5 |

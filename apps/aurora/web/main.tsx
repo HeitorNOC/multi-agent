@@ -11,6 +11,7 @@ import { PilotEvidence, PilotSignIn, type PilotReport } from "./PilotPanel.tsx";
 import { DecisionReport, type Report } from "./DecisionReport.tsx";
 import RecoveryCenter from "./RecoveryCenter.tsx";
 import { ConversationPanel } from "./ConversationPanel.tsx";
+import { KnowledgePanel } from "./KnowledgePanel.tsx";
 import { statusText } from "./job-status.ts";
 import "./recovery.css";
 async function request(path: string, body?: unknown, key?: string) {
@@ -352,6 +353,7 @@ function App() {
             onOpenJob={(id) => openWork(id, "job")}
           />
         )}
+        {runtime && <KnowledgePanel readOnly={!operator} />}
         {operator && <RecoveryCenter />}
         {error && (
           <div role="alert" className="error">

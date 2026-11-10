@@ -58,10 +58,12 @@ export class ExtractiveAnswerer implements KnowledgeAnswerer {
 
   /** As frases do trecho com mais termos da pergunta, na ordem em que aparecem. */
   private bestSentences(p: Passage): string {
+    // Quebras de linha também encerram frases (títulos e itens de lista são unidades próprias);
+    // marcas de Markdown no início da linha não são conteúdo.
     const sentences = p.text
-      .replace(/\s+/g, " ")
-      .split(/(?<=[.!?;:])\s+/)
-      .filter((s) => s.trim());
+      .split(/\n+|(?<=[.!?;:])[ \t]+/)
+      .map((s) => s.replace(/^\s*(#{1,6}|[-*+]|\d+[.)])\s+/, "").replace(/\s+/g, " ").trim())
+      .filter(Boolean);
     const scored = sentences.map((s, i) => ({
       s,
       i,

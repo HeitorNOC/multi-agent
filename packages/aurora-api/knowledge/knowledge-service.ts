@@ -32,6 +32,8 @@ const MAX_TITLE = 200;
 const MAX_QUESTION = 1000;
 const MAX_READERS = 200;
 const PASSAGES = 5;
+/** Fração mínima da pontuação do melhor trecho para um trecho secundário ser citado. */
+const RELATIVE_SCORE = 0.5;
 const BASE64 = /^[A-Za-z0-9+/]*={0,2}$/;
 
 function requireThat(ok: unknown, status: number, message: string): asserts ok {
@@ -206,6 +208,9 @@ export class KnowledgeService {
         },
       })
       .filter((h) => h.matched.length >= needed)
+      // Trechos secundários só entram se forem comparáveis ao melhor; termos genéricos em comum
+      // ("acima", "reais") não bastam para virar citação.
+      .filter((h, _, all) => h.score >= all[0].score * RELATIVE_SCORE)
       .slice(0, PASSAGES);
 
     const found: Passage[] = hits.map((h, i) => {

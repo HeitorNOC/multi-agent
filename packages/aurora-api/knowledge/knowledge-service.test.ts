@@ -114,8 +114,17 @@ describe("serviço do Cérebro", () => {
     assert.equal(r.citations[0].source, remote.id);
     assert.equal(r.citations[0].version, 1);
     assert.match(r.answer, /três dias por semana.*\[1\]/s);
+    assert.doesNotMatch(r.answer, /#/, "marcas de título do Markdown não aparecem na resposta");
     assert.equal(r.citations[0].url, `/api/knowledge/sources/${remote.id}/versions/1/original`);
     assert.deepEqual(r.decision, { engine: "extractive" });
+  });
+
+  test("trecho que só compartilha termos genéricos com a pergunta não vira citação", async () => {
+    const { service } = setup();
+    const purchases = await service.upload("ana", upload("Compras", PURCHASE));
+    await service.upload("ana", upload("Hospedagem", "# Hospedagem\n\nHospedagem acima de 400 reais por noite exige aprovação prévia."));
+    const r = await service.query("ana", { question: "Quem aprova compras acima de dez mil reais?" });
+    assert.deepEqual(r.citations.map((c) => c.source), [purchases.id]);
   });
 
   test("sem evidência suficiente, abstém-se em vez de responder", async () => {
