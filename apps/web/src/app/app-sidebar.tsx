@@ -31,14 +31,14 @@ import {
   SidebarRail,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { jobsApi, recoveryApi } from "@/lib/api";
+import { deliverablesApi, jobsApi, recoveryApi } from "@/lib/api";
 
 interface Area {
   to: string;
   label: string;
   icon: LucideIcon;
   soon?: boolean;
-  badge?: "approvals" | "recovery";
+  badge?: "approvals" | "recovery" | "deliverables";
 }
 
 const GROUPS: { label: string; areas: Area[] }[] = [
@@ -48,7 +48,7 @@ const GROUPS: { label: string; areas: Area[] }[] = [
       { to: "/", label: "Command Center", icon: LayoutDashboard },
       { to: "/conversa", label: "Conversa", icon: MessagesSquare },
       { to: "/trabalhos", label: "Trabalhos", icon: Briefcase, badge: "approvals" },
-      { to: "/entregas", label: "Entregas", icon: PackageCheck, soon: true },
+      { to: "/entregas", label: "Entregas", icon: PackageCheck, badge: "deliverables" },
       { to: "/rotinas", label: "Rotinas", icon: CalendarClock, soon: true },
     ],
   },
@@ -73,7 +73,9 @@ const GROUPS: { label: string; areas: Area[] }[] = [
 function useBadges() {
   const jobs = useQuery({ queryKey: ["jobs"], queryFn: jobsApi.list, refetchInterval: 4000 });
   const recovery = useQuery({ queryKey: ["recovery"], queryFn: recoveryApi.cases, refetchInterval: 8000 });
+  const deliverables = useQuery({ queryKey: ["deliverables"], queryFn: deliverablesApi.list, refetchInterval: 8000 });
   return {
+    deliverables: deliverables.data?.deliverables.filter((d) => d.status === "in_review").length ?? 0,
     approvals: jobs.data?.jobs.filter((j) => j.status === "awaiting_approval").length ?? 0,
     recovery: recovery.data?.cases.length ?? 0,
   };

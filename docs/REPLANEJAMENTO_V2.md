@@ -137,6 +137,7 @@ Depois: identidade corporativa, provedor remoto (API), Loja e áreas de marketin
 - **F0 — concluída.** Jobs, Cérebro, trabalho aberto, conversa, recuperação nativa e migração de dados da v1, nos dois bancos; v1 congelada em `legacy/`. Os testes HTTP de caracterização da v1 não rodam literalmente contra a v2 (o formato das rotas mudou de propósito); os mesmos cenários foram portados.
 - **F1 — concluída.** Interface com sidebar, tema e as áreas Command Center, Conversa, Trabalhos, Cérebro e Governança, servida pela API; conferida no navegador em desktop e celular.
 - **F2 — concluída.** Catálogo de 37 personas em 10 áreas, contratar, criar meu agente, orientações, organograma, empresa, assistente "Montar sua empresa" e Configurações. O Chief of Staff só escala o time contratado. Fica para depois: a "Estação" (conversa direta com um agente) e permissões por agente além das fontes abertas a todos.
+- **F3 — concluída.** O efeito aprovado gera a entrega na mesma transação do recibo (sem entrega, sem efeito). O gestor aceita a versão exata ou pede ajustes; o trabalho de revisão é admitido junto com a mudança da entrega e, aprovado, vira a próxima versão. Histórico por entrega e exportação em Markdown. Fica para depois: entregas de outros formatos (planilhas, documentos) e envio para destinos externos, que dependem das integrações (F5).
 
 ## 8. Decisões para você confirmar
 

@@ -1,4 +1,4 @@
-import type { JobStatus, SourceStatus } from "./api";
+import type { DeliverableStatus, JobStatus, SourceStatus } from "./api";
 
 export const JOB_STATUS: Record<JobStatus, { label: string; tone: Tone }> = {
   queued: { label: "Na fila", tone: "neutral" },
@@ -17,6 +17,12 @@ export const SOURCE_STATUS: Record<SourceStatus, { label: string; tone: Tone }> 
   not_yet_valid: { label: "Vigência futura", tone: "info" },
   superseded: { label: "Substituída", tone: "neutral" },
   revoked: { label: "Revogada", tone: "danger" },
+};
+
+export const DELIVERABLE_STATUS: Record<DeliverableStatus, { label: string; tone: Tone }> = {
+  in_review: { label: "Para revisar", tone: "warning" },
+  accepted: { label: "Aceita", tone: "success" },
+  changes_requested: { label: "Ajustes em andamento", tone: "info" },
 };
 
 export type Tone = "neutral" | "info" | "success" | "warning" | "danger";
@@ -64,4 +70,8 @@ export const EVENT_LABEL: Record<string, string> = {
   recovery_retry_authorized: "Repetição autorizada",
   recovery_closed: "Encerrado na recuperação",
   migrated_review_rehashed: "Parecer migrado da v1",
+  deliverable_created: "Entrega criada",
+  deliverable_revised: "Nova versão entregue",
+  deliverable_accepted: "Entrega aceita",
+  deliverable_changes_requested: "Ajustes pedidos",
 };

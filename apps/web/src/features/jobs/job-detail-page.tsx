@@ -1,11 +1,11 @@
 /** Detalhe do trabalho: o que foi pedido, quem trabalha, o parecer e a decisão do gestor. */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Check, Loader2, RotateCcw, ShieldAlert, X } from "lucide-react";
+import { ArrowLeft, Check, Loader2, PackageCheck, RotateCcw, ShieldAlert, X } from "lucide-react";
 import { Link, useParams } from "react-router";
 import { EmptyState, ErrorNotice, LoadingRows, ToneBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { jobsApi, type Job } from "@/lib/api";
+import { deliverablesApi, jobsApi, type Job } from "@/lib/api";
 import { EVENT_LABEL, formatDateTime, shortId } from "@/lib/format";
 import { isMoving, JobStatusBadge } from "./job-status";
 import { ReportView } from "./report-view";
@@ -115,6 +115,8 @@ function Decision({ job }: { job: Job }) {
   const approve = useMutation({ mutationFn: () => jobsApi.approve(job.id, job.review!.hash), onSuccess: refresh });
   const reject = useMutation({ mutationFn: () => jobsApi.reject(job.id, job.review!.hash), onSuccess: refresh });
   const resume = useMutation({ mutationFn: () => jobsApi.resume(job.id), onSuccess: refresh });
+  // Trabalhos concluídos ou de revisão apontam para a entrega (404 quando não há).
+  const deliverable = useQuery({ queryKey: ["deliverable-of", job.id, job.status], queryFn: () => deliverablesApi.byJob(job.id), retry: false });
   const busy = approve.isPending || reject.isPending || resume.isPending || job.worker_active;
   const error = approve.error ?? reject.error ?? resume.error;
 
@@ -158,7 +160,28 @@ function Decision({ job }: { job: Job }) {
       </>
     );
   else if (job.status === "completed" && job.receipt)
-    body = <p className="text-sm">Entregue uma única vez. Recibo {shortId(job.receipt.id)}.</p>;
+    body = (
+      <>
+        <p className="min-w-0 flex-1 text-sm">Entregue uma única vez. Recibo {shortId(job.receipt.id)}.</p>
+        {deliverable.data && (
+          <Button asChild variant="outline">
+            <Link to={`/entregas/${deliverable.data.id}`}>
+              <PackageCheck /> Ver entrega{deliverable.data.version ? ` v${deliverable.data.version}` : ""}
+            </Link>
+          </Button>
+        )}
+      </>
+    );
+  if (!body && deliverable.data?.revision_of)
+    body = (
+      <p className="text-sm">
+        Revisão da{" "}
+        <Link to={`/entregas/${deliverable.data.id}`} className="underline">
+          entrega
+        </Link>{" "}
+        (ajustes pedidos sobre a v{deliverable.data.revision_of}).
+      </p>
+    );
   if (!body) return null;
   return (
     <div className="space-y-3">

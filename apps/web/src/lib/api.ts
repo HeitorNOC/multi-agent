@@ -304,3 +304,34 @@ export const companyApi = {
   completeSetup: () => post<SetupStatus>("/api/setup/complete"),
   settings: () => get<Settings>("/api/settings"),
 };
+
+// ── Entregas ─────────────────────────────────────────────────────────────────
+
+export type DeliverableStatus = "in_review" | "accepted" | "changes_requested";
+
+export interface DeliverableSummary {
+  id: string;
+  title: string;
+  status: DeliverableStatus;
+  current_version: number;
+  created_at: string;
+  updated_at: string;
+  decided_by: string | null;
+  decision_note: string | null;
+}
+
+export interface DeliverableDetail extends DeliverableSummary {
+  versions: { version: number; job_id: string; created_at: string; content: { goal: string; report: OpenReport; payload: { recipient: string; content: string } } }[];
+  reopenings: { job_id: string; from_version: number; feedback: string; requested_by: string; created_at: string }[];
+  history: JobEvent[];
+}
+
+export const deliverablesApi = {
+  list: () => get<{ deliverables: DeliverableSummary[] }>("/api/deliverables"),
+  get: (id: string) => get<DeliverableDetail>(`/api/deliverables/${id}`),
+  byJob: (jobId: string) => get<{ id: string; version: number | null; revision_of: number | null }>(`/api/deliverables/by-job/${jobId}`),
+  accept: (id: string, version: number) => post<DeliverableDetail>(`/api/deliverables/${id}/accept`, { version }),
+  requestChanges: (id: string, version: number, feedback: string) =>
+    post<DeliverableDetail & { reopened_job: string }>(`/api/deliverables/${id}/request-changes`, { version, feedback }),
+  markdownUrl: (id: string, version: number) => `/api/deliverables/${id}/versions/${version}/markdown`,
+};

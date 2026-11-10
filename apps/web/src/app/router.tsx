@@ -7,6 +7,8 @@ import { GovernancePage } from "@/features/governance/governance-page";
 import { JobDetailPage } from "@/features/jobs/job-detail-page";
 import { JobsPage } from "@/features/jobs/jobs-page";
 import { AgentsPage } from "@/features/agents/agents-page";
+import { DeliverablePage } from "@/features/deliverables/deliverable-page";
+import { DeliverablesPage } from "@/features/deliverables/deliverables-page";
 import { KnowledgePage } from "@/features/knowledge/knowledge-page";
 import { OrganogramPage } from "@/features/organogram/organogram-page";
 import { SettingsPage } from "@/features/settings/settings-page";
@@ -34,6 +36,8 @@ export const router = createBrowserRouter([
       { path: "trabalhos/:id", element: <JobDetailPage /> },
       { path: "cerebro", element: <KnowledgePage /> },
       { path: "governanca", element: <GovernancePage /> },
+      { path: "entregas", element: <DeliverablesPage /> },
+      { path: "entregas/:id", element: <DeliverablePage /> },
       { path: "agentes", element: <AgentsPage /> },
       { path: "organograma", element: <OrganogramPage /> },
       { path: "configuracoes", element: <SettingsPage /> },
