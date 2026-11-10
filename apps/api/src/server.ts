@@ -37,7 +37,13 @@ import { knowledgeHttp } from "./modules/knowledge/http/routes.ts";
 import { Bm25Index } from "./modules/knowledge/infrastructure/bm25-index.ts";
 import { knowledgeStore } from "./modules/knowledge/infrastructure/sql-knowledge.ts";
 import { recoveryHttp } from "./modules/recovery/http/routes.ts";
-import { deliveryFor, type DeliverablesDeps } from "./modules/deliverables/application/deliverables.ts";
+import { acceptedMarkdown, deliveryFor, type DeliverablesDeps } from "./modules/deliverables/application/deliverables.ts";
+import type { DeliverableId } from "./modules/deliverables/domain/deliverable.ts";
+import type { IntegrationsDeps } from "./modules/integrations/application/integrations.ts";
+import { integrationsHttp } from "./modules/integrations/http/routes.ts";
+import { LocalFolder } from "./modules/integrations/infrastructure/local-folder.ts";
+import { integrationsStore } from "./modules/integrations/infrastructure/sql-connections.ts";
+import { uploadSource } from "./modules/knowledge/application/sources.ts";
 import { deliverablesHttp } from "./modules/deliverables/http/routes.ts";
 import { deliverablesStore } from "./modules/deliverables/infrastructure/sql-deliverables.ts";
 import { admitJob } from "./modules/jobs/application/admit-job.ts";
@@ -149,6 +155,21 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     jobStatus: async (jobId) => (await jobs.uow.read.jobs.get(jobId))?.status,
   };
   const ticker = new RoutineTicker(routines, () => void scheduler.wake());
+
+  // Integrações: o conector de pasta local lê para o Cérebro e grava entregas aceitas.
+  const integrations: IntegrationsDeps = {
+    uow: new UnitOfWork(db, integrationsStore(clock)),
+    clock,
+    folder: new LocalFolder({
+      forbidden: config.database.dialect === "sqlite" ? [dirname(config.database.path)] : [],
+      maxBytes: config.knowledge.maxBytes,
+    }),
+    importToKnowledge: async (actor, file) => {
+      const source = await uploadSource(knowledge, actor, file);
+      return { id: source.id, title: source.title };
+    },
+    acceptedDeliverable: (id, version) => acceptedMarkdown(deliverables, id as DeliverableId, version),
+  };
   await reconcileOnRestart(jobs);
 
   // Trabalho aberto
@@ -176,6 +197,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       agentsHttp(agents),
       deliverablesHttp(deliverables, { onJobOpened: () => void scheduler.wake() }),
       routinesHttp(routines, { onJobOpened: () => void scheduler.wake() }),
+      integrationsHttp(integrations),
       settingsHttp(config, parts.model !== null),
       ...(config.webDir ? [staticWeb(config.webDir)] : []),
     ],

@@ -7,7 +7,7 @@
  *   acontecem na mesma transação; se a admissão for recusada (fila cheia, time vazio), nada muda.
  */
 import type { Clock } from "../../../shared/clock.ts";
-import { ensure, notFound } from "../../../shared/errors.ts";
+import { conflict, ensure, notFound } from "../../../shared/errors.ts";
 import { type ActorId, type JobId } from "../../../shared/ids.ts";
 import type { Json } from "../../../shared/json.ts";
 import type { Transaction, UnitOfWork } from "../../../platform/database/unit-of-work.ts";
@@ -132,4 +132,13 @@ export async function deliverableMarkdown(deps: DeliverablesDeps, id: Deliverabl
   const v = (await deps.uow.read.deliverables.versions(id)).find((x) => x.version === version);
   ensure(v, () => notFound("version_not_found", "Versão não encontrada"));
   return { filename: `entrega-${id.slice(0, 8)}-v${version}.md`, text: toMarkdown(d.title, version, v.createdAt, v.content as unknown as DeliverableContent) };
+}
+
+/** A versão aceita em Markdown, para levar para fora (integrações). Outra versão ou estado é recusado. */
+export async function acceptedMarkdown(deps: DeliverablesDeps, id: DeliverableId, version: number) {
+  const d = await load(deps.uow.read, id);
+  ensure(d.status === "accepted" && d.currentVersion === version, () =>
+    conflict("deliverable_not_accepted", "Só a versão aceita de uma entrega pode sair da empresa"),
+  );
+  return deliverableMarkdown(deps, id, version);
 }
