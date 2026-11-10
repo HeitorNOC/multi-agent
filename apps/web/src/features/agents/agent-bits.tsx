@@ -1,6 +1,7 @@
 /** Avatar de persona e nomes dos agentes do time, usados por todas as telas. */
-import { useQuery } from "@tanstack/react-query";
-import { agentsApi } from "@/lib/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
+import { agentsApi, conversationsApi } from "@/lib/api";
 import { agentLabel } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -45,4 +46,23 @@ export function useAgentNames() {
     const a = byId.get(id);
     return a ? `${a.name}, ${a.title}` : agentLabel(id);
   };
+}
+
+/** O time por id (para avatar e nome nas conversas da Estação). */
+export function useTeamMap() {
+  const team = useQuery({ queryKey: ["team"], queryFn: agentsApi.team, staleTime: 30_000 });
+  return new Map((team.data?.agents ?? []).map((a) => [a.id, a]));
+}
+
+/** Abre uma conversa na Estação do agente e vai para ela. */
+export function useOpenStation() {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation({
+    mutationFn: (agentId: string) => conversationsApi.create(undefined, agentId),
+    onSuccess: (c) => {
+      void queryClient.invalidateQueries({ queryKey: ["conversations"] });
+      void navigate(`/conversa/${c.id}`);
+    },
+  });
 }

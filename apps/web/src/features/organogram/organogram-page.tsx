@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { EmptyState, ErrorNotice, LoadingRows, PageHeader } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { agentsApi, type OrgNode } from "@/lib/api";
-import { AgentAvatar } from "../agents/agent-bits";
+import { AgentAvatar, useOpenStation } from "../agents/agent-bits";
 
 export function OrganogramPage() {
   const org = useQuery({ queryKey: ["organogram"], queryFn: agentsApi.organogram });
@@ -62,11 +62,21 @@ export function OrganogramPage() {
 }
 
 function Tree({ nodes, areaTitle }: { nodes: OrgNode[]; areaTitle: (id: string) => string }) {
+  const station = useOpenStation();
   return (
     <ul className="space-y-3">
       {nodes.map((n) => (
         <li key={n.id} className="space-y-3">
-          <Box avatar={<AgentAvatar name={n.name} area={n.area} />} name={n.name} title={`${n.title} · ${areaTitle(n.area)}`} />
+          <Box
+            avatar={<AgentAvatar name={n.name} area={n.area} />}
+            name={n.name}
+            title={`${n.title} · ${areaTitle(n.area)}`}
+            action={
+              <Button size="sm" variant="ghost" disabled={station.isPending} onClick={() => station.mutate(n.id)}>
+                <MessagesSquare /> Estação
+              </Button>
+            }
+          />
           {n.reports.length > 0 && (
             <Indent>
               <Tree nodes={n.reports} areaTitle={areaTitle} />

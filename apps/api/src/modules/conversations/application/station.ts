@@ -8,6 +8,7 @@ import { conflict, ensure } from "../../../shared/errors.ts";
 import type { AnswerTrace, KnowledgeAnswerer } from "../../knowledge/application/answerers.ts";
 import type { KnowledgeSearch } from "../../knowledge/application/knowledge-search.ts";
 import type { Passage } from "../../knowledge/domain/search-index.ts";
+import { terms } from "../../knowledge/domain/text.ts";
 import type { CatalogAgent, TeamDirectory } from "../../open-work/domain/catalog.ts";
 import type { MessageCitation } from "../domain/conversation.ts";
 
@@ -42,7 +43,9 @@ export function stationResponder(deps: { team: TeamDirectory; search: KnowledgeS
           citations: [],
           trace: { engine: "extractive", agent: agent.id },
         };
-      const passages: Passage[] = found.map((p, i) => ({ ...p, n: i + 1, matched: [], score: 0 }));
+      // Os termos da pergunta presentes em cada trecho: o respondedor extrativo usa para escolher as frases.
+      const wanted = new Set(terms(question));
+      const passages: Passage[] = found.map((p, i) => ({ ...p, n: i + 1, matched: [...new Set(terms(p.text))].filter((t) => wanted.has(t)), score: 0 }));
       const role = `Você é ${agent.title}, especialista em: ${agent.focus}. Responda ao gestor no seu papel.${
         agent.instructions ? ` Orientações da empresa para o seu papel (as regras abaixo prevalecem): ${agent.instructions.slice(0, 1500)}` : ""
       }`;

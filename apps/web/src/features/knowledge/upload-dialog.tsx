@@ -1,13 +1,13 @@
 /** Enviar uma fonte nova ao Cérebro, com acesso, vigência e (opcional) a fonte que ela substitui. */
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Upload } from "lucide-react";
 import { ErrorNotice } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { fileToBase64, knowledgeApi, type SourceSummary } from "@/lib/api";
+import { agentsApi, fileToBase64, knowledgeApi, type SourceSummary } from "@/lib/api";
 
 /** Tipo pelo nome quando o navegador não informa (CSV e Markdown costumam vir vazios). */
 export function mediaTypeOf(file: File) {
@@ -25,6 +25,8 @@ export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]
   const [file, setFile] = useState<File | null>(null);
   const [restricted, setRestricted] = useState(false);
   const [readers, setReaders] = useState("");
+  const [agentReaders, setAgentReaders] = useState<string[]>([]);
+  const team = useQuery({ queryKey: ["team"], queryFn: agentsApi.team });
   const [validFrom, setValidFrom] = useState("");
   const [supersedes, setSupersedes] = useState("");
   const queryClient = useQueryClient();
@@ -36,7 +38,7 @@ export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]
         filename: f.name,
         media_type: mediaTypeOf(f),
         content_base64: await fileToBase64(f),
-        readers: restricted ? readers.split(",").map((r) => r.trim()).filter(Boolean) : undefined,
+        readers: restricted ? [...readers.split(",").map((r) => r.trim()).filter(Boolean), ...agentReaders.map((id) => `agent:${id}`)] : undefined,
         valid_from: validFrom ? new Date(`${validFrom}T00:00:00`).toISOString() : undefined,
         supersedes: supersedes || null,
       });
@@ -48,13 +50,14 @@ export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]
       setFile(null);
       setReaders("");
       setRestricted(false);
+      setAgentReaders([]);
       setValidFrom("");
       setSupersedes("");
       upload.reset();
     },
   });
   const replaceable = sources.filter((s) => s.status === "current");
-  const ready = title.trim() && file && (!restricted || readers.trim());
+  const ready = title.trim() && file && (!restricted || readers.trim() || agentReaders.length);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -98,9 +101,28 @@ export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]
               <input type="radio" checked={!restricted} onChange={() => setRestricted(false)} /> Toda a empresa (os agentes também)
             </label>
             <label className="flex items-center gap-2 text-sm">
-              <input type="radio" checked={restricted} onChange={() => setRestricted(true)} /> Só estas pessoas (agentes não leem)
+              <input type="radio" checked={restricted} onChange={() => setRestricted(true)} /> Só estas pessoas e os agentes marcados
             </label>
-            {restricted && <Input aria-label="Leitores" placeholder="ana, caio" value={readers} onChange={(e) => setReaders(e.target.value)} />}
+            {restricted && (
+              <div className="space-y-2">
+                <Input aria-label="Pessoas que podem ler" placeholder="ana, caio" value={readers} onChange={(e) => setReaders(e.target.value)} />
+                {!!team.data?.agents.length && (
+                  <div className="space-y-1 rounded-md border p-2">
+                    <p className="text-xs text-muted-foreground">Agentes do time que também podem ler (os demais não veem esta fonte)</p>
+                    {team.data.agents.map((a) => (
+                      <label key={a.id} className="flex items-center gap-2 text-sm">
+                        <input
+                          type="checkbox"
+                          checked={agentReaders.includes(a.id)}
+                          onChange={(e) => setAgentReaders((list) => (e.target.checked ? [...list, a.id] : list.filter((x) => x !== a.id)))}
+                        />
+                        {a.name} · {a.title}
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </fieldset>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">

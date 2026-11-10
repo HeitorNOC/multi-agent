@@ -1,7 +1,7 @@
 /** O time atual: ajustar orientações e a quem cada um responde, ou tirar do time. */
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Settings2 } from "lucide-react";
+import { MessagesSquare, Settings2 } from "lucide-react";
 import { ErrorNotice } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -9,10 +9,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { agentsApi, type Agent } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
-import { AgentAvatar } from "./agent-bits";
+import { AgentAvatar, useOpenStation } from "./agent-bits";
 
 export function TeamList({ agents, areas }: { agents: Agent[]; areas: { id: string; title: string }[] }) {
   const [editing, setEditing] = useState<Agent | null>(null);
+  const station = useOpenStation();
   const areaTitle = (id: string) => areas.find((a) => a.id === id)?.title ?? id;
   const byId = new Map(agents.map((a) => [a.id, a]));
   return (
@@ -30,6 +31,9 @@ export function TeamList({ agents, areas }: { agents: Agent[]; areas: { id: stri
                 {a.instructions && " · com orientações"}
               </p>
             </div>
+            <Button variant="ghost" size="sm" disabled={station.isPending} onClick={() => station.mutate(a.id)} aria-label={`Abrir a Estação de ${a.name}`}>
+              <MessagesSquare /> Estação
+            </Button>
             <Button variant="ghost" size="sm" onClick={() => setEditing(a)} aria-label={`Ajustar ${a.name}`}>
               <Settings2 /> Ajustar
             </Button>

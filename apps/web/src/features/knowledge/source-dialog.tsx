@@ -10,8 +10,10 @@ import { Label } from "@/components/ui/label";
 import { fileToBase64, knowledgeApi } from "@/lib/api";
 import { formatBytes, formatDate, formatDateTime, SOURCE_STATUS } from "@/lib/format";
 import { mediaTypeOf } from "./upload-dialog";
+import { useAgentNames } from "../agents/agent-bits";
 
 export function SourceDialog({ id, onClose }: { id: string; onClose: () => void }) {
+  const agentName = useAgentNames();
   const queryClient = useQueryClient();
   const source = useQuery({ queryKey: ["source", id], queryFn: () => knowledgeApi.get(id) });
   const refresh = () => {
@@ -50,7 +52,7 @@ export function SourceDialog({ id, onClose }: { id: string; onClose: () => void 
                 {s.title} <ToneBadge tone={SOURCE_STATUS[s.status].tone}>{SOURCE_STATUS[s.status].label}</ToneBadge>
               </DialogTitle>
               <DialogDescription>
-                Dono: {s.owner} · Leitura: {s.readers.includes("*") ? "toda a empresa" : s.readers.join(", ")}
+                Dono: {s.owner} · Leitura: {s.readers.includes("*") ? "toda a empresa" : s.readers.map((r) => (r.startsWith("agent:") ? `${agentName(r.slice(6))} (agente)` : r)).join(", ")}
                 {s.current_version && ` · responde com a v${s.current_version}`}
               </DialogDescription>
             </DialogHeader>

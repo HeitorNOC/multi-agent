@@ -81,7 +81,7 @@ for (const dialect of dialects) {
       assert.deepEqual([conv.title, conv.agent_id], ["Estação de Bruno, Analista de compras", "procurement_analyst"]);
       const r = await sendMessage(deps, ana, conv.id as ConversationId, { text: "Qual o desconto do fornecedor Alfa em compras?" });
       assert.ok(r.reply.citations!.some((c) => c.title === "Contrato confidencial"), "a fonte restrita a ele aparece");
-      assert.match(r.reply.text, /\[1\]/);
+      assert.match(r.reply.text, /desconto de 12%/, "a resposta traz a frase com o dado, não o título");
       const events = await deps.uow.read.events.list(stream.conversation(conv.id));
       assert.deepEqual(events.map((e) => [e.kind, (e.detail as { agent?: string }).agent]), [["agent_reply", "procurement_analyst"]]);
       const read = await readConversation(deps, ana, conv.id as ConversationId);

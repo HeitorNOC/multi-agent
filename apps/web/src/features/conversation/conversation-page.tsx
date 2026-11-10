@@ -1,25 +1,27 @@
 /**
- * Conversa com o Chief of Staff. Cada envio tem um `client_message_id`: se a rede falhar, reenviar
- * a mesma mensagem não duplica a pergunta nem o trabalho aberto.
+ * Conversa com o Chief of Staff ou, na Estação, direto com um agente do time. Cada envio tem um
+ * `client_message_id`: se a rede falhar, reenviar a mesma mensagem não duplica a pergunta nem o
+ * trabalho aberto.
  */
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Bot, MessageSquarePlus, MessagesSquare, Send } from "lucide-react";
+import { Bot, ExternalLink, MessageSquarePlus, MessagesSquare, Send } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import { EmptyState, ErrorNotice, LoadingRows } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { conversationsApi, newKey, type Message } from "@/lib/api";
+import { conversationsApi, newKey, type Agent, type Message } from "@/lib/api";
 import { relativeTime, shortId } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { JobStatusBadge } from "../jobs/job-status";
-import { useAgentNames } from "../agents/agent-bits";
+import { AgentAvatar, useAgentNames, useTeamMap } from "../agents/agent-bits";
 
 export function ConversationPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const list = useQuery({ queryKey: ["conversations"], queryFn: conversationsApi.list });
+  const team = useTeamMap();
   const create = useMutation({
     mutationFn: () => conversationsApi.create(),
     onSuccess: (c) => {
@@ -29,25 +31,32 @@ export function ConversationPage() {
   });
 
   return (
-    <div className="grid h-[calc(100dvh-7rem)] gap-4 md:grid-cols-[240px_1fr]">
+    <div className="grid h-[calc(100dvh-7rem)] gap-4 md:grid-cols-[260px_1fr]">
       <aside className={cn("flex min-h-0 flex-col gap-2", id && "hidden md:flex")}>
         <Button onClick={() => create.mutate()} disabled={create.isPending}>
           <MessageSquarePlus /> Nova conversa
         </Button>
         <ErrorNotice error={list.error ?? create.error} />
         <nav className="min-h-0 flex-1 space-y-1 overflow-y-auto">
-          {list.data?.conversations.map((c) => (
-            <Link
-              key={c.id}
-              to={`/conversa/${c.id}`}
-              className={cn("block rounded-lg px-3 py-2 text-sm hover:bg-muted", c.id === id && "bg-muted font-medium")}
-            >
-              <span className="line-clamp-1">{c.title}</span>
-              <span className="text-xs text-muted-foreground">
-                {c.message_count} mensagens · {relativeTime(c.updated_at)}
-              </span>
-            </Link>
-          ))}
+          {list.data?.conversations.map((c) => {
+            const agent = c.agent_id ? team.get(c.agent_id) : undefined;
+            return (
+              <Link
+                key={c.id}
+                to={`/conversa/${c.id}`}
+                className={cn("flex items-center gap-2 rounded-lg px-3 py-2 text-sm hover:bg-muted", c.id === id && "bg-muted font-medium")}
+              >
+                {agent && <AgentAvatar name={agent.name} area={agent.area} size="sm" />}
+                <span className="min-w-0 flex-1">
+                  <span className="line-clamp-1">{c.title}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {c.agent_id ? "Estação · " : ""}
+                    {c.message_count} mensagens · {relativeTime(c.updated_at)}
+                  </span>
+                </span>
+              </Link>
+            );
+          })}
         </nav>
       </aside>
       <section className={cn("flex min-h-0 flex-col rounded-xl border", !id && "hidden md:flex")}>
@@ -56,7 +65,8 @@ export function ConversationPage() {
         ) : (
           <div className="m-auto p-6">
             <EmptyState icon={<MessagesSquare />} title="Converse com o Chief of Staff">
-              Peça análises, propostas ou o andamento de um trabalho. Quando o pedido exigir especialistas, ele abre um trabalho e o parecer volta para sua aprovação.
+              Peça análises, propostas ou o andamento de um trabalho. Quando o pedido exigir especialistas, ele abre um trabalho e o parecer volta para sua aprovação. Para falar direto com um
+              especialista, abra a Estação dele em Agentes ou no Organograma.
             </EmptyState>
           </div>
         )}
@@ -73,6 +83,10 @@ function Thread({ id }: { id: string }) {
     // Enquanto um trabalho aberto aqui estiver andando, o estado do cartão atualiza.
     refetchInterval: (q) => (q.state.data?.messages.some((m) => m.job && ["queued", "running"].includes(m.job.status)) ? 3000 : false),
   });
+  const team = useTeamMap();
+  const agentId = thread.data?.conversation.agent_id ?? null;
+  const agent = agentId ? team.get(agentId) : undefined;
+  const who = agentId ? (agent?.name ?? "O agente") : "o Chief of Staff";
   const [text, setText] = useState("");
   const [clientId, setClientId] = useState(newKey);
   const end = useRef<HTMLDivElement>(null);
@@ -93,7 +107,12 @@ function Thread({ id }: { id: string }) {
     end.current?.scrollIntoView({ block: "end" });
   }, [count, send.isPending]);
 
-  if (thread.error) return <div className="p-4"><ErrorNotice error={thread.error} title="Conversa não encontrada" /></div>;
+  if (thread.error)
+    return (
+      <div className="p-4">
+        <ErrorNotice error={thread.error} title="Conversa não encontrada" />
+      </div>
+    );
   const submit = () => {
     const message = text.trim();
     if (message && !send.isPending) send.mutate(message);
@@ -104,14 +123,18 @@ function Thread({ id }: { id: string }) {
         <Link to="/conversa" className="text-sm text-muted-foreground md:hidden">
           ←
         </Link>
-        <h2 className="line-clamp-1 font-medium">{thread.data?.conversation.title ?? "Conversa"}</h2>
+        {agent && <AgentAvatar name={agent.name} area={agent.area} size="sm" />}
+        <div className="min-w-0">
+          <h2 className="line-clamp-1 font-medium">{thread.data?.conversation.title ?? "Conversa"}</h2>
+          {agentId && <p className="text-xs text-muted-foreground">Responde só com as fontes do Cérebro que pode ler, citando cada uma.</p>}
+        </div>
       </header>
       <div className="min-h-0 flex-1 space-y-4 overflow-y-auto p-4">
-        {thread.isPending ? <LoadingRows /> : thread.data!.messages.map((m) => <Bubble key={m.seq} message={m} />)}
+        {thread.isPending ? <LoadingRows /> : thread.data!.messages.map((m) => <Bubble key={m.seq} message={m} agent={agent} />)}
         {send.isPending && (
           <>
-            <Bubble message={{ seq: -1, role: "user", text: send.variables ?? "", created_at: new Date().toISOString(), reply_to: null, job: null, decision: null }} />
-            <p className="text-sm text-muted-foreground">O Chief of Staff está pensando…</p>
+            <Bubble message={{ seq: -1, role: "user", text: send.variables ?? "", created_at: new Date().toISOString(), reply_to: null, citations: null, job: null, decision: null }} />
+            <p className="text-sm text-muted-foreground">{agentId ? `${who} está consultando o Cérebro…` : "O Chief of Staff está pensando…"}</p>
           </>
         )}
         <div ref={end} />
@@ -129,7 +152,7 @@ function Thread({ id }: { id: string }) {
             value={text}
             maxLength={2000}
             rows={2}
-            placeholder="Escreva para o Chief of Staff…"
+            placeholder={`Escreva para ${who}…`}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
@@ -147,16 +170,19 @@ function Thread({ id }: { id: string }) {
   );
 }
 
-function Bubble({ message }: { message: Message }) {
+function Bubble({ message, agent }: { message: Message; agent?: Agent }) {
   const agentName = useAgentNames();
   const mine = message.role === "user";
   return (
     <div className={cn("flex gap-2", mine && "justify-end")}>
-      {!mine && (
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-sidebar-primary text-sidebar-primary-foreground">
-          <Bot className="size-4" />
-        </div>
-      )}
+      {!mine &&
+        (agent ? (
+          <AgentAvatar name={agent.name} area={agent.area} size="sm" />
+        ) : (
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-sidebar-primary text-sidebar-primary-foreground">
+            <Bot className="size-4" />
+          </div>
+        ))}
       <div className={cn("max-w-[85%] space-y-2 rounded-2xl px-4 py-2 text-sm", mine ? "bg-primary text-primary-foreground" : "bg-muted")}>
         <p className="whitespace-pre-wrap">{message.text}</p>
         {message.job && (
@@ -168,7 +194,25 @@ function Bubble({ message }: { message: Message }) {
             {message.job.agents && <p className="mt-2 text-xs">{message.job.agents.map(agentName).join(" · ")}</p>}
           </Link>
         )}
-        {message.decision?.fallback && <p className="text-[11px] text-muted-foreground">Decidido por regras ({message.decision.fallback})</p>}
+        {message.citations && message.citations.length > 0 && (
+          <ol className="space-y-1 border-t pt-2 text-xs">
+            {message.citations.map((c) => (
+              <li key={c.n} className="flex items-center gap-2">
+                <span className="min-w-0 flex-1 truncate">
+                  [{c.n}] {c.title} · v{c.version}
+                </span>
+                <a href={c.url} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-1 text-sky-600 hover:underline dark:text-sky-400">
+                  Original <ExternalLink className="size-3" />
+                </a>
+              </li>
+            ))}
+          </ol>
+        )}
+        {message.decision?.fallback && (
+          <p className="text-[11px] text-muted-foreground">
+            {agent ? "Resposta extraída dos trechos" : "Decidido por regras"} ({message.decision.fallback})
+          </p>
+        )}
       </div>
     </div>
   );
