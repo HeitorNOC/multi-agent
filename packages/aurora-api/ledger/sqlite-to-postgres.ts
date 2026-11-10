@@ -92,7 +92,11 @@ const TABLES: TableSpec[] = [
   { name: "recovery_commands", columns: ["id", "actor", "input_sha", "body", "action", "case_id", "operation_id", "evidence_sha", "status", "result", "updated"], key: ["id"], readOrder: "id", optional: true },
 ];
 
-type Value = string | number | bigint | null;
+type Value = string | number | bigint | Uint8Array | null;
+
+/** Forma canônica de um valor para o hash: bytes viram hexadecimal, o resto vira texto. */
+const canonicalValue = (v: Value) =>
+  v === null ? null : v instanceof Uint8Array ? `bytes:${Buffer.from(v).toString("hex")}` : String(v);
 type Row = Value[];
 
 export async function migrateSqliteToPostgres(options: MigrationOptions): Promise<MigrationReport> {
@@ -197,7 +201,8 @@ function readSource(source: DatabaseSync, spec: TableSpec, installation: string)
   }
   const select = spec.columns.map((c) => (present.includes(c) ? c : `NULL AS ${c}`)).join(",");
   const rows = (source.prepare(`SELECT ${select} FROM ${spec.name} ORDER BY ${spec.readOrder}`).all() as Record<string, Value>[]).map(
-    (r) => spec.columns.map((c) => r[c] as Value),
+    // Colunas binárias vêm do SQLite como Uint8Array; o driver do PostgreSQL espera Buffer.
+    (r) => spec.columns.map((c) => (r[c] instanceof Uint8Array ? Buffer.from(r[c] as Uint8Array) : (r[c] as Value))),
   );
   let backfilled = 0;
   if (spec.name === "events") {
@@ -256,7 +261,7 @@ function digestOf(spec: TableSpec, rows: Row[]): string {
   };
   const hash = createHash("sha256");
   for (const row of [...rows].sort(compare))
-    hash.update(JSON.stringify(row.map((v) => (v === null ? null : String(v)))) + "\n");
+    hash.update(JSON.stringify(row.map(canonicalValue)) + "\n");
   return hash.digest("hex");
 }
 

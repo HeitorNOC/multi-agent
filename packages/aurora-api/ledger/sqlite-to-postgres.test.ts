@@ -67,6 +67,17 @@ describe("migração SQLite → PostgreSQL", { skip: url ? false : "defina AUROR
     await l.createConversation({ id: "conv-1", actor: "ana", title: "Comercial", created });
     const question = await l.appendConversationMessage({ conversation: "conv-1", role: "user", text: "analise as vendas", clientId: "envio-000001", created });
     await l.appendConversationMessage({ conversation: "conv-1", role: "chief", text: "Abri um trabalho.", job: "j2", replyTo: question.seq, created });
+    await l.createKnowledgeSource({ id: "fonte-1", title: "Política", owner: "ana", readers: ["*"], supersedes: null, created });
+    const versions: [number, Uint8Array][] = [
+      [1, new Uint8Array([0, 255, 10, 13, 128])],
+      [2, new TextEncoder().encode("texto v2")],
+    ];
+    for (const [version, bytes] of versions)
+      await l.addKnowledgeVersion({
+        source: "fonte-1", version, mediaType: "text/plain", filename: `v${version}.txt`, contentSha: "c".repeat(64),
+        bytes, text: `texto v${version}`, validFrom: created, uploadedBy: "ana", created,
+      });
+    await l.revokeKnowledgeSource("fonte-1", "ana", created);
     await l.close();
     return stateDir;
   }
@@ -79,7 +90,7 @@ describe("migração SQLite → PostgreSQL", { skip: url ? false : "defina AUROR
     assert.equal(report.jobOrderVerified, true);
     assert.deepEqual(
       Object.fromEntries(report.tables.map((t) => [t.table, t.rows])),
-      { jobs: 3, events: 3, effects: 1, pilot_reference_revocations: 1, job_queue: 2, job_admissions: 1, pilot_destination_revocations: 2, pilot_destination_intents: 1, conversations: 1, conversation_messages: 2, recovery_sessions: 1, recovery_commands: 1 },
+      { jobs: 3, events: 3, effects: 1, pilot_reference_revocations: 1, job_queue: 2, job_admissions: 1, pilot_destination_revocations: 2, pilot_destination_intents: 1, conversations: 1, conversation_messages: 2, knowledge_sources: 1, knowledge_versions: 2, recovery_sessions: 1, recovery_commands: 1 },
     );
 
     const source = new SqliteJourneyLedger({ stateDir, installation: INSTALLATION, destinationJournal: true, schedulerLock: false });
@@ -103,6 +114,13 @@ describe("migração SQLite → PostgreSQL", { skip: url ? false : "defina AUROR
       );
       assert.deepEqual(await target.listConversationsForActor("ana"), await source.listConversationsForActor("ana"));
       assert.deepEqual(await target.listConversationMessages("conv-1"), await source.listConversationMessages("conv-1"));
+      assert.deepEqual(await target.getKnowledgeSource("fonte-1"), await source.getKnowledgeSource("fonte-1"));
+      for (const version of [1, 2])
+        assert.deepEqual(
+          [...(await target.getKnowledgeVersion("fonte-1", version))!.bytes],
+          [...(await source.getKnowledgeVersion("fonte-1", version))!.bytes],
+          `bytes da versão ${version} chegam idênticos, inclusive não UTF-8`,
+        );
       // As sequências continuam depois do maior valor copiado.
       const next = await target.enqueue({ job: "j1", kind: "new", crash: false, queuedAt: "2026-02-02T00:00:00.000Z" });
       assert.equal(next.seq, 3);
