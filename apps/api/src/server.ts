@@ -41,6 +41,10 @@ import { deliveryFor, type DeliverablesDeps } from "./modules/deliverables/appli
 import { deliverablesHttp } from "./modules/deliverables/http/routes.ts";
 import { deliverablesStore } from "./modules/deliverables/infrastructure/sql-deliverables.ts";
 import { admitJob } from "./modules/jobs/application/admit-job.ts";
+import { RoutineTicker } from "./modules/routines/application/routine-ticker.ts";
+import type { RoutinesDeps } from "./modules/routines/application/routines.ts";
+import { routinesHttp } from "./modules/routines/http/routes.ts";
+import { routinesStore } from "./modules/routines/infrastructure/sql-routines.ts";
 import { OpenWorkGateway } from "./modules/open-work/application/gateway.ts";
 import { openWorkPolicy } from "./modules/open-work/application/open-policy.ts";
 import { agentsHttp } from "./modules/agents/http/routes.ts";
@@ -135,6 +139,16 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     reopen: async (goal, onAdmitted) => (await admitJob(jobs, { request: { goal }, onAdmitted: (job, tx) => onAdmitted(job.id, tx) })).job.id,
   };
   const scheduler = new JobScheduler(jobs, supervisor);
+
+  // Rotinas: pedidos recorrentes; cada horário vira no máximo um trabalho, mesmo após reiniciar.
+  const routines: RoutinesDeps = {
+    uow: new UnitOfWork(db, routinesStore(clock)),
+    clock,
+    timeZone: config.timeZone,
+    admit: async (goal, onAdmitted) => (await admitJob(jobs, { request: { goal }, onAdmitted: (job, tx) => onAdmitted(job.id, tx) })).job.id,
+    jobStatus: async (jobId) => (await jobs.uow.read.jobs.get(jobId))?.status,
+  };
+  const ticker = new RoutineTicker(routines, () => void scheduler.wake());
   await reconcileOnRestart(jobs);
 
   // Trabalho aberto
@@ -161,6 +175,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       recoveryHttp(jobs, { wake: () => void scheduler.wake() }),
       agentsHttp(agents),
       deliverablesHttp(deliverables, { onJobOpened: () => void scheduler.wake() }),
+      routinesHttp(routines, { onJobOpened: () => void scheduler.wake() }),
       settingsHttp(config, parts.model !== null),
       ...(config.webDir ? [staticWeb(config.webDir)] : []),
     ],
@@ -170,6 +185,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
   url = `http://127.0.0.1:${typeof address === "object" && address ? address.port : config.port}`;
 
   // Sem comando de worker, os pedidos ficam na fila até a API ser iniciada com um.
+  ticker.start();
   if (config.worker.command) scheduler.start();
   else console.warn("AURORA_WORKER_COMMAND não definido: trabalhos ficarão na fila.");
 
@@ -177,6 +193,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     url,
     async close() {
       scheduler.stop();
+      await ticker.stop();
       supervisor.stopAll();
       await app.close();
       await db.close();
@@ -195,6 +212,7 @@ function settingsHttp(config: Config, modelReady: boolean): HttpModule {
       database: config.database.dialect,
       worker: { configured: !!config.worker.command, checkpoints: !!config.worker.checkpointDsn },
       queue: config.queue,
+      time_zone: config.timeZone,
     }));
   };
 }

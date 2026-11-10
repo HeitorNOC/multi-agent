@@ -43,6 +43,18 @@ const schema = z
     /** Como o Chief of Staff decide na conversa: regras ou o modelo (com volta às regras). */
     AURORA_CHIEF_ENGINE: z.enum(["rules", "model"]).default("rules"),
     AURORA_KNOWLEDGE_MAX_BYTES: integer(1, 50_000_000, 5_000_000),
+    /** Fuso dos horários das rotinas (IANA). Padrão: o do computador. */
+    AURORA_TIMEZONE: z
+      .string()
+      .refine((tz) => {
+        try {
+          new Intl.DateTimeFormat("en-US", { timeZone: tz });
+          return true;
+        } catch {
+          return false;
+        }
+      }, "fuso desconhecido (use um nome IANA, como America/Sao_Paulo)")
+      .default(Intl.DateTimeFormat().resolvedOptions().timeZone),
     /** Pasta da interface construída; `none` desliga. Padrão: apps/web/dist. */
     AURORA_WEB_DIR: z.string().min(1).optional(),
     /** Catálogo de personas prontas (padrão: apps/api/data/agent-templates.json). */
@@ -65,6 +77,7 @@ export interface Config {
   chief: { engine: "rules" | "model" };
   templatesPath: string | undefined;
   webDir: string | undefined;
+  timeZone: string;
 }
 
 const DEFAULT_WEB_DIR = fileURLToPath(new URL("../../web/dist", import.meta.url));
@@ -91,6 +104,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     knowledge: { answerer: e.AURORA_KNOWLEDGE_ANSWERER, maxBytes: e.AURORA_KNOWLEDGE_MAX_BYTES },
     chief: { engine: e.AURORA_CHIEF_ENGINE },
     templatesPath: e.AURORA_AGENT_TEMPLATES,
+    timeZone: e.AURORA_TIMEZONE,
     webDir: e.AURORA_WEB_DIR === "none" ? undefined : (e.AURORA_WEB_DIR ?? DEFAULT_WEB_DIR),
   };
 }
