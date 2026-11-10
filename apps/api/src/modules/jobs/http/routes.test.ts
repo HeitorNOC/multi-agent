@@ -39,7 +39,7 @@ for (const dialect of dialects) {
       let wakes = 0;
       const app = await createHttpApp({
         origin: () => ORIGIN,
-        actor: () => ActorId.parse("operador-local"),
+        identify: () => ActorId.parse("operador-local"),
         modules: [
           jobsHttp({
             jobs,

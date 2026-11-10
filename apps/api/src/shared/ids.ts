@@ -12,7 +12,7 @@ import { invalid } from "./errors.ts";
 declare const brand: unique symbol;
 export type Id<Kind extends string> = string & { readonly [brand]: Kind };
 
-const SAFE_ID = /^[A-Za-z0-9_:.@#-]{1,200}$/;
+const SAFE_ID = /^[A-Za-z0-9_:.@#+-]{1,200}$/;
 
 export interface IdFactory<T extends Id<string>> {
   parse(value: unknown): T;

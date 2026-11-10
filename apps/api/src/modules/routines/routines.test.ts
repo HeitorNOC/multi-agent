@@ -157,7 +157,7 @@ for (const dialect of dialects) {
     test("HTTP: criar, listar, rodar agora e arquivar", async () => {
       const { deps } = await setup();
       let woke = 0;
-      const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", actor: () => ana, modules: [routinesHttp(deps, { onJobOpened: () => void woke++ })] });
+      const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", identify: () => ana, modules: [routinesHttp(deps, { onJobOpened: () => void woke++ })] });
       opened.push({ close: () => app.close() });
       const call = (method: "GET" | "POST", url: string, payload?: object) => app.inject({ method, url, payload, headers: { host: "127.0.0.1:1" } });
       const created = await call("POST", "/api/routines", { ...DAILY, schedule: { kind: "daily", time: "08:00", weekdays: [1, 2, 3, 4, 5] } });

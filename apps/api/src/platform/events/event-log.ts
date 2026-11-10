@@ -20,6 +20,7 @@ export const stream = {
   deliverable: (id: string) => `deliverable:${id}` as StreamId,
   routines: (id: string) => `routines:${id}` as StreamId,
   connection: (id: string) => `connection:${id}` as StreamId,
+  access: (id: string) => `access:${id}` as StreamId,
 };
 
 export interface NewEvent {

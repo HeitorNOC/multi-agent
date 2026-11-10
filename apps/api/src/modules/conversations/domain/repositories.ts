@@ -8,6 +8,8 @@ export interface ConversationRepository {
   touch(id: ConversationId, at: string): Promise<void>;
   /** Da mais recente para a mais antiga, com o total de mensagens. */
   listForActor(actor: ActorId): Promise<(Conversation & { messageCount: number })[]>;
+  /** Passa as conversas de uma pessoa para outra (a conta que assume o operador local). */
+  transferActor(from: ActorId, to: ActorId): Promise<void>;
 }
 
 export interface MessageRepository {

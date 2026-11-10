@@ -113,7 +113,7 @@ for (const dialect of dialects) {
 
     test("HTTP: contratar, criar, ajustar, remover e organograma", async () => {
       const { deps } = await setup();
-      const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", actor: () => ana, modules: [agentsHttp(deps)] });
+      const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", identify: () => ana, modules: [agentsHttp(deps)] });
       opened.push({ close: () => app.close() });
       const call = (method: "GET" | "POST", url: string, payload?: object) => app.inject({ method, url, payload, headers: { host: "127.0.0.1:1" } });
       assert.equal((await call("POST", "/api/agents/hire", { template_id: "controller" })).statusCode, 201);

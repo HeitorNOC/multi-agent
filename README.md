@@ -67,8 +67,26 @@ Sem nenhuma variável, a API usa SQLite em `apps/api/data/aurora.db`, deixa os t
 | `AURORA_KNOWLEDGE_ANSWERER` | `extractive` ou `model` (as respostas do Cérebro) |
 | `AURORA_QUEUE_CAPACITY`, `AURORA_RESUME_RESERVE`, `AURORA_MAX_WORKERS` | capacidade da fila |
 | `AURORA_TIMEZONE` | fuso das rotinas e do painel (IANA); padrão: o do computador |
+| `AURORA_AUTH` | `accounts` (padrão: cada pessoa entra com a própria conta) ou `local` (uso individual, sem login) |
+| `AURORA_GOOGLE_CLIENT_ID`, `AURORA_GOOGLE_CLIENT_SECRET` | liga o botão "Entrar com Google" |
+| `AURORA_MICROSOFT_CLIENT_ID`, `AURORA_MICROSOFT_CLIENT_SECRET`, `AURORA_MICROSOFT_TENANT` | liga o botão "Entrar com Microsoft"; o tenant é `common` (padrão), `organizations` ou o id do diretório da empresa |
 
 A lista completa e os padrões estão em [apps/api/src/config.ts](apps/api/src/config.ts).
+
+### Acesso
+
+No primeiro acesso, o Aurora pede a conta do dono (e-mail e senha, ou Google/Microsoft). Ela fica
+com tudo o que já tinha sido feito como operador local. Depois, só entra quem o dono liberar em
+**Configurações › Acesso**: a pessoa entra com Google ou Microsoft usando o e-mail liberado, ou
+cria uma senha em "Criar conta". A sessão fica num cookie HttpOnly por 30 dias; senhas são
+guardadas só como hash (scrypt). Do Google e da Microsoft o Aurora guarda apenas quem é a pessoa,
+nenhum token.
+
+Para ligar o login com Google, crie um "ID do cliente OAuth" do tipo **Aplicativo da Web** no
+Google Cloud e cadastre o endereço de retorno `http://localhost:<porta>/api/auth/oauth/google/callback`
+(fixe a porta com `AURORA_PORT`). Na Microsoft, registre um aplicativo no Entra ID com a plataforma
+**Web** e o retorno `http://localhost:<porta>/api/auth/oauth/microsoft/callback`. A tela de
+Configurações mostra os endereços exatos.
 
 ## Verificar
 

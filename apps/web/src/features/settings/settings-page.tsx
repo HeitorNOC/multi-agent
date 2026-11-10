@@ -4,6 +4,7 @@ import { ErrorNotice, PageHeader, ToneBadge } from "@/components/common";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { companyApi } from "@/lib/api";
 import { formatBytes } from "@/lib/format";
+import { AccessCard } from "../access/access-card";
 import { CompanyForm } from "./company-form";
 
 const PROVIDER = { none: "Nenhum (respostas extraídas dos trechos)", claude: "Claude Code (CLI local)", codex: "Codex (CLI local)" };
@@ -20,6 +21,32 @@ export function SettingsPage() {
         </CardHeader>
         <CardContent>
           <CompanyForm />
+        </CardContent>
+      </Card>
+      <AccessCard auth={s?.auth} />
+      <Card>
+        <CardHeader>
+          <CardTitle>Execução dos agentes</CardTitle>
+          <CardDescription>Como o Aurora chama o modelo de IA.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3 text-sm">
+          <div className="flex flex-wrap items-start gap-3 rounded-lg border p-3">
+            <div className="min-w-0 flex-1 space-y-1">
+              <p className="font-medium">Assinatura do Claude Code ou do Codex</p>
+              <p className="text-muted-foreground">
+                Os agentes usam a CLI oficial já aberta com a sua conta neste computador. O uso entra no limite da sua assinatura; o Aurora não cobra nem mede custo por
+                chamada.
+              </p>
+            </div>
+            {s && (s.model.provider === "none" ? <ToneBadge tone="warning">Nenhuma CLI configurada</ToneBadge> : <ToneBadge tone="success">Em uso: {PROVIDER[s.model.provider]}</ToneBadge>)}
+          </div>
+          <div className="flex flex-wrap items-start gap-3 rounded-lg border border-dashed p-3">
+            <div className="min-w-0 flex-1 space-y-1">
+              <p className="font-medium">Chave de API (pagamento por uso)</p>
+              <p className="text-muted-foreground">Conectar uma chave de API e pagar por token, com custo por chamada no Command Center.</p>
+            </div>
+            <ToneBadge tone="neutral">Em breve</ToneBadge>
+          </div>
         </CardContent>
       </Card>
       <Card>

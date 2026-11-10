@@ -142,7 +142,14 @@ Depois: identidade corporativa, provedor remoto (API), Loja e áreas de marketin
 - **F5 — concluída.** Catálogo de integrações por categoria e o primeiro conector real, **pasta local** (sem credencial; serve pasta sincronizada de OneDrive/Google Drive/Dropbox): lê documentos para o Cérebro e grava entregas aceitas (só a versão aceita sai; nunca sobrescreve). Ação sem permissão ou com a conexão desligada é recusada e registrada. Proteções de caminho: sem sair da pasta, sem atalhos, sem conectar a pasta de dados do Aurora. Os conectores com login (Google Drive, SharePoint, Slack, Gmail, WhatsApp, HubSpot, Webhook) estão no catálogo como "em breve": exigem OAuth ou credenciais da empresa, que o Aurora não guarda.
 - **F6 — concluída.** Command Center com dados reais (`/api/overview`): o que precisa de decisão (pareceres, entregas, recuperação), andamento, problemas (inclusive rotinas que desistiram), consumo do modelo por dia no fuso da instalação e por uso (trabalhos, conversa, Cérebro), avisos do provedor (cota esgotada, CLI ausente, tempo esgotado), próximas rotinas, números da empresa e atividade recente.
 
-**O roteiro F0–F6 está concluído.** Próximos passos, fora do roteiro: identidade corporativa (hoje há um operador local), a "Estação" (conversa direta com um agente), permissões de leitura por agente, conectores com login (OAuth), provedor remoto por API, custo em dinheiro por chamada, Loja e áreas de marketing.
+**O roteiro F0–F6 está concluído.** Depois dele:
+
+- **Estação e acesso por agente — concluídos.** Conversa direta com um agente, que responde só com as fontes que pode ler; fontes restritas podem liberar agentes específicos.
+- **Contas de acesso — concluídas.** E-mail e senha, Google e Microsoft. A primeira conta é a do dono e assume os dados do operador local; depois, só entra quem o dono liberar. `AURORA_AUTH=local` mantém o uso individual sem login.
+- **Catálogo de agentes ampliado.** 69 personas em 11 áreas, com marketing completo (copy, social media/Instagram, tráfego pago, design, SEO, e-mail/CRM, vídeo, marca, performance, influenciadores) e a área E-commerce & Loja.
+- **Execução:** nesta fase, os agentes rodam na assinatura do Claude Code ou do Codex do próprio usuário, sem custo por chamada no Aurora. A execução por chave de API (pagamento por token, com custo por chamada) aparece em Configurações como "em breve".
+
+Próximos passos: conectores com login (OAuth: Google Drive, SharePoint, Gmail, Slack…) e execução por chave de API.
 
 ## 8. Decisões para você confirmar
 

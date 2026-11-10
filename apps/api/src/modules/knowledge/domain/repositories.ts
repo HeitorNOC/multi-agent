@@ -1,5 +1,5 @@
 /** O que o Cérebro guarda. Implementação em `infrastructure/`. */
-import type { SourceId } from "../../../shared/ids.ts";
+import type { ActorId, SourceId } from "../../../shared/ids.ts";
 import type { IndexableVersion, KnowledgeSource, SourceVersion, StoredVersion } from "./source.ts";
 
 export interface SourceRepository {
@@ -9,6 +9,8 @@ export interface SourceRepository {
   save(source: KnowledgeSource): Promise<void>;
   /** Da mais antiga para a mais nova. */
   list(): Promise<KnowledgeSource[]>;
+  /** Passa dono e leitura de uma pessoa para outra (a conta que assume o operador local). */
+  transferActor(from: ActorId, to: ActorId): Promise<void>;
 }
 
 export interface VersionRepository {

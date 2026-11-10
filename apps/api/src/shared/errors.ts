@@ -4,6 +4,7 @@
  */
 export type ErrorKind =
   | "invalid" // entrada mal formada
+  | "unauthenticated" // sem sessão válida
   | "not_found"
   | "forbidden"
   | "conflict" // estado atual impede a operação
@@ -26,6 +27,7 @@ export class AppError extends Error {
 
 export const invalid = (code: string, message: string) => new AppError("invalid", code, message);
 export const notFound = (code: string, message: string) => new AppError("not_found", code, message);
+export const unauthenticated = (code: string, message: string) => new AppError("unauthenticated", code, message);
 export const forbidden = (code: string, message: string) => new AppError("forbidden", code, message);
 export const conflict = (code: string, message: string) => new AppError("conflict", code, message);
 export const rateLimited = (code: string, message: string) => new AppError("rate_limited", code, message);

@@ -151,7 +151,7 @@ for (const dialect of dialects) {
 
     test("HTTP: conectar, ações e recusas com status certos", async () => {
       const { deps, folder } = await setup();
-      const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", actor: () => ana, modules: [integrationsHttp(deps)] });
+      const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", identify: () => ana, modules: [integrationsHttp(deps)] });
       cleanups.push(() => app.close());
       const call = (method: "GET" | "POST", url: string, payload?: object) => app.inject({ method, url, payload, headers: { host: "127.0.0.1:1" } });
       const created = await call("POST", "/api/integrations", { connector_id: "local_folder", name: "Docs", config: { path: folder }, permissions: { read: true } });

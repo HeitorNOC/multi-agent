@@ -10,6 +10,7 @@ const AREA_COLOR: Record<string, string> = {
   marketing: "bg-pink-500/20 text-pink-700 dark:text-pink-300",
   sales: "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300",
   customer: "bg-teal-500/20 text-teal-700 dark:text-teal-300",
+  ecommerce: "bg-rose-500/20 text-rose-700 dark:text-rose-300",
   operations: "bg-amber-500/20 text-amber-700 dark:text-amber-300",
   finance: "bg-lime-500/20 text-lime-700 dark:text-lime-300",
   people: "bg-orange-500/20 text-orange-700 dark:text-orange-300",

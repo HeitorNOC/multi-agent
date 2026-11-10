@@ -16,6 +16,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { NavLink, useLocation } from "react-router";
+import { SignedInAs } from "@/features/access/signed-in-as";
 import {
   Sidebar,
   SidebarContent,
@@ -136,7 +137,9 @@ export function AppSidebar() {
           </SidebarGroup>
         ))}
       </SidebarContent>
-      <SidebarFooter className="px-4 pb-3 text-xs text-muted-foreground group-data-[collapsible=icon]:hidden">Operador local</SidebarFooter>
+      <SidebarFooter className="group-data-[collapsible=icon]:hidden">
+        <SignedInAs />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

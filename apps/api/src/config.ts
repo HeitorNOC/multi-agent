@@ -59,11 +59,34 @@ const schema = z
     AURORA_WEB_DIR: z.string().min(1).optional(),
     /** Catálogo de personas prontas (padrão: apps/api/data/agent-templates.json). */
     AURORA_AGENT_TEMPLATES: z.string().min(1).optional(),
+    /** `accounts`: cada pessoa entra com a própria conta. `local`: uso individual, sem login. */
+    AURORA_AUTH: z.enum(["accounts", "local"]).default("accounts"),
+    /** Entrar com Google: aplicativo OAuth "Web" criado no Google Cloud da empresa. */
+    AURORA_GOOGLE_CLIENT_ID: z.string().min(1).optional(),
+    AURORA_GOOGLE_CLIENT_SECRET: z.string().min(1).optional(),
+    /** Entrar com Microsoft: aplicativo registrado no Entra ID (Azure). */
+    AURORA_MICROSOFT_CLIENT_ID: z.string().min(1).optional(),
+    AURORA_MICROSOFT_CLIENT_SECRET: z.string().min(1).optional(),
+    /** `common` (qualquer conta Microsoft), `organizations` ou o id do diretório da empresa. */
+    AURORA_MICROSOFT_TENANT: z.string().regex(/^[A-Za-z0-9.-]{1,100}$/).default("common"),
   })
   .refine((env) => env.AURORA_RESUME_RESERVE < env.AURORA_QUEUE_CAPACITY, {
     message: "AURORA_RESUME_RESERVE deve ser menor que AURORA_QUEUE_CAPACITY",
     path: ["AURORA_RESUME_RESERVE"],
+  })
+  .refine((env) => !env.AURORA_GOOGLE_CLIENT_ID === !env.AURORA_GOOGLE_CLIENT_SECRET, {
+    message: "defina AURORA_GOOGLE_CLIENT_ID e AURORA_GOOGLE_CLIENT_SECRET juntos",
+    path: ["AURORA_GOOGLE_CLIENT_ID"],
+  })
+  .refine((env) => !env.AURORA_MICROSOFT_CLIENT_ID === !env.AURORA_MICROSOFT_CLIENT_SECRET, {
+    message: "defina AURORA_MICROSOFT_CLIENT_ID e AURORA_MICROSOFT_CLIENT_SECRET juntos",
+    path: ["AURORA_MICROSOFT_CLIENT_ID"],
   });
+
+export interface OAuthClient {
+  clientId: string;
+  clientSecret: string;
+}
 
 export type DatabaseConfig = { dialect: "postgres"; url: string; schema?: string } | { dialect: "sqlite"; path: string };
 
@@ -76,6 +99,11 @@ export interface Config {
   knowledge: { answerer: "extractive" | "model"; maxBytes: number };
   chief: { engine: "rules" | "model" };
   templatesPath: string | undefined;
+  auth: {
+    mode: "accounts" | "local";
+    google: OAuthClient | undefined;
+    microsoft: (OAuthClient & { tenant: string }) | undefined;
+  };
   webDir: string | undefined;
   timeZone: string;
 }
@@ -104,6 +132,14 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     knowledge: { answerer: e.AURORA_KNOWLEDGE_ANSWERER, maxBytes: e.AURORA_KNOWLEDGE_MAX_BYTES },
     chief: { engine: e.AURORA_CHIEF_ENGINE },
     templatesPath: e.AURORA_AGENT_TEMPLATES,
+    auth: {
+      mode: e.AURORA_AUTH,
+      google: e.AURORA_GOOGLE_CLIENT_ID && e.AURORA_GOOGLE_CLIENT_SECRET ? { clientId: e.AURORA_GOOGLE_CLIENT_ID, clientSecret: e.AURORA_GOOGLE_CLIENT_SECRET } : undefined,
+      microsoft:
+        e.AURORA_MICROSOFT_CLIENT_ID && e.AURORA_MICROSOFT_CLIENT_SECRET
+          ? { clientId: e.AURORA_MICROSOFT_CLIENT_ID, clientSecret: e.AURORA_MICROSOFT_CLIENT_SECRET, tenant: e.AURORA_MICROSOFT_TENANT }
+          : undefined,
+    },
     timeZone: e.AURORA_TIMEZONE,
     webDir: e.AURORA_WEB_DIR === "none" ? undefined : (e.AURORA_WEB_DIR ?? DEFAULT_WEB_DIR),
   };

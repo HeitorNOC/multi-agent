@@ -87,6 +87,12 @@ export class SqlSourceRepository implements SourceRepository {
   async list() {
     return (await this.sql.all<SourceRow>("SELECT * FROM knowledge_sources ORDER BY ordinal")).map(toSource);
   }
+
+  async transferActor(from: ActorId, to: ActorId) {
+    await this.sql.run("UPDATE knowledge_sources SET owner = $2 WHERE owner = $1", [from, to]);
+    // Leitores são uma lista JSON de textos: troca o item inteiro, com as aspas.
+    await this.sql.run("UPDATE knowledge_sources SET readers = REPLACE(readers, $1, $2)", [JSON.stringify(from), JSON.stringify(to)]);
+  }
 }
 
 export class SqlVersionRepository implements VersionRepository {

@@ -71,6 +71,10 @@ export class SqlConversationRepository implements ConversationRepository {
     );
     return rows.map((r) => ({ ...toConversation(r), messageCount: Number(r.message_count) }));
   }
+
+  async transferActor(from: ActorId, to: ActorId) {
+    await this.sql.run("UPDATE conversations SET actor = $2 WHERE actor = $1", [from, to]);
+  }
 }
 
 export class SqlMessageRepository implements MessageRepository {

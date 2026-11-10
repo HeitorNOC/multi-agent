@@ -15,7 +15,7 @@ writeFileSync(join(dir, "dist", "assets", "app-abc.js"), "console.log(1)");
 writeFileSync(join(dir, "segredo.txt"), "não deve sair");
 
 test("serve a SPA: arquivos, volta para index.html, API intocada, nada fora da pasta", async () => {
-  const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", actor: () => ActorId.parse("x"), modules: [staticWeb(join(dir, "dist"))] });
+  const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", identify: () => ActorId.parse("x"), modules: [staticWeb(join(dir, "dist"))] });
   const get = (url: string) => app.inject({ method: "GET", url, headers: { host: "127.0.0.1:1" } });
   const asset = await get("/assets/app-abc.js");
   assert.deepEqual([asset.statusCode, asset.headers["content-type"], asset.headers["cache-control"]], [200, "text/javascript; charset=utf-8", "public, max-age=31536000, immutable"]);

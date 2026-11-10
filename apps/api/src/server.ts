@@ -7,7 +7,6 @@ import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import type { Config, DatabaseConfig } from "./config.ts";
 import { systemClock, type Clock } from "./shared/clock.ts";
-import { ActorId } from "./shared/ids.ts";
 import type { Database } from "./platform/database/database.ts";
 import { migrate } from "./platform/database/migrate.ts";
 import { PostgresDatabase } from "./platform/database/postgres.ts";
@@ -61,6 +60,11 @@ import type { TemplateCatalog } from "./modules/agents/domain/template.ts";
 import { agentsStore } from "./modules/agents/infrastructure/sql-agents.ts";
 import type { HttpModule } from "./platform/http/app.ts";
 import { openWorkHttp } from "./modules/open-work/http/routes.ts";
+import type { AccountsDeps } from "./modules/accounts/application/accounts.ts";
+import { LOCAL_OPERATOR } from "./modules/accounts/domain/account.ts";
+import { accountsHttp, localAccessHttp, sessionIdentity } from "./modules/accounts/http/routes.ts";
+import { GoogleOidc, MicrosoftOidc } from "./modules/accounts/infrastructure/oidc.ts";
+import { accountsStore } from "./modules/accounts/infrastructure/sql-accounts.ts";
 
 export interface ServerParts {
   /** Especialistas do trabalho aberto. */
@@ -70,6 +74,8 @@ export interface ServerParts {
   model: ModelClient | null;
   /** Troca a política de trabalho (testes); padrão: trabalho aberto. */
   policy?: WorkPolicy;
+  /** Troca o `fetch` dos logins Google/Microsoft (testes). */
+  oauthFetch?: typeof fetch;
   clock?: Clock;
 }
 
@@ -78,7 +84,6 @@ export interface RunningServer {
   close(): Promise<void>;
 }
 
-const LOCAL_OPERATOR = ActorId.parse("operador-local");
 /** No trabalho aberto, a conversa abre um único tipo de trabalho: o pedido é o texto do gestor. */
 const OPEN_WORK_OFFER = { id: "open", title: "Trabalho com os especialistas", keywords: [] };
 /** Corpo das rotas de envio do Cérebro: o arquivo em base64 (≈ 4/3 do tamanho) e os campos. */
@@ -188,10 +193,27 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     station: stationResponder({ team, search, answerer: knowledge.answerer }),
   };
 
+  // Acesso: contas (senha, Google, Microsoft) ou, no uso individual, o operador local.
+  const accounts: AccountsDeps = {
+    uow: new UnitOfWork(db, accountsStore(clock)),
+    clock,
+    providers: {
+      google: config.auth.google && new GoogleOidc(config.auth.google, { fetch: parts.oauthFetch }),
+      microsoft: config.auth.microsoft && new MicrosoftOidc(config.auth.microsoft, { fetch: parts.oauthFetch }),
+    },
+    async adoptLocalOperator(to, tx) {
+      await knowledgeUow.join(tx).sources.transferActor(LOCAL_OPERATOR, to);
+      await conversations.uow.join(tx).conversations.transferActor(LOCAL_OPERATOR, to);
+    },
+    afterAdoption: () => search.invalidate(),
+  };
+  const local = config.auth.mode === "local";
+
   const app = await createHttpApp({
     origin: () => url,
-    actor: () => LOCAL_OPERATOR,
+    identify: local ? () => LOCAL_OPERATOR : sessionIdentity(accounts),
     modules: [
+      local ? localAccessHttp() : accountsHttp(accounts),
       jobsHttp({ jobs, wake: () => void scheduler.wake(), workerAccess: supervisor }),
       knowledgeHttp(knowledge, { uploadLimit: uploadLimit(config.knowledge.maxBytes) }),
       openWorkHttp(gateway, supervisor),
@@ -239,6 +261,7 @@ function settingsHttp(config: Config, modelReady: boolean): HttpModule {
       worker: { configured: !!config.worker.command, checkpoints: !!config.worker.checkpointDsn },
       queue: config.queue,
       time_zone: config.timeZone,
+      auth: { mode: config.auth.mode, google: !!config.auth.google, microsoft: !!config.auth.microsoft },
     }));
   };
 }

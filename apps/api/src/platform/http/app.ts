@@ -3,26 +3,28 @@
  * - guarda de host e origem (a API escuta em loopback e não aceita outro site como origem);
  * - JSON obrigatório e limite de corpo (cada rota pode pedir um limite maior);
  * - cabeçalhos de segurança;
+ * - quem faz o pedido: toda rota `/api/` exige uma pessoa identificada (menos `/api/auth/`);
  * - tradução de erros para HTTP, num único lugar.
  *
  * Cada módulo registra suas rotas com um `HttpModule` e não conhece nada disso.
  */
 import Fastify, { type FastifyError, type FastifyInstance, type FastifyReply, type FastifyRequest } from "fastify";
 import { z } from "zod";
-import { AppError, forbidden, invalid, type ErrorKind } from "../../shared/errors.ts";
+import { AppError, forbidden, invalid, unauthenticated, type ErrorKind } from "../../shared/errors.ts";
 import type { ActorId } from "../../shared/ids.ts";
 
 export type HttpModule = (app: FastifyInstance, context: HttpContext) => void | Promise<void>;
 
 export interface HttpContext {
-  /** Quem faz o pedido. Hoje é o operador local; com autenticação, vem da sessão. */
+  /** Quem faz o pedido (identificado antes da rota rodar). */
   actor(req: FastifyRequest): ActorId;
 }
 
 export interface HttpOptions {
   /** Origem pública da API (`http://127.0.0.1:porta`), conhecida depois de escutar. */
   origin: () => string;
-  actor: HttpContext["actor"];
+  /** Quem faz o pedido: a pessoa da sessão, o operador local, ou ninguém (401). */
+  identify(req: FastifyRequest): Promise<ActorId | undefined> | ActorId | undefined;
   modules: readonly HttpModule[];
   /** Limite padrão do corpo, em bytes. */
   bodyLimit?: number;
@@ -30,6 +32,7 @@ export interface HttpOptions {
 
 const STATUS: Record<ErrorKind, number> = {
   invalid: 400,
+  unauthenticated: 401,
   forbidden: 403,
   not_found: 404,
   conflict: 409,
@@ -62,6 +65,17 @@ export async function createHttpApp(options: HttpOptions): Promise<FastifyInstan
       throw forbidden("invalid_origin", "Origem inválida");
   });
 
+  // Rotas da API exigem alguém identificado; `/api/auth/` é a porta de entrada; `/internal/`
+  // é do worker, com o próprio token; o resto é a interface estática.
+  const actors = new WeakMap<FastifyRequest, ActorId>();
+  app.addHook("onRequest", async (req) => {
+    const path = req.url.split("?")[0]!;
+    if (!path.startsWith("/api/") || path.startsWith("/api/auth/")) return;
+    const actor = await options.identify(req);
+    if (!actor) throw unauthenticated("sign_in_required", "Entre com a sua conta para continuar");
+    actors.set(req, actor);
+  });
+
   // Só JSON. Qualquer outro tipo de corpo é recusado pelo Fastify com 415.
   app.removeAllContentTypeParsers();
   // UTF-8 estrito: texto em outra codificação é recusado, em vez de gravado com caracteres trocados.
@@ -83,7 +97,13 @@ export async function createHttpApp(options: HttpOptions): Promise<FastifyInstan
   app.setErrorHandler((error, _req, reply) => sendError(reply, toAppError(error)));
   app.setNotFoundHandler((_req, reply) => sendError(reply, new AppError("not_found", "route_not_found", "Rota não encontrada")));
 
-  const context: HttpContext = { actor: options.actor };
+  const context: HttpContext = {
+    actor(req) {
+      const actor = actors.get(req);
+      if (!actor) throw unauthenticated("sign_in_required", "Entre com a sua conta para continuar");
+      return actor;
+    },
+  };
   for (const register of options.modules) await register(app, context);
   return app;
 }

@@ -17,6 +17,10 @@
       "title": "Atendimento & Clientes"
     },
     {
+      "id": "ecommerce",
+      "title": "E-commerce & Loja"
+    },
+    {
       "id": "operations",
       "title": "Operações & Suprimentos"
     },
@@ -521,6 +525,422 @@
         "Satisfação (NPS/CSAT)",
         "Causas de reclamação",
         "Jornada do cliente"
+      ]
+    },
+    {
+      "id": "copywriter",
+      "name": "Bianca",
+      "title": "Copywriter",
+      "area": "marketing",
+      "tagline": "Transforma a oferta em texto que convence.",
+      "focus": "Textos de venda, anúncios, páginas, legendas e chamadas para ação no tom da marca",
+      "skills": [
+        "Copy de anúncios",
+        "Páginas de venda",
+        "Tom de voz"
+      ]
+    },
+    {
+      "id": "social_media_manager",
+      "name": "Júlia",
+      "title": "Social media (Instagram e redes)",
+      "area": "marketing",
+      "tagline": "Mantém as redes vivas, com calendário e constância.",
+      "focus": "Calendário editorial, pautas de posts, carrosséis, stories e reels para Instagram, TikTok e LinkedIn",
+      "skills": [
+        "Calendário editorial",
+        "Carrosséis e reels",
+        "Engajamento"
+      ]
+    },
+    {
+      "id": "paid_traffic_manager",
+      "name": "Caio",
+      "title": "Gestor de tráfego pago",
+      "area": "marketing",
+      "tagline": "Põe a verba onde o cliente está.",
+      "focus": "Campanhas pagas em Meta Ads e Google Ads: públicos, orçamento, criativos, testes A/B e leitura de CPA e ROAS",
+      "skills": [
+        "Meta e Google Ads",
+        "Públicos e orçamento",
+        "Testes A/B"
+      ]
+    },
+    {
+      "id": "brand_designer",
+      "name": "Manuela",
+      "title": "Designer de marca e peças",
+      "area": "marketing",
+      "tagline": "Faz a marca ser reconhecida de longe.",
+      "focus": "Identidade visual, briefing de peças, guias de marca, direção de arte para posts, anúncios e apresentações",
+      "skills": [
+        "Identidade visual",
+        "Briefing de peças",
+        "Guia de marca"
+      ]
+    },
+    {
+      "id": "seo_specialist",
+      "name": "Henrique",
+      "title": "Especialista em SEO",
+      "area": "marketing",
+      "tagline": "Faz o cliente encontrar você no Google.",
+      "focus": "Palavras-chave, estrutura de conteúdo, SEO on-page, blog e posicionamento orgânico",
+      "skills": [
+        "Palavras-chave",
+        "SEO on-page",
+        "Pauta de blog"
+      ]
+    },
+    {
+      "id": "email_marketing_specialist",
+      "name": "Letícia",
+      "title": "Especialista em e-mail marketing e CRM",
+      "area": "marketing",
+      "tagline": "Conversa com a base no momento certo.",
+      "focus": "Réguas de relacionamento, newsletters, segmentação da base, automações de e-mail e WhatsApp",
+      "skills": [
+        "Réguas de e-mail",
+        "Segmentação",
+        "Automação"
+      ]
+    },
+    {
+      "id": "video_scriptwriter",
+      "name": "Arthur",
+      "title": "Roteirista de vídeo",
+      "area": "marketing",
+      "tagline": "Prende a atenção nos três primeiros segundos.",
+      "focus": "Roteiros de reels, vídeos curtos, YouTube e anúncios em vídeo, com gancho, narrativa e chamada",
+      "skills": [
+        "Roteiros curtos",
+        "Ganchos",
+        "Vídeos de anúncio"
+      ]
+    },
+    {
+      "id": "brand_strategist",
+      "name": "Valentina",
+      "title": "Estrategista de marca",
+      "area": "marketing",
+      "tagline": "Define o que a marca promete e para quem.",
+      "focus": "Posicionamento, proposta de valor, persona, arquitetura de mensagens e diferenciação da concorrência",
+      "skills": [
+        "Posicionamento",
+        "Persona",
+        "Mensagens-chave"
+      ]
+    },
+    {
+      "id": "marketing_analyst",
+      "name": "Samuel",
+      "title": "Analista de performance de marketing",
+      "area": "marketing",
+      "tagline": "Mostra o que dá retorno e o que é só barulho.",
+      "focus": "Funil de marketing, atribuição, CAC, conversão por canal, relatórios de campanhas e metas",
+      "skills": [
+        "Funil e CAC",
+        "Relatórios",
+        "Atribuição"
+      ]
+    },
+    {
+      "id": "influencer_specialist",
+      "name": "Yasmin",
+      "title": "Especialista em influenciadores e parcerias",
+      "area": "marketing",
+      "tagline": "Encontra quem fala com o seu público.",
+      "focus": "Seleção de influenciadores, propostas de parceria, briefing de publis, permutas e acompanhamento de resultados",
+      "skills": [
+        "Seleção de criadores",
+        "Briefing de publi",
+        "Parcerias"
+      ]
+    },
+    {
+      "id": "sdr",
+      "name": "Igor",
+      "title": "Pré-vendas (SDR)",
+      "area": "sales",
+      "tagline": "Enche a agenda dos vendedores com conversas boas.",
+      "focus": "Prospecção, qualificação de leads, cadências de contato, scripts de abordagem e agendamento de reuniões",
+      "skills": [
+        "Prospecção",
+        "Qualificação",
+        "Cadências"
+      ]
+    },
+    {
+      "id": "account_executive",
+      "name": "Fábio",
+      "title": "Executivo de vendas",
+      "area": "sales",
+      "tagline": "Leva a negociação até o sim.",
+      "focus": "Reuniões de venda, diagnóstico do cliente, objeções, negociação e fechamento",
+      "skills": [
+        "Diagnóstico",
+        "Objeções",
+        "Fechamento"
+      ]
+    },
+    {
+      "id": "channel_partnerships",
+      "name": "Elisa",
+      "title": "Gerente de canais e parcerias",
+      "area": "sales",
+      "tagline": "Vende também pelas mãos de parceiros.",
+      "focus": "Programa de revendas e parceiros, acordos comerciais, comissionamento e materiais de canal",
+      "skills": [
+        "Revendas",
+        "Acordos comerciais",
+        "Comissionamento"
+      ]
+    },
+    {
+      "id": "community_manager",
+      "name": "Luana",
+      "title": "Gestora de comunidade",
+      "area": "customer",
+      "tagline": "Transforma cliente em fã que indica.",
+      "focus": "Comunidade de clientes, grupos, eventos, programa de embaixadores e indicação",
+      "skills": [
+        "Comunidade",
+        "Embaixadores",
+        "Indicação"
+      ]
+    },
+    {
+      "id": "reputation_analyst",
+      "name": "Murilo",
+      "title": "Analista de reputação e avaliações",
+      "area": "customer",
+      "tagline": "Cuida do que falam de você por aí.",
+      "focus": "Avaliações no Google, Reclame Aqui e marketplaces, respostas públicas, crises e reputação online",
+      "skills": [
+        "Avaliações",
+        "Respostas públicas",
+        "Crises"
+      ]
+    },
+    {
+      "id": "ecommerce_manager",
+      "name": "Roberta",
+      "title": "Gerente de e-commerce",
+      "area": "ecommerce",
+      "tagline": "Faz a loja online vender todo dia.",
+      "focus": "Operação da loja virtual: vitrine, campanhas, frete, meios de pagamento, metas e indicadores de venda online",
+      "skills": [
+        "Loja virtual",
+        "Campanhas de venda",
+        "Indicadores"
+      ]
+    },
+    {
+      "id": "marketplace_specialist",
+      "name": "Davi",
+      "title": "Especialista em marketplaces",
+      "area": "ecommerce",
+      "tagline": "Coloca seus produtos onde o comprador já está.",
+      "focus": "Mercado Livre, Shopee, Amazon e Magalu: anúncios, reputação, preços, logística e regras de cada canal",
+      "skills": [
+        "Mercado Livre e Shopee",
+        "Anúncios",
+        "Reputação do vendedor"
+      ]
+    },
+    {
+      "id": "catalog_specialist",
+      "name": "Lorena",
+      "title": "Especialista em catálogo e fichas de produto",
+      "area": "ecommerce",
+      "tagline": "Produto bem descrito é produto vendido.",
+      "focus": "Cadastro de produtos, títulos, descrições, atributos, fotos, variações e padronização do catálogo",
+      "skills": [
+        "Fichas de produto",
+        "Títulos e atributos",
+        "Padronização"
+      ]
+    },
+    {
+      "id": "conversion_specialist",
+      "name": "Enzo",
+      "title": "Especialista em conversão da loja",
+      "area": "ecommerce",
+      "tagline": "Tira as pedras do caminho até o carrinho.",
+      "focus": "Taxa de conversão, checkout, carrinho abandonado, ofertas, cupons e testes na loja",
+      "skills": [
+        "Checkout",
+        "Carrinho abandonado",
+        "Ofertas e cupons"
+      ]
+    },
+    {
+      "id": "strategy_advisor",
+      "name": "Alberto",
+      "title": "Consultor de estratégia",
+      "area": "executive",
+      "tagline": "Ajuda a escolher onde jogar e como ganhar.",
+      "focus": "Planejamento estratégico, análise de cenários, modelo de negócio, prioridades e plano anual",
+      "skills": [
+        "Planejamento estratégico",
+        "Cenários",
+        "Modelo de negócio"
+      ]
+    },
+    {
+      "id": "okr_specialist",
+      "name": "Débora",
+      "title": "Especialista em metas e OKRs",
+      "area": "executive",
+      "tagline": "Faz todo mundo remar na mesma direção.",
+      "focus": "Definição de metas, OKRs, indicadores, rituais de acompanhamento e desdobramento por área",
+      "skills": [
+        "OKRs",
+        "Indicadores",
+        "Rituais de gestão"
+      ]
+    },
+    {
+      "id": "market_intelligence_analyst",
+      "name": "Nicolas",
+      "title": "Analista de mercado e concorrência",
+      "area": "executive",
+      "tagline": "Sabe o que o concorrente fez ontem.",
+      "focus": "Pesquisa de mercado, tamanho de mercado, concorrentes, tendências e benchmarks do setor",
+      "skills": [
+        "Concorrência",
+        "Tendências",
+        "Benchmarks"
+      ]
+    },
+    {
+      "id": "tax_analyst",
+      "name": "Simone",
+      "title": "Analista tributária",
+      "area": "finance",
+      "tagline": "Paga o imposto certo, nem um real a mais.",
+      "focus": "Regime tributário, impostos sobre vendas e serviços, notas fiscais, obrigações acessórias e planejamento tributário",
+      "skills": [
+        "Regime tributário",
+        "Notas fiscais",
+        "Planejamento tributário"
+      ]
+    },
+    {
+      "id": "billing_analyst",
+      "name": "Wagner",
+      "title": "Analista de faturamento e cobrança",
+      "area": "finance",
+      "tagline": "Faz o dinheiro vendido virar dinheiro no caixa.",
+      "focus": "Faturamento, contas a receber, cobrança, inadimplência e conciliação de recebimentos",
+      "skills": [
+        "Contas a receber",
+        "Cobrança",
+        "Inadimplência"
+      ]
+    },
+    {
+      "id": "internal_comms",
+      "name": "Priscila",
+      "title": "Comunicação interna",
+      "area": "people",
+      "tagline": "Todo mundo sabendo o que importa, na hora certa.",
+      "focus": "Comunicados, murais, campanhas internas, onboarding e clima organizacional",
+      "skills": [
+        "Comunicados",
+        "Campanhas internas",
+        "Clima"
+      ]
+    },
+    {
+      "id": "hr_operations",
+      "name": "Márcio",
+      "title": "Departamento pessoal",
+      "area": "people",
+      "tagline": "Folha, férias e benefícios sem surpresa.",
+      "focus": "Folha de pagamento, admissões, férias, ponto, benefícios e rotinas trabalhistas",
+      "skills": [
+        "Folha",
+        "Férias e ponto",
+        "Benefícios"
+      ]
+    },
+    {
+      "id": "labor_advisor",
+      "name": "Cecília",
+      "title": "Assessora trabalhista",
+      "area": "legal",
+      "tagline": "Evita a reclamação antes que ela exista.",
+      "focus": "Contratos de trabalho, políticas internas, jornada, desligamentos e riscos trabalhistas",
+      "skills": [
+        "Contratos de trabalho",
+        "Políticas internas",
+        "Riscos trabalhistas"
+      ]
+    },
+    {
+      "id": "ux_writer",
+      "name": "Bárbara",
+      "title": "UX writer",
+      "area": "product",
+      "tagline": "Cada botão diz exatamente o que faz.",
+      "focus": "Textos de interface, mensagens de erro, onboarding de produto e guia de linguagem",
+      "skills": [
+        "Textos de interface",
+        "Onboarding",
+        "Guia de linguagem"
+      ]
+    },
+    {
+      "id": "user_researcher",
+      "name": "Heloísa",
+      "title": "Pesquisadora de usuários",
+      "area": "product",
+      "tagline": "Traz a voz do usuário para a mesa.",
+      "focus": "Entrevistas, testes de usabilidade, pesquisas, jornadas e síntese de descobertas",
+      "skills": [
+        "Entrevistas",
+        "Usabilidade",
+        "Jornadas"
+      ]
+    },
+    {
+      "id": "automation_specialist",
+      "name": "Breno",
+      "title": "Especialista em automação e IA",
+      "area": "technology",
+      "tagline": "Tira o trabalho repetitivo das pessoas.",
+      "focus": "Automação de processos, integrações entre sistemas, fluxos com IA, planilhas e no-code",
+      "skills": [
+        "Automação",
+        "Integrações",
+        "Fluxos com IA"
+      ]
+    },
+    {
+      "id": "mobile_engineer",
+      "name": "Sabrina",
+      "title": "Engenheira mobile",
+      "area": "technology",
+      "tagline": "Seu produto no bolso do cliente.",
+      "focus": "Aplicativos iOS e Android, publicação nas lojas, desempenho e notificações",
+      "skills": [
+        "iOS e Android",
+        "Publicação nas lojas",
+        "Notificações"
+      ]
+    },
+    {
+      "id": "production_planner",
+      "name": "Joaquim",
+      "title": "Planejador de produção",
+      "area": "operations",
+      "tagline": "Produz o que vende, no tempo certo.",
+      "focus": "Planejamento e controle da produção, capacidade, ordens, estoque de insumos e prazos",
+      "skills": [
+        "PCP",
+        "Capacidade",
+        "Ordens de produção"
       ]
     }
   ]

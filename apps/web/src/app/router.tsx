@@ -1,4 +1,4 @@
-import { createBrowserRouter, Link } from "react-router";
+import { createBrowserRouter, Link, Navigate } from "react-router";
 import { EmptyState } from "@/components/common";
 import { ComingSoon, UPCOMING } from "@/features/coming-soon";
 import { CommandCenterPage } from "@/features/command-center/command-center-page";
@@ -46,6 +46,8 @@ export const router = createBrowserRouter([
       { path: "organograma", element: <OrganogramPage /> },
       { path: "configuracoes", element: <SettingsPage /> },
       { path: "montar", element: <SetupPage /> },
+      // Volta do login com Google/Microsoft já com sessão.
+      { path: "entrar", element: <Navigate to="/" replace /> },
       ...Object.keys(UPCOMING).map((area) => ({ path: area, element: <ComingSoon area={area} /> })),
       { path: "*", element: <NotFound /> },
     ],

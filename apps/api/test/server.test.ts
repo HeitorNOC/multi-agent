@@ -55,6 +55,7 @@ test("servidor composto: pedido → worker → aprovação → efeito → conclu
   const config = loadConfig({
     AURORA_SQLITE_PATH: join(dir, "aurora.db"),
     AURORA_WORKER_COMMAND: JSON.stringify([process.execPath, "-e", FAKE_WORKER]),
+    AURORA_AUTH: "local",
   });
   const server = await startServer(config, { policy: testPolicy, templates: { areas: [], templates: [] }, model: null });
   try {

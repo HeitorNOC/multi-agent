@@ -26,7 +26,7 @@ async function setup() {
   const deps = { uow, clock, search: new KnowledgeSearch(uow, clock, (p) => new Bm25Index(p)), answerer: new ExtractiveAnswerer(), maxBytes: 100_000 };
   const app = await createHttpApp({
     origin: () => "http://127.0.0.1:4100",
-    actor: () => ActorId.parse("ana"),
+    identify: () => ActorId.parse("ana"),
     modules: [knowledgeHttp(deps, { uploadLimit: 200_000 })],
   });
   opened.push({ close: () => app.close() });

@@ -13,6 +13,9 @@ export class ApiError extends Error {
   }
 }
 
+/** Avisado quando a sessão acabou (401): a tela volta para o login. */
+export const SIGNED_OUT_EVENT = "aurora:signed-out";
+
 /** Código da falha de conexão com a API (status 0). */
 export const OFFLINE = "offline";
 
@@ -32,6 +35,8 @@ async function request<T>(method: "GET" | "POST", path: string, body?: unknown, 
     throw new ApiError(0, OFFLINE, "A API não respondeu. Os dados mostrados são os últimos carregados; a tela tenta de novo sozinha.");
   }
   const data = (await response.json().catch(() => ({}))) as { error?: string; code?: string };
+  // A sessão acabou no meio do uso. As rotas de login respondem 401 por si só: não avisam.
+  if (response.status === 401 && data.code === "sign_in_required" && !path.startsWith("/api/auth/")) window.dispatchEvent(new Event(SIGNED_OUT_EVENT));
   if (!response.ok) throw new ApiError(response.status, data.code ?? "unknown", data.error ?? `Falha (${response.status})`);
   return data as T;
 }
@@ -301,6 +306,7 @@ export interface Settings {
   database: "sqlite" | "postgres";
   worker: { configured: boolean; checkpoints: boolean };
   queue: { capacity: number; resumeReserve: number; maxWorkers: number };
+  auth: { mode: "accounts" | "local"; google: boolean; microsoft: boolean };
 }
 
 export const agentsApi = {
@@ -466,3 +472,50 @@ export interface Overview {
 }
 
 export const overviewApi = { get: () => get<Overview>("/api/overview") };
+
+// ── Acesso ───────────────────────────────────────────────────────────────────
+
+export type LoginProvider = "google" | "microsoft";
+export type Role = "owner" | "member";
+
+export interface AuthStatus {
+  mode: "accounts" | "local";
+  setup_required: boolean;
+  providers: LoginProvider[];
+}
+
+export interface Me {
+  id: string;
+  email: string | null;
+  name: string;
+  role: Role;
+}
+
+export interface AccessList {
+  accounts: (Me & { email: string; password: boolean; providers: LoginProvider[]; disabled: boolean; created_at: string })[];
+  invites: { email: string; role: Role; invited_by: string; created_at: string }[];
+}
+
+interface NewAccount {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export const authApi = {
+  status: () => get<AuthStatus>("/api/auth/status"),
+  me: () => get<Me>("/api/auth/me"),
+  setup: (input: NewAccount) => post<Me>("/api/auth/setup", input),
+  signUp: (input: NewAccount) => post<Me>("/api/auth/sign-up", input),
+  signIn: (input: { email: string; password: string }) => post<Me>("/api/auth/sign-in", input),
+  signOut: () => post<void>("/api/auth/sign-out"),
+  /** Navegação completa: o navegador vai ao Google/Microsoft e volta logado. */
+  providerUrl: (provider: LoginProvider) => `/api/auth/oauth/${provider}/start`,
+};
+
+export const accessApi = {
+  list: () => get<AccessList>("/api/access"),
+  invite: (email: string, role: Role) => post<AccessList>("/api/access/invites", { email, role }),
+  removeInvite: (email: string) => post<AccessList>("/api/access/invites/remove", { email }),
+  setEnabled: (id: string, enabled: boolean) => post<AccessList>(`/api/access/accounts/${encodeURIComponent(id)}`, { enabled }),
+};

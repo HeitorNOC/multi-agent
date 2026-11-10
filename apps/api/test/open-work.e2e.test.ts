@@ -63,6 +63,7 @@ async function start(mode = `ok:${AGENTS}`) {
   writeFileSync(calls, "");
   const config = loadConfig({
     AURORA_SQLITE_PATH: join(dir, `aurora-${n}.db`),
+    AURORA_AUTH: "local",
     AURORA_WORKER_COMMAND: JSON.stringify([python, "-I", worker]),
     AURORA_CHECKPOINT_DSN: checkpointDsn,
   });
@@ -198,6 +199,7 @@ test("API cai no meio de uma chamada ao modelo: não repete sozinha; a central a
   const modelCalls = () => readFileSync(calls, "utf8").split("\n").filter(Boolean);
   const env = (mode: string) => ({
     AURORA_SQLITE_PATH: join(dir, "aurora-crash.db"),
+    AURORA_AUTH: "local",
     AURORA_WORKER_COMMAND: JSON.stringify([python, "-I", worker]),
     AURORA_CHECKPOINT_DSN: checkpointDsn,
     AURORA_MODEL_PROVIDER: "claude",

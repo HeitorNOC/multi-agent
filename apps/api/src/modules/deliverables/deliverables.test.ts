@@ -162,7 +162,7 @@ for (const dialect of dialects) {
       await admitJob(jobs, { request: { goal: "Analisar compras" } });
       const { receipt, id: jobId } = await runToEffect("Três cotações");
       let woke = 0;
-      const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", actor: () => ana, modules: [deliverablesHttp(deps, { onJobOpened: () => void woke++ })] });
+      const app = await createHttpApp({ origin: () => "http://127.0.0.1:1", identify: () => ana, modules: [deliverablesHttp(deps, { onJobOpened: () => void woke++ })] });
       opened.push({ close: () => app.close() });
       const call = (method: "GET" | "POST", url: string, payload?: object) => app.inject({ method, url, payload, headers: { host: "127.0.0.1:1" } });
       const id = receipt.deliverable_id;
