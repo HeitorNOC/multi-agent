@@ -3,7 +3,6 @@ import { Construction } from "lucide-react";
 import { EmptyState, PageHeader } from "@/components/common";
 
 export const UPCOMING: Record<string, { title: string; phase: string; text: string }> = {
-  integracoes: { title: "Integrações", phase: "F5", text: "Catálogo de conectores por categoria; ações externas só com autorização." },
 };
 
 export function ComingSoon({ area }: { area: keyof typeof UPCOMING }) {

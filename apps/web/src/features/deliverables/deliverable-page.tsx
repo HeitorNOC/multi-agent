@@ -4,13 +4,13 @@
  */
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Check, Download, RotateCcw } from "lucide-react";
+import { ArrowLeft, Check, Download, FolderOutput, RotateCcw } from "lucide-react";
 import { Link, useParams } from "react-router";
 import { ErrorNotice, LoadingRows, ToneBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { deliverablesApi, type DeliverableDetail } from "@/lib/api";
+import { deliverablesApi, integrationsApi, type DeliverableDetail } from "@/lib/api";
 import { DELIVERABLE_STATUS, EVENT_LABEL, formatDateTime, shortId } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { ReportView } from "../jobs/report-view";
@@ -125,6 +125,45 @@ export function DeliverablePage() {
   );
 }
 
+/** Entrega aceita: pode sair da empresa por uma conexão com permissão de escrita. */
+function AcceptedActions({ data }: { data: DeliverableDetail }) {
+  const connections = useQuery({ queryKey: ["connections"], queryFn: integrationsApi.list });
+  const writable = (connections.data?.connections ?? []).filter((c) => c.status === "active" && c.permissions.write);
+  const [target, setTarget] = useState("");
+  const save = useMutation({ mutationFn: () => integrationsApi.exportDeliverable(target || writable[0]!.id, data.id, data.current_version) });
+  return (
+    <div className="space-y-3 rounded-xl border bg-card p-4 text-sm">
+      <p>
+        Aceita por {data.decided_by} na versão {data.current_version}.
+      </p>
+      {writable.length > 0 ? (
+        <div className="flex flex-wrap items-center gap-2">
+          <select aria-label="Salvar em" className="h-9 rounded-md border bg-transparent px-2" value={target} onChange={(e) => setTarget(e.target.value)}>
+            {writable.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+          <Button size="sm" variant="outline" disabled={save.isPending} onClick={() => save.mutate()}>
+            <FolderOutput /> Salvar na pasta
+          </Button>
+          {save.data && <span className="text-xs text-success">Salva como “{save.data.file}”.</span>}
+        </div>
+      ) : (
+        <p className="text-xs text-muted-foreground">
+          Para salvar esta entrega fora do Aurora,{" "}
+          <Link to="/integracoes" className="underline">
+            conecte uma pasta com permissão de escrita
+          </Link>
+          .
+        </p>
+      )}
+      <ErrorNotice error={save.error} title="Não salvou" />
+    </div>
+  );
+}
+
 function Decision({ data }: { data: DeliverableDetail }) {
   const queryClient = useQueryClient();
   const [asking, setAsking] = useState(false);
@@ -141,8 +180,7 @@ function Decision({ data }: { data: DeliverableDetail }) {
       refresh();
     },
   });
-  if (data.status === "accepted")
-    return <p className="rounded-xl border bg-card p-4 text-sm">Aceita por {data.decided_by} na versão {data.current_version}.</p>;
+  if (data.status === "accepted") return <AcceptedActions data={data} />;
   if (data.status === "changes_requested")
     return (
       <p className="rounded-xl border bg-card p-4 text-sm">

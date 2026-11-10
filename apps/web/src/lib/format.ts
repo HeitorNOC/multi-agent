@@ -76,4 +76,11 @@ export const EVENT_LABEL: Record<string, string> = {
   deliverable_changes_requested: "Ajustes pedidos",
   routine_fired: "Rotina disparou",
   routine_refused: "Rotina recusada",
+  connection_created: "Conexão criada",
+  connection_updated: "Permissões ajustadas",
+  connection_disconnected: "Desconectada",
+  connection_reconnected: "Reconectada",
+  file_imported: "Arquivo importado para o Cérebro",
+  deliverable_exported: "Entrega salva",
+  action_blocked: "Ação bloqueada",
 };

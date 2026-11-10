@@ -9,6 +9,7 @@ import { JobsPage } from "@/features/jobs/jobs-page";
 import { AgentsPage } from "@/features/agents/agents-page";
 import { DeliverablePage } from "@/features/deliverables/deliverable-page";
 import { DeliverablesPage } from "@/features/deliverables/deliverables-page";
+import { IntegrationsPage } from "@/features/integrations/integrations-page";
 import { KnowledgePage } from "@/features/knowledge/knowledge-page";
 import { OrganogramPage } from "@/features/organogram/organogram-page";
 import { RoutinesPage } from "@/features/routines/routines-page";
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
       { path: "entregas", element: <DeliverablesPage /> },
       { path: "entregas/:id", element: <DeliverablePage /> },
       { path: "rotinas", element: <RoutinesPage /> },
+      { path: "integracoes", element: <IntegrationsPage /> },
       { path: "agentes", element: <AgentsPage /> },
       { path: "organograma", element: <OrganogramPage /> },
       { path: "configuracoes", element: <SettingsPage /> },

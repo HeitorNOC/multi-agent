@@ -393,3 +393,45 @@ export const routinesApi = {
   archive: (id: string) => post<{ archived: boolean }>(`/api/routines/${id}/archive`),
   runNow: (id: string) => post<RoutineRun>(`/api/routines/${id}/run-now`),
 };
+
+// ── Integrações ──────────────────────────────────────────────────────────────
+
+export interface ConnectorDef {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  capabilities: { read?: string; write?: string };
+  available: boolean;
+  connections: number;
+}
+
+export interface Connection {
+  id: string;
+  connector_id: string;
+  connector: string;
+  name: string;
+  config: { path?: string };
+  permissions: { read: boolean; write: boolean };
+  status: "active" | "disconnected";
+  created_at: string;
+  updated_at: string;
+}
+
+export interface FolderFile {
+  name: string;
+  size_bytes: number;
+  modified_at: string;
+  media_type: string;
+}
+
+export const integrationsApi = {
+  catalog: () => get<{ categories: { id: string; title: string; connectors: ConnectorDef[] }[] }>("/api/integrations/catalog"),
+  list: () => get<{ connections: Connection[] }>("/api/integrations"),
+  get: (id: string) => get<Connection & { history: JobEvent[] }>(`/api/integrations/${id}`),
+  connect: (input: { connector_id: string; name: string; config: { path: string }; permissions: { read?: boolean; write?: boolean } }) => post<Connection>("/api/integrations", input),
+  change: (id: string, input: { name?: string; permissions?: { read?: boolean; write?: boolean }; active?: boolean }) => post<Connection>(`/api/integrations/${id}`, input),
+  files: (id: string) => get<{ files: FolderFile[] }>(`/api/integrations/${id}/files`),
+  importFile: (id: string, file: string) => post<{ source: { id: string; title: string } }>(`/api/integrations/${id}/import`, { file }),
+  exportDeliverable: (id: string, deliverableId: string, version: number) => post<{ file: string }>(`/api/integrations/${id}/export`, { deliverable_id: deliverableId, version }),
+};

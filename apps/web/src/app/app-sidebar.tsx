@@ -58,7 +58,7 @@ const GROUPS: { label: string; areas: Area[] }[] = [
       { to: "/cerebro", label: "Cérebro", icon: BrainCircuit },
       { to: "/agentes", label: "Agentes", icon: Users },
       { to: "/organograma", label: "Organograma", icon: Network },
-      { to: "/integracoes", label: "Integrações", icon: Blocks, soon: true },
+      { to: "/integracoes", label: "Integrações", icon: Blocks },
     ],
   },
   {
