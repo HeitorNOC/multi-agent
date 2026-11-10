@@ -29,6 +29,14 @@ export interface JobsHttpDeps {
 
 const jobIdOf = (req: FastifyRequest) => JobId.parse((req.params as { id?: unknown }).id);
 
+/** Confere o segredo do worker e a concessão da execução atual do trabalho da rota. */
+export function authorizeWorker(access: WorkerAccess, req: FastifyRequest, lease: string): JobId {
+  if (!access.acceptsToken(req.headers["x-worker-token"])) throw forbidden("worker_token_invalid", "Acesso interno negado");
+  const id = jobIdOf(req);
+  if (!access.holdsLease(id, lease)) throw forbidden("worker_not_active", "Executor do trabalho não está ativo");
+  return id;
+}
+
 export function jobsHttp(deps: JobsHttpDeps): HttpModule {
   return (app, { actor }) => {
     publicRoutes(app, deps, actor);
@@ -86,13 +94,7 @@ function publicRoutes(app: FastifyInstance, { jobs, wake }: JobsHttpDeps, actor:
 }
 
 function workerRoutes(app: FastifyInstance, { jobs, workerAccess }: JobsHttpDeps) {
-  /** Confere o segredo do worker e a concessão da execução atual deste trabalho. */
-  function authorize(req: FastifyRequest, lease: string): JobId {
-    if (!workerAccess.acceptsToken(req.headers["x-worker-token"])) throw forbidden("worker_token_invalid", "Acesso interno negado");
-    const id = jobIdOf(req);
-    if (!workerAccess.holdsLease(id, lease)) throw forbidden("worker_not_active", "Executor do trabalho não está ativo");
-    return id;
-  }
+  const authorize = (req: FastifyRequest, lease: string) => authorizeWorker(workerAccess, req, lease);
 
   app.post("/internal/jobs/:id/snapshot", async (req) => {
     const { lease } = schema.workerSnapshotBody.parse(req.body);

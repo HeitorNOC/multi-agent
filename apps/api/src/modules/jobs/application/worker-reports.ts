@@ -38,22 +38,24 @@ export async function recordPlan(deps: JobsDeps, jobId: JobId, proposal: Json): 
   });
 }
 
-/** Rótulos de trechos do Cérebro entregues a este trabalho (para conferir as citações do parecer). */
-async function retrievedLabels(events: EventLog, jobId: JobId): Promise<Set<string>> {
-  const labels = new Set<string>();
+/**
+ * Trechos do Cérebro entregues a este trabalho, pelo rótulo (evento `knowledge_retrieved`).
+ * É a lista contra a qual as citações do parecer e as entradas do modelo são conferidas.
+ */
+export async function retrievedFragments(events: EventLog, jobId: JobId): Promise<Map<string, string>> {
+  const fragments = new Map<string, string>();
   for (const event of await events.list(stream.job(jobId))) {
     if (event.kind !== "knowledge_retrieved") continue;
-    const fragments = (event.detail as { fragments?: { label: string }[] }).fragments ?? [];
-    for (const f of fragments) labels.add(f.label);
+    for (const f of (event.detail as { fragments?: { label: string; id: string }[] }).fragments ?? []) fragments.set(f.label, f.id);
   }
-  return labels;
+  return fragments;
 }
 
 export async function recordReview(deps: JobsDeps, jobId: JobId, report: Json): Promise<Job["review"]> {
   const job = await loadJob(deps.uow.read.jobs, jobId);
   let bound;
   try {
-    const reviewed = deps.policy.review(job, report, { retrievedLabels: await retrievedLabels(deps.uow.read.events, jobId) });
+    const reviewed = deps.policy.review(job, report, { retrievedLabels: new Set((await retrievedFragments(deps.uow.read.events, jobId)).keys()) });
     bound = bindReview(jobId, reviewed.report, reviewed.payload);
   } catch (error) {
     return recordRejection(deps.uow.read.events, jobId, "review_rejected", error);
