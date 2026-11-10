@@ -34,6 +34,7 @@ import {
   type ConversationSummary,
   type NewConversationMessage,
   type IndexableKnowledge,
+  type InferenceRecord,
   type KnowledgeSource,
   type KnowledgeVersion,
   type KnowledgeVersionInfo,
@@ -440,6 +441,43 @@ class PostgresJourneyStore implements JourneyStore {
     };
   }
 
+  // Recibos de inferência ---------------------------------------------------
+  async reserveInference(e: { job: string; slot: string; inputSha: string; created: string }) {
+    const inserted = await this.db.query(
+      `INSERT INTO inference_receipts(job,slot,input_sha,state,created,updated)
+       VALUES($1,$2,$3,'reserved',$4,$4) ON CONFLICT (job,slot) DO NOTHING`,
+      [e.job, e.slot, e.inputSha, e.created],
+    );
+    return { created: (inserted.rowCount ?? 0) > 0, record: (await this.getInference(e.job, e.slot))! };
+  }
+  async completeInference(job: string, slot: string, output: string, usage: string, at: string): Promise<boolean> {
+    const r = await this.db.query(
+      "UPDATE inference_receipts SET state='completed',output=$1,usage=$2,updated=$3 WHERE job=$4 AND slot=$5 AND state='reserved'",
+      [output, usage, at, job, slot],
+    );
+    return (r.rowCount ?? 0) > 0;
+  }
+  async getInference(job: string, slot: string): Promise<InferenceRecord | undefined> {
+    const { rows } = await this.db.query("SELECT * FROM inference_receipts WHERE job=$1 AND slot=$2", [job, slot]);
+    return rows[0] && this.toInference(rows[0]);
+  }
+  async listInferences(job: string): Promise<InferenceRecord[]> {
+    const { rows } = await this.db.query("SELECT * FROM inference_receipts WHERE job=$1 ORDER BY ordinal", [job]);
+    return rows.map((r) => this.toInference(r));
+  }
+  private toInference(r: Row): InferenceRecord {
+    return {
+      job: String(r.job),
+      slot: String(r.slot),
+      inputSha: String(r.input_sha),
+      state: r.state as InferenceRecord["state"],
+      output: r.output === null ? null : String(r.output),
+      usage: r.usage === null ? null : String(r.usage),
+      created: String(r.created),
+      updated: String(r.updated),
+    };
+  }
+
   // Central de recuperação ------------------------------------------------
   async createRecoverySession(s: RecoverySession): Promise<void> {
     await this.db.query("INSERT INTO recovery_sessions(hash,actor,auth_sha,expires) VALUES($1,$2,$3,$4)", [
@@ -646,6 +684,10 @@ export class PostgresJourneyLedger implements JourneyLedger {
   listKnowledgeVersions = (source: string) => this.run((st) => st.listKnowledgeVersions(source));
   revokeKnowledgeSource = (id: string, actor: string, at: string) => this.run((st) => st.revokeKnowledgeSource(id, actor, at));
   listIndexableKnowledge = () => this.run((st) => st.listIndexableKnowledge());
+  reserveInference = (e: { job: string; slot: string; inputSha: string; created: string }) => this.run((st) => st.reserveInference(e));
+  completeInference = (job: string, slot: string, output: string, usage: string, at: string) => this.run((st) => st.completeInference(job, slot, output, usage, at));
+  getInference = (job: string, slot: string) => this.run((st) => st.getInference(job, slot));
+  listInferences = (job: string) => this.run((st) => st.listInferences(job));
   createRecoverySession = (s: RecoverySession) => this.run((st) => st.createRecoverySession(s));
   findRecoverySession = (hash: string) => this.run((st) => st.findRecoverySession(hash));
   deleteRecoverySession = (hash: string) => this.run((st) => st.deleteRecoverySession(hash));

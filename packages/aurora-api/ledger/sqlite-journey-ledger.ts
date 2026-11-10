@@ -33,6 +33,7 @@ import {
   type ConversationSummary,
   type NewConversationMessage,
   type IndexableKnowledge,
+  type InferenceRecord,
   type KnowledgeSource,
   type KnowledgeVersion,
   type KnowledgeVersionInfo,
@@ -82,6 +83,7 @@ const SCHEMA = `
   CREATE TABLE IF NOT EXISTS conversation_messages(seq INTEGER PRIMARY KEY AUTOINCREMENT,conversation TEXT NOT NULL,role TEXT NOT NULL,text TEXT NOT NULL,job TEXT,client_id TEXT,reply_to INTEGER,created TEXT NOT NULL,UNIQUE(conversation,client_id));
   CREATE TABLE IF NOT EXISTS knowledge_sources(id TEXT PRIMARY KEY,title TEXT NOT NULL,owner TEXT NOT NULL,readers TEXT NOT NULL,supersedes TEXT,created TEXT NOT NULL,revoked TEXT,revoked_by TEXT,latest_version INTEGER NOT NULL DEFAULT 0);
   CREATE TABLE IF NOT EXISTS knowledge_versions(source TEXT NOT NULL,version INTEGER NOT NULL,media_type TEXT NOT NULL,filename TEXT NOT NULL,content_sha TEXT NOT NULL,bytes BLOB NOT NULL,text TEXT NOT NULL,valid_from TEXT NOT NULL,uploaded_by TEXT NOT NULL,created TEXT NOT NULL,PRIMARY KEY(source,version));
+  CREATE TABLE IF NOT EXISTS inference_receipts(job TEXT NOT NULL,slot TEXT NOT NULL,input_sha TEXT NOT NULL,state TEXT NOT NULL,output TEXT,usage TEXT,created TEXT NOT NULL,updated TEXT NOT NULL,PRIMARY KEY(job,slot));
   CREATE TABLE IF NOT EXISTS recovery_sessions(hash TEXT PRIMARY KEY,actor TEXT,auth_sha TEXT,expires INTEGER);
   CREATE TABLE IF NOT EXISTS recovery_commands(id TEXT PRIMARY KEY,actor TEXT,input_sha TEXT,body TEXT,action TEXT,case_id TEXT,operation_id TEXT,evidence_sha TEXT,status TEXT,result TEXT,updated TEXT);`;
 
@@ -397,6 +399,42 @@ export class SqliteJourneyCore {
     };
   }
 
+  // Recibos de inferência ---------------------------------------------------
+  reserveInference(e: { job: string; slot: string; inputSha: string; created: string }) {
+    const inserted = this.db
+      .prepare("INSERT OR IGNORE INTO inference_receipts(job,slot,input_sha,state,created,updated) VALUES(?,?,?,'reserved',?,?)")
+      .run(e.job, e.slot, e.inputSha, e.created, e.created);
+    return { created: Number(inserted.changes) > 0, record: this.getInference(e.job, e.slot)! };
+  }
+  completeInference(job: string, slot: string, output: string, usage: string, at: string): boolean {
+    return (
+      Number(
+        this.db
+          .prepare("UPDATE inference_receipts SET state='completed',output=?,usage=?,updated=? WHERE job=? AND slot=? AND state='reserved'")
+          .run(output, usage, at, job, slot).changes,
+      ) > 0
+    );
+  }
+  getInference(job: string, slot: string): InferenceRecord | undefined {
+    const r = this.db.prepare("SELECT * FROM inference_receipts WHERE job=? AND slot=?").get(job, slot) as Row | undefined;
+    return r && this.toInference(r);
+  }
+  listInferences(job: string): InferenceRecord[] {
+    return this.rows("SELECT * FROM inference_receipts WHERE job=? ORDER BY rowid", job).map((r) => this.toInference(r));
+  }
+  private toInference(r: Row): InferenceRecord {
+    return {
+      job: String(r.job),
+      slot: String(r.slot),
+      inputSha: String(r.input_sha),
+      state: r.state as InferenceRecord["state"],
+      output: r.output === null ? null : String(r.output),
+      usage: r.usage === null ? null : String(r.usage),
+      created: String(r.created),
+      updated: String(r.updated),
+    };
+  }
+
   // Central de recuperação ------------------------------------------------
   createRecoverySession(s: RecoverySession): void {
     this.db.prepare("INSERT INTO recovery_sessions VALUES(?,?,?,?)").run(s.hash, s.actor, s.authSha, s.expires);
@@ -519,6 +557,10 @@ class SqliteJourneyStore implements JourneyStore {
   async listKnowledgeVersions(source: string) { return this.core.listKnowledgeVersions(source); }
   async revokeKnowledgeSource(id: string, actor: string, at: string) { return this.core.revokeKnowledgeSource(id, actor, at); }
   async listIndexableKnowledge() { return this.core.listIndexableKnowledge(); }
+  async reserveInference(e: { job: string; slot: string; inputSha: string; created: string }) { return this.core.reserveInference(e); }
+  async completeInference(job: string, slot: string, output: string, usage: string, at: string) { return this.core.completeInference(job, slot, output, usage, at); }
+  async getInference(job: string, slot: string) { return this.core.getInference(job, slot); }
+  async listInferences(job: string) { return this.core.listInferences(job); }
   async createRecoverySession(s: RecoverySession) { this.core.createRecoverySession(s); }
   async findRecoverySession(hash: string) { return this.core.findRecoverySession(hash); }
   async deleteRecoverySession(hash: string) { this.core.deleteRecoverySession(hash); }
@@ -596,6 +638,10 @@ export class SqliteJourneyLedger implements JourneyLedger {
   listKnowledgeVersions = (source: string) => this.run((st) => st.listKnowledgeVersions(source));
   revokeKnowledgeSource = (id: string, actor: string, at: string) => this.run((st) => st.revokeKnowledgeSource(id, actor, at));
   listIndexableKnowledge = () => this.run((st) => st.listIndexableKnowledge());
+  reserveInference = (e: { job: string; slot: string; inputSha: string; created: string }) => this.run((st) => st.reserveInference(e));
+  completeInference = (job: string, slot: string, output: string, usage: string, at: string) => this.run((st) => st.completeInference(job, slot, output, usage, at));
+  getInference = (job: string, slot: string) => this.run((st) => st.getInference(job, slot));
+  listInferences = (job: string) => this.run((st) => st.listInferences(job));
   createRecoverySession = (s: RecoverySession) => this.run((st) => st.createRecoverySession(s));
   findRecoverySession = (hash: string) => this.run((st) => st.findRecoverySession(hash));
   deleteRecoverySession = (hash: string) => this.run((st) => st.deleteRecoverySession(hash));

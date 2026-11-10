@@ -90,7 +90,7 @@ describe("migração SQLite → PostgreSQL", { skip: url ? false : "defina AUROR
     assert.equal(report.jobOrderVerified, true);
     assert.deepEqual(
       Object.fromEntries(report.tables.map((t) => [t.table, t.rows])),
-      { jobs: 3, events: 3, effects: 1, pilot_reference_revocations: 1, job_queue: 2, job_admissions: 1, pilot_destination_revocations: 2, pilot_destination_intents: 1, conversations: 1, conversation_messages: 2, knowledge_sources: 1, knowledge_versions: 2, recovery_sessions: 1, recovery_commands: 1 },
+      { jobs: 3, events: 3, effects: 1, pilot_reference_revocations: 1, job_queue: 2, job_admissions: 1, pilot_destination_revocations: 2, pilot_destination_intents: 1, conversations: 1, conversation_messages: 2, knowledge_sources: 1, knowledge_versions: 2, inference_receipts: 0, recovery_sessions: 1, recovery_commands: 1 },
     );
 
     const source = new SqliteJourneyLedger({ stateDir, installation: INSTALLATION, destinationJournal: true, schedulerLock: false });

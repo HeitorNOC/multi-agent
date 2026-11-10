@@ -445,6 +445,39 @@ export function describeJourneyLedgerContract(name: string, options: ContractOpt
       });
     });
 
+    describe("recibos de inferência", () => {
+      const reserve = (l: JourneyLedger, slot = "plan", inputSha = "i".repeat(64)) =>
+        l.reserveInference({ job: "j1", slot, inputSha, created: at(1) });
+
+      test("reservar é idempotente e não troca a entrada registrada", async () => {
+        const l = await ledger();
+        const first = await reserve(l);
+        const again = await reserve(l, "plan", "outra".padEnd(64, "x"));
+        assert.deepEqual([first.created, again.created], [true, false]);
+        assert.equal(again.record.inputSha, "i".repeat(64), "a reserva existente prevalece");
+        assert.deepEqual([first.record.state, first.record.output], ["reserved", null]);
+      });
+
+      test("completar só vale para reserva pendente e grava saída e uso", async () => {
+        const l = await ledger();
+        await reserve(l);
+        assert.equal(await l.completeInference("j1", "plan", '{"ok":1}', '{"tokens":3}', at(2)), true);
+        assert.equal(await l.completeInference("j1", "plan", '{"ok":2}', "{}", at(3)), false, "recibo não é sobrescrito");
+        assert.equal(await l.completeInference("j1", "nada", "{}", "{}", at(3)), false);
+        const done = await l.getInference("j1", "plan");
+        assert.deepEqual([done?.state, done?.output, done?.usage, done?.updated], ["completed", '{"ok":1}', '{"tokens":3}', at(2)]);
+      });
+
+      test("lista na ordem de reserva", async () => {
+        const l = await ledger();
+        await reserve(l, "plan");
+        await reserve(l, "specialist:b");
+        await reserve(l, "specialist:a");
+        assert.deepEqual((await l.listInferences("j1")).map((r) => r.slot), ["plan", "specialist:b", "specialist:a"]);
+        assert.deepEqual(await l.listInferences("outro"), []);
+      });
+    });
+
     describe("central de recuperação", () => {
       test("sessão: cria, encontra pelo hash do token e apaga", async () => {
         const l = await ledger();

@@ -240,6 +240,26 @@ export interface IndexableKnowledge {
   text: string;
 }
 
+/**
+ * Recibo de uma chamada ao modelo dentro de um trabalho. A chamada é reservada ANTES de
+ * acontecer e completada DEPOIS. Uma reserva sem recibo após uma queda significa resultado
+ * desconhecido: a chamada não é refeita automaticamente.
+ */
+export interface InferenceRecord {
+  job: string;
+  /** Identifica a chamada dentro do trabalho (por exemplo, `plan`, `specialist:analista`). */
+  slot: string;
+  /** Hash da entrada; repetir o mesmo slot com outra entrada é recusado. */
+  inputSha: string;
+  state: "reserved" | "completed";
+  /** Saída validada, como JSON em texto. */
+  output: string | null;
+  /** Uso observado (tokens), como JSON em texto. */
+  usage: string | null;
+  created: string;
+  updated: string;
+}
+
 /** Operações disponíveis tanto fora quanto dentro de uma transação. */
 export interface JourneyStore {
   // Trabalhos
@@ -327,6 +347,18 @@ export interface JourneyStore {
   /** `true` se revogou agora; `false` se já estava revogada ou não existe. */
   revokeKnowledgeSource(id: string, actor: string, at: string): Promise<boolean>;
   listIndexableKnowledge(): Promise<IndexableKnowledge[]>;
+
+  // Recibos de inferência
+  /** Reserva a chamada; se já existir, devolve a existente com `created: false`. */
+  reserveInference(entry: { job: string; slot: string; inputSha: string; created: string }): Promise<{
+    created: boolean;
+    record: InferenceRecord;
+  }>;
+  /** Grava o recibo de uma reserva pendente; `false` se não havia reserva pendente. */
+  completeInference(job: string, slot: string, output: string, usage: string, at: string): Promise<boolean>;
+  getInference(job: string, slot: string): Promise<InferenceRecord | undefined>;
+  /** Em ordem de reserva. */
+  listInferences(job: string): Promise<InferenceRecord[]>;
 
   // Central de recuperação humana
   createRecoverySession(session: RecoverySession): Promise<void>;

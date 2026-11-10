@@ -88,6 +88,7 @@ const TABLES: TableSpec[] = [
   { name: "conversation_messages", columns: ["seq", "conversation", "role", "text", "job", "client_id", "reply_to", "created"], key: ["seq"], readOrder: "seq", sequence: "seq", optional: true },
   { name: "knowledge_sources", columns: ["id", "title", "owner", "readers", "supersedes", "created", "revoked", "revoked_by", "latest_version"], key: ["id"], readOrder: "rowid", optional: true },
   { name: "knowledge_versions", columns: ["source", "version", "media_type", "filename", "content_sha", "bytes", "text", "valid_from", "uploaded_by", "created"], key: ["source", "version"], readOrder: "source, version", optional: true },
+  { name: "inference_receipts", columns: ["job", "slot", "input_sha", "state", "output", "usage", "created", "updated"], key: ["job", "slot"], readOrder: "rowid", optional: true },
   { name: "recovery_sessions", columns: ["hash", "actor", "auth_sha", "expires"], key: ["hash"], readOrder: "hash", optional: true },
   { name: "recovery_commands", columns: ["id", "actor", "input_sha", "body", "action", "case_id", "operation_id", "evidence_sha", "status", "result", "updated"], key: ["id"], readOrder: "id", optional: true },
 ];
