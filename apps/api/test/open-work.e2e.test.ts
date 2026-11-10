@@ -15,7 +15,9 @@ import { loadTemplates } from "../src/modules/agents/domain/template.ts";
 import { startServer, type RunningServer } from "../src/server.ts";
 
 const url = process.env.AURORA_TEST_POSTGRES_URL;
-const python = process.env.AURORA_TEST_PYTHON ?? fileURLToPath(new URL("../../runtime/.venv/Scripts/python.exe", import.meta.url));
+const python =
+  process.env.AURORA_TEST_PYTHON ??
+  fileURLToPath(new URL(process.platform === "win32" ? "../../runtime/.venv/Scripts/python.exe" : "../../runtime/.venv/bin/python", import.meta.url));
 const worker = fileURLToPath(new URL("../../runtime/open_worker.py", import.meta.url));
 const fakeModel = fileURLToPath(new URL("./fixtures/fake-open-model.ts", import.meta.url));
 const skip = !url ? "defina AURORA_TEST_POSTGRES_URL" : !existsSync(python) ? "Python com LangGraph não encontrado" : false;

@@ -60,7 +60,7 @@ Sem nenhuma variável, a API usa SQLite em `apps/api/data/aurora.db`, deixa os t
 | Variável | Para quê |
 | --- | --- |
 | `AURORA_DATABASE_URL` | PostgreSQL (`postgres://...`); sem ela, SQLite em `AURORA_SQLITE_PATH` |
-| `AURORA_WORKER_COMMAND` | worker como lista JSON, por exemplo `["apps/runtime/.venv/Scripts/python.exe","-I","apps/runtime/open_worker.py"]` |
+| `AURORA_WORKER_COMMAND` | worker como lista JSON, por exemplo `["apps/runtime/.venv/Scripts/python.exe","-I","apps/runtime/open_worker.py"]` (no Linux/macOS, `.venv/bin/python`) |
 | `AURORA_CHECKPOINT_DSN` | PostgreSQL dos checkpoints do LangGraph |
 | `AURORA_MODEL_PROVIDER` | `claude`, `codex` ou `none` |
 | `AURORA_CHIEF_ENGINE` | `rules` ou `model` (o Chief of Staff na conversa) |
