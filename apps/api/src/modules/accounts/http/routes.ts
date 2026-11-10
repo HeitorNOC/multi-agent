@@ -8,7 +8,7 @@
 import { randomBytes } from "node:crypto";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { AppError, notFound, unauthenticated } from "../../../shared/errors.ts";
+import { AppError, notFound, rateLimited, unauthenticated } from "../../../shared/errors.ts";
 import { ActorId } from "../../../shared/ids.ts";
 import type { HttpModule } from "../../../platform/http/app.ts";
 import {
@@ -33,6 +33,8 @@ import { pkce } from "../infrastructure/oidc.ts";
 const SESSION_COOKIE = "aurora_session";
 const STATE_COOKIE = "aurora_oauth";
 const STATE_TTL_MS = 10 * 60_000;
+/** Logins externos em andamento ao mesmo tempo; acima disso, pede para tentar depois. */
+const MAX_PENDING = 500;
 
 const newAccount = z.strictObject({
   name: z.string().max(100).default(""),
@@ -47,7 +49,12 @@ const removeBody = z.strictObject({ email: z.string().min(3).max(200) });
 export function readCookie(req: FastifyRequest, name: string): string | undefined {
   for (const part of (req.headers.cookie ?? "").split(";")) {
     const [key, ...value] = part.trim().split("=");
-    if (key === name) return decodeURIComponent(value.join("="));
+    if (key !== name) continue;
+    try {
+      return decodeURIComponent(value.join("="));
+    } catch {
+      return undefined; // cookie malformado: trata como ausente
+    }
   }
   return undefined;
 }
@@ -122,6 +129,7 @@ export function accountsHttp(deps: AccountsDeps): HttpModule {
       const provider = providerOf(req.params);
       const now = Date.now();
       for (const [key, p] of pending) if (p.expires < now) pending.delete(key);
+      if (pending.size >= MAX_PENDING) throw rateLimited("too_many_logins", "Muitos logins em andamento. Tente de novo em alguns minutos.");
       const state = randomBytes(24).toString("base64url");
       const nonce = randomBytes(24).toString("base64url");
       const { verifier, challenge } = pkce();

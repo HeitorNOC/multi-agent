@@ -98,6 +98,16 @@ for (const dialect of dialects) {
       assert.match(r.reply.text, /Não encontrei/);
     });
 
+    test("pessoa sem acesso à fonte não a vê pela Estação, mesmo que o agente possa ler", async () => {
+      const { deps, md } = await setup();
+      await md("Contrato confidencial", "Fornecedor Alfa tem desconto de 12% em compras acima de dez mil reais.", ["ana", agentReader("procurement_analyst")]);
+      const caio = ActorId.parse("caio");
+      const conv = await createConversation(deps, caio, undefined, "procurement_analyst");
+      const r = await sendMessage(deps, caio, conv.id as ConversationId, { text: "Qual o desconto do fornecedor Alfa em compras?" });
+      assert.deepEqual(r.reply.citations, []);
+      assert.doesNotMatch(r.reply.text, /12%/);
+    });
+
     test("com modelo: a persona e as orientações vão no sistema, abaixo das regras não", async () => {
       const model = new Scripted();
       const { deps, md } = await setup(model);

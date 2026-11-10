@@ -68,9 +68,11 @@ export async function createHttpApp(options: HttpOptions): Promise<FastifyInstan
   // Rotas da API exigem alguém identificado; `/api/auth/` é a porta de entrada; `/internal/`
   // é do worker, com o próprio token; o resto é a interface estática.
   const actors = new WeakMap<FastifyRequest, ActorId>();
+  // Decide pela rota que atendeu o pedido (o padrão registrado), nunca pelo texto da URL: o
+  // roteador decodifica a URL (`/%61pi/jobs` cai em `/api/jobs`), então o texto cru engana.
   app.addHook("onRequest", async (req) => {
-    const path = req.url.split("?")[0]!;
-    if (!path.startsWith("/api/") || path.startsWith("/api/auth/")) return;
+    const route = req.routeOptions.url;
+    if (!route?.startsWith("/api/") || route.startsWith("/api/auth/")) return;
     const actor = await options.identify(req);
     if (!actor) throw unauthenticated("sign_in_required", "Entre com a sua conta para continuar");
     actors.set(req, actor);

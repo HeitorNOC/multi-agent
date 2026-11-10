@@ -1,7 +1,8 @@
 /**
  * Estação: o gestor conversa direto com um agente do time. O agente responde no papel dele
  * (persona e orientações da empresa), usando só as fontes do Cérebro que pode ler — as abertas a
- * toda a empresa e as restritas em que foi incluído como leitor —, sempre citando. Sem evidência,
+ * toda a empresa e as restritas em que foi incluído como leitor — e que a pessoa que pergunta
+ * também pode ler, sempre citando. Sem evidência,
  * ele se abstém. Com modelo configurado, o modelo redige; senão, a resposta é extraída dos trechos.
  */
 import { conflict, ensure } from "../../../shared/errors.ts";
@@ -10,6 +11,7 @@ import type { KnowledgeSearch } from "../../knowledge/application/knowledge-sear
 import type { Passage } from "../../knowledge/domain/search-index.ts";
 import { terms } from "../../knowledge/domain/text.ts";
 import type { CatalogAgent, TeamDirectory } from "../../open-work/domain/catalog.ts";
+import type { ActorId } from "../../../shared/ids.ts";
 import type { MessageCitation } from "../domain/conversation.ts";
 
 const PASSAGES = 5;
@@ -23,7 +25,8 @@ export interface StationReply {
 export interface StationResponder {
   /** O agente, se estiver no time; recusa se não estiver. */
   member(agentId: string): Promise<CatalogAgent>;
-  reply(agentId: string, question: string): Promise<StationReply>;
+  /** Resposta à pessoa `asker`: só usa fontes que o agente e ela podem ler. */
+  reply(agentId: string, question: string, asker: ActorId): Promise<StationReply>;
 }
 
 export function stationResponder(deps: { team: TeamDirectory; search: KnowledgeSearch; answerer: KnowledgeAnswerer }): StationResponder {
@@ -34,9 +37,9 @@ export function stationResponder(deps: { team: TeamDirectory; search: KnowledgeS
   }
   return {
     member,
-    async reply(agentId, question) {
+    async reply(agentId, question, asker) {
       const agent = await member(agentId);
-      const found = await deps.search.forAgents(`${question}\n${agent.focus}`, PASSAGES, [agent.id]);
+      const found = await deps.search.forAgents(`${question}\n${agent.focus}`, PASSAGES, [agent.id], asker);
       if (!found.length)
         return {
           text: "Não encontrei nas fontes do Cérebro que posso ler evidência para responder. Se houver um documento sobre isso, envie ao Cérebro (ou me dê acesso a ele) e pergunte de novo.",

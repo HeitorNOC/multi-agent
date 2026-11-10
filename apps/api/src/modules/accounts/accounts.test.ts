@@ -179,6 +179,10 @@ test("HTTP: sem sessão a API recusa; dono entra, assume os dados locais e entra
   try {
     const url = server.url;
     assert.equal((await fetch(url + "/api/conversations")).status, 401);
+    // O roteador decodifica a URL: a guarda decide pela rota atendida, não pelo texto.
+    for (const sneaky of ["/%61pi/conversations", "/%61pi/jobs", "/api/%6Aobs"]) assert.equal((await fetch(url + sneaky)).status, 401, sneaky);
+    assert.notEqual((await fetch(url + "/%E0")).status, 500, "URL malformada não derruba nada");
+    assert.equal((await fetch(url + "/api/jobs", { headers: { cookie: "aurora_session=%E0" } })).status, 401, "cookie malformado vale como ausente");
     assert.deepEqual(await (await fetch(url + "/api/auth/status")).json(), { mode: "accounts", setup_required: true, providers: ["google"] });
 
     const created = await post(url, "/api/auth/setup", { name: "Ana", email: "ana@empresa.com", password: PASSWORD });

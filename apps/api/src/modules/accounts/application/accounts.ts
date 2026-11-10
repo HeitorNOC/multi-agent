@@ -35,7 +35,11 @@ export interface Session {
   expiresAt: string;
 }
 
-/** Tentativas erradas por e-mail: depois de algumas, espera alguns minutos. */
+/**
+ * Tentativas erradas por e-mail: depois de algumas, espera alguns minutos. Só bloqueia a senha;
+ * Google e Microsoft continuam entrando. A memória é limitada (entradas vencidas saem primeiro).
+ */
+const MAX_TRACKED = 10_000;
 export class LoginThrottle {
   private readonly failures = new Map<string, { count: number; until: number }>();
   check(email: string, now: number) {
@@ -45,10 +49,19 @@ export class LoginThrottle {
   fail(email: string, now: number) {
     const f = this.failures.get(email);
     const count = f && f.until <= now && f.count >= MAX_FAILURES ? 1 : (f?.count ?? 0) + 1;
+    if (!f && this.failures.size >= MAX_TRACKED) this.prune(now);
     this.failures.set(email, { count, until: count >= MAX_FAILURES ? now + LOCK_MS : 0 });
   }
   clear(email: string) {
     this.failures.delete(email);
+  }
+  private prune(now: number) {
+    for (const [email, f] of this.failures) if (f.until <= now) this.failures.delete(email);
+    // Ainda cheio: esquece as mais antigas (ordem de inserção do Map).
+    for (const email of this.failures.keys()) {
+      if (this.failures.size < MAX_TRACKED) break;
+      this.failures.delete(email);
+    }
   }
 }
 const sharedThrottle = new LoginThrottle();
@@ -112,6 +125,7 @@ export async function signIn(deps: AccountsDeps, input: { email: string; passwor
  * a uma conta existente ou a um convite. Numa instalação nova, a primeira pessoa vira o dono.
  */
 export async function signInExternal(deps: AccountsDeps, provider: Provider, person: ExternalPerson): Promise<Session> {
+  let adopted = false;
   const account = await deps.uow.run(async (r, tx) => {
     const linked = await r.identities.find(provider, person.subject);
     if (linked) return (await r.accounts.get(linked))!;
@@ -125,7 +139,10 @@ export async function signInExternal(deps: AccountsDeps, provider: Provider, per
       return existing;
     }
     let role: Role;
-    if ((await r.accounts.count()) === 0) role = "owner";
+    if ((await r.accounts.count()) === 0) {
+      role = "owner";
+      adopted = true;
+    }
     else {
       const invite = await r.invites.get(email);
       ensure(invite, () => forbidden("not_invited", "Este e-mail não foi liberado. Peça acesso ao dono do Aurora."));
@@ -136,7 +153,7 @@ export async function signInExternal(deps: AccountsDeps, provider: Provider, per
     await r.identities.link(provider, person.subject, created.id, now);
     return created;
   });
-  if (account.role === "owner") deps.afterAdoption?.();
+  if (adopted) deps.afterAdoption?.();
   ensure(!account.disabledAt, () => forbidden("account_disabled", "Seu acesso foi suspenso pelo dono do Aurora"));
   return openSession(deps, account);
 }

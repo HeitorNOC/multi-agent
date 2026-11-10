@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { agentsApi, fileToBase64, knowledgeApi, type SourceSummary } from "@/lib/api";
+import { useAccess } from "../access/auth-gate";
 
 /** Tipo pelo nome quando o navegador não informa (CSV e Markdown costumam vir vazios). */
 export function mediaTypeOf(file: File) {
@@ -19,7 +20,11 @@ export function mediaTypeOf(file: File) {
   return file.type || "application/octet-stream";
 }
 
+/** Pessoas leitoras, como entram no Aurora (e-mail em minúsculas). */
+const people = (text: string) => text.split(",").map((r) => r.trim().toLowerCase()).filter(Boolean);
+
 export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]; mediaTypes: string[] }) {
+  const { mode } = useAccess();
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -38,7 +43,7 @@ export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]
         filename: f.name,
         media_type: mediaTypeOf(f),
         content_base64: await fileToBase64(f),
-        readers: restricted ? [...readers.split(",").map((r) => r.trim()).filter(Boolean), ...agentReaders.map((id) => `agent:${id}`)] : undefined,
+        readers: restricted ? [...people(readers), ...agentReaders.map((id) => `agent:${id}`)] : undefined,
         valid_from: validFrom ? new Date(`${validFrom}T00:00:00`).toISOString() : undefined,
         supersedes: supersedes || null,
       });
@@ -105,7 +110,10 @@ export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]
             </label>
             {restricted && (
               <div className="space-y-2">
-                <Input aria-label="Pessoas que podem ler" placeholder="ana, caio" value={readers} onChange={(e) => setReaders(e.target.value)} />
+                <Input aria-label="E-mails das pessoas que podem ler" placeholder="ana@empresa.com, caio@empresa.com" value={readers} onChange={(e) => setReaders(e.target.value)} />
+                {mode === "accounts" && people(readers).some((r) => !r.includes("@")) && (
+                  <p className="text-xs text-amber-700 dark:text-warning">Use o e-mail de cada pessoa, como ela entra no Aurora; um nome solto não dá acesso a ninguém.</p>
+                )}
                 {!!team.data?.agents.length && (
                   <div className="space-y-1 rounded-md border p-2">
                     <p className="text-xs text-muted-foreground">Agentes do time que também podem ler (os demais não veem esta fonte)</p>

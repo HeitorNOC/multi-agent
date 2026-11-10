@@ -130,7 +130,7 @@ export async function sendMessage(deps: ConversationDeps, actor: ActorId, id: Co
 /** Na Estação, o agente responde com as fontes que pode ler; a decisão vai para a trilha sem o texto. */
 async function stationAnswer(deps: ConversationDeps, conversation: Conversation, question: Message): Promise<Message> {
   ensure(deps.station, () => conflict("station_unavailable", "Estação indisponível nesta instalação"));
-  const r = await deps.station.reply(conversation.agentId!, question.text);
+  const r = await deps.station.reply(conversation.agentId!, question.text, conversation.actor);
   return reply(deps, conversation.id, question.seq, r.text, null, r.trace, r.citations);
 }
 

@@ -29,7 +29,12 @@ export function staticWeb(dir: string): HttpModule {
   return (app) => {
     if (!existsSync(index)) return;
     app.get("/*", async (req, reply) => {
-      const path = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
+      let path: string;
+      try {
+        path = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
+      } catch {
+        throw new AppError("not_found", "route_not_found", "Rota não encontrada");
+      }
       if (API_PREFIXES.some((p) => path.startsWith(p)) || path === "/api" || path === "/internal")
         throw new AppError("not_found", "route_not_found", "Rota não encontrada");
       const file = resolve(root, `.${path}`);

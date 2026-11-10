@@ -104,8 +104,10 @@ cenários de ponta a ponta com o worker Python real.
 - A aprovação vale só para o parecer exato (hash do trabalho, do relatório e do efeito).
 - Cada chamada ao modelo tem recibo. Uma chamada sem recibo depois de uma queda nunca é repetida
   sozinha: o trabalho vai para a central de recuperação e uma pessoa decide, com justificativa.
-- Os agentes só leem fontes abertas a toda a empresa, vigentes e não substituídas. Toda citação
+- Os agentes só leem fontes vigentes e não substituídas: as abertas a toda a empresa e as restritas
+  em que foram incluídos. Na Estação, só o que a pessoa que pergunta também pode ler. Toda citação
   precisa ter sido entregue ao trabalho. O Chief of Staff só escala agentes contratados.
+- Toda rota da API exige uma pessoa identificada (sessão) ou, no uso individual, o operador local.
 - O efeito aprovado gera a entrega na mesma transação do recibo; só a versão aceita sai da empresa.
 - Cada horário de uma rotina vira no máximo um trabalho, mesmo depois de reiniciar.
 - Integrações agem só com a permissão dada; o que não foi autorizado é recusado e registrado.
@@ -115,3 +117,8 @@ cenários de ponta a ponta com o worker Python real.
 Command Center, Conversa, Trabalhos, Entregas, Rotinas, Cérebro, Agentes (catálogo e time),
 Organograma, Integrações, Governança (central de recuperação), Configurações e o assistente
 "Montar sua empresa". O andamento e os próximos passos estão em [docs/REPLANEJAMENTO_V2.md](docs/REPLANEJAMENTO_V2.md).
+
+## Documentação
+
+- [Guia do Aurora](docs/GUIA.md): o que é e como usar, sem jargão.
+- [Arquitetura e fluxos](docs/ARQUITETURA.md): tecnologias, módulos, fluxos e garantias.

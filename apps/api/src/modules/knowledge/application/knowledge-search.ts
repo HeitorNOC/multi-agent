@@ -7,7 +7,8 @@ import type { Clock } from "../../../shared/clock.ts";
 import type { UnitOfWork } from "../../../platform/database/unit-of-work.ts";
 import type { IndexBuilder, KnowledgeIndex, Passage } from "../domain/search-index.ts";
 import { originalUrl } from "../domain/search-index.ts";
-import { agentsCanRead, currentVersions, type IndexableVersion } from "../domain/source.ts";
+import type { ActorId } from "../../../shared/ids.ts";
+import { agentsCanRead, canRead, currentVersions, type IndexableVersion } from "../domain/source.ts";
 import { chunk } from "../domain/text.ts";
 import type { KnowledgeStore } from "../infrastructure/sql-knowledge.ts";
 
@@ -78,10 +79,13 @@ export class KnowledgeSearch {
 
   /**
    * Trechos para agentes: fontes abertas a toda a empresa e as restritas em que algum dos agentes
-   * foi incluído como leitor (`agent:<id>`). As demais nunca chegam a eles.
+   * foi incluído como leitor (`agent:<id>`). As demais nunca chegam a eles. Com `onBehalfOf`, o
+   * agente responde a uma pessoa: só entra o que ela também pode ler (o agente não abre para
+   * ninguém uma fonte que estava fechada para essa pessoa).
    */
-  async forAgents(query: string, limit: number, agentIds: readonly string[] = []): Promise<AgentPassage[]> {
-    const { found } = await this.search(query, (p) => agentsCanRead(p, agentIds), limit);
+  async forAgents(query: string, limit: number, agentIds: readonly string[] = [], onBehalfOf?: ActorId): Promise<AgentPassage[]> {
+    const allow = (p: { owner: string; readers: readonly string[] }) => agentsCanRead(p, agentIds) && (!onBehalfOf || canRead(p, onBehalfOf));
+    const { found } = await this.search(query, allow, limit);
     return found.map(({ n: _n, matched: _m, score: _s, ...p }) => ({ ...p, url: originalUrl(p.sourceId, p.version) }));
   }
 
