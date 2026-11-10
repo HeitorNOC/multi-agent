@@ -72,7 +72,7 @@ export class OpenWorkGateway {
     const { goal, plan } = await this.job(jobId);
     ensure(plan?.agents.includes(agentId), () => conflict("agent_not_in_plan", "Especialista fora do plano"));
     const agent = await this.member(agentId);
-    const passages = await this.deps.search.forAgents(`${goal}\n${agent.focus}`, FRAGMENTS_PER_AGENT);
+    const passages = await this.deps.search.forAgents(`${goal}\n${agent.focus}`, FRAGMENTS_PER_AGENT, [agentId]);
     const fragments = passages.map((p) => ({ ...p, label: labelOf(p.id) }));
     await this.deps.jobs.uow.run((s) =>
       s.events.append(stream.job(jobId), {
@@ -164,24 +164,24 @@ export class OpenWorkGateway {
         for (const f of (r.output as unknown as SpecialistOutput).findings) findings.push({ agent, ...f });
       }
       const labels = [...new Set(findings.flatMap((f) => f.citations))];
-      return synthesisTask(goal, findings, await this.fragments(jobId, labels), now);
+      return synthesisTask(goal, findings, await this.fragments(jobId, labels, plan.agents), now);
     }
     const agentId = slot.slice(SPECIALIST.length);
     ensure(plan.agents.includes(agentId), () => conflict("agent_not_in_plan", "Especialista fora do plano"));
     const labels = input.labels ?? [];
     ensure(labels.length <= FRAGMENTS_PER_AGENT && labels.every((l) => LABEL.test(l)), () => invalid("invalid_labels", "Rótulos inválidos"));
-    return specialistTask(goal, await this.member(agentId), await this.fragments(jobId, labels), now);
+    return specialistTask(goal, await this.member(agentId), await this.fragments(jobId, labels, [agentId]), now);
   }
 
   /** Resolve rótulos entregues a este trabalho; recusa rótulo estranho ou trecho que deixou de valer. */
-  private async fragments(jobId: JobId, labels: readonly string[]): Promise<Fragment[]> {
+  private async fragments(jobId: JobId, labels: readonly string[], agentIds: readonly string[]): Promise<Fragment[]> {
     const served = await retrievedFragments(this.deps.jobs.uow.read.events, jobId);
     const fragments: Fragment[] = [];
     for (const label of labels) {
       const id = served.get(label);
       ensure(id, () => conflict("label_not_served", "Trecho não entregue a este trabalho"));
-      const passage = await this.deps.search.passageForAgents(id);
-      ensure(passage, () => conflict("fragment_no_longer_valid", "Uma fonte usada deixou de valer; recomece a análise"));
+      const passage = await this.deps.search.passageForAgents(id, agentIds);
+      ensure(passage, () => conflict("fragment_no_longer_valid", "Uma fonte usada deixou de valer ou não está acessível a este agente; recomece a análise"));
       fragments.push({ label, source: passage.sourceId, title: passage.title, version: passage.version, validFrom: passage.validFrom, text: passage.text });
     }
     return fragments;

@@ -22,7 +22,7 @@ export interface OverviewDeps {
 type Count = { key: string; n: number | string };
 type EventRow = { stream: string; kind: string; detail: string; occurred_at: string };
 
-export type UsageArea = "work" | "chief" | "knowledge";
+export type UsageArea = "work" | "chief" | "knowledge" | "station";
 
 interface UsageDay {
   date: string;
@@ -80,7 +80,7 @@ export async function overview(deps: OverviewDeps) {
   // Consumo do modelo a partir da trilha.
   const usageEvents = await sql.all<EventRow>(
     `SELECT stream, kind, detail, occurred_at FROM events
-      WHERE occurred_at >= $1 AND kind IN ('inference_completed', 'inference_failed', 'chief_decision', 'knowledge_query')`,
+      WHERE occurred_at >= $1 AND kind IN ('inference_completed', 'inference_failed', 'chief_decision', 'knowledge_query', 'agent_reply')`,
     [since],
   );
   const byDay = new Map<string, UsageDay>();
@@ -92,6 +92,7 @@ export async function overview(deps: OverviewDeps) {
     work: { calls: 0, tokens: 0, fallbacks: 0 },
     chief: { calls: 0, tokens: 0, fallbacks: 0 },
     knowledge: { calls: 0, tokens: 0, fallbacks: 0 },
+    station: { calls: 0, tokens: 0, fallbacks: 0 },
   };
   const problems = new Map<string, { code: string; count: number; last_at: string }>();
   const providers = new Set<string>();
@@ -104,7 +105,7 @@ export async function overview(deps: OverviewDeps) {
   };
   for (const e of usageEvents) {
     const detail = JSON.parse(e.detail) as { engine?: string; usage?: unknown; provider?: string; fallback?: string; code?: string };
-    const area: UsageArea = e.kind === "chief_decision" ? "chief" : e.kind === "knowledge_query" ? "knowledge" : "work";
+    const area: UsageArea = e.kind === "chief_decision" ? "chief" : e.kind === "knowledge_query" ? "knowledge" : e.kind === "agent_reply" ? "station" : "work";
     if (e.kind === "inference_failed") {
       noteProblem(detail.code, e.occurred_at);
       continue;

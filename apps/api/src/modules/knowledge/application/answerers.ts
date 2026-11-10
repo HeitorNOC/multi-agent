@@ -28,8 +28,15 @@ export interface AnswerTrace {
 export type AnswerBody = { kind: "answer"; text: string; cited: number[] } | { kind: "abstain"; text: string };
 export type KnowledgeAnswer = AnswerBody & { trace: AnswerTrace };
 
+export interface AnswerInput {
+  question: string;
+  passages: Passage[];
+  /** Papel de quem responde (por exemplo, a persona de um agente na Estação). As regras abaixo dele continuam valendo. */
+  role?: string;
+}
+
 export interface KnowledgeAnswerer {
-  answer(input: { question: string; passages: Passage[] }): Promise<KnowledgeAnswer>;
+  answer(input: AnswerInput): Promise<KnowledgeAnswer>;
 }
 
 const SENTENCES_PER_PASSAGE = 2;
@@ -109,10 +116,12 @@ export class ModelAnswerer implements KnowledgeAnswerer {
     this.limiter = options.limiter ?? new CallLimiter(1, 4);
   }
 
-  async answer(input: { question: string; passages: Passage[] }): Promise<KnowledgeAnswer> {
+  async answer(input: AnswerInput): Promise<KnowledgeAnswer> {
     try {
       const result = await this.limiter.tryRun(() =>
-        this.client.complete({ system: SYSTEM, prompt: this.prompt(input), schema: SCHEMA, timeoutMs: this.timeoutMs }),
+        this.client.complete({ system: input.role ? `${input.role.trim()}
+
+${SYSTEM}` : SYSTEM, prompt: this.prompt(input), schema: SCHEMA, timeoutMs: this.timeoutMs }),
       );
       if (result.busy) return this.useFallback(input, "model_busy");
       const trace: AnswerTrace = {

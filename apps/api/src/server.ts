@@ -20,6 +20,7 @@ import type { ModelClient } from "./platform/model/model-client.ts";
 import { WorkerSupervisor } from "./platform/workers/supervisor.ts";
 import { conversationsHttp } from "./modules/conversations/http/routes.ts";
 import { jobOpener } from "./modules/conversations/application/job-opener.ts";
+import { stationResponder } from "./modules/conversations/application/station.ts";
 import { ModelChiefOfStaff } from "./modules/conversations/application/model-chief-of-staff.ts";
 import { RuleBasedChiefOfStaff } from "./modules/conversations/domain/chief-of-staff.ts";
 import { conversationStore } from "./modules/conversations/infrastructure/sql-conversations.ts";
@@ -184,6 +185,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     offers: [OPEN_WORK_OFFER],
     jobs: jobOpener(jobs),
     clock,
+    station: stationResponder({ team, search, answerer: knowledge.answerer }),
   };
 
   const app = await createHttpApp({

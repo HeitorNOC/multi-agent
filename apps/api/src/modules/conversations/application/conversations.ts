@@ -11,14 +11,16 @@
  */
 import type { Clock } from "../../../shared/clock.ts";
 import { conflict, ensure, notFound } from "../../../shared/errors.ts";
-import { ConversationId, type ActorId, type JobId } from "../../../shared/ids.ts";
+import { AgentId, ConversationId, type ActorId, type JobId } from "../../../shared/ids.ts";
 import type { Json } from "../../../shared/json.ts";
 import type { Transaction, UnitOfWork } from "../../../platform/database/unit-of-work.ts";
 import { stream } from "../../../platform/events/event-log.ts";
 import type { JobStatus } from "../../jobs/domain/job.ts";
 import type { ChiefOfStaff, ChiefTrace, ConversationOffer } from "../domain/chief-of-staff.ts";
-import { DEFAULT_TITLE, type Message } from "../domain/conversation.ts";
+import type { AnswerTrace } from "../../knowledge/application/answerers.ts";
+import { DEFAULT_TITLE, type Conversation, type Message, type MessageCitation } from "../domain/conversation.ts";
 import type { ConversationStore } from "../infrastructure/sql-conversations.ts";
+import type { StationResponder } from "./station.ts";
 
 export type Admission = { opened: true } | { opened: false; reason: string };
 
@@ -40,6 +42,8 @@ export interface ConversationDeps {
   offers: readonly ConversationOffer[];
   jobs: JobOpener;
   clock: Clock;
+  /** Estação (conversa direta com um agente). Sem ele, só há conversa com o Chief of Staff. */
+  station?: StationResponder;
 }
 
 export interface MessageView {
@@ -48,12 +52,15 @@ export interface MessageView {
   text: string;
   created_at: string;
   reply_to: number | null;
+  /** Na Estação: as fontes citadas na resposta. */
+  citations: readonly MessageCitation[] | null;
   job: { id: string; status: JobStatus; agents: string[] | null } | null;
   /** Só nas respostas: quem decidiu e, se for o caso, por que o modelo não foi usado. */
   decision: { engine: string; provider?: string; fallback?: string } | null;
 }
 
-type DecisionRecord = ChiefTrace & { offer_id?: string; admission?: "refused" };
+/** Quem decidiu a resposta: o Chief of Staff (regras ou modelo) ou, na Estação, o agente (`agent`). */
+type DecisionRecord = (ChiefTrace | (AnswerTrace & { agent: string })) & { offer_id?: string; admission?: "refused" };
 type Decisions = Map<number, MessageView["decision"]>;
 
 /** A resposta já existe; aborta a transação sem criar nada. */
@@ -68,15 +75,24 @@ class AlreadyAnswered extends Error {
 export async function listConversations(deps: ConversationDeps, actor: ActorId) {
   const conversations = await deps.uow.read.conversations.listForActor(actor);
   return {
-    conversations: conversations.map((c) => ({ id: c.id, title: c.title, created_at: c.createdAt, updated_at: c.updatedAt, message_count: c.messageCount })),
+    conversations: conversations.map((c) => ({ id: c.id, title: c.title, agent_id: c.agentId, created_at: c.createdAt, updated_at: c.updatedAt, message_count: c.messageCount })),
   };
 }
 
-export async function createConversation(deps: ConversationDeps, actor: ActorId, title = DEFAULT_TITLE) {
+/** Conversa com o Chief of Staff ou, com `agentId`, a Estação de um agente do time. */
+export async function createConversation(deps: ConversationDeps, actor: ActorId, title?: string, agentId?: string) {
   const now = deps.clock.now();
-  const conversation = { id: ConversationId.create(), actor, title: title.trim(), createdAt: now, updatedAt: now };
+  let agent: AgentId | null = null;
+  let name = title?.trim() || DEFAULT_TITLE;
+  if (agentId) {
+    ensure(deps.station, () => conflict("station_unavailable", "Estação indisponível nesta instalação"));
+    const member = await deps.station.member(agentId);
+    agent = AgentId.parse(member.id);
+    name = title?.trim() || `Estação de ${member.title}`;
+  }
+  const conversation: Conversation = { id: ConversationId.create(), actor, title: name, agentId: agent, createdAt: now, updatedAt: now };
   await deps.uow.run((s) => s.conversations.add(conversation));
-  return { id: conversation.id, title: conversation.title, created_at: conversation.createdAt };
+  return { id: conversation.id, title: conversation.title, agent_id: agent, created_at: conversation.createdAt };
 }
 
 export async function readConversation(deps: ConversationDeps, actor: ActorId, id: ConversationId) {
@@ -84,14 +100,14 @@ export async function readConversation(deps: ConversationDeps, actor: ActorId, i
   const messages = await deps.uow.read.messages.list(id);
   const decisions = await decisionsOf(deps, id);
   return {
-    conversation: { id: conversation.id, title: conversation.title, created_at: conversation.createdAt, updated_at: conversation.updatedAt },
+    conversation: { id: conversation.id, title: conversation.title, agent_id: conversation.agentId, created_at: conversation.createdAt, updated_at: conversation.updatedAt },
     messages: await Promise.all(messages.map((m) => view(deps, m, decisions))),
   };
 }
 
 /** Grava a mensagem do gestor, obtém a decisão do Chief of Staff e grava a resposta. */
 export async function sendMessage(deps: ConversationDeps, actor: ActorId, id: ConversationId, input: { text: string; clientId?: string }) {
-  await owned(deps, actor, id);
+  const conversation = await owned(deps, actor, id);
   const question = await deps.uow.run(async (s) => {
     if (input.clientId) {
       const prior = await s.messages.findByClientId(id, input.clientId);
@@ -102,13 +118,20 @@ export async function sendMessage(deps: ConversationDeps, actor: ActorId, id: Co
     }
     const now = deps.clock.now();
     await s.conversations.touch(id, now);
-    return s.messages.add({ conversationId: id, role: "user", text: input.text, jobId: null, clientId: input.clientId ?? null, replyTo: null, createdAt: now });
+    return s.messages.add({ conversationId: id, role: "user", text: input.text, jobId: null, clientId: input.clientId ?? null, replyTo: null, citations: null, createdAt: now });
   });
 
   const previous = await deps.uow.read.messages.findReply(id, question.seq);
-  const reply = previous ?? (await answer(deps, id, question));
+  const reply = previous ?? (conversation.agentId ? await stationAnswer(deps, conversation, question) : await answer(deps, id, question));
   const decisions = await decisionsOf(deps, id);
   return { replayed: !!previous, user: await view(deps, question, decisions), reply: await view(deps, reply, decisions) };
+}
+
+/** Na Estação, o agente responde com as fontes que pode ler; a decisão vai para a trilha sem o texto. */
+async function stationAnswer(deps: ConversationDeps, conversation: Conversation, question: Message): Promise<Message> {
+  ensure(deps.station, () => conflict("station_unavailable", "Estação indisponível nesta instalação"));
+  const r = await deps.station.reply(conversation.agentId!, question.text);
+  return reply(deps, conversation.id, question.seq, r.text, null, r.trace, r.citations);
 }
 
 async function answer(deps: ConversationDeps, id: ConversationId, question: Message): Promise<Message> {
@@ -144,11 +167,11 @@ async function answer(deps: ConversationDeps, id: ConversationId, question: Mess
 }
 
 /** Grava uma resposta; se outra requisição já respondeu, devolve aquela. */
-async function reply(deps: ConversationDeps, id: ConversationId, replyTo: number, text: string, jobId: JobId | null, trace: DecisionRecord) {
+async function reply(deps: ConversationDeps, id: ConversationId, replyTo: number, text: string, jobId: JobId | null, trace: DecisionRecord, citations: MessageCitation[] | null = null) {
   try {
     return await deps.uow.run(async (s) => {
       await requireUnanswered(s, id, replyTo);
-      return appendReply(deps, s, id, replyTo, text, jobId, trace);
+      return appendReply(deps, s, id, replyTo, text, jobId, trace, citations);
     });
   } catch (error) {
     if (error instanceof AlreadyAnswered) return error.reply;
@@ -162,12 +185,22 @@ async function requireUnanswered(s: ConversationStore, id: ConversationId, reply
 }
 
 /** Grava a resposta e, na mesma transação, a decisão na trilha da conversa (sem o texto). */
-async function appendReply(deps: ConversationDeps, s: ConversationStore, id: ConversationId, replyTo: number, text: string, jobId: JobId | null, trace: DecisionRecord) {
+async function appendReply(
+  deps: ConversationDeps,
+  s: ConversationStore,
+  id: ConversationId,
+  replyTo: number,
+  text: string,
+  jobId: JobId | null,
+  trace: DecisionRecord,
+  citations: MessageCitation[] | null = null,
+) {
   const now = deps.clock.now();
-  const message = await s.messages.add({ conversationId: id, role: "chief", text, jobId, clientId: null, replyTo, createdAt: now });
+  // As respostas da Estação usam o mesmo papel das do Chief of Staff; quem respondeu é o agente da conversa.
+  const message = await s.messages.add({ conversationId: id, role: "chief", text, jobId, clientId: null, replyTo, citations, createdAt: now });
   await s.conversations.touch(id, now);
   await s.events.append(stream.conversation(id), {
-    kind: "chief_decision",
+    kind: "agent" in trace ? "agent_reply" : "chief_decision",
     detail: { reply_to: replyTo, reply_seq: message.seq, job: jobId, ...trace } as Json,
   });
   return message;
@@ -190,7 +223,7 @@ async function lastJob(deps: ConversationDeps, history: readonly Message[]) {
 async function decisionsOf(deps: ConversationDeps, id: ConversationId): Promise<Decisions> {
   const map: Decisions = new Map();
   for (const event of await deps.uow.read.events.list(stream.conversation(id))) {
-    if (event.kind !== "chief_decision") continue;
+    if (event.kind !== "chief_decision" && event.kind !== "agent_reply") continue;
     const d = event.detail as { reply_seq: number; engine: string; provider?: string; fallback?: string };
     map.set(Number(d.reply_seq), { engine: d.engine, ...(d.provider ? { provider: d.provider } : {}), ...(d.fallback ? { fallback: d.fallback } : {}) });
   }
@@ -204,6 +237,7 @@ async function view(deps: ConversationDeps, m: Message, decisions: Decisions): P
     text: m.text,
     created_at: m.createdAt,
     reply_to: m.replyTo,
+    citations: m.citations,
     job: m.jobId ? ((await deps.jobs.describe(m.jobId)) ?? null) : null,
     decision: m.role === "chief" ? (decisions.get(m.seq) ?? null) : null,
   };

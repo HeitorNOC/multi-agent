@@ -51,7 +51,7 @@ for (const dialect of dialects) {
       assert.deepEqual(o.usage.days.map((x) => x.date).slice(-2), ["2026-03-09", "2026-03-10"]);
       assert.deepEqual(o.usage.days.at(-1), { date: "2026-03-10", calls: 3, input_tokens: 150, output_tokens: 33 });
       assert.deepEqual(o.usage.days.at(-2), { date: "2026-03-09", calls: 1, input_tokens: 0, output_tokens: 7 }, "a noite de ontem em SP fica em ontem");
-      assert.deepEqual(o.usage.by_area, { work: { calls: 3, tokens: 187, fallbacks: 0 }, chief: { calls: 1, tokens: 3, fallbacks: 1 }, knowledge: { calls: 0, tokens: 0, fallbacks: 0 } });
+      assert.deepEqual(o.usage.by_area, { work: { calls: 3, tokens: 187, fallbacks: 0 }, chief: { calls: 1, tokens: 3, fallbacks: 1 }, knowledge: { calls: 0, tokens: 0, fallbacks: 0 }, station: { calls: 0, tokens: 0, fallbacks: 0 } });
       assert.deepEqual(o.usage.problems.map((p) => [p.code, p.count]).sort(), [["quota_exhausted", 1], ["timeout", 1]]);
       assert.deepEqual(o.usage.providers, ["claude"]);
       assert.ok(o.activity.some((e) => e.kind === "admission"));

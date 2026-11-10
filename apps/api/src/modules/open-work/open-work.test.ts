@@ -157,6 +157,20 @@ for (const dialect of dialects) {
       assert.ok(!JSON.stringify(events).includes("Netuno"), "a fonte restrita nunca chegou ao trabalho");
     });
 
+    test("fonte restrita a um agente chega só a ele dentro do trabalho", async () => {
+      const { jobs, gateway, md, started } = await setup();
+      await md("Contrato confidencial", "Compras de fornecedores acima de dez mil reais com o fornecedor Alfa têm desconto de 12%.", ["ana", "agent:procurement_analyst"]);
+      const id = await started();
+      await gateway.run(id, "plan");
+      await recordPlan(jobs, id, { agents: ["procurement_analyst", "financial_planning_analyst"], reason: "Compras e finanças cobrem o pedido." });
+      const proc = (await gateway.retrieve(id, "procurement_analyst")).fragments;
+      const fin = (await gateway.retrieve(id, "financial_planning_analyst")).fragments;
+      assert.deepEqual([proc.map((f) => f.title), fin.length], [["Contrato confidencial"], 0]);
+      // O outro especialista não consegue usar o trecho nem passando o rótulo.
+      assert.equal(await code(gateway.run(id, "specialist:financial_planning_analyst", { labels: [proc[0]!.label] })), "fragment_no_longer_valid");
+      assert.equal((await gateway.run(id, "specialist:procurement_analyst", { labels: [proc[0]!.label] })).replayed, false);
+    });
+
     test("repetir um passo devolve o recibo sem chamar o modelo; outra entrada no mesmo passo é recusada", async () => {
       const { gateway, model, md, started, analyze } = await setup();
       await md("Compras", POLICY);

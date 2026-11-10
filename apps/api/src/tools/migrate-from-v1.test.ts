@@ -160,7 +160,7 @@ for (const dialect of dialects) {
       const conv = "conv-1" as ConversationId;
       assert.equal((await conversations.read.messages.list(conv)).length, 2);
       const next = await conversations.run((s) =>
-        s.messages.add({ conversationId: conv, role: "user", text: "nova", jobId: null, clientId: null, replyTo: null, createdAt: clock.now() }),
+        s.messages.add({ conversationId: conv, role: "user", text: "nova", jobId: null, clientId: null, replyTo: null, citations: null, createdAt: clock.now() }),
       );
       assert.equal(next.seq, 3);
     });

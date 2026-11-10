@@ -69,6 +69,13 @@ export const canRead = (source: { owner: string; readers: readonly string[] }, a
 
 export const isOpenToEveryone = (source: { readers: readonly string[] }) => source.readers.includes(EVERYONE);
 
+/** Como um agente aparece na lista de leitores de uma fonte restrita. */
+export const agentReader = (agentId: string) => `agent:${agentId}`;
+
+/** Um agente lê fontes abertas a todos e as restritas em que foi incluído como leitor. */
+export const agentsCanRead = (source: { readers: readonly string[] }, agentIds: readonly string[]) =>
+  isOpenToEveryone(source) || agentIds.some((id) => source.readers.includes(agentReader(id)));
+
 /** Aplica vigência e substituição: de cada fonte, a versão vigente em `now`. */
 export function currentVersions(items: readonly IndexableVersion[], now: string): CurrentVersion[] {
   const latest = new Map<SourceId, IndexableVersion>();

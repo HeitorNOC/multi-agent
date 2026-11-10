@@ -7,7 +7,7 @@ import type { Clock } from "../../../shared/clock.ts";
 import type { UnitOfWork } from "../../../platform/database/unit-of-work.ts";
 import type { IndexBuilder, KnowledgeIndex, Passage } from "../domain/search-index.ts";
 import { originalUrl } from "../domain/search-index.ts";
-import { currentVersions, isOpenToEveryone, type IndexableVersion } from "../domain/source.ts";
+import { agentsCanRead, currentVersions, type IndexableVersion } from "../domain/source.ts";
 import { chunk } from "../domain/text.ts";
 import type { KnowledgeStore } from "../infrastructure/sql-knowledge.ts";
 
@@ -77,18 +77,18 @@ export class KnowledgeSearch {
   }
 
   /**
-   * Trechos para os agentes de um trabalho. Sem identidade corporativa ainda, agentes só leem
-   * fontes abertas a toda a instalação; fontes restritas nunca chegam a eles.
+   * Trechos para agentes: fontes abertas a toda a empresa e as restritas em que algum dos agentes
+   * foi incluído como leitor (`agent:<id>`). As demais nunca chegam a eles.
    */
-  async forAgents(query: string, limit: number): Promise<AgentPassage[]> {
-    const { found } = await this.search(query, isOpenToEveryone, limit);
+  async forAgents(query: string, limit: number, agentIds: readonly string[] = []): Promise<AgentPassage[]> {
+    const { found } = await this.search(query, (p) => agentsCanRead(p, agentIds), limit);
     return found.map(({ n: _n, matched: _m, score: _s, ...p }) => ({ ...p, url: originalUrl(p.sourceId, p.version) }));
   }
 
-  /** Um trecho vigente e aberto a todos, pelo id; `undefined` se deixou de valer. */
-  async passageForAgents(id: string): Promise<AgentPassage | undefined> {
+  /** Um trecho vigente que algum dos agentes pode ler, pelo id; `undefined` se deixou de valer ou perdeu o acesso. */
+  async passageForAgents(id: string, agentIds: readonly string[] = []): Promise<AgentPassage | undefined> {
     const p = (await this.index()).passages.get(id);
-    if (!p || !isOpenToEveryone(p)) return undefined;
+    if (!p || !agentsCanRead(p, agentIds)) return undefined;
     const { owner: _o, readers: _r, ...rest } = p;
     return { ...rest, url: originalUrl(p.sourceId, p.version) };
   }
