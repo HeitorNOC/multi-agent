@@ -56,7 +56,7 @@ test("servidor composto: pedido → worker → aprovação → efeito → conclu
     AURORA_SQLITE_PATH: join(dir, "aurora.db"),
     AURORA_WORKER_COMMAND: JSON.stringify([process.execPath, "-e", FAKE_WORKER]),
   });
-  const server = await startServer(config, { policy: testPolicy });
+  const server = await startServer(config, { policy: testPolicy, catalog: [], model: null });
   try {
     const api = (path: string, body?: object) =>
       fetch(server.url + path, body ? { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) } : {}).then((r) =>

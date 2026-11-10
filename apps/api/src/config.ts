@@ -29,6 +29,17 @@ const schema = z
       })
       .optional(),
     AURORA_WORKER_CWD: z.string().optional(),
+    /** Conexão PostgreSQL dos checkpoints do LangGraph, entregue ao worker. */
+    AURORA_CHECKPOINT_DSN: z.string().startsWith("postgres").optional(),
+    /** CLI oficial já autenticada no computador da empresa; `none` desliga o modelo. */
+    AURORA_MODEL_PROVIDER: z.enum(["none", "claude", "codex"]).default("none"),
+    AURORA_MODEL_NAME: z.string().min(1).max(100).optional(),
+    AURORA_MODEL_TIMEOUT_MS: integer(1_000, 600_000, 180_000),
+    /** Quem redige as respostas do Cérebro: trechos extraídos ou o modelo (com volta ao extrativo). */
+    AURORA_KNOWLEDGE_ANSWERER: z.enum(["extractive", "model"]).default("extractive"),
+    AURORA_KNOWLEDGE_MAX_BYTES: integer(1, 50_000_000, 5_000_000),
+    /** Catálogo de especialistas do trabalho aberto. */
+    AURORA_CATALOG_PATH: z.string().min(1).optional(),
   })
   .refine((env) => env.AURORA_RESUME_RESERVE < env.AURORA_QUEUE_CAPACITY, {
     message: "AURORA_RESUME_RESERVE deve ser menor que AURORA_QUEUE_CAPACITY",
@@ -41,7 +52,10 @@ export interface Config {
   port: number;
   database: DatabaseConfig;
   queue: { capacity: number; resumeReserve: number; maxWorkers: number };
-  worker: { command: readonly string[] | undefined; cwd: string | undefined };
+  worker: { command: readonly string[] | undefined; cwd: string | undefined; checkpointDsn: string | undefined };
+  model: { provider: "none" | "claude" | "codex"; name: string | undefined; timeoutMs: number };
+  knowledge: { answerer: "extractive" | "model"; maxBytes: number };
+  catalogPath: string | undefined;
 }
 
 export class ConfigError extends Error {
@@ -61,6 +75,9 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       ? { dialect: "postgres", url: e.AURORA_DATABASE_URL, schema: e.AURORA_DATABASE_SCHEMA }
       : { dialect: "sqlite", path: e.AURORA_SQLITE_PATH },
     queue: { capacity: e.AURORA_QUEUE_CAPACITY, resumeReserve: e.AURORA_RESUME_RESERVE, maxWorkers: e.AURORA_MAX_WORKERS },
-    worker: { command: e.AURORA_WORKER_COMMAND, cwd: e.AURORA_WORKER_CWD },
+    worker: { command: e.AURORA_WORKER_COMMAND, cwd: e.AURORA_WORKER_CWD, checkpointDsn: e.AURORA_CHECKPOINT_DSN },
+    model: { provider: e.AURORA_MODEL_PROVIDER, name: e.AURORA_MODEL_NAME, timeoutMs: e.AURORA_MODEL_TIMEOUT_MS },
+    knowledge: { answerer: e.AURORA_KNOWLEDGE_ANSWERER, maxBytes: e.AURORA_KNOWLEDGE_MAX_BYTES },
+    catalogPath: e.AURORA_CATALOG_PATH,
   };
 }

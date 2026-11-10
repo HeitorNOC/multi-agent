@@ -1,0 +1,4 @@
+# Runtime Python dos workers (LangGraph). Versões testadas com a API v2.
+langgraph==1.2.19
+langgraph-checkpoint-postgres==3.2.0
+psycopg[binary]==3.3.7
