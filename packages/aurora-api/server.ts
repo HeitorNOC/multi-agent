@@ -24,8 +24,11 @@ import {
   type ChiefOfStaff,
   type ConversationOffer,
 } from "./conversation/chief-of-staff.ts";
-import { ClaudeCliClient, CodexCliClient } from "./conversation/model-cli.ts";
+import { CallLimiter } from "./conversation/call-limiter.ts";
+import { ClaudeCliClient, CodexCliClient, type ModelClient } from "./conversation/model-cli.ts";
 import { ModelChiefOfStaff } from "./conversation/model-chief-of-staff.ts";
+import { ExtractiveAnswerer, ModelAnswerer, type KnowledgeAnswerer } from "./knowledge/answerer.ts";
+import { KnowledgeError, KnowledgeService } from "./knowledge/knowledge-service.ts";
 import {
   ConversationError,
   ConversationService,
@@ -646,26 +649,69 @@ function conversationTargets(): ConversationTarget[] {
 const targets = conversationTargets();
 
 /**
- * `config.chief` escolhe como o Chief of Staff decide:
- *   ausente ou { "engine": "rules" }  → regras determinísticas, sem modelo;
- *   { "engine": "model", "provider": "claude" | "codex", "model"?, "timeoutMs"? } → CLI local
- *   já autenticada pelo usuário, com as regras como plano B.
+ * Uso do modelo pela CLI local do usuário. Configurado por recurso:
+ *   `config.chief`             → como o Chief of Staff decide na conversa;
+ *   `config.knowledge.answerer` → como o Cérebro redige respostas.
+ * Cada um: ausente ou { "engine": "rules" | "extractive" } (sem modelo), ou
+ * { "engine": "model", "provider": "claude" | "codex", "model"?, "timeoutMs"? }.
  * `command` (opcional) troca o executável; é configuração local confiável, como `policyModule`.
+ * Todos compartilham um limitador: a cota da assinatura é uma só.
  */
+const modelLimiter = new CallLimiter(1, 4);
+function modelClient(c: any, setting: string): ModelClient {
+  const options = { command: c.command, model: c.model };
+  if (c.provider === "claude") return new ClaudeCliClient(options);
+  if (c.provider === "codex") return new CodexCliClient(options);
+  throw Error(`${setting}.provider deve ser "claude" ou "codex"`);
+}
+
 function buildChief(): ChiefOfStaff {
   const rules = new RuleBasedChiefOfStaff();
   const c = config.chief;
   if (!c || c.engine === undefined || c.engine === "rules") return rules;
   if (c.engine !== "model") throw Error('config.chief.engine deve ser "rules" ou "model"');
-  const options = { command: c.command, model: c.model };
-  const client =
-    c.provider === "claude"
-      ? new ClaudeCliClient(options)
-      : c.provider === "codex"
-        ? new CodexCliClient(options)
-        : null;
-  if (!client) throw Error('config.chief.provider deve ser "claude" ou "codex"');
-  return new ModelChiefOfStaff({ client, fallback: rules, timeoutMs: c.timeoutMs });
+  return new ModelChiefOfStaff({
+    client: modelClient(c, "config.chief"),
+    fallback: rules,
+    timeoutMs: c.timeoutMs,
+    limiter: modelLimiter,
+  });
+}
+
+function buildAnswerer(): KnowledgeAnswerer {
+  const extractive = new ExtractiveAnswerer();
+  const c = config.knowledge?.answerer;
+  if (!c || c.engine === undefined || c.engine === "extractive") return extractive;
+  if (c.engine !== "model") throw Error('config.knowledge.answerer.engine deve ser "extractive" ou "model"');
+  return new ModelAnswerer({
+    client: modelClient(c, "config.knowledge.answerer"),
+    fallback: extractive,
+    timeoutMs: c.timeoutMs,
+    limiter: modelLimiter,
+  });
+}
+
+const knowledge = new KnowledgeService({
+  ledger,
+  answerer: buildAnswerer(),
+  maxBytes: config.knowledge?.maxBytes,
+});
+/** Envio de arquivo vai em base64 dentro do JSON; só essas rotas aceitam corpo grande. */
+const KNOWLEDGE_UPLOAD_LIMIT = Math.ceil(((config.knowledge?.maxBytes ?? 5_000_000) * 4) / 3) + 20_000;
+
+/**
+ * Cabeçalhos para devolver o original de uma fonte. Nunca como HTML: texto vai como texto puro
+ * e o resto como download, com sandbox, para um arquivo enviado não executar nada no navegador.
+ */
+function originalHeaders(mediaType: string, filename: string) {
+  const inline = ["text/plain", "text/markdown", "text/csv", "application/json"].includes(mediaType);
+  const contentType = mediaType === "application/json" ? "application/json; charset=utf-8" : inline ? "text/plain; charset=utf-8" : "application/octet-stream";
+  const ascii = filename.replace(/[^\x20-\x7e]/g, "_").replace(/["\\]/g, "_");
+  return {
+    "content-type": contentType,
+    "content-disposition": `${inline ? "inline" : "attachment"}; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(filename)}`,
+    "content-security-policy": "sandbox; default-src 'none'",
+  };
 }
 
 const conversations = new ConversationService({
@@ -756,7 +802,8 @@ const server = http.createServer(async (req, res) => {
       let bytes = 0;
       for await (const b of req) {
         bytes += b.length;
-        if (bytes > 20000) throw Error("Payload excedido");
+        const limit = path.startsWith("/api/knowledge/sources") ? KNOWLEDGE_UPLOAD_LIMIT : 20000;
+        if (bytes > limit) throw Error("Payload excedido");
         chunks.push(b);
       }
       body = JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
@@ -1055,6 +1102,29 @@ const server = http.createServer(async (req, res) => {
       await loadJob(ledger, traceMatch[1]);
       return send(await ledger.trace(traceMatch[1]));
     }
+    if (path.startsWith("/api/knowledge/")) {
+      if (config.recoveryOnly)
+        throw Error("Este perfil oferece somente a central de recuperação operacional");
+      const actor = pilotActor?.id ?? "operador-local-demo";
+      const sourceMatch = path.match(/^\/api\/knowledge\/sources\/([\w-]+)(?:\/(versions|revoke)(?:\/(\d+)\/original)?)?$/);
+      if (path === "/api/knowledge/sources" && req.method === "GET") return send(await knowledge.list(actor));
+      if (path === "/api/knowledge/sources" && req.method === "POST") return send(await knowledge.upload(actor, body), 201);
+      if (path === "/api/knowledge/query" && req.method === "POST") return send(await knowledge.query(actor, body));
+      if (sourceMatch) {
+        const [, id, action, version] = sourceMatch;
+        if (!action && req.method === "GET") return send(await knowledge.get(actor, id));
+        if (action === "versions" && version && req.method === "GET") {
+          const original = await knowledge.original(actor, id, Number(version));
+          res.writeHead(200, originalHeaders(original.mediaType, original.filename));
+          res.end(Buffer.from(original.bytes));
+          return;
+        }
+        if (action === "versions" && !version && req.method === "POST")
+          return send(await knowledge.addVersion(actor, id, body), 201);
+        if (action === "revoke" && !version && req.method === "POST") return send(await knowledge.revoke(actor, id));
+      }
+      return send({ error: "Rota do Cérebro não encontrada" }, 404);
+    }
     if (path === "/api/conversations" || path.startsWith("/api/conversations/")) {
       if (config.recoveryOnly)
         throw Error("Este perfil oferece somente a central de recuperação operacional");
@@ -1236,7 +1306,8 @@ const server = http.createServer(async (req, res) => {
     const status =
       error instanceof RecoveryError ||
       error instanceof QueueError ||
-      error instanceof ConversationError
+      error instanceof ConversationError ||
+      error instanceof KnowledgeError
         ? error.status
         : 409;
     if (status === 429) res.setHeader("Retry-After", "2");

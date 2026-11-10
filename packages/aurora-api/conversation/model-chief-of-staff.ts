@@ -54,6 +54,8 @@ export interface ModelChiefOptions {
   timeoutMs?: number;
   maxConcurrent?: number;
   maxWaiting?: number;
+  /** Limitador compartilhado com outros usos do modelo na instalação (a cota é uma só). */
+  limiter?: CallLimiter;
 }
 
 export class ModelChiefOfStaff implements ChiefOfStaff {
@@ -66,7 +68,7 @@ export class ModelChiefOfStaff implements ChiefOfStaff {
     this.client = options.client;
     this.fallback = options.fallback;
     this.timeoutMs = options.timeoutMs ?? 90_000;
-    this.limiter = new CallLimiter(options.maxConcurrent ?? 1, options.maxWaiting ?? 4);
+    this.limiter = options.limiter ?? new CallLimiter(options.maxConcurrent ?? 1, options.maxWaiting ?? 4);
   }
 
   async decide(turn: ChiefTurn): Promise<ChiefDecision> {
