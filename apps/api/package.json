@@ -7,6 +7,7 @@
   },
   "scripts": {
     "start": "node src/main.ts",
+    "migrate:v1": "node src/tools/migrate-from-v1.ts",
     "typecheck": "tsc -p tsconfig.json",
     "test": "node --test --test-concurrency=1 \"src/**/*.test.ts\" \"test/**/*.test.ts\""
   },
