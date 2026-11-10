@@ -41,6 +41,7 @@ import { acceptedMarkdown, deliveryFor, type DeliverablesDeps } from "./modules/
 import type { DeliverableId } from "./modules/deliverables/domain/deliverable.ts";
 import type { IntegrationsDeps } from "./modules/integrations/application/integrations.ts";
 import { integrationsHttp } from "./modules/integrations/http/routes.ts";
+import { overviewHttp } from "./modules/overview/http/routes.ts";
 import { LocalFolder } from "./modules/integrations/infrastructure/local-folder.ts";
 import { integrationsStore } from "./modules/integrations/infrastructure/sql-connections.ts";
 import { uploadSource } from "./modules/knowledge/application/sources.ts";
@@ -198,6 +199,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       deliverablesHttp(deliverables, { onJobOpened: () => void scheduler.wake() }),
       routinesHttp(routines, { onJobOpened: () => void scheduler.wake() }),
       integrationsHttp(integrations),
+      overviewHttp({ sql: db.sql, clock, timeZone: config.timeZone }),
       settingsHttp(config, parts.model !== null),
       ...(config.webDir ? [staticWeb(config.webDir)] : []),
     ],
