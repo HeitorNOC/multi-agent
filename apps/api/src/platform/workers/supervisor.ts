@@ -51,11 +51,15 @@ export class WorkerSupervisor implements ActiveWorkers {
     return this.running.size;
   }
 
+  /** `true` se `token` é o segredo entregue aos workers. */
+  acceptsToken(token: unknown): boolean {
+    return typeof token === "string" && sameSecret(token, this.options.token);
+  }
+
   /** `true` se `lease` é a concessão atual do worker deste trabalho. */
   holdsLease(jobId: JobId, lease: unknown): boolean {
     const current = this.running.get(jobId)?.lease;
-    if (!current || typeof lease !== "string" || lease.length !== current.length) return false;
-    return timingSafeEqual(Buffer.from(lease), Buffer.from(current));
+    return !!current && typeof lease === "string" && sameSecret(lease, current);
   }
 
   start(launch: WorkerLaunch): void {
@@ -98,6 +102,12 @@ export class WorkerSupervisor implements ActiveWorkers {
     this.stopping = true;
     for (const { child } of this.running.values()) child.kill();
   }
+}
+
+function sameSecret(given: string, expected: string): boolean {
+  const a = Buffer.from(given);
+  const b = Buffer.from(expected);
+  return a.length === b.length && timingSafeEqual(a, b);
 }
 
 /** A última linha JSON da saída do worker, se declarar `completed`. */
