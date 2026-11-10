@@ -3,6 +3,7 @@
  * Cada uma define o prompt (instruções separadas dos dados), o schema JSON da saída e a
  * validação. Uma saída que não passa na validação não é usada.
  */
+import { localDate } from "../knowledge/dates.ts";
 import type { CatalogAgent } from "./catalog.ts";
 
 export class TaskOutputError extends Error {
@@ -92,9 +93,9 @@ Responda apenas com o JSON pedido.`,
 }
 
 const fragmentData = (fragments: Fragment[]) =>
-  fragments.map((f) => ({ rotulo: f.label, fonte: f.title, versao: f.version, vigente_desde: f.validFrom, texto: f.text }));
+  fragments.map((f) => ({ rotulo: f.label, fonte: f.title, versao: f.version, vigente_desde: localDate(f.validFrom), texto: f.text }));
 
-export function specialistTask(goal: string, agent: CatalogAgent, fragments: Fragment[]): TaskSpec<SpecialistOutput> {
+export function specialistTask(goal: string, agent: CatalogAgent, fragments: Fragment[], now: string): TaskSpec<SpecialistOutput> {
   const allowed = new Set(fragments.map((f) => f.label));
   return {
     system: `Você é ${agent.title}, especialista em: ${agent.focus}.
@@ -103,7 +104,7 @@ Cada achado é uma afirmação objetiva e lista em "citations" os rótulos dos t
 Não invente números, datas, nomes ou causas. Se os trechos não bastarem, deixe "findings" vazio e explique em "unknowns" o que falta.
 No máximo 6 achados. ${DATA_RULE}
 Responda apenas com o JSON pedido.`,
-    prompt: JSON.stringify({ pedido: goal, trechos: fragmentData(fragments) }, null, 1),
+    prompt: JSON.stringify({ hoje: localDate(now), pedido: goal, trechos: fragmentData(fragments) }, null, 1),
     schema: {
       type: "object",
       properties: {
@@ -141,6 +142,7 @@ export function synthesisTask(
   goal: string,
   findings: { agent: string; claim: string; citations: string[] }[],
   fragments: Fragment[],
+  now: string,
 ): TaskSpec<SynthesisOutput> {
   const cited = new Set(findings.flatMap((f) => f.citations));
   return {
@@ -152,6 +154,7 @@ No máximo 6 frases no total. ${DATA_RULE}
 Responda apenas com o JSON pedido.`,
     prompt: JSON.stringify(
       {
+        hoje: localDate(now),
         pedido: goal,
         achados: findings.map((f) => ({ especialista: f.agent, afirmacao: f.claim, rotulos: f.citations })),
         trechos: fragmentData(fragments.filter((f) => cited.has(f.label))),

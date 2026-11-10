@@ -175,3 +175,24 @@
     grid-template-columns: 1fr;
   }
 }
+/* Parecer do trabalho aberto */
+.open-findings,
+.open-unknowns,
+.open-sources {
+  font-size: 12px;
+  line-height: 1.6;
+  padding-left: 18px;
+}
+.open-findings li {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+.open-findings small {
+  color: #7595ae;
+  font-size: 10px;
+}
+.open-report a {
+  color: #7cc0e3;
+  margin-left: 2px;
+}

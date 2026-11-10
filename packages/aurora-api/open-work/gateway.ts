@@ -179,14 +179,14 @@ export class OpenWorkGateway {
         for (const f of (JSON.parse(r.output!) as SpecialistOutput).findings) findings.push({ agent, ...f });
       }
       const labels = [...new Set(findings.flatMap((f) => f.citations))];
-      return synthesisTask(goal, findings, await this.fragments(job, labels));
+      return synthesisTask(goal, findings, await this.fragments(job, labels), this.now());
     }
     const agentId = slot.slice("specialist:".length);
     if (!plan.agents.includes(agentId)) throw new OpenWorkError(409, "agent_not_in_plan", "Especialista fora do plano");
     const labels = input.labels;
     if (!Array.isArray(labels) || labels.length > FRAGMENTS_PER_AGENT || !labels.every((l) => typeof l === "string" && LABEL.test(l)))
       throw new OpenWorkError(400, "invalid_labels", "Rótulos inválidos");
-    return specialistTask(goal, this.catalog.get(agentId)!, await this.fragments(job, labels as string[]));
+    return specialistTask(goal, this.catalog.get(agentId)!, await this.fragments(job, labels as string[]), this.now());
   }
 
   /** Resolve rótulos entregues a este trabalho; recusa rótulo estranho ou trecho que deixou de valer. */

@@ -9,6 +9,7 @@ import { PerformancePanel } from "./PerformancePanel.tsx";
 import { OperationsOverview } from "./OperationsOverview.tsx";
 import { PilotEvidence, PilotSignIn, type PilotReport } from "./PilotPanel.tsx";
 import { DecisionReport, type Report } from "./DecisionReport.tsx";
+import { OpenReport, type OpenReportData } from "./OpenReport.tsx";
 import RecoveryCenter from "./RecoveryCenter.tsx";
 import { ConversationPanel } from "./ConversationPanel.tsx";
 import { KnowledgePanel } from "./KnowledgePanel.tsx";
@@ -155,7 +156,9 @@ function App() {
     teams: [{ lead: "technology_director", specialists: engineeringAgents, reason: "Implementar e verificar a ingestão." }],
   } : undefined);
   const selected = plan?.capabilities ?? [];
-  const report: Report | undefined = pilot || engineeringReport ? undefined : job?.review?.report;
+  // O parecer do trabalho aberto tem outro formato; o DecisionReport é o da bancada do Aurora.
+  const openReport: OpenReportData | undefined = job?.review?.report?.kind === "open" ? job.review.report : undefined;
+  const report: Report | undefined = pilot || engineeringReport || openReport ? undefined : job?.review?.report;
   const pilotReport: PilotReport | undefined = pilot
     ? job?.review?.report
     : undefined;
@@ -550,6 +553,7 @@ function App() {
                   )}
               </section>
             )}
+            {openReport && <OpenReport report={openReport} agentName={(id) => meta(id)?.title} />}
             {report && (
               <DecisionReport
                 report={report}

@@ -9,6 +9,7 @@
  */
 import { CallLimiter } from "../conversation/call-limiter.ts";
 import { ModelCallError, type ModelClient } from "../conversation/model-cli.ts";
+import { localDate } from "./dates.ts";
 import { normalize } from "./text.ts";
 
 export interface Passage {
@@ -138,7 +139,8 @@ export class ModelAnswerer implements KnowledgeAnswerer {
   private prompt({ question, passages }: { question: string; passages: Passage[] }) {
     return JSON.stringify(
       {
-        trechos: passages.map((p) => ({ n: p.n, fonte: p.title, versao: p.version, vigente_desde: p.validFrom, texto: p.text })),
+        hoje: localDate(new Date().toISOString()),
+        trechos: passages.map((p) => ({ n: p.n, fonte: p.title, versao: p.version, vigente_desde: localDate(p.validFrom), texto: p.text })),
         pergunta: question,
       },
       null,
