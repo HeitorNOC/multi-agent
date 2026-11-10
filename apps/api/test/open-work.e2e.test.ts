@@ -92,7 +92,7 @@ async function until(call: Awaited<ReturnType<typeof start>>["call"], id: string
       throw new Error(`terminou em ${last.status}: ${last.events.map((e) => e.kind).join(", ")}`);
     await new Promise((r) => setTimeout(r, 200));
   }
-  throw new Error(`tempo esgotado esperando ${status}; último: ${last?.status}`);
+  throw new Error(`tempo esgotado esperando ${status}; último: ${last?.status}; trilha: ${last?.events.map((e) => e.kind).join(", ")}`);
 }
 
 test("pedido livre: especialistas citam só fontes abertas; aprovação entrega uma vez", { skip, timeout: 240_000 }, async () => {
