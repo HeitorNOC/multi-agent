@@ -76,26 +76,28 @@ export async function recordReview(deps: JobsDeps, jobId: JobId, report: Json): 
  * o mesmo recibo; um hash diferente do aprovado é recusado.
  */
 export async function recordEffect(deps: JobsDeps, jobId: JobId, hash: string): Promise<Json> {
-  return deps.uow.run(async (store) => {
+  return deps.uow.run(async (store, tx) => {
     const job = await loadJob(store.jobs, jobId);
     const review = verifyApproved(job, hash);
     const existing = await store.effects.get(jobId);
     if (existing) ensure(existing.hash === hash, () => conflict("effect_intent_mismatch", "Intenção divergente do efeito já executado"));
     const payload = review.payload as { recipient: string; content: string };
+    const simulated = !deps.delivery;
     const receipt: Json = existing?.receipt ?? {
       id: randomUUID(),
       job: jobId,
       hash,
-      simulated: true,
+      simulated,
       recipient: payload.recipient,
       content: payload.content,
       created: deps.clock.now(),
+      ...(deps.delivery ? await deps.delivery.deliver({ job, review }, tx) : {}),
     };
     if (!existing) await store.effects.add({ jobId, hash, receipt });
     if (job.receipt === null) await store.jobs.save(transitions.recordReceipt(job, receipt));
     await store.events.append(stream.job(jobId), {
       kind: "effect_receipt",
-      detail: { id: (receipt as { id: string }).id, replayed: !!existing, simulated: true },
+      detail: { id: (receipt as { id: string }).id, replayed: !!existing, simulated: (receipt as { simulated: boolean }).simulated },
     });
     return receipt;
   });

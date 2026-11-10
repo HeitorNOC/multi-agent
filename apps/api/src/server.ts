@@ -37,6 +37,10 @@ import { knowledgeHttp } from "./modules/knowledge/http/routes.ts";
 import { Bm25Index } from "./modules/knowledge/infrastructure/bm25-index.ts";
 import { knowledgeStore } from "./modules/knowledge/infrastructure/sql-knowledge.ts";
 import { recoveryHttp } from "./modules/recovery/http/routes.ts";
+import { deliveryFor, type DeliverablesDeps } from "./modules/deliverables/application/deliverables.ts";
+import { deliverablesHttp } from "./modules/deliverables/http/routes.ts";
+import { deliverablesStore } from "./modules/deliverables/infrastructure/sql-deliverables.ts";
+import { admitJob } from "./modules/jobs/application/admit-job.ts";
 import { OpenWorkGateway } from "./modules/open-work/application/gateway.ts";
 import { openWorkPolicy } from "./modules/open-work/application/open-policy.ts";
 import { agentsHttp } from "./modules/agents/http/routes.ts";
@@ -100,6 +104,9 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
   };
   const team = teamDirectory(agentsUow);
 
+  // Entregas: o efeito aprovado de cada trabalho vira uma entrega (ou a próxima versão dela).
+  const deliverablesUow = new UnitOfWork(db, deliverablesStore(clock));
+
   // Trabalhos
   let url = "";
   let jobs!: JobsDeps;
@@ -120,6 +127,12 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     limits: queueLimits(config.queue),
     clock,
     workers: supervisor,
+    delivery: deliveryFor(deliverablesUow, clock),
+  };
+  const deliverables: DeliverablesDeps = {
+    uow: deliverablesUow,
+    clock,
+    reopen: async (goal, onAdmitted) => (await admitJob(jobs, { request: { goal }, onAdmitted: (job, tx) => onAdmitted(job.id, tx) })).job.id,
   };
   const scheduler = new JobScheduler(jobs, supervisor);
   await reconcileOnRestart(jobs);
@@ -147,6 +160,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       conversationsHttp(conversations, { onJobOpened: () => void scheduler.wake() }),
       recoveryHttp(jobs, { wake: () => void scheduler.wake() }),
       agentsHttp(agents),
+      deliverablesHttp(deliverables, { onJobOpened: () => void scheduler.wake() }),
       settingsHttp(config, parts.model !== null),
       ...(config.webDir ? [staticWeb(config.webDir)] : []),
     ],

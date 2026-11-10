@@ -17,6 +17,7 @@ export const stream = {
   knowledge: (id: string) => `knowledge:${id}` as StreamId,
   recovery: (id: string) => `recovery:${id}` as StreamId,
   agents: (id: string) => `agents:${id}` as StreamId,
+  deliverable: (id: string) => `deliverable:${id}` as StreamId,
 };
 
 export interface NewEvent {
