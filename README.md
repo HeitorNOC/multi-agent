@@ -99,6 +99,13 @@ npm run verify
 Com `AURORA_TEST_POSTGRES_URL` definida, os testes rodam também no PostgreSQL e incluem os
 cenários de ponta a ponta com o worker Python real.
 
+```bash
+npm run test:ui
+```
+
+Testes de interface com Playwright: constrói a interface, sobe a API num banco descartável e
+percorre as telas num navegador de verdade (o Chrome instalado; no CI, o Chromium do Playwright).
+
 ## Garantias
 
 - Transações serializadas e atômicas nos dois bancos; nenhuma leitura parcial.

@@ -87,13 +87,13 @@ Regras que valem em todo módulo:
 | --- | --- | --- |
 | `accounts` | Contas, convites, sessões, login por senha/Google/Microsoft | `accounts`, `account_identities`, `account_invites`, `account_sessions` |
 | `agents` | Empresa, catálogo de personas, time contratado, organograma, primeiro uso | `organization`, `agents` |
-| `knowledge` | Cérebro: fontes, versões, vigência, revogação, busca BM25, perguntas com citação | `knowledge_sources`, `knowledge_versions` |
+| `knowledge` | Cérebro: fontes, versões, vigência, revogação, áreas, busca híbrida (palavras + significado), perguntas com citação | `knowledge_sources`, `knowledge_versions`, `knowledge_areas`, `knowledge_embeddings` |
 | `conversations` | Conversa com o Chief of Staff e Estação (conversa direta com um agente) | `conversations`, `conversation_messages` |
 | `jobs` | Fila, estados do trabalho, aprovação, efeito, recibos, recuperação | `jobs`, `job_queue`, `admissions`, `effect_receipts` |
 | `open-work` | Gateway do worker: plano, pesquisa por especialista, síntese, recibos de modelo | `inference_receipts` |
 | `deliverables` | Entregas versionadas: aceite, pedido de ajuste, exportação | `deliverables`, `deliverable_versions`, `deliverable_reopenings` |
 | `routines` | Pedidos recorrentes no fuso da instalação | `routines`, `routine_runs` |
-| `integrations` | Catálogo e conector de pasta local, com permissões e trilha | `connections` (ações na trilha de eventos) |
+| `integrations` | Catálogo, pasta local, Google Drive, Gmail e Slack, com permissões, cofre de tokens e trilha | `connections`, `connection_secrets`, `connection_items` |
 | `recovery` | Central de recuperação: trabalhos com resultado desconhecido | (usa `jobs`) |
 | `overview` | Command Center: o que decidir, andamento, problemas, consumo | (só leitura) |
 
@@ -172,14 +172,22 @@ stateDiagram-v2
 
 ### 4.2 Cérebro: envio, vigência e busca
 
-- **Envio.** PDF, Word, texto, Markdown, CSV ou JSON (texto em UTF-8 estrito), ou um texto escrito
-  no Aurora. Cada fonte tem área, dono, leitores, versões com data de vigência e pode substituir
-  outra. Detalhes em [DADOS_CEREBRO_AGENTES.md](DADOS_CEREBRO_AGENTES.md).
+- **Envio.** PDF, Word, texto, Markdown, CSV, JSON ou imagem (lida uma vez pelo modelo), ou um
+  texto escrito no Aurora. Cada fonte tem área, dono, leitores, versões com data de vigência e pode
+  substituir outra. Detalhes em [DADOS_CEREBRO_AGENTES.md](DADOS_CEREBRO_AGENTES.md).
+- **Áreas.** "Geral", as áreas do catálogo de agentes (fixas) e as criadas pela empresa
+  (`knowledge_areas`), que podem ser renomeadas e excluídas. O id vem do nome
+  ("Jurídico & Compliance" → `juridico-compliance`) e não muda ao renomear; nome repetido é
+  recusado; uma área só é excluída sem fonte em vigor (as revogadas voltam para "Geral"). Rotas:
+  `POST /api/knowledge/areas`, `POST /api/knowledge/areas/:id` (renomear) e
+  `POST /api/knowledge/areas/:id/remove`.
 - **Vigência.** Vale a versão mais recente já em vigor; fonte substituída ou revogada sai das
   respostas na hora. O histórico fica guardado.
-- **Busca.** BM25 sobre trechos, com índice em memória reconstruído quando algo muda. Com três
-  termos ou mais na pergunta, um trecho precisa conter pelo menos dois; trechos secundários só
-  entram se forem comparáveis ao melhor. Sem evidência, a resposta se abstém.
+- **Busca.** Híbrida: BM25 sobre trechos (índice em memória reconstruído quando algo muda) somada
+  à busca por significado com vetores guardados (`knowledge_embeddings`, modelo local; desligável
+  com `AURORA_EMBEDDINGS=none`). Com três termos ou mais na pergunta, um trecho precisa conter pelo
+  menos dois; trechos secundários só entram se forem comparáveis ao melhor. Sem evidência, a
+  resposta se abstém.
 - **Quem lê o quê.**
   - Pessoa: dono da fonte, leitores listados (e-mail da conta) ou `*` (toda a empresa).
   - Agente: fontes abertas a toda a empresa e as restritas com o leitor `agent:<id>`.
@@ -224,8 +232,7 @@ A **pasta local** (serve pasta sincronizada de OneDrive, Google Drive ou
 Dropbox): lê documentos para o Cérebro e grava entregas aceitas, só a versão aceita e sem
 sobrescrever. Cada ação exige a permissão dada na conexão; o que não foi autorizado é recusado e
 registrado. O caminho não pode sair da pasta, seguir atalhos nem apontar para os dados do Aurora.
-Os conectores com login (Drive, SharePoint, Gmail, Slack, WhatsApp, HubSpot) estão no catálogo
-como "em breve".
+SharePoint/OneDrive, WhatsApp Business, HubSpot e Webhook estão no catálogo como "em breve".
 
 ### 4.6 Acesso e login
 
@@ -292,7 +299,21 @@ carregado só quando aberto (o resto do app não paga o peso do 3D). Dois modos,
 aprovação, ligado a quem responde a quem). Arrastar gira, rolar aproxima, clicar abre o documento
 ou a Estação do agente. As posições vêm de `features/brain-map/layout.ts` (determinístico e testado);
 a rotação automática pausa com o mouse sobre o mapa e não acontece se o sistema pedir menos
-movimento; sem WebGL, a lista continua disponível.
+movimento; sem WebGL, a lista continua disponível. Os rótulos HTML ficam numa camada fixa sobre o
+canvas (`portal` do drei): sem ela, o drei troca o elemento dos rótulos quando os eventos da cena
+se conectam e o primeiro rótulo já desenhado fica vazio.
+
+**Padrões das telas** (em `components/common.tsx` e `components/ui/`), para todo CRUD ter a mesma
+cara:
+
+- `PageHeader` com título, descrição e a ação principal ("Nova rotina", "Adicionar ao Cérebro").
+- Formulários com `Field` (rótulo, campo e dica); selects sempre com `NativeSelect`, que tem
+  fundo sólido e opções nas cores do tema (com fundo transparente o Windows pinta a lista de branco
+  e o texto do tema escuro some). O `:root` escuro usa `color-scheme: dark`.
+- Detalhe ou edição em diálogo; salvar e cancelar no rodapé.
+- Ação que não se desfaz (revogar, tirar do time, arquivar, excluir) numa `DangerZone` no fim, com
+  `ConfirmAction`: o primeiro clique pede confirmação, o segundo executa.
+- Alternância entre poucas vistas com `Segmented` (Lista / Mapa 3D).
 
 
 - Todas as chamadas passam por `lib/api.ts`, que transforma `{ error, code }` em `ApiError` com a
@@ -319,7 +340,15 @@ inválida impede a API de subir, com a lista dos problemas.
   (`test/fixtures/fake-open-model.ts`) imita a CLI, incluindo travamentos e saídas inválidas.
 - `test/open-work.e2e.test.ts` sobe a API, o worker Python real e checkpoints em PostgreSQL, e
   derruba o processo no meio para provar a retomada.
-- O CI (`.github/workflows/ci.yml`) roda o mesmo `verify` com Node 24, Python 3.13 e PostgreSQL.
+- **Testes de interface** (`apps/web/e2e`, Playwright): `npm run test:ui` constrói a interface e
+  sobe a API real (`e2e/serve.mjs`) com um SQLite descartável, sem login e sem modelo. Cobrem a
+  abertura de cada área (computador e celular, sem erro no console e sem rolagem lateral), os
+  selects legíveis no tema escuro, escrever fonte e perguntar com citação, o CRUD de áreas, criar e
+  tirar agente, criar, pausar e arquivar rotina, e o mapa 3D (todos os rótulos, inclusive o do
+  núcleo). Na máquina usam o Chrome instalado; no CI, o Chromium do Playwright
+  (`PLAYWRIGHT_CHANNEL=chromium` força esse).
+- O CI (`.github/workflows/ci.yml`) roda o mesmo `verify` com Node 24, Python 3.13 e PostgreSQL, e
+  depois os testes de interface (relatório anexado quando falham).
 
 ## 9. Como estender
 

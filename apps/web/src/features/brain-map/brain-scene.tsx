@@ -6,7 +6,7 @@
  * até ele; "Recentrar" volta à vista inteira. Gira devagar sozinha até alguém mexer (nunca, se o
  * sistema pedir menos movimento). Carregada só quando o mapa abre.
  */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Html, Line, OrbitControls } from "@react-three/drei";
 import { Vector3, type Mesh, type PerspectiveCamera } from "three";
@@ -56,62 +56,85 @@ export default function BrainScene({ nodes, edges, selected, focus, recenter, on
       edges.flatMap((e) => {
         const a = byId.get(e.from);
         const b = byId.get(e.to);
-        return a && b ? [{ key: `${e.from}>${e.to}`, from: e.from, to: e.to, strong: !!e.strong, points: curve(a.position, b.position, `${e.from}>${e.to}`) }] : [];
+        return a && b
+          ? [
+              {
+                key: `${e.from}>${e.to}`,
+                from: e.from,
+                to: e.to,
+                strong: !!e.strong,
+                points: curve(a.position, b.position, `${e.from}>${e.to}`),
+              },
+            ]
+          : [];
       }),
     [edges, byId],
   );
   const labeled = nodes.filter((n) => n.kind === "area" || n.kind === "core");
+  // Camada fixa dos rótulos. Sem ela, o drei troca o elemento onde os rótulos ficam quando os
+  // eventos da cena se conectam; o primeiro rótulo já desenhado é desmontado no meio da troca e
+  // fica vazio (era o "Cérebro" que sumia).
+  const overlay = useRef<HTMLDivElement>(null!);
   return (
-    <Canvas
-      camera={{ position: [0, radius, radius * 1.7], fov: 45, near: 0.1, far: 400 }}
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true }}
-      onPointerEnter={() => setPointing(true)}
-      onPointerLeave={() => setPointing(false)}
-    >
-      {/* O primeiro `Html` da cena nasce sempre vazio (drei + React 19): este, invisível, absorve isso. */}
-      <Html position={[0, 0, 0]} style={{ display: "none" }}>
-        <span />
-      </Html>
-      <CameraRig radius={radius} focus={focus ? (byId.get(focus) ?? null) : null} recenter={recenter} />
-      <ambientLight intensity={0.5} />
-      <pointLight position={[0, 0, 0]} intensity={30} color="#fdba74" distance={radius * 1.5} />
-      <pointLight position={[radius, radius, radius]} intensity={40} color="#f4ecd8" />
-      {lines.map((l) => {
-        const lit = selected !== null && (selected === l.from || selected === l.to);
-        const toCore = l.from === "core" || l.to === "core";
-        return (
-          <Line
-            key={l.key}
-            points={l.points}
-            color={lit ? "#f4ecd8" : toCore ? "#5eead4" : l.strong ? "#fdba74" : "#a8a29e"}
-            transparent
-            opacity={lit ? 0.85 : toCore ? 0.35 : l.strong ? 0.6 : 0.22}
-            lineWidth={lit ? 1.6 : 1}
+    <div className="relative size-full">
+      <LabelLayer.Provider value={overlay}>
+        <Canvas
+          camera={{
+            position: [0, radius, radius * 1.7],
+            fov: 45,
+            near: 0.1,
+            far: 400,
+          }}
+          dpr={[1, 2]}
+          gl={{ antialias: true, alpha: true }}
+          onPointerEnter={() => setPointing(true)}
+          onPointerLeave={() => setPointing(false)}
+        >
+          <CameraRig radius={radius} focus={focus ? (byId.get(focus) ?? null) : null} recenter={recenter} />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[0, 0, 0]} intensity={30} color="#fdba74" distance={radius * 1.5} />
+          <pointLight position={[radius, radius, radius]} intensity={40} color="#f4ecd8" />
+          {lines.map((l) => {
+            const lit = selected !== null && (selected === l.from || selected === l.to);
+            const toCore = l.from === "core" || l.to === "core";
+            return (
+              <Line
+                key={l.key}
+                points={l.points}
+                color={lit ? "#f4ecd8" : toCore ? "#5eead4" : l.strong ? "#fdba74" : "#a8a29e"}
+                transparent
+                opacity={lit ? 0.85 : toCore ? 0.35 : l.strong ? 0.6 : 0.22}
+                lineWidth={lit ? 1.6 : 1}
+              />
+            );
+          })}
+          {nodes.map((n) => (
+            <Node key={n.id} node={n} selected={selected === n.id} alwaysLabel={items <= ALWAYS_LABEL_LIMIT} onSelect={onSelect} />
+          ))}
+          {/* Rótulos fixos (núcleo e áreas) ficam aqui, no topo da cena, todos pelo mesmo `Label`. */}
+          {labeled.map((a) => (
+            <Label key={a.id} node={a} strong />
+          ))}
+          <OrbitControls
+            enablePan={false}
+            minDistance={3}
+            maxDistance={radius * 6}
+            autoRotate={!reduced && !touched && !pointing && focus === null}
+            autoRotateSpeed={0.4}
+            enableDamping
+            dampingFactor={0.08}
+            onStart={() => setTouched(true)}
+            makeDefault
           />
-        );
-      })}
-      {nodes.map((n) => (
-        <Node key={n.id} node={n} selected={selected === n.id} alwaysLabel={items <= ALWAYS_LABEL_LIMIT} onSelect={onSelect} />
-      ))}
-      {/* Rótulos fixos (núcleo e áreas) ficam aqui, no topo da cena, todos pelo mesmo `Label`. */}
-      {labeled.map((a) => (
-        <Label key={a.id} node={a} strong />
-      ))}
-      <OrbitControls
-        enablePan={false}
-        minDistance={3}
-        maxDistance={radius * 6}
-        autoRotate={!reduced && !touched && !pointing && focus === null}
-        autoRotateSpeed={0.4}
-        enableDamping
-        dampingFactor={0.08}
-        onStart={() => setTouched(true)}
-        makeDefault
-      />
-    </Canvas>
+        </Canvas>
+      </LabelLayer.Provider>
+      <div ref={overlay} data-slot="map-labels" className="pointer-events-none absolute inset-0 overflow-hidden" />
+    </div>
   );
 }
+
+/** Onde os rótulos HTML são desenhados (ver `overlay` em `BrainScene`). */
+const LabelLayer = createContext<RefObject<HTMLDivElement>>({ current: null! });
 
 /**
  * Leva a câmera (e o ponto para onde ela gira) até o nó em foco, ou à vista inteira, num
@@ -137,7 +160,10 @@ function CameraRig({ radius, focus, recenter }: { radius: number; focus: MapNode
   const goal = useRef<{ target: Vector3; distance: number } | null>(null);
   useEffect(() => {
     goal.current = focus
-      ? { target: new Vector3(...focus.position), distance: focus.kind === "area" ? Math.max(5, radius * 0.6) : 4 }
+      ? {
+          target: new Vector3(...focus.position),
+          distance: focus.kind === "area" ? Math.max(5, radius * 0.6) : 4,
+        }
       : { target: new Vector3(0, 0, 0), distance: home };
   }, [focus, recenter, home, radius]);
   useFrame(() => {
@@ -156,13 +182,14 @@ function CameraRig({ radius, focus, recenter }: { radius: number; focus: MapNode
 }
 
 function Label({ node, strong }: { node: MapNode; strong?: boolean }) {
+  const layer = useContext(LabelLayer);
   const r = nodeRadius(node);
   // Núcleo e área: rótulo abaixo do nó; itens: acima (os dois não se encontram).
   const below = node.kind === "area" || node.kind === "core";
   const position: [number, number, number] = [node.position[0], node.position[1] + (below ? -r - 0.45 : r + 0.4), node.position[2]];
   const core = node.kind === "core";
   return (
-    <Html center position={position} distanceFactor={22} style={{ pointerEvents: "none" }} zIndexRange={[60, 0]}>
+    <Html portal={layer} center position={position} distanceFactor={22} style={{ pointerEvents: "none" }} zIndexRange={[60, 0]}>
       <div className="whitespace-nowrap text-center leading-tight [text-shadow:0_1px_6px_rgba(0,0,0,0.9)]">
         <span className={core ? "text-[15px] font-semibold text-[#f4ecd8]" : strong ? "text-[13px] font-semibold text-[#f4ecd8]" : "text-xs text-stone-200"}>{node.label}</span>
         {node.sublabel && !core && <span className="block text-[10px] text-stone-400">{node.sublabel}</span>}
@@ -183,6 +210,7 @@ function Node({ node, selected, alwaysLabel, onSelect }: { node: MapNode; select
     ref.current.scale.setScalar(k * (hover || selected ? 1.35 : 1));
   });
   const clickable = node.kind !== "core";
+  const layer = useContext(LabelLayer);
   return (
     <group position={node.position}>
       {/* Área de clique invisível, bem maior que o ponto: fácil de acertar com o mouse ou o dedo. */}
@@ -216,7 +244,7 @@ function Node({ node, selected, alwaysLabel, onSelect }: { node: MapNode; select
       </mesh>
       {/* Núcleo e áreas têm rótulo próprio, na cena (ver `BrainScene`). */}
       {(node.kind === "source" || node.kind === "agent") && (alwaysLabel || hover || selected) && (
-        <Html center distanceFactor={22} position={[0, radius + 0.4, 0]} style={{ pointerEvents: "none" }} zIndexRange={[80, 0]}>
+        <Html portal={layer} center distanceFactor={22} position={[0, radius + 0.4, 0]} style={{ pointerEvents: "none" }} zIndexRange={[80, 0]}>
           <div className="whitespace-nowrap text-center leading-tight [text-shadow:0_1px_6px_rgba(0,0,0,0.9)]">
             <span className="text-xs text-stone-200">{node.label}</span>
             {(hover || selected) && node.sublabel && <span className="block text-[10px] text-stone-400">{node.sublabel}</span>}

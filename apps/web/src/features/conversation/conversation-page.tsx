@@ -33,6 +33,8 @@ export function ConversationPage() {
 
   return (
     <div className="grid h-[calc(100dvh-7rem)] gap-4 md:grid-cols-[260px_1fr]">
+      {/* Título da área para leitores de tela (a tela já mostra o título de cada conversa). */}
+      <h1 className="sr-only">Conversa</h1>
       <aside className={cn("flex min-h-0 flex-col gap-2", id && "hidden md:flex")}>
         <Button onClick={() => create.mutate()} disabled={create.isPending}>
           <MessageSquarePlus /> Nova conversa

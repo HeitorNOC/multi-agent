@@ -132,7 +132,7 @@ Cada fase termina com testes passando e verificação na interface.
 
 Depois: identidade corporativa, provedor remoto (API), Loja e áreas de marketing.
 
-### Andamento (10/11/2026)
+### Andamento (11/11/2026)
 
 - **F0 — concluída.** Jobs, Cérebro, trabalho aberto, conversa, recuperação nativa e migração de dados da v1, nos dois bancos; v1 congelada em `legacy/`. Os testes HTTP de caracterização da v1 não rodam literalmente contra a v2 (o formato das rotas mudou de propósito); os mesmos cenários foram portados.
 - **F1 — concluída.** Interface com sidebar, tema e as áreas Command Center, Conversa, Trabalhos, Cérebro e Governança, servida pela API; conferida no navegador em desktop e celular.
@@ -149,7 +149,20 @@ Depois: identidade corporativa, provedor remoto (API), Loja e áreas de marketin
 - **Catálogo de agentes ampliado.** 69 personas em 11 áreas, com marketing completo (copy, social media/Instagram, tráfego pago, design, SEO, e-mail/CRM, vídeo, marca, performance, influenciadores) e a área E-commerce & Loja.
 - **Execução:** nesta fase, os agentes rodam na assinatura do Claude Code ou do Codex do próprio usuário, sem custo por chamada no Aurora. A execução por chave de API (pagamento por token, com custo por chamada) aparece em Configurações como "em breve".
 
-Próximos passos: conectores com login (OAuth: Google Drive, SharePoint, Gmail, Slack…) e execução por chave de API.
+- **Busca híbrida e imagens no Cérebro — concluídas.** Palavras (BM25) + significado (vetores guardados, modelo local) e imagens lidas uma vez pelo modelo; anexos na conversa.
+- **Conectores com login — Google Drive, Gmail e Slack concluídos.** OAuth com PKCE (Google) e token de bot (Slack), tokens cifrados no banco com a chave guardada fora dele, sincronização que só baixa o que mudou e aviso para reconectar quando o acesso é revogado.
+- **Mapa 3D do Cérebro e dos agentes — concluído.** Layout orgânico por forças, ligações curvas, foco num nó e recentrar.
+- **Áreas do Cérebro criadas pela empresa — concluídas.** Criar, renomear e excluir (sem fonte em vigor), também direto do envio de uma fonte.
+- **Padronização da interface — concluída.** Select, campos, confirmação de ações destrutivas e alternância de vistas com o mesmo desenho em todas as telas (ver [ARQUITETURA.md › Interface](ARQUITETURA.md#6-interface)).
+- **Testes de interface — concluídos.** Playwright contra a API real, no CI.
+
+Próximos passos:
+
+- Vistas dos agentes: 3D (como a do Cérebro), lista de trabalho por agente (status, progresso, o que está fazendo) e organograma em cartões com ligações, na vertical ou horizontal.
+- Permissões por papel (dono × membro) nas telas de administração (áreas, integrações, time).
+- Execução por chave de API (pagamento por token), hoje "em breve" em Configurações.
+- Conectores que faltam (SharePoint/OneDrive, WhatsApp, HubSpot, Webhook), pela demanda do piloto.
+- Piloto com dados reais.
 
 ## 8. Decisões para você confirmar
 
