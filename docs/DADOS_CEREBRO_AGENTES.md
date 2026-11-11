@@ -81,8 +81,20 @@ flowchart LR
    um vetor no modelo `multilingual-e5-small`, que roda no próprio computador (baixado uma vez do
    Hugging Face, cerca de 118 MB, para `apps/api/data/models`). A pergunta vira vetor e os trechos
    mais parecidos entram numa segunda lista. As duas listas (palavras e significado) são juntadas
-   por posição (RRF, k=60): quem aparece nas duas sobe. Um trecho achado só pelo significado precisa
-   de similaridade mínima (`AURORA_SEMANTIC_MIN`, padrão 0,8); sem isso, abstenção.
+   por posição (RRF, k=60): quem aparece nas duas sobe.
+   - **Quando um trecho achado só pelo significado vale como evidência.** O E5 dá similaridade
+     alta a quase tudo (0,80–0,88), então um corte fixo não separa: na calibração, "Qual o CNPJ da
+     empresa?" (sem resposta) deu 0,833 e uma resposta certa deu 0,829. O que separa é o
+     **destaque**: o quanto o trecho fica acima da média de todos. Vale se o destaque for de pelo
+     menos 0,025 (`AURORA_SEMANTIC_GAP`, com 5 trechos ou mais para comparar) ou se a
+     similaridade for de pelo menos 0,86 (`AURORA_SEMANTIC_MIN`). Sem isso, abstenção.
+   - **Resultado da calibração** (8 documentos, 9 perguntas com outras palavras e 5 sem resposta):
+     só palavras acertou 3 de 9; híbrida acertou 8 de 9, sem resposta errada e sem inventar nas 5
+     sem resposta. O teste `semantic-quality.test.ts` repete essa avaliação sempre que o modelo
+     está baixado, para nenhuma mudança piorar a busca.
+   - **Velocidade** (CPU comum): carregar o modelo ~1 s (feito ao subir a API), vetorizar ~17 ms
+     por trecho de 500 caracteres, pergunta híbrida ~5 ms, comparar 50 mil trechos ~55 ms com
+     ~77 MB de memória. Vetores de perguntas recentes ficam em cache.
    - Vetorizar acontece em segundo plano depois de cada mudança; enviar um arquivo continua rápido.
    - Os vetores ficam no banco: reiniciar não recalcula nada.
    - Se o modelo falhar, a busca segue só por palavras e a tela do Cérebro avisa.

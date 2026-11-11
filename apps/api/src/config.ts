@@ -72,8 +72,12 @@ const schema = z
     AURORA_EMBEDDING_MODEL: z.string().min(1).max(200).optional(),
     /** Pasta dos modelos baixados. Padrão: apps/api/data/models. */
     AURORA_MODELS_DIR: z.string().min(1).optional(),
-    /** Similaridade mínima (0 a 1) para um trecho achado só por significado contar como evidência. */
-    AURORA_SEMANTIC_MIN: z.coerce.number().min(0).max(1).default(0.8),
+    /**
+     * Quando um trecho achado só pelo significado conta como evidência: similaridade de pelo menos
+     * AURORA_SEMANTIC_MIN, ou destaque de AURORA_SEMANTIC_GAP sobre a média dos trechos.
+     */
+    AURORA_SEMANTIC_MIN: z.coerce.number().min(0).max(1).default(0.86),
+    AURORA_SEMANTIC_GAP: z.coerce.number().min(0).max(1).default(0.025),
     /** Entrar com Google: aplicativo OAuth "Web" criado no Google Cloud da empresa. */
     AURORA_GOOGLE_CLIENT_ID: z.string().min(1).optional(),
     AURORA_GOOGLE_CLIENT_SECRET: z.string().min(1).optional(),
@@ -112,7 +116,7 @@ export interface Config {
   knowledge: { answerer: "extractive" | "model"; maxBytes: number };
   chief: { engine: "rules" | "model" };
   templatesPath: string | undefined;
-  embeddings: { mode: "local" | "none"; model: string | undefined; modelsDir: string; minSimilarity: number };
+  embeddings: { mode: "local" | "none"; model: string | undefined; modelsDir: string; minSimilarity: number; minGap: number };
   auth: {
     mode: "accounts" | "local";
     google: OAuthClient | undefined;
@@ -152,6 +156,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
       model: e.AURORA_EMBEDDING_MODEL,
       modelsDir: e.AURORA_MODELS_DIR ?? DEFAULT_MODELS_DIR,
       minSimilarity: e.AURORA_SEMANTIC_MIN,
+      minGap: e.AURORA_SEMANTIC_GAP,
     },
     auth: {
       mode: e.AURORA_AUTH,

@@ -107,7 +107,11 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
   // Busca por palavras sempre; por significado quando há modelo de embeddings.
   const embedder = parts.embedder !== undefined ? parts.embedder : config.embeddings.mode === "local" ? new LocalEmbedder({ model: config.embeddings.model, cacheDir: config.embeddings.modelsDir }) : null;
   const semantic = embedder ? new SemanticIndex({ model: embedder, uow: knowledgeUow, clock }) : undefined;
-  const search = new KnowledgeSearch(knowledgeUow, clock, (passages) => new Bm25Index(passages), { semantic, minSimilarity: config.embeddings.minSimilarity });
+  const search = new KnowledgeSearch(knowledgeUow, clock, (passages) => new Bm25Index(passages), {
+    semantic,
+    minSimilarity: config.embeddings.minSimilarity,
+    minGap: config.embeddings.minGap,
+  });
   const extractive = new ExtractiveAnswerer();
   const knowledge: KnowledgeDeps = {
     uow: knowledgeUow,
@@ -245,7 +249,10 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
   url = `http://127.0.0.1:${typeof address === "object" && address ? address.port : config.port}`;
 
   // Prepara o índice (e vetoriza o que faltar) sem atrasar a subida.
-  if (semantic) void search.semanticStatus().catch(() => undefined);
+  if (semantic) {
+    semantic.warm();
+    void search.semanticStatus().catch(() => undefined);
+  }
 
   // Sem comando de worker, os pedidos ficam na fila até a API ser iniciada com um.
   ticker.start();

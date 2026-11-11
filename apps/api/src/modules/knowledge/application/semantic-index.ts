@@ -16,6 +16,8 @@ import { cosine, type EmbeddingModel } from "../domain/embeddings.ts";
 import type { KnowledgeStore } from "../infrastructure/sql-knowledge.ts";
 
 const BATCH = 16;
+/** Perguntas recentes cujo vetor fica guardado (agentes repetem a mesma consulta no trabalho). */
+const QUERY_CACHE = 256;
 
 export interface SemanticStatus {
   model: string;
@@ -29,6 +31,17 @@ export interface SemanticStatus {
 export interface SemanticHit {
   id: string;
   similarity: number;
+  /**
+   * Quanto o trecho se destaca da média de todos os trechos permitidos. Modelos como o E5 dão
+   * similaridade alta a quase tudo (0,80–0,88); o destaque separa melhor o que responde do que não.
+   */
+  gap: number;
+}
+
+export interface SemanticResult {
+  hits: SemanticHit[];
+  /** Quantos trechos foram comparados (o destaque só é confiável com alguns). */
+  compared: number;
 }
 
 export class SemanticIndex {
@@ -40,6 +53,7 @@ export class SemanticIndex {
   private wanted = new Map<string, { key: string; text: string }>();
   private running: Promise<void> | undefined;
   private error: string | null = null;
+  private readonly queries = new Map<string, Float32Array>();
 
   constructor(deps: { model: EmbeddingModel; uow: UnitOfWork<KnowledgeStore>; clock: Clock }) {
     this.model = deps.model;
@@ -51,6 +65,11 @@ export class SemanticIndex {
   sync(passages: Iterable<{ id: string; text: string }>) {
     this.wanted = new Map([...passages].map((p) => [p.id, { key: keyOf(this.model.id, p.text), text: p.text }]));
     void this.fill();
+  }
+
+  /** Carrega o modelo em segundo plano (a primeira pergunta não espera a carga). */
+  warm() {
+    void this.queryVector("aquecimento").catch((e) => (this.error = message(e)));
   }
 
   /** Vetoriza de novo o que estiver faltando (depois de uma falha). */
@@ -70,21 +89,44 @@ export class SemanticIndex {
   }
 
   /** Trechos mais parecidos com a pergunta, entre os permitidos; vazio se o modelo não responder. */
-  async search(question: string, allow: (id: string) => boolean, limit: number): Promise<SemanticHit[]> {
+  async search(question: string, allow: (id: string) => boolean, limit: number): Promise<SemanticResult> {
     const vectors = await this.loaded();
     let query: Float32Array;
     try {
-      [query] = (await this.model.embed([question], "query")) as [Float32Array];
+      query = await this.queryVector(question);
     } catch (e) {
       this.error = message(e);
-      return [];
+      return { hits: [], compared: 0 };
     }
-    const hits: SemanticHit[] = [];
+    const all: { id: string; similarity: number }[] = [];
+    let sum = 0;
     for (const [id, w] of this.wanted) {
       const v = vectors.get(w.key);
-      if (v && allow(id)) hits.push({ id, similarity: cosine(query, v) });
+      if (!v || !allow(id)) continue;
+      const similarity = cosine(query, v);
+      sum += similarity;
+      all.push({ id, similarity });
     }
-    return hits.sort((a, b) => b.similarity - a.similarity).slice(0, limit);
+    const mean = all.length ? sum / all.length : 0;
+    const hits = all
+      .sort((a, b) => b.similarity - a.similarity)
+      .slice(0, limit)
+      .map((h) => ({ ...h, gap: h.similarity - mean }));
+    return { hits, compared: all.length };
+  }
+
+  private async queryVector(question: string) {
+    const cached = this.queries.get(question);
+    if (cached) {
+      // Recoloca no fim: a mais antiga sai primeiro quando enche.
+      this.queries.delete(question);
+      this.queries.set(question, cached);
+      return cached;
+    }
+    const [vector] = (await this.model.embed([question], "query")) as [Float32Array];
+    this.queries.set(question, vector);
+    if (this.queries.size > QUERY_CACHE) this.queries.delete(this.queries.keys().next().value!);
+    return vector;
   }
 
   private async loaded() {

@@ -25,6 +25,8 @@ const RELATIVE_SCORE = 0.5;
  * analista de compras). Preferência, não filtro: uma fonte Geral muito melhor continua na frente.
  */
 const AREA_BOOST = 1.3;
+/** Trechos mínimos para o destaque sobre a média ser confiável. */
+const MIN_COMPARED = 5;
 
 export interface SearchOptions {
   /** Área preferida: trechos dela ganham peso. */
@@ -70,20 +72,26 @@ export class KnowledgeSearch {
   private cache: { key: string; index: KnowledgeIndex; passages: Map<string, IndexedMeta> } | undefined;
 
   private readonly semantic: SemanticIndex | undefined;
-  /** Similaridade mínima para um trecho achado só por significado contar como evidência. */
+  /**
+   * Quando um trecho achado só pelo significado conta como evidência: similaridade muito alta, ou
+   * destaque claro sobre a média (com pelo menos `MIN_COMPARED` trechos para comparar). Valores
+   * calibrados com perguntas reais no multilingual-e5-small (docs/DADOS_CEREBRO_AGENTES.md).
+   */
   private readonly minSimilarity: number;
+  private readonly minGap: number;
 
   constructor(
     uow: UnitOfWork<KnowledgeStore>,
     clock: Clock,
     build: IndexBuilder,
-    options: { semantic?: SemanticIndex; minSimilarity?: number } = {},
+    options: { semantic?: SemanticIndex; minSimilarity?: number; minGap?: number } = {},
   ) {
     this.uow = uow;
     this.clock = clock;
     this.build = build;
     this.semantic = options.semantic;
-    this.minSimilarity = options.minSimilarity ?? 0.8;
+    this.minSimilarity = options.minSimilarity ?? 0.86;
+    this.minGap = options.minGap ?? 0.025;
   }
 
   /** Estado da busca por significado (para a tela do Cérebro); `null` sem modelo. */
@@ -112,7 +120,8 @@ export class KnowledgeSearch {
       return !!p && (!options.onlyArea || p.area === options.onlyArea) && allow(p);
     };
     const lexical = index.search(question, { limit: limit * 4, allow: visible }).filter((h) => h.matched.length >= needed);
-    const semantic = this.semantic ? (await this.semantic.search(question, visible, limit * 4)).filter((h) => h.similarity >= this.minSimilarity) : [];
+    const result = this.semantic ? await this.semantic.search(question, visible, limit * 4) : { hits: [], compared: 0 };
+    const semantic = result.hits.filter((h) => h.similarity >= this.minSimilarity || (result.compared >= MIN_COMPARED && h.gap >= this.minGap));
     let hits: { id: string; score: number; matched: string[] }[];
     if (!semantic.length) hits = lexical;
     else {
