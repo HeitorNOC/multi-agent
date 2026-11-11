@@ -1,11 +1,12 @@
 /**
- * Agentes: catálogo de personas por área ("Marketing & Conteúdo · 3 especialistas · 1 no time"),
- * conhecer cada um, contratar, e o time atual com orientações e a quem responde.
+ * Agentes: o time em três vistas (lista operacional, mapa 3D e organograma em cartões) e o
+ * catálogo de personas por área para contratar. A vista fica no endereço (`?vista=`).
  */
 import { useState } from "react";
+import { useSearchParams } from "react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Check, Plus, Users } from "lucide-react";
-import { EmptyState, ErrorNotice, LoadingRows, PageHeader, ToneBadge } from "@/components/common";
+import { EmptyState, ErrorNotice, LoadingRows, PageHeader, Segmented, ToneBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -13,7 +14,17 @@ import { agentsApi, type AgentTemplate, type CatalogArea } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { AgentAvatar } from "./agent-bits";
 import { CreateAgentDialog } from "./create-agent-dialog";
+import { BrainMap } from "../brain-map/brain-map";
+import { OrgChart } from "./org-chart";
 import { TeamList } from "./team-list";
+
+
+type View = "lista" | "mapa" | "organograma";
+const VIEWS: readonly (readonly [View, string])[] = [
+  ["lista", "Lista"],
+  ["mapa", "Mapa 3D"],
+  ["organograma", "Organograma"],
+];
 
 export function useHire() {
   const queryClient = useQueryClient();
@@ -29,6 +40,16 @@ export function AgentsPage() {
   const catalog = useQuery({ queryKey: ["catalog"], queryFn: agentsApi.catalog });
   const team = useQuery({ queryKey: ["team"], queryFn: agentsApi.team });
   const areas = catalog.data?.areas ?? [];
+  const [params, setParams] = useSearchParams();
+  const asked = params.get("vista");
+  const view: View = asked === "mapa" || asked === "organograma" ? asked : "lista";
+  const tab = params.get("aba") === "catalogo" ? "catalog" : params.get("aba") === "time" || asked ? "team" : team.data && !team.data.agents.length ? "catalog" : "team";
+  const go = (next: { aba?: string; vista?: View }) => {
+    const p = new URLSearchParams();
+    if (next.aba) p.set("aba", next.aba);
+    if (next.vista && next.vista !== "lista") p.set("vista", next.vista);
+    setParams(p, { replace: true });
+  };
   return (
     <div className="space-y-6">
       <PageHeader
@@ -37,11 +58,14 @@ export function AgentsPage() {
         actions={<CreateAgentDialog areas={areas} />}
       />
       <ErrorNotice error={catalog.error ?? team.error} />
-      <Tabs defaultValue="catalog">
-        <TabsList>
-          <TabsTrigger value="catalog">Catálogo</TabsTrigger>
-          <TabsTrigger value="team">No seu time {team.data ? `(${team.data.agents.length})` : ""}</TabsTrigger>
-        </TabsList>
+      <Tabs value={tab} onValueChange={(t) => go(t === "catalog" ? { aba: "catalogo" } : { aba: "time", vista: view })}>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <TabsList>
+            <TabsTrigger value="team">No seu time {team.data ? `(${team.data.agents.length})` : ""}</TabsTrigger>
+            <TabsTrigger value="catalog">Catálogo</TabsTrigger>
+          </TabsList>
+          {tab === "team" && <Segmented label="Como ver o time" value={view} options={VIEWS} onChange={(v) => go({ aba: "time", vista: v })} />}
+        </div>
         <TabsContent value="catalog" className="mt-4">
           {catalog.isPending ? <LoadingRows /> : <Catalog areas={areas} />}
         </TabsContent>
@@ -52,6 +76,10 @@ export function AgentsPage() {
             <EmptyState icon={<Users />} title="Seu time ainda está vazio">
               Contrate especialistas no catálogo. Sem time, o Chief of Staff não consegue abrir trabalhos.
             </EmptyState>
+          ) : view === "mapa" ? (
+            <BrainMap mode="agents" />
+          ) : view === "organograma" ? (
+            <OrgChart />
           ) : (
             <TeamList agents={team.data.agents} areas={areas} />
           )}

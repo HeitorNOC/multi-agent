@@ -34,9 +34,9 @@ tráfego, a contadora, o copywriter. Você escolhe quem entra no time, como numa
 | **Trabalhos** | Cada pedido em andamento: plano, o que cada agente achou, citações e o botão de aprovar |
 | **Entregas** | O resultado aprovado, com versões. Você aceita ou pede ajustes |
 | **Rotinas** | Pedidos que se repetem sozinhos, como um relatório toda segunda às 9h |
-| **Cérebro** | Os documentos da empresa: enviar, atualizar, revogar, perguntar. Em **Mapa 3D**, o Cérebro e a rede de agentes em 3D |
-| **Agentes** | O catálogo de especialistas por área e o seu time |
-| **Organograma** | Quem responde a quem, com atalho para a Estação de cada agente |
+| **Cérebro** | Os documentos da empresa: enviar, atualizar, revogar, perguntar. Em **Lista** ou em **Mapa 3D** |
+| **Agentes** | O seu time em três vistas: **Lista** (o que cada agente está fazendo agora, em qual trabalho, marcos e tempo), **Mapa 3D** e **Organograma** (cartões ligados por setas, na horizontal ou na vertical). E o catálogo de especialistas para contratar |
+| **Jarvis** | O Chief of Staff como seu assistente, num centro de comando em 3D. Fale ("Jarvis, o que espera minha aprovação?"), aperte espaço ou escreva; ele responde em voz alta (Chrome ou Edge) e você pode interromper falando. Mostra a hora, os sistemas e o que espera você; quem ele aciona acende no mapa. Dá para pôr em tela cheia |
 | **Integrações** | Ligar o Aurora a outras ferramentas (hoje: uma pasta do computador) |
 | **Governança** | Casos que precisam de uma decisão humana e a trilha do que aconteceu |
 | **Configurações** | Empresa, quem tem acesso e como os agentes rodam |

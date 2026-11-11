@@ -322,6 +322,35 @@ export interface OrgNode {
   reports: OrgNode[];
 }
 
+/** O que cada agente está fazendo agora (lista operacional, mapa e organograma). */
+export type ActivityStatus = "idle" | "assigned" | "running" | "waiting" | "done" | "blocked";
+
+export interface ActivityJob {
+  id: string;
+  goal: string;
+  status: JobStatus;
+}
+
+export interface AgentActivity {
+  id: string;
+  name: string;
+  title: string;
+  area: string;
+  reports_to: string | null;
+  status: ActivityStatus;
+  activity: string;
+  job: ActivityJob | null;
+  milestones: { done: number; total: number };
+  started_at: string | null;
+  elapsed_ms: number | null;
+  remaining_ms: number | null;
+}
+
+export interface TeamActivity {
+  chief: { status: ActivityStatus; activity: string; job: ActivityJob | null; milestones: { done: number; total: number } };
+  agents: AgentActivity[];
+}
+
 export interface NewAgent {
   name: string;
   title: string;
@@ -366,6 +395,7 @@ export const agentsApi = {
   create: (input: NewAgent) => post<Agent>("/api/agents", input),
   change: (id: string, changes: Partial<Omit<NewAgent, "area">> & { reports_to?: string | null }) => post<Agent>(`/api/agents/${id}`, changes),
   remove: (id: string) => post<{ replayed: boolean }>(`/api/agents/${id}/remove`),
+  activity: () => get<TeamActivity>("/api/agents/activity"),
 };
 
 export const companyApi = {

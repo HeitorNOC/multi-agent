@@ -1,10 +1,13 @@
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
+import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./app-sidebar";
 import { ThemeToggle } from "./theme";
 
 export function AppLayout() {
+  // O Jarvis ocupa toda a largura (centro de comando); as outras áreas ficam numa coluna legível.
+  const full = useLocation().pathname.startsWith("/jarvis");
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -17,7 +20,7 @@ export function AppLayout() {
             <ThemeToggle />
           </div>
         </header>
-        <main className="mx-auto w-full max-w-6xl flex-1 p-4 md:p-6">
+        <main className={cn("mx-auto w-full flex-1", full ? "p-2 md:p-3" : "max-w-6xl p-4 md:p-6")}>
           <Outlet />
         </main>
       </SidebarInset>

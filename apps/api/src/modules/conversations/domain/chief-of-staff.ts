@@ -25,6 +25,28 @@ export interface ChiefTurn {
   lastJob: { id: string; status: JobStatus } | null;
   /** Trabalhos que podem ser abertos agora. Pode ser vazio. */
   offers: readonly ConversationOffer[];
+  /** Situação da empresa agora (o que espera o gestor, o que anda, quem trabalha). Sem ela, só a conversa. */
+  briefing?: CompanyBriefing | null;
+}
+
+/**
+ * Situação da empresa para o Chief of Staff responder como quem trabalha logo abaixo do gestor:
+ * o que espera uma decisão, o que está andando e quem do time está trabalhando. Só leitura; listas
+ * curtas (as mais recentes) para caber no contexto.
+ */
+export interface CompanyBriefing {
+  /** Pareceres aguardando aprovação. */
+  approvals: { id: string; goal: string }[];
+  /** Entregas aguardando revisão (aceitar ou pedir ajustes). */
+  reviews: { id: string; title: string }[];
+  /** Trabalhos na central de recuperação (resultado desconhecido). */
+  recovery: { id: string; goal: string }[];
+  /** Trabalhos na fila ou em execução, com quem participa. */
+  running: { id: string; goal: string; agents: string[] }[];
+  /** Agentes trabalhando agora (nome · cargo) e o tamanho do time. */
+  team: { working: string[]; size: number };
+  /** Rotinas que desistiram nos últimos 7 dias. */
+  routines_gave_up: number;
 }
 
 /** Como a decisão foi tomada, para auditoria e custo. Nunca contém o texto da conversa. */
@@ -60,6 +82,44 @@ export const STATUS_LABEL: Record<JobStatus, string> = {
 export const normalize = (text: string) => text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 const STATUS_INTENT = /\b(status|andamento|situacao|progresso|como (esta|anda|vai))\b/;
+/** O que espera o gestor. */
+const PENDING_INTENT = /\b(aprova\w*|pendenc\w*|pendente\w*|decidir|decisao|decisoes|revisar|esperando (por )?mim|me espera)\b/;
+/** Quem do time está trabalhando. */
+const TEAM_INTENT = /\b(time|equipe|agentes?|especialistas?|quem esta trabalhando|quem esta fazendo)\b/;
+/** Panorama geral. */
+const BRIEF_INTENT = /\b(resumo|briefing|panorama|novidades|bom dia|boa tarde|boa noite|o que (esta )?acontec\w*)\b/;
+
+const quote = (items: string[], max = 3) => {
+  const shown = items.slice(0, max).map((t) => `"${t.length > 70 ? t.slice(0, 67) + "…" : t}"`);
+  return shown.join(", ") + (items.length > max ? ` e mais ${items.length - max}` : "");
+};
+
+/** O que espera o gestor, em frases curtas (vazio se nada). */
+export function pendingText(b: CompanyBriefing): string {
+  const parts: string[] = [];
+  if (b.approvals.length) parts.push(`${b.approvals.length} parecer(es) aguardando sua aprovação: ${quote(b.approvals.map((a) => a.goal))}`);
+  if (b.reviews.length) parts.push(`${b.reviews.length} entrega(s) para revisar: ${quote(b.reviews.map((r) => r.title))}`);
+  if (b.recovery.length) parts.push(`${b.recovery.length} caso(s) na central de recuperação`);
+  return parts.length ? parts.join(". ") + "." : "";
+}
+
+export function teamText(b: CompanyBriefing): string {
+  if (!b.team.size) return "Seu time ainda está vazio. Contrate especialistas em Agentes.";
+  if (!b.team.working.length) return `Ninguém do time está trabalhando agora (${b.team.size} no time).`;
+  return `Trabalhando agora: ${b.team.working.slice(0, 5).join("; ")}${b.team.working.length > 5 ? ` e mais ${b.team.working.length - 5}` : ""}.`;
+}
+
+export function runningText(b: CompanyBriefing): string {
+  if (!b.running.length) return "Nenhum trabalho andando agora.";
+  return `${b.running.length} trabalho(s) andando: ${quote(b.running.map((r) => r.goal))}.`;
+}
+
+/** Panorama: pendências, o que anda e quem trabalha. */
+export function briefingText(b: CompanyBriefing): string {
+  const pending = pendingText(b);
+  const gaveUp = b.routines_gave_up ? ` ${b.routines_gave_up} rotina(s) desistiram nesta semana; veja em Rotinas.` : "";
+  return `${pending || "Nada esperando sua decisão."} ${runningText(b)} ${teamText(b)}${gaveUp}`.trim();
+}
 /** Pedido genérico de trabalho, usado quando só há um trabalho possível. */
 const GENERIC_WORK = /\b(analis\w*|avali\w*|relatorio\w*|propost\w*|propon\w*|prepar\w*|faca|fazer|elabor\w*)\b/;
 
@@ -73,8 +133,15 @@ const list = (offers: readonly ConversationOffer[]) =>
  * Empate pergunta qual; se nada couber, explica o que está disponível em vez de inventar.
  */
 export class RuleBasedChiefOfStaff implements ChiefOfStaff {
-  async decide({ text, lastJob, offers }: ChiefTurn): Promise<ChiefDecision> {
+  async decide({ text, lastJob, offers, briefing }: ChiefTurn): Promise<ChiefDecision> {
     const intent = normalize(text);
+    if (briefing) {
+      if (PENDING_INTENT.test(intent)) return { kind: "reply", text: pendingText(briefing) || "Nada esperando sua decisão agora." };
+      if (TEAM_INTENT.test(intent) && !GENERIC_WORK.test(intent)) return { kind: "reply", text: teamText(briefing) };
+      if (BRIEF_INTENT.test(intent)) return { kind: "reply", text: briefingText(briefing) };
+      // Andamento sem trabalho nesta conversa: o panorama da empresa.
+      if (STATUS_INTENT.test(intent) && !lastJob) return { kind: "reply", text: `${runningText(briefing)} ${pendingText(briefing)}`.trim() };
+    }
     if (STATUS_INTENT.test(intent))
       return {
         kind: "reply",

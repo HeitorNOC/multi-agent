@@ -144,9 +144,13 @@ const AGENT_STATE: Record<MapAgent["activity"], NodeState> = { idle: "idle", run
  * Agentes: núcleo (Chief of Staff) → áreas do time → agentes. Quem responde a outro agente fica
  * ligado a ele (linha forte), além da área.
  */
-export function agentsMap(areas: MapArea[], agents: MapAgent[]): { nodes: MapNode[]; edges: MapEdge[] } {
+export function agentsMap(
+  areas: MapArea[],
+  agents: MapAgent[],
+  core: { label: string; sublabel: string } = { label: "Chief of Staff", sublabel: "coordena o time" },
+): { nodes: MapNode[]; edges: MapEdge[] } {
   const used = areas.filter((a) => agents.some((g) => g.area === a.id));
-  const nodes: MapNode[] = [{ id: "core", kind: "core", label: "Cérebro", sublabel: "Chief of Staff", position: [0, 0, 0], state: "current", size: 1 }];
+  const nodes: MapNode[] = [{ id: "core", kind: "core", label: core.label, sublabel: core.sublabel, position: [0, 0, 0], state: "current", size: 1 }];
   const edges: MapEdge[] = [];
   const ids = new Set(agents.map((a) => a.id));
   ring(used.length, AREA_RADIUS).forEach((position, i) => {

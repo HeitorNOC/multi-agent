@@ -156,9 +156,11 @@ Depois: identidade corporativa, provedor remoto (API), Loja e áreas de marketin
 - **Padronização da interface — concluída.** Select, campos, confirmação de ações destrutivas e alternância de vistas com o mesmo desenho em todas as telas (ver [ARQUITETURA.md › Interface](ARQUITETURA.md#6-interface)).
 - **Testes de interface — concluídos.** Playwright contra a API real, no CI.
 
+- **Vistas dos agentes e Jarvis — concluídos.** Agentes em Lista operacional (status, atividade, marcos e tempo de cada um, como a v1), Mapa 3D e Organograma em cartões com setas (horizontal ou vertical). Jarvis no menu: o Chief of Staff como assistente por voz e texto, com reator 3D no centro da rede de agentes, painel de sistemas e pendências, e a situação da empresa no contexto do Chief (pendências, trabalhos andando, quem trabalha).
+
 Próximos passos:
 
-- Vistas dos agentes: 3D (como a do Cérebro), lista de trabalho por agente (status, progresso, o que está fazendo) e organograma em cartões com ligações, na vertical ou horizontal.
+- Regras de negócio que faltam: teto de consumo (mensal) e aviso ao chegar perto; aviso quando uma rotina falha; aprovação para agentes permanentes e limite para temporários (previstos na v1).
 - Permissões por papel (dono × membro) nas telas de administração (áreas, integrações, time).
 - Execução por chave de API (pagamento por token), hoje "em breve" em Configurações.
 - Conectores que faltam (SharePoint/OneDrive, WhatsApp, HubSpot, Webhook), pela demanda do piloto.

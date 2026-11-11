@@ -33,7 +33,7 @@ export function KnowledgePage() {
   });
   const [open, setOpen] = useState<string | null>(null);
   const [area, setArea] = useState(ALL);
-  // `?vista=mapa` abre o mapa 3D (`&modo=agentes` já na rede de agentes).
+  // `?vista=mapa` abre o mapa 3D do acervo (a rede de agentes fica em Agentes e no Jarvis).
   const [params, setParams] = useSearchParams();
   const map = params.get("vista") === "mapa";
   const data = sources.data;
@@ -61,7 +61,7 @@ export function KnowledgePage() {
           </>
         }
       />
-      {map && <BrainMap initial={params.get("modo") === "agentes" ? "agents" : "knowledge"} />}
+      {map && <BrainMap mode="knowledge" />}
       <Ask areas={areas} area={area} />
       <ErrorNotice error={sources.error} title="Não foi possível carregar as fontes" />
       {sources.isPending ? (

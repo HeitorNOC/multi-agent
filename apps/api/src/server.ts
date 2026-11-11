@@ -48,6 +48,7 @@ import type { DeliverableId } from "./modules/deliverables/domain/deliverable.ts
 import type { IntegrationsDeps } from "./modules/integrations/application/integrations.ts";
 import { integrationsHttp } from "./modules/integrations/http/routes.ts";
 import { overviewHttp } from "./modules/overview/http/routes.ts";
+import { companyBriefing } from "./modules/overview/application/briefing.ts";
 import { LocalFolder } from "./modules/integrations/infrastructure/local-folder.ts";
 import { integrationsStore } from "./modules/integrations/infrastructure/sql-connections.ts";
 import { GmailAdapter, GoogleDriveAdapter, GoogleOAuth } from "./modules/integrations/infrastructure/google.ts";
@@ -236,6 +237,8 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     jobs: jobOpener(jobs),
     clock,
     station: stationResponder({ team, search, answerer: knowledge.answerer }),
+    // Situação da empresa: o Chief (e o Jarvis) responde sobre pendências, andamento e time.
+    briefing: () => companyBriefing({ sql: db.sql, clock }),
     // Anexo da conversa vira fonte do Cérebro (imagem lida pelo modelo, documento extraído).
     attach: async (actor: ActorId, file: { filename: string; mediaType: string; contentBase64: string }) => {
       const source = await uploadSource(knowledge, actor, { ...file, title: file.filename.replace(/\.[^.]+$/, "") || file.filename });

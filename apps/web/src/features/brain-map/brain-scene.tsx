@@ -12,6 +12,7 @@ import { Html, Line, OrbitControls } from "@react-three/drei";
 import { Vector3, type Mesh, type PerspectiveCamera } from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { curve, type MapEdge, type MapNode, type NodeState } from "./layout";
+import { Dust, Reactor, type ReactorSignal } from "./reactor";
 
 /** Mesma cor do fundo da seção: a névoa apaga o lado de trás do mapa em direção a ela. */
 const BACKGROUND = "#0b0a09";
@@ -38,11 +39,13 @@ export interface SceneProps {
   /** Muda a cada "Recentrar": volta à vista inteira mesmo sem foco. */
   recenter: number;
   onSelect: (node: MapNode) => void;
+  /** Jarvis: o núcleo vira um reator que reage à voz (e a rede ganha poeira luminosa). */
+  reactor?: RefObject<ReactorSignal | null>;
 }
 
 const nodeRadius = (n: MapNode) => (n.kind === "core" ? 0.9 : n.kind === "area" ? 0.55 * n.size : 0.22);
 
-export default function BrainScene({ nodes, edges, selected, focus, recenter, onSelect }: SceneProps) {
+export default function BrainScene({ nodes, edges, selected, focus, recenter, onSelect, reactor }: SceneProps) {
   const reduced = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   const [touched, setTouched] = useState(false);
   // Com o mouse sobre o mapa, a rotação pausa: fica fácil clicar num ponto.
@@ -70,7 +73,8 @@ export default function BrainScene({ nodes, edges, selected, focus, recenter, on
       }),
     [edges, byId],
   );
-  const labeled = nodes.filter((n) => n.kind === "area" || n.kind === "core");
+  // No Jarvis o reator dispensa rótulo (o painel já diz quem é).
+  const labeled = nodes.filter((n) => n.kind === "area" || (n.kind === "core" && !reactor));
   // Camada fixa dos rótulos. Sem ela, o drei troca o elemento onde os rótulos ficam quando os
   // eventos da cena se conectam; o primeiro rótulo já desenhado é desmontado no meio da troca e
   // fica vazio (era o "Cérebro" que sumia).
@@ -90,8 +94,10 @@ export default function BrainScene({ nodes, edges, selected, focus, recenter, on
           onPointerEnter={() => setPointing(true)}
           onPointerLeave={() => setPointing(false)}
         >
-          <CameraRig radius={radius} focus={focus ? (byId.get(focus) ?? null) : null} recenter={recenter} />
-          <ambientLight intensity={0.5} />
+          {/* No Jarvis a rede inteira cabe com folga (painéis e a barra de voz ficam por cima). */}
+      <CameraRig radius={radius} focus={focus ? (byId.get(focus) ?? null) : null} recenter={recenter} fit={reactor ? 1.12 : 0.8} />
+          {reactor && <Dust radius={radius} />}
+      <ambientLight intensity={0.5} />
           <pointLight position={[0, 0, 0]} intensity={30} color="#fdba74" distance={radius * 1.5} />
           <pointLight position={[radius, radius, radius]} intensity={40} color="#f4ecd8" />
           {lines.map((l) => {
@@ -109,7 +115,7 @@ export default function BrainScene({ nodes, edges, selected, focus, recenter, on
             );
           })}
           {nodes.map((n) => (
-            <Node key={n.id} node={n} selected={selected === n.id} alwaysLabel={items <= ALWAYS_LABEL_LIMIT} onSelect={onSelect} />
+            <Node key={n.id} node={n} selected={selected === n.id} alwaysLabel={items <= ALWAYS_LABEL_LIMIT} onSelect={onSelect} reactor={n.kind === "core" ? reactor : undefined} />
           ))}
           {/* Rótulos fixos (núcleo e áreas) ficam aqui, no topo da cena, todos pelo mesmo `Label`. */}
           {labeled.map((a) => (
@@ -128,7 +134,8 @@ export default function BrainScene({ nodes, edges, selected, focus, recenter, on
           />
         </Canvas>
       </LabelLayer.Provider>
-      <div ref={overlay} data-slot="map-labels" className="pointer-events-none absolute inset-0 overflow-hidden" />
+      {/* `z-0` cria um contexto de empilhamento: o drei dá z-index enorme a cada rótulo, que assim não passa por cima do que estiver sobre o mapa. */}
+      <div ref={overlay} data-slot="map-labels" className="pointer-events-none absolute inset-0 z-0 overflow-hidden" />
     </div>
   );
 }
@@ -140,7 +147,7 @@ const LabelLayer = createContext<RefObject<HTMLDivElement>>({ current: null! });
  * Leva a câmera (e o ponto para onde ela gira) até o nó em foco, ou à vista inteira, num
  * movimento curto. A distância da vista inteira faz o mapa caber na tela, inclusive no celular.
  */
-function CameraRig({ radius, focus, recenter }: { radius: number; focus: MapNode | null; recenter: number }) {
+function CameraRig({ radius, focus, recenter, fit = 0.8 }: { radius: number; focus: MapNode | null; recenter: number; fit?: number }) {
   const { camera, size, controls } = useThree();
   const home = useMemo(() => {
     const cam = camera as PerspectiveCamera;
@@ -148,8 +155,8 @@ function CameraRig({ radius, focus, recenter }: { radius: number; focus: MapNode
     const vertical = (cam.fov * Math.PI) / 360;
     const half = Math.min(vertical, Math.atan(Math.tan(vertical) * aspect));
     // O mapa é um disco visto de cima em ângulo: cabe com folga a uma distância menor que a esfera.
-    return (radius / Math.sin(half)) * 0.8;
-  }, [camera, size.width, size.height, radius]);
+    return (radius / Math.sin(half)) * fit;
+  }, [camera, size.width, size.height, radius, fit]);
   // Começa um pouco mais longe e chega perto (entrada curta, sem ficar no escuro).
   const placed = useRef(false);
   useEffect(() => {
@@ -198,7 +205,19 @@ function Label({ node, strong }: { node: MapNode; strong?: boolean }) {
   );
 }
 
-function Node({ node, selected, alwaysLabel, onSelect }: { node: MapNode; selected: boolean; alwaysLabel: boolean; onSelect: (n: MapNode) => void }) {
+function Node({
+  node,
+  selected,
+  alwaysLabel,
+  onSelect,
+  reactor,
+}: {
+  node: MapNode;
+  selected: boolean;
+  alwaysLabel: boolean;
+  onSelect: (n: MapNode) => void;
+  reactor?: RefObject<ReactorSignal | null>;
+}) {
   const ref = useRef<Mesh>(null);
   const [hover, setHover] = useState(false);
   const radius = nodeRadius(node);
@@ -209,7 +228,8 @@ function Node({ node, selected, alwaysLabel, onSelect }: { node: MapNode; select
     const k = pulsing ? 1 + Math.sin(clock.elapsedTime * 4) * 0.15 : node.kind === "core" ? 1 + Math.sin(clock.elapsedTime * 1.2) * 0.04 : 1;
     ref.current.scale.setScalar(k * (hover || selected ? 1.35 : 1));
   });
-  const clickable = node.kind !== "core";
+  // O núcleo só é clicável no Jarvis (abre a conversa).
+  const clickable = node.kind !== "core" || !!reactor;
   const layer = useContext(LabelLayer);
   return (
     <group position={node.position}>
@@ -233,15 +253,21 @@ function Node({ node, selected, alwaysLabel, onSelect }: { node: MapNode; select
         <sphereGeometry args={[Math.max(radius * 2.4, 0.7), 12, 12]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
+      {reactor ? (
+        <Reactor radius={radius} signal={reactor} />
+      ) : (
+        <>
       <mesh ref={ref} raycast={() => null}>
-        <sphereGeometry args={[radius, node.kind === "core" ? 40 : 20, node.kind === "core" ? 40 : 20]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={selected || hover ? 1.1 : node.kind === "core" ? 0.9 : 0.6} roughness={0.5} />
-      </mesh>
-      {/* Halo suave: o "brilho" dos pontos das referências. */}
-      <mesh raycast={() => null}>
-        <sphereGeometry args={[radius * (node.kind === "core" ? 1.9 : 1.8), 16, 16]} />
-        <meshBasicMaterial color={color} transparent opacity={selected || hover ? 0.16 : node.kind === "core" ? 0.1 : 0.07} depthWrite={false} />
-      </mesh>
+            <sphereGeometry args={[radius, node.kind === "core" ? 40 : 20, node.kind === "core" ? 40 : 20]} />
+            <meshStandardMaterial color={color} emissive={color} emissiveIntensity={selected || hover ? 1.1 : node.kind === "core" ? 0.9 : 0.6} roughness={0.5} />
+          </mesh>
+          {/* Halo suave: o "brilho" dos pontos das referências. */}
+          <mesh raycast={() => null}>
+            <sphereGeometry args={[radius * (node.kind === "core" ? 1.9 : 1.8), 16, 16]} />
+            <meshBasicMaterial color={color} transparent opacity={selected || hover ? 0.16 : node.kind === "core" ? 0.1 : 0.07} depthWrite={false} />
+          </mesh>
+        </>
+      )}
       {/* Núcleo e áreas têm rótulo próprio, na cena (ver `BrainScene`). */}
       {(node.kind === "source" || node.kind === "agent") && (alwaysLabel || hover || selected) && (
         <Html portal={layer} center distanceFactor={22} position={[0, radius + 0.4, 0]} style={{ pointerEvents: "none" }} zIndexRange={[80, 0]}>

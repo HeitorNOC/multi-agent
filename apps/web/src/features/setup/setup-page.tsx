@@ -13,7 +13,7 @@ import { agentsApi, companyApi, knowledgeApi } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { Catalog } from "../agents/agents-page";
 import { UploadDialog } from "../knowledge/upload-dialog";
-import { OrganogramPage } from "../organogram/organogram-page";
+import { OrgChart } from "../agents/org-chart";
 import { CompanyForm } from "../settings/company-form";
 
 const STEPS = [
@@ -68,7 +68,7 @@ export function SetupPage() {
           {current.id === "company" && <CompanyForm submitLabel="Salvar e continuar" onSaved={() => setStep(1)} />}
           {current.id === "knowledge" && <KnowledgeStep />}
           {current.id === "team" && <TeamStep />}
-          {current.id === "org" && <OrganogramPage />}
+          {current.id === "org" && <OrgChart />}
         </CardContent>
       </Card>
       <ErrorNotice error={complete.error} title="Ainda falta um passo" />

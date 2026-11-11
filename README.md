@@ -123,8 +123,9 @@ percorre as telas num navegador de verdade (o Chrome instalado; no CI, o Chromiu
 
 ## Áreas
 
-Command Center, Conversa, Trabalhos, Entregas, Rotinas, Cérebro, Agentes (catálogo e time),
-Organograma, Integrações, Governança (central de recuperação), Configurações e o assistente
+Command Center, Conversa, Trabalhos, Entregas, Rotinas, Cérebro (lista e 3D), Agentes (lista
+operacional, 3D, organograma e catálogo), Jarvis (centro de comando em 3D com a conversa do Chief
+of Staff), Integrações, Governança (central de recuperação), Configurações e o assistente
 "Montar sua empresa". O andamento e os próximos passos estão em [docs/REPLANEJAMENTO_V2.md](docs/REPLANEJAMENTO_V2.md).
 
 ## Documentação

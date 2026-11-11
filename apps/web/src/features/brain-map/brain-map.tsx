@@ -1,20 +1,23 @@
 /**
  * Mapa 3D do Cérebro e da rede de agentes, como na v1: núcleo no centro, áreas ao redor e, em volta
- * delas, os documentos (Conhecimento) ou os agentes (Agentes), com quem está trabalhando aceso.
+ * delas, os documentos (Cérebro) ou os agentes (Agentes e Jarvis), com quem está trabalhando aceso.
  *
- * Dados das telas que já existem (fontes, time, trabalhos); a cena 3D é carregada só ao abrir.
+ * Cada tela escolhe o modo. `variant="immersive"` ocupa todo o espaço do pai, sem moldura (Jarvis).
+ * Dados das telas que já existem (fontes, time, atividade); a cena 3D é carregada só ao abrir.
  * Sem WebGL, mostra o aviso e a lista continua disponível.
  */
-import { lazy, Suspense, useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState, type ReactNode, type RefObject } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ErrorNotice, LoadingRows } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { NativeSelect } from "@/components/ui/native-select";
-import { agentsApi, jobsApi, knowledgeApi } from "@/lib/api";
+import { agentsApi, knowledgeApi, type ActivityStatus } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { SourceDialog } from "../knowledge/source-dialog";
 import { useOpenStation } from "../agents/agent-bits";
+import { useTeamActivity } from "../agents/activity";
 import { agentsMap, knowledgeMap, type MapAgent, type MapNode } from "./layout";
+import type { ReactorSignal } from "./reactor";
 
 const BrainScene = lazy(() => import("./brain-scene"));
 
@@ -44,22 +47,46 @@ const webgl = () => {
   }
 };
 
-export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
-  const [mode, setMode] = useState<Mode>(initial);
+/** Status da atividade → estado do nó no mapa (parado também pede você). */
+const MAP_STATE: Record<ActivityStatus, MapAgent["activity"]> = { idle: "idle", assigned: "running", running: "running", waiting: "waiting", blocked: "waiting", done: "done" };
+
+export function BrainMap({
+  mode,
+  variant = "card",
+  core,
+  onCore,
+  toolbar,
+  children,
+  sceneInset,
+  reactor,
+  bare = false,
+}: {
+  mode: Mode;
+  variant?: "card" | "immersive";
+  /** Rótulo do núcleo no modo Agentes (o Jarvis usa o próprio nome). */
+  core?: { label: string; sublabel: string };
+  /** Clique no núcleo (o Jarvis abre a conversa); sem isto, recentra. */
+  onCore?: () => void;
+  /** Botões extras na barra do mapa. */
+  toolbar?: ReactNode;
+  /** Camada sobre o mapa (painel de conversa do Jarvis). */
+  children?: ReactNode;
+  /** Larguras (px) cobertas por painéis à esquerda e à direita: a cena se centra no espaço que sobra. */
+  sceneInset?: { left?: number; right?: number };
+  /** Jarvis: núcleo como reator, guiado pela voz (ver `reactor.tsx`). */
+  reactor?: RefObject<ReactorSignal | null>;
+  /** Jarvis: esconde a barra do mapa (seleção, legenda) para a cena ocupar tudo. */
+  bare?: boolean;
+}) {
   const [selected, setSelected] = useState<MapNode | null>(null);
   // Para onde a câmera olha: um nó ou a vista inteira (o contador refaz o "Recentrar").
   const [focus, setFocus] = useState<string | null>(null);
   const [recenter, setRecenter] = useState(0);
   const sources = useQuery({ queryKey: ["sources"], queryFn: knowledgeApi.list });
-  const team = useQuery({ queryKey: ["team"], queryFn: agentsApi.team });
-  const catalog = useQuery({ queryKey: ["catalog"], queryFn: agentsApi.catalog });
-  // Quem está trabalhando: atualiza enquanto houver trabalho andando.
-  const jobs = useQuery({
-    queryKey: ["jobs"],
-    queryFn: jobsApi.list,
-    enabled: mode === "agents",
-    refetchInterval: (q) => (q.state.data?.jobs.some((j) => ["queued", "running"].includes(j.status)) ? 4000 : false),
-  });
+  const team = useQuery({ queryKey: ["team"], queryFn: agentsApi.team, enabled: mode === "agents" });
+  const catalog = useQuery({ queryKey: ["catalog"], queryFn: agentsApi.catalog, enabled: mode === "agents" });
+  // Quem está trabalhando: a mesma atividade da lista operacional (atualiza sozinha).
+  const activity = useTeamActivity();
   const station = useOpenStation();
   const supported = useMemo(webgl, []);
 
@@ -73,23 +100,13 @@ export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
       );
     }
     if (!team.data || !catalog.data) return null;
-    const today = new Date().toISOString().slice(0, 10);
-    const activity = new Map<string, MapAgent["activity"]>();
-    for (const j of jobs.data?.jobs ?? []) {
-      const state: MapAgent["activity"] | null =
-        j.status === "running" || j.status === "queued" ? "running" : j.status === "awaiting_approval" ? "waiting" : j.status === "completed" && j.created_at.startsWith(today) ? "done" : null;
-      if (!state) continue;
-      for (const a of j.plan?.agents ?? []) {
-        const prev = activity.get(a);
-        // Trabalhando > aguardando > concluído.
-        if (!prev || (prev === "done" && state !== "done") || (prev === "waiting" && state === "running")) activity.set(a, state);
-      }
-    }
+    const now = new Map((activity.data?.agents ?? []).map((a) => [a.id, MAP_STATE[a.status]]));
     return agentsMap(
       catalog.data.areas.map((a) => ({ id: a.id, title: a.title })),
-      team.data.agents.map((a) => ({ id: a.id, name: a.name, title: a.title, area: a.area, reportsTo: a.reports_to, activity: activity.get(a.id) ?? "idle" })),
+      team.data.agents.map((a) => ({ id: a.id, name: a.name, title: a.title, area: a.area, reportsTo: a.reports_to, activity: now.get(a.id) ?? "idle" })),
+      core,
     );
-  }, [mode, sources.data, team.data, catalog.data, jobs.data]);
+  }, [mode, sources.data, team.data, catalog.data, activity.data, core]);
 
   const error = mode === "knowledge" ? sources.error : (team.error ?? catalog.error);
   const reset = () => {
@@ -98,7 +115,10 @@ export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
     setRecenter((n) => n + 1);
   };
   const choose = (node: MapNode) => {
-    if (node.kind === "core") return reset();
+    if (node.kind === "core") {
+      reset();
+      return onCore?.();
+    }
     setFocus(node.id);
     setSelected(node);
   };
@@ -111,38 +131,18 @@ export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
   const counts = graph ? graph.nodes.filter((n) => n.kind === (mode === "knowledge" ? "source" : "agent")).length : 0;
   return (
     <section
-      className="overflow-hidden rounded-xl border border-white/10 text-stone-100"
+      className={cn("relative flex flex-col overflow-hidden text-stone-100", variant === "card" ? "rounded-xl border border-white/10" : "size-full")}
       // Fundo das referências: quase preto e quente, com um brilho âmbar vindo do canto.
       style={{
-        background:
-          "radial-gradient(45% 40% at 6% 14%, rgba(234,88,12,0.30), transparent 70%), radial-gradient(70% 60% at 55% 55%, #16130f 0%, #0b0a09 72%)",
+        background: "radial-gradient(45% 40% at 6% 14%, rgba(234,88,12,0.30), transparent 70%), radial-gradient(70% 60% at 55% 55%, #16130f 0%, #0b0a09 72%)",
       }}
     >
-      <div className="flex flex-wrap items-center gap-2 border-b border-white/10 p-3">
-        <div className="flex rounded-lg border border-white/15 p-0.5" role="tablist" aria-label="O que mostrar">
-          {(
-            [
-              ["knowledge", "Conhecimento"],
-              ["agents", "Agentes"],
-            ] as const
-          ).map(([m, label]) => (
-            <button
-              key={m}
-              type="button"
-              role="tab"
-              aria-selected={mode === m}
-              onClick={() => {
-                setMode(m);
-                reset();
-              }}
-              className={cn("rounded-md px-3 py-1 text-sm", mode === m ? "bg-white/15 font-medium" : "text-stone-300 hover:bg-white/5")}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+      <div className={cn("flex flex-wrap items-center gap-2 border-b border-white/10 p-3", bare && "hidden")}>
         <NativeSelect
-          aria-label="Ir para" className="max-w-56" size="sm" selectClassName="border-white/15 bg-black/60 text-stone-100 dark:bg-black/60"
+          aria-label="Ir para"
+          className="max-w-56"
+          size="sm"
+          selectClassName="border-white/15 bg-black/60 text-stone-100 dark:bg-black/60"
           value={focus ?? ""}
           onChange={(e) => {
             const node = graph?.nodes.find((n) => n.id === e.target.value);
@@ -165,7 +165,8 @@ export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
         <Button size="sm" variant="ghost" className="text-stone-200 hover:bg-white/10 hover:text-white" onClick={reset}>
           Recentrar
         </Button>
-        <p className="text-xs text-stone-400">Arraste para girar, role para aproximar e clique num {mode === "knowledge" ? "documento" : "agente"}.</p>
+        {toolbar}
+        <p className="hidden text-xs text-stone-400 md:block">Arraste para girar, role para aproximar e clique num {mode === "knowledge" ? "documento" : "agente"}.</p>
         <ul className="ml-auto flex flex-wrap gap-3 text-xs text-stone-300">
           {LEGEND[mode].map((l) => (
             <li key={l.label} className="inline-flex items-center gap-1">
@@ -174,24 +175,27 @@ export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
           ))}
         </ul>
       </div>
-      <div className="relative h-[460px] sm:h-[560px]">
-        {error ? (
-          <div className="p-4">
-            <ErrorNotice error={error} />
-          </div>
-        ) : !supported ? (
-          <p className="p-6 text-sm text-stone-300">Este navegador não tem WebGL, então o mapa 3D não abre. A lista continua disponível na aba ao lado.</p>
-        ) : !graph ? (
-          <div className="p-4">
-            <LoadingRows rows={3} />
-          </div>
-        ) : counts === 0 ? (
-          <p className="p-6 text-sm text-stone-300">{mode === "knowledge" ? "O Cérebro ainda não tem documentos." : "O time ainda não tem agentes. Contrate em Agentes."}</p>
-        ) : (
-          <Suspense fallback={<p className="p-6 text-sm text-stone-300">Abrindo o mapa…</p>}>
-            <BrainScene nodes={graph.nodes} edges={graph.edges} selected={selected?.id ?? null} focus={focus} recenter={recenter} onSelect={choose} />
-          </Suspense>
-        )}
+      <div className={cn("relative", variant === "card" ? "h-[460px] sm:h-[560px]" : "min-h-0 flex-1")}>
+        <div className="absolute inset-y-0 transition-[left,right] duration-300" style={{ left: sceneInset?.left ?? 0, right: sceneInset?.right ?? 0 }}>
+          {error ? (
+            <div className="p-4">
+              <ErrorNotice error={error} />
+            </div>
+          ) : !supported ? (
+            <p className="p-6 text-sm text-stone-300">Este navegador não tem WebGL, então o mapa 3D não abre. A lista continua disponível na aba ao lado.</p>
+          ) : !graph ? (
+            <div className="p-4">
+              <LoadingRows rows={3} />
+            </div>
+          ) : counts === 0 ? (
+            <p className="p-6 text-sm text-stone-300">{mode === "knowledge" ? "O Cérebro ainda não tem documentos." : "O time ainda não tem agentes. Contrate em Agentes."}</p>
+          ) : (
+            <Suspense fallback={<p className="p-6 text-sm text-stone-300">Abrindo o mapa…</p>}>
+              <BrainScene nodes={graph.nodes} edges={graph.edges} selected={selected?.id ?? null} focus={focus} recenter={recenter} onSelect={choose} reactor={reactor} />
+            </Suspense>
+          )}
+        </div>
+        {children}
         {selected?.kind === "agent" && (
           // Cartão de vidro como o do organograma das referências: ícone de onda, nome e cargo.
           <div className="absolute bottom-3 left-3 right-3 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.05] p-3 text-sm shadow-2xl backdrop-blur-md sm:right-auto sm:min-w-72">
@@ -212,7 +216,7 @@ export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
           </div>
         )}
       </div>
-      <p className="border-t border-white/10 px-3 py-2 text-xs text-stone-300">
+      <p className={cn("border-t border-white/10 px-3 py-2 text-xs text-stone-300", bare && "hidden")}>
         {mode === "knowledge"
           ? `${counts} documento(s) em ${graph?.nodes.filter((n) => n.kind === "area").length ?? 0} área(s)`
           : `${counts} agente(s) no time · ${graph?.nodes.filter((n) => n.kind === "agent" && n.state === "running").length ?? 0} trabalhando agora`}

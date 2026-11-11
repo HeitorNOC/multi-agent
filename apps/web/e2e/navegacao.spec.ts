@@ -10,7 +10,7 @@ const AREAS = [
   ["/rotinas", "Rotinas"],
   ["/cerebro", "Cérebro"],
   ["/agentes", "Agentes"],
-  ["/organograma", "Organograma"],
+  ["/jarvis", "Jarvis"],
   ["/integracoes", "Integrações"],
   ["/governanca", "Governança"],
   ["/configuracoes", "Configurações"],

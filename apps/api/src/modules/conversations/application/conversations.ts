@@ -16,7 +16,7 @@ import type { Json } from "../../../shared/json.ts";
 import type { Transaction, UnitOfWork } from "../../../platform/database/unit-of-work.ts";
 import { stream } from "../../../platform/events/event-log.ts";
 import type { JobStatus } from "../../jobs/domain/job.ts";
-import type { ChiefOfStaff, ChiefTrace, ConversationOffer } from "../domain/chief-of-staff.ts";
+import type { ChiefOfStaff, ChiefTrace, ConversationOffer, CompanyBriefing } from "../domain/chief-of-staff.ts";
 import type { AnswerTrace } from "../../knowledge/application/answerers.ts";
 import { DEFAULT_TITLE, type Conversation, type Message, type MessageAttachment, type MessageCitation } from "../domain/conversation.ts";
 import type { ConversationStore } from "../infrastructure/sql-conversations.ts";
@@ -46,6 +46,8 @@ export interface ConversationDeps {
   station?: StationResponder;
   /** Guarda um anexo no Cérebro (imagem lida pelo modelo, documento extraído) e devolve a fonte. */
   attach?: (actor: ActorId, file: AttachmentFile) => Promise<MessageAttachment>;
+  /** Situação da empresa para o Chief responder sobre pendências, andamento e time. */
+  briefing?: () => Promise<CompanyBriefing>;
 }
 
 export interface AttachmentFile {
@@ -173,7 +175,9 @@ async function stationAnswer(deps: ConversationDeps, conversation: Conversation,
 
 async function answer(deps: ConversationDeps, id: ConversationId, question: Message): Promise<Message> {
   const history = await deps.uow.read.messages.list(id);
-  const decision = await deps.chief.decide({ text: question.text, history, lastJob: await lastJob(deps, history), offers: deps.offers });
+  // Sem a situação da empresa (falha ao ler), o Chief responde só com a conversa.
+  const briefing = deps.briefing ? await deps.briefing().catch(() => null) : null;
+  const decision = await deps.chief.decide({ text: question.text, history, lastJob: await lastJob(deps, history), offers: deps.offers, briefing });
   const trace: ChiefTrace = decision.trace ?? { engine: "rules" };
   if (decision.kind === "reply") return reply(deps, id, question.seq, decision.text, null, trace);
   // Defesa contra uma implementação que invente um trabalho fora do catálogo.

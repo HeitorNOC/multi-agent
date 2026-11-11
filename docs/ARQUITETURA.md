@@ -95,7 +95,7 @@ Regras que valem em todo módulo:
 | `routines` | Pedidos recorrentes no fuso da instalação | `routines`, `routine_runs` |
 | `integrations` | Catálogo, pasta local, Google Drive, Gmail e Slack, com permissões, cofre de tokens e trilha | `connections`, `connection_secrets`, `connection_items` |
 | `recovery` | Central de recuperação: trabalhos com resultado desconhecido | (usa `jobs`) |
-| `overview` | Command Center: o que decidir, andamento, problemas, consumo | (só leitura) |
+| `overview` | Command Center (o que decidir, andamento, problemas, consumo) e lista operacional dos agentes (`GET /api/agents/activity`) | (só leitura) |
 
 As migrations ficam em `platform/database/migrations/{sqlite,postgres}/NNN_nome.sql`, uma pasta
 por dialeto, aplicadas em ordem e cada uma numa transação. Um arquivo aplicado nunca é editado.
@@ -292,16 +292,62 @@ participantes podem ler.
 
 ## 6. Interface
 
-**Mapa 3D** (Cérebro › Mapa 3D, ou Organograma › Ver em 3D): three.js com React Three Fiber,
-carregado só quando aberto (o resto do app não paga o peso do 3D). Dois modos, como na v1:
-**Conhecimento** (núcleo → áreas → documentos, vigentes e históricos com cores diferentes) e
-**Agentes** (núcleo → áreas do time → agentes, aceso quem está trabalhando ou aguardando
-aprovação, ligado a quem responde a quem). Arrastar gira, rolar aproxima, clicar abre o documento
+**Vistas** (como na v1): o Cérebro tem Lista e Mapa 3D; Agentes tem Lista operacional, Mapa 3D e
+Organograma; o Jarvis é só o 3D dos agentes, em tela inteira, com a conversa do Chief por cima.
+A vista fica no endereço (`/cerebro?vista=mapa`, `/agentes?vista=mapa|organograma`); o antigo
+`/organograma` leva a `/agentes?vista=organograma`.
+
+**Atividade dos agentes** (`GET /api/agents/activity`, em `overview/application/agent-activity.ts`):
+modelo de leitura sem tabela própria. Junta o plano de cada trabalho recente (quem o Chief
+designou) com os recibos de chamada ao modelo (`specialist:<id>` reservado = pesquisando, completo
+= achados entregues). Status: disponível, designado, em execução, aguardando você (parecer pronto),
+concluído ou parado (trabalho interrompido). Marcos do especialista: designado → pesquisa iniciada
+→ achados entregues; do Chief: plano → especialistas → parecer. Tempo restante = mediana de pelo
+menos três participações anteriores concluídas do mesmo agente, menos o já decorrido. A lista, o
+organograma, o 3D e o Jarvis usam a mesma consulta (a cada 3 s enquanto alguém trabalha).
+
+**Organograma em cartões** (`features/agents/org-chart.tsx`): posições de
+`features/agents/org-layout.ts` (cada nível numa coluna ou linha, chefe centrado entre os
+subordinados, ligações em cotovelo com seta; testado). Horizontal ou vertical, guardado no
+navegador; abre centrado no Chief of Staff.
+
+**Jarvis** (`features/jarvis/`): o Chief of Staff como assistente de quem dirige a empresa, logo
+abaixo do gestor. Inspirado no projeto MIT [adewaskar/jarvis](https://github.com/adewaskar/jarvis)
+(rosto e voz no navegador, cérebro separado), com código próprio e o visual do mapa da v2.
+
+- **Cena:** o mapa de agentes em modo `immersive` e `bare`, com o núcleo trocado por um **reator**
+  (`brain-map/reactor.tsx`): anel por shader polar (borda erodida por ruído, disco texturizado,
+  marcas), dois anéis orbitais e poeira de partículas. Cor e pulso vêm da fase (em espera âmbar,
+  ouvindo turquesa, processando laranja, respondendo creme) e do nível da voz, lidos por ref a cada
+  quadro. A câmera deixa folga (`fit`) e a cena se centra entre o painel da esquerda e a conversa
+  (`sceneInset`).
+- **Voz** (`voice.ts`, regras em `voice-text.ts`, testadas): reconhecimento e síntese do próprio
+  navegador (Chrome/Edge, pt-BR), sem chave nem serviço pago; o áudio não passa pelo Aurora. Um
+  reconhecedor aberto enquanto a voz estiver ligada; palavra de ativação "Jarvis" (com o pedido na
+  mesma frase), botão ou barra de espaço; falar enquanto ele responde interrompe; o que ele mesmo
+  diz e volta pelo microfone é descartado como eco; "para"/"chega" cala. Esc volta à espera.
+- **Painel (HUD):** hora no fuso da instalação, sistemas (Aurora, modelo, voz, Cérebro, time,
+  integrações, rotinas), o que espera você agora (com links) e sugestões de pergunta.
+- **Cérebro do Jarvis:** a conversa com o Chief (`Thread` reutilizado; a voz usa a mesma API). O
+  Chief recebe a **situação da empresa** (`CompanyBriefing`, de `overview/application/briefing.ts`):
+  pareceres aguardando aprovação, entregas para revisar, casos em recuperação, trabalhos andando com
+  quem participa, quem do time trabalha agora e rotinas que desistiram. Por regras, responde a
+  "o que espera minha aprovação?", "quem está trabalhando?", "resumo do dia" e andamento sem
+  trabalho na conversa; com modelo, recebe a situação como dado (proibido inventar). Continua sem
+  poder aprovar, enviar ou executar nada: abre trabalhos, e o parecer volta para a aprovação humana.
+- Tela cheia pela Fullscreen API; o Jarvis usa toda a largura do app (as outras áreas ficam numa
+  coluna legível).
+
+**Mapa 3D**: three.js com React Three Fiber, carregado só quando aberto (o resto do app não paga o
+peso do 3D). Dois modos: **Conhecimento** (núcleo → áreas → documentos, vigentes e históricos com
+cores diferentes) e **Agentes** (núcleo Chief of Staff → áreas do time → agentes, aceso quem está
+trabalhando ou aguardando você, ligado a quem responde a quem). Arrastar gira, rolar aproxima, clicar abre o documento
 ou a Estação do agente. As posições vêm de `features/brain-map/layout.ts` (determinístico e testado);
 a rotação automática pausa com o mouse sobre o mapa e não acontece se o sistema pedir menos
 movimento; sem WebGL, a lista continua disponível. Os rótulos HTML ficam numa camada fixa sobre o
 canvas (`portal` do drei): sem ela, o drei troca o elemento dos rótulos quando os eventos da cena
-se conectam e o primeiro rótulo já desenhado fica vazio.
+se conectam e o primeiro rótulo já desenhado fica vazio. A camada tem `z-0` para os rótulos (que o
+drei sobe a um z-index enorme) não passarem por cima de painéis sobre o mapa.
 
 **Padrões das telas** (em `components/common.tsx` e `components/ui/`), para todo CRUD ter a mesma
 cara:
@@ -344,8 +390,9 @@ inválida impede a API de subir, com a lista dos problemas.
   sobe a API real (`e2e/serve.mjs`) com um SQLite descartável, sem login e sem modelo. Cobrem a
   abertura de cada área (computador e celular, sem erro no console e sem rolagem lateral), os
   selects legíveis no tema escuro, escrever fonte e perguntar com citação, o CRUD de áreas, criar e
-  tirar agente, criar, pausar e arquivar rotina, e o mapa 3D (todos os rótulos, inclusive o do
-  núcleo). Na máquina usam o Chrome instalado; no CI, o Chromium do Playwright
+  tirar agente, criar, pausar e arquivar rotina, o mapa 3D (todos os rótulos, inclusive o do
+  núcleo), as três vistas de Agentes (lista, organograma horizontal/vertical, 3D) e o Jarvis
+  (conversa, esconder/mostrar, tela cheia). Com `AURORA_E2E_SHOTS=<pasta>`, guardam capturas. Na máquina usam o Chrome instalado; no CI, o Chromium do Playwright
   (`PLAYWRIGHT_CHANNEL=chromium` força esse).
 - O CI (`.github/workflows/ci.yml`) roda o mesmo `verify` com Node 24, Python 3.13 e PostgreSQL, e
   depois os testes de interface (relatório anexado quando falham).

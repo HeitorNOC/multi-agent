@@ -7,7 +7,7 @@ import {
   CalendarClock,
   LayoutDashboard,
   MessagesSquare,
-  Network,
+  Orbit,
   PackageCheck,
   Settings,
   ShieldCheck,
@@ -58,7 +58,7 @@ const GROUPS: { label: string; areas: Area[] }[] = [
     areas: [
       { to: "/cerebro", label: "Cérebro", icon: BrainCircuit },
       { to: "/agentes", label: "Agentes", icon: Users },
-      { to: "/organograma", label: "Organograma", icon: Network },
+      { to: "/jarvis", label: "Jarvis", icon: Orbit },
       { to: "/integracoes", label: "Integrações", icon: Blocks },
     ],
   },

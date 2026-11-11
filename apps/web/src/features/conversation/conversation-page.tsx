@@ -69,7 +69,7 @@ export function ConversationPage() {
           <div className="m-auto p-6">
             <EmptyState icon={<MessagesSquare />} title="Converse com o Chief of Staff">
               Peça análises, propostas ou o andamento de um trabalho. Quando o pedido exigir especialistas, ele abre um trabalho e o parecer volta para sua aprovação. Para falar direto com um
-              especialista, abra a Estação dele em Agentes ou no Organograma.
+              especialista, abra a Estação dele em Agentes.
             </EmptyState>
           </div>
         )}
@@ -78,7 +78,8 @@ export function ConversationPage() {
   );
 }
 
-function Thread({ id }: { id: string }) {
+/** Uma conversa: mensagens e envio. `embedded` tira a navegação da página (usado no Jarvis). */
+export function Thread({ id, embedded = false }: { id: string; embedded?: boolean }) {
   const queryClient = useQueryClient();
   const thread = useQuery({
     queryKey: ["conversation", id],
@@ -133,9 +134,11 @@ function Thread({ id }: { id: string }) {
   return (
     <>
       <header className="flex items-center gap-2 border-b px-4 py-3">
-        <Link to="/conversa" className="text-sm text-muted-foreground md:hidden">
-          ←
-        </Link>
+        {!embedded && (
+          <Link to="/conversa" className="text-sm text-muted-foreground md:hidden">
+            ←
+          </Link>
+        )}
         {agent && <AgentAvatar name={agent.name} area={agent.area} size="sm" />}
         <div className="min-w-0">
           <h2 className="line-clamp-1 font-medium">{thread.data?.conversation.title ?? "Conversa"}</h2>

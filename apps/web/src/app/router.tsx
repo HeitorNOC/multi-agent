@@ -11,7 +11,7 @@ import { DeliverablePage } from "@/features/deliverables/deliverable-page";
 import { DeliverablesPage } from "@/features/deliverables/deliverables-page";
 import { IntegrationsPage } from "@/features/integrations/integrations-page";
 import { KnowledgePage } from "@/features/knowledge/knowledge-page";
-import { OrganogramPage } from "@/features/organogram/organogram-page";
+import { JarvisPage } from "@/features/jarvis/jarvis-page";
 import { RoutinesPage } from "@/features/routines/routines-page";
 import { SettingsPage } from "@/features/settings/settings-page";
 import { SetupPage } from "@/features/setup/setup-page";
@@ -43,7 +43,9 @@ export const router = createBrowserRouter([
       { path: "rotinas", element: <RoutinesPage /> },
       { path: "integracoes", element: <IntegrationsPage /> },
       { path: "agentes", element: <AgentsPage /> },
-      { path: "organograma", element: <OrganogramPage /> },
+      { path: "jarvis", element: <JarvisPage /> },
+      // O organograma virou uma vista de Agentes; o endereço antigo continua levando até ele.
+      { path: "organograma", element: <Navigate to="/agentes?vista=organograma" replace /> },
       { path: "configuracoes", element: <SettingsPage /> },
       { path: "montar", element: <SetupPage /> },
       // Volta do login com Google/Microsoft já com sessão.

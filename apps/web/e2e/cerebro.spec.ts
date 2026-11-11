@@ -72,12 +72,14 @@ test("ao adicionar uma fonte, “+ Nova área…” cria e já seleciona a área
   await page.goto("/cerebro");
   await page.getByRole("button", { name: "Adicionar ao Cérebro" }).click();
   const dialog = page.getByRole("dialog");
-  await dialog.getByLabel("Área").selectOption("__new__");
+  await dialog.getByLabel("Área", { exact: true }).selectOption("__new__");
   await dialog.getByLabel("Nome da nova área").fill(area);
   // Enter cria a área sem enviar o formulário da fonte.
   await dialog.getByLabel("Nome da nova área").press("Enter");
-  await expect(dialog.getByLabel("Área")).toHaveValue(/operacoes/);
-  await expect(dialog.getByLabel("Área").locator("option:checked")).toHaveText(area);
+  // O campo da nova área fecha quando a API confirma; aí a área já está escolhida.
   await expect(dialog.getByLabel("Nome da nova área")).toHaveCount(0);
+  const select = dialog.getByLabel("Área", { exact: true });
+  await expect(select).toHaveValue(/operacoes/);
+  await expect(select.locator("option:checked")).toHaveText(area);
   await expect(dialog).toBeVisible();
 });
