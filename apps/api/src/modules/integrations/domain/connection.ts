@@ -16,6 +16,8 @@ export interface Connection {
   readonly config: Json;
   readonly permissions: Readonly<Record<Capability, boolean>>;
   readonly status: "active" | "disconnected";
+  /** O que impede a conexão de funcionar até alguém agir (`reauth_required`), ou `null`. */
+  readonly problem: string | null;
   readonly createdBy: ActorId;
   readonly createdAt: string;
   readonly updatedAt: string;

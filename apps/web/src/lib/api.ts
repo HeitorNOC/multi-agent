@@ -457,7 +457,26 @@ export interface ConnectorDef {
   description: string;
   capabilities: { read?: string; write?: string };
   available: boolean;
+  /** Como se conecta: pasta (nada), conta Google (login) ou token de um app (Slack). */
+  auth: "none" | "google" | "token";
+  setup?: string[];
+  /** Funciona nesta instalação? Se não, o que falta configurar. */
+  ready: boolean;
+  missing: string | null;
   connections: number;
+}
+
+export interface ExternalItem {
+  id: string;
+  name: string;
+  kind: "folder" | "file" | "email" | "channel";
+  label: string;
+  modified_at: string | null;
+  size_bytes?: number | null;
+  detail?: string | null;
+  importable: boolean;
+  /** Fonte do Cérebro, se já foi importado. */
+  source: string | null;
 }
 
 export interface Connection {
@@ -465,9 +484,11 @@ export interface Connection {
   connector_id: string;
   connector: string;
   name: string;
-  config: { path?: string };
+  config: { path?: string; team?: string; channel_id?: string; folder_id?: string };
   permissions: { read: boolean; write: boolean };
   status: "active" | "disconnected";
+  /** `reauth_required` quando o acesso à conta acabou. */
+  problem: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -482,11 +503,26 @@ export interface FolderFile {
 export const integrationsApi = {
   catalog: () => get<{ categories: { id: string; title: string; connectors: ConnectorDef[] }[] }>("/api/integrations/catalog"),
   list: () => get<{ connections: Connection[] }>("/api/integrations"),
-  get: (id: string) => get<Connection & { history: JobEvent[] }>(`/api/integrations/${id}`),
-  connect: (input: { connector_id: string; name: string; config: { path: string }; permissions: { read?: boolean; write?: boolean } }) => post<Connection>("/api/integrations", input),
-  change: (id: string, input: { name?: string; permissions?: { read?: boolean; write?: boolean }; active?: boolean }) => post<Connection>(`/api/integrations/${id}`, input),
+  get: (id: string) =>
+    get<Connection & { history: JobEvent[]; imported: { external_id: string; source: string; title: string; imported_at: string; checked_at: string }[] }>(`/api/integrations/${id}`),
+  connect: (input: {
+    connector_id: string;
+    name: string;
+    config: Record<string, string>;
+    permissions: { read?: boolean; write?: boolean };
+    secret?: { token: string };
+  }) => post<Connection>("/api/integrations", input),
+  change: (id: string, input: { name?: string; permissions?: { read?: boolean; write?: boolean }; active?: boolean; config?: Record<string, string>; secret?: { token: string } }) =>
+    post<Connection>(`/api/integrations/${id}`, input),
   files: (id: string) => get<{ files: FolderFile[] }>(`/api/integrations/${id}/files`),
+  browse: (id: string, input: { parent?: string; q?: string; cursor?: string } = {}) =>
+    get<{ items: ExternalItem[]; cursor: string | null }>(`/api/integrations/${id}/files?${new URLSearchParams(Object.entries(input).filter(([, v]) => v) as [string, string][])}`),
   importFile: (id: string, file: string) => post<{ source: { id: string; title: string } }>(`/api/integrations/${id}/import`, { file }),
+  importItem: (id: string, item: string) => post<{ source: { id: string; title: string }; changed: boolean }>(`/api/integrations/${id}/import`, { item }),
+  sync: (id: string) => post<{ updated: string[]; unchanged: string[]; failed: { item: string; reason: string }[] }>(`/api/integrations/${id}/sync`),
+  /** Navegação completa: o navegador vai ao Google e volta para a tela de Integrações. */
+  googleUrl: (input: { connector: string; name: string; read: boolean; write: boolean; connection?: string }) =>
+    `/api/integrations/google/start?${new URLSearchParams({ connector: input.connector, name: input.name, read: input.read ? "1" : "0", write: input.write ? "1" : "0", ...(input.connection ? { connection: input.connection } : {}) })}`,
   exportDeliverable: (id: string, deliverableId: string, version: number) => post<{ file: string }>(`/api/integrations/${id}/export`, { deliverable_id: deliverableId, version }),
 };
 

@@ -50,6 +50,13 @@ import { integrationsHttp } from "./modules/integrations/http/routes.ts";
 import { overviewHttp } from "./modules/overview/http/routes.ts";
 import { LocalFolder } from "./modules/integrations/infrastructure/local-folder.ts";
 import { integrationsStore } from "./modules/integrations/infrastructure/sql-connections.ts";
+import { GmailAdapter, GoogleDriveAdapter, GoogleOAuth } from "./modules/integrations/infrastructure/google.ts";
+import { ExternalHttp } from "./modules/integrations/infrastructure/http-client.ts";
+import { loadSecretKey, secretBox } from "./modules/integrations/infrastructure/secret-box.ts";
+import { SlackAdapter } from "./modules/integrations/infrastructure/slack.ts";
+import { addVersion } from "./modules/knowledge/application/sources.ts";
+import { AppError } from "./shared/errors.ts";
+import type { SourceId } from "./shared/ids.ts";
 import { uploadSource } from "./modules/knowledge/application/sources.ts";
 import { deliverablesHttp } from "./modules/deliverables/http/routes.ts";
 import { deliverablesStore } from "./modules/deliverables/infrastructure/sql-deliverables.ts";
@@ -182,7 +189,11 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
   };
   const ticker = new RoutineTicker(routines, () => void scheduler.wake());
 
-  // Integrações: o conector de pasta local lê para o Cérebro e grava entregas aceitas.
+  // Integrações: pasta local e conectores com login (Google Drive, Gmail, Slack). Os tokens ficam
+  // cifrados; a chave do cofre fica fora do banco (variável ou arquivo ao lado dos dados).
+  const vault = secretBox(loadSecretKey({ hex: config.secretKey, file: config.secretKeyFile }));
+  const external = new ExternalHttp({ fetch: parts.oauthFetch });
+  const google = config.auth.google ? new GoogleOAuth(config.auth.google, external) : undefined;
   const integrations: IntegrationsDeps = {
     uow: new UnitOfWork(db, integrationsStore(clock)),
     clock,
@@ -194,7 +205,22 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       const source = await uploadSource(knowledge, actor, file);
       return { id: source.id, title: source.title };
     },
+    versionToKnowledge: async (actor, sourceId, file) => {
+      try {
+        await addVersion(knowledge, actor, sourceId as SourceId, file);
+        return { changed: true };
+      } catch (error) {
+        if (error instanceof AppError && error.code === "same_content") return { changed: false };
+        if (error instanceof AppError && ["source_not_found", "source_revoked", "not_owner"].includes(error.code)) return { changed: true, missing: true };
+        throw error;
+      }
+    },
     acceptedDeliverable: (id, version) => acceptedMarkdown(deliverables, id as DeliverableId, version),
+    vault,
+    adapters: {
+      slack: new SlackAdapter(external),
+      ...(google ? { google_drive: new GoogleDriveAdapter(external, google), gmail: new GmailAdapter(external, google) } : {}),
+    },
   };
   await reconcileOnRestart(jobs);
 
@@ -246,7 +272,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       agentsHttp(agents),
       deliverablesHttp(deliverables, { onJobOpened: () => void scheduler.wake() }),
       routinesHttp(routines, { onJobOpened: () => void scheduler.wake() }),
-      integrationsHttp(integrations),
+      integrationsHttp(integrations, { google }),
       overviewHttp({ sql: db.sql, clock, timeZone: config.timeZone }),
       settingsHttp(config, parts.model !== null, embedder?.id ?? null),
       ...(config.webDir ? [staticWeb(config.webDir)] : []),

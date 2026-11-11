@@ -83,6 +83,12 @@ export const EVENT_LABEL: Record<string, string> = {
   connection_disconnected: "Desconectada",
   connection_reconnected: "Reconectada",
   file_imported: "Arquivo importado para o Cérebro",
-  deliverable_exported: "Entrega salva",
+  deliverable_exported: "Entrega enviada",
   action_blocked: "Ação bloqueada",
+  item_imported: "Importado para o Cérebro",
+  item_unchanged: "Conferido: sem mudança",
+  connection_synced: "Sincronizada",
+  connection_problem: "Acesso perdido: reconectar",
+  connection_recovered: "Acesso de volta",
+  connection_reauthorized: "Acesso renovado",
 };

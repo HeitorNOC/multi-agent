@@ -202,7 +202,25 @@ Recusa da fila vira nova tentativa com espera crescente, até desistir (aparece 
 
 ### 4.5 Integrações
 
-Hoje o conector real é a **pasta local** (serve pasta sincronizada de OneDrive, Google Drive ou
+Conectores reais: **pasta local**, **Google Drive**, **Gmail** e **Slack**. Todos os externos
+seguem a mesma interface (`modules/integrations/domain/adapter.ts`): navegar, trazer um item para
+o Cérebro, conferir a revisão (barato) e, se tiver escrita, enviar uma entrega aceita.
+
+- **Google (Drive e Gmail):** login na conta Google (OAuth com PKCE, acesso offline). Escopos
+  mínimos: Drive só leitura + arquivos criados pelo Aurora; Gmail só leitura. Docs viram Word,
+  Planilhas viram CSV, Apresentações viram texto; PDFs, Word e imagens são baixados como estão.
+- **Slack:** token de bot de um app da empresa (o Slack não aceita retorno em `http://localhost`).
+  Importa as mensagens recentes de um canal (com nomes e datas) e publica entregas num canal.
+- **Cofre:** tokens cifrados com AES-256-GCM (`connection_secrets`); a chave fica fora do banco
+  (`AURORA_SECRET_KEY` ou o arquivo `aurora.key` ao lado dos dados). Nenhum token sai pela API ou
+  vai para a trilha. Desconectar apaga o token.
+- **Sincronizar:** cada item importado fica ligado à fonte (`connection_items`). Sincronizar confere
+  a revisão de cada um e só baixa o que mudou, que vira versão nova da mesma fonte.
+- **Resiliência:** tempo limite e novas tentativas com espera crescente em 429/5xx; token de acesso
+  renovado sozinho; acesso revogado marca a conexão (`reauth_required`) e a tela pede para
+  reconectar.
+
+A **pasta local** (serve pasta sincronizada de OneDrive, Google Drive ou
 Dropbox): lê documentos para o Cérebro e grava entregas aceitas, só a versão aceita e sem
 sobrescrever. Cada ação exige a permissão dada na conexão; o que não foi autorizado é recusado e
 registrado. O caminho não pode sair da pasta, seguir atalhos nem apontar para os dados do Aurora.

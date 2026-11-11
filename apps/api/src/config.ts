@@ -2,6 +2,7 @@
  * Configuração da API, lida uma vez do ambiente e validada. O resto do código recebe um
  * `Config` tipado e nunca lê `process.env`.
  */
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
 
@@ -65,6 +66,12 @@ const schema = z
      */
     AURORA_AUTH: z.enum(["accounts", "local"]).default("local"),
     /**
+     * Chave do cofre de tokens das integrações (64 hex). Sem ela, o Aurora cria uma num arquivo ao
+     * lado dos dados (AURORA_SECRET_KEY_FILE; padrão: aurora.key na pasta do banco).
+     */
+    AURORA_SECRET_KEY: z.string().optional(),
+    AURORA_SECRET_KEY_FILE: z.string().min(1).optional(),
+    /**
      * Busca por significado no Cérebro. `local` (padrão): modelo de embeddings no próprio
      * computador, baixado uma vez do Hugging Face. `none`: só busca por palavras.
      */
@@ -116,6 +123,8 @@ export interface Config {
   knowledge: { answerer: "extractive" | "model"; maxBytes: number };
   chief: { engine: "rules" | "model" };
   templatesPath: string | undefined;
+  secretKey: string | undefined;
+  secretKeyFile: string;
   embeddings: { mode: "local" | "none"; model: string | undefined; modelsDir: string; minSimilarity: number; minGap: number };
   auth: {
     mode: "accounts" | "local";
@@ -127,6 +136,7 @@ export interface Config {
 }
 
 const DEFAULT_WEB_DIR = fileURLToPath(new URL("../../web/dist", import.meta.url));
+const DEFAULT_KEY_FILE = fileURLToPath(new URL("../data/aurora.key", import.meta.url));
 const DEFAULT_MODELS_DIR = fileURLToPath(new URL("../data/models", import.meta.url));
 
 export class ConfigError extends Error {
@@ -151,6 +161,8 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     knowledge: { answerer: e.AURORA_KNOWLEDGE_ANSWERER, maxBytes: e.AURORA_KNOWLEDGE_MAX_BYTES },
     chief: { engine: e.AURORA_CHIEF_ENGINE },
     templatesPath: e.AURORA_AGENT_TEMPLATES,
+    secretKey: e.AURORA_SECRET_KEY,
+    secretKeyFile: e.AURORA_SECRET_KEY_FILE ?? (e.AURORA_DATABASE_URL ? DEFAULT_KEY_FILE : join(dirname(e.AURORA_SQLITE_PATH), "aurora.key")),
     embeddings: {
       mode: e.AURORA_EMBEDDINGS,
       model: e.AURORA_EMBEDDING_MODEL,

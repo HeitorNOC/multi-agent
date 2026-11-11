@@ -68,7 +68,8 @@ Sem nenhuma variável, a API usa SQLite em `apps/api/data/aurora.db`, deixa os t
 | `AURORA_QUEUE_CAPACITY`, `AURORA_RESUME_RESERVE`, `AURORA_MAX_WORKERS` | capacidade da fila |
 | `AURORA_TIMEZONE` | fuso das rotinas e do painel (IANA); padrão: o do computador |
 | `AURORA_AUTH` | `local` (padrão: uso individual no próprio computador, sem login) ou `accounts` (cada pessoa entra com a própria conta) |
-| `AURORA_GOOGLE_CLIENT_ID`, `AURORA_GOOGLE_CLIENT_SECRET` | liga o botão "Entrar com Google" |
+| `AURORA_GOOGLE_CLIENT_ID`, `AURORA_GOOGLE_CLIENT_SECRET` | liga Google Drive e Gmail em Integrações (e o "Entrar com Google" no modo com contas) |
+| `AURORA_SECRET_KEY` | chave do cofre de tokens das integrações (64 hex); sem ela, o Aurora cria `aurora.key` ao lado dos dados |
 | `AURORA_MICROSOFT_CLIENT_ID`, `AURORA_MICROSOFT_CLIENT_SECRET`, `AURORA_MICROSOFT_TENANT` | liga o botão "Entrar com Microsoft"; o tenant é `common` (padrão), `organizations` ou o id do diretório da empresa |
 
 A lista completa e os padrões estão em [apps/api/src/config.ts](apps/api/src/config.ts).

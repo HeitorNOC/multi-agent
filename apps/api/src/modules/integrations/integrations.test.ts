@@ -105,7 +105,7 @@ for (const dialect of dialects) {
       const { deps, folder } = await setup();
       const cat = await catalogView(deps);
       const all = cat.categories.flatMap((c) => c.connectors);
-      assert.deepEqual(all.filter((c) => c.available).map((c) => c.id), ["local_folder"]);
+      assert.deepEqual(all.filter((c) => c.ready).map((c) => c.id), ["local_folder"], "sem cofre e adaptadores, só a pasta local funciona");
       assert.equal(await code(connect(deps, ana, { connectorId: "slack", name: "Slack", config: {}, permissions: { write: true } })), "connector_unavailable");
       assert.equal(await code(connect(deps, ana, { connectorId: "local_folder", name: "Docs", config: { path: folder }, permissions: {} })), "ok");
     });
@@ -114,7 +114,7 @@ for (const dialect of dialects) {
       const { deps, folder, knowledge } = await setup();
       const c = await connect(deps, ana, { connectorId: "local_folder", name: "Documentos", config: { path: folder }, permissions: { read: true } });
       const id = c.id as ConnectionId;
-      assert.deepEqual((await listFiles(deps, ana, id)).files.map((f) => [f.name, f.media_type]), [["politica-compras.md", "text/markdown"]]);
+      assert.deepEqual((await listFiles(deps, ana, id)).files!.map((f) => [f.name, f.media_type]), [["politica-compras.md", "text/markdown"]]);
       const { source } = await importFile(deps, ana, id, { file: "politica-compras.md" });
       assert.equal(source.title, "politica-compras");
       assert.equal((await listSources(knowledge, ana)).sources.length, 1);
@@ -133,7 +133,7 @@ for (const dialect of dialects) {
       const blocked = (await viewConnection(deps, id)).history.filter((h) => h.kind === "action_blocked");
       assert.deepEqual(blocked.map((b) => (b.detail as { action: string; reason: string }).reason), ["permission_denied", "connection_disconnected"]);
       await changeConnection(deps, ana, id, { active: true });
-      assert.equal((await listFiles(deps, ana, id)).files.length, 1, "reconectar confere a pasta e volta a ler");
+      assert.equal((await listFiles(deps, ana, id)).files!.length, 1, "reconectar confere a pasta e volta a ler");
     });
 
     test("escrita autorizada: só a versão aceita sai; não sobrescreve", async () => {
