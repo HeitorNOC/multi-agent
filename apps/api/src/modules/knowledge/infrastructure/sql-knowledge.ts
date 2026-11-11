@@ -4,7 +4,7 @@ import type { Sql } from "../../../platform/database/database.ts";
 import { SqlEventLog, type EventLog } from "../../../platform/events/event-log.ts";
 import type { Clock } from "../../../shared/clock.ts";
 import type { SourceRepository, VersionRepository } from "../domain/repositories.ts";
-import type { IndexableVersion, KnowledgeSource, SourceVersion, StoredVersion } from "../domain/source.ts";
+import type { ContentOrigin, IndexableVersion, KnowledgeSource, SourceVersion, StoredVersion } from "../domain/source.ts";
 
 type SourceRow = {
   id: string;
@@ -12,6 +12,7 @@ type SourceRow = {
   owner: string;
   readers: string;
   supersedes: string | null;
+  area: string;
   created_at: string;
   revoked_at: string | null;
   revoked_by: string | null;
@@ -28,6 +29,7 @@ type VersionRow = {
   valid_from: string;
   uploaded_by: string;
   created_at: string;
+  origin: string;
 };
 
 const toSource = (r: SourceRow): KnowledgeSource => ({
@@ -36,6 +38,7 @@ const toSource = (r: SourceRow): KnowledgeSource => ({
   owner: r.owner as ActorId,
   readers: JSON.parse(r.readers) as string[],
   supersedes: r.supersedes as SourceId | null,
+  area: r.area,
   createdAt: r.created_at,
   revokedAt: r.revoked_at,
   revokedBy: r.revoked_by as ActorId | null,
@@ -52,9 +55,10 @@ const toVersion = (r: VersionRow): SourceVersion => ({
   validFrom: r.valid_from,
   uploadedBy: r.uploaded_by as ActorId,
   createdAt: r.created_at,
+  origin: r.origin as ContentOrigin,
 });
 
-const VERSION_COLUMNS = "source_id, version, filename, media_type, content_sha, size_bytes, valid_from, uploaded_by, created_at";
+const VERSION_COLUMNS = "source_id, version, filename, media_type, content_sha, size_bytes, valid_from, uploaded_by, created_at, origin";
 
 export class SqlSourceRepository implements SourceRepository {
   private readonly sql: Sql;
@@ -69,18 +73,19 @@ export class SqlSourceRepository implements SourceRepository {
 
   async add(s: KnowledgeSource) {
     await this.sql.run(
-      `INSERT INTO knowledge_sources (id, title, owner, readers, supersedes, created_at, revoked_at, revoked_by, latest_version, ordinal)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM knowledge_sources))`,
-      [s.id, s.title, s.owner, JSON.stringify(s.readers), s.supersedes, s.createdAt, s.revokedAt, s.revokedBy, s.latestVersion],
+      `INSERT INTO knowledge_sources (id, title, owner, readers, supersedes, created_at, revoked_at, revoked_by, latest_version, area, ordinal)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM knowledge_sources))`,
+      [s.id, s.title, s.owner, JSON.stringify(s.readers), s.supersedes, s.createdAt, s.revokedAt, s.revokedBy, s.latestVersion, s.area],
     );
   }
 
   async save(s: KnowledgeSource) {
-    await this.sql.run("UPDATE knowledge_sources SET revoked_at = $2, revoked_by = $3, latest_version = $4 WHERE id = $1", [
+    await this.sql.run("UPDATE knowledge_sources SET revoked_at = $2, revoked_by = $3, latest_version = $4, area = $5 WHERE id = $1", [
       s.id,
       s.revokedAt,
       s.revokedBy,
       s.latestVersion,
+      s.area,
     ]);
   }
 
@@ -103,8 +108,8 @@ export class SqlVersionRepository implements VersionRepository {
 
   async add(v: StoredVersion) {
     await this.sql.run(
-      `INSERT INTO knowledge_versions (${VERSION_COLUMNS}, bytes, text) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
-      [v.sourceId, v.version, v.filename, v.mediaType, v.contentSha, v.sizeBytes, v.validFrom, v.uploadedBy, v.createdAt, v.bytes, v.text],
+      `INSERT INTO knowledge_versions (${VERSION_COLUMNS}, bytes, text) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
+      [v.sourceId, v.version, v.filename, v.mediaType, v.contentSha, v.sizeBytes, v.validFrom, v.uploadedBy, v.createdAt, v.origin, v.bytes, v.text],
     );
   }
 
@@ -122,8 +127,8 @@ export class SqlVersionRepository implements VersionRepository {
   }
 
   async listIndexable(): Promise<IndexableVersion[]> {
-    const rows = await this.sql.all<SourceRow & { version: number | string; valid_from: string; text: string }>(
-      `SELECT s.*, v.version, v.valid_from, v.text
+    const rows = await this.sql.all<SourceRow & { version: number | string; valid_from: string; media_type: string; origin: string; text: string }>(
+      `SELECT s.*, v.version, v.valid_from, v.media_type, v.origin, v.text
          FROM knowledge_versions v JOIN knowledge_sources s ON s.id = v.source_id
         WHERE s.revoked_at IS NULL
         ORDER BY s.ordinal, v.version`,
@@ -136,8 +141,11 @@ export class SqlVersionRepository implements VersionRepository {
         owner: s.owner,
         readers: s.readers,
         supersedes: s.supersedes,
+        area: s.area,
         version: Number(r.version),
         validFrom: r.valid_from,
+        mediaType: r.media_type,
+        origin: r.origin as ContentOrigin,
         text: r.text,
       };
     });

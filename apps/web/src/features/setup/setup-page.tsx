@@ -96,7 +96,7 @@ function KnowledgeStep() {
   return (
     <div className="space-y-4 text-sm">
       <p>Envie políticas, procedimentos, tabelas de preço ou contratos-modelo. Eu leio, divido em trechos e os agentes citam a fonte e a versão em cada afirmação.</p>
-      <UploadDialog sources={list} mediaTypes={sources.data?.media_types ?? []} />
+      <UploadDialog sources={list} areas={sources.data?.areas ?? []} formats={sources.data?.formats ?? []} />
       {list.length > 0 ? (
         <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
           {list.map((s) => (

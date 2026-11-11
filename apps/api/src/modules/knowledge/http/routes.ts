@@ -1,32 +1,42 @@
-/** Rotas do Cérebro: fontes, versões, revogação, original e perguntas. */
+/** Rotas do Cérebro: fontes (arquivo ou texto escrito), versões, área, revogação, original e perguntas. */
 import type { FastifyRequest } from "fastify";
 import { z } from "zod";
 import { SourceId } from "../../../shared/ids.ts";
 import type { HttpModule } from "../../../platform/http/app.ts";
 import { askKnowledge } from "../application/ask.ts";
-import { addVersion, listSources, originalFile, revokeSource, uploadSource, viewSource, type KnowledgeDeps } from "../application/sources.ts";
+import { addVersion, listSources, moveSource, originalFile, revokeSource, uploadSource, viewSource, type FileInput, type KnowledgeDeps } from "../application/sources.ts";
 
 const isoDate = z.string().refine((v) => !Number.isNaN(Date.parse(v)), "deve ser uma data ISO");
+/** Conteúdo de uma versão: um arquivo (base64) ou um texto escrito, nunca os dois. */
 const file = {
-  filename: z.string().min(1).max(200),
-  media_type: z.string().min(1).max(100),
-  content_base64: z.string().min(1),
+  filename: z.string().min(1).max(200).optional(),
+  media_type: z.string().min(1).max(150).optional(),
+  content_base64: z.string().min(1).optional(),
+  text: z.string().min(1).max(2_000_000).optional(),
   valid_from: isoDate.optional(),
 };
-const uploadBody = z.strictObject({
-  title: z.string().trim().min(1).max(200),
-  readers: z.array(z.string().min(1).max(100)).min(1).max(200).optional(),
-  supersedes: z.string().nullable().optional(),
-  ...file,
-});
-const versionBody = z.strictObject(file);
-const queryBody = z.strictObject({ question: z.string().trim().min(1).max(1000) });
+const oneContent = (b: { text?: string; filename?: string; media_type?: string; content_base64?: string }) =>
+  b.text !== undefined ? b.filename === undefined && b.content_base64 === undefined : !!(b.filename && b.media_type && b.content_base64);
+const contentRule = { message: "envie um arquivo (filename, media_type, content_base64) ou um texto (text)" };
+const uploadBody = z
+  .strictObject({
+    title: z.string().trim().min(1).max(200),
+    readers: z.array(z.string().min(1).max(100)).min(1).max(200).optional(),
+    supersedes: z.string().nullable().optional(),
+    area: z.string().min(1).max(40).optional(),
+    ...file,
+  })
+  .refine(oneContent, contentRule);
+const versionBody = z.strictObject(file).refine(oneContent, contentRule);
+const moveBody = z.strictObject({ area: z.string().min(1).max(40) });
+const queryBody = z.strictObject({ question: z.string().trim().min(1).max(1000), area: z.string().min(1).max(40).optional() });
 
 /**
  * Cabeçalhos do original de uma fonte. Nunca como HTML: texto vai como texto puro e o resto como
  * download, com sandbox, para um arquivo enviado não executar nada no navegador.
  */
 export function originalHeaders(mediaType: string, filename: string) {
+  // PDF e Word vão como download (nunca abertos dentro da página do Aurora).
   const inline = ["text/plain", "text/markdown", "text/csv", "application/json"].includes(mediaType);
   const contentType = mediaType === "application/json" ? "application/json; charset=utf-8" : inline ? "text/plain; charset=utf-8" : "application/octet-stream";
   const ascii = filename.replace(/[^\x20-\x7e]/g, "_").replace(/["\\]/g, "_");
@@ -38,10 +48,11 @@ export function originalHeaders(mediaType: string, filename: string) {
 }
 
 const sourceIdOf =(req: FastifyRequest) => SourceId.parse((req.params as { id?: unknown }).id);
-const fileInput = (b: z.infer<typeof versionBody>) => ({
+const fileInput = (b: z.infer<typeof versionBody>): FileInput => ({
   filename: b.filename,
   mediaType: b.media_type,
   contentBase64: b.content_base64,
+  text: b.text,
   validFrom: b.valid_from,
 });
 
@@ -54,7 +65,7 @@ export function knowledgeHttp(deps: KnowledgeDeps, options: { uploadLimit: numbe
     app.post("/api/knowledge/sources", upload, async (req, reply) => {
       const b = uploadBody.parse(req.body);
       const supersedes = b.supersedes ? SourceId.parse(b.supersedes) : null;
-      const view = await uploadSource(deps, actor(req), { ...fileInput(b), title: b.title, readers: b.readers, supersedes });
+      const view = await uploadSource(deps, actor(req), { ...fileInput(b), title: b.title, readers: b.readers, supersedes, area: b.area });
       return reply.code(201).send(view);
     });
 
@@ -65,6 +76,8 @@ export function knowledgeHttp(deps: KnowledgeDeps, options: { uploadLimit: numbe
       return reply.code(201).send(view);
     });
 
+    app.post("/api/knowledge/sources/:id/area", async (req) => moveSource(deps, actor(req), sourceIdOf(req), moveBody.parse(req.body).area));
+
     app.post("/api/knowledge/sources/:id/revoke", async (req) => revokeSource(deps, actor(req), sourceIdOf(req)));
 
     app.get("/api/knowledge/sources/:id/versions/:version/original", async (req, reply) => {
@@ -73,6 +86,9 @@ export function knowledgeHttp(deps: KnowledgeDeps, options: { uploadLimit: numbe
       return reply.headers(originalHeaders(original.mediaType, original.filename)).send(Buffer.from(original.bytes));
     });
 
-    app.post("/api/knowledge/query", async (req) => askKnowledge(deps, actor(req), queryBody.parse(req.body).question));
+    app.post("/api/knowledge/query", async (req) => {
+      const b = queryBody.parse(req.body);
+      return askKnowledge(deps, actor(req), b.question, { area: b.area });
+    });
   };
 }

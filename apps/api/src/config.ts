@@ -59,8 +59,11 @@ const schema = z
     AURORA_WEB_DIR: z.string().min(1).optional(),
     /** Catálogo de personas prontas (padrão: apps/api/data/agent-templates.json). */
     AURORA_AGENT_TEMPLATES: z.string().min(1).optional(),
-    /** `accounts`: cada pessoa entra com a própria conta. `local`: uso individual, sem login. */
-    AURORA_AUTH: z.enum(["accounts", "local"]).default("accounts"),
+    /**
+     * `local` (padrão): uso individual no próprio computador, sem login. `accounts`: cada pessoa
+     * entra com a própria conta (senha, Google ou Microsoft).
+     */
+    AURORA_AUTH: z.enum(["accounts", "local"]).default("local"),
     /** Entrar com Google: aplicativo OAuth "Web" criado no Google Cloud da empresa. */
     AURORA_GOOGLE_CLIENT_ID: z.string().min(1).optional(),
     AURORA_GOOGLE_CLIENT_SECRET: z.string().min(1).optional(),

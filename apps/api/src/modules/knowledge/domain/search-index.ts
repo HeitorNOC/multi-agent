@@ -33,6 +33,9 @@ export interface Passage {
   version: number;
   validFrom: string;
   text: string;
+  /** Área da fonte e seção do documento em que o trecho está. */
+  area?: string;
+  section?: string;
   matched: string[];
   score: number;
 }

@@ -189,16 +189,23 @@ export async function completeSetup(deps: AgentsDeps, actor: ActorId) {
 }
 
 /** O time como o trabalho aberto o vê. */
-export function teamDirectory(uow: UnitOfWork<AgentsStore>): TeamDirectory {
+export function teamDirectory(uow: UnitOfWork<AgentsStore>, catalog?: TemplateCatalog): TeamDirectory {
+  const templates = new Map(catalog?.templates.map((t) => [t.id, t]));
   return {
     async members(): Promise<CatalogAgent[]> {
-      return (await uow.read.agents.list("active")).map((a) => ({
-        id: a.id,
-        title: `${a.name}, ${a.title}`,
-        focus: a.focus,
-        domain: a.area,
-        instructions: a.instructions || undefined,
-      }));
+      return (await uow.read.agents.list("active")).map((a) => {
+        // O papel detalhado é conteúdo do produto: vem sempre do catálogo atual.
+        const t = a.templateId ? templates.get(a.templateId) : undefined;
+        return {
+          id: a.id,
+          title: `${a.name}, ${a.title}`,
+          focus: a.focus,
+          domain: a.area,
+          instructions: a.instructions || undefined,
+          responsibilities: t?.responsibilities,
+          deliverables: t?.deliverables,
+        };
+      });
     },
   };
 }

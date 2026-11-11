@@ -161,6 +161,10 @@ export interface SourceSummary {
   owner: string;
   readers: string[];
   supersedes: string | null;
+  /** Área da empresa (`general` = Geral). */
+  area: string;
+  /** Formato da versão que vale: rótulo (PDF, Word, MD…) e se foi escrita no Aurora. */
+  format: { media_type: string; label: string; origin: "file" | "text" } | null;
   created_at: string;
   revoked_at: string | null;
   latest_version: number;
@@ -178,33 +182,55 @@ export interface SourceVersion {
   valid_from: string;
   uploaded_by: string;
   created_at: string;
+  origin: "file" | "text";
+  format: string;
   url: string;
+}
+
+export interface BrainArea {
+  id: string;
+  title: string;
+  /** Fontes não revogadas nesta área. */
+  sources: number;
+}
+
+export interface FileFormat {
+  media_type: string;
+  label: string;
+  extensions: string[];
 }
 
 export interface Answer {
   abstained: boolean;
   answer: string;
-  citations: { n: number; source: string; title: string; version: number; valid_from: string; excerpt: string; url: string }[];
+  citations: { n: number; source: string; title: string; version: number; valid_from: string; section?: string; excerpt: string; url: string }[];
   decision: { engine: string; provider?: string; fallback?: string };
 }
 
-export interface UploadInput {
-  title: string;
-  filename: string;
-  media_type: string;
-  content_base64: string;
-  readers?: string[];
-  supersedes?: string | null;
+/** Conteúdo: um arquivo (filename, media_type, content_base64) ou um texto escrito (text). */
+export interface VersionInput {
+  filename?: string;
+  media_type?: string;
+  content_base64?: string;
+  text?: string;
   valid_from?: string;
 }
 
+export interface UploadInput extends VersionInput {
+  title: string;
+  readers?: string[];
+  supersedes?: string | null;
+  area?: string;
+}
+
 export const knowledgeApi = {
-  list: () => get<{ sources: SourceSummary[]; media_types: string[] }>("/api/knowledge/sources"),
+  list: () => get<{ sources: SourceSummary[]; areas: BrainArea[]; media_types: string[]; formats: FileFormat[] }>("/api/knowledge/sources"),
   get: (id: string) => get<SourceSummary & { versions: SourceVersion[] }>(`/api/knowledge/sources/${id}`),
   upload: (input: UploadInput) => post<SourceSummary>("/api/knowledge/sources", input),
-  addVersion: (id: string, input: Omit<UploadInput, "title" | "readers" | "supersedes">) => post<SourceSummary>(`/api/knowledge/sources/${id}/versions`, input),
+  addVersion: (id: string, input: VersionInput) => post<SourceSummary>(`/api/knowledge/sources/${id}/versions`, input),
+  move: (id: string, area: string) => post<SourceSummary>(`/api/knowledge/sources/${id}/area`, { area }),
   revoke: (id: string) => post<SourceSummary & { repeated: boolean }>(`/api/knowledge/sources/${id}/revoke`),
-  ask: (question: string) => post<Answer>("/api/knowledge/query", { question }),
+  ask: (question: string, area?: string) => post<Answer>("/api/knowledge/query", { question, ...(area ? { area } : {}) }),
 };
 
 // ── Recuperação ──────────────────────────────────────────────────────────────
@@ -241,6 +267,9 @@ export interface AgentTemplate {
   tagline: string;
   focus: string;
   skills: string[];
+  /** O que faz e o que entrega. */
+  responsibilities: string[];
+  deliverables: string[];
   in_team: boolean;
 }
 

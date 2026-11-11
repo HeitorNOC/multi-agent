@@ -140,7 +140,7 @@ function PersonaDialog({ template: t, areaTitle, onClose }: { template: AgentTem
   const hireAgent = useHire();
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
-      <DialogContent>
+      <DialogContent className="max-h-[90dvh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-center gap-3">
             <AgentAvatar name={t.name} area={t.area} size="lg" />
@@ -158,10 +158,24 @@ function PersonaDialog({ template: t, areaTitle, onClose }: { template: AgentTem
           <p className="text-muted-foreground">{t.focus}</p>
         </div>
         <div className="space-y-1 text-sm">
+          <p className="font-medium">O que faz</p>
+          <ul className="list-disc space-y-0.5 pl-5 text-muted-foreground">
+            {t.responsibilities.map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="space-y-1 text-sm">
+          <p className="font-medium">O que entrega</p>
+          <p className="text-muted-foreground">{t.deliverables.join(" · ")}</p>
+        </div>
+        <div className="space-y-1 text-sm">
           <p className="font-medium">Habilidades</p>
           <p className="text-muted-foreground">{t.skills.join(" · ")}</p>
         </div>
-        <p className="text-xs text-muted-foreground">Responde só com as fontes do Cérebro abertas a toda a empresa, citando cada uma.</p>
+        <p className="text-xs text-muted-foreground">
+          Responde só com as fontes do Cérebro que pode ler (as abertas a toda a empresa e as restritas liberadas para ele), citando cada uma.
+        </p>
         <ErrorNotice error={hireAgent.error} />
         <DialogFooter>
           {t.in_team || hireAgent.isSuccess ? (

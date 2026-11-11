@@ -36,6 +36,7 @@ import type { KnowledgeDeps } from "./modules/knowledge/application/sources.ts";
 import { knowledgeHttp } from "./modules/knowledge/http/routes.ts";
 import { Bm25Index } from "./modules/knowledge/infrastructure/bm25-index.ts";
 import { knowledgeStore } from "./modules/knowledge/infrastructure/sql-knowledge.ts";
+import { extractDocumentText } from "./modules/knowledge/infrastructure/document-text.ts";
 import { recoveryHttp } from "./modules/recovery/http/routes.ts";
 import { acceptedMarkdown, deliveryFor, type DeliverablesDeps } from "./modules/deliverables/application/deliverables.ts";
 import type { DeliverableId } from "./modules/deliverables/domain/deliverable.ts";
@@ -109,6 +110,9 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
         ? new ModelAnswerer({ client: parts.model, fallback: extractive, limiter, now: () => clock.now() })
         : extractive,
     maxBytes: config.knowledge.maxBytes,
+    // As áreas do Cérebro são as mesmas do catálogo de agentes (mais "Geral").
+    areas: parts.templates.areas,
+    extract: extractDocumentText,
   };
 
   // Empresa e time: o Chief of Staff só escala quem foi contratado.
@@ -119,7 +123,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     clock,
     countSources: async () => (await knowledgeUow.read.sources.list()).filter((s) => !s.revokedAt).length,
   };
-  const team = teamDirectory(agentsUow);
+  const team = teamDirectory(agentsUow, parts.templates);
 
   // Entregas: o efeito aprovado de cada trabalho vira uma entrega (ou a próxima versão dela).
   const deliverablesUow = new UnitOfWork(db, deliverablesStore(clock));

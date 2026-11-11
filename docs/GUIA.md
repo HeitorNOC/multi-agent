@@ -43,11 +43,12 @@ tráfego, a contadora, o copywriter. Você escolhe quem entra no time, como numa
 
 ## Primeiros passos
 
-1. **Entre.** No primeiro acesso, crie a conta do dono (e-mail e senha, ou Google/Microsoft). O
-   dono decide quem mais entra.
+1. **Abra o Aurora.** Por padrão ele roda sem login, só para você, no seu computador. (Com
+   `AURORA_AUTH=accounts`, cada pessoa entra com a própria conta.)
 2. **Conte sobre a empresa.** Em "Montar sua empresa": nome, setor, objetivos e políticas.
-3. **Alimente o Cérebro.** Envie os documentos que importam: políticas, contratos, tabelas de
-   preço, manuais. Quanto melhores os documentos, melhores as respostas.
+3. **Alimente o Cérebro.** Envie os documentos que importam (PDF, Word, TXT, Markdown, CSV ou
+   JSON) ou escreva o texto direto, e escolha a área de cada um. Quanto melhores e mais
+   organizados os documentos, melhores as respostas.
 4. **Monte o time.** Em Agentes, contrate os especialistas de que precisa. São 69 em 11 áreas:
    gestão, marketing (copy, Instagram, tráfego pago, design, SEO, e-mail, vídeo, marca),
    vendas, atendimento, e-commerce e loja, operações, finanças, pessoas, jurídico, produto e
@@ -99,5 +100,6 @@ Eles ficam no banco do Aurora, no seu computador. Os trechos usados numa respost
 modelo de IA pela CLI do Claude Code ou do Codex, com a sua conta, como quando você usa essas
 ferramentas diretamente.
 
-**Posso usar sozinho, sem login?**
-Sim: suba o Aurora com `AURORA_AUTH=local`. Tudo fica no nome do "operador local".
+**Preciso de login?**
+Não, por padrão. Tudo fica no nome do "operador local". Para várias pessoas, suba com
+`AURORA_AUTH=accounts`.

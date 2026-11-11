@@ -67,7 +67,7 @@ Sem nenhuma variável, a API usa SQLite em `apps/api/data/aurora.db`, deixa os t
 | `AURORA_KNOWLEDGE_ANSWERER` | `extractive` ou `model` (as respostas do Cérebro) |
 | `AURORA_QUEUE_CAPACITY`, `AURORA_RESUME_RESERVE`, `AURORA_MAX_WORKERS` | capacidade da fila |
 | `AURORA_TIMEZONE` | fuso das rotinas e do painel (IANA); padrão: o do computador |
-| `AURORA_AUTH` | `accounts` (padrão: cada pessoa entra com a própria conta) ou `local` (uso individual, sem login) |
+| `AURORA_AUTH` | `local` (padrão: uso individual no próprio computador, sem login) ou `accounts` (cada pessoa entra com a própria conta) |
 | `AURORA_GOOGLE_CLIENT_ID`, `AURORA_GOOGLE_CLIENT_SECRET` | liga o botão "Entrar com Google" |
 | `AURORA_MICROSOFT_CLIENT_ID`, `AURORA_MICROSOFT_CLIENT_SECRET`, `AURORA_MICROSOFT_TENANT` | liga o botão "Entrar com Microsoft"; o tenant é `common` (padrão), `organizations` ou o id do diretório da empresa |
 
@@ -75,7 +75,8 @@ A lista completa e os padrões estão em [apps/api/src/config.ts](apps/api/src/c
 
 ### Acesso
 
-No primeiro acesso, o Aurora pede a conta do dono (e-mail e senha, ou Google/Microsoft). Ela fica
+Por padrão o Aurora roda sem login, para uma pessoa no próprio computador (`AURORA_AUTH=local`).
+Com `AURORA_AUTH=accounts`, no primeiro acesso o Aurora pede a conta do dono (e-mail e senha, ou Google/Microsoft). Ela fica
 com tudo o que já tinha sido feito como operador local. Depois, só entra quem o dono liberar em
 **Configurações › Acesso**: a pessoa entra com Google ou Microsoft usando o e-mail liberado, ou
 cria uma senha em "Criar conta". A sessão fica num cookie HttpOnly por 30 dias; senhas são
@@ -122,3 +123,4 @@ Organograma, Integrações, Governança (central de recuperação), Configuraç�
 
 - [Guia do Aurora](docs/GUIA.md): o que é e como usar, sem jargão.
 - [Arquitetura e fluxos](docs/ARQUITETURA.md): tecnologias, módulos, fluxos e garantias.
+- [Dados, Cérebro e agentes](docs/DADOS_CEREBRO_AGENTES.md): onde tudo fica, envio e busca no Cérebro, recuperação após falhas, orquestração e o que cada agente faz.

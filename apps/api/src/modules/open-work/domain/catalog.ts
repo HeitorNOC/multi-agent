@@ -11,6 +11,9 @@ export interface CatalogAgent {
   readonly domain: string;
   /** Orientações que a empresa deu a este agente. */
   readonly instructions?: string;
+  /** O que ele faz e o que entrega (do catálogo); vazio em agentes criados pela empresa. */
+  readonly responsibilities?: readonly string[];
+  readonly deliverables?: readonly string[];
 }
 
 export interface TeamDirectory {

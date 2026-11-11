@@ -1,33 +1,53 @@
-/** Enviar uma fonte nova ao Cérebro, com acesso, vigência e (opcional) a fonte que ela substitui. */
+/**
+ * Adicionar ao Cérebro: um arquivo (PDF, Word, TXT, Markdown, CSV, JSON) ou um texto escrito na
+ * hora, com área, acesso, vigência e (opcional) a fonte que ele substitui.
+ */
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Upload } from "lucide-react";
+import { FileUp, PenLine, Upload } from "lucide-react";
 import { ErrorNotice } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { agentsApi, fileToBase64, knowledgeApi, type SourceSummary } from "@/lib/api";
+import { Textarea } from "@/components/ui/textarea";
+import { agentsApi, fileToBase64, knowledgeApi, type BrainArea, type FileFormat, type SourceSummary, type UploadInput } from "@/lib/api";
+import { cn } from "@/lib/utils";
 import { useAccess } from "../access/auth-gate";
 
-/** Tipo pelo nome quando o navegador não informa (CSV e Markdown costumam vir vazios). */
+const BY_EXTENSION: Record<string, string> = {
+  md: "text/markdown",
+  markdown: "text/markdown",
+  csv: "text/csv",
+  json: "application/json",
+  txt: "text/plain",
+  pdf: "application/pdf",
+  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+};
+
+/** Tipo pela extensão quando o navegador não informa (CSV e Markdown costumam vir vazios). */
 export function mediaTypeOf(file: File) {
-  const ext = file.name.split(".").pop()?.toLowerCase();
-  if (ext === "md" || ext === "markdown") return "text/markdown";
-  if (ext === "csv") return "text/csv";
-  if (ext === "json") return "application/json";
-  if (ext === "txt") return "text/plain";
-  return file.type || "application/octet-stream";
+  const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
+  return BY_EXTENSION[ext] ?? (file.type || "application/octet-stream");
 }
+
+/** O `accept` do seletor de arquivos: as extensões que o Cérebro lê. */
+export const acceptOf = (formats: FileFormat[]) =>
+  (formats.length ? formats.flatMap((f) => f.extensions) : Object.keys(BY_EXTENSION)).map((e) => `.${e}`).join(",");
 
 /** Pessoas leitoras, como entram no Aurora (e-mail em minúsculas). */
 const people = (text: string) => text.split(",").map((r) => r.trim().toLowerCase()).filter(Boolean);
 
-export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]; mediaTypes: string[] }) {
+type Kind = "file" | "text";
+
+export function UploadDialog({ sources, areas, formats, defaultArea }: { sources: SourceSummary[]; areas: BrainArea[]; formats: FileFormat[]; defaultArea?: string }) {
   const { mode } = useAccess();
   const [open, setOpen] = useState(false);
+  const [kind, setKind] = useState<Kind>("file");
   const [title, setTitle] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [text, setText] = useState("");
+  const [area, setArea] = useState(defaultArea ?? "general");
   const [restricted, setRestricted] = useState(false);
   const [readers, setReaders] = useState("");
   const [agentReaders, setAgentReaders] = useState<string[]>([]);
@@ -35,46 +55,77 @@ export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]
   const [validFrom, setValidFrom] = useState("");
   const [supersedes, setSupersedes] = useState("");
   const queryClient = useQueryClient();
+  const reset = () => {
+    setTitle("");
+    setFile(null);
+    setText("");
+    setReaders("");
+    setRestricted(false);
+    setAgentReaders([]);
+    setValidFrom("");
+    setSupersedes("");
+  };
   const upload = useMutation({
     mutationFn: async () => {
-      const f = file!;
-      return knowledgeApi.upload({
+      const common: UploadInput = {
         title: title.trim(),
-        filename: f.name,
-        media_type: mediaTypeOf(f),
-        content_base64: await fileToBase64(f),
+        area,
         readers: restricted ? [...people(readers), ...agentReaders.map((id) => `agent:${id}`)] : undefined,
         valid_from: validFrom ? new Date(`${validFrom}T00:00:00`).toISOString() : undefined,
         supersedes: supersedes || null,
-      });
+      };
+      if (kind === "text") return knowledgeApi.upload({ ...common, text });
+      const f = file!;
+      return knowledgeApi.upload({ ...common, filename: f.name, media_type: mediaTypeOf(f), content_base64: await fileToBase64(f) });
     },
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ["sources"] });
       setOpen(false);
-      setTitle("");
-      setFile(null);
-      setReaders("");
-      setRestricted(false);
-      setAgentReaders([]);
-      setValidFrom("");
-      setSupersedes("");
+      reset();
       upload.reset();
     },
   });
   const replaceable = sources.filter((s) => s.status === "current");
-  const ready = title.trim() && file && (!restricted || readers.trim() || agentReaders.length);
+  const content = kind === "file" ? !!file : !!text.trim();
+  const ready = title.trim() && content && (!restricted || readers.trim() || agentReaders.length);
+  const labels = formats.length ? formats.map((f) => f.label).join(", ") : "PDF, Word, TXT, MD, CSV, JSON";
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(o) => {
+        setOpen(o);
+        if (o) setArea(defaultArea ?? "general");
+      }}
+    >
       <DialogTrigger asChild>
         <Button>
-          <Upload /> Enviar fonte
+          <Upload /> Adicionar ao Cérebro
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[90dvh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Enviar fonte ao Cérebro</DialogTitle>
-          <DialogDescription>Aceitos: {mediaTypes.length ? mediaTypes.join(", ") : "texto, Markdown, CSV e JSON"} (UTF-8).</DialogDescription>
+          <DialogTitle>Adicionar ao Cérebro</DialogTitle>
+          <DialogDescription>Envie um arquivo ({labels}) ou escreva o texto aqui. PDF escaneado (só imagem) não tem texto para ler.</DialogDescription>
         </DialogHeader>
+        <div className="grid grid-cols-2 gap-1 rounded-lg border p-1" role="tablist" aria-label="Tipo de conteúdo">
+          {(
+            [
+              ["file", "Arquivo", FileUp],
+              ["text", "Escrever texto", PenLine],
+            ] as const
+          ).map(([k, label, Icon]) => (
+            <button
+              key={k}
+              type="button"
+              role="tab"
+              aria-selected={kind === k}
+              onClick={() => setKind(k)}
+              className={cn("inline-flex items-center justify-center gap-1.5 rounded-md px-2 py-1.5 text-sm", kind === k ? "bg-muted font-medium" : "text-muted-foreground hover:bg-muted/50")}
+            >
+              <Icon className="size-4" /> {label}
+            </button>
+          ))}
+        </div>
         <form
           id="upload"
           className="space-y-4"
@@ -83,22 +134,48 @@ export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]
             if (ready) upload.mutate();
           }}
         >
-          <div className="space-y-2">
-            <Label htmlFor="file">Arquivo</Label>
-            <Input
-              id="file"
-              type="file"
-              accept=".txt,.md,.markdown,.csv,.json,text/plain,text/markdown,text/csv,application/json"
-              onChange={(e) => {
-                const f = e.target.files?.[0] ?? null;
-                setFile(f);
-                if (f && !title) setTitle(f.name.replace(/\.[^.]+$/, ""));
-              }}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="title">Título</Label>
-            <Input id="title" value={title} maxLength={200} onChange={(e) => setTitle(e.target.value)} />
+          {kind === "file" ? (
+            <div className="space-y-2">
+              <Label htmlFor="file">Arquivo</Label>
+              <Input
+                id="file"
+                type="file"
+                accept={acceptOf(formats)}
+                onChange={(e) => {
+                  const f = e.target.files?.[0] ?? null;
+                  setFile(f);
+                  if (f && !title) setTitle(f.name.replace(/\.[^.]+$/, ""));
+                }}
+              />
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <Label htmlFor="text">Texto</Label>
+              <Textarea
+                id="text"
+                rows={8}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder={"# Política de reembolso\n\nDespesas acima de 500 reais precisam de nota fiscal e aprovação do gestor."}
+              />
+              <p className="text-xs text-muted-foreground">Pode usar Markdown: títulos com # viram seções e ajudam a busca a achar o trecho certo.</p>
+            </div>
+          )}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="title">Título</Label>
+              <Input id="title" value={title} maxLength={200} onChange={(e) => setTitle(e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="area">Área</Label>
+              <select id="area" className="h-9 w-full rounded-md border bg-transparent px-2 text-sm" value={area} onChange={(e) => setArea(e.target.value)}>
+                {areas.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.title}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <fieldset className="space-y-2">
             <legend className="text-sm font-medium">Quem pode ler</legend>
@@ -149,11 +226,11 @@ export function UploadDialog({ sources, mediaTypes }: { sources: SourceSummary[]
               </select>
             </div>
           </div>
-          <ErrorNotice error={upload.error} title="Fonte não enviada" />
+          <ErrorNotice error={upload.error} title="Não foi adicionado" />
         </form>
         <DialogFooter>
           <Button type="submit" form="upload" disabled={!ready || upload.isPending}>
-            {upload.isPending ? "Enviando…" : "Enviar"}
+            {upload.isPending ? "Lendo e guardando…" : "Adicionar"}
           </Button>
         </DialogFooter>
       </DialogContent>

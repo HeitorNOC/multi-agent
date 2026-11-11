@@ -1,64 +1,116 @@
 /**
- * Cérebro: as fontes da empresa e perguntas respondidas só com elas. Cada resposta cita a fonte e
- * a versão, com link para o arquivo original; sem evidência, o Cérebro se abstém.
+ * Cérebro: as fontes da empresa, organizadas por área, e perguntas respondidas só com elas. Cada
+ * resposta cita a fonte, a versão e a seção, com link para o original; sem evidência, abstém-se.
  */
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { BrainCircuit, ExternalLink, FileText, Search } from "lucide-react";
+import { BrainCircuit, ExternalLink, FileText, PenLine, Search } from "lucide-react";
 import { EmptyState, ErrorNotice, LoadingRows, PageHeader, ToneBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { knowledgeApi } from "@/lib/api";
+import { knowledgeApi, type BrainArea, type SourceSummary } from "@/lib/api";
 import { formatDate, relativeTime, SOURCE_STATUS } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import { SourceDialog } from "./source-dialog";
 import { UploadDialog } from "./upload-dialog";
+
+const ALL = "";
 
 export function KnowledgePage() {
   const sources = useQuery({ queryKey: ["sources"], queryFn: knowledgeApi.list });
   const [open, setOpen] = useState<string | null>(null);
+  const [area, setArea] = useState(ALL);
+  const data = sources.data;
+  const areas = data?.areas ?? [];
+  const shown = useMemo(() => (data?.sources ?? []).filter((s) => area === ALL || s.area === area), [data, area]);
+  const areaTitle = (id: string) => areas.find((a) => a.id === id)?.title ?? id;
   return (
     <div className="space-y-6">
       <PageHeader
         title="Cérebro"
-        description="Documentos da empresa com dono, acesso, versões e vigência. Os agentes só leem o que está aberto a toda a empresa."
-        actions={<UploadDialog sources={sources.data?.sources ?? []} mediaTypes={sources.data?.media_types ?? []} />}
+        description="Documentos da empresa por área, com dono, acesso, versões e vigência. Os agentes leem o que está aberto a todos e o que foi liberado para eles."
+        actions={<UploadDialog sources={data?.sources ?? []} areas={areas} formats={data?.formats ?? []} defaultArea={area || undefined} />}
       />
-      <Ask />
+      <Ask areas={areas} area={area} />
       <ErrorNotice error={sources.error} title="Não foi possível carregar as fontes" />
       {sources.isPending ? (
         <LoadingRows />
-      ) : !sources.data?.sources.length ? (
+      ) : !data?.sources.length ? (
         <EmptyState icon={<BrainCircuit />} title="O Cérebro está vazio">
-          Envie políticas, procedimentos e dados (texto, Markdown, CSV ou JSON). Eu leio, divido em trechos e cito nas respostas.
+          Envie políticas, contratos, tabelas e manuais (PDF, Word, TXT, Markdown, CSV ou JSON) ou escreva um texto. Eu leio, divido em trechos e cito nas respostas.
         </EmptyState>
       ) : (
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {sources.data.sources.map((s) => (
-            <li key={s.id}>
-              <button type="button" onClick={() => setOpen(s.id)} className="flex h-full w-full flex-col gap-2 rounded-xl border bg-card p-4 text-left transition-colors hover:bg-muted/50">
-                <div className="flex items-start justify-between gap-2">
-                  <FileText className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                  <ToneBadge tone={SOURCE_STATUS[s.status].tone}>{SOURCE_STATUS[s.status].label}</ToneBadge>
-                </div>
-                <p className="line-clamp-2 font-medium">{s.title}</p>
-                <p className="mt-auto text-xs text-muted-foreground">
-                  v{s.current_version ?? s.latest_version} · {s.readers.includes("*") ? "toda a empresa" : `${s.readers.length} leitor(es)`} · {relativeTime(s.created_at)}
-                </p>
-              </button>
-            </li>
-          ))}
-        </ul>
+        <>
+          <AreaFilter areas={areas} total={data.sources.filter((s) => !s.revoked_at).length} value={area} onChange={setArea} />
+          {shown.length ? (
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {shown.map((s) => (
+                <li key={s.id}>
+                  <SourceCard source={s} areaTitle={areaTitle(s.area)} onOpen={() => setOpen(s.id)} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-muted-foreground">Nenhuma fonte nesta área ainda.</p>
+          )}
+        </>
       )}
-      {open && <SourceDialog id={open} onClose={() => setOpen(null)} />}
+      {open && <SourceDialog id={open} areas={areas} onClose={() => setOpen(null)} />}
     </div>
   );
 }
 
-function Ask() {
+function AreaFilter({ areas, total, value, onChange }: { areas: BrainArea[]; total: number; value: string; onChange: (area: string) => void }) {
+  const chips = [{ id: ALL, title: "Todas", sources: total }, ...areas.filter((a) => a.sources > 0 || a.id === value)];
+  return (
+    <div className="flex flex-wrap gap-2" role="tablist" aria-label="Áreas do Cérebro">
+      {chips.map((a) => (
+        <button
+          key={a.id || "all"}
+          type="button"
+          role="tab"
+          aria-selected={value === a.id}
+          onClick={() => onChange(a.id)}
+          className={cn(
+            "rounded-full border px-3 py-1 text-xs transition-colors",
+            value === a.id ? "border-primary bg-primary text-primary-foreground" : "hover:bg-muted",
+          )}
+        >
+          {a.title} <span className="opacity-70">{a.sources}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function SourceCard({ source: s, areaTitle, onOpen }: { source: SourceSummary; areaTitle: string; onOpen: () => void }) {
+  const written = s.format?.origin === "text";
+  return (
+    <button type="button" onClick={onOpen} className="flex h-full w-full flex-col gap-2 rounded-xl border bg-card p-4 text-left transition-colors hover:bg-muted/50">
+      <div className="flex items-start justify-between gap-2">
+        <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+          {written ? <PenLine className="size-4" /> : <FileText className="size-4" />}
+          {written ? "Texto" : s.format && <span className="rounded border px-1.5 py-0.5 font-mono text-[10px] uppercase">{s.format.label}</span>}
+        </span>
+        <ToneBadge tone={SOURCE_STATUS[s.status].tone}>{SOURCE_STATUS[s.status].label}</ToneBadge>
+      </div>
+      <p className="line-clamp-2 font-medium">{s.title}</p>
+      <p className="mt-auto text-xs text-muted-foreground">
+        {areaTitle} · v{s.current_version ?? s.latest_version} · {s.readers.includes("*") ? "toda a empresa" : `${s.readers.length} leitor(es)`} · {relativeTime(s.created_at)}
+      </p>
+    </button>
+  );
+}
+
+function Ask({ areas, area: initial }: { areas: BrainArea[]; area: string }) {
   const [question, setQuestion] = useState("");
+  const [area, setArea] = useState(initial);
   const queryClient = useQueryClient();
-  const ask = useMutation({ mutationFn: (q: string) => knowledgeApi.ask(q), onSettled: () => void queryClient.invalidateQueries({ queryKey: ["sources"] }) });
+  const ask = useMutation({
+    mutationFn: (q: string) => knowledgeApi.ask(q, area || undefined),
+    onSettled: () => void queryClient.invalidateQueries({ queryKey: ["sources"] }),
+  });
   const answer = ask.data;
   return (
     <Card>
@@ -67,13 +119,21 @@ function Ask() {
       </CardHeader>
       <CardContent className="space-y-4">
         <form
-          className="flex gap-2"
+          className="flex flex-col gap-2 sm:flex-row"
           onSubmit={(e) => {
             e.preventDefault();
             if (question.trim()) ask.mutate(question.trim());
           }}
         >
-          <Input value={question} maxLength={1000} placeholder="Ex.: Quem aprova compras acima de dez mil reais?" onChange={(e) => setQuestion(e.target.value)} />
+          <Input value={question} maxLength={1000} placeholder="Ex.: Quem aprova compras acima de dez mil reais?" onChange={(e) => setQuestion(e.target.value)} className="sm:flex-1" />
+          <select aria-label="Procurar em" className="h-9 rounded-md border bg-transparent px-2 text-sm" value={area} onChange={(e) => setArea(e.target.value)}>
+            <option value={ALL}>Todas as áreas</option>
+            {areas.map((a) => (
+              <option key={a.id} value={a.id}>
+                {a.title}
+              </option>
+            ))}
+          </select>
           <Button type="submit" disabled={!question.trim() || ask.isPending}>
             <Search /> {ask.isPending ? "Buscando…" : "Perguntar"}
           </Button>
@@ -89,7 +149,9 @@ function Ask() {
                   <li key={c.n} className="rounded-lg border p-3 text-sm">
                     <div className="flex items-start justify-between gap-2">
                       <p className="font-medium">
-                        [{c.n}] {c.title} <span className="text-xs font-normal text-muted-foreground">v{c.version} · desde {formatDate(c.valid_from)}</span>
+                        [{c.n}] {c.title}
+                        {c.section && <span className="font-normal"> › {c.section}</span>}{" "}
+                        <span className="text-xs font-normal text-muted-foreground">v{c.version} · desde {formatDate(c.valid_from)}</span>
                       </p>
                       <a href={c.url} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-1 text-xs text-sky-600 hover:underline dark:text-sky-400">
                         Original <ExternalLink className="size-3" />

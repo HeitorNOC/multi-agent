@@ -23,7 +23,14 @@ import { conversationStore } from "./infrastructure/sql-conversations.ts";
 const ana = ActorId.parse("ana");
 const code = (p: Promise<unknown>) => p.then(() => "ok", (e) => (e instanceof AppError ? e.code : String(e)));
 const TEAM = staticTeam([
-  { id: "procurement_analyst", title: "Bruno, Analista de compras", focus: "compras fornecedores cotações", domain: "operations", instructions: "Compare sempre três fornecedores." },
+  {
+    id: "procurement_analyst",
+    title: "Bruno, Analista de compras",
+    focus: "compras fornecedores cotações",
+    domain: "operations",
+    instructions: "Compare sempre três fornecedores.",
+    responsibilities: ["Compara fornecedores por preço e prazo", "Prepara cotações"],
+  },
   { id: "financial_planning_analyst", title: "Fernanda, Analista financeira", focus: "orçamento finanças", domain: "finance" },
 ]);
 const opened: TestDatabase[] = [];
@@ -119,6 +126,7 @@ for (const dialect of dialects) {
       const system = model.calls[0]!.system;
       assert.ok(system.startsWith("Você é Bruno, Analista de compras"));
       assert.match(system, /Compare sempre três fornecedores/);
+      assert.match(system, /No seu papel você: Compara fornecedores por preço e prazo; Prepara cotações\./);
       assert.ok(system.indexOf("SOMENTE os trechos") > system.indexOf("Bruno"), "as regras de evidência vêm depois e prevalecem");
     });
 

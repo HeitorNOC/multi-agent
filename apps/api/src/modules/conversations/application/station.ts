@@ -11,6 +11,7 @@ import type { KnowledgeSearch } from "../../knowledge/application/knowledge-sear
 import type { Passage } from "../../knowledge/domain/search-index.ts";
 import { terms } from "../../knowledge/domain/text.ts";
 import type { CatalogAgent, TeamDirectory } from "../../open-work/domain/catalog.ts";
+import { roleNotes } from "../../open-work/domain/tasks.ts";
 import type { ActorId } from "../../../shared/ids.ts";
 import type { MessageCitation } from "../domain/conversation.ts";
 
@@ -39,7 +40,7 @@ export function stationResponder(deps: { team: TeamDirectory; search: KnowledgeS
     member,
     async reply(agentId, question, asker) {
       const agent = await member(agentId);
-      const found = await deps.search.forAgents(`${question}\n${agent.focus}`, PASSAGES, [agent.id], asker);
+      const found = await deps.search.forAgents(`${question}\n${agent.focus}`, PASSAGES, [agent.id], { onBehalfOf: asker, preferArea: agent.domain });
       if (!found.length)
         return {
           text: "Não encontrei nas fontes do Cérebro que posso ler evidência para responder. Se houver um documento sobre isso, envie ao Cérebro (ou me dê acesso a ele) e pergunte de novo.",
@@ -49,9 +50,7 @@ export function stationResponder(deps: { team: TeamDirectory; search: KnowledgeS
       // Os termos da pergunta presentes em cada trecho: o respondedor extrativo usa para escolher as frases.
       const wanted = new Set(terms(question));
       const passages: Passage[] = found.map((p, i) => ({ ...p, n: i + 1, matched: [...new Set(terms(p.text))].filter((t) => wanted.has(t)), score: 0 }));
-      const role = `Você é ${agent.title}, especialista em: ${agent.focus}. Responda ao gestor no seu papel.${
-        agent.instructions ? ` Orientações da empresa para o seu papel (as regras abaixo prevalecem): ${agent.instructions.slice(0, 1500)}` : ""
-      }`;
+      const role = `Você é ${agent.title}, especialista em: ${agent.focus}. Responda ao gestor no seu papel.${roleNotes(agent)}`;
       const answer = await deps.answerer.answer({ question, passages, role });
       const cited = answer.kind === "answer" ? passages.filter((p) => answer.cited.includes(p.n)) : [];
       return {

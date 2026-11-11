@@ -26,7 +26,8 @@ afterEach(async () => {
 test("catálogo de personas: válido, por área, com nome, cargo, frase e habilidades", () => {
   assert.ok(templates.areas.length >= 8);
   assert.ok(templates.templates.length >= 30);
-  for (const t of templates.templates) assert.ok(t.name && t.title && t.tagline && t.skills.length >= 2, t.id);
+  for (const t of templates.templates)
+    assert.ok(t.name && t.title && t.tagline && t.skills.length >= 2 && t.responsibilities.length >= 3 && t.deliverables.length >= 2, t.id);
 });
 
 for (const dialect of dialects) {
@@ -84,13 +85,14 @@ for (const dialect of dialects) {
 
     test("orientações da empresa chegam ao trabalho aberto; quem saiu do time não é escalado", async () => {
       const { deps, uow } = await setup();
-      const team = teamDirectory(uow);
+      const team = teamDirectory(uow, templates);
       const policy = openWorkPolicy(team);
       assert.equal(await code(Promise.resolve().then(() => policy.goal({ goal: "Analise as compras do trimestre, por favor" }))), "team_empty");
       await hire(deps, ana, "procurement_analyst");
       await changeAgent(deps, ana, "procurement_analyst" as AgentId, { instructions: "Sempre compare pelo menos três fornecedores." });
       const [member] = await team.members();
       assert.deepEqual([member!.id, member!.title, member!.instructions], ["procurement_analyst", "Bruno, Analista de compras", "Sempre compare pelo menos três fornecedores."]);
+      assert.ok(member!.responsibilities!.length >= 3 && member!.deliverables!.length >= 2, "o papel detalhado do catálogo chega ao trabalho");
       assert.equal(await code(Promise.resolve().then(() => policy.plan({ agents: ["controller"], reason: "Precisa da controladoria aqui." }, null as never))), "agent_not_in_team");
       await dismiss(deps, ana, "procurement_analyst" as AgentId);
       assert.deepEqual(await team.members(), []);

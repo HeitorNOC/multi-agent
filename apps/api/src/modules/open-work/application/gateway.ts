@@ -72,7 +72,7 @@ export class OpenWorkGateway {
     const { goal, plan } = await this.job(jobId);
     ensure(plan?.agents.includes(agentId), () => conflict("agent_not_in_plan", "Especialista fora do plano"));
     const agent = await this.member(agentId);
-    const passages = await this.deps.search.forAgents(`${goal}\n${agent.focus}`, FRAGMENTS_PER_AGENT, [agentId]);
+    const passages = await this.deps.search.forAgents(`${goal}\n${agent.focus}`, FRAGMENTS_PER_AGENT, [agentId], { preferArea: agent.domain });
     const fragments = passages.map((p) => ({ ...p, label: labelOf(p.id) }));
     await this.deps.jobs.uow.run((s) =>
       s.events.append(stream.job(jobId), {

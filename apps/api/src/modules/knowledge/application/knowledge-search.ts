@@ -14,6 +14,18 @@ import type { KnowledgeStore } from "../infrastructure/sql-knowledge.ts";
 
 /** Fração mínima da pontuação do melhor trecho para um trecho secundário ser citado. */
 const RELATIVE_SCORE = 0.5;
+/**
+ * Peso extra para trechos da área de quem pergunta (por exemplo, fontes de Compras para o
+ * analista de compras). Preferência, não filtro: uma fonte Geral muito melhor continua na frente.
+ */
+const AREA_BOOST = 1.3;
+
+export interface SearchOptions {
+  /** Área preferida: trechos dela ganham peso. */
+  preferArea?: string;
+  /** Só esta área. */
+  onlyArea?: string;
+}
 
 interface IndexedMeta {
   id: string;
@@ -22,6 +34,9 @@ interface IndexedMeta {
   version: number;
   validFrom: string;
   text: string;
+  area: string;
+  /** Seção do documento (título mais próximo), quando houver. */
+  section?: string;
   owner: string;
   readers: readonly string[];
 }
@@ -57,14 +72,20 @@ export class KnowledgeSearch {
   }
 
   /** Busca; `allow` decide quem pode ver cada trecho. */
-  async search(question: string, allow: (p: { owner: string; readers: readonly string[] }) => boolean, limit: number) {
+  async search(question: string, allow: (p: { owner: string; readers: readonly string[] }) => boolean, limit: number, options: SearchOptions = {}) {
     const { index, passages } = await this.index();
     const wanted = index.queryTerms(question);
     // Com 3 termos ou mais, exige pelo menos 2 no mesmo trecho; com menos, 1 basta.
     const needed = wanted.length >= 3 ? 2 : 1;
+    const visible = (id: string) => {
+      const p = passages.get(id);
+      return !!p && (!options.onlyArea || p.area === options.onlyArea) && allow(p);
+    };
     const hits = index
-      .search(question, { limit: limit * 3, allow: (id) => !!passages.get(id) && allow(passages.get(id)!) })
-      .filter((h) => h.matched.length >= needed);
+      .search(question, { limit: limit * 4, allow: visible })
+      .filter((h) => h.matched.length >= needed)
+      .map((h) => (options.preferArea && passages.get(h.id)!.area === options.preferArea ? { ...h, score: h.score * AREA_BOOST } : h))
+      .sort((a, b) => b.score - a.score);
     // Trechos secundários só entram se forem comparáveis ao melhor; termos genéricos não bastam.
     const best = hits[0]?.score ?? 0;
     const found: Passage[] = hits
@@ -83,9 +104,15 @@ export class KnowledgeSearch {
    * agente responde a uma pessoa: só entra o que ela também pode ler (o agente não abre para
    * ninguém uma fonte que estava fechada para essa pessoa).
    */
-  async forAgents(query: string, limit: number, agentIds: readonly string[] = [], onBehalfOf?: ActorId): Promise<AgentPassage[]> {
+  async forAgents(
+    query: string,
+    limit: number,
+    agentIds: readonly string[] = [],
+    options: { onBehalfOf?: ActorId; preferArea?: string } = {},
+  ): Promise<AgentPassage[]> {
+    const { onBehalfOf } = options;
     const allow = (p: { owner: string; readers: readonly string[] }) => agentsCanRead(p, agentIds) && (!onBehalfOf || canRead(p, onBehalfOf));
-    const { found } = await this.search(query, allow, limit);
+    const { found } = await this.search(query, allow, limit, { preferArea: options.preferArea });
     return found.map(({ n: _n, matched: _m, score: _s, ...p }) => ({ ...p, url: originalUrl(p.sourceId, p.version) }));
   }
 
@@ -100,11 +127,11 @@ export class KnowledgeSearch {
   private async index() {
     this.items ??= await this.uow.read.versions.listIndexable();
     const current = currentVersions(this.items, this.clock.now()).filter((c) => !c.supersededBy);
-    const key = current.map((c) => `${c.sourceId}@${c.version}:${c.readers.join(",")}`).sort().join("|");
+    const key = current.map((c) => `${c.sourceId}@${c.version}:${c.area}:${c.readers.join(",")}`).sort().join("|");
     if (this.cache?.key === key) return this.cache;
     const passages = new Map<string, IndexedMeta>();
     for (const item of current)
-      for (const piece of chunk(item.text)) {
+      for (const piece of chunk(item.text, undefined, item.mediaType)) {
         const id = `${item.sourceId}@${item.version}#${piece.ordinal}`;
         passages.set(id, {
           id,
@@ -113,11 +140,15 @@ export class KnowledgeSearch {
           version: item.version,
           validFrom: item.validFrom,
           text: piece.text,
+          area: item.area,
+          ...(piece.section ? { section: piece.section } : {}),
           owner: item.owner,
           readers: item.readers,
         });
       }
-    const index = this.build([...passages.values()].map((p) => ({ id: p.id, text: `${p.title}\n${p.text}` })));
+    // O que a busca lê de cada trecho: título da fonte, seção e o texto (o título e a seção dão
+    // contexto a trechos que, sozinhos, não dizem do que tratam).
+    const index = this.build([...passages.values()].map((p) => ({ id: p.id, text: [p.title, p.section, p.text].filter(Boolean).join("\n") })));
     this.cache = { key, index, passages };
     return this.cache;
   }

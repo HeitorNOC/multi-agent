@@ -14,6 +14,12 @@ import type { ActorId, SourceId } from "../../../shared/ids.ts";
 /** Leitor especial: todos da instalação. */
 export const EVERYONE = "*";
 
+/** Área das fontes que não pertencem a uma área específica. */
+export const GENERAL_AREA = "general";
+
+/** De onde veio o conteúdo de uma versão. */
+export type ContentOrigin = "file" | "text";
+
 export interface KnowledgeSource {
   readonly id: SourceId;
   readonly title: string;
@@ -21,6 +27,8 @@ export interface KnowledgeSource {
   /** Identidades que podem ler, ou `["*"]`. */
   readonly readers: readonly string[];
   readonly supersedes: SourceId | null;
+  /** Área da empresa (`general` quando não é de uma área só). */
+  readonly area: string;
   readonly createdAt: string;
   readonly revokedAt: string | null;
   readonly revokedBy: ActorId | null;
@@ -38,6 +46,7 @@ export interface SourceVersion {
   readonly validFrom: string;
   readonly uploadedBy: ActorId;
   readonly createdAt: string;
+  readonly origin: ContentOrigin;
 }
 
 /** Uma versão com o arquivo original e o texto extraído. */
@@ -53,8 +62,11 @@ export interface IndexableVersion {
   readonly owner: ActorId;
   readonly readers: readonly string[];
   readonly supersedes: SourceId | null;
+  readonly area: string;
   readonly version: number;
   readonly validFrom: string;
+  readonly mediaType: string;
+  readonly origin: ContentOrigin;
   readonly text: string;
 }
 

@@ -9,8 +9,9 @@ import type { KnowledgeDeps } from "./sources.ts";
 const PASSAGES = 5;
 const QUERIES = stream.knowledge("queries");
 
-export async function askKnowledge(deps: KnowledgeDeps, actor: ActorId, question: string) {
-  const { wanted, found } = await deps.search.search(question, (p) => canRead(p, actor), PASSAGES);
+/** `area`: só fontes desta área (quem pergunta escolheu onde procurar). */
+export async function askKnowledge(deps: KnowledgeDeps, actor: ActorId, question: string, options: { area?: string } = {}) {
+  const { wanted, found } = await deps.search.search(question, (p) => canRead(p, actor), PASSAGES, { onlyArea: options.area });
   let result: AnswerBody;
   let trace: AnswerTrace = { engine: "extractive" };
   if (!wanted.length) result = { kind: "abstain", text: "Reformule a pergunta com termos específicos do assunto." };
@@ -36,6 +37,7 @@ export async function askKnowledge(deps: KnowledgeDeps, actor: ActorId, question
       title: p.title,
       version: p.version,
       valid_from: p.validFrom,
+      ...(p.section ? { section: p.section } : {}),
       excerpt: p.text.length > 600 ? `${p.text.slice(0, 597)}…` : p.text,
       url: originalUrl(p.sourceId, p.version),
     })),

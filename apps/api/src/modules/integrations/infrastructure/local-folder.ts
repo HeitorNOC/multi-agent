@@ -10,7 +10,16 @@ import { basename, extname, isAbsolute, join, resolve, sep } from "node:path";
 import { ensure, invalid, notFound } from "../../../shared/errors.ts";
 import type { Json } from "../../../shared/json.ts";
 
-export const READABLE = { ".md": "text/markdown", ".markdown": "text/markdown", ".txt": "text/plain", ".csv": "text/csv", ".json": "application/json" } as const;
+/** Arquivos que a pasta entrega ao Cérebro (os mesmos formatos aceitos no envio). */
+export const READABLE = {
+  ".md": "text/markdown",
+  ".markdown": "text/markdown",
+  ".txt": "text/plain",
+  ".csv": "text/csv",
+  ".json": "application/json",
+  ".pdf": "application/pdf",
+  ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+} as const;
 
 export interface FolderFile {
   name: string;

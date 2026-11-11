@@ -59,7 +59,8 @@ export class ExtractiveAnswerer implements KnowledgeAnswerer {
     // Quebras de linha também encerram frases (títulos e itens de lista são unidades próprias);
     // marcas de Markdown no início da linha não são conteúdo.
     const sentences = p.text
-      .split(/\n+|(?<=[.!?;:])[ \t]+/)
+      // Dois-pontos não encerram frase: o que vem depois completa a afirmação ("Frete: 8%").
+      .split(/\n+|(?<=[.!?;])[ \t]+/)
       .map((s) => s.replace(/^\s*(#{1,6}|[-*+]|\d+[.)])\s+/, "").replace(/\s+/g, " ").trim())
       .filter(Boolean);
     const scored = sentences.map((s, i) => ({

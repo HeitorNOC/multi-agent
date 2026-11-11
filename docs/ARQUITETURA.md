@@ -172,8 +172,9 @@ stateDiagram-v2
 
 ### 4.2 Cérebro: envio, vigência e busca
 
-- **Envio.** Texto, Markdown, CSV ou JSON em UTF-8 estrito (outra codificação é recusada, não
-  corrompida). Cada fonte tem dono, leitores, versões com data de vigência e pode substituir outra.
+- **Envio.** PDF, Word, texto, Markdown, CSV ou JSON (texto em UTF-8 estrito), ou um texto escrito
+  no Aurora. Cada fonte tem área, dono, leitores, versões com data de vigência e pode substituir
+  outra. Detalhes em [DADOS_CEREBRO_AGENTES.md](DADOS_CEREBRO_AGENTES.md).
 - **Vigência.** Vale a versão mais recente já em vigor; fonte substituída ou revogada sai das
   respostas na hora. O histórico fica guardado.
 - **Busca.** BM25 sobre trechos, com índice em memória reconstruído quando algo muda. Com três

@@ -1,4 +1,4 @@
-/** Detalhe de uma fonte: versões (com o original de cada uma), nova versão e revogação. */
+/** Detalhe de uma fonte: área, versões (com o original e o formato de cada uma), nova versão (arquivo ou texto) e revogação. */
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Ban, ExternalLink, FilePlus } from "lucide-react";
@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { fileToBase64, knowledgeApi } from "@/lib/api";
+import { Textarea } from "@/components/ui/textarea";
+import { fileToBase64, knowledgeApi, type BrainArea } from "@/lib/api";
 import { formatBytes, formatDate, formatDateTime, SOURCE_STATUS } from "@/lib/format";
-import { mediaTypeOf } from "./upload-dialog";
+import { acceptOf, mediaTypeOf } from "./upload-dialog";
 import { useAgentNames } from "../agents/agent-bits";
 
-export function SourceDialog({ id, onClose }: { id: string; onClose: () => void }) {
+export function SourceDialog({ id, areas, onClose }: { id: string; areas: BrainArea[]; onClose: () => void }) {
   const agentName = useAgentNames();
   const queryClient = useQueryClient();
   const source = useQuery({ queryKey: ["source", id], queryFn: () => knowledgeApi.get(id) });
@@ -21,23 +22,25 @@ export function SourceDialog({ id, onClose }: { id: string; onClose: () => void 
     void queryClient.invalidateQueries({ queryKey: ["sources"] });
   };
   const [file, setFile] = useState<File | null>(null);
+  const [text, setText] = useState("");
+  const [asText, setAsText] = useState(false);
   const [validFrom, setValidFrom] = useState("");
   const [confirmRevoke, setConfirmRevoke] = useState(false);
   const addVersion = useMutation({
-    mutationFn: async () =>
-      knowledgeApi.addVersion(id, {
-        filename: file!.name,
-        media_type: mediaTypeOf(file!),
-        content_base64: await fileToBase64(file!),
-        valid_from: validFrom ? new Date(`${validFrom}T00:00:00`).toISOString() : undefined,
-      }),
+    mutationFn: async () => {
+      const valid_from = validFrom ? new Date(`${validFrom}T00:00:00`).toISOString() : undefined;
+      if (asText) return knowledgeApi.addVersion(id, { text, valid_from });
+      return knowledgeApi.addVersion(id, { filename: file!.name, media_type: mediaTypeOf(file!), content_base64: await fileToBase64(file!), valid_from });
+    },
     onSuccess: () => {
       setFile(null);
+      setText("");
       setValidFrom("");
       refresh();
     },
   });
   const revoke = useMutation({ mutationFn: () => knowledgeApi.revoke(id), onSuccess: refresh });
+  const move = useMutation({ mutationFn: (area: string) => knowledgeApi.move(id, area), onSuccess: refresh });
   const s = source.data;
 
   return (
@@ -56,12 +59,32 @@ export function SourceDialog({ id, onClose }: { id: string; onClose: () => void 
                 {s.current_version && ` · responde com a v${s.current_version}`}
               </DialogDescription>
             </DialogHeader>
+            <div className="flex flex-wrap items-center gap-2 text-sm">
+              <label htmlFor="s-area" className="text-muted-foreground">
+                Área
+              </label>
+              <select
+                id="s-area"
+                className="h-8 rounded-md border bg-transparent px-2 text-sm"
+                value={s.area}
+                disabled={move.isPending || s.status === "revoked"}
+                onChange={(e) => move.mutate(e.target.value)}
+              >
+                {areas.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.title}
+                  </option>
+                ))}
+              </select>
+              <ErrorNotice error={move.error} />
+            </div>
             <section className="space-y-2">
               <h3 className="text-sm font-medium">Versões</h3>
               <ul className="divide-y rounded-lg border text-sm">
                 {s.versions.map((v) => (
                   <li key={v.version} className="flex flex-wrap items-center gap-x-3 gap-y-1 p-3">
                     <span className="font-medium">v{v.version}</span>
+                    <span className="rounded border px-1.5 py-0.5 font-mono text-[10px] uppercase text-muted-foreground">{v.origin === "text" ? "texto" : v.format}</span>
                     <span className="min-w-0 flex-1 truncate text-muted-foreground">{v.filename}</span>
                     <span className="text-xs text-muted-foreground">
                       {formatBytes(v.size_bytes)} · vale desde {formatDate(v.valid_from)} · enviada {formatDateTime(v.created_at)}
@@ -79,12 +102,22 @@ export function SourceDialog({ id, onClose }: { id: string; onClose: () => void 
                   className="space-y-3 rounded-lg border p-3"
                   onSubmit={(e) => {
                     e.preventDefault();
-                    if (file) addVersion.mutate();
+                    if (asText ? text.trim() : file) addVersion.mutate();
                   }}
                 >
-                  <h3 className="text-sm font-medium">Nova versão</h3>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="text-sm font-medium">Nova versão</h3>
+                    <label className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <input type="checkbox" checked={asText} onChange={(e) => setAsText(e.target.checked)} /> Escrever o texto em vez de enviar arquivo
+                    </label>
+                  </div>
+                  {asText && <Textarea aria-label="Texto da nova versão" rows={6} value={text} onChange={(e) => setText(e.target.value)} />}
                   <div className="grid gap-3 sm:grid-cols-[1fr_180px]">
-                    <Input type="file" aria-label="Arquivo da nova versão" accept=".txt,.md,.markdown,.csv,.json" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
+                    {asText ? (
+                      <span />
+                    ) : (
+                      <Input type="file" aria-label="Arquivo da nova versão" accept={acceptOf([])} onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
+                    )}
                     <div className="space-y-1">
                       <Label htmlFor="v-valid" className="text-xs">
                         Vale a partir de
@@ -93,7 +126,7 @@ export function SourceDialog({ id, onClose }: { id: string; onClose: () => void 
                     </div>
                   </div>
                   <ErrorNotice error={addVersion.error} title="Versão não publicada" />
-                  <Button type="submit" size="sm" disabled={!file || addVersion.isPending}>
+                  <Button type="submit" size="sm" disabled={(asText ? !text.trim() : !file) || addVersion.isPending}>
                     <FilePlus /> Publicar versão
                   </Button>
                 </form>

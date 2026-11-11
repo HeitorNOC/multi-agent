@@ -71,7 +71,10 @@ export function planTask(goal: string, catalog: CatalogAgent[]): TaskSpec<PlanOu
 Use somente ids do catálogo. Explique a escolha em "reason" (até 2 frases). ${DATA_RULE}
 Responda apenas com o JSON pedido.`,
     prompt: JSON.stringify(
-      { pedido: goal, catalogo: catalog.map((a) => ({ id: a.id, titulo: a.title, foco: a.focus })) },
+      {
+        pedido: goal,
+        catalogo: catalog.map((a) => ({ id: a.id, titulo: a.title, foco: a.focus, ...(a.responsibilities?.length ? { faz: a.responsibilities } : {}) })),
+      },
       null,
       1,
     ),
@@ -92,10 +95,17 @@ Responda apenas com o JSON pedido.`,
   };
 }
 
-/** Orientações da empresa para o papel; as regras de evidência abaixo continuam valendo acima delas. */
-const roleNotes = (agent: CatalogAgent) =>
-  agent.instructions?.trim() ? `
+/**
+ * O papel do agente: o que ele faz (catálogo) e as orientações da empresa. As regras de evidência
+ * que vêm depois continuam valendo acima de tudo isso.
+ */
+export function roleNotes(agent: CatalogAgent) {
+  const duties = agent.responsibilities?.length ? `
+No seu papel você: ${agent.responsibilities.join("; ")}.` : "";
+  const notes = agent.instructions?.trim() ? `
 Orientações da empresa para o seu papel (as regras abaixo prevalecem): ${agent.instructions.trim().slice(0, 1500)}` : "";
+  return duties + notes;
+}
 
 const fragmentData = (fragments: Fragment[]) =>
   fragments.map((f) => ({ rotulo: f.label, fonte: f.title, versao: f.version, vigente_desde: localDate(f.validFrom), texto: f.text }));

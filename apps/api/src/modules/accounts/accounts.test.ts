@@ -172,6 +172,7 @@ test("HTTP: sem sessão a API recusa; dono entra, assume os dados locais e entra
   const config = loadConfig({
     AURORA_SQLITE_PATH: join(dir, "aurora.db"),
     AURORA_WEB_DIR: "none",
+    AURORA_AUTH: "accounts",
     AURORA_GOOGLE_CLIENT_ID: "cliente",
     AURORA_GOOGLE_CLIENT_SECRET: "segredo",
   });

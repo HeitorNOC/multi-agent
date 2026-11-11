@@ -10,6 +10,10 @@ export interface AgentTemplate {
   readonly tagline: string;
   readonly focus: string;
   readonly skills: readonly string[];
+  /** O que o agente faz, em frases curtas (o Chief of Staff usa para escolher quem escalar). */
+  readonly responsibilities: readonly string[];
+  /** O que ele costuma entregar. */
+  readonly deliverables: readonly string[];
 }
 
 export interface AgentArea {
@@ -34,6 +38,8 @@ const schema = z
         tagline: z.string().max(160),
         focus: z.string().min(1).max(400),
         skills: z.array(z.string().min(1).max(60)).max(8),
+        responsibilities: z.array(z.string().min(1).max(200)).min(2).max(6),
+        deliverables: z.array(z.string().min(1).max(120)).min(1).max(5),
       }),
     ),
   })
