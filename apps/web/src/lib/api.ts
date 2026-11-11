@@ -138,6 +138,8 @@ export interface Message {
   created_at: string;
   reply_to: number | null;
   citations: { n: number; source: string; title: string; version: number; valid_from: string; url: string }[] | null;
+  /** Arquivos anexados pelo gestor (já são fontes do Cérebro). */
+  attachments: { source: string; title: string }[] | null;
   job: { id: string; status: JobStatus; agents: string[] | null } | null;
   decision: { engine: string; provider?: string; fallback?: string } | null;
 }
@@ -147,8 +149,12 @@ export const conversationsApi = {
   create: (title?: string, agentId?: string) =>
     post<{ id: string; title: string; agent_id: string | null; created_at: string }>("/api/conversations", { ...(title ? { title } : {}), ...(agentId ? { agent_id: agentId } : {}) }),
   read: (id: string) => get<{ conversation: ConversationSummary; messages: Message[] }>(`/api/conversations/${id}`),
-  send: (id: string, text: string, clientMessageId: string) =>
-    post<{ replayed: boolean; user: Message; reply: Message }>(`/api/conversations/${id}/messages`, { text, client_message_id: clientMessageId }),
+  send: (id: string, text: string, clientMessageId: string, attachments: { filename: string; media_type: string; content_base64: string }[] = []) =>
+    post<{ replayed: boolean; user: Message; reply: Message }>(`/api/conversations/${id}/messages`, {
+      text,
+      client_message_id: clientMessageId,
+      ...(attachments.length ? { attachments } : {}),
+    }),
 };
 
 // ── Cérebro ──────────────────────────────────────────────────────────────────

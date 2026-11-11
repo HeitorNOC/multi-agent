@@ -53,6 +53,27 @@ test("Codex: sandbox somente leitura, sem shell, schema em arquivo, uso extraíd
   assert.match(seen.stdin, /^SISTEMA\n\n\{"mensagem":"oi"\}$/);
 });
 
+test("imagens: Claude recebe mensagem estruturada em base64; Codex, arquivos descartáveis", async () => {
+  const png = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 1, 2, 3]);
+  const withImage = { ...request, images: [{ mediaType: "image/png" as const, bytes: png }] };
+  const c = reportFile();
+  assert.equal(JSON.parse((await client("claude", "ok", c).complete(withImage)).json).offer_id, "campaign");
+  const claude = JSON.parse(readFileSync(c, "utf8"));
+  assert.ok(claude.args.join(" ").includes("--input-format stream-json --output-format stream-json --verbose"));
+  const message = JSON.parse(claude.stdin.trim());
+  assert.deepEqual(message.message.content.map((b: { type: string }) => b.type), ["image", "text"]);
+  assert.equal(message.message.content[0].source.data, Buffer.from(png).toString("base64"));
+  assert.equal(message.message.content[1].text, request.prompt);
+  assert.deepEqual(claude.args.slice(claude.args.indexOf("--tools"), claude.args.indexOf("--tools") + 2), ["--tools", ""], "continua sem ferramentas");
+  const x = reportFile();
+  await client("codex", "ok", x).complete(withImage);
+  const codex = JSON.parse(readFileSync(x, "utf8"));
+  assert.deepEqual(codex.images, [png.length], "o Codex leu a imagem do arquivo");
+  const file = codex.args[codex.args.indexOf("--image") + 1];
+  assert.match(file, /imagem-1\.png$/);
+  assert.equal(existsSync(file), false, "o arquivo some depois da chamada");
+});
+
 test("falhas viram códigos estáveis", async () => {
   assert.equal(await code(client("claude", "exit1", reportFile()).complete(request)), "nonzero_exit");
   assert.equal(await code(client("codex", "quota", reportFile()).complete(request)), "quota_exhausted");

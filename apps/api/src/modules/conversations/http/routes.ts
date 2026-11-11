@@ -3,17 +3,21 @@ import type { FastifyRequest } from "fastify";
 import { z } from "zod";
 import { ConversationId } from "../../../shared/ids.ts";
 import type { HttpModule } from "../../../platform/http/app.ts";
-import { createConversation, listConversations, readConversation, sendMessage, type ConversationDeps } from "../application/conversations.ts";
+import { createConversation, listConversations, MAX_ATTACHMENTS, readConversation, sendMessage, type ConversationDeps } from "../application/conversations.ts";
 
 const createBody = z.strictObject({ title: z.string().trim().min(1).max(120).optional(), agent_id: z.string().min(1).max(100).optional() });
 const messageBody = z.strictObject({
   text: z.string().refine((t) => t.trim().length > 0, "não pode ser vazio").pipe(z.string().max(2000)),
   client_message_id: z.string().regex(/^[A-Za-z0-9_-]{8,100}$/).optional(),
+  attachments: z
+    .array(z.strictObject({ filename: z.string().min(1).max(200), media_type: z.string().min(1).max(150), content_base64: z.string().min(1) }))
+    .max(MAX_ATTACHMENTS)
+    .optional(),
 });
 
 const idOf = (req: FastifyRequest) => ConversationId.parse((req.params as { id?: unknown }).id);
 
-export function conversationsHttp(deps: ConversationDeps, options: { onJobOpened?: () => void } = {}): HttpModule {
+export function conversationsHttp(deps: ConversationDeps, options: { onJobOpened?: () => void; messageLimit?: number } = {}): HttpModule {
   return (app, { actor }) => {
     app.get("/api/conversations", async (req) => listConversations(deps, actor(req)));
 
@@ -24,9 +28,12 @@ export function conversationsHttp(deps: ConversationDeps, options: { onJobOpened
 
     app.get("/api/conversations/:id", async (req) => readConversation(deps, actor(req), idOf(req)));
 
-    app.post("/api/conversations/:id/messages", async (req, reply) => {
+    // Só esta rota aceita corpo grande (anexos em base64); as demais seguem o limite padrão.
+    const limit = options.messageLimit ? { bodyLimit: options.messageLimit } : {};
+    app.post("/api/conversations/:id/messages", limit, async (req, reply) => {
       const body = messageBody.parse(req.body);
-      const result = await sendMessage(deps, actor(req), idOf(req), { text: body.text, clientId: body.client_message_id });
+      const attachments = body.attachments?.map((a) => ({ filename: a.filename, mediaType: a.media_type, contentBase64: a.content_base64 }));
+      const result = await sendMessage(deps, actor(req), idOf(req), { text: body.text, clientId: body.client_message_id, attachments });
       if (!result.replayed && result.reply.job) options.onJobOpened?.();
       return reply.code(result.replayed ? 200 : 201).send(result);
     });

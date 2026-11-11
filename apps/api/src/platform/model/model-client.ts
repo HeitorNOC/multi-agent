@@ -9,6 +9,13 @@ export interface ModelRequest {
   /** JSON Schema da resposta. */
   schema: object;
   timeoutMs: number;
+  /** Imagens que o modelo deve ver junto com o pedido (PNG, JPEG, WebP ou GIF). */
+  images?: readonly ModelImage[];
+}
+
+export interface ModelImage {
+  mediaType: "image/png" | "image/jpeg" | "image/webp" | "image/gif";
+  bytes: Uint8Array;
 }
 
 export interface ModelCompletion {

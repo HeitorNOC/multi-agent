@@ -36,9 +36,17 @@ const queryBody = z.strictObject({ question: z.string().trim().min(1).max(1000),
  * download, com sandbox, para um arquivo enviado não executar nada no navegador.
  */
 export function originalHeaders(mediaType: string, filename: string) {
-  // PDF e Word vão como download (nunca abertos dentro da página do Aurora).
-  const inline = ["text/plain", "text/markdown", "text/csv", "application/json"].includes(mediaType);
-  const contentType = mediaType === "application/json" ? "application/json; charset=utf-8" : inline ? "text/plain; charset=utf-8" : "application/octet-stream";
+  // PDF e Word vão como download (nunca abertos dentro da página do Aurora). Imagens raster
+  // (assinatura conferida no envio; SVG não é aceito) abrem como imagem.
+  const image = ["image/png", "image/jpeg", "image/webp", "image/gif"].includes(mediaType);
+  const inline = image || ["text/plain", "text/markdown", "text/csv", "application/json"].includes(mediaType);
+  const contentType = image
+    ? mediaType
+    : mediaType === "application/json"
+      ? "application/json; charset=utf-8"
+      : inline
+        ? "text/plain; charset=utf-8"
+        : "application/octet-stream";
   const ascii = filename.replace(/[^\x20-\x7e]/g, "_").replace(/["\\]/g, "_");
   return {
     "content-type": contentType,

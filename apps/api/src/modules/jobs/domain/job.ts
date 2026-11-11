@@ -32,6 +32,8 @@ export interface Review {
 export interface Job {
   readonly id: JobId;
   readonly goal: string;
+  /** Fontes do Cérebro anexadas ao pedido (imagens da conversa, por exemplo); chegam aos especialistas. */
+  readonly attachments: readonly string[];
   readonly status: JobStatus;
   readonly plan: Json | null;
   readonly review: Review | null;
@@ -45,10 +47,11 @@ export interface Job {
   readonly version: number;
 }
 
-export function newJob(input: { id: JobId; goal: string; createdAt: string }): Job {
+export function newJob(input: { id: JobId; goal: string; createdAt: string; attachments?: readonly string[] }): Job {
   return {
     id: input.id,
     goal: input.goal,
+    attachments: input.attachments ?? [],
     status: "queued",
     plan: null,
     review: null,

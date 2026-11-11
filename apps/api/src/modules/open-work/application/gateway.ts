@@ -43,6 +43,8 @@ export interface OpenWorkDeps {
 const SLOT = /^(plan|synthesis|specialist:[a-z0-9_]{1,80})$/;
 const LABEL = /^f-[0-9a-f]{8}$/;
 const FRAGMENTS_PER_AGENT = 6;
+/** Trechos de fontes anexadas ao pedido entregues a cada especialista, além dos da busca. */
+const ATTACHED_PER_AGENT = 4;
 const SPECIALIST = "specialist:";
 
 /** Rótulo curto e estável de um trecho, fácil para o modelo copiar sem erro. */
@@ -69,10 +71,16 @@ export class OpenWorkGateway {
 
   /** Trechos do Cérebro para um especialista do plano; o que foi entregue fica na trilha do trabalho. */
   async retrieve(jobId: JobId, agentId: string) {
-    const { goal, plan } = await this.job(jobId);
+    const { goal, plan, attachments } = await this.job(jobId);
     ensure(plan?.agents.includes(agentId), () => conflict("agent_not_in_plan", "Especialista fora do plano"));
     const agent = await this.member(agentId);
-    const passages = await this.deps.search.forAgents(`${goal}\n${agent.focus}`, FRAGMENTS_PER_AGENT, [agentId], { preferArea: agent.domain });
+    const query = `${goal}\n${agent.focus}`;
+    // O que veio anexado ao pedido chega primeiro (garantido, sem depender da busca); o resto da
+    // cota vem da busca no Cérebro, sem repetir trechos.
+    const attached = attachments.length ? await this.deps.search.passagesOfSources(attachments, [agentId], ATTACHED_PER_AGENT, query) : [];
+    const searched = await this.deps.search.forAgents(query, FRAGMENTS_PER_AGENT, [agentId], { preferArea: agent.domain });
+    const seen = new Set(attached.map((p) => p.id));
+    const passages = [...attached, ...searched.filter((p) => !seen.has(p.id))].slice(0, FRAGMENTS_PER_AGENT + attached.length);
     const fragments = passages.map((p) => ({ ...p, label: labelOf(p.id) }));
     await this.deps.jobs.uow.run((s) =>
       s.events.append(stream.job(jobId), {
@@ -189,6 +197,6 @@ export class OpenWorkGateway {
 
   private async job(id: JobId) {
     const job = await loadJob(this.deps.jobs.uow.read.jobs, id);
-    return { goal: job.goal, plan: job.plan as unknown as OpenPlan | null };
+    return { goal: job.goal, plan: job.plan as unknown as OpenPlan | null, attachments: job.attachments };
   }
 }

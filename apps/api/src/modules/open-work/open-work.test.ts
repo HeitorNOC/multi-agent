@@ -132,7 +132,7 @@ for (const dialect of dialects) {
         }
         return { plan, labels };
       }
-      return { jobs, gateway, model, md, started, analyze, clock };
+      return { jobs, gateway, model, md, started, analyze, clock, claim: () => claimNextJob(jobs) };
     }
 
     test("caminho completo: só fontes abertas chegam aos agentes; o parecer cita o que foi entregue", async () => {
@@ -200,6 +200,21 @@ for (const dialect of dialects) {
       assert.equal(await code(gateway.run(id, "synthesis")), "plan_call_limit");
       assert.equal(await jobs.uow.read.inferences.get(id, "synthesis"), undefined, "a reserva recusada foi desfeita");
       assert.equal((await gateway.run(id, "plan")).replayed, false, "o plano não conta no limite");
+    });
+
+    test("anexo do pedido chega a cada especialista primeiro, mesmo sem palavra em comum com o pedido", async () => {
+      const { jobs, gateway, md, claim } = await setup();
+      await md("Política de compras", "Compras acima de dez mil reais exigem três cotações de fornecedores.");
+      const photo = await md("Foto do quadro", "Cronograma: entrega da obra em 30 de abril; responsável Joana.");
+      const { job } = await admitJob(jobs, { request: { goal: GOAL }, attachments: [photo.id, photo.id] });
+      assert.deepEqual((await jobs.uow.read.jobs.get(job.id))!.attachments, [photo.id], "sem repetidos");
+      await claim();
+      await recordPlan(jobs, job.id, { agents: ["procurement_analyst"], reason: "Só compras importa aqui." });
+      const { fragments } = await gateway.retrieve(job.id, "procurement_analyst");
+      assert.equal(fragments[0]!.title, "Foto do quadro", "o anexo vem antes da busca");
+      assert.ok(fragments.some((f) => f.title === "Política de compras"), "a busca continua trazendo o resto");
+      const run = await gateway.run(job.id, "specialist:procurement_analyst", { labels: fragments.map((f) => f.label) });
+      assert.ok(run.output, "o especialista pode citar o anexo (foi entregue ao trabalho)");
     });
 
     test("falha sabida libera o passo para nova tentativa; reserva sem recibo pede revisão e nunca repete", async () => {

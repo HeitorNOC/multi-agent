@@ -10,7 +10,7 @@
  *     política), a resposta explica o motivo e nenhum trabalho é criado.
  */
 import type { Clock } from "../../../shared/clock.ts";
-import { conflict, ensure, notFound } from "../../../shared/errors.ts";
+import { conflict, ensure, invalid, notFound } from "../../../shared/errors.ts";
 import { AgentId, ConversationId, type ActorId, type JobId } from "../../../shared/ids.ts";
 import type { Json } from "../../../shared/json.ts";
 import type { Transaction, UnitOfWork } from "../../../platform/database/unit-of-work.ts";
@@ -18,7 +18,7 @@ import { stream } from "../../../platform/events/event-log.ts";
 import type { JobStatus } from "../../jobs/domain/job.ts";
 import type { ChiefOfStaff, ChiefTrace, ConversationOffer } from "../domain/chief-of-staff.ts";
 import type { AnswerTrace } from "../../knowledge/application/answerers.ts";
-import { DEFAULT_TITLE, type Conversation, type Message, type MessageCitation } from "../domain/conversation.ts";
+import { DEFAULT_TITLE, type Conversation, type Message, type MessageAttachment, type MessageCitation } from "../domain/conversation.ts";
 import type { ConversationStore } from "../infrastructure/sql-conversations.ts";
 import type { StationResponder } from "./station.ts";
 
@@ -31,7 +31,7 @@ export interface JobOpener {
    * transação da admissão; se lançar, o trabalho não é criado. Recusas esperadas voltam como
    * `opened: false`.
    */
-  open(offerId: string, text: string, onAdmitted: (jobId: JobId, tx: Transaction) => Promise<void>): Promise<Admission>;
+  open(offerId: string, text: string, onAdmitted: (jobId: JobId, tx: Transaction) => Promise<void>, attachments?: readonly string[]): Promise<Admission>;
   /** Estado atual e especialistas do plano, para mostrar na conversa. */
   describe(jobId: JobId): Promise<{ id: JobId; status: JobStatus; agents: string[] | null } | undefined>;
 }
@@ -44,7 +44,18 @@ export interface ConversationDeps {
   clock: Clock;
   /** Estação (conversa direta com um agente). Sem ele, só há conversa com o Chief of Staff. */
   station?: StationResponder;
+  /** Guarda um anexo no Cérebro (imagem lida pelo modelo, documento extraído) e devolve a fonte. */
+  attach?: (actor: ActorId, file: AttachmentFile) => Promise<MessageAttachment>;
 }
+
+export interface AttachmentFile {
+  filename: string;
+  mediaType: string;
+  contentBase64: string;
+}
+
+/** Anexos por mensagem: o bastante para um pedido; cada imagem custa uma leitura do modelo. */
+export const MAX_ATTACHMENTS = 4;
 
 export interface MessageView {
   seq: number;
@@ -54,6 +65,8 @@ export interface MessageView {
   reply_to: number | null;
   /** Na Estação: as fontes citadas na resposta. */
   citations: readonly MessageCitation[] | null;
+  /** Arquivos que o gestor anexou (fontes do Cérebro). */
+  attachments: readonly MessageAttachment[] | null;
   job: { id: string; status: JobStatus; agents: string[] | null } | null;
   /** Só nas respostas: quem decidiu e, se for o caso, por que o modelo não foi usado. */
   decision: { engine: string; provider?: string; fallback?: string } | null;
@@ -106,19 +119,43 @@ export async function readConversation(deps: ConversationDeps, actor: ActorId, i
 }
 
 /** Grava a mensagem do gestor, obtém a decisão do Chief of Staff e grava a resposta. */
-export async function sendMessage(deps: ConversationDeps, actor: ActorId, id: ConversationId, input: { text: string; clientId?: string }) {
+export async function sendMessage(
+  deps: ConversationDeps,
+  actor: ActorId,
+  id: ConversationId,
+  input: { text: string; clientId?: string; attachments?: readonly AttachmentFile[] },
+) {
   const conversation = await owned(deps, actor, id);
+  const files = input.attachments ?? [];
+  ensure(files.length <= MAX_ATTACHMENTS, () => invalid("too_many_attachments", `No máximo ${MAX_ATTACHMENTS} anexos por mensagem`));
+  ensure(!files.length || deps.attach, () => conflict("attachments_unavailable", "Anexos indisponíveis nesta instalação"));
+  // Repetição do mesmo envio: devolve o que já existe, sem guardar os anexos de novo.
+  const prior = input.clientId ? await deps.uow.read.messages.findByClientId(id, input.clientId) : undefined;
+  // Os anexos vão ao Cérebro antes da mensagem (ler uma imagem leva alguns segundos e não pode
+  // segurar uma transação). Se algum falhar, a mensagem não é gravada e nada fica pela metade na conversa.
+  const attachments: MessageAttachment[] = [];
+  if (!prior) for (const file of files) attachments.push(await deps.attach!(actor, file));
   const question = await deps.uow.run(async (s) => {
     if (input.clientId) {
-      const prior = await s.messages.findByClientId(id, input.clientId);
-      if (prior) {
-        ensure(prior.text === input.text, () => conflict("client_id_reused", "client_message_id já usado com outro texto"));
-        return prior;
+      const again = await s.messages.findByClientId(id, input.clientId);
+      if (again) {
+        ensure(again.text === input.text, () => conflict("client_id_reused", "client_message_id já usado com outro texto"));
+        return again;
       }
     }
     const now = deps.clock.now();
     await s.conversations.touch(id, now);
-    return s.messages.add({ conversationId: id, role: "user", text: input.text, jobId: null, clientId: input.clientId ?? null, replyTo: null, citations: null, createdAt: now });
+    return s.messages.add({
+      conversationId: id,
+      role: "user",
+      text: input.text,
+      jobId: null,
+      clientId: input.clientId ?? null,
+      replyTo: null,
+      citations: null,
+      attachments: attachments.length ? attachments : null,
+      createdAt: now,
+    });
   });
 
   const previous = await deps.uow.read.messages.findReply(id, question.seq);
@@ -130,7 +167,7 @@ export async function sendMessage(deps: ConversationDeps, actor: ActorId, id: Co
 /** Na Estação, o agente responde com as fontes que pode ler; a decisão vai para a trilha sem o texto. */
 async function stationAnswer(deps: ConversationDeps, conversation: Conversation, question: Message): Promise<Message> {
   ensure(deps.station, () => conflict("station_unavailable", "Estação indisponível nesta instalação"));
-  const r = await deps.station.reply(conversation.agentId!, question.text, conversation.actor);
+  const r = await deps.station.reply(conversation.agentId!, question.text, conversation.actor, sourcesOf(question));
   return reply(deps, conversation.id, question.seq, r.text, null, r.trace, r.citations);
 }
 
@@ -145,11 +182,16 @@ async function answer(deps: ConversationDeps, id: ConversationId, question: Mess
 
   let admission: Admission;
   try {
-    admission = await deps.jobs.open(decision.offerId, question.text, async (jobId, tx) => {
-      const s = deps.uow.join(tx);
-      await requireUnanswered(s, id, question.seq);
-      await appendReply(deps, s, id, question.seq, decision.text, jobId, { ...trace, offer_id: decision.offerId });
-    });
+    admission = await deps.jobs.open(
+      decision.offerId,
+      question.text,
+      async (jobId, tx) => {
+        const s = deps.uow.join(tx);
+        await requireUnanswered(s, id, question.seq);
+        await appendReply(deps, s, id, question.seq, decision.text, jobId, { ...trace, offer_id: decision.offerId });
+      },
+      sourcesOf(question),
+    );
   } catch (error) {
     if (error instanceof AlreadyAnswered) return error.reply;
     throw error;
@@ -165,6 +207,8 @@ async function answer(deps: ConversationDeps, id: ConversationId, question: Mess
     admission: "refused",
   });
 }
+
+const sourcesOf = (m: Message) => (m.attachments ?? []).map((a) => a.source);
 
 /** Grava uma resposta; se outra requisição já respondeu, devolve aquela. */
 async function reply(deps: ConversationDeps, id: ConversationId, replyTo: number, text: string, jobId: JobId | null, trace: DecisionRecord, citations: MessageCitation[] | null = null) {
@@ -197,7 +241,7 @@ async function appendReply(
 ) {
   const now = deps.clock.now();
   // As respostas da Estação usam o mesmo papel das do Chief of Staff; quem respondeu é o agente da conversa.
-  const message = await s.messages.add({ conversationId: id, role: "chief", text, jobId, clientId: null, replyTo, citations, createdAt: now });
+  const message = await s.messages.add({ conversationId: id, role: "chief", text, jobId, clientId: null, replyTo, citations, attachments: null, createdAt: now });
   await s.conversations.touch(id, now);
   await s.events.append(stream.conversation(id), {
     kind: "agent" in trace ? "agent_reply" : "chief_decision",
@@ -238,6 +282,7 @@ async function view(deps: ConversationDeps, m: Message, decisions: Decisions): P
     created_at: m.createdAt,
     reply_to: m.replyTo,
     citations: m.citations,
+    attachments: m.attachments,
     job: m.jobId ? ((await deps.jobs.describe(m.jobId)) ?? null) : null,
     decision: m.role === "chief" ? (decisions.get(m.seq) ?? null) : null,
   };

@@ -88,13 +88,27 @@ function run(command: string[], args: string[], input: string, timeoutMs: number
   });
 }
 
-/** Extrai o JSON da saída de `claude -p --output-format json`. */
+/**
+ * Extrai o JSON da saída de `claude -p`: um objeto (`--output-format json`) ou uma linha por
+ * evento (`stream-json`, usado quando o pedido leva imagens); vale o evento `result`.
+ */
 export function parseClaudeOutput(stdout: string): { json: string; usage: Record<string, number> } {
   let payload: any;
   try {
     payload = JSON.parse(stdout);
   } catch {
-    throw new ModelCallError("invalid_output");
+    const events = stdout
+      .split("\n")
+      .filter((line) => line.startsWith("{"))
+      .map((line) => {
+        try {
+          return JSON.parse(line);
+        } catch {
+          return null;
+        }
+      });
+    payload = [...events].reverse().find((e) => e?.type === "result");
+    if (!payload) throw new ModelCallError("invalid_output");
   }
   if (Array.isArray(payload)) payload = [...payload].reverse().find((e) => e?.type === "result") ?? {};
   if (payload?.is_error)
@@ -140,6 +154,8 @@ function codexEvents(stdout: string): any[] {
     .filter(Boolean);
 }
 
+const EXTENSION = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/gif": "gif" } as const;
+
 export class ClaudeCliClient implements ModelClient {
   readonly provider = "claude" as const;
   readonly model: string | undefined;
@@ -150,11 +166,26 @@ export class ClaudeCliClient implements ModelClient {
     this.model = options.model;
   }
 
-  async complete({ system, prompt, schema, timeoutMs }: ModelRequest): Promise<ModelCompletion> {
+  async complete({ system, prompt, schema, timeoutMs, images = [] }: ModelRequest): Promise<ModelCompletion> {
     const started = performance.now();
+    // Com imagens, a entrada vai como mensagem estruturada (texto + imagens em base64), sem arquivo
+    // em disco e sem dar ferramentas ao modelo.
+    const withImages = images.length > 0;
+    const input = withImages
+      ? JSON.stringify({
+          type: "user",
+          message: {
+            role: "user",
+            content: [
+              ...images.map((i) => ({ type: "image", source: { type: "base64", media_type: i.mediaType, data: Buffer.from(i.bytes).toString("base64") } })),
+              { type: "text", text: prompt },
+            ],
+          },
+        }) + "\n"
+      : prompt;
     const args = [
       "-p",
-      "--output-format", "json",
+      ...(withImages ? ["--input-format", "stream-json", "--output-format", "stream-json", "--verbose"] : ["--output-format", "json"]),
       "--json-schema", JSON.stringify(schema),
       "--system-prompt", system,
       "--tools", "",
@@ -164,7 +195,7 @@ export class ClaudeCliClient implements ModelClient {
     ];
     const sandbox = mkdtempSync(join(tmpdir(), "aurora-chief-"));
     try {
-      const { stdout, code } = await run(this.command, args, prompt, timeoutMs, sandbox);
+      const { stdout, code } = await run(this.command, args, input, timeoutMs, sandbox);
       // O Claude também informa limite de uso no JSON de saída, mesmo com código de erro.
       if (code !== 0) {
         try {
@@ -192,12 +223,18 @@ export class CodexCliClient implements ModelClient {
     this.model = options.model;
   }
 
-  async complete({ system, prompt, schema, timeoutMs }: ModelRequest): Promise<ModelCompletion> {
+  async complete({ system, prompt, schema, timeoutMs, images = [] }: ModelRequest): Promise<ModelCompletion> {
     const started = performance.now();
     // Diretório vazio e descartável: o Codex roda em sandbox somente leitura sem acesso ao projeto.
     const sandbox = mkdtempSync(join(tmpdir(), "aurora-chief-"));
     const schemaFile = join(sandbox, "schema.json");
     writeFileSync(schemaFile, JSON.stringify(schema));
+    // O Codex recebe imagens como arquivos: ficam só neste diretório descartável.
+    const imageArgs = images.flatMap((image, n) => {
+      const file = join(sandbox, `imagem-${n + 1}.${EXTENSION[image.mediaType]}`);
+      writeFileSync(file, image.bytes);
+      return ["--image", file];
+    });
     const args = [
       "exec",
       "--ignore-user-config",
@@ -209,6 +246,7 @@ export class CodexCliClient implements ModelClient {
       "--cd", sandbox,
       "--output-schema", schemaFile,
       "--json",
+      ...imageArgs,
       ...(this.model ? ["--model", this.model] : []),
       "-",
     ];

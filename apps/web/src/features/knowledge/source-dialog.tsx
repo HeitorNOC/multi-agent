@@ -78,6 +78,11 @@ export function SourceDialog({ id, areas, onClose }: { id: string; areas: BrainA
               </select>
               <ErrorNotice error={move.error} />
             </div>
+            {s.format?.media_type.startsWith("image/") && s.versions[0] && (
+              <a href={s.versions[0].url} target="_blank" rel="noreferrer" className="block overflow-hidden rounded-lg border">
+                <img src={s.versions[0].url} alt={s.title} className="max-h-64 w-full bg-muted object-contain" />
+              </a>
+            )}
             <section className="space-y-2">
               <h3 className="text-sm font-medium">Versões</h3>
               <ul className="divide-y rounded-lg border text-sm">

@@ -6,6 +6,7 @@ import { randomBytes } from "node:crypto";
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import type { Config, DatabaseConfig } from "./config.ts";
+import type { ActorId } from "./shared/ids.ts";
 import { systemClock, type Clock } from "./shared/clock.ts";
 import type { Database } from "./platform/database/database.ts";
 import { migrate } from "./platform/database/migrate.ts";
@@ -36,7 +37,8 @@ import type { KnowledgeDeps } from "./modules/knowledge/application/sources.ts";
 import { knowledgeHttp } from "./modules/knowledge/http/routes.ts";
 import { Bm25Index } from "./modules/knowledge/infrastructure/bm25-index.ts";
 import { knowledgeStore } from "./modules/knowledge/infrastructure/sql-knowledge.ts";
-import { extractDocumentText } from "./modules/knowledge/infrastructure/document-text.ts";
+import { fileTextExtractor } from "./modules/knowledge/infrastructure/document-text.ts";
+import { ImageReader } from "./modules/knowledge/infrastructure/image-reader.ts";
 import { LocalEmbedder } from "./modules/knowledge/infrastructure/local-embedder.ts";
 import { SemanticIndex } from "./modules/knowledge/application/semantic-index.ts";
 import type { EmbeddingModel } from "./modules/knowledge/domain/embeddings.ts";
@@ -124,7 +126,8 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     maxBytes: config.knowledge.maxBytes,
     // As áreas do Cérebro são as mesmas do catálogo de agentes (mais "Geral").
     areas: parts.templates.areas,
-    extract: extractDocumentText,
+    // Imagens são lidas pelo modelo com visão (uma vez, no envio); sem modelo, são recusadas.
+    extract: fileTextExtractor(parts.model ? new ImageReader({ client: parts.model, limiter, timeoutMs: config.model.timeoutMs }) : null),
   };
 
   // Empresa e time: o Chief of Staff só escala quem foi contratado.
@@ -207,6 +210,11 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     jobs: jobOpener(jobs),
     clock,
     station: stationResponder({ team, search, answerer: knowledge.answerer }),
+    // Anexo da conversa vira fonte do Cérebro (imagem lida pelo modelo, documento extraído).
+    attach: async (actor: ActorId, file: { filename: string; mediaType: string; contentBase64: string }) => {
+      const source = await uploadSource(knowledge, actor, { ...file, title: file.filename.replace(/\.[^.]+$/, "") || file.filename });
+      return { source: source.id, title: source.title };
+    },
   };
 
   // Acesso: contas (senha, Google, Microsoft) ou, no uso individual, o operador local.
@@ -233,7 +241,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
       jobsHttp({ jobs, wake: () => void scheduler.wake(), workerAccess: supervisor }),
       knowledgeHttp(knowledge, { uploadLimit: uploadLimit(config.knowledge.maxBytes) }),
       openWorkHttp(gateway, supervisor),
-      conversationsHttp(conversations, { onJobOpened: () => void scheduler.wake() }),
+      conversationsHttp(conversations, { onJobOpened: () => void scheduler.wake(), messageLimit: uploadLimit(config.knowledge.maxBytes) * 4 }),
       recoveryHttp(jobs, { wake: () => void scheduler.wake() }),
       agentsHttp(agents),
       deliverablesHttp(deliverables, { onJobOpened: () => void scheduler.wake() }),

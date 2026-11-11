@@ -27,8 +27,12 @@ export interface StationResponder {
   /** O agente, se estiver no time; recusa se não estiver. */
   member(agentId: string): Promise<CatalogAgent>;
   /** Resposta à pessoa `asker`: só usa fontes que o agente e ela podem ler. */
-  reply(agentId: string, question: string, asker: ActorId): Promise<StationReply>;
+  /** `attachments`: fontes que a pessoa anexou nesta mensagem; chegam ao agente primeiro. */
+  reply(agentId: string, question: string, asker: ActorId, attachments?: readonly string[]): Promise<StationReply>;
 }
+
+/** Trechos de anexos da mensagem entregues ao agente, além dos da busca. */
+const ATTACHED = 3;
 
 export function stationResponder(deps: { team: TeamDirectory; search: KnowledgeSearch; answerer: KnowledgeAnswerer }): StationResponder {
   async function member(agentId: string) {
@@ -38,9 +42,14 @@ export function stationResponder(deps: { team: TeamDirectory; search: KnowledgeS
   }
   return {
     member,
-    async reply(agentId, question, asker) {
+    async reply(agentId, question, asker, attachments = []) {
       const agent = await member(agentId);
-      const found = await deps.search.forAgents(`${question}\n${agent.focus}`, PASSAGES, [agent.id], { onBehalfOf: asker, preferArea: agent.domain });
+      const query = `${question}\n${agent.focus}`;
+      // Os anexos são da própria pessoa (ela os enviou nesta mensagem); vêm antes da busca.
+      const attached = attachments.length ? await deps.search.passagesOfSources(attachments, [agent.id], ATTACHED, query) : [];
+      const seen = new Set(attached.map((p) => p.id));
+      const searched = await deps.search.forAgents(query, PASSAGES, [agent.id], { onBehalfOf: asker, preferArea: agent.domain });
+      const found = [...attached, ...searched.filter((p) => !seen.has(p.id))].slice(0, PASSAGES);
       if (!found.length)
         return {
           text: "Não encontrei nas fontes do Cérebro que posso ler evidência para responder. Se houver um documento sobre isso, envie ao Cérebro (ou me dê acesso a ele) e pergunte de novo.",

@@ -7,13 +7,33 @@
  * - Word: o texto dos parágrafos (sem imagens nem formatação).
  * Os demais formatos são de texto e são lidos pelo domínio (`extractText`).
  */
-import { invalid } from "../../../shared/errors.ts";
-import { cleanText, ensureSupported, extractText } from "../domain/text.ts";
+import { AppError, invalid } from "../../../shared/errors.ts";
+import type { ModelImage } from "../../../platform/model/model-client.ts";
+import { cleanText, ensureSignature, ensureSupported, extractText } from "../domain/text.ts";
+import { imageReadError, type ImageReader } from "./image-reader.ts";
 
-export type TextExtractor = (bytes: Uint8Array, mediaType: string) => Promise<string>;
+export type TextExtractor = (bytes: Uint8Array, mediaType: string, filename?: string) => Promise<string>;
 
 const PDF = "application/pdf";
 const DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+
+/**
+ * Extrator completo: texto, documentos e, com modelo configurado, imagens. Sem modelo, imagem é
+ * recusada com orientação (não há como ler sem visão).
+ */
+export function fileTextExtractor(images: ImageReader | null): TextExtractor {
+  return async (bytes, mediaType, filename = "imagem") => {
+    const format = ensureSupported(mediaType);
+    ensureSignature(bytes, mediaType);
+    if (format.kind !== "image") return extractDocumentText(bytes, mediaType);
+    if (!images) throw new AppError("unsupported", "image_needs_model", "Para ler imagens, o Aurora precisa do Claude Code ou do Codex configurado (AURORA_MODEL_PROVIDER).");
+    try {
+      return await images.read({ mediaType: mediaType as ModelImage["mediaType"], bytes }, filename);
+    } catch (error) {
+      throw imageReadError(error);
+    }
+  };
+}
 
 export const extractDocumentText: TextExtractor = async (bytes, mediaType) => {
   if (ensureSupported(mediaType).kind === "text") return extractText(bytes, mediaType);

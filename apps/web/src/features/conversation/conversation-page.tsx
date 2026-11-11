@@ -5,12 +5,13 @@
  */
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Bot, ExternalLink, MessageSquarePlus, MessagesSquare, Send } from "lucide-react";
+import { Bot, ExternalLink, MessageSquarePlus, MessagesSquare, Paperclip, Send, X } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import { EmptyState, ErrorNotice, LoadingRows } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { conversationsApi, newKey, type Agent, type Message } from "@/lib/api";
+import { conversationsApi, fileToBase64, newKey, type Agent, type Message } from "@/lib/api";
+import { acceptOf, mediaTypeOf } from "../knowledge/upload-dialog";
 import { relativeTime, shortId } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { JobStatusBadge } from "../jobs/job-status";
@@ -88,13 +89,23 @@ function Thread({ id }: { id: string }) {
   const agent = agentId ? team.get(agentId) : undefined;
   const who = agentId ? (agent?.name ?? "O agente") : "o Chief of Staff";
   const [text, setText] = useState("");
+  const [files, setFiles] = useState<File[]>([]);
   const [clientId, setClientId] = useState(newKey);
   const end = useRef<HTMLDivElement>(null);
+  const picker = useRef<HTMLInputElement>(null);
   const send = useMutation({
-    mutationFn: (message: string) => conversationsApi.send(id, message, clientId),
+    mutationFn: async (message: string) =>
+      conversationsApi.send(
+        id,
+        message,
+        clientId,
+        await Promise.all(files.map(async (f) => ({ filename: f.name, media_type: mediaTypeOf(f), content_base64: await fileToBase64(f) }))),
+      ),
     onSuccess: () => {
       setText("");
+      setFiles([]);
       setClientId(newKey());
+      void queryClient.invalidateQueries({ queryKey: ["sources"] });
       void queryClient.invalidateQueries({ queryKey: ["conversation", id] });
       void queryClient.invalidateQueries({ queryKey: ["conversations"] });
       void queryClient.invalidateQueries({ queryKey: ["jobs"] });
@@ -133,8 +144,22 @@ function Thread({ id }: { id: string }) {
         {thread.isPending ? <LoadingRows /> : thread.data!.messages.map((m) => <Bubble key={m.seq} message={m} agent={agent} />)}
         {send.isPending && (
           <>
-            <Bubble message={{ seq: -1, role: "user", text: send.variables ?? "", created_at: new Date().toISOString(), reply_to: null, citations: null, job: null, decision: null }} />
-            <p className="text-sm text-muted-foreground">{agentId ? `${who} está consultando o Cérebro…` : "O Chief of Staff está pensando…"}</p>
+            <Bubble
+              message={{
+                seq: -1,
+                role: "user",
+                text: send.variables ?? "",
+                created_at: new Date().toISOString(),
+                reply_to: null,
+                citations: null,
+                attachments: files.map((f) => ({ source: f.name, title: f.name })),
+                job: null,
+                decision: null,
+              }}
+            />
+            <p className="text-sm text-muted-foreground">
+              {files.length ? "Lendo os anexos e guardando no Cérebro…" : agentId ? `${who} está consultando o Cérebro…` : "O Chief of Staff está pensando…"}
+            </p>
           </>
         )}
         <div ref={end} />
@@ -147,7 +172,42 @@ function Thread({ id }: { id: string }) {
         }}
       >
         <ErrorNotice error={send.error} title="Mensagem não enviada; tente de novo (não vai duplicar)" />
+        {files.length > 0 && (
+          <ul className="flex flex-wrap gap-2" aria-label="Anexos">
+            {files.map((f, i) => (
+              <li key={`${f.name}-${i}`} className="flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs">
+                <Paperclip className="size-3" /> <span className="max-w-40 truncate">{f.name}</span>
+                <button type="button" aria-label={`Tirar ${f.name}`} className="text-muted-foreground hover:text-foreground" disabled={send.isPending} onClick={() => setFiles((l) => l.filter((_, j) => j !== i))}>
+                  <X className="size-3" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="flex items-end gap-2">
+          <input
+            ref={picker}
+            type="file"
+            multiple
+            hidden
+            accept={acceptOf([])}
+            onChange={(e) => {
+              const picked = [...(e.target.files ?? [])];
+              setFiles((l) => [...l, ...picked].slice(0, 4));
+              e.target.value = "";
+            }}
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            aria-label="Anexar imagem ou documento"
+            title="Anexar imagem ou documento (vai para o Cérebro)"
+            disabled={send.isPending || files.length >= 4}
+            onClick={() => picker.current?.click()}
+          >
+            <Paperclip />
+          </Button>
           <Textarea
             value={text}
             maxLength={2000}
@@ -185,6 +245,15 @@ function Bubble({ message, agent }: { message: Message; agent?: Agent }) {
         ))}
       <div className={cn("max-w-[85%] space-y-2 rounded-2xl px-4 py-2 text-sm", mine ? "bg-primary text-primary-foreground" : "bg-muted")}>
         <p className="whitespace-pre-wrap">{message.text}</p>
+        {message.attachments && message.attachments.length > 0 && (
+          <ul className={cn("flex flex-wrap gap-1 text-xs", mine ? "text-primary-foreground/80" : "text-muted-foreground")}>
+            {message.attachments.map((a) => (
+              <li key={a.source} className="inline-flex items-center gap-1 rounded-full border border-current/30 px-2 py-0.5">
+                <Paperclip className="size-3" /> {a.title}
+              </li>
+            ))}
+          </ul>
+        )}
         {message.job && (
           <Link to={`/trabalhos/${message.job.id}`} className="block rounded-lg border bg-background p-3 text-foreground hover:bg-muted/50">
             <div className="flex items-center justify-between gap-2">

@@ -3,7 +3,7 @@ import type { Clock } from "../../../shared/clock.ts";
 import type { ActorId, AgentId, ConversationId, JobId } from "../../../shared/ids.ts";
 import type { Sql } from "../../../platform/database/database.ts";
 import { SqlEventLog, type EventLog } from "../../../platform/events/event-log.ts";
-import type { Conversation, Message, MessageCitation, MessageRole } from "../domain/conversation.ts";
+import type { Conversation, Message, MessageAttachment, MessageCitation, MessageRole } from "../domain/conversation.ts";
 import type { ConversationRepository, MessageRepository } from "../domain/repositories.ts";
 
 type ConversationRow = { id: string; actor: string; title: string; agent_id: string | null; created_at: string; updated_at: string };
@@ -16,6 +16,7 @@ type MessageRow = {
   client_id: string | null;
   reply_to: number | string | null;
   citations: string | null;
+  attachments: string | null;
   created_at: string;
 };
 
@@ -37,6 +38,7 @@ const toMessage = (r: MessageRow): Message => ({
   clientId: r.client_id,
   replyTo: r.reply_to === null ? null : Number(r.reply_to),
   citations: r.citations ? (JSON.parse(r.citations) as MessageCitation[]) : null,
+  attachments: r.attachments ? (JSON.parse(r.attachments) as MessageAttachment[]) : null,
   createdAt: r.created_at,
 });
 
@@ -85,9 +87,19 @@ export class SqlMessageRepository implements MessageRepository {
 
   async add(m: Omit<Message, "seq">) {
     const row = await this.sql.one<{ seq: number | string }>(
-      `INSERT INTO conversation_messages (conversation_id, role, text, job_id, client_id, reply_to, citations, created_at)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING seq`,
-      [m.conversationId, m.role, m.text, m.jobId, m.clientId, m.replyTo, m.citations ? JSON.stringify(m.citations) : null, m.createdAt],
+      `INSERT INTO conversation_messages (conversation_id, role, text, job_id, client_id, reply_to, citations, attachments, created_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING seq`,
+      [
+        m.conversationId,
+        m.role,
+        m.text,
+        m.jobId,
+        m.clientId,
+        m.replyTo,
+        m.citations ? JSON.stringify(m.citations) : null,
+        m.attachments?.length ? JSON.stringify(m.attachments) : null,
+        m.createdAt,
+      ],
     );
     return { ...m, seq: Number(row!.seq) };
   }

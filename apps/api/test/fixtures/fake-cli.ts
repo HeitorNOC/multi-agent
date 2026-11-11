@@ -1,11 +1,13 @@
 // CLI falsa para testes do cliente de modelo. Uso: node fake-cli.ts <claude|codex> <modo> <relatorio.json> [args da CLI...]
 // Grava o que recebeu (argumentos, chaves de ambiente, stdin, diretório) e responde conforme o modo.
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 
 const [flavor, mode, reportPath, ...cliArgs] = process.argv.slice(2);
 let stdin = "";
 for await (const chunk of process.stdin) stdin += chunk;
-writeFileSync(reportPath!, JSON.stringify({ args: cliArgs, envKeys: Object.keys(process.env), stdin, cwd: process.cwd() }));
+// Imagens passadas por arquivo (Codex): registra o tamanho lido enquanto a chamada acontece.
+const images = cliArgs.flatMap((a, i) => (a === "--image" ? [readFileSync(cliArgs[i + 1]!).length] : []));
+writeFileSync(reportPath!, JSON.stringify({ args: cliArgs, envKeys: Object.keys(process.env), stdin, cwd: process.cwd(), images }));
 
 const decision = { kind: "open_job", offer_id: "campaign", text: "Abri o trabalho." };
 if (mode === "hang") setInterval(() => {}, 1000);

@@ -8,6 +8,7 @@ import type { JobRepository } from "../domain/repositories.ts";
 type JobRow = {
   id: string;
   goal: string;
+  attachments: string | null;
   status: string;
   plan: string | null;
   review: string | null;
@@ -25,6 +26,7 @@ function toJob(r: JobRow): Job {
   return {
     id: r.id as JobId,
     goal: r.goal,
+    attachments: r.attachments ? (JSON.parse(r.attachments) as string[]) : [],
     status: r.status as JobStatus,
     plan: parse<Json>(r.plan),
     review: parse<Review>(r.review),
@@ -50,9 +52,9 @@ export class SqlJobRepository implements JobRepository {
 
   async add(job: Job) {
     await this.sql.run(
-      `INSERT INTO jobs (id, goal, status, plan, review, approval, receipt, error, created_at, ordinal, version)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM jobs), 1)`,
-      [job.id, job.goal, job.status, text(job.plan), text(job.review), job.approval, text(job.receipt), job.error, job.createdAt],
+      `INSERT INTO jobs (id, goal, status, plan, review, approval, receipt, error, created_at, attachments, ordinal, version)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM jobs), 1)`,
+      [job.id, job.goal, job.status, text(job.plan), text(job.review), job.approval, text(job.receipt), job.error, job.createdAt, JSON.stringify(job.attachments)],
     );
     return { ...job, version: 1 };
   }

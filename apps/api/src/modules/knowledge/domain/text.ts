@@ -12,8 +12,25 @@ export interface FileFormat {
   /** Como aparece na tela. */
   readonly label: string;
   readonly extensions: readonly string[];
-  /** `text`: lido direto como UTF-8. `document`: precisa de extrator. */
-  readonly kind: "text" | "document";
+  /** `text`: lido direto como UTF-8. `document`: precisa de extrator. `image`: lida pelo modelo com visão. */
+  readonly kind: "text" | "document" | "image";
+}
+
+/** Assinatura dos primeiros bytes de cada formato binário: o arquivo é o que diz ser. */
+const SIGNATURES: Record<string, (b: Uint8Array) => boolean> = {
+  "application/pdf": (b) => ascii(b, 0, 5) === "%PDF-",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document": (b) => b[0] === 0x50 && b[1] === 0x4b,
+  "image/png": (b) => b[0] === 0x89 && ascii(b, 1, 4) === "PNG",
+  "image/jpeg": (b) => b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff,
+  "image/webp": (b) => ascii(b, 0, 4) === "RIFF" && ascii(b, 8, 12) === "WEBP",
+  "image/gif": (b) => ascii(b, 0, 4) === "GIF8",
+};
+const ascii = (b: Uint8Array, from: number, to: number) => String.fromCharCode(...b.subarray(from, to));
+
+/** Recusa arquivo cujo conteúdo não bate com o formato declarado (renomeado ou corrompido). */
+export function ensureSignature(bytes: Uint8Array, mediaType: string) {
+  const check = SIGNATURES[mediaType];
+  if (check && !check(bytes)) throw invalid("format_mismatch", `O conteúdo do arquivo não é ${formatOf(mediaType)?.label ?? mediaType}`);
 }
 
 export const FORMATS = {
@@ -23,6 +40,10 @@ export const FORMATS = {
   "application/json": { label: "JSON", extensions: ["json"], kind: "text" },
   "application/pdf": { label: "PDF", extensions: ["pdf"], kind: "document" },
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document": { label: "Word", extensions: ["docx"], kind: "document" },
+  "image/png": { label: "PNG", extensions: ["png"], kind: "image" },
+  "image/jpeg": { label: "JPG", extensions: ["jpg", "jpeg"], kind: "image" },
+  "image/webp": { label: "WEBP", extensions: ["webp"], kind: "image" },
+  "image/gif": { label: "GIF", extensions: ["gif"], kind: "image" },
 } as const satisfies Record<string, FileFormat>;
 
 export type SupportedMediaType = keyof typeof FORMATS;

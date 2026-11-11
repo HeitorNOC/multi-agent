@@ -42,7 +42,7 @@ export interface KnowledgeDeps {
   extract?: TextExtractor;
 }
 
-export type TextExtractor = (bytes: Uint8Array, mediaType: string) => Promise<string>;
+export type TextExtractor = (bytes: Uint8Array, mediaType: string, filename?: string) => Promise<string>;
 
 /**
  * Uma versão nova: um arquivo (`filename`, `mediaType`, `contentBase64`) ou um texto escrito no
@@ -232,7 +232,7 @@ async function finish(
   ensure(bytes.length > 0, () => invalid("empty_file", "Arquivo vazio"));
   ensure(bytes.length <= deps.maxBytes, () => new AppError("too_large", "file_too_large", `Arquivo maior que ${deps.maxBytes} bytes`));
   const validFrom = input.validFrom === undefined ? deps.clock.now() : new Date(input.validFrom).toISOString();
-  const text = deps.extract ? await deps.extract(bytes, mediaType) : extractText(bytes, mediaType);
+  const text = deps.extract ? await deps.extract(bytes, mediaType, file.filename) : extractText(bytes, mediaType);
   return { ...file, text, contentSha: createHash("sha256").update(bytes).digest("hex"), sizeBytes: bytes.length, validFrom };
 }
 

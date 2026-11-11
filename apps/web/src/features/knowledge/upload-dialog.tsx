@@ -23,6 +23,11 @@ const BY_EXTENSION: Record<string, string> = {
   txt: "text/plain",
   pdf: "application/pdf",
   docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  png: "image/png",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  webp: "image/webp",
+  gif: "image/gif",
 };
 
 /** Tipo pela extensão quando o navegador não informa (CSV e Markdown costumam vir vazios). */
@@ -105,7 +110,7 @@ export function UploadDialog({ sources, areas, formats, defaultArea }: { sources
       <DialogContent className="max-h-[90dvh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Adicionar ao Cérebro</DialogTitle>
-          <DialogDescription>Envie um arquivo ({labels}) ou escreva o texto aqui. PDF escaneado (só imagem) não tem texto para ler.</DialogDescription>
+          <DialogDescription>Envie um arquivo ({labels}) ou escreva o texto aqui. Imagens (PNG, JPG, WEBP) são lidas uma vez pelo modelo, que transcreve o que está nelas (usa a sua cota). PDF escaneado não tem texto: envie como imagem.</DialogDescription>
         </DialogHeader>
         <div className="grid grid-cols-2 gap-1 rounded-lg border p-1" role="tablist" aria-label="Tipo de conteúdo">
           {(

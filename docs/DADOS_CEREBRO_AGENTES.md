@@ -60,6 +60,24 @@ flowchart LR
   conteúdo da última versão é recusado (SHA-256 igual).
 - **Pasta local:** o conector lê os mesmos formatos da pasta e envia ao Cérebro pelo mesmo caminho.
 
+### Imagens e anexos
+
+- **Imagem vira fonte.** PNG, JPG, WEBP e GIF são lidos **uma única vez**, no envio, pelo modelo com
+  visão (Claude Code ou Codex, na sua conta). Ele transcreve o texto visível (tabelas viram
+  tabelas Markdown) e descreve em 1 a 3 frases o que a imagem mostra, sem deduzir nada. A
+  transcrição é o texto da versão; a imagem original fica guardada e a citação abre a imagem.
+  Perguntar depois não lê a imagem de novo (rápido e não gasta cota).
+- **Sem modelo configurado**, imagem é recusada com orientação. Se o modelo falhar ou a cota
+  acabar, nada é guardado pela metade e a mensagem diz o que aconteceu.
+- **Conferência do arquivo:** PDF, Word e imagens têm os primeiros bytes conferidos; arquivo
+  renomeado (um texto chamado `.png`) é recusado. SVG não é aceito.
+- **Anexo na conversa:** até 4 arquivos por mensagem (imagens ou documentos). Cada um vira fonte do
+  Cérebro (área Geral, aberta à empresa; dá para mudar depois) **antes** de a mensagem ser
+  gravada. Se o Chief of Staff abrir um trabalho, as fontes anexadas ficam gravadas no trabalho
+  (`jobs.attachments`) e **cada especialista recebe primeiro os trechos delas** (até 4), além dos
+  da busca; na Estação, o agente também recebe os anexos primeiro. Reenviar a mesma mensagem
+  (mesma `client_message_id`) não guarda nem lê os anexos de novo.
+
 ## 3. Recuperação da informação (busca)
 
 1. **Trechos.** O texto é dividido em trechos de até 800 caracteres:

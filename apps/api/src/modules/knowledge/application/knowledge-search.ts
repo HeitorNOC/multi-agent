@@ -168,6 +168,24 @@ export class KnowledgeSearch {
     return found.map(({ n: _n, matched: _m, score: _s, ...p }) => ({ ...p, url: originalUrl(p.sourceId, p.version) }));
   }
 
+  /**
+   * Trechos vigentes de fontes específicas (anexadas a um pedido) que os agentes podem ler. Com
+   * `query`, os mais relevantes para ela primeiro; depois, na ordem do documento.
+   */
+  async passagesOfSources(sourceIds: readonly string[], agentIds: readonly string[], limit: number, query?: string): Promise<AgentPassage[]> {
+    const { passages } = await this.index();
+    const wanted = new Set(sourceIds);
+    const candidates = [...passages.values()].filter((p) => wanted.has(p.sourceId) && agentsCanRead(p, agentIds));
+    let ordered = candidates;
+    if (query && candidates.length > limit) {
+      const allowed = new Set(candidates.map((p) => p.id));
+      const { found } = await this.search(query, (p) => agentsCanRead(p, agentIds), candidates.length);
+      const ranked = found.map((f) => f.id).filter((id) => allowed.has(id));
+      ordered = [...ranked.map((id) => passages.get(id)!), ...candidates.filter((p) => !ranked.includes(p.id))];
+    }
+    return ordered.slice(0, limit).map(({ owner: _o, readers: _r, ...p }) => ({ ...p, url: originalUrl(p.sourceId, p.version) }));
+  }
+
   /** Um trecho vigente que algum dos agentes pode ler, pelo id; `undefined` se deixou de valer ou perdeu o acesso. */
   async passageForAgents(id: string, agentIds: readonly string[] = []): Promise<AgentPassage | undefined> {
     const p = (await this.index()).passages.get(id);

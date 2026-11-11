@@ -36,7 +36,14 @@ export interface Message {
   readonly replyTo: number | null;
   /** Fontes citadas (respostas da Estação). */
   readonly citations: readonly MessageCitation[] | null;
+  /** Arquivos anexados pelo gestor, já guardados no Cérebro como fontes. */
+  readonly attachments: readonly MessageAttachment[] | null;
   readonly createdAt: string;
+}
+
+export interface MessageAttachment {
+  source: string;
+  title: string;
 }
 
 export const DEFAULT_TITLE = "Nova conversa";

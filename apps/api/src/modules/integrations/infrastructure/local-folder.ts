@@ -19,6 +19,10 @@ export const READABLE = {
   ".json": "application/json",
   ".pdf": "application/pdf",
   ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
 } as const;
 
 export interface FolderFile {
