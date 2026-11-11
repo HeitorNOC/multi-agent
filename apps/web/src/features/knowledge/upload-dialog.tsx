@@ -11,9 +11,11 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { NativeSelect } from "@/components/ui/native-select";
 import { agentsApi, fileToBase64, knowledgeApi, type BrainArea, type FileFormat, type SourceSummary, type UploadInput } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { useAccess } from "../access/auth-gate";
+import { NewAreaForm } from "./areas-dialog";
 
 const BY_EXTENSION: Record<string, string> = {
   md: "text/markdown",
@@ -45,6 +47,9 @@ const people = (text: string) => text.split(",").map((r) => r.trim().toLowerCase
 
 type Kind = "file" | "text";
 
+/** Valor da opção "+ Nova área…" (nunca é o id de uma área: ids não têm sublinhado). */
+const NEW_AREA = "__new__";
+
 export function UploadDialog({ sources, areas, formats, defaultArea }: { sources: SourceSummary[]; areas: BrainArea[]; formats: FileFormat[]; defaultArea?: string }) {
   const { mode } = useAccess();
   const [open, setOpen] = useState(false);
@@ -53,6 +58,7 @@ export function UploadDialog({ sources, areas, formats, defaultArea }: { sources
   const [file, setFile] = useState<File | null>(null);
   const [text, setText] = useState("");
   const [area, setArea] = useState(defaultArea ?? "general");
+  const [creatingArea, setCreatingArea] = useState(false);
   const [restricted, setRestricted] = useState(false);
   const [readers, setReaders] = useState("");
   const [agentReaders, setAgentReaders] = useState<string[]>([]);
@@ -173,15 +179,33 @@ export function UploadDialog({ sources, areas, formats, defaultArea }: { sources
             </div>
             <div className="space-y-2">
               <Label htmlFor="area">Área</Label>
-              <select id="area" className="h-9 w-full rounded-md border bg-transparent px-2 text-sm" value={area} onChange={(e) => setArea(e.target.value)}>
+              <NativeSelect
+                id="area"
+                value={area}
+                onChange={(e) => {
+                  if (e.target.value === NEW_AREA) setCreatingArea(true);
+                  else setArea(e.target.value);
+                }}
+              >
                 {areas.map((a) => (
                   <option key={a.id} value={a.id}>
                     {a.title}
                   </option>
                 ))}
-              </select>
+                <option value={NEW_AREA}>+ Nova área…</option>
+              </NativeSelect>
             </div>
           </div>
+          {creatingArea && (
+            <NewAreaForm
+              autoFocus
+              onCancel={() => setCreatingArea(false)}
+              onCreated={(a) => {
+                setArea(a.id);
+                setCreatingArea(false);
+              }}
+            />
+          )}
           <fieldset className="space-y-2">
             <legend className="text-sm font-medium">Quem pode ler</legend>
             <label className="flex items-center gap-2 text-sm">
@@ -221,14 +245,14 @@ export function UploadDialog({ sources, areas, formats, defaultArea }: { sources
             </div>
             <div className="space-y-2">
               <Label htmlFor="supersedes">Substitui</Label>
-              <select id="supersedes" className="h-9 w-full rounded-md border bg-transparent px-2 text-sm" value={supersedes} onChange={(e) => setSupersedes(e.target.value)}>
+              <NativeSelect id="supersedes" value={supersedes} onChange={(e) => setSupersedes(e.target.value)}>
                 <option value="">Nenhuma</option>
                 {replaceable.map((s) => (
                   <option key={s.id} value={s.id}>
                     {s.title}
                   </option>
                 ))}
-              </select>
+              </NativeSelect>
             </div>
           </div>
           <ErrorNotice error={upload.error} title="Não foi adicionado" />

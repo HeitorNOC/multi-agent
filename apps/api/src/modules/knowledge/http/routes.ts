@@ -4,7 +4,7 @@ import { z } from "zod";
 import { SourceId } from "../../../shared/ids.ts";
 import type { HttpModule } from "../../../platform/http/app.ts";
 import { askKnowledge } from "../application/ask.ts";
-import { addVersion, listSources, moveSource, originalFile, revokeSource, uploadSource, viewSource, type FileInput, type KnowledgeDeps } from "../application/sources.ts";
+import { addVersion, createArea, listSources, removeArea, renameArea, moveSource, originalFile, revokeSource, uploadSource, viewSource, type FileInput, type KnowledgeDeps } from "../application/sources.ts";
 
 const isoDate = z.string().refine((v) => !Number.isNaN(Date.parse(v)), "deve ser uma data ISO");
 /** Conteúdo de uma versão: um arquivo (base64) ou um texto escrito, nunca os dois. */
@@ -28,6 +28,8 @@ const uploadBody = z
   })
   .refine(oneContent, contentRule);
 const versionBody = z.strictObject(file).refine(oneContent, contentRule);
+const areaBody = z.strictObject({ title: z.string().min(1).max(200) });
+const areaIdOf = (req: FastifyRequest) => z.string().min(1).max(40).parse((req.params as { id?: unknown }).id);
 const moveBody = z.strictObject({ area: z.string().min(1).max(40) });
 const queryBody = z.strictObject({ question: z.string().trim().min(1).max(1000), area: z.string().min(1).max(40).optional() });
 
@@ -83,6 +85,12 @@ export function knowledgeHttp(deps: KnowledgeDeps, options: { uploadLimit: numbe
       const view = await addVersion(deps, actor(req), sourceIdOf(req), fileInput(versionBody.parse(req.body)));
       return reply.code(201).send(view);
     });
+
+    app.post("/api/knowledge/areas", async (req, reply) => reply.code(201).send(await createArea(deps, actor(req), areaBody.parse(req.body).title)));
+
+    app.post("/api/knowledge/areas/:id", async (req) => renameArea(deps, actor(req), areaIdOf(req), areaBody.parse(req.body).title));
+
+    app.post("/api/knowledge/areas/:id/remove", async (req) => removeArea(deps, actor(req), areaIdOf(req)));
 
     app.post("/api/knowledge/sources/:id/area", async (req) => moveSource(deps, actor(req), sourceIdOf(req), moveBody.parse(req.body).area));
 

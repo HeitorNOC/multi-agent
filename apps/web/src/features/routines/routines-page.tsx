@@ -1,9 +1,9 @@
 /** Rotinas: pedidos recorrentes ao Chief of Staff, com agenda, próximos horários e histórico. */
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarClock, Pause, Play, Plus, Zap } from "lucide-react";
+import { Archive, CalendarClock, History, Pause, Pencil, Play, Plus, Zap } from "lucide-react";
 import { Link } from "react-router";
-import { EmptyState, ErrorNotice, LoadingRows, PageHeader, ToneBadge } from "@/components/common";
+import { ConfirmAction, DangerZone, EmptyState, ErrorNotice, LoadingRows, PageHeader, ToneBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -96,10 +96,10 @@ function RoutineCard({ routine: r, lastRun, onOpen, onEdit }: { routine: Routine
               )}
             </Button>
             <Button size="sm" variant="ghost" onClick={onEdit}>
-              Ajustar
+              <Pencil /> Ajustar
             </Button>
             <Button size="sm" variant="ghost" onClick={onOpen}>
-              Histórico
+              <History /> Histórico
             </Button>
           </div>
         </div>
@@ -120,7 +120,6 @@ function runLabel(run: RoutineRun) {
 function RunsDialog({ id, onClose }: { id: string; onClose: () => void }) {
   const queryClient = useQueryClient();
   const routine = useQuery({ queryKey: ["routine", id], queryFn: () => routinesApi.get(id), refetchInterval: 10_000 });
-  const [confirm, setConfirm] = useState(false);
   const archive = useMutation({
     mutationFn: () => routinesApi.archive(id),
     onSuccess: () => {
@@ -170,17 +169,9 @@ function RunsDialog({ id, onClose }: { id: string; onClose: () => void }) {
                 <p className="text-muted-foreground">Ainda não rodou.</p>
               )}
             </div>
-            <div className="flex justify-end">
-              {confirm ? (
-                <Button variant="destructive" size="sm" disabled={archive.isPending} onClick={() => archive.mutate()}>
-                  Confirmar: arquivar rotina
-                </Button>
-              ) : (
-                <Button variant="ghost" size="sm" onClick={() => setConfirm(true)}>
-                  Arquivar
-                </Button>
-              )}
-            </div>
+            <DangerZone action={<ConfirmAction icon={<Archive />} label="Arquivar" confirmLabel="Arquivar rotina" pending={archive.isPending} onConfirm={() => archive.mutate()} />}>
+              Arquivar para a rotina de vez. Os trabalhos que ela já abriu continuam guardados.
+            </DangerZone>
             <ErrorNotice error={archive.error} />
           </div>
         )}

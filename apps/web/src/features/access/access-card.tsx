@@ -6,6 +6,7 @@ import { ErrorNotice, LoadingRows, ToneBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { NativeSelect } from "@/components/ui/native-select";
 import { accessApi, type AccessList, type Role, type Settings } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { useAccess } from "./auth-gate";
@@ -96,10 +97,10 @@ function People({ selfId }: { selfId: string }) {
         }}
       >
         <Input type="email" placeholder="email@empresa.com" aria-label="E-mail para liberar" value={email} onChange={(e) => setEmail(e.target.value)} className="sm:flex-1" />
-        <select aria-label="Papel" className="h-9 rounded-md border bg-transparent px-2 text-sm" value={role} onChange={(e) => setRole(e.target.value as Role)}>
+        <NativeSelect aria-label="Papel" value={role} onChange={(e) => setRole(e.target.value as Role)}>
           <option value="member">Membro</option>
           <option value="owner">Dono</option>
-        </select>
+        </NativeSelect>
         <Button type="submit" disabled={!email.trim() || add.isPending}>
           <MailPlus /> Liberar acesso
         </Button>

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { NativeSelect } from "@/components/ui/native-select";
 import { routinesApi, type Routine, type Schedule } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
@@ -58,7 +59,7 @@ export function RoutineForm({ routine, onDone }: { routine?: Routine; onDone: ()
               role="radio"
               aria-checked={kind === k}
               onClick={() => setKind(k)}
-              className={cn("rounded-full border px-3 py-1 text-xs", kind === k ? "border-transparent bg-primary text-primary-foreground" : "hover:bg-muted")}
+              className={cn("rounded-md border px-3 py-1 text-sm", kind === k ? "border-transparent bg-primary text-primary-foreground" : "hover:bg-muted")}
             >
               {k === "daily" ? "Num horário" : "Por intervalo"}
             </button>
@@ -82,13 +83,13 @@ export function RoutineForm({ routine, onDone }: { routine?: Routine; onDone: ()
             </div>
           </div>
         ) : (
-          <select aria-label="Intervalo" className="h-9 rounded-md border bg-transparent px-2 text-sm" value={minutes} onChange={(e) => setMinutes(Number(e.target.value))}>
+          <NativeSelect aria-label="Intervalo" className="w-48" value={minutes} onChange={(e) => setMinutes(Number(e.target.value))}>
             {INTERVALS.map((m) => (
               <option key={m} value={m}>
                 A cada {m < 60 ? `${m} min` : `${m / 60} h`}
               </option>
             ))}
-          </select>
+          </NativeSelect>
         )}
       </fieldset>
       <ErrorNotice error={save.error} title="Rotina não salva" />

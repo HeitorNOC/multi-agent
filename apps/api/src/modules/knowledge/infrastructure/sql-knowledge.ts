@@ -4,7 +4,7 @@ import type { Sql } from "../../../platform/database/database.ts";
 import { SqlEventLog, type EventLog } from "../../../platform/events/event-log.ts";
 import type { Clock } from "../../../shared/clock.ts";
 import { fromBytes, toBytes } from "../domain/embeddings.ts";
-import type { SourceRepository, VersionRepository } from "../domain/repositories.ts";
+import type { AreaRepository, CustomArea, SourceRepository, VersionRepository } from "../domain/repositories.ts";
 import type { ContentOrigin, IndexableVersion, KnowledgeSource, SourceVersion, StoredVersion } from "../domain/source.ts";
 
 type SourceRow = {
@@ -172,7 +172,34 @@ export class SqlEmbeddingRepository {
   }
 }
 
+type AreaRow = { id: string; title: string; created_by: string; created_at: string };
+
+export class SqlAreaRepository implements AreaRepository {
+  private readonly sql: Sql;
+  constructor(sql: Sql) {
+    this.sql = sql;
+  }
+
+  async list() {
+    const rows = await this.sql.all<AreaRow>("SELECT * FROM knowledge_areas ORDER BY created_at, id");
+    return rows.map((r): CustomArea => ({ id: r.id, title: r.title, createdBy: r.created_by as ActorId, createdAt: r.created_at }));
+  }
+
+  async add(a: CustomArea) {
+    await this.sql.run("INSERT INTO knowledge_areas (id, title, created_by, created_at) VALUES ($1, $2, $3, $4)", [a.id, a.title, a.createdBy, a.createdAt]);
+  }
+
+  async rename(id: string, title: string) {
+    await this.sql.run("UPDATE knowledge_areas SET title = $2 WHERE id = $1", [id, title]);
+  }
+
+  async remove(id: string) {
+    await this.sql.run("DELETE FROM knowledge_areas WHERE id = $1", [id]);
+  }
+}
+
 export interface KnowledgeStore {
+  areas: AreaRepository;
   sources: SourceRepository;
   versions: VersionRepository;
   embeddings: SqlEmbeddingRepository;
@@ -182,6 +209,7 @@ export interface KnowledgeStore {
 export const knowledgeStore =
   (clock: Clock) =>
   (sql: Sql): KnowledgeStore => ({
+    areas: new SqlAreaRepository(sql),
     sources: new SqlSourceRepository(sql),
     versions: new SqlVersionRepository(sql),
     embeddings: new SqlEmbeddingRepository(sql),

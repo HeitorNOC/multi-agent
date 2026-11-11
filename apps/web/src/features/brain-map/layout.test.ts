@@ -1,7 +1,7 @@
 // Posições do mapa 3D: determinísticas, espalhadas, sem fontes revogadas e com quem responde a quem.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { agentsMap, around, fibonacci, knowledgeMap } from "./layout.ts";
+import { agentsMap, around, curve, fibonacci, knowledgeMap } from "./layout.ts";
 
 const dist = (a: number[], b: number[]) => Math.hypot(a[0]! - b[0]!, a[1]! - b[1]!, a[2]! - b[2]!);
 
@@ -45,4 +45,30 @@ test("agentes: trabalhando acende a área; quem responde a outro agente fica lig
   assert.equal(map.nodes.find((n) => n.id === "area:operations")!.state, "running");
   assert.equal(map.nodes.find((n) => n.id === "area:finance")!.state, "current");
   assert.ok(map.edges.some((e) => e.from === "agent:fernanda" && e.to === "agent:patricia" && e.strong));
+});
+
+test("acomodação orgânica: núcleo no centro, ninguém sobreposto, rápido com muitos documentos", () => {
+  const areas = Array.from({ length: 11 }, (_, i) => ({ id: `a${i}`, title: `Área ${i}` }));
+  const sources = Array.from({ length: 300 }, (_, i) => ({ id: `s${i}`, title: `Doc ${i}`, area: `a${i % 11}`, status: "current" as const, version: 1 }));
+  const started = performance.now();
+  const map = knowledgeMap(areas, sources);
+  const elapsed = performance.now() - started;
+  assert.ok(elapsed < 1500, `levou ${elapsed.toFixed(0)} ms`);
+  assert.deepEqual(map.nodes[0]!.position, [0, 0, 0]);
+  let closest = Infinity;
+  for (let i = 0; i < map.nodes.length; i++)
+    for (let j = i + 1; j < map.nodes.length; j++) closest = Math.min(closest, dist(map.nodes[i]!.position, map.nodes[j]!.position));
+  assert.ok(closest > 0.35, `nós a ${closest.toFixed(2)} um do outro`);
+  const areaNodes = map.nodes.filter((n) => n.kind === "area");
+  assert.ok(areaNodes.every((n) => Math.hypot(...n.position) > 3), "áreas longe do núcleo");
+  assert.ok(map.nodes.every((n) => Math.abs(n.position[1]) < Math.max(...map.nodes.map((m) => Math.hypot(m.position[0], m.position[2])))), "achatado");
+});
+
+test("linha curva: começa e termina nos nós, arqueia para fora e é sempre igual", () => {
+  const points = curve([0, 0, 0], [10, 0, 0], "core>area:x");
+  assert.deepEqual(points[0], [0, 0, 0]);
+  assert.deepEqual(points.at(-1), [10, 0, 0]);
+  const mid = points[Math.floor(points.length / 2)]!;
+  assert.ok(Math.hypot(mid[1], mid[2]) > 0.5, "arqueia");
+  assert.deepEqual(curve([0, 0, 0], [10, 0, 0], "core>area:x"), points);
 });

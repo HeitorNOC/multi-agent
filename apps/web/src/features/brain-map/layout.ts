@@ -135,7 +135,7 @@ export function knowledgeMap(areas: MapArea[], sources: MapSource[]): { nodes: M
       edges.push({ from: `area:${area.id}`, to: `source:${s.id}` });
     });
   });
-  return { nodes, edges };
+  return relax({ nodes, edges });
 }
 
 const AGENT_STATE: Record<MapAgent["activity"], NodeState> = { idle: "idle", running: "running", waiting: "waiting", done: "done" };
@@ -165,5 +165,97 @@ export function agentsMap(areas: MapArea[], agents: MapAgent[]): { nodes: MapNod
     });
   });
   for (const g of agents) if (g.reportsTo && ids.has(g.reportsTo)) edges.push({ from: `agent:${g.reportsTo}`, to: `agent:${g.id}`, strong: true });
-  return { nodes, edges };
+  return relax({ nodes, edges });
+}
+
+/**
+ * Acomodação orgânica (como um grafo de notas): parte das posições em anel e roda uma simulação
+ * de forças com número fixo de passos, sem acaso. Nós se repelem, ligações puxam até um
+ * comprimento natural e o conjunto fica achatado (um disco com profundidade, fácil de ler de
+ * cima). O núcleo fica preso no centro. Com muitos nós, menos passos (o custo cresce com n²).
+ */
+export function relax<T extends { nodes: MapNode[]; edges: MapEdge[] }>(graph: T): T {
+  const { nodes, edges } = graph;
+  const n = nodes.length;
+  if (n < 3) return graph;
+  const index = new Map(nodes.map((node, i) => [node.id, i]));
+  const p = nodes.map((node) => [...node.position] as Vec3);
+  const mass = nodes.map((node) => (node.kind === "core" ? 8 : node.kind === "area" ? 3 : 1));
+  const links = edges
+    .map((e) => {
+      const a = index.get(e.from);
+      const b = index.get(e.to);
+      if (a === undefined || b === undefined) return null;
+      const ka = nodes[a]!.kind;
+      const kb = nodes[b]!.kind;
+      // Núcleo → área: longe; área → item: perto; item ↔ item (quem responde a quem): fraco.
+      const length = ka === "core" || kb === "core" ? 7 : ka === "area" || kb === "area" ? 2.6 : 3;
+      const strength = ka === "core" || kb === "core" ? 0.06 : ka === "area" || kb === "area" ? 0.1 : 0.02;
+      return { a, b, length, strength };
+    })
+    .filter((l): l is NonNullable<typeof l> => l !== null);
+  const steps = Math.round(Math.min(220, Math.max(40, 6_000_000 / (n * n))));
+  for (let step = 0; step < steps; step++) {
+    const heat = 1 - step / steps;
+    const f = p.map(() => [0, 0, 0] as Vec3);
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const dx = p[i]![0] - p[j]![0];
+        const dy = p[i]![1] - p[j]![1];
+        const dz = p[i]![2] - p[j]![2];
+        const d2 = dx * dx + dy * dy + dz * dz + 0.05;
+        if (d2 > 144) continue;
+        const k = (1.1 * mass[i]! * mass[j]!) / (d2 * Math.sqrt(d2));
+        f[i]![0] += dx * k; f[i]![1] += dy * k; f[i]![2] += dz * k;
+        f[j]![0] -= dx * k; f[j]![1] -= dy * k; f[j]![2] -= dz * k;
+      }
+    }
+    for (const l of links) {
+      const dx = p[l.b]![0] - p[l.a]![0];
+      const dy = p[l.b]![1] - p[l.a]![1];
+      const dz = p[l.b]![2] - p[l.a]![2];
+      const d = Math.hypot(dx, dy, dz) || 0.001;
+      const k = ((d - l.length) * l.strength) / d;
+      f[l.a]![0] += dx * k * mass[l.b]!; f[l.a]![1] += dy * k * mass[l.b]!; f[l.a]![2] += dz * k * mass[l.b]!;
+      f[l.b]![0] -= dx * k * mass[l.a]!; f[l.b]![1] -= dy * k * mass[l.a]!; f[l.b]![2] -= dz * k * mass[l.a]!;
+    }
+    for (let i = 0; i < n; i++) {
+      if (nodes[i]!.kind === "core") continue;
+      const fi = f[i]!;
+      // Achata (o eixo vertical pesa menos) e puxa de leve para o centro.
+      fi[1] = fi[1] * 0.5 - p[i]![1] * 0.04 * mass[i]!;
+      fi[0] -= p[i]![0] * 0.004 * mass[i]!;
+      fi[2] -= p[i]![2] * 0.004 * mass[i]!;
+      const move = Math.min(0.6 * heat + 0.02, Math.hypot(...fi) / mass[i]!);
+      const len = Math.hypot(...fi) || 1;
+      p[i]![0] += (fi[0] / len) * move;
+      p[i]![1] += (fi[1] / len) * move;
+      p[i]![2] += (fi[2] / len) * move;
+    }
+  }
+  const round = (v: number) => Math.round(v * 1000) / 1000;
+  return { ...graph, nodes: nodes.map((node, i) => ({ ...node, position: p[i]!.map(round) as Vec3 })) };
+}
+
+/**
+ * Linha curva entre dois pontos (bezier quadrática), como nas imagens de referência: o arco
+ * vai para um lado escolhido pelo próprio par (sempre igual), com curvatura proporcional ao
+ * comprimento.
+ */
+export function curve(a: Vec3, b: Vec3, seed: string, segments = 14): Vec3[] {
+  const dir: Vec3 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
+  const length = Math.hypot(...dir);
+  if (length < 1e-6) return [a, b];
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) | 0;
+  const side = h & 1 ? 1 : -1;
+  const up: Vec3 = Math.abs(dir[1] / length) > 0.9 ? [1, 0, 0] : [0, 1, 0];
+  const perp = norm(cross(dir, up));
+  const bend = length * (0.12 + ((h >>> 1) % 7) * 0.012) * side;
+  const c: Vec3 = [(a[0] + b[0]) / 2 + perp[0] * bend, (a[1] + b[1]) / 2 + perp[1] * bend, (a[2] + b[2]) / 2 + perp[2] * bend];
+  return Array.from({ length: segments + 1 }, (_, i) => {
+    const t = i / segments;
+    const u = 1 - t;
+    return [u * u * a[0] + 2 * u * t * c[0] + t * t * b[0], u * u * a[1] + 2 * u * t * c[1] + t * t * b[1], u * u * a[2] + 2 * u * t * c[2] + t * t * b[2]];
+  });
 }

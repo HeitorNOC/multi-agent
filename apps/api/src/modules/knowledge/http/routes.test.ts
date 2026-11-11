@@ -71,3 +71,29 @@ test("só as rotas de envio aceitam corpo grande; validações viram 400", async
     assert.equal((await call({ method: "POST", url: "/api/knowledge/sources", payload })).json().code, code, JSON.stringify(payload).slice(0, 60));
   assert.equal((await call({ method: "GET", url: "/api/knowledge/sources/x/versions/0/original" })).statusCode, 400);
 });
+
+test("áreas criadas pela empresa: criar, renomear, usar e excluir", async () => {
+  const call = await setup();
+  const created = await call({ method: "POST", url: "/api/knowledge/areas", payload: { title: "  Jurídico & Compliance " } });
+  assert.equal(created.statusCode, 201);
+  assert.deepEqual(created.json(), { id: "juridico-compliance", title: "Jurídico & Compliance", custom: true, sources: 0 });
+  assert.equal((await call({ method: "POST", url: "/api/knowledge/areas", payload: { title: "jurídico & compliance" } })).statusCode, 409, "nome repetido");
+  assert.equal((await call({ method: "POST", url: "/api/knowledge/areas/general", payload: { title: "Outra" } })).statusCode, 403, "Geral é fixa");
+
+  const renamed = await call({ method: "POST", url: "/api/knowledge/areas/juridico-compliance", payload: { title: "Jurídico" } });
+  assert.equal(renamed.json().title, "Jurídico");
+  const source = (await call({ method: "POST", url: "/api/knowledge/sources", payload: body({ area: "juridico-compliance" }) })).json();
+  const list = (await call({ method: "GET", url: "/api/knowledge/sources" })).json();
+  assert.deepEqual(
+    list.areas.map((a: { id: string; sources: number; custom: boolean }) => [a.id, a.sources, a.custom]),
+    [
+      ["general", 0, false],
+      ["juridico-compliance", 1, true],
+    ],
+  );
+
+  assert.equal((await call({ method: "POST", url: "/api/knowledge/areas/juridico-compliance/remove" })).statusCode, 409, "área com fonte em vigor");
+  await call({ method: "POST", url: `/api/knowledge/sources/${source.id}/area`, payload: { area: "general" } });
+  assert.equal((await call({ method: "POST", url: "/api/knowledge/areas/juridico-compliance/remove" })).statusCode, 200);
+  assert.equal((await call({ method: "GET", url: "/api/knowledge/sources" })).json().areas.length, 1);
+});

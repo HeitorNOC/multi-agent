@@ -2,12 +2,13 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Ban, ExternalLink, FilePlus } from "lucide-react";
-import { ErrorNotice, LoadingRows, ToneBadge } from "@/components/common";
+import { ConfirmAction, DangerZone, ErrorNotice, LoadingRows, ToneBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { NativeSelect } from "@/components/ui/native-select";
 import { fileToBase64, knowledgeApi, type BrainArea } from "@/lib/api";
 import { formatBytes, formatDate, formatDateTime, SOURCE_STATUS } from "@/lib/format";
 import { acceptOf, mediaTypeOf } from "./upload-dialog";
@@ -25,7 +26,6 @@ export function SourceDialog({ id, areas, onClose }: { id: string; areas: BrainA
   const [text, setText] = useState("");
   const [asText, setAsText] = useState(false);
   const [validFrom, setValidFrom] = useState("");
-  const [confirmRevoke, setConfirmRevoke] = useState(false);
   const addVersion = useMutation({
     mutationFn: async () => {
       const valid_from = validFrom ? new Date(`${validFrom}T00:00:00`).toISOString() : undefined;
@@ -63,9 +63,8 @@ export function SourceDialog({ id, areas, onClose }: { id: string; areas: BrainA
               <label htmlFor="s-area" className="text-muted-foreground">
                 Área
               </label>
-              <select
-                id="s-area"
-                className="h-8 rounded-md border bg-transparent px-2 text-sm"
+              <NativeSelect
+                id="s-area" size="sm" className="w-52"
                 value={s.area}
                 disabled={move.isPending || s.status === "revoked"}
                 onChange={(e) => move.mutate(e.target.value)}
@@ -75,7 +74,7 @@ export function SourceDialog({ id, areas, onClose }: { id: string; areas: BrainA
                     {a.title}
                   </option>
                 ))}
-              </select>
+              </NativeSelect>
               <ErrorNotice error={move.error} />
             </div>
             {s.format?.media_type.startsWith("image/") && s.versions[0] && (
@@ -135,23 +134,11 @@ export function SourceDialog({ id, areas, onClose }: { id: string; areas: BrainA
                     <FilePlus /> Publicar versão
                   </Button>
                 </form>
-                <div className="flex flex-col gap-2 rounded-lg border border-destructive/40 p-3 sm:flex-row sm:items-center">
-                  <p className="min-w-0 flex-1 text-sm">Revogar tira a fonte das respostas na hora. O histórico continua guardado e não dá para desfazer.</p>
-                  {confirmRevoke ? (
-                    <div className="flex gap-2">
-                      <Button variant="ghost" size="sm" onClick={() => setConfirmRevoke(false)}>
-                        Cancelar
-                      </Button>
-                      <Button variant="destructive" size="sm" disabled={revoke.isPending} onClick={() => revoke.mutate()}>
-                        Confirmar revogação
-                      </Button>
-                    </div>
-                  ) : (
-                    <Button variant="outline" size="sm" onClick={() => setConfirmRevoke(true)}>
-                      <Ban /> Revogar
-                    </Button>
-                  )}
-                </div>
+                <DangerZone
+                  action={<ConfirmAction icon={<Ban />} label="Revogar" confirmLabel="Confirmar revogação" pending={revoke.isPending} onConfirm={() => revoke.mutate()} />}
+                >
+                  Revogar tira a fonte das respostas na hora. O histórico continua guardado e não dá para desfazer.
+                </DangerZone>
                 <ErrorNotice error={revoke.error} />
               </>
             )}

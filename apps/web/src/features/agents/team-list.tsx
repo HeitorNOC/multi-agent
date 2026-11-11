@@ -1,12 +1,13 @@
 /** O time atual: ajustar orientações e a quem cada um responde, ou tirar do time. */
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { MessagesSquare, Settings2 } from "lucide-react";
-import { ErrorNotice } from "@/components/common";
+import { MessagesSquare, Settings2, UserMinus } from "lucide-react";
+import { ConfirmAction, DangerZone, ErrorNotice } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { NativeSelect } from "@/components/ui/native-select";
 import { agentsApi, type Agent } from "@/lib/api";
 import { relativeTime } from "@/lib/format";
 import { AgentAvatar, useOpenStation } from "./agent-bits";
@@ -49,7 +50,6 @@ function EditAgentDialog({ agent, team, onClose }: { agent: Agent; team: Agent[]
   const queryClient = useQueryClient();
   const [instructions, setInstructions] = useState(agent.instructions);
   const [reportsTo, setReportsTo] = useState(agent.reports_to ?? "");
-  const [confirm, setConfirm] = useState(false);
   const refresh = () => {
     for (const key of ["team", "organogram", "catalog", "setup"]) void queryClient.invalidateQueries({ queryKey: [key] });
   };
@@ -83,7 +83,7 @@ function EditAgentDialog({ agent, team, onClose }: { agent: Agent; team: Agent[]
         </div>
         <div className="space-y-2">
           <Label htmlFor="e-reports">Responde a</Label>
-          <select id="e-reports" className="h-9 w-full rounded-md border bg-transparent px-2 text-sm" value={reportsTo} onChange={(e) => setReportsTo(e.target.value)}>
+          <NativeSelect id="e-reports" value={reportsTo} onChange={(e) => setReportsTo(e.target.value)}>
             <option value="">Chief of Staff</option>
             {team
               .filter((a) => a.id !== agent.id)
@@ -92,23 +92,21 @@ function EditAgentDialog({ agent, team, onClose }: { agent: Agent; team: Agent[]
                   {a.name} · {a.title}
                 </option>
               ))}
-          </select>
+          </NativeSelect>
         </div>
-        <ErrorNotice error={save.error ?? remove.error} />
-        <DialogFooter className="gap-2 sm:justify-between">
-          {confirm ? (
-            <Button variant="destructive" disabled={remove.isPending} onClick={() => remove.mutate()}>
-              Confirmar: tirar do time
-            </Button>
-          ) : (
-            <Button variant="ghost" onClick={() => setConfirm(true)}>
-              Tirar do time
-            </Button>
-          )}
+        <ErrorNotice error={save.error} title="Ajuste não salvo" />
+        <DialogFooter>
+          <Button variant="ghost" onClick={onClose}>
+            Cancelar
+          </Button>
           <Button disabled={save.isPending} onClick={() => save.mutate()}>
-            Salvar
+            {save.isPending ? "Salvando…" : "Salvar"}
           </Button>
         </DialogFooter>
+        <DangerZone action={<ConfirmAction icon={<UserMinus />} label="Tirar do time" confirmLabel="Confirmar" pending={remove.isPending} onConfirm={() => remove.mutate()} />}>
+          {agent.name} sai do time e deixa de receber trabalhos. O histórico do que já fez continua guardado.
+        </DangerZone>
+        <ErrorNotice error={remove.error} />
       </DialogContent>
     </Dialog>
   );

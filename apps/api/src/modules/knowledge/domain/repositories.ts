@@ -22,3 +22,18 @@ export interface VersionRepository {
   /** Todas as versões de fontes não revogadas, com o texto. */
   listIndexable(): Promise<IndexableVersion[]>;
 }
+
+/** Área criada pela empresa (as do catálogo e "Geral" não ficam aqui). */
+export interface CustomArea {
+  id: string;
+  title: string;
+  createdBy: ActorId;
+  createdAt: string;
+}
+
+export interface AreaRepository {
+  list(): Promise<CustomArea[]>;
+  add(area: CustomArea): Promise<void>;
+  rename(id: string, title: string): Promise<void>;
+  remove(id: string): Promise<void>;
+}

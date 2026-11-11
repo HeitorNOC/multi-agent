@@ -9,6 +9,7 @@ import { lazy, Suspense, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ErrorNotice, LoadingRows } from "@/components/common";
 import { Button } from "@/components/ui/button";
+import { NativeSelect } from "@/components/ui/native-select";
 import { agentsApi, jobsApi, knowledgeApi } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { SourceDialog } from "../knowledge/source-dialog";
@@ -21,11 +22,13 @@ type Mode = "knowledge" | "agents";
 
 const LEGEND: Record<Mode, { color: string; label: string }[]> = {
   knowledge: [
-    { color: "#5eead4", label: "Vigente" },
-    { color: "#a78bfa", label: "Histórico ou ainda não vigente" },
+    { color: "#5eead4", label: "Área" },
+    { color: "#a7bdb8", label: "Vigente" },
+    { color: "#9d8cf0", label: "Histórico ou ainda não vigente" },
   ],
   agents: [
-    { color: "#7dd3fc", label: "Disponível" },
+    { color: "#5eead4", label: "Área" },
+    { color: "#a8a29e", label: "Disponível" },
     { color: "#fb923c", label: "Trabalhando" },
     { color: "#facc15", label: "Aguardando você" },
     { color: "#4ade80", label: "Concluiu hoje" },
@@ -44,6 +47,9 @@ const webgl = () => {
 export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
   const [mode, setMode] = useState<Mode>(initial);
   const [selected, setSelected] = useState<MapNode | null>(null);
+  // Para onde a câmera olha: um nó ou a vista inteira (o contador refaz o "Recentrar").
+  const [focus, setFocus] = useState<string | null>(null);
+  const [recenter, setRecenter] = useState(0);
   const sources = useQuery({ queryKey: ["sources"], queryFn: knowledgeApi.list });
   const team = useQuery({ queryKey: ["team"], queryFn: agentsApi.team });
   const catalog = useQuery({ queryKey: ["catalog"], queryFn: agentsApi.catalog });
@@ -86,9 +92,32 @@ export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
   }, [mode, sources.data, team.data, catalog.data, jobs.data]);
 
   const error = mode === "knowledge" ? sources.error : (team.error ?? catalog.error);
+  const reset = () => {
+    setFocus(null);
+    setSelected(null);
+    setRecenter((n) => n + 1);
+  };
+  const choose = (node: MapNode) => {
+    if (node.kind === "core") return reset();
+    setFocus(node.id);
+    setSelected(node);
+  };
+  // "Ir para…": áreas e, dentro de cada uma, seus itens (também é o caminho pelo teclado).
+  const groups = useMemo(() => {
+    if (!graph) return [];
+    const areaOf = new Map(graph.edges.filter((e) => e.from.startsWith("area:")).map((e) => [e.to, e.from]));
+    return graph.nodes.filter((n) => n.kind === "area").map((a) => ({ area: a, items: graph.nodes.filter((n) => areaOf.get(n.id) === a.id) }));
+  }, [graph]);
   const counts = graph ? graph.nodes.filter((n) => n.kind === (mode === "knowledge" ? "source" : "agent")).length : 0;
   return (
-    <section className="overflow-hidden rounded-xl border bg-[radial-gradient(ellipse_at_center,#0c2a4a_0%,#07111f_70%)] text-slate-100">
+    <section
+      className="overflow-hidden rounded-xl border border-white/10 text-stone-100"
+      // Fundo das referências: quase preto e quente, com um brilho âmbar vindo do canto.
+      style={{
+        background:
+          "radial-gradient(45% 40% at 6% 14%, rgba(234,88,12,0.30), transparent 70%), radial-gradient(70% 60% at 55% 55%, #16130f 0%, #0b0a09 72%)",
+      }}
+    >
       <div className="flex flex-wrap items-center gap-2 border-b border-white/10 p-3">
         <div className="flex rounded-lg border border-white/15 p-0.5" role="tablist" aria-label="O que mostrar">
           {(
@@ -104,16 +133,40 @@ export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
               aria-selected={mode === m}
               onClick={() => {
                 setMode(m);
-                setSelected(null);
+                reset();
               }}
-              className={cn("rounded-md px-3 py-1 text-sm", mode === m ? "bg-white/15 font-medium" : "text-slate-300 hover:bg-white/5")}
+              className={cn("rounded-md px-3 py-1 text-sm", mode === m ? "bg-white/15 font-medium" : "text-stone-300 hover:bg-white/5")}
             >
               {label}
             </button>
           ))}
         </div>
-        <p className="text-xs text-slate-300">Arraste para girar, role para aproximar e clique num {mode === "knowledge" ? "documento" : "agente"}.</p>
-        <ul className="ml-auto flex flex-wrap gap-3 text-xs text-slate-300">
+        <NativeSelect
+          aria-label="Ir para" className="max-w-56" size="sm" selectClassName="border-white/15 bg-black/60 text-stone-100 dark:bg-black/60"
+          value={focus ?? ""}
+          onChange={(e) => {
+            const node = graph?.nodes.find((n) => n.id === e.target.value);
+            if (node) choose(node);
+            else reset();
+          }}
+        >
+          <option value="">Ir para…</option>
+          {groups.map((g) => (
+            <optgroup key={g.area.id} label={g.area.label}>
+              <option value={g.area.id}>{g.area.label} (área)</option>
+              {g.items.map((n) => (
+                <option key={n.id} value={n.id}>
+                  {n.label}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </NativeSelect>
+        <Button size="sm" variant="ghost" className="text-stone-200 hover:bg-white/10 hover:text-white" onClick={reset}>
+          Recentrar
+        </Button>
+        <p className="text-xs text-stone-400">Arraste para girar, role para aproximar e clique num {mode === "knowledge" ? "documento" : "agente"}.</p>
+        <ul className="ml-auto flex flex-wrap gap-3 text-xs text-stone-300">
           {LEGEND[mode].map((l) => (
             <li key={l.label} className="inline-flex items-center gap-1">
               <span className="size-2 rounded-full" style={{ background: l.color }} /> {l.label}
@@ -127,44 +180,69 @@ export function BrainMap({ initial = "knowledge" }: { initial?: Mode }) {
             <ErrorNotice error={error} />
           </div>
         ) : !supported ? (
-          <p className="p-6 text-sm text-slate-300">Este navegador não tem WebGL, então o mapa 3D não abre. A lista continua disponível na aba ao lado.</p>
+          <p className="p-6 text-sm text-stone-300">Este navegador não tem WebGL, então o mapa 3D não abre. A lista continua disponível na aba ao lado.</p>
         ) : !graph ? (
           <div className="p-4">
             <LoadingRows rows={3} />
           </div>
         ) : counts === 0 ? (
-          <p className="p-6 text-sm text-slate-300">{mode === "knowledge" ? "O Cérebro ainda não tem documentos." : "O time ainda não tem agentes. Contrate em Agentes."}</p>
+          <p className="p-6 text-sm text-stone-300">{mode === "knowledge" ? "O Cérebro ainda não tem documentos." : "O time ainda não tem agentes. Contrate em Agentes."}</p>
         ) : (
-          <Suspense fallback={<p className="p-6 text-sm text-slate-300">Abrindo o mapa…</p>}>
-            <BrainScene nodes={graph.nodes} edges={graph.edges} selected={selected?.id ?? null} onSelect={setSelected} />
-            {/* O núcleo fica sempre no centro da cena (a câmera gira em volta dele). */}
-            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="text-sm font-semibold tracking-[0.25em] text-white drop-shadow">CÉREBRO</span>
-              <span className="text-[10px] uppercase tracking-widest text-sky-100/80">{mode === "knowledge" ? "acervo versionado" : "Chief of Staff"}</span>
-            </div>
+          <Suspense fallback={<p className="p-6 text-sm text-stone-300">Abrindo o mapa…</p>}>
+            <BrainScene nodes={graph.nodes} edges={graph.edges} selected={selected?.id ?? null} focus={focus} recenter={recenter} onSelect={choose} />
           </Suspense>
         )}
         {selected?.kind === "agent" && (
-          <div className="absolute bottom-3 left-3 right-3 flex flex-wrap items-center gap-2 rounded-lg border border-white/15 bg-slate-950/80 p-3 text-sm backdrop-blur sm:right-auto">
-            <div className="min-w-0">
-              <p className="font-medium">{selected.label}</p>
-              <p className="text-xs text-slate-300">{selected.sublabel}</p>
+          // Cartão de vidro como o do organograma das referências: ícone de onda, nome e cargo.
+          <div className="absolute bottom-3 left-3 right-3 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.05] p-3 text-sm shadow-2xl backdrop-blur-md sm:right-auto sm:min-w-72">
+            <Wave state={selected.state} />
+            <div className="min-w-0 flex-1">
+              <p className="truncate font-semibold text-[#f4ecd8]">{selected.label}</p>
+              <p className="truncate text-xs text-stone-400">{selected.sublabel}</p>
+              <p className="mt-0.5 text-[11px] text-stone-400">{AGENT_STATE_LABEL[selected.state] ?? ""}</p>
             </div>
-            <Button size="sm" disabled={station.isPending} onClick={() => station.mutate(selected.ref!)}>
-              Abrir a Estação
-            </Button>
-            <Button size="sm" variant="ghost" onClick={() => setSelected(null)}>
-              Fechar
-            </Button>
+            <div className="flex flex-col gap-1">
+              <Button size="sm" disabled={station.isPending} onClick={() => station.mutate(selected.ref!)}>
+                Conversar
+              </Button>
+              <Button size="sm" variant="ghost" className="text-stone-300 hover:bg-white/10 hover:text-white" onClick={reset}>
+                Fechar
+              </Button>
+            </div>
           </div>
         )}
       </div>
-      <p className="border-t border-white/10 px-3 py-2 text-xs text-slate-300">
+      <p className="border-t border-white/10 px-3 py-2 text-xs text-stone-300">
         {mode === "knowledge"
           ? `${counts} documento(s) em ${graph?.nodes.filter((n) => n.kind === "area").length ?? 0} área(s)`
           : `${counts} agente(s) no time · ${graph?.nodes.filter((n) => n.kind === "agent" && n.state === "running").length ?? 0} trabalhando agora`}
       </p>
       {selected?.kind === "source" && sources.data && <SourceDialog id={selected.ref!} areas={sources.data.areas} onClose={() => setSelected(null)} />}
     </section>
+  );
+}
+
+const AGENT_STATE_LABEL: Partial<Record<MapNode["state"], string>> = {
+  idle: "Disponível",
+  running: "Trabalhando agora",
+  waiting: "Aguardando você",
+  done: "Concluiu hoje",
+};
+
+/** Ícone de onda em degradê turquesa → violeta (o "sinal" do agente); trabalhando, pulsa. */
+function Wave({ state }: { state: MapNode["state"] }) {
+  const active = state === "running" || state === "waiting";
+  return (
+    <div aria-hidden className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-black/40">
+      <svg viewBox="0 0 40 20" className={cn("h-5 w-9", active && "motion-safe:animate-pulse")}>
+        <defs>
+          <linearGradient id="aurora-wave" x1="0" x2="1">
+            <stop offset="0" stopColor="#2dd4bf" />
+            <stop offset="1" stopColor="#818cf8" />
+          </linearGradient>
+        </defs>
+        <path d="M1 11 C6 11 7 4 11 4 S16 17 20 17 S25 2 29 2 S34 11 39 11" fill="none" stroke="url(#aurora-wave)" strokeWidth="2.2" strokeLinecap="round" />
+      </svg>
+    </div>
   );
 }

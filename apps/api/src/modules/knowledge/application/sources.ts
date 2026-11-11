@@ -67,7 +67,7 @@ const BASE64 = /^[A-Za-z0-9+/]*={0,2}$/;
 
 export async function uploadSource(deps: KnowledgeDeps, actor: ActorId, input: UploadInput) {
   const file = await prepareFile(deps, input, input.title);
-  const area = checkArea(deps, input.area);
+  const area = await checkArea(deps, input.area);
   const id = SourceId.create();
   const now = deps.clock.now();
   await deps.uow.run(async (s) => {
@@ -119,7 +119,7 @@ export async function addVersion(deps: KnowledgeDeps, actor: ActorId, id: Source
 
 /** Muda a fonte de área (só o dono). Não cria versão: o conteúdo é o mesmo. */
 export async function moveSource(deps: KnowledgeDeps, actor: ActorId, id: SourceId, rawArea: string) {
-  const area = checkArea(deps, rawArea);
+  const area = await checkArea(deps, rawArea);
   await deps.uow.run(async (s) => {
     const source = await owned(s, actor, id);
     if (source.area === area) return;
@@ -147,7 +147,7 @@ export async function listSources(deps: KnowledgeDeps, actor: ActorId) {
   const { current, latest } = await versionsById(deps);
   return {
     sources: sources.map((s) => summary(s, current.get(s.id), latest.get(s.id))),
-    areas: areaList(deps).map((a) => ({ ...a, sources: sources.filter((s) => s.area === a.id && !s.revokedAt).length })),
+    areas: (await areaList(deps)).map((a) => ({ ...a, sources: sources.filter((s) => s.area === a.id && !s.revokedAt).length })),
     /** Busca por significado: modelo e quantos trechos já têm vetor; `null` se desligada. */
     semantic: await deps.search.semanticStatus(),
     media_types: SUPPORTED_MEDIA_TYPES,
@@ -191,12 +191,76 @@ async function versionsById(deps: KnowledgeDeps) {
   return { current, latest };
 }
 
-const areaList = (deps: KnowledgeDeps) => [{ id: GENERAL_AREA, title: "Geral" }, ...(deps.areas ?? []).filter((a) => a.id !== GENERAL_AREA)];
+/** "Geral", depois as áreas do catálogo e por fim as criadas pela empresa (`custom`). */
+async function areaList(deps: KnowledgeDeps, s: KnowledgeStore = deps.uow.read) {
+  const fixed = [{ id: GENERAL_AREA, title: "Geral" }, ...(deps.areas ?? []).filter((a) => a.id !== GENERAL_AREA)];
+  const ids = new Set(fixed.map((a) => a.id));
+  const custom = (await s.areas.list()).filter((a) => !ids.has(a.id));
+  return [...fixed.map((a) => ({ ...a, custom: false })), ...custom.map((a) => ({ id: a.id, title: a.title, custom: true }))];
+}
 
-function checkArea(deps: KnowledgeDeps, area: string | undefined) {
+async function checkArea(deps: KnowledgeDeps, area: string | undefined) {
   if (area === undefined || area === "") return GENERAL_AREA;
-  ensure(areaList(deps).some((a) => a.id === area), () => invalid("unknown_area", `Área desconhecida: ${area}`));
+  ensure((await areaList(deps)).some((a) => a.id === area), () => invalid("unknown_area", `Área desconhecida: ${area}`));
   return area;
+}
+
+const AREA_TITLE_MAX = 60;
+
+function areaTitle(raw: string) {
+  const title = raw.trim().replace(/\s+/g, " ");
+  ensure(title.length > 0 && title.length <= AREA_TITLE_MAX, () => invalid("invalid_area_title", `O nome da área precisa ter de 1 a ${AREA_TITLE_MAX} caracteres`));
+  return title;
+}
+
+/** Cria uma área do Cérebro. O nome não pode repetir o de outra área (sem diferenciar maiúsculas). */
+export async function createArea(deps: KnowledgeDeps, actor: ActorId, rawTitle: string) {
+  const title = areaTitle(rawTitle);
+  const id = await deps.uow.run(async (s) => {
+    const all = await areaList(deps, s);
+    ensure(!all.some((a) => a.title.toLowerCase() === title.toLowerCase()), () => conflict("area_exists", `Já existe a área "${title}"`));
+    const taken = new Set(all.map((a) => a.id));
+    const base = slug(title).slice(0, 32).replace(/-$/, "");
+    let id = base;
+    for (let n = 2; taken.has(id); n++) id = `${base}-${n}`;
+    await s.areas.add({ id, title, createdBy: actor, createdAt: deps.clock.now() });
+    await s.events.append(stream.knowledge(`area:${id}`), { kind: "knowledge_area_created", detail: { actor, title } });
+    return id;
+  });
+  return { id, title, custom: true, sources: 0 };
+}
+
+/** Renomeia uma área criada pela empresa (as do catálogo e "Geral" são fixas). */
+export async function renameArea(deps: KnowledgeDeps, actor: ActorId, id: string, rawTitle: string) {
+  const title = areaTitle(rawTitle);
+  await deps.uow.run(async (s) => {
+    const all = await areaList(deps, s);
+    const area = all.find((a) => a.id === id);
+    ensure(area, () => notFound("area_not_found", "Área não encontrada"));
+    ensure(area.custom, () => forbidden("area_fixed", "Esta área é fixa e não pode ser renomeada"));
+    ensure(!all.some((a) => a.id !== id && a.title.toLowerCase() === title.toLowerCase()), () => conflict("area_exists", `Já existe a área "${title}"`));
+    if (area.title === title) return;
+    await s.areas.rename(id, title);
+    await s.events.append(stream.knowledge(`area:${id}`), { kind: "knowledge_area_renamed", detail: { actor, from: area.title, to: title } });
+  });
+  return { id, title, custom: true };
+}
+
+/** Exclui uma área criada pela empresa, desde que nenhuma fonte em vigor esteja nela. */
+export async function removeArea(deps: KnowledgeDeps, actor: ActorId, id: string) {
+  await deps.uow.run(async (s) => {
+    const area = (await areaList(deps, s)).find((a) => a.id === id);
+    ensure(area, () => notFound("area_not_found", "Área não encontrada"));
+    ensure(area.custom, () => forbidden("area_fixed", "Esta área é fixa e não pode ser excluída"));
+    const inside = (await s.sources.list()).filter((src) => src.area === id);
+    const active = inside.filter((src) => !src.revokedAt).length;
+    ensure(active === 0, () => conflict("area_in_use", `Mova as ${active} fonte(s) desta área antes de excluí-la`));
+    // Fontes revogadas que ainda apontavam para ela voltam para "Geral".
+    for (const src of inside) await s.sources.save({ ...src, area: GENERAL_AREA });
+    await s.areas.remove(id);
+    await s.events.append(stream.knowledge(`area:${id}`), { kind: "knowledge_area_removed", detail: { actor, title: area.title } });
+  });
+  return { id, removed: true };
 }
 
 const slug = (title: string) =>

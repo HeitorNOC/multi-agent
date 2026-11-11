@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { NativeSelect } from "@/components/ui/native-select";
 import { agentsApi, type CatalogArea } from "@/lib/api";
 
 const EMPTY = { name: "", title: "", area: "", focus: "", tagline: "", skills: "", instructions: "" };
@@ -68,14 +69,14 @@ export function CreateAgentDialog({ areas }: { areas: { id: string; title: strin
           </div>
           <div className="space-y-2">
             <Label htmlFor="a-area">Área</Label>
-            <select id="a-area" className="h-9 w-full rounded-md border bg-transparent px-2 text-sm" value={form.area} onChange={set("area")}>
+            <NativeSelect id="a-area" value={form.area} onChange={set("area")}>
               <option value="">Escolha…</option>
               {areas.map((a) => (
                 <option key={a.id} value={a.id}>
                   {a.title}
                 </option>
               ))}
-            </select>
+            </NativeSelect>
           </div>
           <div className="space-y-2">
             <Label htmlFor="a-focus">No que ajuda</Label>

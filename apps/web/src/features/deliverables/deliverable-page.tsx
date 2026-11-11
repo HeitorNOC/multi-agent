@@ -10,6 +10,7 @@ import { ErrorNotice, LoadingRows, ToneBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { NativeSelect } from "@/components/ui/native-select";
 import { deliverablesApi, integrationsApi, type DeliverableDetail } from "@/lib/api";
 import { DELIVERABLE_STATUS, EVENT_LABEL, formatDateTime, shortId } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -138,13 +139,13 @@ function AcceptedActions({ data }: { data: DeliverableDetail }) {
       </p>
       {writable.length > 0 ? (
         <div className="flex flex-wrap items-center gap-2">
-          <select aria-label="Salvar em" className="h-9 rounded-md border bg-transparent px-2" value={target} onChange={(e) => setTarget(e.target.value)}>
+          <NativeSelect aria-label="Salvar em" value={target} onChange={(e) => setTarget(e.target.value)}>
             {writable.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
               </option>
             ))}
-          </select>
+          </NativeSelect>
           <Button size="sm" variant="outline" disabled={save.isPending} onClick={() => save.mutate()}>
             <FolderOutput /> Salvar na pasta
           </Button>

@@ -207,6 +207,8 @@ export interface BrainArea {
   title: string;
   /** Fontes não revogadas nesta área. */
   sources: number;
+  /** Criada pela empresa (pode renomear e excluir). "Geral" e as do catálogo são fixas. */
+  custom: boolean;
 }
 
 export interface FileFormat {
@@ -246,6 +248,9 @@ export const knowledgeApi = {
   move: (id: string, area: string) => post<SourceSummary>(`/api/knowledge/sources/${id}/area`, { area }),
   revoke: (id: string) => post<SourceSummary & { repeated: boolean }>(`/api/knowledge/sources/${id}/revoke`),
   ask: (question: string, area?: string) => post<Answer>("/api/knowledge/query", { question, ...(area ? { area } : {}) }),
+  createArea: (title: string) => post<BrainArea>("/api/knowledge/areas", { title }),
+  renameArea: (id: string, title: string) => post<Omit<BrainArea, "sources">>(`/api/knowledge/areas/${encodeURIComponent(id)}`, { title }),
+  removeArea: (id: string) => post<{ id: string; removed: true }>(`/api/knowledge/areas/${encodeURIComponent(id)}/remove`),
 };
 
 // ── Recuperação ──────────────────────────────────────────────────────────────

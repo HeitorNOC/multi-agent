@@ -5,15 +5,17 @@
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BrainCircuit, ExternalLink, FileText, PenLine, Search } from "lucide-react";
-import { EmptyState, ErrorNotice, LoadingRows, PageHeader, ToneBadge } from "@/components/common";
+import { EmptyState, ErrorNotice, LoadingRows, PageHeader, Segmented, ToneBadge } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { NativeSelect } from "@/components/ui/native-select";
 import { knowledgeApi, type BrainArea, type SemanticStatus, type SourceSummary } from "@/lib/api";
 import { formatDate, relativeTime, SOURCE_STATUS } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "react-router";
 import { BrainMap } from "../brain-map/brain-map";
+import { AreasDialog } from "./areas-dialog";
 import { SourceDialog } from "./source-dialog";
 import { UploadDialog } from "./upload-dialog";
 
@@ -45,25 +47,16 @@ export function KnowledgePage() {
         description="Documentos da empresa por área, com dono, acesso, versões e vigência. Os agentes leem o que está aberto a todos e o que foi liberado para eles."
         actions={
           <>
-            <div className="flex rounded-lg border p-0.5" role="tablist" aria-label="Como ver">
-              {(
-                [
-                  [false, "Lista"],
-                  [true, "Mapa 3D"],
-                ] as const
-              ).map(([m, label]) => (
-                <button
-                  key={label}
-                  type="button"
-                  role="tab"
-                  aria-selected={map === m}
-                  onClick={() => setParams(m ? { vista: "mapa" } : {})}
-                  className={cn("rounded-md px-3 py-1 text-sm", map === m ? "bg-muted font-medium" : "text-muted-foreground hover:bg-muted/50")}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
+            <Segmented
+              label="Como ver"
+              value={map}
+              options={[
+                [false, "Lista"],
+                [true, "Mapa 3D"],
+              ]}
+              onChange={(m) => setParams(m ? { vista: "mapa" } : {})}
+            />
+            <AreasDialog areas={areas} />
             <UploadDialog sources={data?.sources ?? []} areas={areas} formats={data?.formats ?? []} defaultArea={area || undefined} />
           </>
         }
@@ -184,14 +177,14 @@ function Ask({ areas, area: initial }: { areas: BrainArea[]; area: string }) {
           }}
         >
           <Input value={question} maxLength={1000} placeholder="Ex.: Quem aprova compras acima de dez mil reais?" onChange={(e) => setQuestion(e.target.value)} className="sm:flex-1" />
-          <select aria-label="Procurar em" className="h-9 rounded-md border bg-transparent px-2 text-sm" value={area} onChange={(e) => setArea(e.target.value)}>
+          <NativeSelect aria-label="Procurar em" value={area} onChange={(e) => setArea(e.target.value)}>
             <option value={ALL}>Todas as áreas</option>
             {areas.map((a) => (
               <option key={a.id} value={a.id}>
                 {a.title}
               </option>
             ))}
-          </select>
+          </NativeSelect>
           <Button type="submit" disabled={!question.trim() || ask.isPending}>
             <Search /> {ask.isPending ? "Buscando…" : "Perguntar"}
           </Button>
