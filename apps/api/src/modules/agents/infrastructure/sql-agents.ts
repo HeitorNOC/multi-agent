@@ -143,9 +143,90 @@ export class SqlAutonomyRepository implements AutonomyRepository {
   }
 }
 
+export interface CompanyFact {
+  id: string;
+  text: string;
+  category: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/** Fatos da empresa (N5): o que todo agente deve saber, editado pelo CEO. */
+export class SqlCompanyFacts {
+  private readonly sql: Sql;
+  constructor(sql: Sql) {
+    this.sql = sql;
+  }
+
+  async list(): Promise<CompanyFact[]> {
+    return (
+      await this.sql.all<{ id: string; text: string; category: string; created_by: string; created_at: string; updated_at: string }>("SELECT * FROM company_facts ORDER BY ordinal")
+    ).map((r) => ({ id: r.id, text: r.text, category: r.category, createdBy: r.created_by, createdAt: r.created_at, updatedAt: r.updated_at }));
+  }
+
+  async add(f: CompanyFact) {
+    await this.sql.run(
+      `INSERT INTO company_facts (id, text, category, created_by, created_at, updated_at, ordinal)
+       VALUES ($1, $2, $3, $4, $5, $6, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM company_facts))`,
+      [f.id, f.text, f.category, f.createdBy, f.createdAt, f.updatedAt],
+    );
+  }
+
+  async update(id: string, text: string, category: string, at: string) {
+    return (await this.sql.run("UPDATE company_facts SET text = $2, category = $3, updated_at = $4 WHERE id = $1", [id, text, category, at])) > 0;
+  }
+
+  async remove(id: string) {
+    return (await this.sql.run("DELETE FROM company_facts WHERE id = $1", [id])) > 0;
+  }
+}
+
+export interface CompanyResource {
+  id: string;
+  kind: "database" | "queue" | "environment" | "repository" | "cloud" | "other";
+  name: string;
+  description: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/** Recursos da empresa (N6): descrições para o Chief planejar, sem credenciais. */
+export class SqlCompanyResources {
+  private readonly sql: Sql;
+  constructor(sql: Sql) {
+    this.sql = sql;
+  }
+
+  async list(): Promise<CompanyResource[]> {
+    return (
+      await this.sql.all<{ id: string; kind: string; name: string; description: string; created_by: string; created_at: string; updated_at: string }>("SELECT * FROM company_resources ORDER BY ordinal")
+    ).map((r) => ({ id: r.id, kind: r.kind as CompanyResource["kind"], name: r.name, description: r.description, createdBy: r.created_by, createdAt: r.created_at, updatedAt: r.updated_at }));
+  }
+
+  async add(r: CompanyResource) {
+    await this.sql.run(
+      `INSERT INTO company_resources (id, kind, name, description, created_by, created_at, updated_at, ordinal)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM company_resources))`,
+      [r.id, r.kind, r.name, r.description, r.createdBy, r.createdAt, r.updatedAt],
+    );
+  }
+
+  async update(id: string, kind: string, name: string, description: string, at: string) {
+    return (await this.sql.run("UPDATE company_resources SET kind = $2, name = $3, description = $4, updated_at = $5 WHERE id = $1", [id, kind, name, description, at])) > 0;
+  }
+
+  async remove(id: string) {
+    return (await this.sql.run("DELETE FROM company_resources WHERE id = $1", [id])) > 0;
+  }
+}
+
 export interface AgentsStore {
   agents: AgentRepository;
   autonomy: AutonomyRepository;
+  facts: SqlCompanyFacts;
+  resources: SqlCompanyResources;
   organization: OrganizationRepository;
   events: EventLog;
 }
@@ -155,6 +236,8 @@ export const agentsStore =
   (sql: Sql): AgentsStore => ({
     agents: new SqlAgentRepository(sql),
     autonomy: new SqlAutonomyRepository(sql),
+    facts: new SqlCompanyFacts(sql),
+    resources: new SqlCompanyResources(sql),
     organization: new SqlOrganizationRepository(sql),
     events: new SqlEventLog(sql, clock),
   });

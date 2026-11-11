@@ -60,7 +60,49 @@ const STUCK = new Set(["failed", "interrupted", "recovery_required"]);
 const ENDED = new Set(["rejected", "closed_unknown"]);
 
 type JobRow = { id: string; goal: string; status: string; plan: unknown; created_at: string };
-type ReceiptRow = { job_id: string; slot: string; state: string; created_at: string; updated_at: string };
+type ReceiptRow = { job_id: string; slot: string; state: string; output?: unknown; created_at: string; updated_at: string };
+
+/** Decisão gravada numa revisão de etapa (texto JSON no SQLite, objeto no PostgreSQL). */
+const decisionOf = (output: unknown) => {
+  const o = typeof output === "string" ? (JSON.parse(output) as { decision?: unknown }) : (output as { decision?: unknown } | null);
+  return o?.decision;
+};
+
+type Step = { title: string; owner: string; reviewer: string };
+const planSteps = (plan: unknown): Step[] | null => {
+  const p = typeof plan === "string" ? (JSON.parse(plan) as unknown) : plan;
+  const steps = (p as { steps?: unknown } | null)?.steps;
+  return Array.isArray(steps) ? (steps as Step[]) : null;
+};
+
+/**
+ * Trabalho em etapas (N3): quem está entregando ou revisando qual etapa. Marcos: designado →
+ * trabalhando numa etapa → todas as suas etapas aceitas.
+ */
+function stepActivity(agentId: string, job: JobRow, steps: Step[], receipts: ReceiptRow[], now: number) {
+  const mine = steps.map((s, i) => ({ s, i })).filter((x) => x.s.owner === agentId || x.s.reviewer === agentId);
+  if (!mine.length) return null;
+  const ofJob = receipts.filter((r) => r.job_id === job.id);
+  const accepted = (i: number) => ofJob.some((r) => r.slot.startsWith(`review:${i}:`) && r.state === "completed" && decisionOf(r.output) === "accept");
+  for (const { s, i } of mine) {
+    const prefix = s.owner === agentId ? "step" : "review";
+    const live = ofJob.find((r) => r.slot.startsWith(`${prefix}:${i}:`) && r.state === "reserved");
+    if (live)
+      return {
+        status: "running" as const,
+        activity: `${prefix === "step" ? "Trabalhando na" : "Revisando a"} etapa ${i + 1}: ${s.title}`,
+        milestones: { done: 2, total: 3 },
+        started_at: live.created_at,
+        elapsed_ms: now - Date.parse(live.created_at),
+      };
+  }
+  const owned = mine.filter((x) => x.s.owner === agentId);
+  if (owned.length && owned.every((x) => accepted(x.i)))
+    return { status: (job.status === "awaiting_approval" ? "waiting" : "done") as "waiting" | "done", activity: `Etapa(s) ${owned.map((x) => x.i + 1).join(", ")} aceita(s) na revisão`, milestones: { done: 3, total: 3 }, started_at: null, elapsed_ms: null };
+  const next = owned.find((x) => !accepted(x.i)) ?? mine[0]!;
+  if (STUCK.has(job.status)) return { status: "blocked" as const, activity: `Trabalho parado na etapa ${next.i + 1}`, milestones: { done: 1, total: 3 }, started_at: null, elapsed_ms: null };
+  return { status: "assigned" as const, activity: `Na fila: etapa ${next.i + 1} — ${next.s.title}`, milestones: { done: 1, total: 3 }, started_at: null, elapsed_ms: null };
+}
 
 const planAgents = (plan: unknown): string[] => {
   const p = typeof plan === "string" ? (JSON.parse(plan) as unknown) : plan;
@@ -97,7 +139,7 @@ export async function agentActivity(deps: AgentActivityDeps): Promise<{ chief: C
   const ids = jobs.map((j) => j.id);
   const receipts = ids.length
     ? await deps.sql.all<ReceiptRow>(
-        `SELECT job_id, slot, state, created_at, updated_at FROM inference_receipts WHERE job_id IN (${ids.map((_, i) => `$${i + 1}`).join(", ")})`,
+        `SELECT job_id, slot, state, output, created_at, updated_at FROM inference_receipts WHERE job_id IN (${ids.map((_, i) => `$${i + 1}`).join(", ")})`,
         ids,
       )
     : [];
@@ -125,6 +167,11 @@ export async function agentActivity(deps: AgentActivityDeps): Promise<{ chief: C
     const j = current.get(a.id);
     if (!j) return { ...base, status: "idle", activity: "Sem participação em trabalhos agora", job: null, milestones: { done: 0, total: 3 }, started_at: null, elapsed_ms: null, remaining_ms: null };
     const job = { id: j.id, goal: j.goal, status: j.status };
+    const steps = planSteps(j.plan);
+    if (steps) {
+      const st = stepActivity(a.id, j, steps, receipts, now);
+      if (st) return { ...base, job, remaining_ms: null, ...st };
+    }
     const r = receipt.get(`${j.id}|specialist:${a.id}`);
     const elapsed = r ? (r.state === "completed" ? Date.parse(r.updated_at) : now) - Date.parse(r.created_at) : null;
     // Só estima enquanto pesquisa; a participação atual ainda não está no histórico (não concluiu).

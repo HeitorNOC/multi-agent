@@ -69,12 +69,16 @@ export async function overview(deps: OverviewDeps) {
   const d = counts(deliverables);
 
   // Pendências com links, para a lista "Para decidir".
-  const [approvals, reviews, recovery] = await Promise.all([
+  const [approvals, reviews, recovery, plans] = await Promise.all([
     sql.all<{ id: string; goal: string; created_at: string }>("SELECT id, goal, created_at FROM jobs WHERE status = 'awaiting_approval' ORDER BY ordinal DESC LIMIT 10"),
     sql.all<{ id: string; title: string; updated_at: string; current_version: number | string }>(
       "SELECT id, title, updated_at, current_version FROM deliverables WHERE status = 'in_review' ORDER BY updated_at DESC LIMIT 10",
     ),
     sql.all<{ id: string; goal: string; created_at: string }>("SELECT id, goal, created_at FROM jobs WHERE status = 'recovery_required' ORDER BY ordinal DESC LIMIT 10"),
+    // Planos que o Chief propôs na conversa e esperam o "aprovar" do CEO (N2).
+    sql.all<{ id: string; conversation_id: string; brief: string; updated_at: string }>(
+      "SELECT id, conversation_id, brief, updated_at FROM work_plans WHERE status = 'proposed' ORDER BY updated_at DESC LIMIT 10",
+    ),
   ]);
 
   // Consumo do modelo a partir da trilha.
@@ -143,7 +147,7 @@ export async function overview(deps: OverviewDeps) {
     time_zone: timeZone,
     days,
     kpis: {
-      waiting_you: (j.awaiting_approval ?? 0) + (d.in_review ?? 0) + (j.recovery_required ?? 0),
+      waiting_you: (j.awaiting_approval ?? 0) + (d.in_review ?? 0) + (j.recovery_required ?? 0) + plans.length,
       in_progress: (j.queued ?? 0) + (j.running ?? 0) + (d.changes_requested ?? 0),
       attention,
       delivered: Number(recentDone?.n ?? 0),
@@ -155,6 +159,7 @@ export async function overview(deps: OverviewDeps) {
       approvals: approvals.map((r) => ({ id: r.id, title: r.goal, at: r.created_at })),
       reviews: reviews.map((r) => ({ id: r.id, title: r.title, at: r.updated_at, version: Number(r.current_version) })),
       recovery: recovery.map((r) => ({ id: r.id, title: r.goal, at: r.created_at })),
+      plans: plans.map((r) => ({ id: r.id, conversation_id: r.conversation_id, title: (JSON.parse(r.brief) as { objective: string }).objective, at: r.updated_at })),
     },
     routines: { next: routines, gave_up: Number(gaveUp?.n ?? 0) },
     usage: { days: [...byDay.values()], by_area: byArea, providers: [...providers], problems: [...problems.values()] },

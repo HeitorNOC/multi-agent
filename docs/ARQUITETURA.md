@@ -123,6 +123,47 @@ por dialeto, aplicadas em ordem e cada uma numa transação. Um arquivo aplicado
   quem respondia a ele passa a responder a quem ele respondia. O CEO contratar de novo o torna
   permanente.
 
+### 4.0b Planejamento na conversa (N2)
+
+- Só com o modelo (`ChiefOfStaff.plans`; a busca no Cérebro para planejar nem roda por regras).
+  A decisão ganha `plan` (brief, perguntas, plano) e `cancel_plan`; o modelo recebe o time, o
+  catálogo que pode trazer, o limite de agentes, até 6 trechos do Cérebro com rótulo
+  (`knowledge`, filtrados por `canRead` do CEO) e o plano em elaboração, e o histórico é maior.
+- `validatePlanning` (domínio) recusa responsável fora do plano, agente fora do time, persona não
+  oferecida, limite de agentes e listas grandes; rótulo não entregue é descartado. O plano guarda a
+  fonte e a versão citadas, não o rótulo. Recusa volta às regras com o motivo.
+- `work_plans`: uma linha por planejamento, revisada com controle de versão (a revisão parte da
+  versão atual; aprovar uma versão antiga é recusado). O cartão aparece só na resposta com a versão
+  atual. Estados: em elaboração (com perguntas), proposto, aprovado, cancelado.
+- Aprovar (`POST /api/conversations/:id/plans/:plano/approve` com `version`) abre o trabalho na
+  mesma transação em que contrata quem o plano traz e marca o plano como aprovado. O pedido do
+  trabalho é montado do brief e das etapas (`composeGoal`, até 2000 caracteres) e o trabalho nasce
+  com `preset` (time e motivo). No passo de plano, o gateway devolve o `preset` sem chamar o modelo
+  e a política valida como qualquer plano (com o time já contratado).
+- Durante o planejamento o trabalho só abre pela aprovação; uma decisão de abrir direto vira
+  explicação. Cancelar: botão (`…/cancel`) ou pela conversa.
+- Sem comando de worker, abrir um trabalho não tenta iniciar worker: ele fica na fila.
+
+### 4.0c Execução em etapas, Cérebro, memória e ações (N3–N6)
+
+- **Etapas (N3):** `jobs.preset.steps` (título, responsável, entrega, `after`, `reviewer`). No passo
+  de plano o gateway devolve o preset; depois o worker repete `POST /internal/jobs/:id/advance` até
+  `done` (cada chamada faz uma entrega `step:<i>:<n>` e a revisão `review:<i>:<n>`, com recibo) e
+  monta o parecer com `POST …/report` (`kind: "steps"`: etapas, entregas, revisões, escalações).
+  Orçamento: etapas × 2 × 3 tentativas + síntese. `open-work/domain/step-tasks.ts` tem as tarefas;
+  o grafo do worker é testado com checkpoint em memória (`apps/runtime/test_open_worker.py`).
+- **Cérebro (N4):** `KnowledgeSearch.searchMany` (consultas de `queriesOf`, RRF, cobertura, título
+  e `byTitle`); `around` com os vizinhos; `#sum` (resumo do documento) e `#calcN` (resumo calculado
+  de tabelas, `knowledge/domain/table.ts`) como trechos da própria fonte, com as permissões dela.
+  Conector `postgres_readonly` (`BEGIN READ ONLY`, tempo limite, `SELECT` montado pelo Aurora,
+  lista de tabelas) e GitHub como fonte.
+- **Memória (N5):** `conversation_memory` (decisões e resumo) e `company_facts`
+  (`/api/company/facts`). `domain/memory.ts`: decisões afirmadas, resumo extrativo, lembrança das
+  mensagens antigas e `withinBudget` para o prompt.
+- **Recursos e ações (N6):** `company_resources` (`/api/resources`, sem credenciais); conectores
+  `github`, `whatsapp` e `facebook_page` (`integrations/infrastructure/actions.ts`), que declaram
+  os campos da tela (`fields`, `secretLabel`). Ação externa só pela entrega aceita, no "Salvar em".
+
 ### 4.1 Pedido na conversa até a entrega
 
 ```mermaid

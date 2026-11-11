@@ -179,6 +179,7 @@ function Stat({ icon: Icon, label, value, to, tone }: { icon: LucideIcon; label:
 function Decide({ data }: { data: Overview }) {
   const items = [
     ...data.decide.recovery.map((x) => ({ key: `r-${x.id}`, to: "/governanca", title: x.title, at: x.at, badge: <ToneBadge tone="danger">Revisar na central</ToneBadge> })),
+    ...data.decide.plans.map((x) => ({ key: `p-${x.id}`, to: `/conversa/${x.conversation_id}`, title: x.title, at: x.at, badge: <ToneBadge tone="warning">Aprovar plano</ToneBadge> })),
     ...data.decide.approvals.map((x) => ({ key: `a-${x.id}`, to: `/trabalhos/${x.id}`, title: x.title, at: x.at, badge: <ToneBadge tone="warning">Aprovar parecer</ToneBadge> })),
     ...data.decide.reviews.map((x) => ({ key: `d-${x.id}`, to: `/entregas/${x.id}`, title: x.title, at: x.at, badge: <ToneBadge tone="info">Revisar entrega v{x.version}</ToneBadge> })),
   ];

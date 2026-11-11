@@ -6,7 +6,9 @@
  */
 import type { JobStatus } from "../../jobs/domain/job.ts";
 import type { Message } from "./conversation.ts";
+import type { Brief, WorkPlan } from "./planning.ts";
 import type { StaffingSnapshot } from "./staffing.ts";
+import { asksDecisions } from "./memory.ts";
 
 /** Um tipo de trabalho que a conversa pode abrir. */
 export interface ConversationOffer {
@@ -30,6 +32,25 @@ export interface ChiefTurn {
   briefing?: CompanyBriefing | null;
   /** Time, alçada e catálogo para contratar (N1). Sem isto, o Chief só usa o time. */
   staffing?: StaffingSnapshot | null;
+  /** Plano em elaboração nesta conversa (N2): a mensagem atual provavelmente o ajusta. */
+  planning?: { version: number; brief: Brief; questions: readonly string[]; plan: WorkPlan | null } | null;
+  /** Trechos do Cérebro ligados ao pedido (que o CEO pode ler), com rótulo para citar no plano. */
+  knowledge?: readonly KnowledgeNote[] | null;
+  /** Memória da conversa (N5): resumo do que ficou para trás, decisões registradas e lembranças. */
+  memory?: { summary: string; decisions: readonly string[]; recalled: readonly { de: string; texto: string }[] } | null;
+  /** Fatos da empresa que o CEO registrou (N5). */
+  facts?: readonly string[] | null;
+  /** Recursos provisionados pelo CEO (N6): o plano usa estes e diz o que falta. */
+  resources?: readonly { name: string; kind: string; description: string }[] | null;
+  /** Partes detalhadas pelos diretores (N2): o Chief consolida numa versão nova do plano. */
+  specifications?: readonly { agent: string; title: string; summary: string; requirements: readonly string[]; components: readonly string[]; risks: readonly string[]; questions: readonly string[] }[] | null;
+}
+
+export interface KnowledgeNote {
+  label: string;
+  title: string;
+  version: number;
+  text: string;
 }
 
 /**
@@ -40,6 +61,8 @@ export interface ChiefTurn {
 export interface CompanyBriefing {
   /** Pareceres aguardando aprovação. */
   approvals: { id: string; goal: string }[];
+  /** Planos propostos na conversa aguardando aprovação (N2). */
+  plans?: { id: string; objective: string }[];
   /** Entregas aguardando revisão (aceitar ou pedir ajustes). */
   reviews: { id: string; title: string }[];
   /** Trabalhos na central de recuperação (resultado desconhecido). */
@@ -68,10 +91,22 @@ export interface ChiefTrace {
  * decide pela alçada se propõe, contrata ou ignora. Ausente = o Chief não opinou (regras: o caso de
  * uso aplica `suggestHires`); lista vazia = não falta ninguém.
  */
-export type ChiefDecision = ({ kind: "reply"; text: string } | { kind: "open_job"; offerId: string; text: string; hire?: string[] }) & { trace?: ChiefTrace };
+export type ChiefDecision = (
+  | { kind: "reply"; text: string }
+  | { kind: "open_job"; offerId: string; text: string; hire?: string[] }
+  /** Começa ou revisa o planejamento (já validado contra o time, o catálogo e os trechos). */
+  | { kind: "plan"; offerId: string; text: string; brief: Brief; questions: string[]; plan: WorkPlan | null }
+  | { kind: "cancel_plan"; text: string }
+) & {
+  trace?: ChiefTrace;
+  /** Decisões ou fatos que o gestor afirmou nesta mensagem (o Chief registra na memória). */
+  remember?: string[];
+};
 
 export interface ChiefOfStaff {
   decide(turn: ChiefTurn): Promise<ChiefDecision>;
+  /** Planeja com trechos do Cérebro (só com modelo): sem isto, a conversa nem busca os trechos. */
+  readonly plans?: boolean;
 }
 
 export const STATUS_LABEL: Record<JobStatus, string> = {
@@ -90,6 +125,8 @@ export const STATUS_LABEL: Record<JobStatus, string> = {
 export const normalize = (text: string) => text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 const STATUS_INTENT = /\b(status|andamento|situacao|progresso|como (esta|anda|vai))\b/;
+/** Desistir do plano em elaboração. */
+const CANCEL_PLAN = /\b(cancel\w*|desist\w*|esquece|deixa pra la|nao (quero|precisa) mais)\b/;
 /** O que espera o gestor. */
 const PENDING_INTENT = /\b(aprova\w*|pendenc\w*|pendente\w*|decidir|decisao|decisoes|revisar|esperando (por )?mim|me espera)\b/;
 /** Quem do time está trabalhando. */
@@ -105,6 +142,7 @@ const quote = (items: string[], max = 3) => {
 /** O que espera o gestor, em frases curtas (vazio se nada). */
 export function pendingText(b: CompanyBriefing): string {
   const parts: string[] = [];
+  if (b.plans?.length) parts.push(`${b.plans.length} plano(s) esperando seu "aprovar": ${quote(b.plans.map((p) => p.objective))}`);
   if (b.approvals.length) parts.push(`${b.approvals.length} parecer(es) aguardando sua aprovação: ${quote(b.approvals.map((a) => a.goal))}`);
   if (b.reviews.length) parts.push(`${b.reviews.length} entrega(s) para revisar: ${quote(b.reviews.map((r) => r.title))}`);
   if (b.recovery.length) parts.push(`${b.recovery.length} caso(s) na central de recuperação`);
@@ -142,8 +180,24 @@ const list = (offers: readonly ConversationOffer[]) =>
  * Empate pergunta qual; se nada couber, explica o que está disponível em vez de inventar.
  */
 export class RuleBasedChiefOfStaff implements ChiefOfStaff {
-  async decide({ text, lastJob, offers, briefing }: ChiefTurn): Promise<ChiefDecision> {
+  async decide({ text, lastJob, offers, briefing, planning, memory }: ChiefTurn): Promise<ChiefDecision> {
     const intent = normalize(text);
+    // "O que decidimos?": responde da memória, sem modelo.
+    if (memory && asksDecisions(text))
+      return {
+        kind: "reply",
+        text: memory.decisions.length
+          ? `Até aqui ficou decidido: ${memory.decisions.map((d, i) => `${i + 1}) ${d.replace(/[.!;\s]+$/, "")}`).join("; ")}.`
+          : "Ainda não registrei decisões nesta conversa.",
+      };
+    // Planejar e revisar o plano exige o modelo; por regras, só cancelar ou explicar.
+    if (planning) {
+      if (CANCEL_PLAN.test(intent)) return { kind: "cancel_plan", text: "Certo, cancelei o planejamento. Nada foi aberto." };
+      return {
+        kind: "reply",
+        text: "Para revisar o plano eu preciso do modelo, que não está disponível agora. Você pode aprovar o plano como está, cancelar, ou tentar de novo em instantes.",
+      };
+    }
     if (briefing) {
       if (PENDING_INTENT.test(intent)) return { kind: "reply", text: pendingText(briefing) || "Nada esperando sua decisão agora." };
       if (TEAM_INTENT.test(intent) && !GENERIC_WORK.test(intent)) return { kind: "reply", text: teamText(briefing) };

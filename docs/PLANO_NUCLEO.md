@@ -92,7 +92,24 @@ Sem modelo, o Chief por regras reconhece pedidos como o CEO fala ("quero", "prec
 **Pronto quando:** para o WebChat, com um time sem Tech Lead, o Chief propõe o Tech Lead do
 catálogo, que entra só nesse trabalho.
 
-### N2 — Planejamento: o Chief entende, levanta e devolve o plano
+### N2 — Planejamento: o Chief entende, levanta e devolve o plano — concluída (11/11/2026)
+
+Como ficou: com o modelo ligado, pedidos de construção, implementação, campanha ou projeto viram
+planejamento na conversa. O Chief pergunta só o que falta (até 3 perguntas), escreve o brief,
+consulta o Cérebro (só o que o CEO pode ler) e propõe etapas com responsáveis do time ou do
+catálogo, riscos e as fontes usadas. O CEO ajusta escrevendo, aprova a versão que está vendo
+("Aprovar e começar") ou cancela. Aprovado, o trabalho nasce com o pedido montado do brief e com
+o time do plano (`jobs.preset`): o worker usa este time em vez de pedir ao modelo, e quem o plano
+traz do catálogo entra na mesma transação. Planos aguardando aprovação aparecem no Command Center,
+no Jarvis e no briefing do Chief. Sem modelo, o Chief por regras continua abrindo o trabalho
+direto (e, se houver plano em elaboração, só explica ou cancela).
+
+Passo 4 (delegação aos diretores): o plano indica em `specify` os diretores e líderes que detalham
+a sua parte; ele fica "Diretores detalhando" (não pode ser aprovado), cada um escreve requisitos,
+componentes, riscos e perguntas em segundo plano (`SpecificationRunner`, retoma depois de
+reiniciar), e o Chief consolida numa versão nova que volta ao CEO. Se um diretor falhar ou a
+consolidação não sair, o plano volta como estava, com o que houver.
+
 
 1. **Entende:** pergunta ao CEO só o que falta (canais, volume, integrações, prazo, o que conta
    como pronto). Pedido completo não gera pergunta.
@@ -110,7 +127,19 @@ catálogo, que entra só nesse trabalho.
 **Pronto quando:** o pedido do WebChat vira um plano revisável, com o que reaproveita dos projetos
 existentes e os padrões que vai seguir citados, e nada é construído antes do "aprovado".
 
-### N3 — Execução hierárquica e revisão em cadeia
+### N3 — Execução hierárquica e revisão em cadeia — concluída (11/11/2026)
+
+Como ficou: o plano aprovado vai ao trabalho com as etapas (dependências e revisor por etapa,
+escolhido pela hierarquia: diretor da área no plano, senão o líder, senão o Chief). O worker chama
+`advance` até acabar; para cada etapa, o responsável entrega (com as entregas anteriores, o retorno
+da revisão e os trechos do Cérebro) e o revisor aceita, manda refazer (até 3 tentativas) ou leva ao
+CEO. Escalação e tentativas esgotadas param a execução e aparecem no parecer, na frente do botão de
+aprovar. Cada entrega e revisão tem recibo (queda retoma sem refazer) e conta no orçamento do plano.
+A lista operacional, o organograma e o Jarvis mostram quem está entregando ou revisando qual etapa.
+Etapas rodam em sequência (respeitando as dependências); rodar em paralelo fica para quando houver
+mais de um worker por trabalho. O Chief ainda não altera o time durante a execução (as alçadas de
+ajustar e tirar do time ficam guardadas para isso).
+
 
 - **Plano como árvore de tarefas:** cada tarefa tem dono (diretor ou especialista), dependências,
   entradas (o que recebe das anteriores), entrega esperada e critério de aceite. O worker LangGraph
@@ -140,7 +169,18 @@ devolve; o Chief encontra um desvio do padrão de logs, devolve ao Diretor de TI
 casos chega ao CEO; a criação do repositório sobe para aprovação; derrubar o worker no meio retoma
 da tarefa em que parou.
 
-### N4 — Cérebro: padrões, projetos e recuperação
+### N4 — Cérebro: padrões, projetos e recuperação — concluída (11/11/2026)
+
+Como ficou: avaliação no CI (`retrieval-eval.test.ts`: acerto nos 3 primeiros, MRR e abstenção;
+a busca dos agentes faz 100% contra 92% de uma consulta só); busca dos agentes com várias
+consultas (as partes do pedido), fusão por posição, reordenação por cobertura e título, e uma
+passada pelos títulos das fontes; trechos vizinhos como contexto; resumo extrativo por documento;
+tabelas (CSV) com resumo calculado de todas as linhas (média, soma, por categoria); banco
+PostgreSQL somente leitura como conector; repositório do GitHub como fonte (os projetos
+existentes). Resumos por área ficaram de fora de propósito: juntariam fontes com leitores
+diferentes. Padrões entram como documentos comuns (achados pela busca e pelo título); marcá-los
+como checklist de revisão é o próximo passo natural.
+
 
 1. **Avaliação primeiro:** perguntas da empresa com resposta e fontes esperadas; mede recuperação,
    citação e abstenção. Roda no CI; toda mudança é medida contra ela.
@@ -158,7 +198,14 @@ da tarefa em que parou.
 **Pronto quando:** a avaliação mostra ganho sobre a linha de base atual, e o plano do WebChat
 cita o padrão de arquitetura e o projeto de autenticação que vai reaproveitar.
 
-### N5 — Memória
+### N5 — Memória — concluída (11/11/2026)
+
+Como ficou: decisões registradas por conversa (plano aprovado ou cancelado, contratação decidida,
+"fica decidido…" e o que o Chief registra com o modelo), resumo extrativo do que sai da janela,
+mensagens antigas relevantes de volta ao contexto, "o que decidimos?" respondido sem modelo, botão
+Memória na conversa. Memória da empresa em Configurações (fatos por categoria) para o Chief e
+todos os agentes. O prompt do Chief monta fatos, memória e histórico dentro de um orçamento.
+
 
 - **Da conversa:** resumo acumulado, **decisões registradas** à parte e busca no histórico inteiro.
 - **Da empresa:** fatos estáveis (produtos, clientes, marca, stack) que o CEO vê e edita.
@@ -169,7 +216,18 @@ cita o padrão de arquitetura e o projeto de autenticação que vai reaproveitar
 **Pronto quando:** semanas depois, "e o WebChat?" traz o plano, as decisões e o andamento, sem o
 CEO repetir nada.
 
-### N6 — Recursos da empresa e execução
+### N6 — Recursos da empresa e execução — concluída (11/11/2026)
+
+Como ficou: cadastro de recursos (bancos, filas, ambientes, repositórios, nuvem) em Integrações,
+só descrições (descrição com cara de senha é recusada); o Chief planeja com eles, o plano diz o que
+usa e o que falta provisionar, e o pedido do trabalho os descreve. Conectores de ação com o mesmo
+portão de sempre (entrega aceita + clique do CEO): GitHub (lê o repositório e abre pull request com
+a entrega e os arquivos de código das etapas; nunca faz merge, o CI do repositório testa),
+WhatsApp Business (mensagem) e Página do Facebook (post). Testados com HTTP simulado; com contas
+reais, falta a aprovação da Meta (conta empresarial, app revisado, modelos fora da janela de 24 h).
+A compilação e os testes do código entregue acontecem no CI do repositório, no pull request (não
+num ambiente isolado do Aurora). Instagram fica para depois (exige imagem em cada post).
+
 
 - **Registro de recursos (o CEO fornece):** bancos, filas (Kafka…), ambientes, repositórios,
   nuvem, com credenciais no cofre e escopo (o que pode ser usado, por quem, com que permissão).

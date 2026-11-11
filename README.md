@@ -103,6 +103,8 @@ cenários de ponta a ponta com o worker Python real.
 npm run test:ui
 ```
 
+O grafo do worker (Python) tem testes próprios: `cd apps/runtime && .venv/Scripts/python.exe -m unittest test_open_worker` (no Linux, `.venv/bin/python`).
+
 Testes de interface com Playwright: constrói a interface, sobe a API num banco descartável e
 percorre as telas num navegador de verdade (o Chrome instalado; no CI, o Chromium do Playwright).
 

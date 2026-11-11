@@ -15,6 +15,11 @@ export function openWorkHttp(gateway: OpenWorkGateway, access: WorkerAccess): Ht
       return gateway.retrieve(authorizeWorker(access, req, body.lease), body.agent);
     });
 
+    // Execução em etapas (N3): avança uma etapa (entrega e revisão) e monta o parecer final.
+    const leaseBody = z.object({ lease });
+    app.post("/internal/jobs/:id/advance", async (req) => gateway.advance(authorizeWorker(access, req, leaseBody.parse(req.body).lease)));
+    app.post("/internal/jobs/:id/report", async (req) => gateway.stepsReport(authorizeWorker(access, req, leaseBody.parse(req.body).lease)));
+
     app.post("/internal/jobs/:id/model", async (req) => {
       const body = modelBody.parse(req.body);
       return gateway.run(authorizeWorker(access, req, body.lease), body.slot, { labels: body.labels });

@@ -112,5 +112,32 @@ for (const dialect of dialects) {
       assert.deepEqual((await companyBriefing({ sql: d.db.sql, clock })).approvals, [{ id: j.id, goal: "Orçamento de marketing" }]);
       assert.deepEqual(chief.milestones, { done: 3, total: 3 });
     });
+
+    test("trabalho em etapas: quem entrega, quem revisa e etapa aceita", async () => {
+      const d = await fresh(dialect);
+      opened.push(d);
+      const clock = manualClock("2026-03-10T15:00:00.000Z");
+      const jobs: JobsDeps = { uow: new UnitOfWork(d.db, jobsStore(clock)), policy: testPolicy, limits: queueLimits({ capacity: 8 }), clock, workers: { isActive: () => false, count: () => 0 } };
+      let n = 0;
+      for (const id of ["lead", "dir"])
+        await d.db.sql.run(
+          "INSERT INTO agents (id, template_id, name, title, area, tagline, focus, skills, instructions, reports_to, status, hired_at, updated_at, ordinal) VALUES ($1, NULL, $2, 'Cargo', 'technology', '', '', '[]', '', NULL, 'active', $3, $3, $4)",
+          [id, id.toUpperCase(), clock.now(), ++n],
+        );
+      const j = (await admitJob(jobs, { request: { goal: "Implementar o WebChat" } })).job;
+      const steps = [{ title: "Serviço de WebChat", owner: "lead", reviewer: "dir", after: [], deliverable: "Código" }];
+      await jobs.uow.run(async (s) => s.jobs.save({ ...(await s.jobs.get(j.id))!, status: "running", plan: { agents: ["lead", "dir"], steps } as never }));
+      await jobs.uow.run((s) => s.inferences.reserve({ jobId: j.id, slot: "step:0:0", inputSha: "x" }));
+      let by = new Map((await agentActivity({ sql: d.db.sql, clock })).agents.map((a) => [a.id, a]));
+      assert.deepEqual([by.get("lead")!.status, by.get("lead")!.activity], ["running", "Trabalhando na etapa 1: Serviço de WebChat"]);
+      assert.deepEqual([by.get("dir")!.status, by.get("dir")!.activity], ["assigned", "Na fila: etapa 1 — Serviço de WebChat"]);
+      await jobs.uow.run((s) => s.inferences.complete({ jobId: j.id, slot: "step:0:0", output: {}, usage: {} }));
+      await jobs.uow.run((s) => s.inferences.reserve({ jobId: j.id, slot: "review:0:0", inputSha: "x" }));
+      by = new Map((await agentActivity({ sql: d.db.sql, clock })).agents.map((a) => [a.id, a]));
+      assert.equal(by.get("dir")!.activity, "Revisando a etapa 1: Serviço de WebChat");
+      await jobs.uow.run((s) => s.inferences.complete({ jobId: j.id, slot: "review:0:0", output: { decision: "accept", feedback: "", issues: [] }, usage: {} }));
+      by = new Map((await agentActivity({ sql: d.db.sql, clock })).agents.map((a) => [a.id, a]));
+      assert.deepEqual([by.get("lead")!.status, by.get("lead")!.milestones.done], ["done", 3]);
+    });
   });
 }

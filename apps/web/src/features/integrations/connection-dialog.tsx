@@ -98,7 +98,7 @@ function Reauthorize({ connection, onDone, inline }: { connection: Connection; o
         if (token.trim()) save.mutate();
       }}
     >
-      <Input type="password" autoComplete="off" aria-label="Token novo" placeholder="xoxb-…" value={token} onChange={(e) => setToken(e.target.value)} className="w-56" />
+      <Input type="password" autoComplete="off" aria-label="Token novo" placeholder={connection.connector_id === "postgres_readonly" ? "postgres://…" : "xoxb-…"} value={token} onChange={(e) => setToken(e.target.value)} className="w-56" />
       <Button size="sm" type="submit" disabled={!token.trim() || save.isPending}>
         Salvar token
       </Button>

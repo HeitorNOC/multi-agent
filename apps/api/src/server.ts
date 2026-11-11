@@ -19,6 +19,8 @@ import { CallLimiter } from "./platform/model/call-limiter.ts";
 import type { ModelClient } from "./platform/model/model-client.ts";
 import { WorkerSupervisor } from "./platform/workers/supervisor.ts";
 import { conversationsHttp } from "./modules/conversations/http/routes.ts";
+import type { ConversationDeps } from "./modules/conversations/application/conversations.ts";
+import { modelSpecifier, SpecificationRunner } from "./modules/conversations/application/specification.ts";
 import { jobOpener } from "./modules/conversations/application/job-opener.ts";
 import { stationResponder } from "./modules/conversations/application/station.ts";
 import { ModelChiefOfStaff } from "./modules/conversations/application/model-chief-of-staff.ts";
@@ -49,12 +51,18 @@ import type { IntegrationsDeps } from "./modules/integrations/application/integr
 import { integrationsHttp } from "./modules/integrations/http/routes.ts";
 import { overviewHttp } from "./modules/overview/http/routes.ts";
 import { companyBriefing } from "./modules/overview/application/briefing.ts";
+import { canRead } from "./modules/knowledge/domain/source.ts";
+
+/** Trechos do Cérebro que o Chief vê ao planejar. */
+const PLANNING_PASSAGES = 6;
 import { LocalFolder } from "./modules/integrations/infrastructure/local-folder.ts";
 import { integrationsStore } from "./modules/integrations/infrastructure/sql-connections.ts";
 import { GmailAdapter, GoogleDriveAdapter, GoogleOAuth } from "./modules/integrations/infrastructure/google.ts";
 import { ExternalHttp } from "./modules/integrations/infrastructure/http-client.ts";
 import { loadSecretKey, secretBox } from "./modules/integrations/infrastructure/secret-box.ts";
 import { SlackAdapter } from "./modules/integrations/infrastructure/slack.ts";
+import { PostgresReadonlyAdapter } from "./modules/integrations/infrastructure/postgres-readonly.ts";
+import { FacebookPageAdapter, GitHubAdapter, WhatsAppCloudAdapter } from "./modules/integrations/infrastructure/actions.ts";
 import { addVersion } from "./modules/knowledge/application/sources.ts";
 import { AppError } from "./shared/errors.ts";
 import type { SourceId } from "./shared/ids.ts";
@@ -70,6 +78,8 @@ import { OpenWorkGateway } from "./modules/open-work/application/gateway.ts";
 import { openWorkPolicy } from "./modules/open-work/application/open-policy.ts";
 import { agentsHttp } from "./modules/agents/http/routes.ts";
 import { releaseJobHires, staffingPort } from "./modules/agents/application/staffing.ts";
+import { factLines } from "./modules/agents/application/facts.ts";
+import { resourceBriefs } from "./modules/agents/application/resources.ts";
 import { teamDirectory, type AgentsDeps } from "./modules/agents/application/agents.ts";
 import type { TemplateCatalog } from "./modules/agents/domain/template.ts";
 import { agentsStore } from "./modules/agents/infrastructure/sql-agents.ts";
@@ -180,6 +190,10 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     reopen: async (goal, onAdmitted) => (await admitJob(jobs, { request: { goal }, onAdmitted: (job, tx) => onAdmitted(job.id, tx) })).job.id,
   };
   const scheduler = new JobScheduler(jobs, supervisor);
+  // Sem comando de worker, os trabalhos ficam na fila (não tenta iniciar um worker que não existe).
+  const wakeWorker = () => {
+    if (config.worker.command) void scheduler.wake();
+  };
 
   // Rotinas: pedidos recorrentes; cada horário vira no máximo um trabalho, mesmo após reiniciar.
   const routines: RoutinesDeps = {
@@ -189,7 +203,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     admit: async (goal, onAdmitted) => (await admitJob(jobs, { request: { goal }, onAdmitted: (job, tx) => onAdmitted(job.id, tx) })).job.id,
     jobStatus: async (jobId) => (await jobs.uow.read.jobs.get(jobId))?.status,
   };
-  const ticker = new RoutineTicker(routines, () => void scheduler.wake());
+  const ticker = new RoutineTicker(routines, wakeWorker);
 
   // Integrações: pasta local e conectores com login (Google Drive, Gmail, Slack). Os tokens ficam
   // cifrados; a chave do cofre fica fora do banco (variável ou arquivo ao lado dos dados).
@@ -221,17 +235,21 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     vault,
     adapters: {
       slack: new SlackAdapter(external),
+      postgres_readonly: new PostgresReadonlyAdapter(),
+      github: new GitHubAdapter(external),
+      whatsapp: new WhatsAppCloudAdapter(external),
+      facebook_page: new FacebookPageAdapter(external),
       ...(google ? { google_drive: new GoogleDriveAdapter(external, google), gmail: new GmailAdapter(external, google) } : {}),
     },
   };
   await reconcileOnRestart(jobs);
 
   // Trabalho aberto
-  const gateway = new OpenWorkGateway({ jobs, search, client: parts.model, limiter, team, clock, timeoutMs: config.model.timeoutMs });
+  const gateway = new OpenWorkGateway({ jobs, search, client: parts.model, limiter, team, clock, timeoutMs: config.model.timeoutMs, facts: () => factLines(agents) });
 
   // Conversa
   const rules = new RuleBasedChiefOfStaff();
-  const conversations = {
+  const conversations: ConversationDeps = {
     uow: new UnitOfWork(db, conversationStore(clock)),
     chief: config.chief.engine === "model" && parts.model ? new ModelChiefOfStaff({ client: parts.model, fallback: rules, limiter }) : rules,
     offers: [OPEN_WORK_OFFER],
@@ -242,12 +260,30 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     briefing: () => companyBriefing({ sql: db.sql, clock }),
     // Time, alçadas e catálogo: o Chief propõe ou contrata quem falta.
     staffing: staffingPort(agents),
+    // Memória da empresa: fatos que o CEO registrou.
+    facts: () => factLines(agents),
+    // Recursos provisionados (bancos, filas, ambientes) para o Chief planejar.
+    resources: () => resourceBriefs(agents),
+    // Planejamento (N2): trechos do Cérebro que a pessoa pode ler, com rótulo para o plano citar.
+    knowledge: async (text: string, actor: ActorId) =>
+      (await search.search(text, (p) => canRead(p, actor), PLANNING_PASSAGES)).found.map((p, i) => ({
+        label: `k${i + 1}`,
+        title: p.section ? `${p.title} › ${p.section}` : p.title,
+        version: p.version,
+        text: p.text.slice(0, 700),
+      })),
     // Anexo da conversa vira fonte do Cérebro (imagem lida pelo modelo, documento extraído).
     attach: async (actor: ActorId, file: { filename: string; mediaType: string; contentBase64: string }) => {
       const source = await uploadSource(knowledge, actor, { ...file, title: file.filename.replace(/\.[^.]+$/, "") || file.filename });
       return { source: source.id, title: source.title };
     },
   };
+  // Especificação pelos diretores em segundo plano (só com modelo); retoma o que ficou no meio.
+  const specRunner = parts.model ? new SpecificationRunner(conversations, modelSpecifier(parts.model, limiter, config.model.timeoutMs)) : null;
+  if (specRunner) {
+    conversations.specRunner = specRunner;
+    void specRunner.resumeAll().catch((error: unknown) => console.error("Retomar especificações:", error));
+  }
 
   // Acesso: contas (senha, Google, Microsoft) ou, no uso individual, o operador local.
   const accounts: AccountsDeps = {
@@ -270,14 +306,14 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     identify: local ? () => LOCAL_OPERATOR : sessionIdentity(accounts),
     modules: [
       local ? localAccessHttp() : accountsHttp(accounts),
-      jobsHttp({ jobs, wake: () => void scheduler.wake(), workerAccess: supervisor }),
+      jobsHttp({ jobs, wake: wakeWorker, workerAccess: supervisor }),
       knowledgeHttp(knowledge, { uploadLimit: uploadLimit(config.knowledge.maxBytes) }),
       openWorkHttp(gateway, supervisor),
-      conversationsHttp(conversations, { onJobOpened: () => void scheduler.wake(), messageLimit: uploadLimit(config.knowledge.maxBytes) * 4 }),
-      recoveryHttp(jobs, { wake: () => void scheduler.wake() }),
+      conversationsHttp(conversations, { onJobOpened: wakeWorker, messageLimit: uploadLimit(config.knowledge.maxBytes) * 4 }),
+      recoveryHttp(jobs, { wake: wakeWorker }),
       agentsHttp(agents),
-      deliverablesHttp(deliverables, { onJobOpened: () => void scheduler.wake() }),
-      routinesHttp(routines, { onJobOpened: () => void scheduler.wake() }),
+      deliverablesHttp(deliverables, { onJobOpened: wakeWorker }),
+      routinesHttp(routines, { onJobOpened: wakeWorker }),
       integrationsHttp(integrations, { google }),
       overviewHttp({ sql: db.sql, clock, timeZone: config.timeZone }),
       settingsHttp(config, parts.model !== null, embedder?.id ?? null),

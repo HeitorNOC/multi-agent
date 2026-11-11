@@ -26,6 +26,7 @@ import { retrievedFragments } from "../../jobs/application/worker-reports.ts";
 import * as transitions from "../../jobs/domain/transitions.ts";
 import type { KnowledgeSearch } from "../../knowledge/application/knowledge-search.ts";
 import { maxAgentsOf, type CatalogAgent, type TeamDirectory } from "../domain/catalog.ts";
+import { CHIEF, MAX_ATTEMPTS, reviewTask, stepsSynthesisTask, stepTask, type PlanStep, type ReviewDecision, type ReviewOutput, type StepOutcome, type StepOutput, type StepsSynthesisOutput } from "../domain/step-tasks.ts";
 import { planTask, specialistTask, synthesisTask, TaskOutputError, type Fragment, type SpecialistOutput, type TaskSpec } from "../domain/tasks.ts";
 
 export interface OpenWorkDeps {
@@ -38,9 +39,14 @@ export interface OpenWorkDeps {
   team: TeamDirectory;
   clock: Clock;
   timeoutMs?: number;
+  /** Fatos da empresa (N5) que todo agente recebe. */
+  facts?: () => Promise<string[]>;
 }
 
-const SLOT = /^(plan|synthesis|specialist:[a-z0-9_]{1,80})$/;
+const SLOT = /^(plan|synthesis|specialist:[a-z0-9_]{1,80}|step:\d{1,2}:\d|review:\d{1,2}:\d)$/;
+const STEP_SLOT = /^(step|review):(\d{1,2}):(\d)$/;
+/** Trechos por etapa (do responsável ou do revisor). */
+const FRAGMENTS_PER_STEP = 10;
 const LABEL = /^f-[0-9a-f]{8}$/;
 const FRAGMENTS_PER_AGENT = 6;
 /** Trechos de fontes anexadas ao pedido entregues a cada especialista, além dos da busca. */
@@ -52,6 +58,8 @@ export const labelOf = (passageId: string) => `f-${createHash("sha256").update(p
 
 interface OpenPlan {
   agents: string[];
+  /** Plano aprovado pelo CEO, executado em etapas (N3). */
+  steps?: PlanStep[];
   max_model_calls: number;
 }
 
@@ -99,6 +107,8 @@ export class OpenWorkGateway {
     const client = this.deps.client;
     ensure(client, () => unavailable("model_not_configured", "Modelo do trabalho aberto não configurado"));
     const job = await this.job(jobId);
+    // Plano aprovado pelo CEO na conversa: é ele, sem chamar o modelo (nem gastar cota).
+    if (slot === "plan" && job.preset) return { output: job.preset, replayed: true };
     const spec = await this.spec(jobId, job, slot, input);
     // O plano não conta; os demais passos contam contra o limite do plano (incluindo o reservado agora).
     const limit = slot === "plan" ? Infinity : this.deps.jobs.policy.modelCallLimit(job.plan as unknown as Json);
@@ -164,6 +174,7 @@ export class OpenWorkGateway {
     }
     ensure(plan, () => conflict("plan_missing", "Plano ausente"));
     const now = this.deps.clock.now();
+    if (plan.steps) return this.stepSpec(jobId, goal, plan as OpenPlan & { steps: PlanStep[] }, slot, input);
     if (slot === "synthesis") {
       const findings: { agent: string; claim: string; citations: string[] }[] = [];
       for (const r of await this.deps.jobs.uow.read.inferences.list(jobId)) {
@@ -178,7 +189,136 @@ export class OpenWorkGateway {
     ensure(plan.agents.includes(agentId), () => conflict("agent_not_in_plan", "Especialista fora do plano"));
     const labels = input.labels ?? [];
     ensure(labels.length <= FRAGMENTS_PER_AGENT && labels.every((l) => LABEL.test(l)), () => invalid("invalid_labels", "Rótulos inválidos"));
-    return specialistTask(goal, await this.member(agentId), await this.fragments(jobId, labels, [agentId]), now);
+    return specialistTask(goal, await this.member(agentId), await this.fragments(jobId, labels, [agentId]), now, await this.facts());
+  }
+
+  // ── Execução em etapas (N3) ─────────────────────────────────────────────────
+
+  /** Tarefa de uma etapa, da revisão dela ou da síntese, montada só do que está no banco. */
+  private async stepSpec(jobId: JobId, goal: string, plan: OpenPlan & { steps: PlanStep[] }, slot: string, input: { labels?: readonly string[] }): Promise<TaskSpec<unknown>> {
+    if (slot === "synthesis") return stepsSynthesisTask(goal, await this.outcomes(jobId, plan));
+    const m = STEP_SLOT.exec(slot);
+    ensure(m, () => invalid("invalid_slot", "Passo inválido para um trabalho em etapas"));
+    const [, kind, i, n] = m;
+    const index = Number(i);
+    const attempt = Number(n);
+    const step = plan.steps[index];
+    ensure(step && attempt < MAX_ATTEMPTS, () => invalid("invalid_slot", "Etapa ou tentativa inexistente"));
+    const labels = input.labels ?? [];
+    ensure(labels.length <= FRAGMENTS_PER_STEP && labels.every((l) => LABEL.test(l)), () => invalid("invalid_labels", "Rótulos inválidos"));
+    const receipts = new Map((await this.deps.jobs.uow.read.inferences.list(jobId)).filter((r) => r.state === "completed").map((r) => [r.slot, r.output]));
+    if (kind === "step") {
+      const outcomes = await this.outcomes(jobId, plan);
+      const prior = step.after.map((j) => ({ title: plan.steps[j]!.title, owner: plan.steps[j]!.owner, deliverable: outcomes[j]?.deliverable ?? "" }));
+      const last = attempt > 0 ? (receipts.get(`review:${index}:${attempt - 1}`) as unknown as ReviewOutput | undefined) : undefined;
+      ensure(attempt === 0 || last?.decision === "revise", () => conflict("step_not_revisable", "A etapa não foi devolvida para refação"));
+      return stepTask({
+        goal,
+        index,
+        step,
+        agent: await this.member(step.owner),
+        prior,
+        feedback: last ? { feedback: last.feedback, issues: last.issues } : null,
+        fragments: await this.fragments(jobId, labels, [step.owner]),
+        facts: await this.facts(),
+      });
+    }
+    const deliverable = receipts.get(`step:${index}:${attempt}`) as unknown as StepOutput | undefined;
+    ensure(deliverable, () => conflict("step_missing", "Revisão antes da entrega"));
+    const reviewer = step.reviewer === CHIEF ? null : await this.member(step.reviewer);
+    return reviewTask({
+      goal,
+      index,
+      step,
+      reviewer: reviewer && { title: reviewer.title, focus: reviewer.focus },
+      deliverable,
+      attempt,
+      fragments: await this.fragments(jobId, labels, step.reviewer === CHIEF ? plan.agents : [step.reviewer]),
+      facts: await this.facts(),
+    });
+  }
+
+  private async facts() {
+    return this.deps.facts ? await this.deps.facts().catch(() => []) : [];
+  }
+
+  /** Situação de cada etapa a partir dos recibos (aceita, levada ao CEO, esgotada ou não feita). */
+  async outcomes(jobId: JobId, plan: { steps: PlanStep[] }): Promise<StepOutcome[]> {
+    const done = new Map((await this.deps.jobs.uow.read.inferences.list(jobId)).filter((r) => r.state === "completed").map((r) => [r.slot, r.output]));
+    return plan.steps.map((step, index) => {
+      let attempts = 0;
+      while (done.has(`review:${index}:${attempts}`)) attempts++;
+      const review = attempts ? (done.get(`review:${index}:${attempts - 1}`) as unknown as ReviewOutput) : null;
+      const work = attempts ? (done.get(`step:${index}:${attempts - 1}`) as unknown as StepOutput) : null;
+      const status: StepOutcome["status"] = !review
+        ? "skipped"
+        : review.decision === "accept"
+          ? "accepted"
+          : review.decision === "escalate"
+            ? "escalated"
+            : attempts >= MAX_ATTEMPTS
+              ? "exhausted"
+              : "skipped";
+      return { index, title: step.title, owner: step.owner, reviewer: step.reviewer, status, attempts, deliverable: work?.deliverable ?? null, feedback: review?.feedback ?? null, issues: review?.issues ?? [] };
+    });
+  }
+
+  /**
+   * Avança o trabalho em etapas um passo: a próxima etapa não aceita é feita (ou refeita) pelo
+   * responsável e revisada. Escalação ou tentativas esgotadas encerram a execução: o que falta vai
+   * ao CEO no parecer. Repetir depois de uma queda reaproveita os recibos (nada é feito duas vezes).
+   */
+  async advance(jobId: JobId): Promise<{ done: boolean; step?: number; attempt?: number; decision?: ReviewDecision; stopped?: "escalated" | "exhausted" }> {
+    const { plan } = await this.job(jobId);
+    ensure(plan?.steps, () => conflict("no_steps", "Este trabalho não tem etapas"));
+    const steps = plan.steps;
+    const outcomes = await this.outcomes(jobId, { steps });
+    const blocked = outcomes.find((o) => o.status === "escalated" || o.status === "exhausted");
+    if (blocked) return { done: true, stopped: blocked.status as "escalated" | "exhausted" };
+    for (const [index, step] of steps.entries()) {
+      const o = outcomes[index]!;
+      if (o.status === "accepted") continue;
+      const attempt = o.attempts;
+      const ownerLabels = (await this.retrieve(jobId, step.owner)).fragments.map((f) => f.label).slice(0, FRAGMENTS_PER_STEP);
+      await this.run(jobId, `step:${index}:${attempt}`, { labels: ownerLabels });
+      const reviewerLabels = step.reviewer === CHIEF ? ownerLabels : (await this.retrieve(jobId, step.reviewer)).fragments.map((f) => f.label).slice(0, FRAGMENTS_PER_STEP);
+      const review = (await this.run(jobId, `review:${index}:${attempt}`, { labels: reviewerLabels })).output as unknown as ReviewOutput;
+      return { done: false, step: index, attempt, decision: review.decision };
+    }
+    return { done: true };
+  }
+
+  /** Parecer do trabalho em etapas, para o worker vincular (o CEO aprova a entrega exata). */
+  async stepsReport(jobId: JobId) {
+    const { plan } = await this.job(jobId);
+    ensure(plan?.steps, () => conflict("no_steps", "Este trabalho não tem etapas"));
+    const outcomes = await this.outcomes(jobId, { steps: plan.steps });
+    const receipts = await this.deps.jobs.uow.read.inferences.list(jobId);
+    const synthesis = receipts.find((r) => r.slot === "synthesis" && r.state === "completed")?.output as unknown as StepsSynthesisOutput | undefined;
+    ensure(synthesis, () => conflict("synthesis_missing", "Síntese ainda não feita"));
+    const cited = new Set<string>();
+    for (const r of receipts) if (r.state === "completed" && r.slot.startsWith("step:")) for (const c of (r.output as unknown as StepOutput).citations) cited.add(c);
+    const citations = [];
+    for (const label of cited) {
+      try {
+        const [f] = await this.fragments(jobId, [label], plan.agents);
+        citations.push({ label, source: f!.source, title: f!.title, version: f!.version });
+      } catch {
+        // Trecho que deixou de valer: fica fora das citações (a entrega já o registrou).
+      }
+    }
+    return {
+      report: {
+        kind: "steps",
+        summary: synthesis.summary,
+        recommendation: synthesis.recommendation,
+        steps: outcomes.map((o) => ({ ...o })),
+        escalations: outcomes.filter((o) => o.status === "escalated" || o.status === "exhausted").map((o) => ({ step: o.index, title: o.title, reason: o.feedback ?? "" })),
+        citations,
+        plan_reason: (plan as unknown as { reason?: string }).reason ?? "",
+        requires_approval: true,
+      } as unknown as Json,
+    };
   }
 
   /** Resolve rótulos entregues a este trabalho; recusa rótulo estranho ou trecho que deixou de valer. */
@@ -190,13 +330,13 @@ export class OpenWorkGateway {
       ensure(id, () => conflict("label_not_served", "Trecho não entregue a este trabalho"));
       const passage = await this.deps.search.passageForAgents(id, agentIds);
       ensure(passage, () => conflict("fragment_no_longer_valid", "Uma fonte usada deixou de valer ou não está acessível a este agente; recomece a análise"));
-      fragments.push({ label, source: passage.sourceId, title: passage.title, version: passage.version, validFrom: passage.validFrom, text: passage.text });
+      fragments.push({ label, source: passage.sourceId, title: passage.title, version: passage.version, validFrom: passage.validFrom, text: passage.text, ...(passage.around ? { around: passage.around } : {}) });
     }
     return fragments;
   }
 
   private async job(id: JobId) {
     const job = await loadJob(this.deps.jobs.uow.read.jobs, id);
-    return { goal: job.goal, plan: job.plan as unknown as OpenPlan | null, attachments: job.attachments };
+    return { goal: job.goal, plan: job.plan as unknown as OpenPlan | null, attachments: job.attachments, preset: job.preset };
   }
 }

@@ -16,6 +16,8 @@ export interface AdmitJobInput {
   request: Json;
   /** Fontes do Cérebro anexadas ao pedido. */
   attachments?: readonly string[];
+  /** Plano já aprovado pelo CEO (time e motivo); validado pela política no passo de plano. */
+  preset?: Json;
   key?: AdmissionKey;
   /** Executado na mesma transação da admissão (por exemplo, a resposta da conversa). */
   onAdmitted?: (job: Job, tx: Transaction) => Promise<void>;
@@ -34,10 +36,13 @@ export async function admitJob(deps: JobsDeps, input: AdmitJobInput): Promise<{ 
     }
     await requireQueueSpace(store.queue, deps.limits, "new");
     const attachments = [...new Set(input.attachments ?? [])];
-    const job = await store.jobs.add(newJob({ id: JobId.create(), goal, createdAt: deps.clock.now(), attachments }));
+    const job = await store.jobs.add(newJob({ id: JobId.create(), goal, createdAt: deps.clock.now(), attachments, preset: input.preset ?? null }));
     if (input.key) await store.admissions.add(input.key, job.id);
     const entry = await store.queue.add({ jobId: job.id, kind: "new", crashAfterEffect: false, queuedAt: deps.clock.now() });
-    await store.events.append(stream.job(job.id), { kind: "admission", detail: attachments.length ? { goal, attachments } : { goal } });
+    await store.events.append(stream.job(job.id), {
+      kind: "admission",
+      detail: { goal, ...(attachments.length ? { attachments } : {}), ...(input.preset ? { preset: input.preset } : {}) } as Json,
+    });
     await store.events.append(stream.job(job.id), { kind: "job_queued", detail: { position: entry.seq, kind: "new" } });
     if (input.onAdmitted) await input.onAdmitted(job, tx);
     return { job, replayed: false };

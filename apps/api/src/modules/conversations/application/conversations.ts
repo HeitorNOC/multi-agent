@@ -17,7 +17,9 @@ import type { Json } from "../../../shared/json.ts";
 import type { Transaction, UnitOfWork } from "../../../platform/database/unit-of-work.ts";
 import { stream } from "../../../platform/events/event-log.ts";
 import type { JobStatus } from "../../jobs/domain/job.ts";
-import type { ChiefOfStaff, ChiefTrace, ConversationOffer, CompanyBriefing } from "../domain/chief-of-staff.ts";
+import type { ChiefDecision, ChiefOfStaff, ChiefTrace, ChiefTurn, ConversationOffer, CompanyBriefing, KnowledgeNote } from "../domain/chief-of-staff.ts";
+import { composeGoal, isProposal, presetOf, type Brief, type PlanningDraft, type WorkPlan } from "../domain/planning.ts";
+import { addDecisions, recallOlder, statedDecisions, summarizeOlder, type MemoryDecision } from "../domain/memory.ts";
 import type { AnswerTrace } from "../../knowledge/application/answerers.ts";
 import { DEFAULT_TITLE, type Conversation, type Message, type MessageAttachment, type MessageCitation } from "../domain/conversation.ts";
 import type { ConversationStore } from "../infrastructure/sql-conversations.ts";
@@ -33,7 +35,14 @@ export interface JobOpener {
    * transação da admissão; se lançar, o trabalho não é criado. Recusas esperadas voltam como
    * `opened: false`.
    */
-  open(offerId: string, text: string, onAdmitted: (jobId: JobId, tx: Transaction) => Promise<void>, attachments?: readonly string[]): Promise<Admission>;
+  open(
+    offerId: string,
+    text: string,
+    onAdmitted: (jobId: JobId, tx: Transaction) => Promise<void>,
+    attachments?: readonly string[],
+    /** Plano aprovado pelo CEO (time e motivo): o trabalho usa este em vez de escolher o time. */
+    preset?: Json,
+  ): Promise<Admission>;
   /** Estado atual e especialistas do plano, para mostrar na conversa. */
   describe(jobId: JobId): Promise<{ id: JobId; status: JobStatus; agents: string[] | null } | undefined>;
 }
@@ -52,6 +61,14 @@ export interface ConversationDeps {
   briefing?: () => Promise<CompanyBriefing>;
   /** Time, alçadas e catálogo: o Chief propõe ou contrata quem falta (N1). */
   staffing?: StaffingDirectory;
+  /** Trechos do Cérebro ligados ao pedido que a pessoa pode ler (para o Chief planejar, N2). */
+  knowledge?: (text: string, actor: ActorId) => Promise<KnowledgeNote[]>;
+  /** Fatos da empresa (N5), para o Chief e os agentes. */
+  facts?: () => Promise<string[]>;
+  /** Recursos provisionados (N6), para o Chief planejar. */
+  resources?: () => Promise<{ name: string; kind: string; description: string }[]>;
+  /** Especificação pelos diretores em segundo plano (N2); sem isto, o plano vai direto ao CEO. */
+  specRunner?: { kick(planId: string): void };
 }
 
 export interface AttachmentFile {
@@ -76,6 +93,8 @@ export interface MessageView {
   job: { id: string; status: JobStatus; agents: string[] | null } | null;
   /** Só nas respostas: quem decidiu e, se for o caso, por que o modelo não foi usado. */
   decision: { engine: string; provider?: string; fallback?: string } | null;
+  /** Plano em elaboração ou decidido que esta resposta mostra (a versão atual fica na última). */
+  planning: PlanView | null;
   /** Proposta de contratação do Chief que esta resposta traz (para o CEO decidir). */
   staffing: { id: string; status: ProposalStatus; engagement: Engagement; templates: StaffingProposal["templates"]; job_id: string | null } | null;
 }
@@ -87,9 +106,62 @@ type DecisionRecord = (ChiefTrace | (AnswerTrace & { agent: string })) & {
   /** Composição do time: o Chief propôs, contratou, ou o CEO aceitou ou recusou a proposta. */
   staffing?: "proposed" | "hired" | "accepted" | "declined";
   hired?: string[];
+  /** Planejamento (N2): versão em elaboração, proposta, aprovada ou cancelada. */
+  planning?: "drafting" | "specifying" | "proposed" | "approved" | "cancelled";
+  plan_version?: number;
 };
 type Decisions = Map<number, MessageView["decision"]>;
 type Proposals = Map<number, StaffingProposal>;
+type Plans = Map<number, PlanningDraft>;
+
+export interface PlanView {
+  id: string;
+  version: number;
+  status: PlanningDraft["status"];
+  brief: Brief;
+  questions: readonly string[];
+  plan: (WorkPlan & { steps: (WorkPlan["steps"][number] & { owner_name: string })[]; hire_names: string[] }) | null;
+  job_id: string | null;
+  /** Partes detalhadas pelos diretores (a rodada mais recente). */
+  specs: { agent: string; name: string; status: "pending" | "done" | "failed"; summary: string | null; requirements: readonly string[]; risks: readonly string[] }[];
+}
+
+async function plansOf(deps: ConversationDeps, id: ConversationId): Promise<Plans> {
+  return new Map((await deps.uow.read.planning.listForConversation(id)).map((p) => [p.replySeq, p]));
+}
+
+/** Nomes de quem aparece no plano (do time ou do catálogo), para o cartão. */
+async function planView(deps: ConversationDeps, d: PlanningDraft): Promise<PlanView> {
+  const s = deps.staffing ? await deps.staffing.snapshot().catch(() => null) : null;
+  const names = new Map<string, string>([
+    ...(s?.team.map((a) => [a.id, `${a.name} · ${a.title}`] as const) ?? []),
+    ...(s?.candidates.map((c) => [c.id, `${c.name} · ${c.title}`] as const) ?? []),
+  ]);
+  return {
+    id: d.id,
+    version: d.version,
+    status: d.status,
+    brief: d.brief,
+    questions: d.questions,
+    plan: d.plan
+      ? {
+          ...d.plan,
+          steps: d.plan.steps.map((st) => ({ ...st, owner_name: names.get(st.owner) ?? st.owner })),
+          hire_names: d.plan.hire.map((h) => names.get(h) ?? h),
+        }
+      : null,
+    job_id: d.jobId,
+    specs: await specsOf(deps, d, names),
+  };
+}
+
+async function specsOf(deps: ConversationDeps, d: PlanningDraft, names: ReadonlyMap<string, string>): Promise<PlanView["specs"]> {
+  const all = await deps.uow.read.specs.list(d.id);
+  const last = Math.max(0, ...all.map((x) => x.version));
+  return all
+    .filter((x) => x.version === last)
+    .map((x) => ({ agent: x.agentId, name: names.get(x.agentId) ?? x.agentId, status: x.status, summary: x.output?.summary ?? null, requirements: x.output?.requirements ?? [], risks: x.output?.risks ?? [] }));
+}
 
 async function proposalsOf(deps: ConversationDeps, id: ConversationId): Promise<Proposals> {
   return new Map((await deps.uow.read.staffing.listForConversation(id)).map((p) => [p.replySeq, p]));
@@ -132,9 +204,12 @@ export async function readConversation(deps: ConversationDeps, actor: ActorId, i
   const messages = await deps.uow.read.messages.list(id);
   const decisions = await decisionsOf(deps, id);
   const proposals = await proposalsOf(deps, id);
+  const plans = await plansOf(deps, id);
+  const memory = await deps.uow.read.memory.get(id);
   return {
+    memory: { summary: memory?.summary ?? "", decisions: (memory?.decisions ?? []).map((d) => ({ text: d.text, kind: d.kind, at: d.at })) },
     conversation: { id: conversation.id, title: conversation.title, agent_id: conversation.agentId, created_at: conversation.createdAt, updated_at: conversation.updatedAt },
-    messages: await Promise.all(messages.map((m) => view(deps, m, decisions, proposals))),
+    messages: await Promise.all(messages.map((m) => view(deps, m, decisions, proposals, plans))),
   };
 }
 
@@ -179,10 +254,11 @@ export async function sendMessage(
   });
 
   const previous = await deps.uow.read.messages.findReply(id, question.seq);
-  const reply = previous ?? (conversation.agentId ? await stationAnswer(deps, conversation, question) : await answer(deps, id, question));
+  const reply = previous ?? (conversation.agentId ? await stationAnswer(deps, conversation, question) : await answer(deps, conversation, question));
   const decisions = await decisionsOf(deps, id);
   const proposals = await proposalsOf(deps, id);
-  return { replayed: !!previous, user: await view(deps, question, decisions, proposals), reply: await view(deps, reply, decisions, proposals) };
+  const plans = await plansOf(deps, id);
+  return { replayed: !!previous, user: await view(deps, question, decisions, proposals, plans), reply: await view(deps, reply, decisions, proposals, plans) };
 }
 
 /** Na Estação, o agente responde com as fontes que pode ler; a decisão vai para a trilha sem o texto. */
@@ -192,14 +268,64 @@ async function stationAnswer(deps: ConversationDeps, conversation: Conversation,
   return reply(deps, conversation.id, question.seq, r.text, null, r.trace, r.citations);
 }
 
-async function answer(deps: ConversationDeps, id: ConversationId, question: Message): Promise<Message> {
+async function answer(deps: ConversationDeps, conversation: Conversation, question: Message): Promise<Message> {
+  const id = conversation.id;
   const history = await deps.uow.read.messages.list(id);
-  // Sem a situação da empresa ou o time (falha ao ler), o Chief responde só com a conversa.
+  // Sem a situação da empresa, o time ou o Cérebro (falha ao ler), o Chief responde só com a conversa.
   const briefing = deps.briefing ? await deps.briefing().catch(() => null) : null;
   const staffing = deps.staffing ? await deps.staffing.snapshot().catch(() => null) : null;
-  const decision = await deps.chief.decide({ text: question.text, history, lastJob: await lastJob(deps, history), offers: deps.offers, briefing, staffing });
+  const draft = (await deps.uow.read.planning.active(id)) ?? null;
+  const knowledge = deps.knowledge && deps.chief.plans ? await deps.knowledge(planningQuery(draft, question.text), conversation.actor).catch(() => null) : null;
+  const memory = (await deps.uow.read.memory.get(id)) ?? null;
+  const facts = deps.facts ? await deps.facts().catch(() => null) : null;
+  const resources = deps.resources && deps.chief.plans ? await deps.resources().catch(() => null) : null;
+  const decision = await deps.chief.decide({
+    text: question.text,
+    history,
+    memory: { summary: memory?.summary ?? "", decisions: memory?.decisions.map((d) => d.text) ?? [], recalled: recallOlder(history.slice(0, -1), question.text) },
+    facts,
+    resources,
+    lastJob: await lastJob(deps, history),
+    offers: deps.offers,
+    briefing,
+    staffing,
+    planning: draft ? { version: draft.version, brief: draft.brief, questions: draft.questions, plan: draft.plan } : null,
+    knowledge,
+  });
   const trace: ChiefTrace = decision.trace ?? { engine: "rules" };
+  // O que o gestor afirmou (pelo modelo ou pela frase "fica decidido…") vai para a memória.
+  const stated = [...new Set([...(decision.remember ?? []), ...statedDecisions(question.text)])];
+  const answered = await answerDecision(deps, conversation, question, decision, trace, draft, knowledge, staffing);
+  await noteMemory(deps, id, stated.map((text) => ({ text, kind: "stated" as const, seq: question.seq, at: deps.clock.now() }))).catch(() => undefined);
+  return answered;
+}
+
+async function answerDecision(
+  deps: ConversationDeps,
+  conversation: Conversation,
+  question: Message,
+  decision: ChiefDecision,
+  trace: ChiefTrace,
+  draft: PlanningDraft | null,
+  knowledge: KnowledgeNote[] | null,
+  staffing: StaffingSnapshot | null,
+): Promise<Message> {
+  const id = conversation.id;
   if (decision.kind === "reply") return reply(deps, id, question.seq, decision.text, null, trace);
+  if (decision.kind === "cancel_plan") return cancelDraft(deps, id, question.seq, draft, decision.text, trace);
+  if (decision.kind === "plan") {
+    // Os rótulos dos trechos só valem nesta chamada: o plano guarda a fonte e a versão.
+    const sources = new Map(knowledge?.map((k) => [k.label, `${k.title} (v${k.version})`]) ?? []);
+    const plan = decision.plan && { ...decision.plan, references: [...new Set(decision.plan.references.map((r) => sources.get(r)).filter((t): t is string => !!t))] };
+    return planReply(deps, id, question, draft, { ...decision, plan }, trace);
+  }
+  // Com plano em elaboração, o trabalho só abre pela aprovação do CEO (defesa: uma implementação
+  // que tente abrir direto vira explicação).
+  if (draft)
+    return reply(deps, id, question.seq, "Há um plano em elaboração nesta conversa. Aprove, ajuste ou cancele o plano antes de eu abrir outro trabalho.", null, {
+      ...trace,
+      fallback: trace.fallback ?? "open_job_while_planning",
+    });
   // Defesa contra uma implementação que invente um trabalho fora do catálogo.
   if (!deps.offers.some((o) => o.id === decision.offerId))
     return reply(deps, id, question.seq, "Não consegui identificar um trabalho disponível para esse pedido.", null, { ...trace, fallback: "offer_not_in_catalog" });
@@ -223,6 +349,226 @@ async function answer(deps: ConversationDeps, id: ConversationId, question: Mess
     offer_id: decision.offerId,
     admission: "refused",
   });
+}
+
+/** Junta decisões novas e refaz o resumo das mensagens que saíram da janela. */
+async function noteMemory(deps: ConversationDeps, id: ConversationId, fresh: MemoryDecision[]) {
+  const messages = await deps.uow.read.messages.list(id);
+  await deps.uow.run(async (s) => {
+    const current = await s.memory.get(id);
+    const { summary, upTo } = summarizeOlder(messages);
+    if (!fresh.length && (current?.summarizedSeq ?? 0) === upTo) return;
+    await s.memory.save({
+      conversationId: id,
+      summary: upTo ? summary : (current?.summary ?? ""),
+      decisions: addDecisions(current?.decisions ?? [], fresh),
+      summarizedSeq: Math.max(upTo, current?.summarizedSeq ?? 0),
+      updatedAt: deps.clock.now(),
+    });
+  });
+}
+
+/** O que buscar no Cérebro para planejar: o pedido de origem e a mensagem atual. */
+const planningQuery = (draft: PlanningDraft | null, text: string) => (draft ? `${draft.brief.objective}\n${text}` : text);
+
+/** Começa ou revisa o planejamento: grava a resposta do Chief e a nova versão, juntas. */
+async function planReply(
+  deps: ConversationDeps,
+  id: ConversationId,
+  question: Message,
+  draft: PlanningDraft | null,
+  d: { offerId: string; text: string; brief: Brief; questions: string[]; plan: WorkPlan | null },
+  trace: ChiefTrace,
+) {
+  // Pronto para o CEO, mas o Chief pediu que diretores detalhem antes: vai para "specifying".
+  const delegate = isProposal(d) && !!deps.specRunner && (d.plan?.specify.length ?? 0) > 0;
+  const planId = draft?.id ?? randomUUID();
+  // Nomes antes da transação (a leitura do time é por fora dela).
+  const leaders = delegate ? await leaderNames(deps, d.plan!.specify) : null;
+  try {
+    const message = await deps.uow.run(async (s) => {
+      await requireUnanswered(s, id, question.seq);
+      const status = delegate ? "specifying" : isProposal(d) ? "proposed" : "drafting";
+      const version = (draft?.version ?? 0) + 1;
+      const text = leaders ? `${d.text} Pedi para ${leaders.text} ${leaders.many ? "detalharem a parte deles" : "detalhar a parte dele"}; o plano volta para você em seguida.` : d.text;
+      const message = await appendReply(deps, s, id, question.seq, text, null, { ...trace, offer_id: d.offerId, planning: status, plan_version: version });
+      const now = deps.clock.now();
+      if (draft) {
+        const revised = await s.planning.revise(
+          { ...draft, replySeq: message.seq, version, status, brief: d.brief, questions: d.questions, plan: d.plan, updatedAt: now },
+          draft.version,
+        );
+        ensure(revised, () => conflict("plan_changed", "O plano mudou enquanto eu revisava; envie de novo"));
+      } else
+        await s.planning.add({
+          id: planId,
+          conversationId: id,
+          originSeq: question.seq,
+          replySeq: message.seq,
+          offerId: d.offerId,
+          version,
+          status,
+          brief: d.brief,
+          questions: d.questions,
+          plan: d.plan,
+          jobId: null,
+          decidedBy: null,
+          decidedAt: null,
+          createdAt: now,
+          updatedAt: now,
+        });
+      if (delegate) await s.specs.add(planId, version, d.plan!.specify, now);
+      return message;
+    });
+    if (delegate) deps.specRunner!.kick(planId);
+    return message;
+  } catch (error) {
+    if (error instanceof AlreadyAnswered) return error.reply;
+    throw error;
+  }
+}
+
+async function leaderNames(deps: ConversationDeps, ids: readonly string[]) {
+  const s = deps.staffing ? await deps.staffing.snapshot().catch(() => null) : null;
+  const names = new Map<string, string>([...(s?.team.map((a) => [a.id, a.name] as const) ?? []), ...(s?.candidates.map((c) => [c.id, c.name] as const) ?? [])]);
+  const list = ids.map((i) => names.get(i) ?? i);
+  return { text: list.length > 1 ? `${list.slice(0, -1).join(", ")} e ${list.at(-1)}` : list[0]!, many: list.length > 1 };
+}
+
+const CONSOLIDATE = "Os diretores detalharam as partes deles. Consolide as especificações no plano e devolva a versão revisada completa.";
+
+/**
+ * Fim da especificação (chamado pelo `SpecificationRunner`): o Chief consolida as partes numa versão
+ * nova do plano e responde na conversa. Sem conseguir consolidar, o plano volta ao CEO como estava.
+ * Se o CEO mexeu no plano enquanto isso (outra versão, cancelado), não faz nada.
+ */
+export async function settlePlanFromSpecs(
+  deps: ConversationDeps,
+  draft: PlanningDraft,
+  sections: NonNullable<ChiefTurn["specifications"]>,
+  knowledge: readonly KnowledgeNote[],
+  staffing: ChiefTurn["staffing"],
+) {
+  const id = draft.conversationId as ConversationId;
+  let decision: Awaited<ReturnType<ChiefOfStaff["decide"]>> | null = null;
+  if (sections.length)
+    decision = await deps.chief
+      .decide({
+        text: CONSOLIDATE,
+        history: await deps.uow.read.messages.list(id),
+        lastJob: null,
+        offers: deps.offers,
+        staffing: staffing ?? null,
+        planning: { version: draft.version, brief: draft.brief, questions: draft.questions, plan: draft.plan },
+        knowledge,
+        specifications: sections,
+      })
+      .catch(() => null);
+  const names = sections.map((x) => x.title.split(",")[0]!);
+  const who = `${names.length > 1 ? `${names.slice(0, -1).join(", ")} e ${names.at(-1)}` : (names[0] ?? "")} ${names.length > 1 ? "detalharam a parte deles" : "detalhou a parte dele"}`;
+  let next: { brief: Brief; questions: string[]; plan: WorkPlan | null; text: string; trace: DecisionRecord };
+  if (decision?.kind === "plan") {
+    const sources = new Map(knowledge.map((k) => [k.label, `${k.title} (v${k.version})`]));
+    const plan = decision.plan && { ...decision.plan, specify: [], references: [...new Set(decision.plan.references.map((r) => sources.get(r)).filter((t): t is string => !!t))] };
+    next = { brief: decision.brief, questions: decision.questions, plan, text: `${who}. ${decision.text}`, trace: { ...(decision.trace ?? { engine: "rules" }), planning: "proposed" } };
+  } else
+    next = {
+      brief: draft.brief,
+      questions: [...draft.questions],
+      plan: draft.plan && { ...draft.plan, specify: [] },
+      text: sections.length
+        ? `${who}, mas não consegui consolidar no plano agora. O plano segue como estava, com as especificações abaixo, para sua aprovação.`
+        : "Os diretores não conseguiram detalhar agora. O plano segue como estava, para sua aprovação.",
+      trace: { engine: "rules", planning: "proposed", fallback: "consolidation_failed" },
+    };
+  const status = next.plan && next.questions.length === 0 ? "proposed" : "drafting";
+  try {
+    await deps.uow.run(async (s) => {
+      await requireUnanswered(s, id, draft.replySeq);
+      const message = await appendReply(deps, s, id, draft.replySeq, next.text, null, { ...next.trace, planning: status, plan_version: draft.version + 1 });
+      const revised = await s.planning.revise(
+        { ...draft, replySeq: message.seq, version: draft.version + 1, status, brief: next.brief, questions: next.questions, plan: next.plan, updatedAt: deps.clock.now() },
+        draft.version,
+      );
+      // O CEO mexeu no plano no meio: descarta (a transação desfaz a mensagem).
+      if (!revised) throw new AlreadyAnswered(message);
+    });
+  } catch (error) {
+    if (!(error instanceof AlreadyAnswered)) throw error;
+  }
+}
+
+async function cancelDraft(deps: ConversationDeps, id: ConversationId, replyTo: number, draft: PlanningDraft | null, text: string, trace: ChiefTrace) {
+  try {
+    return await deps.uow.run(async (s) => {
+      await requireUnanswered(s, id, replyTo);
+      if (draft) await s.planning.decide(draft.id, draft.version, "cancelled", null, "chief_of_staff", deps.clock.now());
+      return appendReply(deps, s, id, replyTo, text, null, { ...trace, planning: "cancelled" });
+    });
+  } catch (error) {
+    if (error instanceof AlreadyAnswered) return error.reply;
+    throw error;
+  }
+}
+
+/**
+ * O CEO aprova a versão do plano que está vendo: contrata quem o plano traz do catálogo, abre o
+ * trabalho com o pedido montado do brief e com o time do plano, tudo na mesma transação. Aprovar
+ * uma versão antiga é recusado (o plano mudou); repetir a aprovação é inofensivo.
+ */
+export async function approvePlan(deps: ConversationDeps, actor: ActorId, id: ConversationId, planId: string, version: number) {
+  await owned(deps, actor, id);
+  const draft = await deps.uow.read.planning.get(planId);
+  ensure(draft && draft.conversationId === id, () => notFound("plan_not_found", "Plano não encontrado"));
+  if (draft.status === "approved") return readConversation(deps, actor, id);
+  ensure(draft.status !== "specifying", () => conflict("plan_specifying", "Os diretores ainda estão detalhando o plano"));
+  ensure(draft.status === "proposed", () => conflict(draft.status === "cancelled" ? "plan_cancelled" : "plan_not_ready", draft.status === "cancelled" ? "Este plano foi cancelado" : "O plano ainda tem perguntas em aberto"));
+  ensure(draft.version === version, () => conflict("plan_changed", "O plano mudou desde que você o viu; confira a versão nova"));
+  const plan = draft.plan!;
+  const staffing = deps.staffing ? await deps.staffing.snapshot() : null;
+  const names = new Map<string, string>([
+    ...(staffing?.team.map((a) => [a.id, `${a.name} (${a.title})`] as const) ?? []),
+    ...(staffing?.candidates.map((c) => [c.id, `${c.name} (${c.title})`] as const) ?? []),
+  ]);
+  // Quem o plano traz do catálogo precisa continuar disponível (alguém pode ter mudado o time).
+  const offered = new Map(staffing?.candidates.map((c) => [c.id, c]) ?? []);
+  ensure(plan.hire.every((h) => offered.has(h)), () => conflict("plan_hire_unavailable", "Alguém que o plano traz não está mais disponível no catálogo; peça uma revisão"));
+  const hires = plan.hire.map((h) => offered.get(h)!).map((c) => ({ id: c.id, name: c.name, title: c.title, area: c.area }));
+  const engagement = staffing?.autonomy.engagement ?? "job";
+  const question = (await deps.uow.read.messages.list(id)).find((m) => m.seq === draft.originSeq);
+  const text = `Plano aprovado. ${hires.length ? `${hiredText(hires, engagement)} ` : ""}Abri o trabalho com ${plan.steps.length} etapa(s); aviso aqui quando houver um parecer para você aprovar.`;
+  const opened = await openJob(deps, id, draft.replySeq, {
+    offerId: draft.offerId,
+    request: composeGoal(draft.brief, plan, names, new Map((deps.resources ? await deps.resources().catch(() => []) : []).map((r) => [r.name, r.description.slice(0, 160)]))),
+    text,
+    trace: { engine: "rules", offer_id: draft.offerId, planning: "approved", plan_version: draft.version, ...(hires.length ? { hired: hires.map((h) => h.id) } : {}) },
+    attachments: question ? sourcesOf(question) : [],
+    hire: hires.length ? { templates: hires, engagement, actor } : null,
+    preset: presetOf(
+      plan,
+      draft.version,
+      new Map([...(staffing?.team.map((a) => [a.id, { area: a.area, role: a.role }] as const) ?? []), ...(staffing?.candidates.map((c) => [c.id, { area: c.area, role: c.role }] as const) ?? [])]),
+    ),
+    also: async (jobId, tx) => {
+      const decided = await deps.uow.join(tx).planning.decide(draft.id, draft.version, "approved", jobId, actor, deps.clock.now());
+      ensure(decided, () => conflict("plan_changed", "O plano mudou enquanto você aprovava; confira a versão nova"));
+    },
+  });
+  ensure(opened.ok, () => conflict("admission_refused", `Não consegui abrir o trabalho agora: ${opened.ok ? "" : opened.reason}. Tente de novo em instantes.`));
+  await noteMemory(deps, id, [{ text: `Plano aprovado (versão ${draft.version}): ${draft.brief.objective}`, kind: "plan_approved", seq: draft.replySeq, at: deps.clock.now() }]).catch(() => undefined);
+  return readConversation(deps, actor, id);
+}
+
+/** O CEO cancela o plano pelo botão. */
+export async function cancelPlan(deps: ConversationDeps, actor: ActorId, id: ConversationId, planId: string) {
+  await owned(deps, actor, id);
+  const draft = await deps.uow.read.planning.get(planId);
+  ensure(draft && draft.conversationId === id, () => notFound("plan_not_found", "Plano não encontrado"));
+  if (draft.status === "drafting" || draft.status === "proposed" || draft.status === "specifying") {
+    await cancelDraft(deps, id, draft.replySeq, draft, "Certo, cancelei o planejamento. Nada foi aberto.", { engine: "rules" });
+    await noteMemory(deps, id, [{ text: `Planejamento cancelado: ${draft.brief.objective}`, kind: "plan_cancelled", seq: draft.replySeq, at: deps.clock.now() }]).catch(() => undefined);
+  }
+  return readConversation(deps, actor, id);
 }
 
 type Hire = StaffingProposal["templates"][number];
@@ -284,6 +630,8 @@ interface OpenRequest {
   /** Contratar na mesma transação em que o trabalho é admitido (o worker só planeja depois). */
   hire: { templates: readonly Hire[]; engagement: Engagement; actor: string } | null;
   /** Mais algo na mesma transação (por exemplo, marcar a proposta como decidida). */
+  /** Plano aprovado (time e motivo) que o trabalho recebe pronto. */
+  preset?: Json;
   also?: (jobId: JobId, tx: Transaction) => Promise<void>;
 }
 
@@ -309,6 +657,7 @@ async function openJob(deps: ConversationDeps, id: ConversationId, replyTo: numb
         await appendReply(deps, s, id, replyTo, r.text, jobId, r.trace);
       },
       r.attachments,
+      r.preset,
     );
   } catch (error) {
     if (error instanceof AlreadyAnswered) return { ok: true, reply: error.reply };
@@ -346,6 +695,14 @@ export async function decideStaffing(deps: ConversationDeps, actor: ActorId, id:
       },
     });
     ensure(opened.ok, () => conflict("admission_refused", `Não consegui abrir o trabalho agora: ${opened.ok ? "" : opened.reason}. Tente de novo em instantes.`));
+    await noteMemory(deps, id, [
+      {
+        text: accept ? `Contratar ${proposal.templates.map((t) => `${t.name} (${t.title})`).join(" e ")} ${proposal.engagement === "job" ? "só para o trabalho" : "para o time"}` : "Seguir com o time atual, sem contratar",
+        kind: "staffing",
+        seq: proposal.replySeq,
+        at: deps.clock.now(),
+      },
+    ]).catch(() => undefined);
   }
   return readConversation(deps, actor, id);
 }
@@ -416,8 +773,9 @@ async function decisionsOf(deps: ConversationDeps, id: ConversationId): Promise<
   return map;
 }
 
-async function view(deps: ConversationDeps, m: Message, decisions: Decisions, proposals: Proposals = new Map()): Promise<MessageView> {
+async function view(deps: ConversationDeps, m: Message, decisions: Decisions, proposals: Proposals = new Map(), plans: Plans = new Map()): Promise<MessageView> {
   const p = m.role === "chief" ? proposals.get(m.seq) : undefined;
+  const plan = m.role === "chief" ? plans.get(m.seq) : undefined;
   return {
     seq: m.seq,
     role: m.role,
@@ -429,5 +787,6 @@ async function view(deps: ConversationDeps, m: Message, decisions: Decisions, pr
     job: m.jobId ? ((await deps.jobs.describe(m.jobId)) ?? null) : null,
     decision: m.role === "chief" ? (decisions.get(m.seq) ?? null) : null,
     staffing: p ? { id: p.id, status: p.status, engagement: p.engagement, templates: p.templates, job_id: p.jobId } : null,
+    planning: plan ? await planView(deps, plan) : null,
   };
 }

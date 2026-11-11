@@ -96,6 +96,7 @@ export interface TeamMemberBrief {
   name: string;
   title: string;
   area: string;
+  role: TemplateRole;
   focus: string;
   skills: readonly string[];
 }
@@ -117,7 +118,7 @@ export function staffingPort(deps: StaffingDeps): StaffingPort {
       const inTeam = new Set(team.map((a) => a.templateId).filter(Boolean));
       return {
         autonomy,
-        team: team.map((a) => ({ id: a.id, name: a.name, title: a.title, area: a.area, focus: a.focus, skills: a.skills })),
+        team: team.map((a) => ({ id: a.id, name: a.name, title: a.title, area: a.area, role: roleOf(deps.catalog, a), focus: a.focus, skills: a.skills })),
         candidates: deps.catalog.templates
           .filter((t) => !inTeam.has(t.id) && mayHire(autonomy, t.area))
           .map((t) => ({ id: t.id, name: t.name, title: t.title, area: t.area, role: t.role, focus: t.focus, skills: t.skills })),

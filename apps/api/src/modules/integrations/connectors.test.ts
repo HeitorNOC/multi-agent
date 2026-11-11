@@ -264,7 +264,7 @@ test("HTTP: Conectar com Google cria a conexão; sem o cookie do navegador, não
   try {
     const catalog = await (await globalThis.fetch(server.url + "/api/integrations/catalog")).json();
     const ready = catalog.categories.flatMap((c: { connectors: { id: string; ready: boolean }[] }) => c.connectors).filter((c: { ready: boolean }) => c.ready).map((c: { id: string }) => c.id);
-    assert.deepEqual(ready.sort(), ["gmail", "google_drive", "local_folder", "slack"]);
+    assert.deepEqual(ready.sort(), ["facebook_page", "github", "gmail", "google_drive", "local_folder", "postgres_readonly", "slack", "whatsapp"]);
     const start = await globalThis.fetch(server.url + "/api/integrations/google/start?connector=google_drive&name=Drive&read=1&write=1", { redirect: "manual" });
     assert.equal(start.status, 302);
     const consent = new URL(start.headers.get("location")!);

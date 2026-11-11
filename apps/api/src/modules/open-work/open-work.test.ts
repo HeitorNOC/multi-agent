@@ -135,6 +135,18 @@ for (const dialect of dialects) {
       return { jobs, gateway, model, md, started, analyze, clock, claim: () => claimNextJob(jobs) };
     }
 
+    test("plano aprovado pelo CEO (preset): o passo de plano devolve ele sem chamar o modelo, e a política aceita", async () => {
+      const { jobs, gateway, model } = await setup();
+      const preset = { agents: ["financial_planning_analyst"], reason: "Plano aprovado pelo CEO na conversa (versão 2), com 1 etapa(s)." };
+      const { job } = await admitJob(jobs, { request: { goal: GOAL }, preset });
+      await claimNextJob(jobs);
+      const { output, replayed } = await gateway.run(job.id, "plan");
+      assert.deepEqual([output, replayed, model.calls.length], [preset, true, 0]);
+      const bound = await recordPlan(jobs, job.id, output as never);
+      assert.deepEqual((bound as { agents: string[] }).agents, ["financial_planning_analyst"]);
+      assert.deepEqual(((await jobs.uow.read.jobs.get(job.id))!.preset as { agents: string[] }).agents, ["financial_planning_analyst"]);
+    });
+
     test("caminho completo: só fontes abertas chegam aos agentes; o parecer cita o que foi entregue", async () => {
       const { jobs, gateway, model, md, started, analyze } = await setup();
       const open = await md("Compras", POLICY);

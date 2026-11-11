@@ -6,6 +6,8 @@ import { catalogView, changeAgent, completeSetup, createAgent, dismiss, getOrgan
 import { LIMITS } from "../domain/agent.ts";
 import { AGENTS_PER_JOB } from "../domain/autonomy.ts";
 import { getAutonomy, saveAutonomy } from "../application/staffing.ts";
+import { addFact, changeFact, listFacts, removeFact } from "../application/facts.ts";
+import { addResource, changeResource, listResources, removeResource } from "../application/resources.ts";
 
 const skills = z.array(z.string().max(LIMITS.skill)).max(LIMITS.skills);
 const hireBody = z.strictObject({ template_id: z.string().min(1).max(80) });
@@ -83,6 +85,21 @@ export function agentsHttp(deps: AgentsDeps): HttpModule {
       const { max_agents, ...rest } = autonomyBody.parse(req.body);
       return autonomyView(await saveAutonomy(deps, actor(req), { ...rest, ...(max_agents === undefined ? {} : { maxAgents: max_agents }) }));
     });
+
+    // Memória da empresa (N5): fatos que todo agente recebe.
+    const factBody = z.strictObject({ text: z.string().max(500), category: z.string().max(40) });
+    const factId = (params: unknown) => z.string().uuid().parse((params as { id?: unknown }).id);
+    app.get("/api/company/facts", async () => listFacts(deps));
+    app.post("/api/company/facts", async (req, reply) => reply.code(201).send(await addFact(deps, actor(req), factBody.parse(req.body))));
+    app.post("/api/company/facts/:id", async (req) => changeFact(deps, actor(req), factId(req.params), factBody.parse(req.body)));
+    app.post("/api/company/facts/:id/remove", async (req) => removeFact(deps, actor(req), factId(req.params)));
+
+    // Recursos da empresa (N6): bancos, filas, ambientes, repositórios — só descrições.
+    const resourceBody = z.strictObject({ kind: z.string().max(20), name: z.string().max(80), description: z.string().max(1000) });
+    app.get("/api/resources", async () => listResources(deps));
+    app.post("/api/resources", async (req, reply) => reply.code(201).send(await addResource(deps, actor(req), resourceBody.parse(req.body))));
+    app.post("/api/resources/:id", async (req) => changeResource(deps, actor(req), factId(req.params), resourceBody.parse(req.body)));
+    app.post("/api/resources/:id/remove", async (req) => removeResource(deps, actor(req), factId(req.params)));
 
     app.get("/api/organization", async () => getOrganization(deps));
     app.post("/api/organization", async (req) => saveOrganization(deps, actor(req), organizationBody.parse(req.body)));

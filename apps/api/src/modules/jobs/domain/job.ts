@@ -35,6 +35,11 @@ export interface Job {
   /** Fontes do Cérebro anexadas ao pedido (imagens da conversa, por exemplo); chegam aos especialistas. */
   readonly attachments: readonly string[];
   readonly status: JobStatus;
+  /**
+   * Plano aprovado pelo CEO na conversa (time e motivo), quando houver. O worker usa este no passo
+   * de plano em vez de pedir ao modelo; a validação acontece ali, com o time já contratado.
+   */
+  readonly preset: Json | null;
   readonly plan: Json | null;
   readonly review: Review | null;
   /** Hash do parecer aprovado; `null` enquanto não houver aprovação. */
@@ -47,12 +52,13 @@ export interface Job {
   readonly version: number;
 }
 
-export function newJob(input: { id: JobId; goal: string; createdAt: string; attachments?: readonly string[] }): Job {
+export function newJob(input: { id: JobId; goal: string; createdAt: string; attachments?: readonly string[]; preset?: Json | null }): Job {
   return {
     id: input.id,
     goal: input.goal,
     attachments: input.attachments ?? [],
     status: "queued",
+    preset: input.preset ?? null,
     plan: null,
     review: null,
     approval: null,

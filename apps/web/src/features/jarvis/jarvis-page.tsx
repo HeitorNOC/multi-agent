@@ -436,6 +436,7 @@ function Hud({ phase, voiceOn, supported, onAsk }: { phase: Phase; voiceOn: bool
   ];
   const pending = o
     ? [
+        ...o.decide.plans.map((p) => ({ key: `p${p.id}`, label: "Aprovar plano", title: p.title, to: `/jarvis?conversa=${p.conversation_id}` })),
         ...o.decide.approvals.map((a) => ({ key: `a${a.id}`, label: "Aprovar parecer", title: a.title, to: `/trabalhos/${a.id}` })),
         ...o.decide.reviews.map((r) => ({ key: `r${r.id}`, label: "Revisar entrega", title: r.title, to: `/entregas/${r.id}` })),
         ...o.decide.recovery.map((r) => ({ key: `c${r.id}`, label: "Recuperação", title: r.title, to: "/governanca" })),

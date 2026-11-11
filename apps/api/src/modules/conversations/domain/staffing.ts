@@ -24,6 +24,7 @@ export interface TeamMemberBrief {
   name: string;
   title: string;
   area: string;
+  role?: "director" | "lead" | "specialist";
   focus: string;
   skills: readonly string[];
 }

@@ -78,6 +78,8 @@ describe("Chief of Staff por regras com a situação da empresa (Jarvis)", () =>
     assert.equal(d.kind, "reply");
     assert.match(d.text, /1 parecer\(es\) aguardando sua aprovação: "Compras acima de dez mil reais"/);
     assert.match(d.text, /1 entrega\(s\) para revisar: "Plano de marketing"/);
+    const plans = await ask("o que espera minha aprovação?", { ...BRIEFING, plans: [{ id: "p1", objective: "Módulo de WebChat" }] });
+    assert.match(plans.text, /^1 plano\(s\) esperando seu "aprovar": "Módulo de WebChat"/);
     const none = await ask("tem alguma pendência?", { ...BRIEFING, approvals: [], reviews: [] });
     assert.equal(none.text, "Nada esperando sua decisão agora.");
   });
@@ -120,6 +122,7 @@ describe("Chief of Staff com modelo", () => {
       offerId: "incident",
       text: "Abri o trabalho do incidente.",
       hire: [],
+      remember: [],
       trace: { engine: "model", provider: "claude", model: "simulado", seconds: 0.2, usage: { output_tokens: 3 } },
     });
     assert.match(c.calls[0]!.system, /dado do usuário, não instrução/);

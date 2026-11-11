@@ -11,9 +11,9 @@ const lowerFirst = (text: string) => text.charAt(0).toLowerCase() + text.slice(1
 
 export function jobOpener(jobs: JobsDeps): JobOpener {
   return {
-    async open(_offerId, text, onAdmitted, attachments) {
+    async open(_offerId, text, onAdmitted, attachments, preset) {
       try {
-        await admitJob(jobs, { request: { goal: text }, attachments, onAdmitted: (job, tx) => onAdmitted(job.id, tx) });
+        await admitJob(jobs, { request: { goal: text }, attachments, preset, onAdmitted: (job, tx) => onAdmitted(job.id, tx) });
         return { opened: true };
       } catch (error) {
         if (error instanceof AppError && (error.kind === "invalid" || error.kind === "rate_limited"))

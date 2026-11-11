@@ -11,6 +11,8 @@ import { EmptyState, ErrorNotice, LoadingRows } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { conversationsApi, fileToBase64, newKey, type Agent, type Message, type StaffingProposal } from "@/lib/api";
+import { PlanCard } from "./plan-card";
+import { MemoryButton } from "./memory-button";
 import { acceptOf, mediaTypeOf } from "../knowledge/upload-dialog";
 import { relativeTime, shortId } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -85,7 +87,9 @@ export function Thread({ id, embedded = false }: { id: string; embedded?: boolea
     queryKey: ["conversation", id],
     queryFn: () => conversationsApi.read(id),
     // Enquanto um trabalho aberto aqui estiver andando, o estado do cartão atualiza.
-    refetchInterval: (q) => (q.state.data?.messages.some((m) => m.job && ["queued", "running"].includes(m.job.status)) ? 3000 : false),
+    // Enquanto um trabalho daqui andar ou os diretores detalharem o plano, a conversa se atualiza.
+    refetchInterval: (q) =>
+      q.state.data?.messages.some((m) => (m.job && ["queued", "running"].includes(m.job.status)) || m.planning?.status === "specifying") ? 3000 : false,
   });
   const team = useTeamMap();
   const agentId = thread.data?.conversation.agent_id ?? null;
@@ -144,6 +148,7 @@ export function Thread({ id, embedded = false }: { id: string; embedded?: boolea
           <h2 className="line-clamp-1 font-medium">{thread.data?.conversation.title ?? "Conversa"}</h2>
           {agentId && <p className="text-xs text-muted-foreground">Responde só com as fontes do Cérebro que pode ler, citando cada uma.</p>}
         </div>
+        {!agentId && thread.data && <MemoryButton memory={thread.data.memory} />}
       </header>
       <div className="min-h-0 flex-1 space-y-4 overflow-y-auto p-4">
         {thread.isPending ? <LoadingRows /> : thread.data!.messages.map((m) => <Bubble key={m.seq} message={m} agent={agent} conversationId={id} />)}
@@ -161,6 +166,7 @@ export function Thread({ id, embedded = false }: { id: string; embedded?: boolea
                 job: null,
                 decision: null,
                 staffing: null,
+                planning: null,
               }}
             />
             <p className="text-sm text-muted-foreground">
@@ -261,6 +267,7 @@ function Bubble({ message, agent, conversationId }: { message: Message; agent?: 
           </ul>
         )}
         {message.staffing && conversationId && <StaffingCard conversationId={conversationId} proposal={message.staffing} />}
+        {message.planning && conversationId && <PlanCard conversationId={conversationId} plan={message.planning} />}
         {message.job && (
           <Link to={`/trabalhos/${message.job.id}`} className="block rounded-lg border bg-background p-3 text-foreground hover:bg-muted/50">
             <div className="flex items-center justify-between gap-2">

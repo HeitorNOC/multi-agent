@@ -10,6 +10,7 @@ type JobRow = {
   goal: string;
   attachments: string | null;
   status: string;
+  preset: string | null;
   plan: string | null;
   review: string | null;
   approval: string | null;
@@ -28,6 +29,7 @@ function toJob(r: JobRow): Job {
     goal: r.goal,
     attachments: r.attachments ? (JSON.parse(r.attachments) as string[]) : [],
     status: r.status as JobStatus,
+    preset: parse<Json>(r.preset),
     plan: parse<Json>(r.plan),
     review: parse<Review>(r.review),
     approval: r.approval,
@@ -52,9 +54,9 @@ export class SqlJobRepository implements JobRepository {
 
   async add(job: Job) {
     await this.sql.run(
-      `INSERT INTO jobs (id, goal, status, plan, review, approval, receipt, error, created_at, attachments, ordinal, version)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM jobs), 1)`,
-      [job.id, job.goal, job.status, text(job.plan), text(job.review), job.approval, text(job.receipt), job.error, job.createdAt, JSON.stringify(job.attachments)],
+      `INSERT INTO jobs (id, goal, status, plan, review, approval, receipt, error, created_at, attachments, preset, ordinal, version)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM jobs), 1)`,
+      [job.id, job.goal, job.status, text(job.plan), text(job.review), job.approval, text(job.receipt), job.error, job.createdAt, JSON.stringify(job.attachments), text(job.preset)],
     );
     return { ...job, version: 1 };
   }

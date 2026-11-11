@@ -1,4 +1,5 @@
 /** Integrações: catálogo por categoria, conexões da empresa e o que cada uma pode fazer. */
+import { ResourcesCard } from "./resources-card";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Blocks, FolderOpen, Hash, Mail, Plug, TriangleAlert } from "lucide-react";
@@ -33,6 +34,7 @@ export function IntegrationsPage() {
   return (
     <div className="space-y-6">
       <PageHeader title="Integrações" description="Conecte o Aurora aos sistemas da empresa. Cada conexão diz o que pode ler e escrever; o resto é recusado e fica registrado." />
+      <ResourcesCard />
       {returned && (
         <Alert variant="destructive">
           <AlertDescription className="flex flex-wrap items-center justify-between gap-2">
@@ -79,7 +81,7 @@ export function IntegrationsPage() {
                     {!c.available ? (
                       <ToneBadge tone="neutral">Em breve</ToneBadge>
                     ) : (
-                      <Button size="sm" variant={c.ready ? "default" : "outline"} onClick={() => setConnecting(c)}>
+                      <Button size="sm" variant={c.ready ? "default" : "outline"} onClick={() => setConnecting(c)} aria-label={`${c.ready ? "Conectar" : "Como configurar"} ${c.name}`}>
                         <Plug /> {c.ready ? "Conectar" : "Como configurar"}
                       </Button>
                     )}
@@ -143,6 +145,16 @@ function ConnectDialog({ connector, onClose, onConnected }: { connector: Connect
   const [path, setPath] = useState("");
   const [token, setToken] = useState("");
   const [channel, setChannel] = useState("");
+  const [tables, setTables] = useState("");
+  const database = connector.id === "postgres_readonly";
+  // Conectores que declaram os próprios campos (GitHub, WhatsApp, Facebook): a tela só os desenha.
+  const [values, setValues] = useState<Record<string, string>>({});
+  const declared = connector.fields ?? null;
+  const missingField = declared?.some((f) => f.required && !values[f.key]?.trim()) ?? false;
+  const tableList = tables
+    .split(/[\s,;]+/)
+    .map((t) => t.trim())
+    .filter(Boolean);
   const [read, setRead] = useState(!!connector.capabilities.read);
   const [write, setWrite] = useState(false);
   const connect = useMutation({
@@ -150,7 +162,18 @@ function ConnectDialog({ connector, onClose, onConnected }: { connector: Connect
       integrationsApi.connect({
         connector_id: connector.id,
         name: name.trim(),
-        config: connector.auth === "none" ? { path: path.trim() } : channel.trim() ? { channel_id: channel.trim() } : {},
+        config:
+          connector.auth === "none"
+            ? { path: path.trim() }
+            : declared
+              ? Object.fromEntries(Object.entries(values).map(([k, v]) => [k, v.trim()]).filter(([, v]) => v))
+              : database
+                ? tableList.length
+                  ? { tables: tableList }
+                  : {}
+                : channel.trim()
+                  ? { channel_id: channel.trim() }
+                  : {},
         permissions: { read, write },
         ...(connector.auth === "token" ? { secret: { token: token.trim() } } : {}),
       }),
@@ -162,7 +185,7 @@ function ConnectDialog({ connector, onClose, onConnected }: { connector: Connect
     },
   });
   const filled = connector.auth === "none" ? !!path.trim() : connector.auth === "token" ? !!token.trim() : true;
-  const ready = connector.ready && name.trim().length >= 2 && filled && (read || write);
+  const ready = connector.ready && name.trim().length >= 2 && filled && !missingField && (read || write);
   const callback = `${window.location.origin}/api/integrations/google/callback`;
   return (
     <Dialog open onOpenChange={(o) => !o && onClose()}>
@@ -215,15 +238,40 @@ function ConnectDialog({ connector, onClose, onConnected }: { connector: Connect
             {connector.auth === "token" && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="c-token">Bot User OAuth Token</Label>
-                  <Input id="c-token" type="password" autoComplete="off" value={token} onChange={(e) => setToken(e.target.value)} placeholder="xoxb-…" />
+                  <Label htmlFor="c-token">{connector.secretLabel ?? (database ? "URL de conexão do usuário somente leitura" : "Bot User OAuth Token")}</Label>
+                  <Input
+                    id="c-token"
+                    type="password"
+                    autoComplete="off"
+                    value={token}
+                    onChange={(e) => setToken(e.target.value)}
+                    placeholder={connector.secretPlaceholder ?? (database ? "postgres://aurora_leitura:senha@host:5432/banco" : "xoxb-…")}
+                  />
                   <p className="text-xs text-muted-foreground">Fica cifrado neste computador e nunca é mostrado de novo.</p>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="c-channel">Canal para publicar entregas (opcional)</Label>
-                  <Input id="c-channel" value={channel} onChange={(e) => setChannel(e.target.value)} placeholder="C0123ABCD" />
-                  <p className="text-xs text-muted-foreground">No Slack: abra o canal › nome do canal › o id aparece no fim da janela.</p>
-                </div>
+                {declared ? (
+                  declared.map((f) => (
+                    <div key={f.key} className="space-y-2">
+                      <Label htmlFor={`c-${f.key}`}>{f.label}</Label>
+                      <Input id={`c-${f.key}`} value={values[f.key] ?? ""} onChange={(e) => setValues((v) => ({ ...v, [f.key]: e.target.value }))} placeholder={f.placeholder} />
+                      {f.hint && <p className="text-xs text-muted-foreground">{f.hint}</p>}
+                    </div>
+                  ))
+                ) : database ? (
+                  <div className="space-y-2">
+                    <Label htmlFor="c-tables">Tabelas liberadas (opcional)</Label>
+                    <Input id="c-tables" value={tables} onChange={(e) => setTables(e.target.value)} placeholder="vendas.avaliacoes, atendimento.chamados" />
+                    <p className="text-xs text-muted-foreground">
+                      Esquema.tabela, separadas por vírgula. Sem a lista, vale o que o usuário do banco pode ler. O Aurora só lê, até 5.000 linhas por tabela.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Label htmlFor="c-channel">Canal para publicar entregas (opcional)</Label>
+                    <Input id="c-channel" value={channel} onChange={(e) => setChannel(e.target.value)} placeholder="C0123ABCD" />
+                    <p className="text-xs text-muted-foreground">No Slack: abra o canal › nome do canal › o id aparece no fim da janela.</p>
+                  </div>
+                )}
               </>
             )}
             <fieldset className="space-y-2 text-sm">

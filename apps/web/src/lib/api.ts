@@ -80,6 +80,29 @@ export interface OpenReport {
   plan_reason?: string;
 }
 
+/** Parecer de um trabalho em etapas (plano aprovado pelo CEO, N3). */
+export interface StepsReport {
+  kind: "steps";
+  summary: string;
+  recommendation: string;
+  steps: {
+    index: number;
+    title: string;
+    owner: string;
+    reviewer: string;
+    status: "accepted" | "escalated" | "exhausted" | "skipped";
+    attempts: number;
+    deliverable: string | null;
+    feedback: string | null;
+    issues: string[];
+  }[];
+  escalations: { step: number; title: string; reason: string }[];
+  citations: Citation[];
+  plan_reason?: string;
+}
+
+export type JobReport = OpenReport | StepsReport;
+
 export interface JobEvent {
   seq: number;
   kind: string;
@@ -92,7 +115,7 @@ export interface Job {
   goal: string;
   status: JobStatus;
   plan: { agents?: string[]; reason?: string; max_model_calls?: number } | null;
-  review: { hash: string; report: OpenReport; payload: { operation: string; recipient: string; content: string } } | null;
+  review: { hash: string; report: JobReport; payload: { operation: string; recipient: string; content: string } } | null;
   approved: boolean;
   receipt: { id: string; hash: string; created?: string } | null;
   error: string | null;
@@ -144,6 +167,31 @@ export interface Message {
   decision: { engine: string; provider?: string; fallback?: string } | null;
   /** Proposta de contratação do Chief nesta resposta (o CEO decide). */
   staffing: StaffingProposal | null;
+  /** Plano em elaboração ou decidido que esta resposta mostra (a versão atual). */
+  planning: PlanView | null;
+}
+
+export interface PlanView {
+  id: string;
+  version: number;
+  status: "drafting" | "specifying" | "proposed" | "approved" | "cancelled";
+  brief: { objective: string; context: string[]; constraints: string[]; deadline: string | null; done: string[] };
+  questions: string[];
+  plan: {
+    steps: { title: string; owner: string; owner_name: string; deliverable: string }[];
+    team: string[];
+    hire: string[];
+    hire_names: string[];
+    risks: string[];
+    references: string[];
+    specify: string[];
+    /** Recursos da empresa que o plano usa e o que falta provisionar. */
+    resources?: string[];
+    needs?: string[];
+  } | null;
+  job_id: string | null;
+  /** Partes detalhadas pelos diretores (a rodada mais recente). */
+  specs: { agent: string; name: string; status: "pending" | "done" | "failed"; summary: string | null; requirements: string[]; risks: string[] }[];
 }
 
 export interface StaffingProposal {
@@ -171,16 +219,20 @@ export const conversationsApi = {
   list: () => get<{ conversations: ConversationSummary[] }>("/api/conversations"),
   create: (title?: string, agentId?: string) =>
     post<{ id: string; title: string; agent_id: string | null; created_at: string }>("/api/conversations", { ...(title ? { title } : {}), ...(agentId ? { agent_id: agentId } : {}) }),
-  read: (id: string) => get<{ conversation: ConversationSummary; messages: Message[] }>(`/api/conversations/${id}`),
+  read: (id: string) => get<{ conversation: ConversationSummary; messages: Message[]; memory: ConversationMemory }>(`/api/conversations/${id}`),
   send: (id: string, text: string, clientMessageId: string, attachments: { filename: string; media_type: string; content_base64: string }[] = []) =>
     post<{ replayed: boolean; user: Message; reply: Message }>(`/api/conversations/${id}/messages`, {
       text,
       client_message_id: clientMessageId,
       ...(attachments.length ? { attachments } : {}),
     }),
+  /** Aprovar a versão do plano que o CEO está vendo (abre o trabalho), ou cancelar. */
+  approvePlan: (id: string, planId: string, version: number) =>
+    post<{ conversation: ConversationSummary; messages: Message[]; memory: ConversationMemory }>(`/api/conversations/${id}/plans/${planId}/approve`, { version }),
+  cancelPlan: (id: string, planId: string) => post<{ conversation: ConversationSummary; messages: Message[]; memory: ConversationMemory }>(`/api/conversations/${id}/plans/${planId}/cancel`),
   /** Decidir a proposta de contratação do Chief: contratar e seguir, ou seguir com o time atual. */
   decideStaffing: (id: string, proposalId: string, accept: boolean) =>
-    post<{ conversation: ConversationSummary; messages: Message[] }>(`/api/conversations/${id}/staffing/${proposalId}/${accept ? "accept" : "decline"}`),
+    post<{ conversation: ConversationSummary; messages: Message[]; memory: ConversationMemory }>(`/api/conversations/${id}/staffing/${proposalId}/${accept ? "accept" : "decline"}`),
 };
 
 // ── Cérebro ──────────────────────────────────────────────────────────────────
@@ -434,6 +486,40 @@ export const agentsApi = {
   saveAutonomy: (changes: Partial<Autonomy>) => post<Autonomy>("/api/autonomy", changes),
 };
 
+/** Memória da conversa (N5): decisões registradas e resumo das mensagens antigas. */
+export interface ConversationMemory {
+  summary: string;
+  decisions: { text: string; kind: "plan_approved" | "plan_cancelled" | "staffing" | "stated"; at: string }[];
+}
+
+export interface CompanyFact {
+  id: string;
+  text: string;
+  category: string;
+  updated_at: string;
+}
+
+export interface CompanyResource {
+  id: string;
+  kind: string;
+  name: string;
+  description: string;
+  updated_at: string;
+}
+
+export const resourcesApi = {
+  list: () => get<{ resources: CompanyResource[]; kinds: string[] }>("/api/resources"),
+  add: (kind: string, name: string, description: string) => post<CompanyResource>("/api/resources", { kind, name, description }),
+  remove: (id: string) => post<{ removed: boolean }>(`/api/resources/${id}/remove`),
+};
+
+export const factsApi = {
+  list: () => get<{ facts: CompanyFact[]; categories: string[] }>("/api/company/facts"),
+  add: (text: string, category: string) => post<CompanyFact>("/api/company/facts", { text, category }),
+  change: (id: string, text: string, category: string) => post<CompanyFact>(`/api/company/facts/${id}`, { text, category }),
+  remove: (id: string) => post<{ removed: boolean }>(`/api/company/facts/${id}/remove`),
+};
+
 export const companyApi = {
   get: () => get<Organization>("/api/organization"),
   save: (input: { name: string; sector?: string; objectives?: string; policies?: string }) => post<Organization>("/api/organization", input),
@@ -458,7 +544,7 @@ export interface DeliverableSummary {
 }
 
 export interface DeliverableDetail extends DeliverableSummary {
-  versions: { version: number; job_id: string; created_at: string; content: { goal: string; report: OpenReport; payload: { recipient: string; content: string } } }[];
+  versions: { version: number; job_id: string; created_at: string; content: { goal: string; report: JobReport; payload: { recipient: string; content: string } } }[];
   reopenings: { job_id: string; from_version: number; feedback: string; requested_by: string; created_at: string }[];
   history: JobEvent[];
 }
@@ -531,6 +617,10 @@ export interface ConnectorDef {
   /** Como se conecta: pasta (nada), conta Google (login) ou token de um app (Slack). */
   auth: "none" | "google" | "token";
   setup?: string[];
+  /** Campos que a tela de conectar pede, e como chamar o segredo. */
+  fields?: { key: string; label: string; placeholder?: string; hint?: string; required?: boolean }[];
+  secretLabel?: string;
+  secretPlaceholder?: string;
   /** Funciona nesta instalação? Se não, o que falta configurar. */
   ready: boolean;
   missing: string | null;
@@ -579,7 +669,7 @@ export const integrationsApi = {
   connect: (input: {
     connector_id: string;
     name: string;
-    config: Record<string, string>;
+    config: Record<string, unknown>;
     permissions: { read?: boolean; write?: boolean };
     secret?: { token: string };
   }) => post<Connection>("/api/integrations", input),
@@ -611,6 +701,8 @@ export interface Overview {
     approvals: { id: string; title: string; at: string }[];
     reviews: { id: string; title: string; at: string; version: number }[];
     recovery: { id: string; title: string; at: string }[];
+    /** Planos propostos pelo Chief na conversa, esperando seu "aprovar". */
+    plans: { id: string; conversation_id: string; title: string; at: string }[];
   };
   routines: { next: { id: string; name: string; next_run_at: string }[]; gave_up: number };
   usage: {

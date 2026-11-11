@@ -72,6 +72,12 @@ def build(api: Api, crash_after_effect: bool):
         return {"plan": (await api.call("plan", plan=proposal))["plan"]}
 
     async def research(state: State):
+        if state["plan"].get("steps"):
+            # Plano aprovado pelo CEO: etapas com entrega e revisão, uma por chamada. Cada passo tem
+            # recibo na API; repetir depois de uma queda não refaz nada.
+            while not (await api.call("advance"))["done"]:
+                pass
+            return {"evidence": {}, "findings": [], "unknowns": []}
         evidence, findings, unknowns = {}, [], []
         for agent in state["plan"]["agents"]:
             fragments = (await api.call("knowledge", agent=agent))["fragments"]
@@ -86,6 +92,8 @@ def build(api: Api, crash_after_effect: bool):
         return {"evidence": evidence, "findings": findings, "unknowns": unknowns}
 
     async def synthesis(state: State):
+        if state["plan"].get("steps"):
+            return {"synthesis": (await api.call("model", slot="synthesis"))["output"]}
         if not state["findings"]:
             # Sem achados citados não há o que sintetizar: abstenção explícita, sem chamar o modelo.
             return {
@@ -99,6 +107,9 @@ def build(api: Api, crash_after_effect: bool):
         return {"synthesis": (await api.call("model", slot="synthesis"))["output"]}
 
     async def review(state: State):
+        if state["plan"].get("steps"):
+            report = (await api.call("report"))["report"]
+            return {"review": (await api.call("review", report=report))["review"]}
         fragments = {f["label"]: f for group in state["evidence"].values() for f in group}
         cited = set(state["synthesis"]["citations"]) | {c for f in state["findings"] for c in f["citations"]}
         report = {

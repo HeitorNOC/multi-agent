@@ -34,6 +34,9 @@ jobs:
           python-version: "3.13"
       - run: npm run install:all
       - run: npm run setup:runtime
+      # Grafo do worker (LangGraph) com checkpoint em memória: com e sem etapas.
+      - run: .venv/bin/python -m unittest test_open_worker
+        working-directory: apps/runtime
       # Tipos da API e da interface, testes da API nos dois bancos e build da interface.
       - run: npm run verify
       # Testes de interface: a API real servindo a interface, num navegador de verdade.
