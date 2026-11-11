@@ -35,3 +35,6 @@ legacy/packages/aurora-api/test/.open-calls-*.log
 
 # Configuração local do Claude Code
 .claude/launch.json
+
+# Modelos baixados (busca por significado)
+apps/api/data/models/

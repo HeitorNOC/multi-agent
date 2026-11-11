@@ -148,6 +148,8 @@ export async function listSources(deps: KnowledgeDeps, actor: ActorId) {
   return {
     sources: sources.map((s) => summary(s, current.get(s.id), latest.get(s.id))),
     areas: areaList(deps).map((a) => ({ ...a, sources: sources.filter((s) => s.area === a.id && !s.revokedAt).length })),
+    /** Busca por significado: modelo e quantos trechos já têm vetor; `null` se desligada. */
+    semantic: await deps.search.semanticStatus(),
     media_types: SUPPORTED_MEDIA_TYPES,
     formats: SUPPORTED_MEDIA_TYPES.map((m) => ({ media_type: m, label: FORMATS[m].label, extensions: FORMATS[m].extensions })),
   };

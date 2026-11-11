@@ -64,6 +64,16 @@ const schema = z
      * entra com a própria conta (senha, Google ou Microsoft).
      */
     AURORA_AUTH: z.enum(["accounts", "local"]).default("local"),
+    /**
+     * Busca por significado no Cérebro. `local` (padrão): modelo de embeddings no próprio
+     * computador, baixado uma vez do Hugging Face. `none`: só busca por palavras.
+     */
+    AURORA_EMBEDDINGS: z.enum(["local", "none"]).default("local"),
+    AURORA_EMBEDDING_MODEL: z.string().min(1).max(200).optional(),
+    /** Pasta dos modelos baixados. Padrão: apps/api/data/models. */
+    AURORA_MODELS_DIR: z.string().min(1).optional(),
+    /** Similaridade mínima (0 a 1) para um trecho achado só por significado contar como evidência. */
+    AURORA_SEMANTIC_MIN: z.coerce.number().min(0).max(1).default(0.8),
     /** Entrar com Google: aplicativo OAuth "Web" criado no Google Cloud da empresa. */
     AURORA_GOOGLE_CLIENT_ID: z.string().min(1).optional(),
     AURORA_GOOGLE_CLIENT_SECRET: z.string().min(1).optional(),
@@ -102,6 +112,7 @@ export interface Config {
   knowledge: { answerer: "extractive" | "model"; maxBytes: number };
   chief: { engine: "rules" | "model" };
   templatesPath: string | undefined;
+  embeddings: { mode: "local" | "none"; model: string | undefined; modelsDir: string; minSimilarity: number };
   auth: {
     mode: "accounts" | "local";
     google: OAuthClient | undefined;
@@ -112,6 +123,7 @@ export interface Config {
 }
 
 const DEFAULT_WEB_DIR = fileURLToPath(new URL("../../web/dist", import.meta.url));
+const DEFAULT_MODELS_DIR = fileURLToPath(new URL("../data/models", import.meta.url));
 
 export class ConfigError extends Error {
   override name = "ConfigError";
@@ -135,6 +147,12 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
     knowledge: { answerer: e.AURORA_KNOWLEDGE_ANSWERER, maxBytes: e.AURORA_KNOWLEDGE_MAX_BYTES },
     chief: { engine: e.AURORA_CHIEF_ENGINE },
     templatesPath: e.AURORA_AGENT_TEMPLATES,
+    embeddings: {
+      mode: e.AURORA_EMBEDDINGS,
+      model: e.AURORA_EMBEDDING_MODEL,
+      modelsDir: e.AURORA_MODELS_DIR ?? DEFAULT_MODELS_DIR,
+      minSimilarity: e.AURORA_SEMANTIC_MIN,
+    },
     auth: {
       mode: e.AURORA_AUTH,
       google: e.AURORA_GOOGLE_CLIENT_ID && e.AURORA_GOOGLE_CLIENT_SECRET ? { clientId: e.AURORA_GOOGLE_CLIENT_ID, clientSecret: e.AURORA_GOOGLE_CLIENT_SECRET } : undefined,

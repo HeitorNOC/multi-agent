@@ -3,6 +3,7 @@ import type { ActorId, SourceId } from "../../../shared/ids.ts";
 import type { Sql } from "../../../platform/database/database.ts";
 import { SqlEventLog, type EventLog } from "../../../platform/events/event-log.ts";
 import type { Clock } from "../../../shared/clock.ts";
+import { fromBytes, toBytes } from "../domain/embeddings.ts";
 import type { SourceRepository, VersionRepository } from "../domain/repositories.ts";
 import type { ContentOrigin, IndexableVersion, KnowledgeSource, SourceVersion, StoredVersion } from "../domain/source.ts";
 
@@ -152,9 +153,29 @@ export class SqlVersionRepository implements VersionRepository {
   }
 }
 
+/** Vetores dos trechos (busca por significado), por modelo e hash do texto vetorizado. */
+export class SqlEmbeddingRepository {
+  private readonly sql: Sql;
+  constructor(sql: Sql) {
+    this.sql = sql;
+  }
+  async list(model: string): Promise<Map<string, Float32Array>> {
+    const rows = await this.sql.all<{ content_key: string; vector: Uint8Array }>("SELECT content_key, vector FROM knowledge_embeddings WHERE model = $1", [model]);
+    return new Map(rows.map((r) => [r.content_key, fromBytes(new Uint8Array(r.vector))]));
+  }
+  async put(model: string, key: string, vector: Float32Array, at: string) {
+    await this.sql.run(
+      `INSERT INTO knowledge_embeddings (model, content_key, dims, vector, created_at) VALUES ($1, $2, $3, $4, $5)
+       ON CONFLICT (model, content_key) DO NOTHING`,
+      [model, key, vector.length, toBytes(vector), at],
+    );
+  }
+}
+
 export interface KnowledgeStore {
   sources: SourceRepository;
   versions: VersionRepository;
+  embeddings: SqlEmbeddingRepository;
   events: EventLog;
 }
 
@@ -163,5 +184,6 @@ export const knowledgeStore =
   (sql: Sql): KnowledgeStore => ({
     sources: new SqlSourceRepository(sql),
     versions: new SqlVersionRepository(sql),
+    embeddings: new SqlEmbeddingRepository(sql),
     events: new SqlEventLog(sql, clock),
   });

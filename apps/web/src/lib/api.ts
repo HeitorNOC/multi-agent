@@ -187,6 +187,15 @@ export interface SourceVersion {
   url: string;
 }
 
+/** Busca por significado: modelo, trechos com vetor e erro (se o modelo não carregou). */
+export interface SemanticStatus {
+  model: string;
+  indexed: number;
+  total: number;
+  running: boolean;
+  error: string | null;
+}
+
 export interface BrainArea {
   id: string;
   title: string;
@@ -224,7 +233,7 @@ export interface UploadInput extends VersionInput {
 }
 
 export const knowledgeApi = {
-  list: () => get<{ sources: SourceSummary[]; areas: BrainArea[]; media_types: string[]; formats: FileFormat[] }>("/api/knowledge/sources"),
+  list: () => get<{ sources: SourceSummary[]; areas: BrainArea[]; semantic: SemanticStatus | null; media_types: string[]; formats: FileFormat[] }>("/api/knowledge/sources"),
   get: (id: string) => get<SourceSummary & { versions: SourceVersion[] }>(`/api/knowledge/sources/${id}`),
   upload: (input: UploadInput) => post<SourceSummary>("/api/knowledge/sources", input),
   addVersion: (id: string, input: VersionInput) => post<SourceSummary>(`/api/knowledge/sources/${id}/versions`, input),

@@ -15,6 +15,7 @@ nuvem do Aurora.
 | O quê | Tabela | Observação |
 | --- | --- | --- |
 | Fontes do Cérebro | `knowledge_sources` | título, dono, leitores, **área**, substituição, revogação |
+| Vetores dos trechos | `knowledge_embeddings` | busca por significado; um vetor por modelo e texto (hash), recalculado só se o texto mudar |
 | Versões de cada fonte | `knowledge_versions` | **arquivo original (bytes)**, **texto extraído**, formato, **origem** (arquivo ou texto escrito), SHA-256, vigência |
 | Conversas e mensagens | `conversations`, `conversation_messages` | mensagens com citações gravadas |
 | Trabalhos | `jobs`, `job_queue`, `admissions` | pedido, plano, parecer, aprovação, recibo |
@@ -76,12 +77,21 @@ flowchart LR
    resposta é **abstenção**.
 5. **Preferência de área.** Para um agente, trechos da área dele ganham 30% de peso: o analista de
    compras acha primeiro o manual de compras, sem perder uma política Geral melhor.
-6. **Resposta.** Extrativa (as frases do trecho que têm os termos da pergunta) ou redigida pelo
+6. **Por significado (híbrida).** Com `AURORA_EMBEDDINGS=local` (padrão), cada trecho também vira
+   um vetor no modelo `multilingual-e5-small`, que roda no próprio computador (baixado uma vez do
+   Hugging Face, cerca de 118 MB, para `apps/api/data/models`). A pergunta vira vetor e os trechos
+   mais parecidos entram numa segunda lista. As duas listas (palavras e significado) são juntadas
+   por posição (RRF, k=60): quem aparece nas duas sobe. Um trecho achado só pelo significado precisa
+   de similaridade mínima (`AURORA_SEMANTIC_MIN`, padrão 0,8); sem isso, abstenção.
+   - Vetorizar acontece em segundo plano depois de cada mudança; enviar um arquivo continua rápido.
+   - Os vetores ficam no banco: reiniciar não recalcula nada.
+   - Se o modelo falhar, a busca segue só por palavras e a tela do Cérebro avisa.
+7. **Resposta.** Extrativa (as frases do trecho que têm os termos da pergunta) ou redigida pelo
    modelo, que só pode citar os trechos entregues. A citação mostra fonte, seção, versão e link.
 
-Limites honestos desta versão: a busca é por palavras, não por significado ("despesa" não acha
-"gasto"). O índice é trocável pela interface `KnowledgeIndex`; o próximo passo natural é somar
-busca semântica (embeddings) à BM25.
+Próximos ganhos possíveis: um reordenador (cross-encoder) depois da fusão e um índice vetorial no
+banco (pgvector) se o volume passar de dezenas de milhares de trechos; hoje a comparação é feita
+em memória, o que é rápido nesse tamanho.
 
 ## 4. Recuperação depois de uma falha
 

@@ -161,7 +161,7 @@ test("HTTP: sem sessão a API recusa; dono entra, assume os dados locais e entra
   let claims: Record<string, unknown> = {};
   const oauthFetch = (async () => new Response(JSON.stringify({ id_token: idToken(claims) }), { status: 200 })) as unknown as typeof fetch;
   // Antes das contas: o operador local tem uma conversa.
-  const localConfig = loadConfig({ AURORA_SQLITE_PATH: join(dir, "aurora.db"), AURORA_AUTH: "local", AURORA_WEB_DIR: "none" });
+  const localConfig = loadConfig({ AURORA_SQLITE_PATH: join(dir, "aurora.db"), AURORA_EMBEDDINGS: "none", AURORA_AUTH: "local", AURORA_WEB_DIR: "none" });
   const empty = { templates: { areas: [], templates: [] }, model: null };
   const before = await startServer(localConfig, empty);
   const post = (base: string, path: string, body: object, cookie = "") =>
@@ -171,6 +171,7 @@ test("HTTP: sem sessão a API recusa; dono entra, assume os dados locais e entra
 
   const config = loadConfig({
     AURORA_SQLITE_PATH: join(dir, "aurora.db"),
+    AURORA_EMBEDDINGS: "none",
     AURORA_WEB_DIR: "none",
     AURORA_AUTH: "accounts",
     AURORA_GOOGLE_CLIENT_ID: "cliente",

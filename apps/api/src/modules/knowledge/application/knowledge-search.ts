@@ -1,5 +1,9 @@
 /**
- * Busca nos trechos vigentes, com evidência mínima e corte relativo. Mantém em memória o índice
+ * Busca nos trechos vigentes, com evidência mínima e corte relativo.
+ *
+ * Híbrida quando há modelo de embeddings: por palavras (BM25, bom em nomes, números e termos
+ * exatos) e por significado (vetores, bom em sinônimos e perguntas com outras palavras). As duas
+ * listas são juntadas por posição (RRF). Sem modelo, ou enquanto ele não responde, só palavras. Mantém em memória o índice
  * do conjunto vigente; a chave é o próprio conjunto (`fonte@versão:leitores`) no instante da
  * consulta, então uma versão com vigência futura entra exatamente na data, sem expiração por tempo.
  */
@@ -9,7 +13,9 @@ import type { IndexBuilder, KnowledgeIndex, Passage } from "../domain/search-ind
 import { originalUrl } from "../domain/search-index.ts";
 import type { ActorId } from "../../../shared/ids.ts";
 import { agentsCanRead, canRead, currentVersions, type IndexableVersion } from "../domain/source.ts";
-import { chunk } from "../domain/text.ts";
+import { reciprocalRankFusion } from "../domain/embeddings.ts";
+import { chunk, terms } from "../domain/text.ts";
+import type { SemanticIndex } from "./semantic-index.ts";
 import type { KnowledgeStore } from "../infrastructure/sql-knowledge.ts";
 
 /** Fração mínima da pontuação do melhor trecho para um trecho secundário ser citado. */
@@ -52,6 +58,9 @@ export interface AgentPassage {
   url: string;
 }
 
+/** O texto de um trecho como a busca o lê: fonte, seção e conteúdo (o contexto ajuda os dois índices). */
+const contextual = (p: { title: string; section?: string; text: string }) => [p.section ? `${p.title} › ${p.section}` : p.title, p.text].join("\n");
+
 export class KnowledgeSearch {
   private readonly uow: UnitOfWork<KnowledgeStore>;
   private readonly clock: Clock;
@@ -60,15 +69,36 @@ export class KnowledgeSearch {
   private items: IndexableVersion[] | undefined;
   private cache: { key: string; index: KnowledgeIndex; passages: Map<string, IndexedMeta> } | undefined;
 
-  constructor(uow: UnitOfWork<KnowledgeStore>, clock: Clock, build: IndexBuilder) {
+  private readonly semantic: SemanticIndex | undefined;
+  /** Similaridade mínima para um trecho achado só por significado contar como evidência. */
+  private readonly minSimilarity: number;
+
+  constructor(
+    uow: UnitOfWork<KnowledgeStore>,
+    clock: Clock,
+    build: IndexBuilder,
+    options: { semantic?: SemanticIndex; minSimilarity?: number } = {},
+  ) {
     this.uow = uow;
     this.clock = clock;
     this.build = build;
+    this.semantic = options.semantic;
+    this.minSimilarity = options.minSimilarity ?? 0.8;
+  }
+
+  /** Estado da busca por significado (para a tela do Cérebro); `null` sem modelo. */
+  async semanticStatus() {
+    if (!this.semantic) return null;
+    await this.index();
+    return this.semantic.status();
   }
 
   /** Chamado depois de envio, versão nova ou revogação. */
   invalidate() {
     this.items = undefined;
+    // Com busca por significado, já prepara o índice novo para vetorizar o que mudou.
+    // Também tenta de novo os vetores que falharam antes (modelo fora do ar, por exemplo).
+    if (this.semantic) void this.index().then(() => this.semantic!.retry(), () => undefined);
   }
 
   /** Busca; `allow` decide quem pode ver cada trecho. */
@@ -81,9 +111,22 @@ export class KnowledgeSearch {
       const p = passages.get(id);
       return !!p && (!options.onlyArea || p.area === options.onlyArea) && allow(p);
     };
-    const hits = index
-      .search(question, { limit: limit * 4, allow: visible })
-      .filter((h) => h.matched.length >= needed)
+    const lexical = index.search(question, { limit: limit * 4, allow: visible }).filter((h) => h.matched.length >= needed);
+    const semantic = this.semantic ? (await this.semantic.search(question, visible, limit * 4)).filter((h) => h.similarity >= this.minSimilarity) : [];
+    let hits: { id: string; score: number; matched: string[] }[];
+    if (!semantic.length) hits = lexical;
+    else {
+      // Híbrida: junta as duas listas por posição; quem aparece nas duas sobe.
+      const fused = reciprocalRankFusion([lexical.map((h) => h.id), semantic.map((h) => h.id)]);
+      const matchedOf = new Map(lexical.map((h) => [h.id, h.matched]));
+      const want = new Set(wanted);
+      hits = [...fused].map(([id, score]) => ({
+        id,
+        score,
+        matched: matchedOf.get(id) ?? [...new Set(terms(passages.get(id)!.text))].filter((t) => want.has(t)),
+      }));
+    }
+    hits = hits
       .map((h) => (options.preferArea && passages.get(h.id)!.area === options.preferArea ? { ...h, score: h.score * AREA_BOOST } : h))
       .sort((a, b) => b.score - a.score);
     // Trechos secundários só entram se forem comparáveis ao melhor; termos genéricos não bastam.
@@ -93,7 +136,7 @@ export class KnowledgeSearch {
       .slice(0, limit)
       .map((h, i) => {
         const { owner: _o, readers: _r, ...p } = passages.get(h.id)!;
-        return { ...p, n: i + 1, matched: h.matched, score: Math.round(h.score * 1000) / 1000 };
+        return { ...p, n: i + 1, matched: h.matched, score: Math.round(h.score * 100000) / 100000 };
       });
     return { wanted, found };
   }
@@ -148,8 +191,11 @@ export class KnowledgeSearch {
       }
     // O que a busca lê de cada trecho: título da fonte, seção e o texto (o título e a seção dão
     // contexto a trechos que, sozinhos, não dizem do que tratam).
-    const index = this.build([...passages.values()].map((p) => ({ id: p.id, text: [p.title, p.section, p.text].filter(Boolean).join("\n") })));
+    const readable = [...passages.values()].map((p) => ({ id: p.id, text: contextual(p) }));
+    const index = this.build(readable);
     this.cache = { key, index, passages };
+    // Vetoriza em segundo plano o que ainda não tem vetor (o resto já está guardado no banco).
+    this.semantic?.sync(readable);
     return this.cache;
   }
 }

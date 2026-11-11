@@ -9,7 +9,7 @@ import { EmptyState, ErrorNotice, LoadingRows, PageHeader, ToneBadge } from "@/c
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { knowledgeApi, type BrainArea, type SourceSummary } from "@/lib/api";
+import { knowledgeApi, type BrainArea, type SemanticStatus, type SourceSummary } from "@/lib/api";
 import { formatDate, relativeTime, SOURCE_STATUS } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { SourceDialog } from "./source-dialog";
@@ -18,7 +18,15 @@ import { UploadDialog } from "./upload-dialog";
 const ALL = "";
 
 export function KnowledgePage() {
-  const sources = useQuery({ queryKey: ["sources"], queryFn: knowledgeApi.list });
+  // Enquanto a busca por significado se prepara, atualiza o progresso.
+  const sources = useQuery({
+    queryKey: ["sources"],
+    queryFn: knowledgeApi.list,
+    refetchInterval: (q) => {
+      const s = q.state.data?.semantic;
+      return s && !s.error && s.indexed < s.total ? 3000 : false;
+    },
+  });
   const [open, setOpen] = useState<string | null>(null);
   const [area, setArea] = useState(ALL);
   const data = sources.data;
@@ -42,7 +50,10 @@ export function KnowledgePage() {
         </EmptyState>
       ) : (
         <>
-          <AreaFilter areas={areas} total={data.sources.filter((s) => !s.revoked_at).length} value={area} onChange={setArea} />
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <AreaFilter areas={areas} total={data.sources.filter((s) => !s.revoked_at).length} value={area} onChange={setArea} />
+            <SemanticBadge status={data.semantic} />
+          </div>
           {shown.length ? (
             <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {shown.map((s) => (
@@ -59,6 +70,24 @@ export function KnowledgePage() {
       {open && <SourceDialog id={open} areas={areas} onClose={() => setOpen(null)} />}
     </div>
   );
+}
+
+/** Mostra se a busca por significado está pronta, preparando ou indisponível. */
+function SemanticBadge({ status }: { status: SemanticStatus | null }) {
+  if (!status) return <span className="text-xs text-muted-foreground">Busca por palavras</span>;
+  if (status.error)
+    return (
+      <span className="text-xs text-amber-700 dark:text-warning" title={status.error}>
+        Busca por significado indisponível (só palavras)
+      </span>
+    );
+  if (status.indexed < status.total)
+    return (
+      <span className="text-xs text-muted-foreground">
+        Preparando busca por significado: {status.indexed}/{status.total} trechos
+      </span>
+    );
+  return <span className="text-xs text-muted-foreground">Busca por palavras e por significado · {status.total} trechos</span>;
 }
 
 function AreaFilter({ areas, total, value, onChange }: { areas: BrainArea[]; total: number; value: string; onChange: (area: string) => void }) {
