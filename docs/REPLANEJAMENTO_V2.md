@@ -158,7 +158,9 @@ Depois: identidade corporativa, provedor remoto (API), Loja e áreas de marketin
 
 - **Vistas dos agentes e Jarvis — concluídos.** Agentes em Lista operacional (status, atividade, marcos e tempo de cada um, como a v1), Mapa 3D e Organograma em cartões com setas (horizontal ou vertical). Jarvis no menu: o Chief of Staff como assistente por voz e texto, com reator 3D no centro da rede de agentes, painel de sistemas e pendências, e a situação da empresa no contexto do Chief (pendências, trabalhos andando, quem trabalha).
 
-Próximos passos:
+Próximos passos — **o núcleo: uma empresa de agentes** (CEO → Chief → diretores → especialistas, com planejamento aprovado pelo CEO, revisão em cadeia e alçadas), detalhado em [PLANO_NUCLEO.md](PLANO_NUCLEO.md): N1 time, hierarquia e autonomia; N2 planejamento devolvido ao CEO; N3 execução hierárquica e revisão; N4 Cérebro com padrões e projetos; N5 memória; N6 recursos da empresa e execução.
+
+Também pendentes:
 
 - Regras de negócio que faltam: teto de consumo (mensal) e aviso ao chegar perto; aviso quando uma rotina falha; aprovação para agentes permanentes e limite para temporários (previstos na v1).
 - Permissões por papel (dono × membro) nas telas de administração (áreas, integrações, time).
