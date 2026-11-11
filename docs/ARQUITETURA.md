@@ -285,6 +285,16 @@ participantes podem ler.
 
 ## 6. Interface
 
+**Mapa 3D** (Cérebro › Mapa 3D, ou Organograma › Ver em 3D): three.js com React Three Fiber,
+carregado só quando aberto (o resto do app não paga o peso do 3D). Dois modos, como na v1:
+**Conhecimento** (núcleo → áreas → documentos, vigentes e históricos com cores diferentes) e
+**Agentes** (núcleo → áreas do time → agentes, aceso quem está trabalhando ou aguardando
+aprovação, ligado a quem responde a quem). Arrastar gira, rolar aproxima, clicar abre o documento
+ou a Estação do agente. As posições vêm de `features/brain-map/layout.ts` (determinístico e testado);
+a rotação automática pausa com o mouse sobre o mapa e não acontece se o sistema pedir menos
+movimento; sem WebGL, a lista continua disponível.
+
+
 - Todas as chamadas passam por `lib/api.ts`, que transforma `{ error, code }` em `ApiError` com a
   mensagem em português. Queda de conexão vira um aviso e a tela tenta de novo sozinha.
 - `AuthGate` (em `features/access`) decide entre login, primeiro acesso e o app. Um 401

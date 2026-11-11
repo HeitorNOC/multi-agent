@@ -12,7 +12,7 @@
     "start": "npm --prefix apps/api start",
     "dev:web": "npm --prefix apps/web run dev",
     "typecheck": "npm --prefix apps/api run typecheck && npm --prefix apps/web run typecheck",
-    "test": "npm --prefix apps/api test",
+    "test": "npm --prefix apps/api test && npm --prefix apps/web test",
     "verify": "npm run typecheck && npm test && npm run build"
   }
 }

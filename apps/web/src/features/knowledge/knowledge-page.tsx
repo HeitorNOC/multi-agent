@@ -12,6 +12,8 @@ import { Input } from "@/components/ui/input";
 import { knowledgeApi, type BrainArea, type SemanticStatus, type SourceSummary } from "@/lib/api";
 import { formatDate, relativeTime, SOURCE_STATUS } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { useSearchParams } from "react-router";
+import { BrainMap } from "../brain-map/brain-map";
 import { SourceDialog } from "./source-dialog";
 import { UploadDialog } from "./upload-dialog";
 
@@ -29,6 +31,9 @@ export function KnowledgePage() {
   });
   const [open, setOpen] = useState<string | null>(null);
   const [area, setArea] = useState(ALL);
+  // `?vista=mapa` abre o mapa 3D (`&modo=agentes` já na rede de agentes).
+  const [params, setParams] = useSearchParams();
+  const map = params.get("vista") === "mapa";
   const data = sources.data;
   const areas = data?.areas ?? [];
   const shown = useMemo(() => (data?.sources ?? []).filter((s) => area === ALL || s.area === area), [data, area]);
@@ -38,8 +43,32 @@ export function KnowledgePage() {
       <PageHeader
         title="Cérebro"
         description="Documentos da empresa por área, com dono, acesso, versões e vigência. Os agentes leem o que está aberto a todos e o que foi liberado para eles."
-        actions={<UploadDialog sources={data?.sources ?? []} areas={areas} formats={data?.formats ?? []} defaultArea={area || undefined} />}
+        actions={
+          <>
+            <div className="flex rounded-lg border p-0.5" role="tablist" aria-label="Como ver">
+              {(
+                [
+                  [false, "Lista"],
+                  [true, "Mapa 3D"],
+                ] as const
+              ).map(([m, label]) => (
+                <button
+                  key={label}
+                  type="button"
+                  role="tab"
+                  aria-selected={map === m}
+                  onClick={() => setParams(m ? { vista: "mapa" } : {})}
+                  className={cn("rounded-md px-3 py-1 text-sm", map === m ? "bg-muted font-medium" : "text-muted-foreground hover:bg-muted/50")}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <UploadDialog sources={data?.sources ?? []} areas={areas} formats={data?.formats ?? []} defaultArea={area || undefined} />
+          </>
+        }
       />
+      {map && <BrainMap initial={params.get("modo") === "agentes" ? "agents" : "knowledge"} />}
       <Ask areas={areas} area={area} />
       <ErrorNotice error={sources.error} title="Não foi possível carregar as fontes" />
       {sources.isPending ? (

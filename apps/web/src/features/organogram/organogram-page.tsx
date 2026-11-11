@@ -16,9 +16,14 @@ export function OrganogramPage() {
         title="Organograma"
         description={org.data?.company ? `Quem responde a quem na ${org.data.company}. Você aprova o que sai da empresa.` : "Quem responde a quem. Você aprova o que sai da empresa."}
         actions={
-          <Button asChild variant="outline">
-            <Link to="/agentes">Ajustar o time</Link>
-          </Button>
+          <>
+            <Button asChild variant="outline">
+              <Link to="/cerebro?vista=mapa&modo=agentes">Ver em 3D</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/agentes">Ajustar o time</Link>
+            </Button>
+          </>
         }
       />
       <ErrorNotice error={org.error} />
