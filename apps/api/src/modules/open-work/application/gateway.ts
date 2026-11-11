@@ -25,7 +25,7 @@ import { loadJob } from "../../jobs/application/load-job.ts";
 import { retrievedFragments } from "../../jobs/application/worker-reports.ts";
 import * as transitions from "../../jobs/domain/transitions.ts";
 import type { KnowledgeSearch } from "../../knowledge/application/knowledge-search.ts";
-import type { CatalogAgent, TeamDirectory } from "../domain/catalog.ts";
+import { maxAgentsOf, type CatalogAgent, type TeamDirectory } from "../domain/catalog.ts";
 import { planTask, specialistTask, synthesisTask, TaskOutputError, type Fragment, type SpecialistOutput, type TaskSpec } from "../domain/tasks.ts";
 
 export interface OpenWorkDeps {
@@ -160,7 +160,7 @@ export class OpenWorkGateway {
     if (slot === "plan") {
       const members = await this.deps.team.members();
       ensure(members.length, () => conflict("team_empty", "Monte seu time em Agentes antes de pedir um trabalho"));
-      return planTask(goal, members);
+      return planTask(goal, members, await maxAgentsOf(this.deps.team));
     }
     ensure(plan, () => conflict("plan_missing", "Plano ausente"));
     const now = this.deps.clock.now();

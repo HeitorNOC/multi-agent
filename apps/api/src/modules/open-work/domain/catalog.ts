@@ -19,7 +19,13 @@ export interface CatalogAgent {
 export interface TeamDirectory {
   /** Agentes ativos do time, na ordem de contratação. */
   members(): Promise<CatalogAgent[]>;
+  /** Quantos agentes um trabalho pode envolver (alçadas do Chief). Sem isto, `DEFAULT_MAX_AGENTS`. */
+  maxAgents?(): Promise<number>;
 }
+
+export const DEFAULT_MAX_AGENTS = 3;
+
+export const maxAgentsOf = async (team: TeamDirectory) => (team.maxAgents ? await team.maxAgents() : DEFAULT_MAX_AGENTS);
 
 /** Time fixo (testes e ferramentas). */
 export const staticTeam = (agents: readonly CatalogAgent[]): TeamDirectory => ({ members: async () => [...agents] });

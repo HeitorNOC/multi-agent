@@ -4,6 +4,8 @@ import { AgentId } from "../../../shared/ids.ts";
 import type { HttpModule } from "../../../platform/http/app.ts";
 import { catalogView, changeAgent, completeSetup, createAgent, dismiss, getOrganization, hire, listTeam, organogram, saveOrganization, setupStatus, type AgentsDeps } from "../application/agents.ts";
 import { LIMITS } from "../domain/agent.ts";
+import { AGENTS_PER_JOB } from "../domain/autonomy.ts";
+import { getAutonomy, saveAutonomy } from "../application/staffing.ts";
 
 const skills = z.array(z.string().max(LIMITS.skill)).max(LIMITS.skills);
 const hireBody = z.strictObject({ template_id: z.string().min(1).max(80) });
@@ -32,6 +34,25 @@ const organizationBody = z.strictObject({
   policies: z.string().max(4000).optional(),
 });
 
+const autonomyBody = z.strictObject({
+  hire: z.enum(["never", "propose", "auto"]).optional(),
+  engagement: z.enum(["job", "permanent"]).optional(),
+  max_agents: z.number().int().min(AGENTS_PER_JOB.min).max(AGENTS_PER_JOB.max).optional(),
+  areas: z.array(z.string().max(40)).max(40).nullable().optional(),
+  edit: z.enum(["never", "propose", "auto"]).optional(),
+  remove: z.enum(["never", "propose"]).optional(),
+});
+
+/** Alçadas no formato da API (snake_case). */
+const autonomyView = (a: Awaited<ReturnType<typeof getAutonomy>>) => ({
+  hire: a.hire,
+  engagement: a.engagement,
+  max_agents: a.maxAgents,
+  areas: a.areas,
+  edit: a.edit,
+  remove: a.remove,
+});
+
 const idOf = (params: unknown) => AgentId.parse((params as { id?: unknown }).id);
 
 export function agentsHttp(deps: AgentsDeps): HttpModule {
@@ -55,6 +76,13 @@ export function agentsHttp(deps: AgentsDeps): HttpModule {
     });
 
     app.post("/api/agents/:id/remove", async (req) => dismiss(deps, actor(req), idOf(req.params)));
+
+    // Alçadas do Chief of Staff sobre o time (Configurações).
+    app.get("/api/autonomy", async () => autonomyView(await getAutonomy(deps)));
+    app.post("/api/autonomy", async (req) => {
+      const { max_agents, ...rest } = autonomyBody.parse(req.body);
+      return autonomyView(await saveAutonomy(deps, actor(req), { ...rest, ...(max_agents === undefined ? {} : { maxAgents: max_agents }) }));
+    });
 
     app.get("/api/organization", async () => getOrganization(deps));
     app.post("/api/organization", async (req) => saveOrganization(deps, actor(req), organizationBody.parse(req.body)));

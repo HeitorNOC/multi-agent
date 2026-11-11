@@ -6,6 +6,7 @@
  */
 import type { JobStatus } from "../../jobs/domain/job.ts";
 import type { Message } from "./conversation.ts";
+import type { StaffingSnapshot } from "./staffing.ts";
 
 /** Um tipo de trabalho que a conversa pode abrir. */
 export interface ConversationOffer {
@@ -27,6 +28,8 @@ export interface ChiefTurn {
   offers: readonly ConversationOffer[];
   /** Situação da empresa agora (o que espera o gestor, o que anda, quem trabalha). Sem ela, só a conversa. */
   briefing?: CompanyBriefing | null;
+  /** Time, alçada e catálogo para contratar (N1). Sem isto, o Chief só usa o time. */
+  staffing?: StaffingSnapshot | null;
 }
 
 /**
@@ -60,7 +63,12 @@ export interface ChiefTrace {
   fallback?: string;
 }
 
-export type ChiefDecision = ({ kind: "reply"; text: string } | { kind: "open_job"; offerId: string; text: string }) & { trace?: ChiefTrace };
+/**
+ * `hire` (ao abrir trabalho): ids do catálogo que o Chief acha que faltam no time. O caso de uso
+ * decide pela alçada se propõe, contrata ou ignora. Ausente = o Chief não opinou (regras: o caso de
+ * uso aplica `suggestHires`); lista vazia = não falta ninguém.
+ */
+export type ChiefDecision = ({ kind: "reply"; text: string } | { kind: "open_job"; offerId: string; text: string; hire?: string[] }) & { trace?: ChiefTrace };
 
 export interface ChiefOfStaff {
   decide(turn: ChiefTurn): Promise<ChiefDecision>;
@@ -121,7 +129,8 @@ export function briefingText(b: CompanyBriefing): string {
   return `${pending || "Nada esperando sua decisão."} ${runningText(b)} ${teamText(b)}${gaveUp}`.trim();
 }
 /** Pedido genérico de trabalho, usado quando só há um trabalho possível. */
-const GENERIC_WORK = /\b(analis\w*|avali\w*|relatorio\w*|propost\w*|propon\w*|prepar\w*|faca|fazer|elabor\w*)\b/;
+const GENERIC_WORK =
+  /\b(analis\w*|avali\w*|relatorio\w*|propost\w*|propon\w*|prepar\w*|faca|fazer|elabor\w*|quero|queria|preciso|precisamos|cri[ae]r?|mont[ae]r?|implement\w*|planej\w*|lanc[ae]r?|desenvolv\w*|constru\w*|organiz\w*|estrutur\w*)\b/;
 
 const containsTerm = (text: string, term: string) => new RegExp(`\\b${normalize(term).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(text);
 

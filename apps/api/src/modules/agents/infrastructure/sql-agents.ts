@@ -3,7 +3,8 @@ import type { Clock } from "../../../shared/clock.ts";
 import type { AgentId } from "../../../shared/ids.ts";
 import type { Sql } from "../../../platform/database/database.ts";
 import { SqlEventLog, type EventLog } from "../../../platform/events/event-log.ts";
-import type { Agent, AgentStatus } from "../domain/agent.ts";
+import type { Agent, AgentStatus, HiredBy } from "../domain/agent.ts";
+import { DEFAULT_AUTONOMY, type ChiefAutonomy, type Engagement } from "../domain/autonomy.ts";
 import { EMPTY_ORGANIZATION, type Organization } from "../domain/organization.ts";
 
 export interface AgentRepository {
@@ -12,6 +13,12 @@ export interface AgentRepository {
   save(agent: Agent): Promise<void>;
   /** Na ordem de contratação. */
   list(status?: AgentStatus): Promise<Agent[]>;
+}
+
+/** Alçadas do Chief (uma linha; sem linha, valem as padrão). */
+export interface AutonomyRepository {
+  get(): Promise<ChiefAutonomy>;
+  save(autonomy: ChiefAutonomy, actor: string, at: string): Promise<void>;
 }
 
 export interface OrganizationRepository {
@@ -31,6 +38,9 @@ type AgentRow = {
   instructions: string;
   reports_to: string | null;
   status: string;
+  engagement: string;
+  engaged_job: string | null;
+  hired_by: string;
   hired_at: string;
   updated_at: string;
 };
@@ -47,6 +57,9 @@ const toAgent = (r: AgentRow): Agent => ({
   instructions: r.instructions,
   reportsTo: r.reports_to as AgentId | null,
   status: r.status as AgentStatus,
+  engagement: r.engagement as Engagement,
+  engagedJob: r.engaged_job,
+  hiredBy: r.hired_by as HiredBy,
   hiredAt: r.hired_at,
   updatedAt: r.updated_at,
 });
@@ -64,17 +77,18 @@ export class SqlAgentRepository implements AgentRepository {
 
   async add(a: Agent) {
     await this.sql.run(
-      `INSERT INTO agents (id, template_id, name, title, area, tagline, focus, skills, instructions, reports_to, status, hired_at, updated_at, ordinal)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM agents))`,
-      [a.id, a.templateId, a.name, a.title, a.area, a.tagline, a.focus, JSON.stringify(a.skills), a.instructions, a.reportsTo, a.status, a.hiredAt, a.updatedAt],
+      `INSERT INTO agents (id, template_id, name, title, area, tagline, focus, skills, instructions, reports_to, status, engagement, engaged_job, hired_by, hired_at, updated_at, ordinal)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, (SELECT COALESCE(MAX(ordinal), 0) + 1 FROM agents))`,
+      [a.id, a.templateId, a.name, a.title, a.area, a.tagline, a.focus, JSON.stringify(a.skills), a.instructions, a.reportsTo, a.status, a.engagement, a.engagedJob, a.hiredBy, a.hiredAt, a.updatedAt],
     );
   }
 
   async save(a: Agent) {
     await this.sql.run(
-      `UPDATE agents SET name = $2, title = $3, tagline = $4, focus = $5, skills = $6, instructions = $7, reports_to = $8, status = $9, updated_at = $10
+      `UPDATE agents SET name = $2, title = $3, tagline = $4, focus = $5, skills = $6, instructions = $7, reports_to = $8, status = $9, updated_at = $10,
+              engagement = $11, engaged_job = $12, hired_by = $13
         WHERE id = $1`,
-      [a.id, a.name, a.title, a.tagline, a.focus, JSON.stringify(a.skills), a.instructions, a.reportsTo, a.status, a.updatedAt],
+      [a.id, a.name, a.title, a.tagline, a.focus, JSON.stringify(a.skills), a.instructions, a.reportsTo, a.status, a.updatedAt, a.engagement, a.engagedJob, a.hiredBy],
     );
   }
 
@@ -109,8 +123,29 @@ export class SqlOrganizationRepository implements OrganizationRepository {
   }
 }
 
+export class SqlAutonomyRepository implements AutonomyRepository {
+  private readonly sql: Sql;
+  constructor(sql: Sql) {
+    this.sql = sql;
+  }
+
+  async get(): Promise<ChiefAutonomy> {
+    const r = await this.sql.one<{ settings: string }>("SELECT settings FROM chief_autonomy WHERE id = 'default'");
+    return r ? { ...DEFAULT_AUTONOMY, ...(JSON.parse(r.settings) as Partial<ChiefAutonomy>) } : DEFAULT_AUTONOMY;
+  }
+
+  async save(a: ChiefAutonomy, actor: string, at: string) {
+    await this.sql.run(
+      `INSERT INTO chief_autonomy (id, settings, updated_by, updated_at) VALUES ('default', $1, $2, $3)
+       ON CONFLICT (id) DO UPDATE SET settings = $1, updated_by = $2, updated_at = $3`,
+      [JSON.stringify(a), actor, at],
+    );
+  }
+}
+
 export interface AgentsStore {
   agents: AgentRepository;
+  autonomy: AutonomyRepository;
   organization: OrganizationRepository;
   events: EventLog;
 }
@@ -119,6 +154,7 @@ export const agentsStore =
   (clock: Clock) =>
   (sql: Sql): AgentsStore => ({
     agents: new SqlAgentRepository(sql),
+    autonomy: new SqlAutonomyRepository(sql),
     organization: new SqlOrganizationRepository(sql),
     events: new SqlEventLog(sql, clock),
   });

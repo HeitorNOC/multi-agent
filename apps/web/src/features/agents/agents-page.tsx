@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { agentsApi, type AgentTemplate, type CatalogArea } from "@/lib/api";
 import { cn } from "@/lib/utils";
-import { AgentAvatar } from "./agent-bits";
+import { AgentAvatar, RoleBadge } from "./agent-bits";
 import { CreateAgentDialog } from "./create-agent-dialog";
 import { BrainMap } from "../brain-map/brain-map";
 import { OrgChart } from "./org-chart";
@@ -133,7 +133,9 @@ function PersonaCard({ template: t, onOpen }: { template: AgentTemplate; onOpen:
       <div className="flex items-start gap-3">
         <AgentAvatar name={t.name} area={t.area} />
         <div className="min-w-0">
-          <p className="font-medium">{t.name}</p>
+          <p className="flex items-center gap-1.5 font-medium">
+            {t.name} <RoleBadge role={t.role} />
+          </p>
           <p className="text-xs text-muted-foreground">{t.title}</p>
         </div>
       </div>

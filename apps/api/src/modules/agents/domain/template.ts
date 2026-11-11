@@ -7,6 +7,8 @@ export interface AgentTemplate {
   readonly name: string;
   readonly title: string;
   readonly area: string;
+  /** Diretor lidera a área (os especialistas dela respondem a ele); líder coordena parte dela. */
+  readonly role: TemplateRole;
   readonly tagline: string;
   readonly focus: string;
   readonly skills: readonly string[];
@@ -15,6 +17,8 @@ export interface AgentTemplate {
   /** O que ele costuma entregar. */
   readonly deliverables: readonly string[];
 }
+
+export type TemplateRole = "director" | "lead" | "specialist";
 
 export interface AgentArea {
   readonly id: string;
@@ -35,6 +39,7 @@ const schema = z
         name: z.string().min(1).max(60),
         title: z.string().min(1).max(100),
         area: z.string(),
+        role: z.enum(["director", "lead", "specialist"]).default("specialist"),
         tagline: z.string().max(160),
         focus: z.string().min(1).max(400),
         skills: z.array(z.string().min(1).max(60)).max(8),
@@ -44,7 +49,8 @@ const schema = z
     ),
   })
   .refine((c) => new Set(c.templates.map((t) => t.id)).size === c.templates.length, "ids de persona repetidos")
-  .refine((c) => c.templates.every((t) => c.areas.some((a) => a.id === t.area)), "persona com área desconhecida");
+  .refine((c) => c.templates.every((t) => c.areas.some((a) => a.id === t.area)), "persona com área desconhecida")
+  .refine((c) => c.areas.every((a) => c.templates.filter((t) => t.area === a.id && t.role === "director").length <= 1), "mais de um diretor na mesma área");
 
 /** Lê e valida o catálogo; um arquivo inválido impede a API de subir com dados errados. */
 export function loadTemplates(path: string | URL): TemplateCatalog {

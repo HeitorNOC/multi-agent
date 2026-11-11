@@ -5,12 +5,12 @@
  */
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Bot, ExternalLink, MessageSquarePlus, MessagesSquare, Paperclip, Send, X } from "lucide-react";
+import { Bot, Check, ExternalLink, MessageSquarePlus, MessagesSquare, Paperclip, Send, UserPlus, X } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router";
 import { EmptyState, ErrorNotice, LoadingRows } from "@/components/common";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { conversationsApi, fileToBase64, newKey, type Agent, type Message } from "@/lib/api";
+import { conversationsApi, fileToBase64, newKey, type Agent, type Message, type StaffingProposal } from "@/lib/api";
 import { acceptOf, mediaTypeOf } from "../knowledge/upload-dialog";
 import { relativeTime, shortId } from "@/lib/format";
 import { cn } from "@/lib/utils";
@@ -146,7 +146,7 @@ export function Thread({ id, embedded = false }: { id: string; embedded?: boolea
         </div>
       </header>
       <div className="min-h-0 flex-1 space-y-4 overflow-y-auto p-4">
-        {thread.isPending ? <LoadingRows /> : thread.data!.messages.map((m) => <Bubble key={m.seq} message={m} agent={agent} />)}
+        {thread.isPending ? <LoadingRows /> : thread.data!.messages.map((m) => <Bubble key={m.seq} message={m} agent={agent} conversationId={id} />)}
         {send.isPending && (
           <>
             <Bubble
@@ -160,6 +160,7 @@ export function Thread({ id, embedded = false }: { id: string; embedded?: boolea
                 attachments: files.map((f) => ({ source: f.name, title: f.name })),
                 job: null,
                 decision: null,
+                staffing: null,
               }}
             />
             <p className="text-sm text-muted-foreground">
@@ -235,7 +236,7 @@ export function Thread({ id, embedded = false }: { id: string; embedded?: boolea
   );
 }
 
-function Bubble({ message, agent }: { message: Message; agent?: Agent }) {
+function Bubble({ message, agent, conversationId }: { message: Message; agent?: Agent; conversationId?: string }) {
   const agentName = useAgentNames();
   const mine = message.role === "user";
   return (
@@ -259,6 +260,7 @@ function Bubble({ message, agent }: { message: Message; agent?: Agent }) {
             ))}
           </ul>
         )}
+        {message.staffing && conversationId && <StaffingCard conversationId={conversationId} proposal={message.staffing} />}
         {message.job && (
           <Link to={`/trabalhos/${message.job.id}`} className="block rounded-lg border bg-background p-3 text-foreground hover:bg-muted/50">
             <div className="flex items-center justify-between gap-2">
@@ -288,6 +290,61 @@ function Bubble({ message, agent }: { message: Message; agent?: Agent }) {
           </p>
         )}
       </div>
+    </div>
+  );
+}
+
+/**
+ * Proposta de contratação do Chief: quem ele quer trazer e por quanto tempo. Contratar abre o
+ * trabalho com o reforço; seguir com o time atual abre sem contratar. Depois, mostra o que foi feito.
+ */
+function StaffingCard({ conversationId, proposal }: { conversationId: string; proposal: StaffingProposal }) {
+  const queryClient = useQueryClient();
+  const decide = useMutation({
+    mutationFn: (accept: boolean) => conversationsApi.decideStaffing(conversationId, proposal.id, accept),
+    onSuccess: (data) => {
+      queryClient.setQueryData(["conversation", conversationId], data);
+      for (const key of ["conversations", "jobs", "team", "agent-activity", "organogram", "catalog", "overview"]) void queryClient.invalidateQueries({ queryKey: [key] });
+    },
+  });
+  const how = proposal.engagement === "job" ? "só para este trabalho" : "permanente";
+  return (
+    <div className="space-y-2 rounded-lg border bg-background p-3 text-foreground" aria-label="Proposta de contratação">
+      <p className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+        <UserPlus className="size-3.5" /> Proposta de contratação · {how}
+      </p>
+      <ul className="space-y-1">
+        {proposal.templates.map((t) => (
+          <li key={t.id} className="text-sm">
+            <span className="font-medium">{t.name}</span> <span className="text-muted-foreground">· {t.title}</span>
+          </li>
+        ))}
+      </ul>
+      {proposal.status === "pending" ? (
+        <>
+          <div className="flex flex-wrap gap-2">
+            <Button size="sm" disabled={decide.isPending} onClick={() => decide.mutate(true)}>
+              <Check /> Contratar e seguir
+            </Button>
+            <Button size="sm" variant="outline" disabled={decide.isPending} onClick={() => decide.mutate(false)}>
+              Seguir com o time atual
+            </Button>
+          </div>
+          <ErrorNotice error={decide.error} title="Não foi possível decidir agora" />
+        </>
+      ) : (
+        <p className="text-xs text-muted-foreground">
+          {proposal.status === "accepted" ? "Você aprovou a contratação." : "Você preferiu seguir com o time atual."}
+          {proposal.job_id && (
+            <>
+              {" "}
+              <Link to={`/trabalhos/${proposal.job_id}`} className="underline">
+                Ver o trabalho
+              </Link>
+            </>
+          )}
+        </p>
+      )}
     </div>
   );
 }

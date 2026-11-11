@@ -3,7 +3,7 @@ import type { FastifyRequest } from "fastify";
 import { z } from "zod";
 import { ConversationId } from "../../../shared/ids.ts";
 import type { HttpModule } from "../../../platform/http/app.ts";
-import { createConversation, listConversations, MAX_ATTACHMENTS, readConversation, sendMessage, type ConversationDeps } from "../application/conversations.ts";
+import { createConversation, decideStaffing, listConversations, MAX_ATTACHMENTS, readConversation, sendMessage, type ConversationDeps } from "../application/conversations.ts";
 
 const createBody = z.strictObject({ title: z.string().trim().min(1).max(120).optional(), agent_id: z.string().min(1).max(100).optional() });
 const messageBody = z.strictObject({
@@ -37,5 +37,14 @@ export function conversationsHttp(deps: ConversationDeps, options: { onJobOpened
       if (!result.replayed && result.reply.job) options.onJobOpened?.();
       return reply.code(result.replayed ? 200 : 201).send(result);
     });
+
+    // Proposta de contratação do Chief: aceitar contrata e abre o trabalho; recusar abre com o time atual.
+    for (const [action, accept] of [["accept", true], ["decline", false]] as const)
+      app.post(`/api/conversations/:id/staffing/:proposal/${action}`, async (req) => {
+        const proposal = z.string().uuid().parse((req.params as { proposal?: unknown }).proposal);
+        const result = await decideStaffing(deps, actor(req), idOf(req), proposal, accept);
+        options.onJobOpened?.();
+        return result;
+      });
   };
 }

@@ -142,6 +142,29 @@ export interface Message {
   attachments: { source: string; title: string }[] | null;
   job: { id: string; status: JobStatus; agents: string[] | null } | null;
   decision: { engine: string; provider?: string; fallback?: string } | null;
+  /** Proposta de contratação do Chief nesta resposta (o CEO decide). */
+  staffing: StaffingProposal | null;
+}
+
+export interface StaffingProposal {
+  id: string;
+  status: "pending" | "accepted" | "declined";
+  engagement: Engagement;
+  templates: { id: string; name: string; title: string; area: string }[];
+  job_id: string | null;
+}
+
+export type Engagement = "job" | "permanent";
+export type AgentRole = "director" | "lead" | "specialist";
+
+/** Alçadas do Chief of Staff sobre o time. */
+export interface Autonomy {
+  hire: "never" | "propose" | "auto";
+  engagement: Engagement;
+  max_agents: number;
+  areas: string[] | null;
+  edit: "never" | "propose" | "auto";
+  remove: "never" | "propose";
 }
 
 export const conversationsApi = {
@@ -155,6 +178,9 @@ export const conversationsApi = {
       client_message_id: clientMessageId,
       ...(attachments.length ? { attachments } : {}),
     }),
+  /** Decidir a proposta de contratação do Chief: contratar e seguir, ou seguir com o time atual. */
+  decideStaffing: (id: string, proposalId: string, accept: boolean) =>
+    post<{ conversation: ConversationSummary; messages: Message[] }>(`/api/conversations/${id}/staffing/${proposalId}/${accept ? "accept" : "decline"}`),
 };
 
 // ── Cérebro ──────────────────────────────────────────────────────────────────
@@ -290,6 +316,7 @@ export interface AgentTemplate {
   /** O que faz e o que entrega. */
   responsibilities: string[];
   deliverables: string[];
+  role: AgentRole;
   in_team: boolean;
 }
 
@@ -311,6 +338,11 @@ export interface Agent {
   skills: string[];
   instructions: string;
   reports_to: string | null;
+  role: AgentRole;
+  /** Permanente, ou só para um trabalho (`engaged_job`); e quem contratou. */
+  engagement: Engagement;
+  engaged_job: string | null;
+  hired_by: "ceo" | "chief";
   hired_at: string;
 }
 
@@ -319,6 +351,8 @@ export interface OrgNode {
   name: string;
   title: string;
   area: string;
+  role: AgentRole;
+  engagement: Engagement;
   reports: OrgNode[];
 }
 
@@ -396,6 +430,8 @@ export const agentsApi = {
   change: (id: string, changes: Partial<Omit<NewAgent, "area">> & { reports_to?: string | null }) => post<Agent>(`/api/agents/${id}`, changes),
   remove: (id: string) => post<{ replayed: boolean }>(`/api/agents/${id}/remove`),
   activity: () => get<TeamActivity>("/api/agents/activity"),
+  autonomy: () => get<Autonomy>("/api/autonomy"),
+  saveAutonomy: (changes: Partial<Autonomy>) => post<Autonomy>("/api/autonomy", changes),
 };
 
 export const companyApi = {

@@ -63,7 +63,15 @@ Três ideias sustentam isso:
 
 Cada fase fecha com testes nos dois bancos e um critério de pronto observável.
 
-### N1 — Time, hierarquia e autonomia
+### N1 — Time, hierarquia e autonomia — concluída (11/11/2026)
+
+Como ficou: a proposta de contratação acontece **na conversa, antes de o trabalho abrir** (não é
+uma pausa no meio da execução). É onde o N2 vai acontecer (o Chief propõe plano e time e o CEO
+aprova antes da execução) e não mexe no estado do trabalho. Ajustar e tirar do time já são
+alçadas guardadas e mostradas; o Chief passa a usá-las no N3, quando revisar o time na execução.
+Sem modelo, o Chief por regras reconhece pedidos como o CEO fala ("quero", "preciso",
+"implemente", "monte"…) e usa uma regra de cobertura por palavras em comum para achar quem falta.
+
 
 - **Diretores com time:** um agente pode liderar outros (já há "responde a"); o catálogo ganha
   papéis de liderança por área (Diretor de TI, Tech Lead, Diretor executivo, Diretor de marketing…)

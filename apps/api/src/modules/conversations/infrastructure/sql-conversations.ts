@@ -5,6 +5,7 @@ import type { Sql } from "../../../platform/database/database.ts";
 import { SqlEventLog, type EventLog } from "../../../platform/events/event-log.ts";
 import type { Conversation, Message, MessageAttachment, MessageCitation, MessageRole } from "../domain/conversation.ts";
 import type { ConversationRepository, MessageRepository } from "../domain/repositories.ts";
+import type { StaffingProposal } from "../domain/staffing.ts";
 
 type ConversationRow = { id: string; actor: string; title: string; agent_id: string | null; created_at: string; updated_at: string };
 type MessageRow = {
@@ -119,9 +120,80 @@ export class SqlMessageRepository implements MessageRepository {
   }
 }
 
+type ProposalRow = {
+  id: string;
+  conversation_id: string;
+  question_seq: number | string;
+  reply_seq: number | string;
+  offer_id: string;
+  request: string;
+  templates: string;
+  engagement: string;
+  status: string;
+  job_id: string | null;
+  decided_by: string | null;
+  decided_at: string | null;
+  created_at: string;
+};
+
+const toProposal = (r: ProposalRow): StaffingProposal => ({
+  id: r.id,
+  conversationId: r.conversation_id,
+  questionSeq: Number(r.question_seq),
+  replySeq: Number(r.reply_seq),
+  offerId: r.offer_id,
+  request: r.request,
+  templates: JSON.parse(r.templates) as StaffingProposal["templates"],
+  engagement: r.engagement as StaffingProposal["engagement"],
+  status: r.status as StaffingProposal["status"],
+  jobId: r.job_id,
+  decidedBy: r.decided_by,
+  decidedAt: r.decided_at,
+  createdAt: r.created_at,
+});
+
+/** Propostas de contratação do Chief na conversa. */
+export class SqlStaffingProposals {
+  private readonly sql: Sql;
+  constructor(sql: Sql) {
+    this.sql = sql;
+  }
+
+  async add(p: StaffingProposal) {
+    await this.sql.run(
+      `INSERT INTO staffing_proposals (id, conversation_id, question_seq, reply_seq, offer_id, request, templates, engagement, status, job_id, decided_by, decided_at, created_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
+      [p.id, p.conversationId, p.questionSeq, p.replySeq, p.offerId, p.request, JSON.stringify(p.templates), p.engagement, p.status, p.jobId, p.decidedBy, p.decidedAt, p.createdAt],
+    );
+  }
+
+  async get(id: string) {
+    const row = await this.sql.one<ProposalRow>("SELECT * FROM staffing_proposals WHERE id = $1", [id]);
+    return row && toProposal(row);
+  }
+
+  /** Decide só se ainda estiver pendente; devolve se esta chamada decidiu. */
+  async decide(id: string, status: "accepted" | "declined", jobId: string, actor: string, at: string) {
+    return (
+      (await this.sql.run("UPDATE staffing_proposals SET status = $2, job_id = $3, decided_by = $4, decided_at = $5 WHERE id = $1 AND status = 'pending'", [
+        id,
+        status,
+        jobId,
+        actor,
+        at,
+      ])) > 0
+    );
+  }
+
+  async listForConversation(conversationId: string) {
+    return (await this.sql.all<ProposalRow>("SELECT * FROM staffing_proposals WHERE conversation_id = $1 ORDER BY reply_seq", [conversationId])).map(toProposal);
+  }
+}
+
 export interface ConversationStore {
   conversations: ConversationRepository;
   messages: MessageRepository;
+  staffing: SqlStaffingProposals;
   events: EventLog;
 }
 
@@ -130,5 +202,6 @@ export const conversationStore =
   (sql: Sql): ConversationStore => ({
     conversations: new SqlConversationRepository(sql),
     messages: new SqlMessageRepository(sql),
+    staffing: new SqlStaffingProposals(sql),
     events: new SqlEventLog(sql, clock),
   });

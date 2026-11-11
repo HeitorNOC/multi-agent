@@ -9,6 +9,7 @@
 import { randomBytes } from "node:crypto";
 import { conflict, ensure, invalid } from "../../../shared/errors.ts";
 import type { AgentId } from "../../../shared/ids.ts";
+import type { Engagement } from "./autonomy.ts";
 import type { AgentTemplate } from "./template.ts";
 
 export type AgentStatus = "active" | "removed";
@@ -27,9 +28,29 @@ export interface Agent {
   /** A quem responde; `null` é o Chief of Staff. */
   readonly reportsTo: AgentId | null;
   readonly status: AgentStatus;
+  /** Permanente, ou só para um trabalho (`engagedJob`): sai do time quando ele termina. */
+  readonly engagement: Engagement;
+  readonly engagedJob: string | null;
+  /** Quem trouxe para o time: o CEO (tela de Agentes) ou o Chief of Staff (dentro da alçada). */
+  readonly hiredBy: HiredBy;
   readonly hiredAt: string;
   readonly updatedAt: string;
 }
+
+export type HiredBy = "ceo" | "chief";
+
+/** Como a contratação acontece: padrão é permanente, pelo CEO. */
+export interface HireTerms {
+  engagement?: Engagement;
+  engagedJob?: string | null;
+  hiredBy?: HiredBy;
+}
+
+const terms = (t: HireTerms = {}) => ({
+  engagement: t.engagement ?? "permanent",
+  engagedJob: t.engagement === "job" ? (t.engagedJob ?? null) : null,
+  hiredBy: t.hiredBy ?? "ceo",
+});
 
 export const LIMITS = { name: 60, title: 100, tagline: 160, focus: 400, instructions: 1500, skill: 60, skills: 8 } as const;
 export const AGENT_ID = /^[a-z0-9_]{1,80}$/;
@@ -48,7 +69,7 @@ function cleanSkills(skills: readonly string[]) {
   return unique;
 }
 
-export function hireFromTemplate(template: AgentTemplate, now: string): Agent {
+export function hireFromTemplate(template: AgentTemplate, now: string, hire: HireTerms = {}): Agent {
   return {
     id: template.id as AgentId,
     templateId: template.id,
@@ -61,6 +82,7 @@ export function hireFromTemplate(template: AgentTemplate, now: string): Agent {
     instructions: "",
     reportsTo: null,
     status: "active",
+    ...terms(hire),
     hiredAt: now,
     updatedAt: now,
   };
@@ -99,6 +121,7 @@ export function createCustom(input: CustomAgentInput, areas: ReadonlySet<string>
     instructions: (input.instructions ?? "").trim().slice(0, LIMITS.instructions),
     reportsTo: null,
     status: "active",
+    ...terms(),
     hiredAt: now,
     updatedAt: now,
   };
@@ -147,4 +170,10 @@ export function updateAgent(agent: Agent, changes: AgentChanges, team: readonly 
 export const removeAgent = (agent: Agent, now: string): Agent => ({ ...agent, status: "removed", reportsTo: null, updatedAt: now });
 
 /** Recontratar uma persona que saiu: volta ativa, respondendo ao Chief of Staff. */
-export const rehire = (agent: Agent, now: string): Agent => ({ ...agent, status: "active", reportsTo: null, updatedAt: now });
+export const rehire = (agent: Agent, now: string, hire: HireTerms = {}): Agent => ({ ...agent, status: "active", reportsTo: null, ...terms(hire), updatedAt: now });
+
+/**
+ * Quem já está no time e foi trazido só para um trabalho, ao ser contratado de novo de forma
+ * permanente (pelo CEO), passa a ficar. O contrário não acontece: o Chief nunca rebaixa alguém.
+ */
+export const makePermanent = (agent: Agent, now: string): Agent => ({ ...agent, engagement: "permanent", engagedJob: null, updatedAt: now });

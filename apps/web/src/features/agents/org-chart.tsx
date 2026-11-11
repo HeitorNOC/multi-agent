@@ -52,7 +52,7 @@ export function OrgChart() {
       const x = now.get(n.id);
       cards.set(n.id, {
         id: n.id,
-        kind: n.reports.length ? `Lidera · ${areaTitle(n.area)}` : areaTitle(n.area),
+        kind: `${n.role === "director" ? "Diretoria · " : n.role === "lead" ? "Liderança · " : n.reports.length ? "Lidera · " : ""}${areaTitle(n.area)}${n.engagement === "job" ? " · só no trabalho" : ""}`,
         name: n.name,
         title: n.title,
         status: x?.status ?? "idle",
@@ -62,7 +62,7 @@ export function OrgChart() {
     };
     const root: TreeNode = { id: "chief", children: org.data.chief.reports.map(toTree) };
     const count = cards.size - 1;
-    const leaders = [...cards.values()].filter((c) => c.kind.startsWith("Lidera")).length;
+    const leaders = [...cards.values()].filter((c) => !c.chief && /^(Diretoria|Liderança|Lidera)/.test(c.kind)).length;
     return { layout: layoutTree(root, orientation), cards, count, leaders };
   }, [org.data, activity.data, orientation]);
 

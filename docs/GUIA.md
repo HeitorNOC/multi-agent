@@ -39,7 +39,7 @@ tráfego, a contadora, o copywriter. Você escolhe quem entra no time, como numa
 | **Jarvis** | O Chief of Staff como seu assistente, num centro de comando em 3D. Fale ("Jarvis, o que espera minha aprovação?"), aperte espaço ou escreva; ele responde em voz alta (Chrome ou Edge) e você pode interromper falando. Mostra a hora, os sistemas e o que espera você; quem ele aciona acende no mapa. Dá para pôr em tela cheia |
 | **Integrações** | Ligar o Aurora a outras ferramentas (hoje: uma pasta do computador) |
 | **Governança** | Casos que precisam de uma decisão humana e a trilha do que aconteceu |
-| **Configurações** | Empresa, quem tem acesso e como os agentes rodam |
+| **Configurações** | Empresa, **alçadas do Chief of Staff** (se ele pode trazer agentes que faltam: nunca, propondo para você aprovar ou sozinho; se entram só para o trabalho; quantos por trabalho e em quais áreas), quem tem acesso e como os agentes rodam |
 
 ## Primeiros passos
 

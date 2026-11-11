@@ -67,3 +67,15 @@ export function useOpenStation() {
     },
   });
 }
+
+/** Diretoria e liderança aparecem como selo; especialista não precisa. */
+export const ROLE_LABEL = { director: "Diretoria", lead: "Liderança", specialist: "" } as const;
+
+export function RoleBadge({ role }: { role: keyof typeof ROLE_LABEL }) {
+  if (role === "specialist") return null;
+  return (
+    <span className={cn("rounded-full px-1.5 py-px text-[10px] font-medium uppercase tracking-wide", role === "director" ? "bg-amber-500/15 text-amber-700 dark:text-amber-300" : "bg-sky-500/15 text-sky-700 dark:text-sky-300")}>
+      {ROLE_LABEL[role]}
+    </span>
+  );
+}

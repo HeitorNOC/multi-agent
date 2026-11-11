@@ -102,6 +102,27 @@ por dialeto, aplicadas em ordem e cada uma numa transação. Um arquivo aplicado
 
 ## 4. Fluxos
 
+### 4.0 Composição do time e alçadas do Chief (N1)
+
+- **Catálogo:** cada persona tem papel (`director`, `lead`, `specialist`); há um diretor por área.
+  Contratar um diretor faz quem da área responde direto ao Chief passar a responder a ele; quem
+  chega depois na área já entra respondendo ao diretor (`agents/application/staffing.ts`).
+- **Alçadas** (`agents/domain/autonomy.ts`, tabela `chief_autonomy`, `GET/POST /api/autonomy`,
+  Configurações): trazer agente que falta (nunca, propor, contratar sozinho), tipo de contratação
+  (só para o trabalho ou permanente), agentes por trabalho (substitui o limite fixo de 3 no plano),
+  áreas permitidas, ajustar e tirar do time.
+- **Na conversa:** ao abrir trabalho, o Chief compara o pedido com o time (modelo: campo `hire`
+  com ids do catálogo oferecido, o resto é descartado; regras: `suggestHires`, sobreposição de
+  palavras com vantagem sobre o time). Em "propor", a resposta traz uma proposta
+  (`staffing_proposals`) e o trabalho só abre quando o CEO decide
+  (`POST /api/conversations/:id/staffing/:proposta/accept|decline`): aceitar contrata e abre na
+  mesma transação; recusar abre com o time atual; repetir é inofensivo. Em "contratar sozinho",
+  contrata e abre na mesma resposta. Tudo na trilha (quem decidiu e com qual regra).
+- **Só para o trabalho:** o agente guarda `engagement = job` e o trabalho; quando o trabalho
+  termina (concluído, rejeitado ou encerrado), sai do time (verificação a cada 30 s e ao subir), e
+  quem respondia a ele passa a responder a quem ele respondia. O CEO contratar de novo o torna
+  permanente.
+
 ### 4.1 Pedido na conversa até a entrega
 
 ```mermaid

@@ -5,9 +5,8 @@
 import { ensure, invalid } from "../../../shared/errors.ts";
 import type { Json } from "../../../shared/json.ts";
 import type { WorkPolicy } from "../../jobs/application/policy.ts";
-import type { TeamDirectory } from "../domain/catalog.ts";
+import { maxAgentsOf, type TeamDirectory } from "../domain/catalog.ts";
 
-export const MAX_AGENTS = 3;
 
 const isText = (v: unknown, min: number, max: number): v is string => typeof v === "string" && v.trim().length >= min && v.length <= max;
 const demand = (ok: unknown, code: string, message: string) => ensure(ok, () => invalid(code, message));
@@ -36,9 +35,10 @@ export function openWorkPolicy(team: TeamDirectory): WorkPolicy {
 
     async plan(proposal) {
       const specialists = new Set((await team.members()).map((a) => a.id));
+      const max = await maxAgentsOf(team);
       const p = (proposal ?? {}) as { agents?: unknown; reason?: unknown };
       const agents = Array.isArray(p.agents) ? [...new Set(p.agents)] : [];
-      demand(agents.length >= 1 && agents.length <= MAX_AGENTS, "invalid_plan", `O plano precisa de 1 a ${MAX_AGENTS} especialistas`);
+      demand(agents.length >= 1 && agents.length <= max, "invalid_plan", `O plano precisa de 1 a ${max} especialistas`);
       demand(agents.every((a) => typeof a === "string" && specialists.has(a)), "agent_not_in_team", "Especialista fora do time da empresa");
       demand(isText(p.reason, 10, 800), "invalid_plan", "Motivo do plano ausente");
       return {

@@ -9,6 +9,7 @@
  *     existem os dois, ou nenhum. Se a admissão for recusada (fila cheia, pedido fora da
  *     política), a resposta explica o motivo e nenhum trabalho é criado.
  */
+import { randomUUID } from "node:crypto";
 import type { Clock } from "../../../shared/clock.ts";
 import { conflict, ensure, invalid, notFound } from "../../../shared/errors.ts";
 import { AgentId, ConversationId, type ActorId, type JobId } from "../../../shared/ids.ts";
@@ -21,6 +22,7 @@ import type { AnswerTrace } from "../../knowledge/application/answerers.ts";
 import { DEFAULT_TITLE, type Conversation, type Message, type MessageAttachment, type MessageCitation } from "../domain/conversation.ts";
 import type { ConversationStore } from "../infrastructure/sql-conversations.ts";
 import type { StationResponder } from "./station.ts";
+import { MAX_HIRES, proposalText, suggestHires, type Engagement, type ProposalStatus, type StaffingCandidate, type StaffingDirectory, type StaffingProposal, type StaffingSnapshot } from "../domain/staffing.ts";
 
 export type Admission = { opened: true } | { opened: false; reason: string };
 
@@ -48,6 +50,8 @@ export interface ConversationDeps {
   attach?: (actor: ActorId, file: AttachmentFile) => Promise<MessageAttachment>;
   /** Situação da empresa para o Chief responder sobre pendências, andamento e time. */
   briefing?: () => Promise<CompanyBriefing>;
+  /** Time, alçadas e catálogo: o Chief propõe ou contrata quem falta (N1). */
+  staffing?: StaffingDirectory;
 }
 
 export interface AttachmentFile {
@@ -72,11 +76,24 @@ export interface MessageView {
   job: { id: string; status: JobStatus; agents: string[] | null } | null;
   /** Só nas respostas: quem decidiu e, se for o caso, por que o modelo não foi usado. */
   decision: { engine: string; provider?: string; fallback?: string } | null;
+  /** Proposta de contratação do Chief que esta resposta traz (para o CEO decidir). */
+  staffing: { id: string; status: ProposalStatus; engagement: Engagement; templates: StaffingProposal["templates"]; job_id: string | null } | null;
 }
 
 /** Quem decidiu a resposta: o Chief of Staff (regras ou modelo) ou, na Estação, o agente (`agent`). */
-type DecisionRecord = (ChiefTrace | (AnswerTrace & { agent: string })) & { offer_id?: string; admission?: "refused" };
+type DecisionRecord = (ChiefTrace | (AnswerTrace & { agent: string })) & {
+  offer_id?: string;
+  admission?: "refused";
+  /** Composição do time: o Chief propôs, contratou, ou o CEO aceitou ou recusou a proposta. */
+  staffing?: "proposed" | "hired" | "accepted" | "declined";
+  hired?: string[];
+};
 type Decisions = Map<number, MessageView["decision"]>;
+type Proposals = Map<number, StaffingProposal>;
+
+async function proposalsOf(deps: ConversationDeps, id: ConversationId): Promise<Proposals> {
+  return new Map((await deps.uow.read.staffing.listForConversation(id)).map((p) => [p.replySeq, p]));
+}
 
 /** A resposta já existe; aborta a transação sem criar nada. */
 class AlreadyAnswered extends Error {
@@ -114,9 +131,10 @@ export async function readConversation(deps: ConversationDeps, actor: ActorId, i
   const conversation = await owned(deps, actor, id);
   const messages = await deps.uow.read.messages.list(id);
   const decisions = await decisionsOf(deps, id);
+  const proposals = await proposalsOf(deps, id);
   return {
     conversation: { id: conversation.id, title: conversation.title, agent_id: conversation.agentId, created_at: conversation.createdAt, updated_at: conversation.updatedAt },
-    messages: await Promise.all(messages.map((m) => view(deps, m, decisions))),
+    messages: await Promise.all(messages.map((m) => view(deps, m, decisions, proposals))),
   };
 }
 
@@ -163,7 +181,8 @@ export async function sendMessage(
   const previous = await deps.uow.read.messages.findReply(id, question.seq);
   const reply = previous ?? (conversation.agentId ? await stationAnswer(deps, conversation, question) : await answer(deps, id, question));
   const decisions = await decisionsOf(deps, id);
-  return { replayed: !!previous, user: await view(deps, question, decisions), reply: await view(deps, reply, decisions) };
+  const proposals = await proposalsOf(deps, id);
+  return { replayed: !!previous, user: await view(deps, question, decisions, proposals), reply: await view(deps, reply, decisions, proposals) };
 }
 
 /** Na Estação, o agente responde com as fontes que pode ler; a decisão vai para a trilha sem o texto. */
@@ -175,41 +194,160 @@ async function stationAnswer(deps: ConversationDeps, conversation: Conversation,
 
 async function answer(deps: ConversationDeps, id: ConversationId, question: Message): Promise<Message> {
   const history = await deps.uow.read.messages.list(id);
-  // Sem a situação da empresa (falha ao ler), o Chief responde só com a conversa.
+  // Sem a situação da empresa ou o time (falha ao ler), o Chief responde só com a conversa.
   const briefing = deps.briefing ? await deps.briefing().catch(() => null) : null;
-  const decision = await deps.chief.decide({ text: question.text, history, lastJob: await lastJob(deps, history), offers: deps.offers, briefing });
+  const staffing = deps.staffing ? await deps.staffing.snapshot().catch(() => null) : null;
+  const decision = await deps.chief.decide({ text: question.text, history, lastJob: await lastJob(deps, history), offers: deps.offers, briefing, staffing });
   const trace: ChiefTrace = decision.trace ?? { engine: "rules" };
   if (decision.kind === "reply") return reply(deps, id, question.seq, decision.text, null, trace);
   // Defesa contra uma implementação que invente um trabalho fora do catálogo.
   if (!deps.offers.some((o) => o.id === decision.offerId))
     return reply(deps, id, question.seq, "Não consegui identificar um trabalho disponível para esse pedido.", null, { ...trace, fallback: "offer_not_in_catalog" });
 
-  let admission: Admission;
-  try {
-    admission = await deps.jobs.open(
-      decision.offerId,
-      question.text,
-      async (jobId, tx) => {
-        const s = deps.uow.join(tx);
-        await requireUnanswered(s, id, question.seq);
-        await appendReply(deps, s, id, question.seq, decision.text, jobId, { ...trace, offer_id: decision.offerId });
-      },
-      sourcesOf(question),
-    );
-  } catch (error) {
-    if (error instanceof AlreadyAnswered) return error.reply;
-    throw error;
-  }
-  if (admission.opened) {
-    const stored = await deps.uow.read.messages.findReply(id, question.seq);
-    ensure(stored, () => conflict("reply_missing", "Trabalho aberto sem resposta registrada"));
-    return stored;
-  }
-  return reply(deps, id, question.seq, `Não consegui abrir o trabalho agora: ${admission.reason}. Tente de novo em instantes.`, null, {
+  // Falta alguém no time? O modelo diz em `hire`; por regras, a sobreposição de palavras.
+  const hires = staffing ? pickHires(decision.hire ?? suggestHires(question.text, staffing), staffing) : [];
+  if (hires.length && staffing!.autonomy.hire === "propose") return propose(deps, id, question, decision.offerId, hires, staffing!.autonomy.engagement, trace);
+  const auto = hires.length > 0 && staffing!.autonomy.hire === "auto";
+  const text = auto ? `${decision.text} ${hiredText(hires, staffing!.autonomy.engagement)}` : decision.text;
+  const opened = await openJob(deps, id, question.seq, {
+    offerId: decision.offerId,
+    request: question.text,
+    text,
+    trace: { ...trace, offer_id: decision.offerId, ...(auto ? { staffing: "hired", hired: hires.map((h) => h.id) } : {}) },
+    attachments: sourcesOf(question),
+    hire: auto ? { templates: hires, engagement: staffing!.autonomy.engagement, actor: "chief_of_staff" } : null,
+  });
+  if (opened.ok) return opened.reply;
+  return reply(deps, id, question.seq, `Não consegui abrir o trabalho agora: ${opened.reason}. Tente de novo em instantes.`, null, {
     ...trace,
     offer_id: decision.offerId,
     admission: "refused",
   });
+}
+
+type Hire = StaffingProposal["templates"][number];
+
+/** Só quem o catálogo oferece agora (fora do time, dentro das áreas), sem repetir, até `MAX_HIRES`. */
+function pickHires(ids: readonly string[], staffing: StaffingSnapshot): Hire[] {
+  const byId = new Map(staffing.candidates.map((c) => [c.id, c]));
+  return [...new Set(ids)]
+    .map((i) => byId.get(i))
+    .filter((c): c is StaffingCandidate => !!c)
+    .slice(0, MAX_HIRES)
+    .map((c) => ({ id: c.id, name: c.name, title: c.title, area: c.area }));
+}
+
+const who = (hires: readonly Hire[]) => hires.map((h) => `${h.name} (${h.title})`).join(" e ");
+const how = (engagement: Engagement) => (engagement === "job" ? "só para este trabalho" : "para o time");
+const hiredText = (hires: readonly Hire[], engagement: Engagement) => `Trouxe ${who(hires)} ${how(engagement)}.`;
+
+/** O Chief propõe contratar: grava a resposta com a proposta, sem abrir o trabalho ainda. */
+async function propose(deps: ConversationDeps, id: ConversationId, question: Message, offerId: string, hires: Hire[], engagement: Engagement, trace: ChiefTrace) {
+  try {
+    return await deps.uow.run(async (s) => {
+      await requireUnanswered(s, id, question.seq);
+      const message = await appendReply(deps, s, id, question.seq, proposalText(hires, engagement), null, {
+        ...trace,
+        offer_id: offerId,
+        staffing: "proposed",
+        hired: hires.map((h) => h.id),
+      });
+      await s.staffing.add({
+        id: randomUUID(),
+        conversationId: id,
+        questionSeq: question.seq,
+        replySeq: message.seq,
+        offerId,
+        request: question.text,
+        templates: hires,
+        engagement,
+        status: "pending",
+        jobId: null,
+        decidedBy: null,
+        decidedAt: null,
+        createdAt: deps.clock.now(),
+      });
+      return message;
+    });
+  } catch (error) {
+    if (error instanceof AlreadyAnswered) return error.reply;
+    throw error;
+  }
+}
+
+interface OpenRequest {
+  offerId: string;
+  request: string;
+  text: string;
+  trace: DecisionRecord;
+  attachments: readonly string[];
+  /** Contratar na mesma transação em que o trabalho é admitido (o worker só planeja depois). */
+  hire: { templates: readonly Hire[]; engagement: Engagement; actor: string } | null;
+  /** Mais algo na mesma transação (por exemplo, marcar a proposta como decidida). */
+  also?: (jobId: JobId, tx: Transaction) => Promise<void>;
+}
+
+/** Abre o trabalho e grava a resposta (em `replyTo`) na mesma transação. */
+async function openJob(deps: ConversationDeps, id: ConversationId, replyTo: number, r: OpenRequest): Promise<{ ok: true; reply: Message } | { ok: false; reason: string }> {
+  let admission: Admission;
+  try {
+    admission = await deps.jobs.open(
+      r.offerId,
+      r.request,
+      async (jobId, tx) => {
+        const s = deps.uow.join(tx);
+        await requireUnanswered(s, id, replyTo);
+        await r.also?.(jobId, tx);
+        if (r.hire) {
+          ensure(deps.staffing, () => conflict("staffing_unavailable", "Contratação indisponível nesta instalação"));
+          await deps.staffing.hire(
+            tx,
+            r.hire.templates.map((t) => t.id),
+            { engagement: r.hire.engagement, engagedJob: jobId, hiredBy: "chief", actor: r.hire.actor },
+          );
+        }
+        await appendReply(deps, s, id, replyTo, r.text, jobId, r.trace);
+      },
+      r.attachments,
+    );
+  } catch (error) {
+    if (error instanceof AlreadyAnswered) return { ok: true, reply: error.reply };
+    throw error;
+  }
+  if (!admission.opened) return { ok: false, reason: admission.reason };
+  const stored = await deps.uow.read.messages.findReply(id, replyTo);
+  ensure(stored, () => conflict("reply_missing", "Trabalho aberto sem resposta registrada"));
+  return { ok: true, reply: stored };
+}
+
+/**
+ * O CEO decide a proposta de contratação: aceitar (contrata e abre o trabalho) ou seguir com o
+ * time atual (abre sem contratar). Repetir a decisão é inofensivo.
+ */
+export async function decideStaffing(deps: ConversationDeps, actor: ActorId, id: ConversationId, proposalId: string, accept: boolean) {
+  await owned(deps, actor, id);
+  const proposal = await deps.uow.read.staffing.get(proposalId);
+  ensure(proposal && proposal.conversationId === id, () => notFound("proposal_not_found", "Proposta não encontrada"));
+  if (proposal.status === "pending") {
+    const question = (await deps.uow.read.messages.list(id)).find((m) => m.seq === proposal.questionSeq);
+    const text = accept
+      ? `Combinado. ${hiredText(proposal.templates, proposal.engagement)} Abri o trabalho e aviso aqui quando houver um parecer para você aprovar.`
+      : "Certo, sigo com o time atual. Abri o trabalho e aviso aqui quando houver um parecer para você aprovar.";
+    const opened = await openJob(deps, id, proposal.replySeq, {
+      offerId: proposal.offerId,
+      request: proposal.request,
+      text,
+      trace: { engine: "rules", offer_id: proposal.offerId, staffing: accept ? "accepted" : "declined", ...(accept ? { hired: proposal.templates.map((t) => t.id) } : {}) },
+      attachments: question ? sourcesOf(question) : [],
+      hire: accept ? { templates: proposal.templates, engagement: proposal.engagement, actor } : null,
+      also: async (jobId, tx) => {
+        const decided = await deps.uow.join(tx).staffing.decide(proposal.id, accept ? "accepted" : "declined", jobId, actor, deps.clock.now());
+        ensure(decided, () => conflict("proposal_decided", "Esta proposta já foi decidida"));
+      },
+    });
+    ensure(opened.ok, () => conflict("admission_refused", `Não consegui abrir o trabalho agora: ${opened.ok ? "" : opened.reason}. Tente de novo em instantes.`));
+  }
+  return readConversation(deps, actor, id);
 }
 
 const sourcesOf = (m: Message) => (m.attachments ?? []).map((a) => a.source);
@@ -278,7 +416,8 @@ async function decisionsOf(deps: ConversationDeps, id: ConversationId): Promise<
   return map;
 }
 
-async function view(deps: ConversationDeps, m: Message, decisions: Decisions): Promise<MessageView> {
+async function view(deps: ConversationDeps, m: Message, decisions: Decisions, proposals: Proposals = new Map()): Promise<MessageView> {
+  const p = m.role === "chief" ? proposals.get(m.seq) : undefined;
   return {
     seq: m.seq,
     role: m.role,
@@ -289,5 +428,6 @@ async function view(deps: ConversationDeps, m: Message, decisions: Decisions): P
     attachments: m.attachments,
     job: m.jobId ? ((await deps.jobs.describe(m.jobId)) ?? null) : null,
     decision: m.role === "chief" ? (decisions.get(m.seq) ?? null) : null,
+    staffing: p ? { id: p.id, status: p.status, engagement: p.engagement, templates: p.templates, job_id: p.jobId } : null,
   };
 }

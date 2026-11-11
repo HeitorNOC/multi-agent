@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { companyApi } from "@/lib/api";
 import { formatBytes } from "@/lib/format";
 import { AccessCard } from "../access/access-card";
+import { AutonomyCard } from "./autonomy-card";
 import { CompanyForm } from "./company-form";
 
 const PROVIDER = { none: "Nenhum (respostas extraídas dos trechos)", claude: "Claude Code (CLI local)", codex: "Codex (CLI local)" };
@@ -23,6 +24,7 @@ export function SettingsPage() {
           <CompanyForm />
         </CardContent>
       </Card>
+      <AutonomyCard />
       <AccessCard auth={s?.auth} />
       <Card>
         <CardHeader>

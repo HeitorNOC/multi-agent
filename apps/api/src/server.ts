@@ -69,6 +69,7 @@ import { routinesStore } from "./modules/routines/infrastructure/sql-routines.ts
 import { OpenWorkGateway } from "./modules/open-work/application/gateway.ts";
 import { openWorkPolicy } from "./modules/open-work/application/open-policy.ts";
 import { agentsHttp } from "./modules/agents/http/routes.ts";
+import { releaseJobHires, staffingPort } from "./modules/agents/application/staffing.ts";
 import { teamDirectory, type AgentsDeps } from "./modules/agents/application/agents.ts";
 import type { TemplateCatalog } from "./modules/agents/domain/template.ts";
 import { agentsStore } from "./modules/agents/infrastructure/sql-agents.ts";
@@ -239,6 +240,8 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     station: stationResponder({ team, search, answerer: knowledge.answerer }),
     // Situação da empresa: o Chief (e o Jarvis) responde sobre pendências, andamento e time.
     briefing: () => companyBriefing({ sql: db.sql, clock }),
+    // Time, alçadas e catálogo: o Chief propõe ou contrata quem falta.
+    staffing: staffingPort(agents),
     // Anexo da conversa vira fonte do Cérebro (imagem lida pelo modelo, documento extraído).
     attach: async (actor: ActorId, file: { filename: string; mediaType: string; contentBase64: string }) => {
       const source = await uploadSource(knowledge, actor, { ...file, title: file.filename.replace(/\.[^.]+$/, "") || file.filename });
@@ -291,6 +294,18 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
     void search.semanticStatus().catch(() => undefined);
   }
 
+  // Quem o Chief trouxe só para um trabalho sai do time quando o trabalho termina.
+  const releaseHires = () =>
+    releaseJobHires(agents, async (ids) => {
+      const rows = await db.sql.all<{ id: string }>(
+        `SELECT id FROM jobs WHERE status IN ('completed', 'rejected', 'closed_unknown') AND id IN (${ids.map((_, i) => `$${i + 1}`).join(", ")})`,
+        ids,
+      );
+      return new Set(rows.map((r) => r.id));
+    }).catch((error: unknown) => console.error("Falha ao liberar contratações por trabalho:", error));
+  void releaseHires();
+  const releaseTimer = setInterval(() => void releaseHires(), 30_000);
+
   // Sem comando de worker, os pedidos ficam na fila até a API ser iniciada com um.
   ticker.start();
   if (config.worker.command) scheduler.start();
@@ -299,6 +314,7 @@ export async function startServer(config: Config, parts: ServerParts): Promise<R
   return {
     url,
     async close() {
+      clearInterval(releaseTimer);
       scheduler.stop();
       await ticker.stop();
       supervisor.stopAll();

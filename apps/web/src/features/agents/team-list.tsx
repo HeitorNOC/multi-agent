@@ -13,7 +13,7 @@ import { agentsApi, type ActivityJob, type ActivityStatus, type Agent } from "@/
 import { relativeTime } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { ACTIVITY_STATUS, Milestones, StatusDot, formatDuration, useTeamActivity } from "./activity";
-import { AgentAvatar, useOpenStation } from "./agent-bits";
+import { AgentAvatar, RoleBadge, useOpenStation } from "./agent-bits";
 
 // Colunas quando a própria lista tem largura para elas (container query, não a janela: o menu lateral ocupa espaço).
 const COLUMNS = "@[68rem]:grid-cols-[minmax(14rem,2fr)_8.5rem_minmax(12rem,2fr)_4.5rem_6rem_7rem_7.5rem]";
@@ -77,12 +77,22 @@ export function TeamList({ agents, areas }: { agents: Agent[]; areas: { id: stri
                   <>
                     <AgentAvatar name={a.name} area={a.area} />
                     <div className="min-w-0">
-                      <p className="font-medium">
-                        {a.name} <span className="font-normal text-muted-foreground">· {a.title}</span>
+                      <p className="flex flex-wrap items-center gap-x-1.5 font-medium">
+                        {a.name} <span className="font-normal text-muted-foreground">· {a.title}</span> <RoleBadge role={a.role} />
+                        {a.engagement === "job" && (
+                          <Link
+                            to={a.engaged_job ? `/trabalhos/${a.engaged_job}` : "/trabalhos"}
+                            className="rounded-full bg-violet-500/15 px-1.5 py-px text-[10px] font-medium uppercase tracking-wide text-violet-700 hover:underline dark:text-violet-300"
+                            title="Sai do time quando o trabalho terminar"
+                          >
+                            Só neste trabalho
+                          </Link>
+                        )}
                       </p>
                       <p className="text-xs text-muted-foreground">
                         {areaTitle(a.area)} · responde a {a.reports_to ? (byId.get(a.reports_to)?.name ?? a.reports_to) : "Chief of Staff"} · no time {relativeTime(a.hired_at)}
                         {a.instructions && " · com orientações"}
+                        {a.hired_by === "chief" && " · trazido pelo Chief"}
                       </p>
                     </div>
                   </>
