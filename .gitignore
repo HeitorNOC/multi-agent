@@ -42,3 +42,6 @@ legacy/packages/aurora-api/test/.open-calls-*.log
 
 # Modelos baixados (busca por significado)
 apps/api/data/models/
+
+# Dados do teste real (docs/TESTE_REAL_WEBCHAT.md)
+apps/api/data/teste-real/

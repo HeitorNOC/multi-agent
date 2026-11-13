@@ -136,3 +136,4 @@ of Staff), Integrações, Governança (central de recuperação), Configuraçõe
 - [Arquitetura e fluxos](docs/ARQUITETURA.md): tecnologias, módulos, fluxos e garantias.
 - [Plano do núcleo](docs/PLANO_NUCLEO.md): para onde vão o time, o Chief, a orquestração, o Cérebro e a memória.
 - [Dados, Cérebro e agentes](docs/DADOS_CEREBRO_AGENTES.md): onde tudo fica, envio e busca no Cérebro, recuperação após falhas, orquestração e o que cada agente faz.
+- [Teste real: WebChat](docs/TESTE_REAL_WEBCHAT.md): roteiro do teste de ponta a ponta com o modelo de verdade, com scripts de checagem, preparação e coleta em `scripts/teste-real/`.
