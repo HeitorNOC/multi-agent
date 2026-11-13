@@ -1,4 +1,0 @@
-{"type":"thread.started","thread_id":"01a1a723-8322-7933-83e3-0623959c9c56"}
-{"type":"turn.started"}
-{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"Não há informação sobre quantas pessoas integram a equipe Aurora na fonte selecionada. Ela informa apenas que a equipe tem três dias de trabalho remoto por semana [1].\\n\\nA versão consultada entrou em vigência em 1º de março de 2026 e foi publicada em 4 de novembro de 2026.\\n\\n### References\\n\\n* [1] politica-remoto@v2.md\"}"}}
-{"type":"turn.completed","usage":{"input_tokens":13230,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":99,"reasoning_output_tokens":0}}

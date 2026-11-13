@@ -1,4 +1,0 @@
-{"type":"thread.started","thread_id":"01a1b3f5-5674-79a1-9d59-7f68569d7abc"}
-{"type":"turn.started"}
-{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"action\\\":\\\"human_review\\\",\\\"reason\\\":\\\"Os testes e o parecer técnico passaram, cobrindo idempotência, conflito de payload, isolamento entre tenants, persistência e nova tentativa após falha de escrita.\\\"}\"}"}}
-{"type":"turn.completed","usage":{"input_tokens":11654,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":56,"reasoning_output_tokens":0}}

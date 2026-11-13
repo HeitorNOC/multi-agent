@@ -1,0 +1,19 @@
+{
+  "name": "aurora",
+  "private": true,
+  "description": "Plataforma empresarial multiagente: Chief of Staff, especialistas, Cérebro e aprovação humana.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "install:all": "npm --prefix apps/api ci && npm --prefix apps/web ci",
+    "setup:runtime": "node scripts/setup-runtime.mjs",
+    "build": "npm --prefix apps/web run build",
+    "start": "npm --prefix apps/api start",
+    "dev:web": "npm --prefix apps/web run dev",
+    "typecheck": "npm --prefix apps/api run typecheck && npm --prefix apps/web run typecheck",
+    "test": "npm --prefix apps/api test && npm --prefix apps/web test",
+    "test:ui": "npm --prefix apps/web run test:ui",
+    "verify": "npm run typecheck && npm test && npm run build"
+  }
+}

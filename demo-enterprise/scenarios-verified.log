@@ -1,3 +1,0 @@
-CHECK 16 current documents, 1 historical, 21 available agents
-FAIL campaign: review not accepted; preserved
-CHECK incident: 4/21 agents, 6 slots, resume without inference

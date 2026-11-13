@@ -1,0 +1,18 @@
+C:\Users\PC\multi-agent\validation\integrated-pilot\.venv\Lib\site-packages\pytest_asyncio\plugin.py:300: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+The event loop scope for asynchronous fixtures will default to the "fixture" caching scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session"
+
+  warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
+CHECKPOINT real_services_identity_and_pretrained_embeddings
+ACCEPTANCE february_known_before_correction {'selected_version': True, 'answer_value': True, 'citation': True, 'native_source': True, 'no_other_version_in_native_context': True, 'no_private_canary': True}
+ACCEPTANCE march_known_before_correction {'selected_version': True, 'answer_value': True, 'citation': True, 'native_source': True, 'no_other_version_in_native_context': True, 'no_private_canary': True}
+CHECKPOINT editorial_source_selection_and_native_rag_before_retroactive_correction
+ACCEPTANCE february_known_after_correction {'selected_version': True, 'answer_value': True, 'citation': True, 'native_source': True, 'no_other_version_in_native_context': True, 'no_private_canary': True}
+ACCEPTANCE march_unchanged_after_correction {'selected_version': True, 'answer_value': True, 'citation': True, 'native_source': True, 'no_other_version_in_native_context': True, 'no_private_canary': True}
+ACCEPTANCE january_after_correction {'selected_version': True, 'answer_value': True, 'citation': True, 'native_source': True, 'no_other_version_in_native_context': True, 'no_private_canary': True}
+CHECKPOINT old_advice_and_provenance_retrieved_exactly_without_regeneration
+CHECKPOINT no_published_source_means_abstention_without_model
+CHECKPOINT current_acl_applies_to_private_advice_and_historical_records
+CHECKPOINT runtime_sql_role_cannot_update_or_delete_advice_records
+CHECKPOINT restart_preserves_original_advice_and_revocation_without_model_calls
+.
+1 passed in 214.39s (0:03:34)

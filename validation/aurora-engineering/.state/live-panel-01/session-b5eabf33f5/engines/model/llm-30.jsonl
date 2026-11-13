@@ -1,4 +1,0 @@
-{"type":"thread.started","thread_id":"01a1b41a-79e7-7f30-b64f-3102bc7c5134"}
-{"type":"turn.started"}
-{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"action\\\":\\\"human_review\\\",\\\"reason\\\":\\\"A QA e a revisão técnica aprovaram a alteração. A suíte passou, o teste existente foi preservado e o novo teste detectou a regressão na execução com mutação.\\\"}\"}"}}
-{"type":"turn.completed","usage":{"input_tokens":12393,"cached_input_tokens":11392,"cache_write_input_tokens":0,"output_tokens":60,"reasoning_output_tokens":0}}

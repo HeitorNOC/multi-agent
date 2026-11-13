@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="8" time="225.343" timestamp="2026-11-06T17:45:31.959204-03:00" hostname="DESKTOP-BRCHPFP"><testcase classname="validation.aurora-local-restart.test_pilot" name="test_manifest_rejects_paths_outside_scope_and_changed_bytes" time="0.007" /><testcase classname="validation.aurora-local-restart.test_pilot" name="test_provider_privacy_mode_keeps_usage_without_content" time="0.241" /><testcase classname="validation.aurora-local-restart.test_pilot" name="test_provider_rejects_unexpected_tool_event" time="0.002" /><testcase classname="validation.aurora-local-restart.test_pilot" name="test_pilot_open_task_access_minimization_and_citations[sentence]" time="50.898" /><testcase classname="validation.aurora-local-restart.test_pilot" name="test_pilot_open_task_access_minimization_and_citations[context]" time="51.749" /><testcase classname="validation.aurora-local-restart.test_pilot" name="test_pilot_open_task_access_minimization_and_citations[reference]" time="122.195"><failure message="KeyError: 'jobs'">validation\aurora-local-restart\test_pilot.py:232: in test_pilot_open_task_access_minimization_and_citations
+    assert_blocked(REFUND_GOAL, "refund_reference_divergent:value_mismatch")
+validation\aurora-local-restart\test_pilot.py:226: in assert_blocked
+    blocked = wait_for(lambda: find(job, "failed"))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+validation\aurora-local-restart\test_launcher.py:24: in wait_for
+    value=check()
+          ^^^^^^^
+validation\aurora-local-restart\test_pilot.py:226: in &lt;lambda&gt;
+    blocked = wait_for(lambda: find(job, "failed"))
+                               ^^^^^^^^^^^^^^^^^^^^^
+validation\aurora-local-restart\test_pilot.py:211: in find
+    jobs = call("/api/state", cookie=operator)[1]["jobs"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'jobs'</failure></testcase><testcase classname="validation.aurora-local-restart.test_pilot_hybrid" name="test_hybrid_indexes_only_approved_current_passages" time="0.006" /><testcase classname="validation.aurora-local-restart.test_pilot_hybrid" name="test_vocabulary_is_scoped_to_exact_question" time="0.001" /></testsuite></testsuites>

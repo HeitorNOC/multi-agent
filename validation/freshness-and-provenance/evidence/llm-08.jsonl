@@ -1,4 +1,0 @@
-{"type":"thread.started","thread_id":"01a1a723-5b28-71f3-98a1-a78e6f6a7b69"}
-{"type":"turn.started"}
-{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"O projeto de expansão chama-se **Horizonte**. [1]\\n\\nA versão selecionada está vigente desde **1º de janeiro de 2026**. Ela foi publicada em 4 de novembro de 2026; não há data de fim de vigência informada. [1]\\n\\n### References\\n\\n* [1] politica-remoto@v1.md\"}"}}
-{"type":"turn.completed","usage":{"input_tokens":12463,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":92,"reasoning_output_tokens":0}}

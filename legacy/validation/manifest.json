@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-03",
+  "captured_utc": "2026-11-03T15:22:56.145104+00:00",
+  "scope": "Component reuse probes and selected upstream tests. No production, paid LLM or full platform certification.",
+  "projects": {
+    "agentscope": {
+      "sha": "9668b4c90c70cc214e1b7bb65dec2a6e70b90010",
+      "tracked_diff": "",
+      "source": "https://github.com/agentscope-ai/agentscope.git",
+      "python": "Python 3.12.14",
+      "xml": {
+        "upstream-unrestricted.xml": {
+          "tests": "215",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "22",
+          "time": "3.292"
+        },
+        "upstream.xml": {
+          "tests": "2",
+          "failures": "0",
+          "errors": "2",
+          "skipped": "0",
+          "time": "9.120"
+        }
+      }
+    },
+    "openagents": {
+      "sha": "6a330c789c321bdce5856578b7c47c2539ea7fc6",
+      "tracked_diff": "",
+      "source": "https://github.com/openagents-org/openagents.git",
+      "python": "Python 3.12.14",
+      "xml": {
+        "own-layer.xml": {
+          "tests": "1",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "2.209"
+        },
+        "upstream-unrestricted.xml": {
+          "tests": "92",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "8.715"
+        }
+      }
+    },
+    "opencompany": {
+      "sha": "dc69aec7cfa70732de486512c1ba424bb855fd52",
+      "tracked_diff": "",
+      "source": "https://github.com/zeenie-ai/OpenCompany.git",
+      "python": "Python 3.12.14",
+      "xml": {
+        "helpers-unrestricted.xml": {
+          "tests": "9",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.135"
+        }
+      }
+    },
+    "eigent": {
+      "sha": "4958c94bd91faf4e0bfff270a971d4d1810fb6db",
+      "tracked_diff": "",
+      "source": "https://github.com/eigent-ai/eigent.git",
+      "python": "Python 3.11.18",
+      "uv_lock_sha256": "2e29e333b75817c016c6fad1d4360231495ecf824cccd8ec3512a454263f7c6e",
+      "xml": {
+        "profile-subset.xml": {
+          "tests": "5",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "1.477"
+        },
+        "workforce-locked.xml": {
+          "tests": "8",
+          "failures": "8",
+          "errors": "0",
+          "skipped": "0",
+          "time": "86.355"
+        }
+      }
+    }
+  }
+}

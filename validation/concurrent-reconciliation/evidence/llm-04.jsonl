@@ -1,4 +1,0 @@
-{"type":"thread.started","thread_id":"01a1a7c5-8618-7f90-9b81-4f2f6cd488e8"}
-{"type":"turn.started"}
-{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"política de trabalho remoto\\\",\\\"dias remotos por semana\\\"],\\\"low_level_keywords\\\":[\\\"equipe Aurora\\\",\\\"2026-02-01\\\",\\\"politica-remoto@v1\\\",\\\"data de vigência\\\",\\\"corte de conhecimento\\\"]}\"}"}}
-{"type":"turn.completed","usage":{"input_tokens":12692,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":71,"reasoning_output_tokens":0}}

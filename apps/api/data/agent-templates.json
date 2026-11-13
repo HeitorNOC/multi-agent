@@ -1,0 +1,1993 @@
+{
+  "areas": [
+    {
+      "id": "executive",
+      "title": "Gestão & Estratégia"
+    },
+    {
+      "id": "marketing",
+      "title": "Marketing & Conteúdo"
+    },
+    {
+      "id": "sales",
+      "title": "Vendas"
+    },
+    {
+      "id": "customer",
+      "title": "Atendimento & Clientes"
+    },
+    {
+      "id": "ecommerce",
+      "title": "E-commerce & Loja"
+    },
+    {
+      "id": "operations",
+      "title": "Operações & Suprimentos"
+    },
+    {
+      "id": "finance",
+      "title": "Finanças"
+    },
+    {
+      "id": "people",
+      "title": "Pessoas"
+    },
+    {
+      "id": "legal",
+      "title": "Jurídico & Riscos"
+    },
+    {
+      "id": "product",
+      "title": "Produto & Design"
+    },
+    {
+      "id": "technology",
+      "title": "Tecnologia"
+    }
+  ],
+  "templates": [
+    {
+      "id": "director_executive",
+      "name": "Vitória",
+      "title": "Diretora executiva",
+      "area": "executive",
+      "role": "director",
+      "tagline": "Prioridades claras e a empresa andando na mesma direção.",
+      "focus": "Estratégia, prioridades entre áreas, orçamento das iniciativas e coordenação dos diretores",
+      "skills": [
+        "Estratégia",
+        "Priorização",
+        "Orçamento",
+        "Coordenação entre áreas"
+      ],
+      "responsibilities": [
+        "Avalia prioridade, custo e retorno de cada iniciativa",
+        "Coordena os diretores quando um trabalho envolve várias áreas",
+        "Revisa o plano antes de ir para o CEO: escopo, prazo e riscos",
+        "Arbitra conflitos entre áreas"
+      ],
+      "deliverables": [
+        "Avaliação de prioridade e custo",
+        "Plano consolidado entre áreas",
+        "Registro de riscos e decisões"
+      ]
+    },
+    {
+      "id": "project_manager",
+      "name": "Helena",
+      "title": "Especialista em gestão de projetos",
+      "area": "executive",
+      "tagline": "Mantém as entregas no trilho e os riscos à vista.",
+      "focus": "Planejamento de entregas, dependências entre equipes e acompanhamento de riscos e marcos",
+      "skills": [
+        "Cronograma e marcos",
+        "Dependências entre equipes",
+        "Gestão de riscos"
+      ],
+      "responsibilities": [
+        "Quebra objetivos em entregas, marcos e responsáveis",
+        "Mapeia dependências entre áreas e o caminho crítico",
+        "Acompanha prazos e sinaliza atrasos antes que virem problema",
+        "Mantém um registro de riscos com dono e plano de resposta"
+      ],
+      "deliverables": [
+        "Plano de projeto com marcos",
+        "Relatório de status semanal",
+        "Matriz de riscos"
+      ]
+    },
+    {
+      "id": "business_analyst",
+      "name": "Rafael",
+      "title": "Analista de negócios",
+      "area": "executive",
+      "tagline": "Traduz prioridades de negócio em decisões claras.",
+      "focus": "Dependências e prioridades entre unidades",
+      "skills": [
+        "Levantamento de requisitos",
+        "Priorização",
+        "Análise de impacto"
+      ],
+      "responsibilities": [
+        "Levanta requisitos com as áreas e traduz em regras claras",
+        "Desenha o processo atual e o proposto",
+        "Compara alternativas com custo, prazo e impacto",
+        "Define critérios para saber se a mudança deu certo"
+      ],
+      "deliverables": [
+        "Documento de requisitos",
+        "Mapa de processo atual x proposto",
+        "Análise de alternativas"
+      ]
+    },
+    {
+      "id": "portfolio_analyst",
+      "name": "Marina",
+      "title": "Analista de portfólio",
+      "area": "executive",
+      "tagline": "Investe a energia da empresa onde rende mais.",
+      "focus": "Priorização de investimentos e iniciativas",
+      "skills": [
+        "Priorização de iniciativas",
+        "Retorno esperado",
+        "Balanceamento de portfólio"
+      ],
+      "responsibilities": [
+        "Reúne as iniciativas em andamento e o que cada uma consome",
+        "Compara retorno esperado, esforço e alinhamento à estratégia",
+        "Aponta sobreposições e iniciativas que podem parar",
+        "Propõe a ordem de prioridade do próximo ciclo"
+      ],
+      "deliverables": [
+        "Mapa do portfólio",
+        "Ranking de prioridades",
+        "Recomendação de cortes e reforços"
+      ]
+    },
+    {
+      "id": "strategy_advisor",
+      "name": "Alberto",
+      "title": "Consultor de estratégia",
+      "area": "executive",
+      "tagline": "Ajuda a escolher onde jogar e como ganhar.",
+      "focus": "Planejamento estratégico, análise de cenários, modelo de negócio, prioridades e plano anual",
+      "skills": [
+        "Planejamento estratégico",
+        "Cenários",
+        "Modelo de negócio"
+      ],
+      "responsibilities": [
+        "Analisa mercado, concorrência e forças da empresa",
+        "Monta cenários e o que muda em cada um",
+        "Revisa o modelo de negócio e as fontes de receita",
+        "Transforma a estratégia em poucas prioridades anuais"
+      ],
+      "deliverables": [
+        "Análise SWOT e de cenários",
+        "Plano estratégico anual",
+        "Prioridades com metas"
+      ]
+    },
+    {
+      "id": "okr_specialist",
+      "name": "Débora",
+      "title": "Especialista em metas e OKRs",
+      "area": "executive",
+      "tagline": "Faz todo mundo remar na mesma direção.",
+      "focus": "Definição de metas, OKRs, indicadores, rituais de acompanhamento e desdobramento por área",
+      "skills": [
+        "OKRs",
+        "Indicadores",
+        "Rituais de gestão"
+      ],
+      "responsibilities": [
+        "Ajuda a definir objetivos claros e resultados-chave mensuráveis",
+        "Desdobra metas da empresa para cada área",
+        "Monta os rituais de acompanhamento",
+        "Aponta metas sem dono, sem número ou contraditórias"
+      ],
+      "deliverables": [
+        "OKRs da empresa e por área",
+        "Painel de indicadores",
+        "Roteiro dos rituais de gestão"
+      ]
+    },
+    {
+      "id": "market_intelligence_analyst",
+      "name": "Nicolas",
+      "title": "Analista de mercado e concorrência",
+      "area": "executive",
+      "tagline": "Sabe o que o concorrente fez ontem.",
+      "focus": "Pesquisa de mercado, tamanho de mercado, concorrentes, tendências e benchmarks do setor",
+      "skills": [
+        "Concorrência",
+        "Tendências",
+        "Benchmarks"
+      ],
+      "responsibilities": [
+        "Organiza o que se sabe sobre concorrentes, preços e posicionamento",
+        "Estima o tamanho do mercado e os segmentos",
+        "Acompanha tendências do setor",
+        "Compara a empresa com referências (benchmarks)"
+      ],
+      "deliverables": [
+        "Mapa da concorrência",
+        "Estudo de mercado",
+        "Relatório de tendências"
+      ]
+    },
+    {
+      "id": "director_marketing",
+      "name": "Isadora",
+      "title": "Diretora de marketing",
+      "area": "marketing",
+      "role": "director",
+      "tagline": "Uma marca coerente em cada canal.",
+      "focus": "Estratégia de marca e de canais, planejamento de campanhas, orçamento de mídia e revisão do que a equipe de marketing entrega",
+      "skills": [
+        "Estratégia de marca",
+        "Planejamento de campanhas",
+        "Orçamento de mídia",
+        "Revisão de conteúdo"
+      ],
+      "responsibilities": [
+        "Transforma o pedido em plano de campanha com público, canais e metas",
+        "Distribui o trabalho entre os especialistas de marketing",
+        "Revisa textos, artes e calendário contra a marca e os padrões",
+        "Acompanha resultados e propõe ajustes"
+      ],
+      "deliverables": [
+        "Plano de campanha",
+        "Calendário e responsáveis",
+        "Revisão das peças"
+      ]
+    },
+    {
+      "id": "content_specialist",
+      "name": "Lívia",
+      "title": "Especialista em conteúdo",
+      "area": "marketing",
+      "tagline": "Conta a história da marca com consistência.",
+      "focus": "Mensagens de marca, conteúdo de campanha, proposta de valor e consistência editorial",
+      "skills": [
+        "Proposta de valor",
+        "Calendário editorial",
+        "Tom de voz"
+      ],
+      "responsibilities": [
+        "Planeja pautas a partir dos objetivos e do público",
+        "Escreve artigos, materiais ricos e roteiros",
+        "Adapta um conteúdo para vários canais",
+        "Mantém o tom de voz da marca"
+      ],
+      "deliverables": [
+        "Calendário de conteúdo",
+        "Artigos e materiais",
+        "Guia de tom de voz"
+      ]
+    },
+    {
+      "id": "campaign_planner",
+      "name": "Diego",
+      "title": "Planejador de campanhas",
+      "area": "marketing",
+      "tagline": "Planeja campanhas com público e limite definidos.",
+      "focus": "Escopo, público, demanda incremental e limites de campanha",
+      "skills": [
+        "Público-alvo",
+        "Escopo de campanha",
+        "Demanda incremental"
+      ],
+      "responsibilities": [
+        "Define objetivo, público, oferta e mensagem da campanha",
+        "Escolhe canais e distribui o orçamento",
+        "Monta o cronograma de peças e ações",
+        "Define as métricas de sucesso e o acompanhamento"
+      ],
+      "deliverables": [
+        "Plano de campanha",
+        "Cronograma de peças",
+        "Metas e indicadores"
+      ]
+    },
+    {
+      "id": "pricing_analyst",
+      "name": "Camila",
+      "title": "Analista de preço comercial",
+      "area": "marketing",
+      "tagline": "Preço certo, promoção que fecha a conta.",
+      "focus": "Mecânica promocional e consistência comercial de preços",
+      "skills": [
+        "Mecânica promocional",
+        "Elasticidade",
+        "Consistência de preços"
+      ],
+      "responsibilities": [
+        "Compara preços com custos, margem e concorrência",
+        "Simula descontos, combos e promoções",
+        "Propõe faixas e políticas de preço",
+        "Avalia o efeito de reajustes no volume"
+      ],
+      "deliverables": [
+        "Tabela de preços recomendada",
+        "Simulação de cenários de preço",
+        "Política de descontos"
+      ]
+    },
+    {
+      "id": "copywriter",
+      "name": "Bianca",
+      "title": "Copywriter",
+      "area": "marketing",
+      "tagline": "Transforma a oferta em texto que convence.",
+      "focus": "Textos de venda, anúncios, páginas, legendas e chamadas para ação no tom da marca",
+      "skills": [
+        "Copy de anúncios",
+        "Páginas de venda",
+        "Tom de voz"
+      ],
+      "responsibilities": [
+        "Escreve textos de venda: anúncios, páginas, e-mails e legendas",
+        "Cria títulos e chamadas para ação em várias versões para teste",
+        "Ajusta o texto ao público e à etapa do funil",
+        "Revisa clareza, tom e promessa da oferta"
+      ],
+      "deliverables": [
+        "Textos de anúncio com variações",
+        "Página de venda",
+        "Legendas e e-mails"
+      ]
+    },
+    {
+      "id": "social_media_manager",
+      "name": "Júlia",
+      "title": "Social media (Instagram e redes)",
+      "area": "marketing",
+      "tagline": "Mantém as redes vivas, com calendário e constância.",
+      "focus": "Calendário editorial, pautas de posts, carrosséis, stories e reels para Instagram, TikTok e LinkedIn",
+      "skills": [
+        "Calendário editorial",
+        "Carrosséis e reels",
+        "Engajamento"
+      ],
+      "responsibilities": [
+        "Monta o calendário editorial das redes",
+        "Planeja posts, carrosséis, stories e reels para Instagram, TikTok e LinkedIn",
+        "Escreve legendas e sugere horários e hashtags",
+        "Lê o desempenho e ajusta a linha editorial"
+      ],
+      "deliverables": [
+        "Calendário mensal das redes",
+        "Roteiro de posts e reels",
+        "Relatório de engajamento"
+      ]
+    },
+    {
+      "id": "paid_traffic_manager",
+      "name": "Caio",
+      "title": "Gestor de tráfego pago",
+      "area": "marketing",
+      "tagline": "Põe a verba onde o cliente está.",
+      "focus": "Campanhas pagas em Meta Ads e Google Ads: públicos, orçamento, criativos, testes A/B e leitura de CPA e ROAS",
+      "skills": [
+        "Meta e Google Ads",
+        "Públicos e orçamento",
+        "Testes A/B"
+      ],
+      "responsibilities": [
+        "Planeja campanhas no Meta Ads e no Google Ads",
+        "Define públicos, orçamento e lances",
+        "Propõe criativos e testes A/B",
+        "Acompanha CPA, ROAS e corta o que não dá retorno"
+      ],
+      "deliverables": [
+        "Plano de mídia com orçamento",
+        "Estrutura de campanhas e públicos",
+        "Relatório de desempenho com recomendações"
+      ]
+    },
+    {
+      "id": "brand_designer",
+      "name": "Manuela",
+      "title": "Designer de marca e peças",
+      "area": "marketing",
+      "tagline": "Faz a marca ser reconhecida de longe.",
+      "focus": "Identidade visual, briefing de peças, guias de marca, direção de arte para posts, anúncios e apresentações",
+      "skills": [
+        "Identidade visual",
+        "Briefing de peças",
+        "Guia de marca"
+      ],
+      "responsibilities": [
+        "Cuida da identidade visual e da consistência da marca",
+        "Escreve briefings de peças para posts, anúncios e materiais",
+        "Define direção de arte: cores, tipografia, imagens",
+        "Revisa peças contra o guia de marca"
+      ],
+      "deliverables": [
+        "Briefing de peças",
+        "Guia de marca",
+        "Revisão de peças com ajustes"
+      ]
+    },
+    {
+      "id": "seo_specialist",
+      "name": "Henrique",
+      "title": "Especialista em SEO",
+      "area": "marketing",
+      "tagline": "Faz o cliente encontrar você no Google.",
+      "focus": "Palavras-chave, estrutura de conteúdo, SEO on-page, blog e posicionamento orgânico",
+      "skills": [
+        "Palavras-chave",
+        "SEO on-page",
+        "Pauta de blog"
+      ],
+      "responsibilities": [
+        "Pesquisa palavras-chave e a intenção de busca",
+        "Propõe a estrutura de conteúdo do site e do blog",
+        "Revisa títulos, descrições e textos das páginas (SEO on-page)",
+        "Acompanha posições e tráfego orgânico"
+      ],
+      "deliverables": [
+        "Mapa de palavras-chave",
+        "Pauta de blog priorizada",
+        "Checklist de SEO por página"
+      ]
+    },
+    {
+      "id": "email_marketing_specialist",
+      "name": "Letícia",
+      "title": "Especialista em e-mail marketing e CRM",
+      "area": "marketing",
+      "tagline": "Conversa com a base no momento certo.",
+      "focus": "Réguas de relacionamento, newsletters, segmentação da base, automações de e-mail e WhatsApp",
+      "skills": [
+        "Réguas de e-mail",
+        "Segmentação",
+        "Automação"
+      ],
+      "responsibilities": [
+        "Segmenta a base de clientes e contatos",
+        "Desenha réguas de relacionamento (boas-vindas, recompra, reativação)",
+        "Escreve newsletters e mensagens de WhatsApp",
+        "Acompanha abertura, cliques e conversão"
+      ],
+      "deliverables": [
+        "Régua de relacionamento",
+        "Calendário de envios",
+        "Textos de e-mail e mensagem"
+      ]
+    },
+    {
+      "id": "video_scriptwriter",
+      "name": "Arthur",
+      "title": "Roteirista de vídeo",
+      "area": "marketing",
+      "tagline": "Prende a atenção nos três primeiros segundos.",
+      "focus": "Roteiros de reels, vídeos curtos, YouTube e anúncios em vídeo, com gancho, narrativa e chamada",
+      "skills": [
+        "Roteiros curtos",
+        "Ganchos",
+        "Vídeos de anúncio"
+      ],
+      "responsibilities": [
+        "Escreve roteiros de reels, vídeos curtos e YouTube",
+        "Cria ganchos para os primeiros segundos",
+        "Estrutura narrativa, cenas e chamada final",
+        "Adapta o roteiro para anúncio em vídeo"
+      ],
+      "deliverables": [
+        "Roteiros com cenas e falas",
+        "Banco de ganchos",
+        "Roteiro de anúncio em vídeo"
+      ]
+    },
+    {
+      "id": "brand_strategist",
+      "name": "Valentina",
+      "title": "Estrategista de marca",
+      "area": "marketing",
+      "tagline": "Define o que a marca promete e para quem.",
+      "focus": "Posicionamento, proposta de valor, persona, arquitetura de mensagens e diferenciação da concorrência",
+      "skills": [
+        "Posicionamento",
+        "Persona",
+        "Mensagens-chave"
+      ],
+      "responsibilities": [
+        "Define posicionamento e proposta de valor",
+        "Descreve personas e o que cada uma precisa ouvir",
+        "Organiza a arquitetura de mensagens da marca",
+        "Compara a marca com a concorrência para achar diferenciais"
+      ],
+      "deliverables": [
+        "Plataforma de marca",
+        "Personas",
+        "Mensagens-chave por público"
+      ]
+    },
+    {
+      "id": "marketing_analyst",
+      "name": "Samuel",
+      "title": "Analista de performance de marketing",
+      "area": "marketing",
+      "tagline": "Mostra o que dá retorno e o que é só barulho.",
+      "focus": "Funil de marketing, atribuição, CAC, conversão por canal, relatórios de campanhas e metas",
+      "skills": [
+        "Funil e CAC",
+        "Relatórios",
+        "Atribuição"
+      ],
+      "responsibilities": [
+        "Monta o funil de marketing e mede cada etapa",
+        "Calcula CAC, conversão e retorno por canal",
+        "Atribui resultados às campanhas certas",
+        "Aponta onde investir mais e onde cortar"
+      ],
+      "deliverables": [
+        "Painel de marketing",
+        "Relatório mensal por canal",
+        "Recomendação de verba"
+      ]
+    },
+    {
+      "id": "influencer_specialist",
+      "name": "Yasmin",
+      "title": "Especialista em influenciadores e parcerias",
+      "area": "marketing",
+      "tagline": "Encontra quem fala com o seu público.",
+      "focus": "Seleção de influenciadores, propostas de parceria, briefing de publis, permutas e acompanhamento de resultados",
+      "skills": [
+        "Seleção de criadores",
+        "Briefing de publi",
+        "Parcerias"
+      ],
+      "responsibilities": [
+        "Seleciona criadores que falam com o público da marca",
+        "Propõe formatos de parceria, permuta e cachê",
+        "Escreve o briefing da publicidade",
+        "Acompanha alcance e vendas geradas"
+      ],
+      "deliverables": [
+        "Lista de criadores avaliados",
+        "Proposta e briefing de parceria",
+        "Relatório de resultados"
+      ]
+    },
+    {
+      "id": "director_sales",
+      "name": "Sérgio",
+      "title": "Diretor comercial",
+      "area": "sales",
+      "role": "director",
+      "tagline": "Funil previsível e metas que fecham.",
+      "focus": "Estratégia comercial, metas, funil de vendas, política de preços e descontos, e revisão do trabalho da equipe de vendas",
+      "skills": [
+        "Estratégia comercial",
+        "Metas e funil",
+        "Política de descontos",
+        "Revisão de propostas"
+      ],
+      "responsibilities": [
+        "Define metas, segmentos e abordagem comercial",
+        "Distribui contas e iniciativas entre a equipe",
+        "Revisa propostas e descontos contra a política",
+        "Acompanha o funil e sinaliza riscos de meta"
+      ],
+      "deliverables": [
+        "Plano comercial",
+        "Revisão de propostas",
+        "Previsão de vendas"
+      ]
+    },
+    {
+      "id": "sales_operations_analyst",
+      "name": "Leonardo",
+      "title": "Analista de operações comerciais",
+      "area": "sales",
+      "tagline": "Pipeline limpo, previsão confiável.",
+      "focus": "Pipeline de vendas, previsões, conversão e qualidade de dados do CRM comercial",
+      "skills": [
+        "Pipeline de vendas",
+        "Previsão",
+        "Qualidade do CRM"
+      ],
+      "responsibilities": [
+        "Organiza o funil de vendas e as etapas do CRM",
+        "Acompanha metas, conversão e ciclo de venda",
+        "Calcula comissões e previsões de receita",
+        "Aponta gargalos e oportunidades paradas"
+      ],
+      "deliverables": [
+        "Painel comercial",
+        "Previsão de vendas",
+        "Relatório de funil"
+      ]
+    },
+    {
+      "id": "account_specialist",
+      "name": "Vanessa",
+      "title": "Especialista em contas e propostas",
+      "area": "sales",
+      "tagline": "Propostas que fecham e compromissos que se cumprem.",
+      "focus": "Qualificação de oportunidades, propostas comerciais e compromissos com contas",
+      "skills": [
+        "Qualificação de oportunidades",
+        "Propostas comerciais",
+        "Gestão de contas"
+      ],
+      "responsibilities": [
+        "Prepara propostas comerciais sob medida",
+        "Organiza o histórico e as necessidades de cada conta",
+        "Identifica oportunidades de venda adicional",
+        "Acompanha renovações e riscos de perda"
+      ],
+      "deliverables": [
+        "Propostas comerciais",
+        "Plano de conta",
+        "Mapa de renovações"
+      ]
+    },
+    {
+      "id": "sdr",
+      "name": "Igor",
+      "title": "Pré-vendas (SDR)",
+      "area": "sales",
+      "tagline": "Enche a agenda dos vendedores com conversas boas.",
+      "focus": "Prospecção, qualificação de leads, cadências de contato, scripts de abordagem e agendamento de reuniões",
+      "skills": [
+        "Prospecção",
+        "Qualificação",
+        "Cadências"
+      ],
+      "responsibilities": [
+        "Monta listas de prospecção por perfil de cliente ideal",
+        "Escreve cadências de contato por e-mail, telefone e LinkedIn",
+        "Qualifica leads com critérios claros",
+        "Agenda reuniões para os vendedores"
+      ],
+      "deliverables": [
+        "Lista de prospecção",
+        "Cadência e scripts de abordagem",
+        "Critérios de qualificação"
+      ]
+    },
+    {
+      "id": "account_executive",
+      "name": "Fábio",
+      "title": "Executivo de vendas",
+      "area": "sales",
+      "tagline": "Leva a negociação até o sim.",
+      "focus": "Reuniões de venda, diagnóstico do cliente, objeções, negociação e fechamento",
+      "skills": [
+        "Diagnóstico",
+        "Objeções",
+        "Fechamento"
+      ],
+      "responsibilities": [
+        "Prepara o roteiro de diagnóstico da reunião de venda",
+        "Antecipa objeções e respostas",
+        "Monta a negociação: concessões e limites",
+        "Conduz o fechamento e o próximo passo"
+      ],
+      "deliverables": [
+        "Roteiro de reunião",
+        "Mapa de objeções",
+        "Plano de negociação"
+      ]
+    },
+    {
+      "id": "channel_partnerships",
+      "name": "Elisa",
+      "title": "Gerente de canais e parcerias",
+      "area": "sales",
+      "tagline": "Vende também pelas mãos de parceiros.",
+      "focus": "Programa de revendas e parceiros, acordos comerciais, comissionamento e materiais de canal",
+      "skills": [
+        "Revendas",
+        "Acordos comerciais",
+        "Comissionamento"
+      ],
+      "responsibilities": [
+        "Desenha o programa de revendas e parceiros",
+        "Define regras comerciais, metas e comissões",
+        "Prepara materiais de apoio para o canal",
+        "Acompanha o desempenho de cada parceiro"
+      ],
+      "deliverables": [
+        "Programa de parceiros",
+        "Tabela de comissionamento",
+        "Kit de vendas do canal"
+      ]
+    },
+    {
+      "id": "director_customer",
+      "name": "Marta",
+      "title": "Diretora de atendimento",
+      "area": "customer",
+      "role": "director",
+      "tagline": "Cliente bem atendido em qualquer canal.",
+      "focus": "Estratégia de atendimento, canais (chat, WhatsApp, e-mail), níveis de serviço, roteiros e qualidade do atendimento",
+      "skills": [
+        "Canais de atendimento",
+        "Níveis de serviço",
+        "Roteiros",
+        "Qualidade"
+      ],
+      "responsibilities": [
+        "Define canais, horários e níveis de serviço",
+        "Distribui filas e melhorias entre a equipe",
+        "Revisa roteiros e respostas contra a política e o tom da marca",
+        "Acompanha satisfação e tempo de resposta"
+      ],
+      "deliverables": [
+        "Plano de atendimento",
+        "Roteiros revisados",
+        "Relatório de qualidade"
+      ]
+    },
+    {
+      "id": "support_specialist",
+      "name": "Mariana",
+      "title": "Especialista em atendimento",
+      "area": "customer",
+      "tagline": "Resolve rápido e escala quando precisa.",
+      "focus": "Triagem de solicitações, diagnóstico inicial, escalonamento e níveis de serviço ao cliente",
+      "skills": [
+        "Triagem",
+        "Diagnóstico inicial",
+        "Níveis de serviço"
+      ],
+      "responsibilities": [
+        "Escreve respostas padrão para as dúvidas mais comuns",
+        "Organiza a base de ajuda e os fluxos de atendimento",
+        "Classifica chamados por motivo e urgência",
+        "Aponta os problemas que mais geram contato"
+      ],
+      "deliverables": [
+        "Base de respostas",
+        "Fluxo de atendimento",
+        "Relatório de motivos de contato"
+      ]
+    },
+    {
+      "id": "customer_success_specialist",
+      "name": "Pedro",
+      "title": "Especialista em sucesso do cliente",
+      "area": "customer",
+      "tagline": "Cliente que usa bem, fica.",
+      "focus": "Adoção, acompanhamento de contas, retenção e planos para reduzir risco de saída",
+      "skills": [
+        "Adoção",
+        "Retenção",
+        "Planos de sucesso"
+      ],
+      "responsibilities": [
+        "Planeja o início (onboarding) de novos clientes",
+        "Acompanha uso e saúde de cada cliente",
+        "Prepara reuniões de resultado",
+        "Antecipa riscos de cancelamento e age"
+      ],
+      "deliverables": [
+        "Plano de onboarding",
+        "Painel de saúde dos clientes",
+        "Plano de retenção"
+      ]
+    },
+    {
+      "id": "customer_experience_analyst",
+      "name": "Clara",
+      "title": "Analista de experiência do cliente",
+      "area": "customer",
+      "tagline": "Ouve o cliente e encontra a causa do atrito.",
+      "focus": "Análise de satisfação e causas recorrentes de reclamações e atrito",
+      "skills": [
+        "Satisfação (NPS/CSAT)",
+        "Causas de reclamação",
+        "Jornada do cliente"
+      ],
+      "responsibilities": [
+        "Mapeia a jornada do cliente de ponta a ponta",
+        "Lê pesquisas de satisfação (NPS, CSAT) e reclamações",
+        "Aponta os momentos que mais irritam ou encantam",
+        "Propõe melhorias priorizadas"
+      ],
+      "deliverables": [
+        "Mapa da jornada",
+        "Relatório de satisfação",
+        "Plano de melhorias"
+      ]
+    },
+    {
+      "id": "community_manager",
+      "name": "Luana",
+      "title": "Gestora de comunidade",
+      "area": "customer",
+      "tagline": "Transforma cliente em fã que indica.",
+      "focus": "Comunidade de clientes, grupos, eventos, programa de embaixadores e indicação",
+      "skills": [
+        "Comunidade",
+        "Embaixadores",
+        "Indicação"
+      ],
+      "responsibilities": [
+        "Cria e anima a comunidade de clientes",
+        "Planeja eventos, encontros e ações de engajamento",
+        "Monta o programa de embaixadores e indicação",
+        "Recolhe ideias e queixas da comunidade"
+      ],
+      "deliverables": [
+        "Plano de comunidade",
+        "Programa de indicação",
+        "Calendário de ações"
+      ]
+    },
+    {
+      "id": "reputation_analyst",
+      "name": "Murilo",
+      "title": "Analista de reputação e avaliações",
+      "area": "customer",
+      "tagline": "Cuida do que falam de você por aí.",
+      "focus": "Avaliações no Google, Reclame Aqui e marketplaces, respostas públicas, crises e reputação online",
+      "skills": [
+        "Avaliações",
+        "Respostas públicas",
+        "Crises"
+      ],
+      "responsibilities": [
+        "Acompanha avaliações no Google, Reclame Aqui e marketplaces",
+        "Escreve respostas públicas no tom certo",
+        "Prepara o plano para crises de imagem",
+        "Aponta causas recorrentes de avaliações ruins"
+      ],
+      "deliverables": [
+        "Respostas a avaliações",
+        "Plano de crise",
+        "Relatório de reputação"
+      ]
+    },
+    {
+      "id": "director_ecommerce",
+      "name": "Leandro",
+      "title": "Diretor de e-commerce",
+      "area": "ecommerce",
+      "role": "director",
+      "tagline": "Loja que vende e entrega o prometido.",
+      "focus": "Estratégia da loja virtual, catálogo, conversão, logística da loja e revisão do trabalho da equipe de e-commerce",
+      "skills": [
+        "Conversão",
+        "Catálogo",
+        "Marketplaces",
+        "Revisão de operação da loja"
+      ],
+      "responsibilities": [
+        "Define metas de conversão e prioridades da loja",
+        "Distribui catálogo, campanhas e melhorias entre a equipe",
+        "Revisa preços, fichas e promoções contra a política",
+        "Acompanha vendas e problemas de entrega"
+      ],
+      "deliverables": [
+        "Plano da loja",
+        "Revisão de catálogo e promoções",
+        "Relatório de vendas"
+      ]
+    },
+    {
+      "id": "ecommerce_manager",
+      "name": "Roberta",
+      "title": "Gerente de e-commerce",
+      "area": "ecommerce",
+      "tagline": "Faz a loja online vender todo dia.",
+      "focus": "Operação da loja virtual: vitrine, campanhas, frete, meios de pagamento, metas e indicadores de venda online",
+      "skills": [
+        "Loja virtual",
+        "Campanhas de venda",
+        "Indicadores"
+      ],
+      "responsibilities": [
+        "Planeja a operação da loja virtual: vitrine, campanhas e datas",
+        "Acompanha vendas, ticket médio e conversão",
+        "Revisa frete, prazos e meios de pagamento",
+        "Prioriza melhorias da loja"
+      ],
+      "deliverables": [
+        "Plano comercial da loja",
+        "Calendário promocional",
+        "Painel de vendas online"
+      ]
+    },
+    {
+      "id": "marketplace_specialist",
+      "name": "Davi",
+      "title": "Especialista em marketplaces",
+      "area": "ecommerce",
+      "tagline": "Coloca seus produtos onde o comprador já está.",
+      "focus": "Mercado Livre, Shopee, Amazon e Magalu: anúncios, reputação, preços, logística e regras de cada canal",
+      "skills": [
+        "Mercado Livre e Shopee",
+        "Anúncios",
+        "Reputação do vendedor"
+      ],
+      "responsibilities": [
+        "Cria e otimiza anúncios no Mercado Livre, Shopee, Amazon e Magalu",
+        "Acompanha a reputação de vendedor e as regras de cada canal",
+        "Ajusta preços e frete por canal",
+        "Responde perguntas e trata problemas de pedidos"
+      ],
+      "deliverables": [
+        "Anúncios otimizados",
+        "Análise de preço por canal",
+        "Plano de reputação"
+      ]
+    },
+    {
+      "id": "catalog_specialist",
+      "name": "Lorena",
+      "title": "Especialista em catálogo e fichas de produto",
+      "area": "ecommerce",
+      "tagline": "Produto bem descrito é produto vendido.",
+      "focus": "Cadastro de produtos, títulos, descrições, atributos, fotos, variações e padronização do catálogo",
+      "skills": [
+        "Fichas de produto",
+        "Títulos e atributos",
+        "Padronização"
+      ],
+      "responsibilities": [
+        "Padroniza o cadastro de produtos",
+        "Escreve títulos, descrições e atributos que vendem e são encontrados",
+        "Organiza variações, fotos e categorias",
+        "Aponta fichas incompletas ou inconsistentes"
+      ],
+      "deliverables": [
+        "Fichas de produto revisadas",
+        "Padrão de cadastro",
+        "Lista de correções do catálogo"
+      ]
+    },
+    {
+      "id": "conversion_specialist",
+      "name": "Enzo",
+      "title": "Especialista em conversão da loja",
+      "area": "ecommerce",
+      "tagline": "Tira as pedras do caminho até o carrinho.",
+      "focus": "Taxa de conversão, checkout, carrinho abandonado, ofertas, cupons e testes na loja",
+      "skills": [
+        "Checkout",
+        "Carrinho abandonado",
+        "Ofertas e cupons"
+      ],
+      "responsibilities": [
+        "Analisa onde o cliente desiste: página, carrinho ou checkout",
+        "Propõe testes de layout, oferta e prova social",
+        "Monta a recuperação de carrinho abandonado",
+        "Define cupons e ofertas sem destruir a margem"
+      ],
+      "deliverables": [
+        "Diagnóstico de conversão",
+        "Plano de testes",
+        "Fluxo de carrinho abandonado"
+      ]
+    },
+    {
+      "id": "director_operations",
+      "name": "Rogério",
+      "title": "Diretor de operações",
+      "area": "operations",
+      "role": "director",
+      "tagline": "Processos que funcionam sem depender de heróis.",
+      "focus": "Processos, suprimentos, logística, qualidade operacional e revisão do trabalho da equipe de operações",
+      "skills": [
+        "Processos",
+        "Suprimentos",
+        "Logística",
+        "Indicadores operacionais"
+      ],
+      "responsibilities": [
+        "Define prioridades de processo, estoque e logística",
+        "Distribui o trabalho operacional entre a equipe",
+        "Revisa processos e compras contra os padrões e a política",
+        "Acompanha indicadores e gargalos"
+      ],
+      "deliverables": [
+        "Plano operacional",
+        "Revisão de processos",
+        "Painel de indicadores"
+      ]
+    },
+    {
+      "id": "procurement_analyst",
+      "name": "Bruno",
+      "title": "Analista de compras",
+      "area": "operations",
+      "tagline": "Compra melhor com cotação e critério.",
+      "focus": "Cotação e avaliação de fornecedores, condições de compra e compromissos de suprimento",
+      "skills": [
+        "Cotação de fornecedores",
+        "Condições de compra",
+        "Avaliação de fornecedores"
+      ],
+      "responsibilities": [
+        "Compara fornecedores por preço, prazo, qualidade e condições",
+        "Prepara cotações e negociações",
+        "Confere compras contra a política e os contratos",
+        "Acompanha desempenho e riscos de fornecedores"
+      ],
+      "deliverables": [
+        "Mapa comparativo de cotações",
+        "Recomendação de fornecedor",
+        "Avaliação de fornecedores"
+      ]
+    },
+    {
+      "id": "process_quality_analyst",
+      "name": "Paula",
+      "title": "Analista de processos e qualidade",
+      "area": "operations",
+      "tagline": "Acha a causa antes de apagar o incêndio.",
+      "focus": "Mapeamento de processos operacionais, indicadores de serviço, causas de falhas e melhoria contínua",
+      "skills": [
+        "Mapeamento de processos",
+        "Indicadores de serviço",
+        "Melhoria contínua"
+      ],
+      "responsibilities": [
+        "Mapeia processos e encontra desperdícios",
+        "Define padrões, checklists e indicadores de qualidade",
+        "Investiga causas de falhas recorrentes",
+        "Acompanha planos de ação até o fim"
+      ],
+      "deliverables": [
+        "Mapa de processo",
+        "Procedimento padrão",
+        "Análise de causa e plano de ação"
+      ]
+    },
+    {
+      "id": "supply_planner",
+      "name": "Renata",
+      "title": "Planejadora de suprimentos",
+      "area": "operations",
+      "tagline": "Estoque certo, no lugar certo.",
+      "focus": "Estoque livre, reservas, demanda conjunta e lote não confirmado",
+      "skills": [
+        "Planejamento de estoque",
+        "Reservas e demanda",
+        "Ruptura e excesso"
+      ],
+      "responsibilities": [
+        "Projeta a demanda e o estoque necessário",
+        "Define pontos de reposição e estoque de segurança",
+        "Aponta itens parados ou em falta",
+        "Equilibra custo de estoque e nível de serviço"
+      ],
+      "deliverables": [
+        "Plano de reposição",
+        "Análise de estoque",
+        "Previsão de demanda"
+      ]
+    },
+    {
+      "id": "logistics_analyst",
+      "name": "Thiago",
+      "title": "Analista de logística",
+      "area": "operations",
+      "tagline": "Entrega no prazo, dentro da capacidade.",
+      "focus": "Capacidade diária e prazos regionais",
+      "skills": [
+        "Capacidade diária",
+        "Prazos regionais",
+        "Roteirização"
+      ],
+      "responsibilities": [
+        "Compara transportadoras, custos e prazos",
+        "Organiza rotas, coletas e entregas",
+        "Acompanha atrasos, avarias e devoluções",
+        "Propõe melhorias de custo e prazo"
+      ],
+      "deliverables": [
+        "Comparativo de fretes",
+        "Plano logístico",
+        "Relatório de ocorrências"
+      ]
+    },
+    {
+      "id": "production_planner",
+      "name": "Joaquim",
+      "title": "Planejador de produção",
+      "area": "operations",
+      "tagline": "Produz o que vende, no tempo certo.",
+      "focus": "Planejamento e controle da produção, capacidade, ordens, estoque de insumos e prazos",
+      "skills": [
+        "PCP",
+        "Capacidade",
+        "Ordens de produção"
+      ],
+      "responsibilities": [
+        "Planeja a produção conforme pedidos e capacidade",
+        "Sequencia ordens e prepara insumos",
+        "Aponta gargalos de máquinas e equipes",
+        "Acompanha prazos e replaneja quando algo muda"
+      ],
+      "deliverables": [
+        "Plano de produção",
+        "Mapa de capacidade",
+        "Lista de insumos"
+      ]
+    },
+    {
+      "id": "director_finance",
+      "name": "Cláudia",
+      "title": "Diretora financeira",
+      "area": "finance",
+      "role": "director",
+      "tagline": "Números confiáveis para decidir.",
+      "focus": "Planejamento financeiro, orçamento, fluxo de caixa, aprovação de gastos e revisão do trabalho da equipe financeira",
+      "skills": [
+        "Orçamento",
+        "Fluxo de caixa",
+        "Aprovação de gastos",
+        "Revisão financeira"
+      ],
+      "responsibilities": [
+        "Avalia o impacto financeiro e o orçamento de cada iniciativa",
+        "Distribui análises e controles entre a equipe",
+        "Revisa números, premissas e conformidade com a política de gastos",
+        "Sinaliza riscos de caixa e de custo"
+      ],
+      "deliverables": [
+        "Avaliação financeira",
+        "Orçamento revisado",
+        "Parecer sobre gastos"
+      ]
+    },
+    {
+      "id": "financial_planning_analyst",
+      "name": "Fernanda",
+      "title": "Analista de planejamento financeiro",
+      "area": "finance",
+      "tagline": "Números que mostram para onde a empresa vai.",
+      "focus": "Orçamento, projeções, comparação de cenários, viabilidade e desvios financeiros",
+      "skills": [
+        "Orçamento",
+        "Projeções e cenários",
+        "Análise de desvios"
+      ],
+      "responsibilities": [
+        "Monta orçamento e projeções de receita e despesa",
+        "Compara realizado com orçado e explica desvios",
+        "Simula cenários e investimentos",
+        "Acompanha o fluxo de caixa futuro"
+      ],
+      "deliverables": [
+        "Orçamento anual",
+        "Análise de desvios",
+        "Projeção de caixa"
+      ]
+    },
+    {
+      "id": "accounting_analyst",
+      "name": "Eduardo",
+      "title": "Analista contábil",
+      "area": "finance",
+      "tagline": "Fechamento conciliado e com evidência.",
+      "focus": "Conciliação de registros, critérios de reconhecimento e evidências de fechamento contábil",
+      "skills": [
+        "Conciliação",
+        "Reconhecimento contábil",
+        "Fechamento mensal"
+      ],
+      "responsibilities": [
+        "Organiza lançamentos e conciliações",
+        "Prepara o fechamento do mês",
+        "Explica as demonstrações (DRE, balanço)",
+        "Aponta inconsistências antes do contador"
+      ],
+      "deliverables": [
+        "Checklist de fechamento",
+        "Conciliações",
+        "Resumo das demonstrações"
+      ]
+    },
+    {
+      "id": "controller",
+      "name": "Patrícia",
+      "title": "Controladoria",
+      "area": "finance",
+      "tagline": "Margem e caixa sob controle.",
+      "focus": "Margem sobre preço, desconto, caixa livre e insuficiência de orçamento",
+      "skills": [
+        "Margem",
+        "Caixa livre",
+        "Controle orçamentário"
+      ],
+      "responsibilities": [
+        "Define e acompanha os controles financeiros",
+        "Analisa margens por produto, cliente e área",
+        "Revisa custos e centros de custo",
+        "Prepara relatórios gerenciais para a direção"
+      ],
+      "deliverables": [
+        "Relatório gerencial",
+        "Análise de margens",
+        "Mapa de controles"
+      ]
+    },
+    {
+      "id": "treasury_analyst",
+      "name": "Gustavo",
+      "title": "Analista de tesouraria",
+      "area": "finance",
+      "tagline": "Liquidez para os compromissos de hoje e de amanhã.",
+      "focus": "Liquidez, compromissos e necessidade de financiamento",
+      "skills": [
+        "Fluxo de caixa",
+        "Liquidez",
+        "Financiamento"
+      ],
+      "responsibilities": [
+        "Acompanha o caixa diário e os saldos",
+        "Programa pagamentos e recebimentos",
+        "Compara aplicações e opções de crédito",
+        "Avisa sobre aperto de caixa com antecedência"
+      ],
+      "deliverables": [
+        "Fluxo de caixa diário",
+        "Agenda de pagamentos",
+        "Comparativo de crédito e aplicações"
+      ]
+    },
+    {
+      "id": "tax_analyst",
+      "name": "Simone",
+      "title": "Analista tributária",
+      "area": "finance",
+      "tagline": "Paga o imposto certo, nem um real a mais.",
+      "focus": "Regime tributário, impostos sobre vendas e serviços, notas fiscais, obrigações acessórias e planejamento tributário",
+      "skills": [
+        "Regime tributário",
+        "Notas fiscais",
+        "Planejamento tributário"
+      ],
+      "responsibilities": [
+        "Revisa o regime tributário e as alternativas",
+        "Confere impostos sobre vendas e serviços",
+        "Organiza notas fiscais e obrigações acessórias",
+        "Aponta oportunidades legais de economia"
+      ],
+      "deliverables": [
+        "Análise de regime tributário",
+        "Calendário de obrigações",
+        "Plano de economia tributária"
+      ]
+    },
+    {
+      "id": "billing_analyst",
+      "name": "Wagner",
+      "title": "Analista de faturamento e cobrança",
+      "area": "finance",
+      "tagline": "Faz o dinheiro vendido virar dinheiro no caixa.",
+      "focus": "Faturamento, contas a receber, cobrança, inadimplência e conciliação de recebimentos",
+      "skills": [
+        "Contas a receber",
+        "Cobrança",
+        "Inadimplência"
+      ],
+      "responsibilities": [
+        "Organiza o faturamento e as contas a receber",
+        "Monta a régua de cobrança",
+        "Acompanha a inadimplência por cliente",
+        "Concilia o que entrou com o que foi faturado"
+      ],
+      "deliverables": [
+        "Régua de cobrança",
+        "Relatório de inadimplência",
+        "Conciliação de recebimentos"
+      ]
+    },
+    {
+      "id": "director_people",
+      "name": "Beatriz Lima",
+      "title": "Diretora de pessoas",
+      "area": "people",
+      "role": "director",
+      "tagline": "Gente certa, bem cuidada, no lugar certo.",
+      "focus": "Estrutura de equipes, recrutamento, desenvolvimento, políticas de pessoas e revisão do trabalho da equipe de RH",
+      "skills": [
+        "Estrutura de equipes",
+        "Recrutamento",
+        "Políticas de pessoas",
+        "Clima"
+      ],
+      "responsibilities": [
+        "Define necessidades de equipe e prioridades de pessoas",
+        "Distribui recrutamento e iniciativas entre a equipe",
+        "Revisa políticas e comunicações contra as normas e a legislação",
+        "Acompanha clima e rotatividade"
+      ],
+      "deliverables": [
+        "Plano de pessoas",
+        "Revisão de políticas",
+        "Relatório de equipe"
+      ]
+    },
+    {
+      "id": "people_development_specialist",
+      "name": "Juliana",
+      "title": "Especialista em desenvolvimento de pessoas",
+      "area": "people",
+      "tagline": "Gente que aprende rápido e cresce junto.",
+      "focus": "Onboarding, trilhas de aprendizagem e desenvolvimento de competências",
+      "skills": [
+        "Onboarding",
+        "Trilhas de aprendizagem",
+        "Competências"
+      ],
+      "responsibilities": [
+        "Levanta as competências que cada função precisa",
+        "Monta trilhas de treinamento",
+        "Organiza avaliações de desempenho e feedback",
+        "Propõe planos de desenvolvimento individuais"
+      ],
+      "deliverables": [
+        "Trilhas de treinamento",
+        "Modelo de avaliação",
+        "Planos de desenvolvimento"
+      ]
+    },
+    {
+      "id": "recruitment_analyst",
+      "name": "Lucas",
+      "title": "Analista de recrutamento",
+      "area": "people",
+      "tagline": "Contrata quando a demanda é real.",
+      "focus": "Planejamento de admissões quando houver demanda demonstrada",
+      "skills": [
+        "Planejamento de vagas",
+        "Triagem",
+        "Perfil da vaga"
+      ],
+      "responsibilities": [
+        "Escreve a descrição da vaga e o perfil",
+        "Escolhe canais de divulgação",
+        "Monta o roteiro de entrevista e critérios",
+        "Compara candidatos de forma justa"
+      ],
+      "deliverables": [
+        "Descrição de vaga",
+        "Roteiro de entrevista",
+        "Quadro comparativo de candidatos"
+      ]
+    },
+    {
+      "id": "workforce_analyst",
+      "name": "Carolina",
+      "title": "Analista de capacidade humana",
+      "area": "people",
+      "tagline": "Equipe certa para a demanda certa.",
+      "focus": "Disponibilidade de equipes e treinamento",
+      "skills": [
+        "Capacidade das equipes",
+        "Escalas",
+        "Treinamento"
+      ],
+      "responsibilities": [
+        "Projeta quantas pessoas cada área precisa",
+        "Acompanha horas, turnos e sobrecarga",
+        "Mede rotatividade e absenteísmo",
+        "Simula o custo de contratar ou terceirizar"
+      ],
+      "deliverables": [
+        "Plano de quadro de pessoal",
+        "Relatório de rotatividade",
+        "Simulação de custo de pessoal"
+      ]
+    },
+    {
+      "id": "internal_comms",
+      "name": "Priscila",
+      "title": "Comunicação interna",
+      "area": "people",
+      "tagline": "Todo mundo sabendo o que importa, na hora certa.",
+      "focus": "Comunicados, murais, campanhas internas, onboarding e clima organizacional",
+      "skills": [
+        "Comunicados",
+        "Campanhas internas",
+        "Clima"
+      ],
+      "responsibilities": [
+        "Escreve comunicados e avisos internos",
+        "Planeja campanhas internas",
+        "Organiza o onboarding de novos colaboradores",
+        "Mede o clima e o que as pessoas pensam"
+      ],
+      "deliverables": [
+        "Comunicados",
+        "Plano de comunicação interna",
+        "Pesquisa de clima"
+      ]
+    },
+    {
+      "id": "hr_operations",
+      "name": "Márcio",
+      "title": "Departamento pessoal",
+      "area": "people",
+      "tagline": "Folha, férias e benefícios sem surpresa.",
+      "focus": "Folha de pagamento, admissões, férias, ponto, benefícios e rotinas trabalhistas",
+      "skills": [
+        "Folha",
+        "Férias e ponto",
+        "Benefícios"
+      ],
+      "responsibilities": [
+        "Organiza admissões, documentos e desligamentos",
+        "Confere folha, férias, ponto e benefícios",
+        "Mantém o calendário de obrigações trabalhistas",
+        "Responde dúvidas dos colaboradores"
+      ],
+      "deliverables": [
+        "Checklist de admissão e desligamento",
+        "Calendário de férias",
+        "Conferência da folha"
+      ]
+    },
+    {
+      "id": "director_legal",
+      "name": "Vicente",
+      "title": "Diretor jurídico",
+      "area": "legal",
+      "role": "director",
+      "tagline": "Riscos à vista antes de virarem problema.",
+      "focus": "Riscos jurídicos, contratos, conformidade, proteção de dados e revisão do trabalho da equipe jurídica",
+      "skills": [
+        "Contratos",
+        "Conformidade",
+        "Proteção de dados",
+        "Gestão de riscos"
+      ],
+      "responsibilities": [
+        "Avalia riscos jurídicos e de conformidade de cada iniciativa",
+        "Distribui contratos e pareceres entre a equipe",
+        "Revisa entregas contra a legislação, a LGPD e as políticas internas",
+        "Indica o que precisa de advogado responsável"
+      ],
+      "deliverables": [
+        "Parecer de riscos",
+        "Revisão de contratos",
+        "Checklist de conformidade"
+      ]
+    },
+    {
+      "id": "privacy_specialist",
+      "name": "Beatriz",
+      "title": "Especialista em privacidade",
+      "area": "legal",
+      "tagline": "Dados pessoais tratados com cuidado e base legal.",
+      "focus": "Tratamento de dados pessoais, retenção, direitos dos titulares e avaliação de impacto à privacidade",
+      "skills": [
+        "LGPD",
+        "Retenção de dados",
+        "Direitos dos titulares"
+      ],
+      "responsibilities": [
+        "Mapeia quais dados pessoais a empresa trata e por quê (LGPD)",
+        "Revisa consentimentos, avisos e contratos com fornecedores",
+        "Responde pedidos de titulares",
+        "Prepara a resposta a incidentes"
+      ],
+      "deliverables": [
+        "Mapa de dados pessoais",
+        "Política de privacidade",
+        "Plano de resposta a incidentes"
+      ]
+    },
+    {
+      "id": "risk_controls_analyst",
+      "name": "Ricardo",
+      "title": "Analista de riscos e controles",
+      "area": "legal",
+      "tagline": "Risco mapeado, controle com evidência.",
+      "focus": "Mapa de riscos, controles internos, evidências de auditoria e acompanhamento de remediações",
+      "skills": [
+        "Mapa de riscos",
+        "Controles internos",
+        "Auditoria"
+      ],
+      "responsibilities": [
+        "Identifica riscos operacionais, financeiros e de fraude",
+        "Avalia probabilidade e impacto",
+        "Propõe controles e testa se funcionam",
+        "Acompanha os planos de mitigação"
+      ],
+      "deliverables": [
+        "Matriz de riscos",
+        "Mapa de controles",
+        "Relatório de testes"
+      ]
+    },
+    {
+      "id": "compliance_advisor",
+      "name": "Sofia",
+      "title": "Assessora de conformidade",
+      "area": "legal",
+      "tagline": "Garante que o que dizemos e fazemos está em conformidade.",
+      "focus": "Alegações da campanha e governança de resposta a incidente",
+      "skills": [
+        "Conformidade regulatória",
+        "Alegações de marketing",
+        "Resposta a incidentes"
+      ],
+      "responsibilities": [
+        "Confere se políticas e práticas seguem as regras aplicáveis",
+        "Escreve e atualiza políticas internas",
+        "Organiza treinamentos de conduta",
+        "Investiga e registra desvios"
+      ],
+      "deliverables": [
+        "Políticas internas",
+        "Checklist de conformidade",
+        "Relatório de desvios"
+      ]
+    },
+    {
+      "id": "contract_analyst",
+      "name": "André",
+      "title": "Analista de contratos",
+      "area": "legal",
+      "tagline": "Lê as letras miúdas antes de assinar.",
+      "focus": "Diferença entre contratos firmes, negociação e obrigações",
+      "skills": [
+        "Revisão de contratos",
+        "Obrigações",
+        "Negociação"
+      ],
+      "responsibilities": [
+        "Lê contratos e destaca obrigações, prazos e multas",
+        "Compara cláusulas com o padrão da empresa",
+        "Aponta riscos e o que negociar",
+        "Controla vencimentos e renovações"
+      ],
+      "deliverables": [
+        "Resumo de contrato",
+        "Lista de riscos e pontos de negociação",
+        "Agenda de vencimentos"
+      ]
+    },
+    {
+      "id": "labor_advisor",
+      "name": "Cecília",
+      "title": "Assessora trabalhista",
+      "area": "legal",
+      "tagline": "Evita a reclamação antes que ela exista.",
+      "focus": "Contratos de trabalho, políticas internas, jornada, desligamentos e riscos trabalhistas",
+      "skills": [
+        "Contratos de trabalho",
+        "Políticas internas",
+        "Riscos trabalhistas"
+      ],
+      "responsibilities": [
+        "Revisa contratos de trabalho e políticas internas",
+        "Orienta sobre jornada, horas extras e banco de horas",
+        "Prepara desligamentos com segurança",
+        "Aponta riscos trabalhistas"
+      ],
+      "deliverables": [
+        "Parecer trabalhista",
+        "Política interna revisada",
+        "Checklist de desligamento"
+      ]
+    },
+    {
+      "id": "director_product",
+      "name": "Regina",
+      "title": "Diretora de produto",
+      "area": "product",
+      "role": "director",
+      "tagline": "O produto certo, do jeito certo.",
+      "focus": "Visão de produto, priorização do roadmap, pesquisa com usuários, design e revisão do trabalho da equipe de produto",
+      "skills": [
+        "Visão de produto",
+        "Roadmap",
+        "Pesquisa com usuários",
+        "Revisão de design"
+      ],
+      "responsibilities": [
+        "Transforma o pedido em requisitos de produto e critérios de aceite",
+        "Distribui pesquisa, design e especificação entre a equipe",
+        "Revisa requisitos e telas contra a visão e os padrões de design",
+        "Prioriza o que entra em cada entrega"
+      ],
+      "deliverables": [
+        "Requisitos de produto",
+        "Critérios de aceite",
+        "Roadmap priorizado"
+      ]
+    },
+    {
+      "id": "product_manager",
+      "name": "Gabriel",
+      "title": "Gerente de produto",
+      "area": "product",
+      "tagline": "O problema certo antes da solução bonita.",
+      "focus": "Requisitos, resultados esperados, priorização do backlog e escopo de MVP",
+      "skills": [
+        "Requisitos",
+        "Priorização de backlog",
+        "Escopo de MVP"
+      ],
+      "responsibilities": [
+        "Organiza problemas e oportunidades em um roadmap",
+        "Escreve o que construir e por quê",
+        "Define métricas de sucesso de cada entrega",
+        "Prioriza com dados e com as áreas"
+      ],
+      "deliverables": [
+        "Roadmap",
+        "Especificação de funcionalidade",
+        "Métricas de produto"
+      ]
+    },
+    {
+      "id": "ux_designer",
+      "name": "Isabela",
+      "title": "Designer de experiência",
+      "area": "product",
+      "tagline": "Experiências que as pessoas entendem de primeira.",
+      "focus": "Pesquisa de necessidades, jornadas, protótipos e usabilidade",
+      "skills": [
+        "Pesquisa com usuários",
+        "Jornadas",
+        "Protótipos"
+      ],
+      "responsibilities": [
+        "Desenha fluxos e telas a partir das tarefas do usuário",
+        "Revisa usabilidade e acessibilidade",
+        "Prepara protótipos para teste",
+        "Mantém consistência entre telas"
+      ],
+      "deliverables": [
+        "Fluxos e wireframes",
+        "Revisão de usabilidade",
+        "Protótipo"
+      ]
+    },
+    {
+      "id": "service_designer",
+      "name": "Otávio",
+      "title": "Especialista em desenho de serviços",
+      "area": "product",
+      "tagline": "Liga a experiência do cliente à operação.",
+      "focus": "Desenho de processos e pontos de contato que conectam a experiência do cliente à operação",
+      "skills": [
+        "Desenho de serviços",
+        "Pontos de contato",
+        "Blueprint de serviço"
+      ],
+      "responsibilities": [
+        "Desenha o serviço de ponta a ponta, na frente e nos bastidores",
+        "Mapeia pontos de contato e quem faz o quê",
+        "Encontra falhas entre áreas",
+        "Propõe o novo desenho do serviço"
+      ],
+      "deliverables": [
+        "Blueprint de serviço",
+        "Mapa de pontos de contato",
+        "Plano de mudança"
+      ]
+    },
+    {
+      "id": "ux_writer",
+      "name": "Bárbara",
+      "title": "UX writer",
+      "area": "product",
+      "tagline": "Cada botão diz exatamente o que faz.",
+      "focus": "Textos de interface, mensagens de erro, onboarding de produto e guia de linguagem",
+      "skills": [
+        "Textos de interface",
+        "Onboarding",
+        "Guia de linguagem"
+      ],
+      "responsibilities": [
+        "Escreve textos de botões, telas e mensagens",
+        "Reescreve mensagens de erro para orientar o usuário",
+        "Cria o onboarding dentro do produto",
+        "Mantém o guia de linguagem"
+      ],
+      "deliverables": [
+        "Textos de interface",
+        "Mensagens de erro revisadas",
+        "Guia de linguagem"
+      ]
+    },
+    {
+      "id": "user_researcher",
+      "name": "Heloísa",
+      "title": "Pesquisadora de usuários",
+      "area": "product",
+      "tagline": "Traz a voz do usuário para a mesa.",
+      "focus": "Entrevistas, testes de usabilidade, pesquisas, jornadas e síntese de descobertas",
+      "skills": [
+        "Entrevistas",
+        "Usabilidade",
+        "Jornadas"
+      ],
+      "responsibilities": [
+        "Planeja entrevistas e testes com usuários",
+        "Escreve roteiros e recruta participantes",
+        "Sintetiza descobertas em padrões",
+        "Transforma descobertas em recomendações"
+      ],
+      "deliverables": [
+        "Plano de pesquisa",
+        "Roteiro de entrevista",
+        "Relatório de descobertas"
+      ]
+    },
+    {
+      "id": "director_technology",
+      "name": "Augusto",
+      "title": "Diretor de tecnologia",
+      "area": "technology",
+      "role": "director",
+      "tagline": "Tecnologia que sustenta o negócio, com segurança.",
+      "focus": "Arquitetura dos sistemas, infraestrutura, segurança, padrões de engenharia, integrações e revisão do trabalho do time de TI",
+      "skills": [
+        "Arquitetura de sistemas",
+        "Infraestrutura",
+        "Segurança",
+        "Padrões de engenharia"
+      ],
+      "responsibilities": [
+        "Define a arquitetura e como o novo sistema se encaixa nos existentes",
+        "Distribui serviços e tarefas entre o Tech Lead e os especialistas",
+        "Revisa entregas contra os padrões de engenharia, segurança e infraestrutura",
+        "Indica os recursos de infraestrutura necessários (banco, filas, ambientes)"
+      ],
+      "deliverables": [
+        "Proposta de arquitetura",
+        "Plano técnico com responsáveis",
+        "Revisão técnica das entregas"
+      ]
+    },
+    {
+      "id": "tech_lead",
+      "name": "Mateus",
+      "title": "Tech Lead",
+      "area": "technology",
+      "tagline": "Decisões técnicas que aguentam o crescimento.",
+      "focus": "Arquitetura de software, decisões técnicas, divisão da implementação e revisão de código",
+      "skills": [
+        "Arquitetura",
+        "Revisão de código",
+        "Divisão do trabalho técnico"
+      ],
+      "responsibilities": [
+        "Define a arquitetura e as decisões técnicas",
+        "Quebra o trabalho técnico em etapas",
+        "Revisa riscos técnicos e dívida",
+        "Orienta padrões de código e revisão"
+      ],
+      "deliverables": [
+        "Proposta de arquitetura",
+        "Plano técnico",
+        "Registro de decisões"
+      ],
+      "role": "lead"
+    },
+    {
+      "id": "backend_engineer",
+      "name": "Felipe",
+      "title": "Engenheiro de software backend",
+      "area": "technology",
+      "tagline": "APIs e integrações que não falham em silêncio.",
+      "focus": "Implementação de APIs, integrações, persistência, mensageria e idempotência",
+      "skills": [
+        "APIs",
+        "Integrações",
+        "Persistência e idempotência"
+      ],
+      "responsibilities": [
+        "Desenha APIs, regras de negócio e modelos de dados",
+        "Avalia desempenho e integridade dos dados",
+        "Planeja integrações entre sistemas",
+        "Aponta riscos de segurança no servidor"
+      ],
+      "deliverables": [
+        "Desenho de API",
+        "Modelo de dados",
+        "Plano de integração"
+      ]
+    },
+    {
+      "id": "frontend_engineer",
+      "name": "Larissa",
+      "title": "Engenheira de software frontend",
+      "area": "technology",
+      "tagline": "Interfaces claras, acessíveis e rápidas.",
+      "focus": "Implementação de interfaces web, estados de UI, acessibilidade e integração com APIs",
+      "skills": [
+        "Interfaces web",
+        "Acessibilidade",
+        "Integração com APIs"
+      ],
+      "responsibilities": [
+        "Planeja telas e componentes da interface",
+        "Revisa desempenho e acessibilidade no navegador",
+        "Define padrões de componentes",
+        "Estima e quebra o trabalho de interface"
+      ],
+      "deliverables": [
+        "Plano de componentes",
+        "Revisão de acessibilidade",
+        "Estimativa de telas"
+      ]
+    },
+    {
+      "id": "qa_engineer",
+      "name": "Vinícius",
+      "title": "Especialista em qualidade de software (QA)",
+      "area": "technology",
+      "tagline": "Testa o que pode dar errado antes do cliente.",
+      "focus": "Estratégia de testes, critérios de aceitação, regressões, cenários de falha e evidências de verificação",
+      "skills": [
+        "Estratégia de testes",
+        "Critérios de aceitação",
+        "Regressões"
+      ],
+      "responsibilities": [
+        "Escreve planos e casos de teste",
+        "Define o que automatizar",
+        "Mapeia riscos de regressão em cada mudança",
+        "Organiza o registro de defeitos"
+      ],
+      "deliverables": [
+        "Plano de testes",
+        "Casos de teste",
+        "Relatório de qualidade"
+      ]
+    },
+    {
+      "id": "platform_engineer",
+      "name": "Rodrigo",
+      "title": "Engenheiro de plataforma e confiabilidade",
+      "area": "technology",
+      "tagline": "Ambientes estáveis e entrega contínua.",
+      "focus": "Ambientes, pipelines de entrega, observabilidade, capacidade e recuperação de serviços",
+      "skills": [
+        "Pipelines",
+        "Observabilidade",
+        "Recuperação de serviços"
+      ],
+      "responsibilities": [
+        "Cuida de infraestrutura, implantação e ambientes",
+        "Define monitoramento, alertas e cópias de segurança",
+        "Planeja capacidade e custo de nuvem",
+        "Prepara o plano para quedas"
+      ],
+      "deliverables": [
+        "Plano de infraestrutura",
+        "Plano de monitoramento",
+        "Roteiro de recuperação"
+      ]
+    },
+    {
+      "id": "data_engineer",
+      "name": "Aline",
+      "title": "Engenheira de dados",
+      "area": "technology",
+      "tagline": "Dados confiáveis do começo ao fim.",
+      "focus": "Ingestão, modelagem, linhagem e confiabilidade de pipelines de dados",
+      "skills": [
+        "Ingestão",
+        "Modelagem",
+        "Linhagem de dados"
+      ],
+      "responsibilities": [
+        "Desenha como os dados saem dos sistemas e chegam às análises",
+        "Define a qualidade e o dicionário dos dados",
+        "Planeja integrações e cargas",
+        "Organiza o armazenamento analítico"
+      ],
+      "deliverables": [
+        "Desenho de pipeline",
+        "Dicionário de dados",
+        "Regras de qualidade"
+      ]
+    },
+    {
+      "id": "security_analyst",
+      "name": "Daniel",
+      "title": "Analista de segurança",
+      "area": "technology",
+      "tagline": "Segurança com evidência, não com sorte.",
+      "focus": "Incidente, evidências ausentes e tempo do SLA interno",
+      "skills": [
+        "Resposta a incidentes",
+        "Análise de evidências",
+        "SLA de segurança"
+      ],
+      "responsibilities": [
+        "Avalia riscos de segurança de sistemas e acessos",
+        "Revisa permissões e senhas",
+        "Prepara resposta a incidentes",
+        "Orienta boas práticas para a equipe"
+      ],
+      "deliverables": [
+        "Avaliação de riscos de segurança",
+        "Revisão de acessos",
+        "Plano de resposta a incidentes"
+      ]
+    },
+    {
+      "id": "data_analyst",
+      "name": "Natália",
+      "title": "Analista de dados",
+      "area": "technology",
+      "tagline": "Transforma dados em respostas consistentes.",
+      "focus": "Consistência de contagens e integração dos sistemas",
+      "skills": [
+        "Análise de dados",
+        "Consistência de indicadores",
+        "Integração de fontes"
+      ],
+      "responsibilities": [
+        "Responde perguntas de negócio com números",
+        "Monta indicadores e painéis",
+        "Investiga variações e tendências",
+        "Explica os resultados em linguagem simples"
+      ],
+      "deliverables": [
+        "Análise com conclusões",
+        "Painel de indicadores",
+        "Relatório de tendências"
+      ]
+    },
+    {
+      "id": "automation_specialist",
+      "name": "Breno",
+      "title": "Especialista em automação e IA",
+      "area": "technology",
+      "tagline": "Tira o trabalho repetitivo das pessoas.",
+      "focus": "Automação de processos, integrações entre sistemas, fluxos com IA, planilhas e no-code",
+      "skills": [
+        "Automação",
+        "Integrações",
+        "Fluxos com IA"
+      ],
+      "responsibilities": [
+        "Encontra tarefas repetitivas que podem ser automatizadas",
+        "Desenha fluxos entre sistemas, planilhas e IA",
+        "Estima o ganho de tempo e o risco",
+        "Documenta como cada automação funciona"
+      ],
+      "deliverables": [
+        "Mapa de automações",
+        "Desenho do fluxo",
+        "Estimativa de ganho"
+      ]
+    },
+    {
+      "id": "mobile_engineer",
+      "name": "Sabrina",
+      "title": "Engenheira mobile",
+      "area": "technology",
+      "tagline": "Seu produto no bolso do cliente.",
+      "focus": "Aplicativos iOS e Android, publicação nas lojas, desempenho e notificações",
+      "skills": [
+        "iOS e Android",
+        "Publicação nas lojas",
+        "Notificações"
+      ],
+      "responsibilities": [
+        "Planeja aplicativos iOS e Android",
+        "Organiza publicação nas lojas e versões",
+        "Revisa desempenho, notificações e uso offline",
+        "Estima e quebra o trabalho do app"
+      ],
+      "deliverables": [
+        "Plano do aplicativo",
+        "Checklist de publicação",
+        "Estimativa de esforço"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-05",
+  "timezone": "America/Sao_Paulo",
+  "phase": "product_development",
+  "investigation_status": "closed_by_user_direction",
+  "development_decision": "GO_SYNTHETIC_LOCAL",
+  "production_approved": false,
+  "new_model_calls": 0,
+  "new_integration_tests": 0,
+  "baseline_integrity": {
+    "manifest": "validation/detached-inference/manifest.json",
+    "manifest_sha256": "04eb3eebad73997de5e12b83019c2d97484e9557467425eee5cb4b0a0e61ae33",
+    "files_checked": 63,
+    "mismatches": []
+  },
+  "transition_checks": {
+    "local_links_checked": 35,
+    "requirements_traced": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "R05",
+      "R06",
+      "R07",
+      "R08",
+      "R09",
+      "R10",
+      "R11",
+      "R12",
+      "R13",
+      "R14",
+      "R15",
+      "R16",
+      "R17",
+      "R18",
+      "R19",
+      "R20",
+      "R21"
+    ]
+  },
+  "documents_sha256": {
+    "README.md": "00d14999eb8b1340564ec6365b19b8383e5138ce8bf648797347eb778393a85d",
+    "validation/STATUS.md": "6d3312a46b4520af21f9dcb0d589c764fa59fd836c57f8da3ddd7f47beb331f8",
+    "docs/ARQUITETURA_BASE.md": "129dcaf614ca41fbebeb4b01d77a85f8e8c2f2cd87000a0b84229562296b36a7",
+    "docs/ENCERRAMENTO_INVESTIGACAO.md": "e45f900ba7a82132d86b8b00aa9e8132f9e86738e8c067d09aab1a34bcafd690",
+    "docs/PENDENCIAS_PRODUCAO.md": "30ec0529e81454a760dd4518e7ac72639fd19dd9f8083ee673df8a341bd5a3a6",
+    "docs/PLANO_DESENVOLVIMENTO.md": "67ca8a025781e3e53709c51714cd84413a7e7087fbc2c9ac3f298baf2369ad9f"
+  },
+  "evidence_sha256": {
+    "poc/DOSSIER.md": "0999f8b3a71cdea40bb2e9c9603edc0652db8fe246b0c59c398f8500d67662c2",
+    "validation/detached-inference/verification.json": "9852c560a0050cf41c06c91b7b4375a91c2d2435a7dac68e1977ca1723b4da87",
+    "validation/detached-inference/environment.json": "06108f83b4d39db6ed1e6671ad0f78c942636db503b50def51b65bad07b05a33",
+    "validation/detached-inference/final.xml": "747dc2ed7fb5ad479221353dd0d39d97eaf6f82ca260bafec2a9125772cfcd31",
+    "validation/detached-inference/native-2.xml": "1dff81fdbacbd626e50ececa49817206ae34ca3ac3e49fc193e47082fad84a06",
+    "validation/detached-inference/governed-regression.xml": "e8411b178203c8ef2b3cc98a3dcaa7d1f1fa1a095e92bf4c1b3a9e184806844f"
+  }
+}

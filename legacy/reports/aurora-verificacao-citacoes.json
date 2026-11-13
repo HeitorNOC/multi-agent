@@ -1,0 +1,304 @@
+{
+  "fixture_sha256": "1711c8f4795f825f225204e342814ed6adc6ff19c6abb17ce81d3b3e4a479cfd",
+  "verifier_prompt_sha256": "96468fa8b1e5dbed2dcafb97a3079765288e72d908b9b4fc47f0046c5fb5856a",
+  "model": "gpt-6.1-terra",
+  "case_count": 8,
+  "cases": [
+    {
+      "case": "V01",
+      "expected": [
+        "b"
+      ],
+      "baseline": [
+        "a",
+        "b",
+        "c"
+      ],
+      "actual": [
+        "b"
+      ],
+      "false_accepts": [],
+      "false_rejects": [],
+      "error": null,
+      "passed": true
+    },
+    {
+      "case": "V02",
+      "expected": [
+        "a"
+      ],
+      "baseline": [
+        "a",
+        "b"
+      ],
+      "actual": [
+        "a"
+      ],
+      "false_accepts": [],
+      "false_rejects": [],
+      "error": null,
+      "passed": true
+    },
+    {
+      "case": "V03",
+      "expected": [
+        "a",
+        "c"
+      ],
+      "baseline": [
+        "a",
+        "b",
+        "c"
+      ],
+      "actual": [
+        "a",
+        "c"
+      ],
+      "false_accepts": [],
+      "false_rejects": [],
+      "error": null,
+      "passed": true
+    },
+    {
+      "case": "V04",
+      "expected": [],
+      "baseline": [
+        "a",
+        "b"
+      ],
+      "actual": [],
+      "false_accepts": [],
+      "false_rejects": [],
+      "error": null,
+      "passed": true
+    },
+    {
+      "case": "V05",
+      "expected": [
+        "b"
+      ],
+      "baseline": [
+        "a",
+        "b"
+      ],
+      "actual": [
+        "b"
+      ],
+      "false_accepts": [],
+      "false_rejects": [],
+      "error": null,
+      "passed": true
+    },
+    {
+      "case": "V06",
+      "expected": [
+        "b"
+      ],
+      "baseline": [
+        "a",
+        "b",
+        "c"
+      ],
+      "actual": [
+        "b"
+      ],
+      "false_accepts": [],
+      "false_rejects": [],
+      "error": null,
+      "passed": true
+    },
+    {
+      "case": "V07",
+      "expected": [
+        "a"
+      ],
+      "baseline": [
+        "a",
+        "b"
+      ],
+      "actual": [
+        "a"
+      ],
+      "false_accepts": [],
+      "false_rejects": [],
+      "error": null,
+      "passed": true
+    },
+    {
+      "case": "V08",
+      "expected": [
+        "a"
+      ],
+      "baseline": [
+        "a",
+        "b"
+      ],
+      "actual": [
+        "a"
+      ],
+      "false_accepts": [],
+      "false_rejects": [],
+      "error": null,
+      "passed": true
+    }
+  ],
+  "passed": 8,
+  "operational_errors": 0,
+  "baseline_false_accepts": 11,
+  "false_accepts": 0,
+  "false_rejects": 0,
+  "call_metadata": [
+    {
+      "call": 1,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "e987bfeadb88d06694c8f99f79dc7638564df96195693a64ed633d42b1b14aca",
+      "reservation_id": "V01",
+      "instance": "synthetic-citation-eval",
+      "seconds": 4.063336799998069,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12286,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 24,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 2,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "f445435f051c97778241c929107335172c5dc3d2d155e2cfcf5ae7dd89b99408",
+      "reservation_id": "V02",
+      "instance": "synthetic-citation-eval",
+      "seconds": 11.54924989999563,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12277,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 24,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 3,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "fc5d6d6ff7b79810f91d725b7e58c60be7f8a49f47e98d2710affbfc4d1fb29b",
+      "reservation_id": "V03",
+      "instance": "synthetic-citation-eval",
+      "seconds": 5.331406800003606,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11486,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 26,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 4,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "377df60be7913a280af0cbd7d2476d58c51b240d4f6c7d8d9bab7dc6c5d4ac01",
+      "reservation_id": "V04",
+      "instance": "synthetic-citation-eval",
+      "seconds": 4.5856152000051225,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11487,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 20,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 5,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "795ba0839aee6f1d069f18b4241a35cc062d326c145ce9aaf47bad11ae3823df",
+      "reservation_id": "V05",
+      "instance": "synthetic-citation-eval",
+      "seconds": 4.618478699994739,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12278,
+          "cached_input_tokens": 9088,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 24,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 6,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "b757b9c6aaea0bf45f94a8310b7bb5bf2c08c2b6da80beef56e2f59096495d06",
+      "reservation_id": "V06",
+      "instance": "synthetic-citation-eval",
+      "seconds": 4.313065800000913,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12276,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 24,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 7,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "e2894000e0bd1dc9f01d502198511d6816bde873922eff3e12aab6712fe3f219",
+      "reservation_id": "V07",
+      "instance": "synthetic-citation-eval",
+      "seconds": 8.26659979998658,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 12279,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 24,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    },
+    {
+      "call": 8,
+      "model": "gpt-6.1-terra",
+      "prompt_sha256": "ba7cd911f09d54911873fe7cfc656584cc478b8f091859c7fd8b98f1c7bb839d",
+      "reservation_id": "V08",
+      "instance": "synthetic-citation-eval",
+      "seconds": 4.437791700009257,
+      "exit_code": 0,
+      "usage": [
+        {
+          "input_tokens": 11506,
+          "cached_input_tokens": 0,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 24,
+          "reasoning_output_tokens": 0
+        }
+      ],
+      "unexpected_tool_events": 0
+    }
+  ]
+}

@@ -1,7 +1,0 @@
-{"id": "business-flow-b80b15b6e5:model:c4aaf5cffd3c9809cfa84d2e67dea19ab643c7a6b988f7120cb7fa2078647b9a", "number": 1, "role": "chief"}
-{"id": "business-flow-b80b15b6e5:model:dab91c06bb9b09fb1c5d6ccf35ca1d2074d173b788e6cd9d975b1f2a18d45c9d", "number": 2, "role": "director_assign"}
-{"id": "business-flow-b80b15b6e5:model:e7dc3a0d369b5c7eafb996d28ffb9b3266f03a08066588637e0af889bc336a05", "number": 3, "role": "tech_lead_design"}
-{"id": "business-flow-b80b15b6e5:model:35a8dfd28084c164f1ed57f0bacdef4b354ba530c7001789822aa464f54951c6", "number": 4, "role": "backend_implement"}
-{"id": "business-flow-b80b15b6e5:model:f20faffc3964646f627a16fa111bce203ffed35588d1a8de0dbd6b30b17bb829", "number": 5, "role": "qa_review"}
-{"id": "business-flow-b80b15b6e5:model:0304a6d14043c7dc90002ac4b8a90a9fcf5938f10418c659ad58088f47068fa0", "number": 6, "role": "tech_lead_review"}
-{"id": "business-flow-b80b15b6e5:model:d21490ea5695ba26cc71024e5503d37cf00d1254962cccfcccc349482e05ebdd", "number": 7, "role": "director_review"}

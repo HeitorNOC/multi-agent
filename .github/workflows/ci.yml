@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    # Também nas branches de trabalho (refactor/*, feat/*), para validar antes do PR.
+    branches: [main, "refactor/**", "feat/**"]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: aurora_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      # Com esta variável, os testes rodam também no PostgreSQL, incluindo os de ponta a ponta
+      # com o worker LangGraph real (o modelo é uma CLI falsa; nenhuma conta é usada).
+      AURORA_TEST_POSTGRES_URL: postgres://postgres:test@localhost:5432/aurora_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: npm run install:all
+      - run: npm run setup:runtime
+      # Grafo do worker (LangGraph) com checkpoint em memória: com e sem etapas.
+      - run: .venv/bin/python -m unittest test_open_worker
+        working-directory: apps/runtime
+      # Tipos da API e da interface, testes da API nos dois bancos e build da interface.
+      - run: npm run verify
+      # Testes de interface: a API real servindo a interface, num navegador de verdade.
+      - run: npx playwright install --with-deps chromium
+        working-directory: apps/web
+      - run: npm run test:ui
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report/
+          retention-days: 7

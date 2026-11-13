@@ -1,8 +1,0 @@
-.venv/
-.embedding-venv/
-.security-venv/
-.models/
-model-io/
-.state/
-__pycache__/
-.pytest_cache/

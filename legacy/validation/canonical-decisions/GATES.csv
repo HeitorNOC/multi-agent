@@ -1,0 +1,11 @@
+gate,status,evidence,remaining
+Canonical_asof_to_native_LightRAG,PASS_SMALL_E2E,evidence/acceptance.json,multiple sources complex intervals exclusions parsers and representative corpus
+Main_value_and_reference_version,PASS_5_CASES,evidence/acceptance.json,independent repetitions complete claim support and citation precision recall
+Original_advice_record,PASS_EXACT_READ,evidence/decisions.json,disaster recovery retention privileged operator tampering and full agent decision linkage
+Runtime_append_only_permissions,PASS_ROLE_BOUNDARY,evidence/ledger-permissions.json,RLS deployment secrets separation and DBA/WORM requirements
+Current_permissions_for_history,PASS_SMALL_E2E,evidence/integration.json,enterprise SSO lifecycle multiple installations and concurrent revocation
+Restart_persistence,PASS_SMALL_E2E,evidence/integration.json,joint SQLite PostgreSQL graph backup PITR failover and migration
+Model_choice,NOT_GENERALIZED,evidence/model-calls.jsonl,controlled provider model prompt and retrieval comparisons
+Architecture_choice,CONTINUE_QUALIFICATION,RESEARCH.md,alternative baselines scale cost and product operation gates
+Graphiti_prior_knowledge_history,NOT_REQUALIFIED,../temporal-editorial/RESULTS.md,no claim this source-selection test repairs native fact-history limitation
+Production_release,NO_GO_THIS_BUILD,RESULTS.md,full product organization security costs corpus and operations

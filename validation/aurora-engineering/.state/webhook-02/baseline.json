@@ -1,5 +1,0 @@
-{
-  "exit_code": 1,
-  "passed": false,
-  "log": "TAP version 13\n# Subtest: webhook deduplicates repeated deliveries and preserves tenant scope\nnot ok 1 - webhook deduplicates repeated deliveries and preserves tenant scope\n  ---\n  duration_ms: 45.324326\n  type: 'test'\n  location: '/input/acceptance.cjs:9:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    Expected values to be strictly deep-equal:\n    + actual - expected\n    \n      [\n    -   200,\n        202,\n    +   202\n      ]\n    \n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected:\n    0: 200\n    1: 202\n  actual:\n    0: 202\n    1: 202\n  operator: 'deepStrictEqual'\n  stack: |-\n    TestContext.<anonymous> (/input/acceptance.cjs:37:12)\n    process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    async Test.run (node:internal/test_runner/test:1404:7)\n    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)\n  ...\n1..1\n# tests 1\n# suites 0\n# pass 0\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 122.691899\n"
-}

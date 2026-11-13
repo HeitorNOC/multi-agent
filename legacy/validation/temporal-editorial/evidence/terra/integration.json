@@ -1,0 +1,47 @@
+{
+  "installation": "0238a6a5ad",
+  "images": {
+    "postgres": "pgvector/pgvector@sha256:c0cd736fe8b8b5d408db56b780570bac404fe518e66e39de624aa46f9aabc60a",
+    "neo4j": "neo4j@sha256:fe8607113c4177fbd2466bf2c30f1ebab5b9530594e86487c58c98e113145192",
+    "keycloak": "quay.io/keycloak/keycloak@sha256:de6ed510b59cfcd25f129ba4118696fa10d4165eee921a8d846178b6d35d30f7"
+  },
+  "scenarios": [
+    {
+      "name": "real_graphiti_neo4j_oidc_and_pretrained_embeddings_ready"
+    },
+    {
+      "name": "obsidian_compatible_note_requires_review_and_publication_is_replayed_without_reingestion"
+    },
+    {
+      "name": "native_policy_update_valid_time_observed"
+    },
+    {
+      "name": "retroactive_and_knowledge_time_results_recorded_without_manual_edge_repair"
+    },
+    {
+      "name": "native_temporal_partition_authorization_and_source_revocation"
+    },
+    {
+      "name": "restart_preserves_editorial_canonical_state_and_revocation"
+    }
+  ],
+  "worker_calls": [],
+  "versions": {
+    "postgres": "PostgreSQL 16.15 (Debian 16.15-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+    "pgvector": "0.8.7",
+    "neo4j": "versions\n[\"5.26.32\"]",
+    "keycloak": "26.8.1"
+  },
+  "result": "FAIL_ACCEPTANCE",
+  "execution_completed": true,
+  "temporal_passed": 3,
+  "temporal_total": 7,
+  "elapsed_seconds": 215.53158060001442,
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

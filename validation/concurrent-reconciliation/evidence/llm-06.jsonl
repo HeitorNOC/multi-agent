@@ -1,4 +1,0 @@
-{"type":"thread.started","thread_id":"01a1a7c5-ba77-7081-ba9f-6ba5ee19cffa"}
-{"type":"turn.started"}
-{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"high_level_keywords\\\":[\\\"horário limite para envio de comprovantes\\\"],\\\"low_level_keywords\\\":[\\\"comprovantes\\\",\\\"data de vigência\\\",\\\"2026-02-01T00:00:00+00:00\\\",\\\"corte de conhecimento\\\",\\\"2026-11-04T18:14:35.707115+00:00\\\",\\\"politica-remoto@v1\\\"]}\"}"}}
-{"type":"turn.completed","usage":{"input_tokens":11899,"cached_input_tokens":0,"cache_write_input_tokens":0,"output_tokens":98,"reasoning_output_tokens":0}}

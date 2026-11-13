@@ -1,0 +1,654 @@
+{
+  "input": "aurora-omnichannel-api-rotulos-curtos-reteste.json",
+  "manifest_sha256": "4c90c9063e472dce7ee6e74961f438a2e9f7ee46edbbbdce5bc3578398915715",
+  "embedding_revision": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+  "first_agent_matches_recorded_locations": true,
+  "per_question": [
+    {
+      "question": "Quais responsabilidades e fluxos o documento de mensageria descreve?",
+      "candidates": [
+        {
+          "id": "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243",
+          "source": "contact",
+          "page": 17,
+          "line": 74,
+          "quote": "Observações do atendimento Notas internas (sticky notes) do atendimento."
+        },
+        {
+          "id": "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00",
+          "source": "fluxo",
+          "page": 12,
+          "line": 28,
+          "quote": "Sessão e mensagem: quem é dono de quê Duas entidades acompanham toda conversa, e cada uma tem seu serviço."
+        },
+        {
+          "id": "40a937e79355e765a689df8ff99d95228ef821b1c06c610f1881a2d2569c265a",
+          "source": "contact",
+          "page": 16,
+          "line": 60,
+          "quote": "A configuração do próprio atendimento (o retrato gravado na criação) tem prioridade sobre a da conta."
+        },
+        {
+          "id": "a3889dd0b43b34c8a000c481f24268e47d9278d21ad101512290c35431944972",
+          "source": "contact",
+          "page": 9,
+          "line": 1,
+          "quote": "O ciclo de vida de um atendimento"
+        },
+        {
+          "id": "693fdc785b2cc40911c195e11bed5aa7b6679047c4deea65a099c216d6673fb0",
+          "source": "fluxo",
+          "page": 10,
+          "line": 19,
+          "quote": "É um registro de auditoria."
+        },
+        {
+          "id": "f9a69924830c92a6820ddaecd74ef073f514aa73d9c3beeed929c4fcba7a397f",
+          "source": "contact",
+          "page": 15,
+          "line": 40,
+          "quote": "As ações do atendente, uma a uma Para cada ação: o que o front faz, a operação GraphQL e o que o backend executa."
+        }
+      ]
+    },
+    {
+      "question": "Quais são os contratos documentados dos eventos Kafka?",
+      "candidates": [
+        {
+          "id": "693fdc785b2cc40911c195e11bed5aa7b6679047c4deea65a099c216d6673fb0",
+          "source": "fluxo",
+          "page": 10,
+          "line": 19,
+          "quote": "É um registro de auditoria."
+        }
+      ]
+    },
+    {
+      "question": "Quais estados e transições de sessão estão documentados?",
+      "candidates": [
+        {
+          "id": "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d",
+          "source": "contact",
+          "page": 9,
+          "line": 14,
+          "quote": "4.2 Transições Principais transições de status WAITING (2) ACTIVE (3) DONE (5) CANCELLED TRANSFERED (6) PAUSED (11) (4, 7, 8, 9)"
+        },
+        {
+          "id": "05fd5c2041582a42d71aeca3267130bb97d298d00740244eafed5b445c812e85",
+          "source": "fluxo",
+          "page": 9,
+          "line": 10,
+          "quote": "Qualquer outro tipo de sessão Devolve PreconditionError (\"Tipo da sessão inválido.\")."
+        },
+        {
+          "id": "74c9cfb49fe3e5ec3c86b4cfddbe86e4d7495d1e4950d3b7ffaf7e4593bd570a",
+          "source": "contact",
+          "page": 15,
+          "line": 53,
+          "quote": "Devolve a sessão com lastInteraction."
+        },
+        {
+          "id": "8d2e6f1590d3cef0862e02d5372292cfb1cb37d28b865a24bfa18e40ae4fb7f2",
+          "source": "fluxo",
+          "page": 12,
+          "line": 28,
+          "quote": "g-consumer sessão [confirmado]"
+        },
+        {
+          "id": "e04453cca023bc44bbba8746ef0830fbcdbe199a31991ce19c11f6fb03dc849d",
+          "source": "contact",
+          "page": 15,
+          "line": 53,
+          "quote": "O backend soma o tempo ativo, muda para PAUSED, atualiza cache, grava status e tempo de trabalho e remove a expiração da sessão de mensagens (a sessão não expira enquanto o atendimento está pausado)."
+        },
+        {
+          "id": "6b8995b460783d413781e940eadc1466a1e72e2990342b26f26275b58deeaa19",
+          "source": "fluxo",
+          "page": 12,
+          "line": 28,
+          "quote": "A sessão nasce com tipo ML_MODEL e status \"em execução\"."
+        }
+      ]
+    },
+    {
+      "question": "Quais mecanismos oficiais do MBA confirmam a transferência de controle?",
+      "candidates": [
+        {
+          "id": "f72df4c1a993fd4c645a90c48c91636992d8171f1bb07c0fd3484e3eb07716ca",
+          "source": "mba",
+          "page": 4,
+          "line": 6,
+          "quote": "1 Verificar elegibilidade Confirmar se o número pode usar o MBA."
+        },
+        {
+          "id": "ad32ec16b497276fb9242eed8118177e14c775dc031bc084ab97b3c95168dcce",
+          "source": "mba",
+          "page": 8,
+          "line": 14,
+          "quote": "Cobrança, transferência e arquivos: ainda são áreas incompletas, com soluções alternativas descritas na página de limitações conhecidas."
+        },
+        {
+          "id": "e38a8f176674605298e153d36ff03e1680a237bdead2dcbe7e39319595fa3595",
+          "source": "contact",
+          "page": 17,
+          "line": 74,
+          "quote": "Solicitações de disponibilidade Integração com workforce-ui."
+        },
+        {
+          "id": "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243",
+          "source": "contact",
+          "page": 17,
+          "line": 74,
+          "quote": "Observações do atendimento Notas internas (sticky notes) do atendimento."
+        },
+        {
+          "id": "9dbacf1ff29d33149296e6b0936982f7d6d396f4cb954ff411842c71e93b41ba",
+          "source": "contact",
+          "page": 17,
+          "line": 74,
+          "quote": "Criar e pesquisar ticket Integração com ticket-ui."
+        }
+      ]
+    },
+    {
+      "question": "Quais dados pessoais são previstos no histórico de conversas?",
+      "candidates": [
+        {
+          "id": "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454",
+          "source": "fluxo",
+          "page": 12,
+          "line": 28,
+          "quote": "[mapeamento anterior] messaging-session-processin Processamento de Consome o tópico mp-session-processing."
+        },
+        {
+          "id": "b2fb02861785daff51579fb6075522a990e220588f739628894404947f4a3b31",
+          "source": "contact",
+          "page": 11,
+          "line": 22,
+          "quote": "Grava grupo, especialização, subespecialização, área e subárea; metadados do cliente; e dados adicionais."
+        },
+        {
+          "id": "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e",
+          "source": "fluxo",
+          "page": 12,
+          "line": 30,
+          "quote": "O handoff entre bot e humano muda o tipo da sessão no messaging-session (tipos ML_MODEL e HUMAN)."
+        },
+        {
+          "id": "3e4ede6f9402a7c45c4cfaaec0edc6e9a60e39dc4f631086b793394edb633ecf",
+          "source": "contact",
+          "page": 17,
+          "line": 74,
+          "quote": "8.9 Outras ações do menu Ação Observação Mensagens automáticas Lista de mensagens de texto e de arquivos oficiais cadastrados, enviados pelo mesmo caminho do chat."
+        },
+        {
+          "id": "288bc8f3f68f964d6c56cf1bf661c2f9eb85a696eae87a41a881cf915e98b7b1",
+          "source": "mba",
+          "page": 3,
+          "line": 4,
+          "quote": "Transfere a conversa para o aplicativo da empresa ou para um atendente humano quando necessário."
+        },
+        {
+          "id": "9eb9f283aca7b3dd055ab6d42b07dd9f02b6a417343653c6c046b642b80abb94",
+          "source": "contact",
+          "page": 17,
+          "line": 73,
+          "quote": "A mensagem aparece no chat de imediato (otimista) e o contador \"última mensagem vista\" é atualizado."
+        }
+      ]
+    },
+    {
+      "question": "Quais regras documentadas definem a retenção dos eventos?",
+      "candidates": [
+        {
+          "id": "767dd0f836dd4efac3cfe5c56f2f8ee5f165af43f57d28e9c2305f22ca90ac19",
+          "source": "mba",
+          "page": 8,
+          "line": 12,
+          "quote": "Limitações e avisos"
+        },
+        {
+          "id": "74c9cfb49fe3e5ec3c86b4cfddbe86e4d7495d1e4950d3b7ffaf7e4593bd570a",
+          "source": "contact",
+          "page": 15,
+          "line": 53,
+          "quote": "Devolve a sessão com lastInteraction."
+        },
+        {
+          "id": "f9a69924830c92a6820ddaecd74ef073f514aa73d9c3beeed929c4fcba7a397f",
+          "source": "contact",
+          "page": 15,
+          "line": 40,
+          "quote": "As ações do atendente, uma a uma Para cada ação: o que o front faz, a operação GraphQL e o que o backend executa."
+        },
+        {
+          "id": "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d",
+          "source": "contact",
+          "page": 9,
+          "line": 14,
+          "quote": "4.2 Transições Principais transições de status WAITING (2) ACTIVE (3) DONE (5) CANCELLED TRANSFERED (6) PAUSED (11) (4, 7, 8, 9)"
+        },
+        {
+          "id": "ce5ffdbc04454c2713c5a7ff65bbe1945bbfbd458bea55f7017c067b2e626757",
+          "source": "fluxo",
+          "page": 10,
+          "line": 20,
+          "quote": "Storage: recebe a mensagem já normalizada e faz um INSERT na tabela de histórico (StorageWhatsappMessageModel)."
+        },
+        {
+          "id": "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243",
+          "source": "contact",
+          "page": 17,
+          "line": 74,
+          "quote": "Observações do atendimento Notas internas (sticky notes) do atendimento."
+        }
+      ]
+    },
+    {
+      "question": "Quais controles documentados restringem o acesso aos dados entre empresas?",
+      "candidates": [
+        {
+          "id": "b2fb02861785daff51579fb6075522a990e220588f739628894404947f4a3b31",
+          "source": "contact",
+          "page": 11,
+          "line": 22,
+          "quote": "Grava grupo, especialização, subespecialização, área e subárea; metadados do cliente; e dados adicionais."
+        },
+        {
+          "id": "832d018e1240c77f822086020c524c9543b076cb9dcef0f6cc02a8cdc8e3baf0",
+          "source": "contact",
+          "page": 15,
+          "line": 56,
+          "quote": "A tela relê o atendimento, confere permissões (ver, interferir, finalizar de outro usuário) e o status (precisa estar ACTIVE)."
+        },
+        {
+          "id": "f08c3d3c78ba5b04182f4c8f6e54811901b7dd1d3c3e275fcb31956a3c2dcaba",
+          "source": "contact",
+          "page": 16,
+          "line": 62,
+          "quote": "O modal \"Cancelar atendimento\" aceita uma observação privada, uma observação pública e um motivo de cancelamento (obrigatório se a configuração contactCenterAllowReasonCancellationObrigatory exigir)."
+        },
+        {
+          "id": "963d5be9b87e9191c7ccad5ca66dbb7ef6341caafbda520c43f527cbde7ce2fd",
+          "source": "contact",
+          "page": 17,
+          "line": 74,
+          "quote": "Informação adicional e etiquetas Dados chave e valor, e etiquetas (reutiliza modais do ticket-ui)."
+        },
+        {
+          "id": "a21995a388c341231c2fe1fba9fc627fd9357b2981e2daa754556490fda9b407",
+          "source": "mba",
+          "page": 4,
+          "line": 8,
+          "quote": "3 Configurar o agente Definir o conhecimento (informações do negócio, FAQs, arquivos, sites), o comportamento (skills), as políticas de transferência e de acompanhamento, e os conectores para ações."
+        },
+        {
+          "id": "d26a56ff3f94288b9770bc8160903a86f5e87f15259a053f3ef6cfbb256e5cc1",
+          "source": "mba",
+          "page": 3,
+          "line": 2,
+          "quote": "Responde com base no conhecimento que a empresa fornece."
+        }
+      ]
+    },
+    {
+      "question": "Quais evidências de auditoria são exigidas para o handoff?",
+      "candidates": [
+        {
+          "id": "693fdc785b2cc40911c195e11bed5aa7b6679047c4deea65a099c216d6673fb0",
+          "source": "fluxo",
+          "page": 10,
+          "line": 19,
+          "quote": "É um registro de auditoria."
+        },
+        {
+          "id": "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243",
+          "source": "contact",
+          "page": 17,
+          "line": 74,
+          "quote": "Observações do atendimento Notas internas (sticky notes) do atendimento."
+        },
+        {
+          "id": "f08c3d3c78ba5b04182f4c8f6e54811901b7dd1d3c3e275fcb31956a3c2dcaba",
+          "source": "contact",
+          "page": 16,
+          "line": 62,
+          "quote": "O modal \"Cancelar atendimento\" aceita uma observação privada, uma observação pública e um motivo de cancelamento (obrigatório se a configuração contactCenterAllowReasonCancellationObrigatory exigir)."
+        },
+        {
+          "id": "bf437c6b354aa8865e2fbb75fd863be66ee089fbf9e10a77605377a14e248db3",
+          "source": "contact",
+          "page": 15,
+          "line": 57,
+          "quote": "Se o departamento tem uma tabulação ativa, a tela valida os campos obrigatórios e opções permitidas; se falhar, avisa \"A tabulação precisa ser preenchida.\" e abre o modal de tabulação."
+        },
+        {
+          "id": "767dd0f836dd4efac3cfe5c56f2f8ee5f165af43f57d28e9c2305f22ca90ac19",
+          "source": "mba",
+          "page": 8,
+          "line": 12,
+          "quote": "Limitações e avisos"
+        },
+        {
+          "id": "c21aff7bd73e32bb301d54d917853581c4a8cd1304313710d2a05ba450c871bf",
+          "source": "contact",
+          "page": 16,
+          "line": 60,
+          "quote": "Senão, pedir avaliação ligado Texto \"Deixe sua avaliação\" e cinco botões de nota, de \"muito ruim\" a \"excelente\"."
+        }
+      ]
+    },
+    {
+      "question": "Quais etapas compõem o primeiro fluxo vertical obrigatório?",
+      "candidates": [
+        {
+          "id": "b60b7a02053f7f5e4f28b15e2432501b8e8153e10b1394e29eb39d4c55abfa32",
+          "source": "fluxo",
+          "page": 9,
+          "line": 2,
+          "quote": "5.1 Passo a passo"
+        },
+        {
+          "id": "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+          "source": "contact",
+          "page": 9,
+          "line": 7,
+          "quote": "5 DONE Finalizado pelo atendente."
+        }
+      ]
+    },
+    {
+      "question": "Qual sequência de fases a diretiva estabelece para as integrações?",
+      "candidates": [
+        {
+          "id": "bb54ae7dee5f58a5e2a920888cf347ee940794d9807084d3a23439af821a08b8",
+          "source": "mba",
+          "page": 4,
+          "line": 5,
+          "quote": "A jornada de configuração A configuração tem seis etapas, cada uma com sua própria página na documentação: # Etapa O que acontece"
+        },
+        {
+          "id": "f9a69924830c92a6820ddaecd74ef073f514aa73d9c3beeed929c4fcba7a397f",
+          "source": "contact",
+          "page": 15,
+          "line": 40,
+          "quote": "As ações do atendente, uma a uma Para cada ação: o que o front faz, a operação GraphQL e o que o backend executa."
+        },
+        {
+          "id": "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d",
+          "source": "contact",
+          "page": 9,
+          "line": 14,
+          "quote": "4.2 Transições Principais transições de status WAITING (2) ACTIVE (3) DONE (5) CANCELLED TRANSFERED (6) PAUSED (11) (4, 7, 8, 9)"
+        },
+        {
+          "id": "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+          "source": "contact",
+          "page": 9,
+          "line": 7,
+          "quote": "5 DONE Finalizado pelo atendente."
+        },
+        {
+          "id": "3ef14f78f676ca372af454fa8d4bf61f4df7e55bf312a051b48582ba4de798ca",
+          "source": "contact",
+          "page": 16,
+          "line": 60,
+          "quote": "personalizadas de conclusão ligadas Os três primeiros são excludentes (um else if): vale o primeiro que estiver ligado, nesta ordem."
+        },
+        {
+          "id": "ad32ec16b497276fb9242eed8118177e14c775dc031bc084ab97b3c95168dcce",
+          "source": "mba",
+          "page": 8,
+          "line": 14,
+          "quote": "Cobrança, transferência e arquivos: ainda são áreas incompletas, com soluções alternativas descritas na página de limitações conhecidas."
+        }
+      ]
+    },
+    {
+      "question": "Qual comportamento demonstra a continuidade do histórico no handoff?",
+      "candidates": [
+        {
+          "id": "74c9cfb49fe3e5ec3c86b4cfddbe86e4d7495d1e4950d3b7ffaf7e4593bd570a",
+          "source": "contact",
+          "page": 15,
+          "line": 53,
+          "quote": "Devolve a sessão com lastInteraction."
+        },
+        {
+          "id": "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+          "source": "contact",
+          "page": 9,
+          "line": 7,
+          "quote": "5 DONE Finalizado pelo atendente."
+        },
+        {
+          "id": "5099511b21e6ba516ca1182cd31a3db64645505262f02e3cb1493466373eb60e",
+          "source": "fluxo",
+          "page": 9,
+          "line": 3,
+          "quote": "Valida o evento."
+        },
+        {
+          "id": "ed63a78f1d25220c84ff629fc4eb02fcfd0e11b9a6f19fe0bf7df8f78114aacb",
+          "source": "contact",
+          "page": 15,
+          "line": 41,
+          "quote": "8.1 Iniciar o atendimento"
+        },
+        {
+          "id": "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d",
+          "source": "contact",
+          "page": 9,
+          "line": 14,
+          "quote": "4.2 Transições Principais transições de status WAITING (2) ACTIVE (3) DONE (5) CANCELLED TRANSFERED (6) PAUSED (11) (4, 7, 8, 9)"
+        },
+        {
+          "id": "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243",
+          "source": "contact",
+          "page": 17,
+          "line": 74,
+          "quote": "Observações do atendimento Notas internas (sticky notes) do atendimento."
+        }
+      ]
+    }
+  ],
+  "synthesis_reconstructed": [
+    {
+      "id": "bf68b3a78d9d0e6b14acf4d6ed46b091e650d0e666176871bc7b3de39394b243",
+      "source": "contact",
+      "page": 17,
+      "line": 74,
+      "quote": "Observações do atendimento Notas internas (sticky notes) do atendimento."
+    },
+    {
+      "id": "693fdc785b2cc40911c195e11bed5aa7b6679047c4deea65a099c216d6673fb0",
+      "source": "fluxo",
+      "page": 10,
+      "line": 19,
+      "quote": "É um registro de auditoria."
+    },
+    {
+      "id": "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d",
+      "source": "contact",
+      "page": 9,
+      "line": 14,
+      "quote": "4.2 Transições Principais transições de status WAITING (2) ACTIVE (3) DONE (5) CANCELLED TRANSFERED (6) PAUSED (11) (4, 7, 8, 9)"
+    },
+    {
+      "id": "f72df4c1a993fd4c645a90c48c91636992d8171f1bb07c0fd3484e3eb07716ca",
+      "source": "mba",
+      "page": 4,
+      "line": 6,
+      "quote": "1 Verificar elegibilidade Confirmar se o número pode usar o MBA."
+    },
+    {
+      "id": "29a519c98635abd8a14f51c4cd951608a0287651a7dc9991db16dfb4a11de454",
+      "source": "fluxo",
+      "page": 12,
+      "line": 28,
+      "quote": "[mapeamento anterior] messaging-session-processin Processamento de Consome o tópico mp-session-processing."
+    },
+    {
+      "id": "767dd0f836dd4efac3cfe5c56f2f8ee5f165af43f57d28e9c2305f22ca90ac19",
+      "source": "mba",
+      "page": 8,
+      "line": 12,
+      "quote": "Limitações e avisos"
+    },
+    {
+      "id": "b2fb02861785daff51579fb6075522a990e220588f739628894404947f4a3b31",
+      "source": "contact",
+      "page": 11,
+      "line": 22,
+      "quote": "Grava grupo, especialização, subespecialização, área e subárea; metadados do cliente; e dados adicionais."
+    },
+    {
+      "id": "b60b7a02053f7f5e4f28b15e2432501b8e8153e10b1394e29eb39d4c55abfa32",
+      "source": "fluxo",
+      "page": 9,
+      "line": 2,
+      "quote": "5.1 Passo a passo"
+    },
+    {
+      "id": "bb54ae7dee5f58a5e2a920888cf347ee940794d9807084d3a23439af821a08b8",
+      "source": "mba",
+      "page": 4,
+      "line": 5,
+      "quote": "A jornada de configuração A configuração tem seis etapas, cada uma com sua própria página na documentação: # Etapa O que acontece"
+    },
+    {
+      "id": "74c9cfb49fe3e5ec3c86b4cfddbe86e4d7495d1e4950d3b7ffaf7e4593bd570a",
+      "source": "contact",
+      "page": 15,
+      "line": 53,
+      "quote": "Devolve a sessão com lastInteraction."
+    },
+    {
+      "id": "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00",
+      "source": "fluxo",
+      "page": 12,
+      "line": 28,
+      "quote": "Sessão e mensagem: quem é dono de quê Duas entidades acompanham toda conversa, e cada uma tem seu serviço."
+    },
+    {
+      "id": "05fd5c2041582a42d71aeca3267130bb97d298d00740244eafed5b445c812e85",
+      "source": "fluxo",
+      "page": 9,
+      "line": 10,
+      "quote": "Qualquer outro tipo de sessão Devolve PreconditionError (\"Tipo da sessão inválido.\")."
+    },
+    {
+      "id": "ad32ec16b497276fb9242eed8118177e14c775dc031bc084ab97b3c95168dcce",
+      "source": "mba",
+      "page": 8,
+      "line": 14,
+      "quote": "Cobrança, transferência e arquivos: ainda são áreas incompletas, com soluções alternativas descritas na página de limitações conhecidas."
+    },
+    {
+      "id": "832d018e1240c77f822086020c524c9543b076cb9dcef0f6cc02a8cdc8e3baf0",
+      "source": "contact",
+      "page": 15,
+      "line": 56,
+      "quote": "A tela relê o atendimento, confere permissões (ver, interferir, finalizar de outro usuário) e o status (precisa estar ACTIVE)."
+    },
+    {
+      "id": "b74acb7daf644b68887f8c380fd480bf852fe4122c9e7af9ebb04c13695fb40b",
+      "source": "contact",
+      "page": 9,
+      "line": 7,
+      "quote": "5 DONE Finalizado pelo atendente."
+    },
+    {
+      "id": "f9a69924830c92a6820ddaecd74ef073f514aa73d9c3beeed929c4fcba7a397f",
+      "source": "contact",
+      "page": 15,
+      "line": 40,
+      "quote": "As ações do atendente, uma a uma Para cada ação: o que o front faz, a operação GraphQL e o que o backend executa."
+    },
+    {
+      "id": "40a937e79355e765a689df8ff99d95228ef821b1c06c610f1881a2d2569c265a",
+      "source": "contact",
+      "page": 16,
+      "line": 60,
+      "quote": "A configuração do próprio atendimento (o retrato gravado na criação) tem prioridade sobre a da conta."
+    },
+    {
+      "id": "e38a8f176674605298e153d36ff03e1680a237bdead2dcbe7e39319595fa3595",
+      "source": "contact",
+      "page": 17,
+      "line": 74,
+      "quote": "Solicitações de disponibilidade Integração com workforce-ui."
+    },
+    {
+      "id": "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e",
+      "source": "fluxo",
+      "page": 12,
+      "line": 30,
+      "quote": "O handoff entre bot e humano muda o tipo da sessão no messaging-session (tipos ML_MODEL e HUMAN)."
+    },
+    {
+      "id": "f08c3d3c78ba5b04182f4c8f6e54811901b7dd1d3c3e275fcb31956a3c2dcaba",
+      "source": "contact",
+      "page": 16,
+      "line": 62,
+      "quote": "O modal \"Cancelar atendimento\" aceita uma observação privada, uma observação pública e um motivo de cancelamento (obrigatório se a configuração contactCenterAllowReasonCancellationObrigatory exigir)."
+    },
+    {
+      "id": "5099511b21e6ba516ca1182cd31a3db64645505262f02e3cb1493466373eb60e",
+      "source": "fluxo",
+      "page": 9,
+      "line": 3,
+      "quote": "Valida o evento."
+    },
+    {
+      "id": "a3889dd0b43b34c8a000c481f24268e47d9278d21ad101512290c35431944972",
+      "source": "contact",
+      "page": 9,
+      "line": 1,
+      "quote": "O ciclo de vida de um atendimento"
+    },
+    {
+      "id": "8d2e6f1590d3cef0862e02d5372292cfb1cb37d28b865a24bfa18e40ae4fb7f2",
+      "source": "fluxo",
+      "page": 12,
+      "line": 28,
+      "quote": "g-consumer sessão [confirmado]"
+    },
+    {
+      "id": "3e4ede6f9402a7c45c4cfaaec0edc6e9a60e39dc4f631086b793394edb633ecf",
+      "source": "contact",
+      "page": 17,
+      "line": 74,
+      "quote": "8.9 Outras ações do menu Ação Observação Mensagens automáticas Lista de mensagens de texto e de arquivos oficiais cadastrados, enviados pelo mesmo caminho do chat."
+    }
+  ],
+  "final_citations": [
+    {
+      "id": "e8a4c41e5a9942a833a2abc7351a24512da3e02dbea9b72c323c9ffc4841cf00",
+      "source": "fluxo",
+      "version": 1,
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1",
+      "line": 28,
+      "quote": "Sessão e mensagem: quem é dono de quê Duas entidades acompanham toda conversa, e cada uma tem seu serviço.",
+      "pdf_page": 12
+    },
+    {
+      "id": "74bc06c2c217400496c24716a5274c82b7fed5caa1df127c49d594fcf37d1d3e",
+      "source": "fluxo",
+      "version": 1,
+      "sha256": "879c772d47a9ef0c1eeb45e8c3b757d54bfd137366722a9c9f6dfe7c3bb135e1",
+      "line": 30,
+      "quote": "O handoff entre bot e humano muda o tipo da sessão no messaging-session (tipos ML_MODEL e HUMAN).",
+      "pdf_page": 12
+    },
+    {
+      "id": "31a0ef38025c41b634bc9ae32a76c8a44cf1eddb940a928988ddd595e902885d",
+      "source": "contact",
+      "version": 1,
+      "sha256": "e73eb198a867ca2fd70fc74d94c87bce63a4a4979b9f4fa60b69bd013b6d4510",
+      "line": 14,
+      "quote": "4.2 Transições Principais transições de status WAITING (2) ACTIVE (3) DONE (5) CANCELLED TRANSFERED (6) PAUSED (11) (4, 7, 8, 9)",
+      "pdf_page": 9
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+# Ambientes e dependências
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.pyc
+.tools/
+
+# Estado de execução local
+.state/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.db
+
+# Build
+apps/*/dist/
+
+# Testes de interface (Playwright)
+apps/web/test-results/
+apps/web/playwright-report/
+legacy/apps/*/dist/
+
+# Segredos
+.env
+.env.*
+*.pem
+*.key
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Saída de testes
+legacy/packages/aurora-api/test/.fake-cli-report.json
+legacy/packages/aurora-api/test/.open-calls-*.log
+
+# Configuração local do Claude Code
+.claude/launch.json
+
+# Modelos baixados (busca por significado)
+apps/api/data/models/

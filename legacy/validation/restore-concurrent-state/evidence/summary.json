@@ -1,0 +1,34 @@
+{
+  "integrated_result": "PASS",
+  "elapsed_seconds": 478.98191080000834,
+  "checkpoints": 7,
+  "actual_cli_calls": 9,
+  "retained_model_reservations": 10,
+  "deliberate_unstarted_reservations": 1,
+  "unused_call_numbers": [
+    8
+  ],
+  "stress_reserved": 7,
+  "unit_budget_floor_cases": 4,
+  "proofs_verified": 136,
+  "counter_rollback_proofs": 8,
+  "usage": {
+    "input_tokens": 115841,
+    "cached_input_tokens": 70528,
+    "output_tokens": 959,
+    "reasoning_output_tokens": 0
+  },
+  "model_tool_events": 0,
+  "production": "NO_GO",
+  "cleanup": {
+    "volumes_removed": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "network_removed": true
+  }
+}

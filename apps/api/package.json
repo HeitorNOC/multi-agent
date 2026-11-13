@@ -1,0 +1,27 @@
+{
+  "name": "@aurora/api",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node src/main.ts",
+    "migrate:v1": "node src/tools/migrate-from-v1.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --test --test-concurrency=1 \"src/**/*.test.ts\" \"test/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@huggingface/transformers": "4.3.1",
+    "fastify": "5.12.8",
+    "mammoth": "1.13.0",
+    "pdfjs-dist": "4.10.38",
+    "pg": "8.16.3",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/pg": "8.23.1",
+    "typescript": "7.0.2"
+  }
+}

@@ -1,4 +1,0 @@
-{"type":"thread.started","thread_id":"01a1a5cf-8e20-7033-b0f6-e1a1125bdcb6"}
-{"type":"turn.started"}
-{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"text\":\"{\\\"dias_remotos\\\":1}\"}"}}
-{"type":"turn.completed","usage":{"input_tokens":12232,"cached_input_tokens":9088,"cache_write_input_tokens":0,"output_tokens":21,"reasoning_output_tokens":0}}
