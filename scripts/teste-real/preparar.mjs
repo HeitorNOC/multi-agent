@@ -1,6 +1,9 @@
 // Prepara a empresa do teste real pela API (Aurora já rodando): alçadas, fatos e recursos.
 // Só descrições: nenhuma senha ou token vai para o Aurora por aqui.
 // Uso: node scripts/teste-real/preparar.mjs [http://localhost:4300]
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+
 const base = process.argv[2] ?? "http://localhost:4300";
 
 async function call(method, path, body) {
@@ -24,6 +27,31 @@ const resources = [
   ["repository", "GitHub da empresa", "Organização no GitHub; cada serviço em um repositório; CI com GitHub Actions."],
 ];
 
+// Primeiro acesso: empresa, um diretor de tecnologia no time (o resto o Chief propõe) e o padrão
+// de microserviços no Cérebro.
+const org = await call("GET", "/api/organization");
+if (!org.name) {
+  await call("POST", "/api/organization", {
+    name: "Empresa Teste",
+    sector: "Software B2B de atendimento ao cliente",
+    objectives: "Lançar o atendimento por WebChat como microserviço neste trimestre.",
+  });
+  console.log("empresa: Empresa Teste");
+}
+const team = await call("GET", "/api/agents");
+if (!team.agents.some((a) => a.template_id === "director_technology")) {
+  await call("POST", "/api/agents/hire", { template_id: "director_technology" });
+  console.log("time: diretor de tecnologia");
+}
+const TITLE = "Padrão de microserviços";
+const sources = await call("GET", "/api/knowledge/sources");
+if (!sources.sources.some((s) => s.title === TITLE && !s.revoked_at)) {
+  const text = readFileSync(fileURLToPath(new URL("padrao-microservicos.md", import.meta.url)), "utf8");
+  await call("POST", "/api/knowledge/sources", { title: TITLE, text });
+  console.log(`Cérebro: ${TITLE}`);
+}
+await call("POST", "/api/setup/complete");
+
 const existing = await call("GET", "/api/resources");
 const have = new Set(existing.resources.map((r) => r.name));
 for (const [kind, name, description] of resources) {
@@ -42,4 +70,4 @@ for (const [category, text] of facts) {
 
 await call("POST", "/api/autonomy", { hire: "propose", engagement: "job", max_agents: 8 });
 console.log("alçadas: contratar = propor, só neste trabalho, até 8 agentes");
-console.log("\nPronto. Siga a seção 4 do roteiro (GitHub e o padrão no Cérebro).");
+console.log("\nPronto. Falta só o GitHub em Integrações (seção 4 do roteiro).");

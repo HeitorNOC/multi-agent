@@ -9,63 +9,61 @@ O resultado esperado não é "passou": é uma **lista de ajustes** com evidênci
 
 ## 1. O que é preciso
 
-| Item | Para quê | Quem faz |
+| Item | Para quê | Situação |
 | --- | --- | --- |
-| CLI do Claude logada (`claude`) | o modelo. O Aurora usa a sessão da CLI, **não há chave de API** | instalada; se a checagem disser "OAuth session expired", rode `claude` num terminal e faça `/login` |
-| PostgreSQL local | checkpoints do worker (LangGraph). Sem ele o worker não sobe | você instala (seção 2) |
-| Ambiente Python do worker | `npm run setup:runtime` (já criado em `apps/runtime/.venv`) | pronto |
-| Interface construída | `npm run build` | pronto |
-| Repositório de teste no GitHub, vazio, privado (ex.: `aurora-teste-webchat`) | destino do pull request no fim | você cria |
-| Token *fine-grained* só desse repositório: Contents e Pull requests em leitura e escrita | o conector GitHub | você cria e cola no Aurora |
+| CLI do Claude logada (`claude`) | o modelo. O Aurora usa a sessão da CLI, **não há chave de API** | **você:** se a checagem disser "OAuth session expired", rode `claude` num terminal e faça `/login` |
+| PostgreSQL 17 portátil | checkpoints do worker (LangGraph) | pronto: `%LOCALAPPDATA%urora-pg`, só em `127.0.0.1:5433`, sem serviço nem senha |
+| Ambiente Python do worker | o worker (`apps/runtime/.venv`) | pronto |
+| Interface construída | `apps/web/dist` | pronto |
+| Repositório de teste no GitHub | destino do pull request no fim | pronto: `HeitorNOC/aurora-teste-webchat` (privado, branch `main`) |
+| Token *fine-grained* só desse repositório: Contents e Pull requests em leitura e escrita | o conector GitHub | **você:** cria em github.com → Settings → Developer settings e cola no Aurora (seção 4) |
 
 Os dados do teste ficam num banco separado (`apps/api/data/teste-real/`), sem misturar com o que você
-já tem. Para recomeçar do zero, apague essa pasta.
+já tem. Para recomeçar do zero, pare o Aurora e apague essa pasta.
 
 ## 2. PostgreSQL
 
-Instale o PostgreSQL 17 (o instalador pede a senha do usuário `postgres`; guarde-a com você):
+Já instalado. O `iniciar.ps1` sobe o banco sozinho; para mexer à mão:
 
-```bash
-winget install --id PostgreSQL.PostgreSQL.17 -e
+```powershell
+./scripts/teste-real/postgres.ps1 status
 ```
 
-Crie o banco dos checkpoints:
-
-```bash
-& "C:\Program Files\PostgreSQL\17\bin\createdb.exe" -U postgres aurora_checkpoints
+```powershell
+./scripts/teste-real/postgres.ps1 parar
 ```
+
+Para usar outro PostgreSQL, defina `AURORA_CHECKPOINT_DSN` antes de subir.
 
 ## 3. Subir
 
-No PowerShell, na raiz do projeto, defina a conexão (a senha fica só na sua sessão do terminal) e
-rode a checagem:
+Na raiz do projeto, confira o ambiente (`--probe` faz uma chamada mínima ao modelo):
 
 ```powershell
-$env:AURORA_CHECKPOINT_DSN = "postgresql://postgres:SUA_SENHA@localhost:5432/aurora_checkpoints"
 node scripts/teste-real/preflight.mjs --probe
 ```
 
-`--probe` faz uma chamada mínima ao modelo para confirmar que a CLI está logada. Tudo verde? Suba:
+Tudo verde? Suba (sobe o PostgreSQL e o Aurora em `http://localhost:4300`, com o modelo no Chief, no
+Cérebro e no worker):
 
 ```powershell
 ./scripts/teste-real/iniciar.ps1
 ```
 
-Ele sobe o Aurora em `http://localhost:4300`, com o modelo ligado no Chief, no Cérebro e no worker.
-Em outro terminal, prepare a empresa do teste (recursos, fatos e alçadas):
+Num banco novo, prepare a empresa do teste em outro terminal. O script é idempotente: empresa,
+diretor de tecnologia no time, padrão de microserviços no Cérebro, recursos, fatos e alçadas.
 
 ```bash
 node scripts/teste-real/preparar.mjs
 ```
 
-## 4. Configuração na tela (5 min)
+## 4. Configuração na tela (2 min)
 
-1. **Primeiro acesso:** nome da empresa e Chief of Staff (o assistente de início).
-2. **Configurações → Alçadas do Chief:** contratar = **propor** (você decide cada contratação), só
-   neste trabalho, até 8 agentes. O `preparar.mjs` já deixa assim; só confira.
-3. **Integrações → GitHub:** cole o token e o repositório de teste (`dono/aurora-teste-webchat`).
-4. **Integrações → Recursos da empresa:** confira os quatro recursos cadastrados pelo script.
-5. **Cérebro:** envie o padrão de arquitetura `scripts/teste-real/padrao-microservicos.md`.
+1. **Integrações → GitHub → Conectar GitHub:** cole o token e o repositório
+   `HeitorNOC/aurora-teste-webchat`.
+2. Confira, sem mudar: **Configurações → Alçadas do Chief** (contratar = propor, só neste trabalho,
+   até 8), **Integrações → Recursos da empresa** (quatro recursos) e **Cérebro** (Padrão de
+   microserviços).
 
 Anote a hora de início.
 

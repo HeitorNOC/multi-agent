@@ -1,10 +1,13 @@
 # Sobe o Aurora para o teste real (docs/TESTE_REAL_WEBCHAT.md): modelo ligado no Chief, no Cerebro
-# e no worker, dados separados em apps/api/data/teste-real. Defina antes, na sua sessao:
-#   $env:AURORA_CHECKPOINT_DSN = "postgresql://postgres:SUA_SENHA@localhost:5432/aurora_checkpoints"
+# e no worker, dados separados em apps/api/data/teste-real. Sobe antes o PostgreSQL portatil
+# (postgres.ps1). Para usar outro PostgreSQL, defina AURORA_CHECKPOINT_DSN antes.
 # (Arquivo so com ASCII: o PowerShell 5.1 le UTF-8 sem BOM como ANSI.)
 $ErrorActionPreference = "Stop"
 $root = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
-if (-not $env:AURORA_CHECKPOINT_DSN) { throw "Defina AURORA_CHECKPOINT_DSN antes (docs/TESTE_REAL_WEBCHAT.md, secao 3)." }
+if (-not $env:AURORA_CHECKPOINT_DSN) {
+  & (Join-Path $PSScriptRoot "postgres.ps1") iniciar
+  $env:AURORA_CHECKPOINT_DSN = "postgresql://postgres@127.0.0.1:5433/aurora_checkpoints"
+}
 
 $python = Join-Path $root "apps\runtime\.venv\Scripts\python.exe"
 $worker = Join-Path $root "apps\runtime\open_worker.py"

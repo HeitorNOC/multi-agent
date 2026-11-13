@@ -27,9 +27,9 @@ if (existsSync(python)) {
   check("Dependências do worker (LangGraph + psycopg)", imp.status === 0, imp.status === 0 ? "" : (imp.stderr || "").trim().split("\n").pop());
 }
 
-const dsn = process.env.AURORA_CHECKPOINT_DSN;
-check("AURORA_CHECKPOINT_DSN definida", !!dsn, "veja a seção 3 do roteiro");
-if (dsn) {
+// Sem AURORA_CHECKPOINT_DSN, o PostgreSQL portátil do teste (scripts/teste-real/postgres.ps1).
+const dsn = process.env.AURORA_CHECKPOINT_DSN ?? "postgresql://postgres@127.0.0.1:5433/aurora_checkpoints";
+{
   const pg = createRequire(join(root, "apps/api/package.json"))("pg");
   const client = new pg.Client({ connectionString: dsn, connectionTimeoutMillis: 5000 });
   try {
@@ -37,7 +37,7 @@ if (dsn) {
     const { rows } = await client.query("select current_database() as db, version() as v");
     check("PostgreSQL dos checkpoints acessível", true, "", `${rows[0].db} · ${rows[0].v.split(",")[0]}`);
   } catch (error) {
-    check("PostgreSQL dos checkpoints acessível", false, error.message);
+    check("PostgreSQL dos checkpoints acessível", false, `${error.message || error.code} — suba com ./scripts/teste-real/postgres.ps1`);
   } finally {
     await client.end().catch(() => {});
   }

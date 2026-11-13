@@ -197,4 +197,6 @@ async def main(config):
 
 
 if __name__ == "__main__":
-    asyncio.run(main(json.loads(sys.stdin.buffer.read().decode("utf-8"))))
+    # No Windows o loop padrão (Proactor) não serve ao psycopg assíncrono dos checkpoints.
+    loop = asyncio.SelectorEventLoop if sys.platform == "win32" else None
+    asyncio.run(main(json.loads(sys.stdin.buffer.read().decode("utf-8"))), loop_factory=loop)
